@@ -1,0 +1,256 @@
+# parsed arguments: Namespace(benchmark='Q3cde2', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'3', '9', 'strength', 'red', '34', '32', '28', 'about', '23', '56', '7', '18', 'orange', 'response', '21', 'blue', 'religion', 'same', 'views', 'statement', 'ahead', 'freedom', 'children', 'practice', '69', '62', 'in', '52', '14', 'to', 'poor', '20', 'for', '13', 'treatment', 'opportunity', 'u.s.', 'country', 'values', 'society', '26', 'percentage', 'color', 'moral', 'get', 'political', 'raising', '73', 'ties', 'origin', 'express', '5', 'family', 'conditions', '64', 'better', '38'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                             statement  ...   color
+0             Opportunity to get ahead  ...    blue
+1   Freedom to express political views  ...    blue
+2                Treatment of the poor  ...    blue
+3      Conditions for raising children  ...    blue
+4         Freedom to practice religion  ...    blue
+5              Moral values of society  ...    blue
+6              Strength of family ties  ...    blue
+7             Opportunity to get ahead  ...  orange
+8   Freedom to express political views  ...  orange
+9                Treatment of the poor  ...  orange
+10     Conditions for raising children  ...  orange
+11        Freedom to practice religion  ...  orange
+12             Moral values of society  ...  orange
+13             Strength of family ties  ...  orange
+14            Opportunity to get ahead  ...     red
+15  Freedom to express political views  ...     red
+16               Treatment of the poor  ...     red
+17     Conditions for raising children  ...     red
+18        Freedom to practice religion  ...     red
+19             Moral values of society  ...     red
+20             Strength of family ties  ...     red
+
+[21 rows x 4 columns]
+# query is: Which characteristic is considered best experienced in the U.S.?
+# expected output type:[dtype('O')]
+# expected output is:
+                     ANSWER
+0  Opportunity to get ahead
+# inferred DSL terminals:
+  # ConstVal: ['Better in country of origin@Str', 'Better in U.S.@Str', '<NULL>']
+     # cmap: [('best', 'Better in U.S.'), ('best', 'Better in country of origin'), ('in', 'Better in country of origin'), ('u.s.', 'Better in U.S.'), ('in', 'Better in U.S.')]
+  # AggrFunc: ['max', 'min', '<NULL>']
+     # amap: [('best', 'max'), ('best', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', 'eqmin', '<NULL>']
+     # imap: [('best', 'eqmin'), ('best', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Better in country of origin'}]
+  # found 21 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Better in country of origin@Str), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'response', 'Better in country of origin'], 'eqmax', 'percentage'], ['response']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Better in country of origin@Str), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'response', 'Better in country of origin'], 'eqmin', 'percentage'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response'], 'min', 'percentage'], 'eqmin', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response'], 'min', 'percentage'], 'eqmin', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'response'], 'max', 'percentage'], 'eqmin', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'response'], 'max', 'percentage'], 'eqmin', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'response'], 'min', 'percentage'], 'eqmin', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'response'], 'min', 'percentage'], 'eqmin', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmin', 'percentage'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmin', 'percentage'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmin', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmin', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'min', 'percentage'], 'eqmin', 'percentage'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'min', 'percentage'], 'eqmin', 'percentage'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'min', 'percentage'], 'eqmin', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'min', 'percentage'], 'eqmin', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'color'], 'min', 'percentage'], 'eqmin', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'color'], 'min', 'percentage'], 'eqmin', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(@param0, eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'percentage'], ['response']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in country of origin@Str), ==, 1, Better in country of origin@Str), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Better in country of origin'], '==', 'response', 'Better in country of origin'], 'eqmax', 'percentage'], ['response']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in country of origin@Str), ==, 1, Better in country of origin@Str), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Better in country of origin'], '==', 'response', 'Better in country of origin'], 'eqmin', 'percentage'], ['response']]
+# (t=3.83) i=1, candidate=[{'ANSWER': 'Better in U.S.'}]
+  # found 21 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Better in U.S.@Str), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'response', 'Better in U.S.'], 'eqmax', 'percentage'], ['response']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Better in U.S.@Str), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'response', 'Better in U.S.'], 'eqmin', 'percentage'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response'], 'max', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response'], 'max', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'response'], 'max', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'response'], 'max', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'response'], 'min', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'response'], 'min', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'min', 'percentage'], 'eqmax', 'percentage'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'min', 'percentage'], 'eqmax', 'percentage'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'min', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'min', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(@param0, eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'percentage'], ['response']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in U.S.@Str), ==, 1, Better in U.S.@Str), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Better in U.S.'], '==', 'response', 'Better in U.S.'], 'eqmax', 'percentage'], ['response']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in U.S.@Str), ==, 1, Better in U.S.@Str), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Better in U.S.'], '==', 'response', 'Better in U.S.'], 'eqmin', 'percentage'], ['response']]
+# (t=7.71) i=2, candidate=[{'ANSWER': 'About the same'}]
+  # found 8 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response'], 'max', 'percentage'], 'eqmin', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response'], 'max', 'percentage'], 'eqmin', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response'], 'min', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response'], 'min', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'color'], 'max', 'percentage'], 'eqmin', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'color'], 'max', 'percentage'], 'eqmin', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'color'], 'min', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'color'], 'min', 'percentage'], 'eqmax', 'COL0'], ['response']]
+
+# ========== review report ========== #
+# top-1, score: 1.43, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Better in U.S.@Str), eqmax, 2), ['1'])
+# top-2, score: 1.43, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Better in U.S.@Str), eqmin, 2), ['1'])
+# top-3, score: 1.40, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in U.S.@Str), ==, 1, Better in U.S.@Str), eqmax, 2), ['1'])
+# top-4, score: 1.40, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in U.S.@Str), ==, 1, Better in U.S.@Str), eqmin, 2), ['1'])
+# top-5, score: 1.32, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Better in country of origin@Str), eqmax, 2), ['1'])
+# top-6, score: 1.32, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Better in country of origin@Str), eqmin, 2), ['1'])
+# top-7, score: 1.29, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in country of origin@Str), ==, 1, Better in country of origin@Str), eqmax, 2), ['1'])
+# top-8, score: 1.29, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in country of origin@Str), ==, 1, Better in country of origin@Str), eqmin, 2), ['1'])
+# top-9, score: 1.28, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 2), ['1'])
+# top-10, score: 1.28, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 2), ['1'])
+# top-11, score: 1.21, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmin, 1), ['0'])
+# top-12, score: 1.21, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmin, 1), ['-1'])
+# top-13, score: 1.21, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['0'])
+# top-14, score: 1.21, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['-1'])
+# top-15, score: 1.21, answer: ['About the same']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmin, 1), ['0'])
+# top-16, score: 1.21, answer: ['About the same']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmin, 1), ['-1'])
+# top-17, score: 1.21, answer: ['About the same']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmax, 1), ['0'])
+# top-18, score: 1.21, answer: ['About the same']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmax, 1), ['-1'])
+# top-19, score: 1.20, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmin, 2), ['1'])
+# top-20, score: 1.20, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmin, 2), ['-99', '-2'])
+# top-21, score: 1.20, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['1'])
+# top-22, score: 1.20, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-99', '-2'])
+# top-23, score: 1.20, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 1), ['0'])
+# top-24, score: 1.20, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 1), ['-1', '-2'])
+# top-25, score: 1.20, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 2), ['0'])
+# top-26, score: 1.20, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 2), ['-1', '-2'])
+# top-27, score: 1.20, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 1), ['0'])
+# top-28, score: 1.20, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 1), ['-1', '-2'])
+# top-29, score: 1.20, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 2), ['0'])
+# top-30, score: 1.20, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-31, score: 1.20, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmin, 2), ['0'])
+# top-32, score: 1.20, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-33, score: 1.20, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['1'])
+# top-34, score: 1.20, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-99', '-2'])
+# top-35, score: 1.20, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmax, 2), ['1'])
+# top-36, score: 1.20, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmax, 2), ['-99', '-2'])
+# top-37, score: 1.20, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['0'])
+# top-38, score: 1.20, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+# top-39, score: 1.20, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['0'])
+# top-40, score: 1.20, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-41, score: 1.20, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 1), ['0'])
+# top-42, score: 1.20, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 1), ['-1', '-2'])
+# top-43, score: 1.20, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 2), ['0'])
+# top-44, score: 1.20, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 2), ['-1', '-2'])
+# top-45, score: 1.20, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['0'])
+# top-46, score: 1.20, answer: ['Better in U.S.']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-47, score: 1.20, answer: ['About the same']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmin, 2), ['0'])
+# top-48, score: 1.20, answer: ['About the same']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmin, 2), ['-1', '-2'])
+# top-49, score: 1.20, answer: ['About the same']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmax, 2), ['0'])
+# top-50, score: 1.20, answer: ['About the same']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmax, 2), ['-1', '-2'])

@@ -1,0 +1,88 @@
+# parsed arguments: Namespace(benchmark='Q00c86', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'190', '15233', '81', 'osx', 'unix', '300', '230', '1426', '2139', 'windows', 'jsp', '636', '193', 'aix', 'hardware', 'cgi', '863', 'ios', 'platform', 'color', 'asp', 'multiple', 'bsd', 'lin_x86', 'solaris', 'blue', 'php', 'count', '80', '162', '1664', '100', '7240', 'linux'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+    Platform  count color
+0        bsd     80  blue
+1        aix     81  blue
+2        ios    100  blue
+3        jsp    162  blue
+4    solaris    190  blue
+5    lin_x86    193  blue
+6        osx    230  blue
+7       unix    300  blue
+8        cgi    636  blue
+9   hardware    863  blue
+10       asp   1426  blue
+11  multiple   1664  blue
+12     linux   2139  blue
+13   windows   7240  blue
+14       php  15233  blue
+# query is: Which platform has had about half the security vulnerabilities as php?
+# expected output type:[dtype('O')]
+# expected output is:
+    ANSWER
+0  windows
+# inferred DSL terminals:
+  # ConstVal: ['php@Str', 'Platform@Str', '<NULL>']
+     # cmap: [('php', 'php'), ('platform', 'Platform')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'php'}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, php@Str), ==, 0, php@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Platform', 'php'], '==', 'Platform', 'php'], ['Platform']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, php@Str), ==, 0, php@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Platform', 'php'], '==', 'Platform', 'php'], ['Platform']]
+    # SelectCol(SelectRow1(@param0, ==, 0, php@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Platform', 'php'], ['Platform']]
+    # SelectCol(SelectRow1(@param0, ==, 0, php@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Platform', 'php'], ['Platform']]
+# (t=1.07) i=1, candidate=[{'ANSWER': 'bsd'}]
+  # found 0 program(s)
+# (t=2.12) i=2, candidate=[{'ANSWER': 'lin_x86'}]
+  # found 0 program(s)
+# (t=3.19) i=3, candidate=[{'ANSWER': 'windows'}]
+  # found 0 program(s)
+# (t=4.23) i=4, candidate=[{'ANSWER': 'ios'}]
+  # found 0 program(s)
+# (t=5.27) i=5, candidate=[{'ANSWER': 'aix'}]
+  # found 0 program(s)
+# (t=6.30) i=6, candidate=[{'ANSWER': 'unix'}]
+  # found 0 program(s)
+# (t=7.33) i=7, candidate=[{'ANSWER': 'solaris'}]
+  # found 0 program(s)
+# (t=8.36) i=8, candidate=[{'ANSWER': 'asp'}]
+  # found 0 program(s)
+# (t=9.40) i=9, candidate=[{'ANSWER': 'multiple'}]
+  # found 0 program(s)
+# (t=10.44) i=10, candidate=[{'ANSWER': 'jsp'}]
+  # found 0 program(s)
+# (t=11.78) i=11, candidate=[{'ANSWER': 'cgi'}]
+  # found 0 program(s)
+# (t=12.82) i=12, candidate=[{'ANSWER': 'linux'}]
+  # found 0 program(s)
+# (t=13.87) i=13, candidate=[{'ANSWER': 'osx'}]
+  # found 0 program(s)
+# (t=14.91) i=14, candidate=[{'ANSWER': 'hardware'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.32, answer: ['php']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, php@Str), ['0'])
+# top-2, score: 2.32, answer: ['php']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, php@Str), ['-1', '-2'])
+# top-3, score: 2.27, answer: ['php']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, php@Str), ==, 0, php@Str), ['0'])
+# top-4, score: 2.27, answer: ['php']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, php@Str), ==, 0, php@Str), ['-1', '-2'])

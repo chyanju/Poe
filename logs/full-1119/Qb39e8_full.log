@@ -1,0 +1,81 @@
+# parsed arguments: Namespace(benchmark='Qb39e8', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'turkey', 'jordan', '37812334', '28029721', 'egypt', '15804557', '22094911', 'country', '1700000', 'blue', 'go', '40221893', 'to', 'color', 'iraq', 'total', 'lebanon', 'regional', 'funds'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+    Country  Total funds go to color
+0    Jordan           40221893  blue
+1   Lebanon           37812334  blue
+2  Regional           28029721  blue
+3    Turkey           22094911  blue
+4      Iraq           15804557  blue
+5     Egypt            1700000  blue
+# query is: Which countries get less than Turkey?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0  Egypt
+1   Iraq
+# inferred DSL terminals:
+  # ConstVal: ['Country@Str', 'Turkey@Str', '<NULL>']
+     # cmap: [('countries', 'Country'), ('turkey', 'Turkey')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('less', '-')]
+  # BoolFunc: ['<', '==', '<=', '<NULL>']
+     # bmap: [('less', '<='), ('less', '<'), (None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: []
+  # [debug] high_values (no dup.): []
+  # [debug] filtered low_values (no dup.): [(20394911, 2), (18126982, 2), (15717423, 2), (6290354, 2), (5934810, 2), (-5934810, 2), (-6290354, 2), (-15717423, 2), (-18126982, 2), (-20394911, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Iraq'}]
+  # found 0 program(s)
+# (t=0.74) i=1, candidate=[{'ANSWER': 'Egypt'}]
+  # found 0 program(s)
+# (t=1.48) i=2, candidate=[{'ANSWER': 'Egypt'}, {'ANSWER': 'Iraq'}]
+  # found 0 program(s)
+# (t=1.62) i=3, candidate=[{'ANSWER': 'Egypt'}, {'ANSWER': 'Iraq'}, {'ANSWER': 'Turkey'}]
+  # found 0 program(s)
+# (t=1.77) i=4, candidate=[{'ANSWER': 'Iraq'}, {'ANSWER': 'Turkey'}]
+  # found 0 program(s)
+# (t=1.91) i=5, candidate=[{'ANSWER': 'Egypt'}, {'ANSWER': 'Turkey'}]
+  # found 0 program(s)
+# (t=2.06) i=6, candidate=[{'ANSWER': 'Turkey'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Turkey@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Turkey'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Turkey@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Turkey'], ['Country']]
+# (t=2.80) i=7, candidate=[{'ANSWER': 20394911}]
+  # found 0 program(s)
+# (t=3.42) i=8, candidate=[{'ANSWER': 18126982}]
+  # found 0 program(s)
+# (t=4.04) i=9, candidate=[{'ANSWER': 15717423}]
+  # found 0 program(s)
+# (t=4.66) i=10, candidate=[{'ANSWER': 6290354}]
+  # found 0 program(s)
+# (t=5.28) i=11, candidate=[{'ANSWER': 5934810}]
+  # found 0 program(s)
+# (t=5.90) i=12, candidate=[{'ANSWER': -5934810}]
+  # found 0 program(s)
+# (t=6.53) i=13, candidate=[{'ANSWER': -6290354}]
+  # found 0 program(s)
+# (t=7.15) i=14, candidate=[{'ANSWER': -15717423}]
+  # found 0 program(s)
+# (t=7.78) i=15, candidate=[{'ANSWER': -18126982}]
+  # found 0 program(s)
+# (t=8.38) i=16, candidate=[{'ANSWER': -20394911}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.48, answer: ['Turkey']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Turkey@Str), ['0'])
+# top-2, score: 2.48, answer: ['Turkey']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Turkey@Str), ['-1', '-2'])

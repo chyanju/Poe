@@ -1,0 +1,112 @@
+# parsed arguments: Namespace(benchmark='Q1e4db', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'14', 'children', '5', '69', '7', '13', 'ties', '38', 'strength', '23', 'practice', '21', '20', '32', 'better', '3', 'about', '64', 'religion', 'percentage', 'conditions', '26', 'to', '28', 'origin', 'opportunity', 'express', 'blue', '52', 'views', 'red', 'treatment', '9', 'society', 'country', 'freedom', 'color', 'get', 'statement', 'in', 'moral', 'family', 'for', '62', 'response', 'political', 'ahead', 'poor', 'values', 'raising', 'orange', '18', 'same', 'u.s.', '56', '34', '73'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                             statement  ...   color
+0             Opportunity to get ahead  ...    blue
+1   Freedom to express political views  ...    blue
+2                Treatment of the poor  ...    blue
+3      Conditions for raising children  ...    blue
+4         Freedom to practice religion  ...    blue
+5              Moral values of society  ...    blue
+6              Strength of family ties  ...    blue
+7             Opportunity to get ahead  ...  orange
+8   Freedom to express political views  ...  orange
+9                Treatment of the poor  ...  orange
+10     Conditions for raising children  ...  orange
+11        Freedom to practice religion  ...  orange
+12             Moral values of society  ...  orange
+13             Strength of family ties  ...  orange
+14            Opportunity to get ahead  ...     red
+15  Freedom to express political views  ...     red
+16               Treatment of the poor  ...     red
+17     Conditions for raising children  ...     red
+18        Freedom to practice religion  ...     red
+19             Moral values of society  ...     red
+20             Strength of family ties  ...     red
+
+[21 rows x 4 columns]
+# query is: Which statement has equal values for it being better in the US and it being about the same?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0   None
+# inferred DSL terminals:
+  # ConstVal: ['Better in country of origin@Str', 'Conditions for raising children@Str', 'statement@Str', 'About the same@Str', 'Better in U.S.@Str', 'Moral values of society@Str', '<NULL>']
+     # cmap: [('in', 'Better in country of origin'), ('in', 'Better in U.S.'), ('for', 'Conditions for raising children'), ('same', 'About the same'), ('statement', 'statement'), ('about', 'About the same'), ('values', 'Moral values of society'), ('better', 'Better in country of origin'), ('better', 'Better in U.S.')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '=='), ('equal', '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Freedom to practice religion'}]
+  # found 0 program(s)
+# (t=9.78) i=1, candidate=[{'ANSWER': 'Treatment of the poor'}]
+  # found 0 program(s)
+# (t=19.53) i=2, candidate=[{'ANSWER': 'Conditions for raising children'}]
+  # found 6 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 1, Better in country of origin@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Conditions for raising children'], '==', 'response', 'Better in country of origin'], ['statement']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 1, About the same@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Conditions for raising children'], '==', 'response', 'About the same'], ['statement']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 1, Better in U.S.@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Conditions for raising children'], '==', 'response', 'Better in U.S.'], ['statement']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Better in country of origin@Str), ==, 0, Conditions for raising children@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Better in country of origin'], '==', 'statement', 'Conditions for raising children'], ['statement']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, About the same@Str), ==, 0, Conditions for raising children@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'About the same'], '==', 'statement', 'Conditions for raising children'], ['statement']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Better in U.S.@Str), ==, 0, Conditions for raising children@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Better in U.S.'], '==', 'statement', 'Conditions for raising children'], ['statement']]
+# (t=29.23) i=3, candidate=[{'ANSWER': 'Opportunity to get ahead'}]
+  # found 0 program(s)
+# (t=38.87) i=4, candidate=[{'ANSWER': 'Moral values of society'}]
+  # found 6 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Moral values of society@Str), ==, 1, Better in country of origin@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Moral values of society'], '==', 'response', 'Better in country of origin'], ['statement']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Moral values of society@Str), ==, 1, About the same@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Moral values of society'], '==', 'response', 'About the same'], ['statement']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Moral values of society@Str), ==, 1, Better in U.S.@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Moral values of society'], '==', 'response', 'Better in U.S.'], ['statement']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Better in country of origin@Str), ==, 0, Moral values of society@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Better in country of origin'], '==', 'statement', 'Moral values of society'], ['statement']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, About the same@Str), ==, 0, Moral values of society@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'About the same'], '==', 'statement', 'Moral values of society'], ['statement']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Better in U.S.@Str), ==, 0, Moral values of society@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Better in U.S.'], '==', 'statement', 'Moral values of society'], ['statement']]
+# (t=48.68) i=5, candidate=[{'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=58.42) i=6, candidate=[{'ANSWER': 'Freedom to express political views'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.37, answer: ['Conditions for raising children']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 1, About the same@Str), ['0'])
+# top-2, score: 2.37, answer: ['Conditions for raising children']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, About the same@Str), ==, 0, Conditions for raising children@Str), ['0'])
+# top-3, score: 2.37, answer: ['Moral values of society']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Moral values of society@Str), ==, 1, About the same@Str), ['0'])
+# top-4, score: 2.37, answer: ['Moral values of society']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, About the same@Str), ==, 0, Moral values of society@Str), ['0'])
+# top-5, score: 1.37, answer: ['Conditions for raising children']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 1, Better in country of origin@Str), ['0'])
+# top-6, score: 1.37, answer: ['Conditions for raising children']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 1, Better in U.S.@Str), ['0'])
+# top-7, score: 1.37, answer: ['Conditions for raising children']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Better in country of origin@Str), ==, 0, Conditions for raising children@Str), ['0'])
+# top-8, score: 1.37, answer: ['Conditions for raising children']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Better in U.S.@Str), ==, 0, Conditions for raising children@Str), ['0'])
+# top-9, score: 1.37, answer: ['Moral values of society']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Moral values of society@Str), ==, 1, Better in country of origin@Str), ['0'])
+# top-10, score: 1.37, answer: ['Moral values of society']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Moral values of society@Str), ==, 1, Better in U.S.@Str), ['0'])
+# top-11, score: 1.37, answer: ['Moral values of society']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Better in country of origin@Str), ==, 0, Moral values of society@Str), ['0'])
+# top-12, score: 1.37, answer: ['Moral values of society']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Better in U.S.@Str), ==, 0, Moral values of society@Str), ['0'])

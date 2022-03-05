@@ -1,0 +1,138 @@
+# parsed arguments: Namespace(benchmark='Q28d9d', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'unix', 'osx', '7240', '2139', 'php', '1664', '230', 'hardware', 'aix', '81', 'lin_x86', '193', '80', 'platform', '863', 'windows', 'count', 'jsp', '15233', 'ios', '1426', '190', 'multiple', 'color', '162', '100', '300', 'bsd', 'linux', 'blue', '636', 'cgi', 'asp', 'solaris'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+    Platform  count color
+0        bsd     80  blue
+1        aix     81  blue
+2        ios    100  blue
+3        jsp    162  blue
+4    solaris    190  blue
+5    lin_x86    193  blue
+6        osx    230  blue
+7       unix    300  blue
+8        cgi    636  blue
+9   hardware    863  blue
+10       asp   1426  blue
+11  multiple   1664  blue
+12     linux   2139  blue
+13   windows   7240  blue
+14       php  15233  blue
+# query is: Name the three platforms with the lowest number of security vulnerabilities?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0    aix
+1    bsd
+2    ios
+# inferred DSL terminals:
+  # ConstVal: ['Platform@Str', '<NULL>']
+     # cmap: [('platforms', 'Platform')]
+  # AggrFunc: ['min', 'count', '<NULL>']
+     # amap: [('number', 'count'), ('lowest', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('lowest', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'bsd'}]
+  # found 16 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform'], 'min', 'count'], 'eqmin', 'COL0'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform'], 'min', 'count'], 'eqmin', 'COL0'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform', 'count'], 'min', 'count'], 'eqmin', 'count'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform', 'count'], 'min', 'count'], 'eqmin', 'count'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform', 'count'], 'min', 'count'], 'eqmin', 'COL0'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform', 'count'], 'min', 'count'], 'eqmin', 'COL0'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform', 'count'], 'count', 'Platform'], 'eqmin', 'count'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform', 'count'], 'count', 'Platform'], 'eqmin', 'count'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform', 'count'], 'count', 'count'], 'eqmin', 'count'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform', 'count'], 'count', 'count'], 'eqmin', 'count'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform', 'count'], 'count', 'color'], 'eqmin', 'count'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform', 'count'], 'count', 'color'], 'eqmin', 'count'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform', 'color'], 'min', 'count'], 'eqmin', 'COL0'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform', 'color'], 'min', 'count'], 'eqmin', 'COL0'], ['Platform']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'count'], ['Platform']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'count'], ['Platform']]
+# (t=1.15) i=1, candidate=[{'ANSWER': 'ios'}]
+  # found 0 program(s)
+# (t=2.25) i=2, candidate=[{'ANSWER': 'lin_x86'}]
+  # found 0 program(s)
+# (t=3.33) i=3, candidate=[{'ANSWER': 'aix'}]
+  # found 0 program(s)
+# (t=4.41) i=4, candidate=[{'ANSWER': 'jsp'}]
+  # found 0 program(s)
+# (t=5.50) i=5, candidate=[{'ANSWER': 'multiple'}]
+  # found 0 program(s)
+# (t=6.59) i=6, candidate=[{'ANSWER': 'linux'}]
+  # found 0 program(s)
+# (t=7.67) i=7, candidate=[{'ANSWER': 'solaris'}]
+  # found 0 program(s)
+# (t=8.76) i=8, candidate=[{'ANSWER': 'osx'}]
+  # found 0 program(s)
+# (t=9.86) i=9, candidate=[{'ANSWER': 'asp'}]
+  # found 0 program(s)
+# (t=10.95) i=10, candidate=[{'ANSWER': 'unix'}]
+  # found 0 program(s)
+# (t=12.06) i=11, candidate=[{'ANSWER': 'hardware'}]
+  # found 0 program(s)
+# (t=13.15) i=12, candidate=[{'ANSWER': 'cgi'}]
+  # found 0 program(s)
+# (t=14.22) i=13, candidate=[{'ANSWER': 'php'}]
+  # found 0 program(s)
+# (t=15.29) i=14, candidate=[{'ANSWER': 'windows'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.44, answer: ['bsd']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+# top-2, score: 1.44, answer: ['bsd']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+# top-3, score: 1.37, answer: ['bsd']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+# top-4, score: 1.37, answer: ['bsd']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+# top-5, score: 1.36, answer: ['bsd']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+# top-6, score: 1.36, answer: ['bsd']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+# top-7, score: 1.36, answer: ['bsd']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+# top-8, score: 1.36, answer: ['bsd']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-9, score: 1.36, answer: ['bsd']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['0'])
+# top-10, score: 1.36, answer: ['bsd']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['-1', '-2'])
+# top-11, score: 1.36, answer: ['bsd']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['0'])
+# top-12, score: 1.36, answer: ['bsd']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['-1', '-2'])
+# top-13, score: 1.36, answer: ['bsd']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['0'])
+# top-14, score: 1.36, answer: ['bsd']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['-1', '-2'])
+# top-15, score: 1.36, answer: ['bsd']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+# top-16, score: 1.36, answer: ['bsd']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])

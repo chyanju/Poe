@@ -1,0 +1,76 @@
+# parsed arguments: Namespace(benchmark='Q1eebe', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'-1.71', '11.53', '-0.21', 'temperature', '0.76', 'blair', '-1.05', 'rainfall', 'major', 'blue', 'sunshine', '2.55', '3.14', '1.77', 'administration', '-3.62', '7.5', 'percentage', 'thatcher', '8.8', '-1.29', 'color', 'cameron', '2.98', '-4.18', '-3.95', 'orange', 'red', 'brown', 'category'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+   administration     category  percentage   color
+0           Blair  Temperature        7.50     red
+1           Blair     Sunshine        3.14  orange
+2           Blair     Rainfall        8.80    blue
+3           Brown  Temperature       -3.95     red
+4           Brown     Sunshine        1.77  orange
+5           Brown     Rainfall       -0.21    blue
+6        Thatcher  Temperature        0.76     red
+7        Thatcher     Sunshine       -1.05  orange
+8        Thatcher     Rainfall       11.53    blue
+9         Cameron  Temperature       -4.18     red
+10        Cameron     Sunshine       -1.29  orange
+11        Cameron     Rainfall       -1.71    blue
+12          Major  Temperature        2.98     red
+13          Major     Sunshine        2.55  orange
+14          Major     Rainfall       -3.62    blue
+# query is: What's the difference in sunshine percentage between Blair and Brown?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0    1.37
+# inferred DSL terminals:
+  # ConstVal: ['Blair@Str', 'Sunshine@Str', 'Brown@Str', 'percentage@Str', '<NULL>']
+     # cmap: [('brown', 'Brown'), ('blair', 'Blair'), ('percentage', 'percentage'), ('sunshine', 'Sunshine')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(1.37, 9), (-1.37, 9), (7.09, 6), (7.030000000000001, 6), (5.73, 6), (5.720000000000001, 6), (5.66, 6), (4.43, 6), (4.359999999999999, 6), (4.19, 6)]
+  # [debug] high_values (no dup.): [(9.76, 3), (8.389999999999999, 3), (7.32, 3), (6.76, 3), (5.949999999999999, 3), (5.390000000000001, 3), (4.85, 3), (3.48, 3), (2.38, 3), (1.21, 3)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=5.41) i=1, candidate=[{'ANSWER': 1.37}]
+  # found 2 program(s)
+    # Contrast(SelectRow1(@param0, ==, 1, Sunshine@Str), diff, 0, Blair@Str, Brown@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'category', 'Sunshine'], 'diff', 'administration', 'Blair', 'Brown', 'percentage']
+    # Contrast(SelectRow1(@param0, ==, 1, Sunshine@Str), diff, 0, Brown@Str, Blair@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'category', 'Sunshine'], 'diff', 'administration', 'Brown', 'Blair', 'percentage']
+# (t=10.76) i=2, candidate=[{'ANSWER': -1.37}]
+  # found 0 program(s)
+# (t=16.13) i=3, candidate=[{'ANSWER': 7.09}]
+  # found 0 program(s)
+# (t=21.48) i=4, candidate=[{'ANSWER': 7.030000000000001}]
+  # found 0 program(s)
+# (t=26.87) i=5, candidate=[{'ANSWER': 5.73}]
+  # found 0 program(s)
+# (t=32.27) i=6, candidate=[{'ANSWER': 5.720000000000001}]
+  # found 0 program(s)
+# (t=37.64) i=7, candidate=[{'ANSWER': 5.66}]
+  # found 0 program(s)
+# (t=43.00) i=8, candidate=[{'ANSWER': 4.43}]
+  # found 0 program(s)
+# (t=48.36) i=9, candidate=[{'ANSWER': 4.359999999999999}]
+  # found 0 program(s)
+# (t=53.71) i=10, candidate=[{'ANSWER': 4.19}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.55, answer: 1.37
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Sunshine@Str), diff, 0, Blair@Str, Brown@Str, 2)
+# top-2, score: 2.55, answer: 1.37
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Sunshine@Str), diff, 0, Brown@Str, Blair@Str, 2)

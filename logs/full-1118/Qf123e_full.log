@@ -1,0 +1,80 @@
+# parsed arguments: Namespace(benchmark='Qf123e', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'arts', 'chemistry', 'purple', 'percent', 'design', 'ls', 'undergrad', 'red', 'brown', 'major', 'phys', 'green', 'resources', 'math', 'programs', 'social', 'gray', 'humanities', 'yellow', '84', 'color', 'sci', 'sciences', 'orange', 'blue', 'engineering', '61', '52', '62', 'env', 'nat', '53', '60', '42', 'bio', '55', 'business', '67', '91'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+              major  percent   color
+0       LS Programs       42  yellow
+1      Bio Sciences       52    blue
+2      LS Undergrad       53  yellow
+3     Math Phys Sci       55  orange
+4     Nat Resources       60   brown
+5   Arts Humanities       61    gray
+6   Social Sciences       61   brown
+7         Chemistry       62     red
+8        Env Design       67   green
+9       Engineering       84  orange
+10         Business       91  purple
+# query is: Which major had the least amount of degrees awarded?
+# expected output type:[dtype('O')]
+# expected output is:
+        ANSWER
+0  LS programs
+# inferred DSL terminals:
+  # ConstVal: ['major@Str', '<NULL>']
+     # cmap: [('major', 'major')]
+  # AggrFunc: ['min', '<NULL>']
+     # amap: [('least', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('least', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'LS Programs'}]
+  # found 10 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['major'], 'min', 'percent'], 'eqmin', 'COL0'], ['major']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['major'], 'min', 'percent'], 'eqmin', 'COL0'], ['major']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['major', 'percent'], 'min', 'percent'], 'eqmin', 'percent'], ['major']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['major', 'percent'], 'min', 'percent'], 'eqmin', 'percent'], ['major']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['major', 'percent'], 'min', 'percent'], 'eqmin', 'COL0'], ['major']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['major', 'percent'], 'min', 'percent'], 'eqmin', 'COL0'], ['major']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['major', 'color'], 'min', 'percent'], 'eqmin', 'COL0'], ['major']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['major', 'color'], 'min', 'percent'], 'eqmin', 'COL0'], ['major']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'percent'], ['major']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'percent'], ['major']]
+
+# ========== review report ========== #
+# top-1, score: 1.39, answer: LS Programs
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+# top-2, score: 1.39, answer: LS Programs
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+# top-3, score: 1.32, answer: LS Programs
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+# top-4, score: 1.32, answer: LS Programs
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+# top-5, score: 1.31, answer: LS Programs
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+# top-6, score: 1.31, answer: LS Programs
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+# top-7, score: 1.31, answer: LS Programs
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+# top-8, score: 1.31, answer: LS Programs
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-9, score: 1.31, answer: LS Programs
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+# top-10, score: 1.31, answer: LS Programs
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])

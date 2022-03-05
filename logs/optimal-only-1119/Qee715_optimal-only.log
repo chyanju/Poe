@@ -1,0 +1,88 @@
+# parsed arguments: Namespace(benchmark='Qee715', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'4769530000', '4870750000', 'fra', 'country', '799520000', '2329560000', '456310000', 'swe', 'aut', '776670000', 'irl', 'aus', 'blue', 'bel', '1363080000', '5404860000', 'ita', '405800000', '672630000', '18014480000', '372190000', 'deu', '2289930000', 'dnk', '1802720000', 'kor', 'fin', 'can', 'gbr', '7020280000', '1890450000', 'jpn', '2301450000', 'donation', 'nor', 'nld', 'esp', 'che', '1349570000', '1372000000', 'color', 'prt', '458880000', 'usa'}
+# input type: [dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+       donation Country color
+0   18014480000     USA  blue
+1    7020280000     JPN  blue
+2    5404860000     FRA  blue
+3    4870750000     DEU  blue
+4    4769530000     GBR  blue
+5    2329560000     CAN  blue
+6    2301450000     AUS  blue
+7    2289930000     ESP  blue
+8    1890450000     NLD  blue
+9    1802720000     NOR  blue
+10   1372000000     BEL  blue
+11   1363080000     SWE  blue
+12   1349570000     DNK  blue
+13    799520000     KOR  blue
+14    776670000     CHE  blue
+15    672630000     ITA  blue
+16    458880000     IRL  blue
+17    456310000     FIN  blue
+18    405800000     AUT  blue
+19    372190000     PRT  blue
+# query is: What is the difference donation value between USA and JPN?
+# expected output type:[dtype('int64')]
+# expected output is:
+        ANSWER
+0  10994200000
+# inferred DSL terminals:
+  # ConstVal: ['JPN@Str', 'USA@Str', 'donation@Str', '<NULL>']
+     # cmap: [('donation', 'donation'), ('jpn', 'JPN'), ('usa', 'USA')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(10994200000, 4), (-10994200000, 4)]
+  # [debug] high_values (no dup.): [(10994200000, 4), (-10994200000, 4)]
+  # [debug] filtered low_values (no dup.): [(17642290000, 2), (17608680000, 2), (17558170000, 2), (17555600000, 2), (17341850000, 2), (17237810000, 2), (17214960000, 2), (16664910000, 2), (16651400000, 2), (16642480000, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=2.69) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=5.35) i=2, candidate=[{'ANSWER': 10994200000}]
+  # found 2 program(s)
+    # Contrast(@param0, diff, 1, JPN@Str, USA@Str, 0)
+      --> ['Contrast', 'input@0', 'diff', 'Country', 'JPN', 'USA', 'donation']
+    # Contrast(@param0, diff, 1, USA@Str, JPN@Str, 0)
+      --> ['Contrast', 'input@0', 'diff', 'Country', 'USA', 'JPN', 'donation']
+# (t=8.01) i=3, candidate=[{'ANSWER': -10994200000}]
+  # found 0 program(s)
+# (t=10.68) i=4, candidate=[{'ANSWER': 17642290000}]
+  # found 0 program(s)
+# (t=13.35) i=5, candidate=[{'ANSWER': 17608680000}]
+  # found 0 program(s)
+# (t=16.28) i=6, candidate=[{'ANSWER': 17558170000}]
+  # found 0 program(s)
+# (t=18.94) i=7, candidate=[{'ANSWER': 17555600000}]
+  # found 0 program(s)
+# (t=21.61) i=8, candidate=[{'ANSWER': 17341850000}]
+  # found 0 program(s)
+# (t=24.27) i=9, candidate=[{'ANSWER': 17237810000}]
+  # found 0 program(s)
+# (t=26.94) i=10, candidate=[{'ANSWER': 17214960000}]
+  # found 0 program(s)
+# (t=29.59) i=11, candidate=[{'ANSWER': 16664910000}]
+  # found 0 program(s)
+# (t=32.57) i=12, candidate=[{'ANSWER': 16651400000}]
+  # found 0 program(s)
+# (t=35.22) i=13, candidate=[{'ANSWER': 16642480000}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.54, answer: [10994200000]
+  # tprog: Contrast(@param0, diff, 1, JPN@Str, USA@Str, 0)
+# top-2, score: 2.54, answer: [10994200000]
+  # tprog: Contrast(@param0, diff, 1, USA@Str, JPN@Str, 0)

@@ -1,0 +1,165 @@
+# parsed arguments: Namespace(benchmark='Q423f1', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'75-79', '73.55', '82.66', '84.23', '83.92', '79.52', '60-64', '50-54', '72.92', '65-69', 'and', '78.57', 'all', '70-74', 'aged', '70.09', 'age', '55-59', '85.49', '67.89', '63.8', '83.6', 'orange', '72.6', '65.69', '75.43', '68.83', 'blue', '75.75', 'men', '80', '75.12', 'group', 'gender', 'color', '80.77', '16', 'red', '84.86', 'over', 'percentage', 'women'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+               Age group gender  Percentage   color
+0   All aged 16 and over  Women       67.89     red
+1   All aged 16 and over    All       65.69    blue
+2   All aged 16 and over    Men       63.80  orange
+3            80 and over  Women       84.23     red
+4            80 and over    All       83.92    blue
+5            80 and over    Men       83.92  orange
+6                  55-59  Women       73.55     red
+7                  55-59    All       72.92    blue
+8                  55-59    Men       72.60  orange
+9                  60-64  Women       75.75     red
+10                 60-64    All       75.43    blue
+11                 60-64    Men       75.12  orange
+12                 75-79  Women       84.86     red
+13                 75-79    All       84.23    blue
+14                 75-79    Men       83.60  orange
+15                 65-69  Women       80.77     red
+16                 65-69    All       79.52    blue
+17                 65-69    Men       78.57  orange
+18                 50-54  Women       70.09     red
+19                 50-54    All       68.83    blue
+20                 50-54    Men       67.89  orange
+21                 70-74  Women       85.49     red
+22                 70-74    All       83.92    blue
+23                 70-74    Men       82.66  orange
+# query is: Did more women or men overall feel welcome?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0  Women
+# inferred DSL terminals:
+  # ConstVal: ['Men@Str', 'Women@Str', '<NULL>']
+     # cmap: [('women', 'Women'), ('men', 'Men')]
+  # AggrFunc: ['sum', '<NULL>']
+     # amap: [('overall', 'sum')]
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>', '>=', '==', '<NULL>']
+     # bmap: [('more', '>'), ('more', '>='), (None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(21.689999999999998, 4), (21.060000000000002, 4), (20.430000000000007, 4), (20.120000000000005, 4), (19.799999999999997, 4), (18.86, 4), (17.599999999999994, 4), (17.599999999999994, 4), (16.97, 4), (16.97, 4)]
+  # [debug] high_values (no dup.): [(20.430000000000007, 2), (20.120000000000005, 2), (20.120000000000005, 2), (19.799999999999997, 2), (19.17, 2), (18.540000000000006, 2), (18.230000000000004, 2), (17.909999999999997, 2), (16.97, 2), (16.659999999999997, 2)]
+  # [debug] fallback (comparison) answers are added
+# ====> fallback strategy (selection) is triggered
+  # [debug] fallback (selection) answers: ['Men', 'Women']
+  # [debug] fallback (selection) answers (no dup.): []
+  # [debug] 0 fallback (selection) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Women'}]
+  # found 0 program(s)
+# (t=1.64) i=1, candidate=[{'ANSWER': 'Men'}]
+  # found 0 program(s)
+# (t=3.27) i=2, candidate=[{'ANSWER': 'All'}]
+  # found 0 program(s)
+# (t=4.91) i=3, candidate=[{'ANSWER': 21.689999999999998}]
+  # found 0 program(s)
+# (t=6.11) i=4, candidate=[{'ANSWER': 21.060000000000002}]
+  # found 0 program(s)
+# (t=7.31) i=5, candidate=[{'ANSWER': 20.430000000000007}]
+  # found 0 program(s)
+# (t=8.50) i=6, candidate=[{'ANSWER': 20.120000000000005}]
+  # found 0 program(s)
+# (t=9.71) i=7, candidate=[{'ANSWER': 19.799999999999997}]
+  # found 0 program(s)
+# (t=10.91) i=8, candidate=[{'ANSWER': 18.86}]
+  # found 0 program(s)
+# (t=12.12) i=9, candidate=[{'ANSWER': 17.599999999999994}]
+  # found 0 program(s)
+# (t=13.33) i=10, candidate=[{'ANSWER': 17.599999999999994}]
+  # found 0 program(s)
+# (t=14.52) i=11, candidate=[{'ANSWER': 16.97}]
+  # found 0 program(s)
+# (t=15.73) i=12, candidate=[{'ANSWER': 16.97}]
+  # found 0 program(s)
+# ====> fallback strategy (retrieval) is triggered because no explanation is found so far
+# ====> retrieval_values: ['50-54', '55-59', '60-64', 63.8, '65-69', 65.69, 67.89, 68.83, '70-74', 70.09, 72.6, 72.92, 73.55, '75-79', 75.12, 75.43, 75.75, 78.57, 79.52, '80 and over', 80.77, 82.66, 83.6, 83.92, 84.23, 84.86, 85.49, 'Age group', 'All', 'All aged 16 and over', 'Men', 'Percentage', 'Women', 'blue', 'color', 'gender', 'orange', 'red']
+# (t=16.94) fallback i=0, candidate=[{'ANSWER': '50-54'}]
+  # found 0 program(s)
+# (t=18.56) fallback i=1, candidate=[{'ANSWER': '55-59'}]
+  # found 0 program(s)
+# (t=20.22) fallback i=2, candidate=[{'ANSWER': '60-64'}]
+  # found 0 program(s)
+# (t=21.87) fallback i=3, candidate=[{'ANSWER': 63.8}]
+  # found 0 program(s)
+# (t=23.51) fallback i=4, candidate=[{'ANSWER': '65-69'}]
+  # found 0 program(s)
+# (t=25.14) fallback i=5, candidate=[{'ANSWER': 65.69}]
+  # found 0 program(s)
+# (t=26.78) fallback i=6, candidate=[{'ANSWER': 67.89}]
+  # found 0 program(s)
+# (t=28.43) fallback i=7, candidate=[{'ANSWER': 68.83}]
+  # found 0 program(s)
+# (t=30.07) fallback i=8, candidate=[{'ANSWER': '70-74'}]
+  # found 0 program(s)
+# (t=31.72) fallback i=9, candidate=[{'ANSWER': 70.09}]
+  # found 0 program(s)
+# (t=33.38) fallback i=10, candidate=[{'ANSWER': 72.6}]
+  # found 0 program(s)
+# (t=35.04) fallback i=11, candidate=[{'ANSWER': 72.92}]
+  # found 0 program(s)
+# (t=36.67) fallback i=12, candidate=[{'ANSWER': 73.55}]
+  # found 0 program(s)
+# (t=38.31) fallback i=13, candidate=[{'ANSWER': '75-79'}]
+  # found 0 program(s)
+# (t=39.96) fallback i=14, candidate=[{'ANSWER': 75.12}]
+  # found 0 program(s)
+# (t=41.84) fallback i=15, candidate=[{'ANSWER': 75.43}]
+  # found 0 program(s)
+# (t=43.48) fallback i=16, candidate=[{'ANSWER': 75.75}]
+  # found 0 program(s)
+# (t=45.13) fallback i=17, candidate=[{'ANSWER': 78.57}]
+  # found 0 program(s)
+# (t=46.80) fallback i=18, candidate=[{'ANSWER': 79.52}]
+  # found 0 program(s)
+# (t=48.44) fallback i=19, candidate=[{'ANSWER': '80 and over'}]
+  # found 0 program(s)
+# (t=50.08) fallback i=20, candidate=[{'ANSWER': 80.77}]
+  # found 0 program(s)
+# (t=51.74) fallback i=21, candidate=[{'ANSWER': 82.66}]
+  # found 0 program(s)
+# (t=53.40) fallback i=22, candidate=[{'ANSWER': 83.6}]
+  # found 0 program(s)
+# (t=55.07) fallback i=23, candidate=[{'ANSWER': 83.92}]
+  # found 0 program(s)
+# (t=56.73) fallback i=24, candidate=[{'ANSWER': 84.23}]
+  # found 0 program(s)
+# (t=58.37) fallback i=25, candidate=[{'ANSWER': 84.86}]
+  # found 0 program(s)
+# (t=60.03) fallback i=26, candidate=[{'ANSWER': 85.49}]
+  # found 0 program(s)
+# (t=61.66) fallback i=27, candidate=[{'ANSWER': 'Age group'}]
+  # found 0 program(s)
+# (t=62.85) fallback i=28, candidate=[{'ANSWER': 'All'}]
+  # found 0 program(s)
+# (t=64.47) fallback i=29, candidate=[{'ANSWER': 'All aged 16 and over'}]
+  # found 0 program(s)
+# (t=66.11) fallback i=30, candidate=[{'ANSWER': 'Men'}]
+  # found 0 program(s)
+# (t=67.76) fallback i=31, candidate=[{'ANSWER': 'Percentage'}]
+  # found 0 program(s)
+# (t=68.98) fallback i=32, candidate=[{'ANSWER': 'Women'}]
+  # found 0 program(s)
+# (t=70.64) fallback i=33, candidate=[{'ANSWER': 'blue'}]
+  # found 0 program(s)
+# (t=72.27) fallback i=34, candidate=[{'ANSWER': 'color'}]
+  # found 0 program(s)
+# (t=73.49) fallback i=35, candidate=[{'ANSWER': 'gender'}]
+  # found 0 program(s)
+# (t=74.70) fallback i=36, candidate=[{'ANSWER': 'orange'}]
+  # found 0 program(s)
+# (t=76.34) fallback i=37, candidate=[{'ANSWER': 'red'}]
+  # found 0 program(s)
+# ====> fallback strategy (original) is triggered
+# ====> use the original TaPas output as answer, which is: ['Women']
+
+# ========== review report ========== #

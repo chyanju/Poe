@@ -1,0 +1,136 @@
+# parsed arguments: Namespace(benchmark='Q1c7a1', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'2002', '2001', '1459', '794', '971', '828', '1294', '1413', 'blue', '1138', '2009', '1999', '884', '2007', '1115', '2011', '2003', '2005', '771', '2006', '1230', '2004', '2012', '4140', '1582', '2008', 'color', '1103', 'deaths', '2000', 'year', '2010'}
+# input type: [dtype('int64'), dtype('int64'), dtype('O')]
+# input is:
+    year  deaths color
+0   2012     794  blue
+1   2011     828  blue
+2   2010    1115  blue
+3   2009    1103  blue
+4   2008     884  blue
+5   2007     971  blue
+6   2006    1294  blue
+7   2005    1459  blue
+8   2004     771  blue
+9   2003    1230  blue
+10  2002    1413  blue
+11  2001    4140  blue
+12  2000    1582  blue
+13  1999    1138  blue
+# query is: How many less deaths from 2001 to 2002?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0    2727
+# inferred DSL terminals:
+  # ConstVal: ['deaths@Str', '2001@Int', '2002@Int', '<NULL>']
+     # cmap: [(2002, 2002), (2001, 2001), ('deaths', 'deaths')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('less', '-')]
+  # BoolFunc: ['==', '<', '<=', '<NULL>']
+     # bmap: [('less', '<'), ('less', '<='), (None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(2727, 4), (2138, 4), (588, 4), (1, 4), (-1, 4), (-588, 4), (-2138, 4), (-2727, 4)]
+  # [debug] high_values (no dup.): [(2727, 4), (2138, 4), (588, 4), (-1, 4), (-588, 4), (-2138, 4), (-2727, 4)]
+  # [debug] filtered low_values (no dup.): [(3369, 2), (3346, 2), (3312, 2), (3256, 2), (3169, 2), (3037, 2), (3025, 2), (3002, 2), (2910, 2), (2846, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 6 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, 2001@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2001], 'count', 'year']
+    # Summarize(SelectRow1(@param0, ==, 0, 2001@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2001], 'count', 'deaths']
+    # Summarize(SelectRow1(@param0, ==, 0, 2001@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2001], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 2002@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2002], 'count', 'year']
+    # Summarize(SelectRow1(@param0, ==, 0, 2002@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2002], 'count', 'deaths']
+    # Summarize(SelectRow1(@param0, ==, 0, 2002@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2002], 'count', 'color']
+# (t=8.42) i=1, candidate=[{'ANSWER': 2}]
+  # found 3 program(s)
+    # Summarize(SelectRow1(@param0, <, 0, 2001@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'year', 2001], 'count', 'year']
+    # Summarize(SelectRow1(@param0, <, 0, 2001@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'year', 2001], 'count', 'deaths']
+    # Summarize(SelectRow1(@param0, <, 0, 2001@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'year', 2001], 'count', 'color']
+# (t=17.09) i=2, candidate=[{'ANSWER': 2727}]
+  # found 2 program(s)
+    # Contrast(SelectRow1(@param0, <=, 0, 2002@Int), -, 0, 2001@Int, 2002@Int, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'year', 2002], '-', 'year', 2001, 2002, 'deaths']
+    # Contrast(@param0, -, 0, 2001@Int, 2002@Int, 1)
+      --> ['Contrast', 'input@0', '-', 'year', 2001, 2002, 'deaths']
+# (t=25.40) i=3, candidate=[{'ANSWER': 2138}]
+  # found 0 program(s)
+# (t=34.01) i=4, candidate=[{'ANSWER': 588}]
+  # found 0 program(s)
+# (t=42.36) i=5, candidate=[{'ANSWER': -1}]
+  # found 0 program(s)
+# (t=51.19) i=6, candidate=[{'ANSWER': -588}]
+  # found 0 program(s)
+# (t=59.65) i=7, candidate=[{'ANSWER': -2138}]
+  # found 0 program(s)
+# (t=68.33) i=8, candidate=[{'ANSWER': -2727}]
+  # found 2 program(s)
+    # Contrast(SelectRow1(@param0, <=, 0, 2002@Int), -, 0, 2002@Int, 2001@Int, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'year', 2002], '-', 'year', 2002, 2001, 'deaths']
+    # Contrast(@param0, -, 0, 2002@Int, 2001@Int, 1)
+      --> ['Contrast', 'input@0', '-', 'year', 2002, 2001, 'deaths']
+# (t=76.69) i=9, candidate=[{'ANSWER': 3369}]
+  # found 0 program(s)
+# (t=85.44) i=10, candidate=[{'ANSWER': 3346}]
+  # found 0 program(s)
+# (t=93.71) i=11, candidate=[{'ANSWER': 3312}]
+  # found 0 program(s)
+# (t=102.36) i=12, candidate=[{'ANSWER': 3256}]
+  # found 0 program(s)
+# (t=110.71) i=13, candidate=[{'ANSWER': 3169}]
+  # found 0 program(s)
+# (t=119.32) i=14, candidate=[{'ANSWER': 3037}]
+  # found 0 program(s)
+# (t=127.69) i=15, candidate=[{'ANSWER': 3025}]
+  # found 0 program(s)
+# (t=136.38) i=16, candidate=[{'ANSWER': 3002}]
+  # found 0 program(s)
+# (t=144.62) i=17, candidate=[{'ANSWER': 2910}]
+  # found 0 program(s)
+# (t=153.22) i=18, candidate=[{'ANSWER': 2846}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.64, answer: [2727]
+  # tprog: Contrast(@param0, -, 0, 2001@Int, 2002@Int, 1)
+# top-2, score: 1.64, answer: [-2727]
+  # tprog: Contrast(@param0, -, 0, 2002@Int, 2001@Int, 1)
+# top-3, score: 1.62, answer: [2]
+  # tprog: Summarize(SelectRow1(@param0, <, 0, 2001@Int), count, 1)
+# top-4, score: 1.59, answer: [2727]
+  # tprog: Contrast(SelectRow1(@param0, <=, 0, 2002@Int), -, 0, 2001@Int, 2002@Int, 1)
+# top-5, score: 1.59, answer: [-2727]
+  # tprog: Contrast(SelectRow1(@param0, <=, 0, 2002@Int), -, 0, 2002@Int, 2001@Int, 1)
+# top-6, score: 1.50, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2001@Int), count, 1)
+# top-7, score: 1.50, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2002@Int), count, 1)
+# top-8, score: 1.50, answer: [2]
+  # tprog: Summarize(SelectRow1(@param0, <, 0, 2001@Int), count, 0)
+# top-9, score: 1.50, answer: [2]
+  # tprog: Summarize(SelectRow1(@param0, <, 0, 2001@Int), count, 2)
+# top-10, score: 1.38, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2001@Int), count, 0)
+# top-11, score: 1.38, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2001@Int), count, 2)
+# top-12, score: 1.38, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2002@Int), count, 0)
+# top-13, score: 1.38, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2002@Int), count, 2)

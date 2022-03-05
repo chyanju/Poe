@@ -1,0 +1,266 @@
+# parsed arguments: Namespace(benchmark='Qbe4fc', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'83', 'blue', 'u.s.', 'greece', '43', 'mexico', '9', 'spain', 'china', 'britain', 'russia', 'opinion', '44', '35', 'lebanon', '18', '2', 'japan', '34', '13', '60', '27', 'poland', 'color', '25', '29', '49', '22', 'rep.', '81', '50', 'czech', '15', 'turkey', 'percentage', 'brazil', 'france', 'italy', '84', '16', 'pakistan', 'same', '51', '23', 'orange', 'remain', 'improve', '5', '28', 'red', '40', '31', '45', '37', 'india', '24', 'germany', '52', 'jordan', '12', 'egypt', '20', '26', '47', '33', '10', '32', 'country', 'tunisia', 'worsen', '75'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       Country          opinion  percentage   color
+0       Brazil          Improve          84    blue
+1       Brazil  Remain the same          12  orange
+2       Brazil           Worsen           5     red
+3        China          Improve          83    blue
+4        China  Remain the same           9  orange
+..         ...              ...         ...     ...
+58  Czech Rep.  Remain the same          27  orange
+59  Czech Rep.           Worsen          60     red
+60      Greece          Improve           9    blue
+61      Greece  Remain the same          10  orange
+62      Greece           Worsen          81     red
+
+[63 rows x 4 columns]
+# query is: Which countries have more than 50% of responses believing that the economy will improve?
+# expected output type:[dtype('O')]
+# expected output is:
+    ANSWER
+0   Brazil
+1    China
+2   Mexico
+3  Tunisia
+4     U.S.
+# inferred DSL terminals:
+  # ConstVal: ['50@Int', 'Improve@Str', 'Country@Str', '<NULL>']
+     # cmap: [(50, 50), ('countries', 'Country'), ('improve', 'Improve')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>', '==', '>=', '<NULL>']
+     # bmap: [('more', '>='), (None, '=='), ('more', '>')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(41, 6), (37, 6), (34, 6), (34, 6), (33, 6), (32, 6), (28, 6), (28, 6), (28, 6), (25, 6)]
+  # [debug] high_values (no dup.): [(48, 3), (45, 3), (41, 3), (40, 3), (38, 3), (38, 3), (38, 3), (35, 3), (34, 3), (31, 3)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Brazil'}]
+  # found 0 program(s)
+# (t=4.28) i=1, candidate=[{'ANSWER': 'China'}]
+  # found 0 program(s)
+# (t=8.54) i=2, candidate=[{'ANSWER': 'Tunisia'}]
+  # found 0 program(s)
+# (t=12.82) i=3, candidate=[{'ANSWER': 'Brazil'}, {'ANSWER': 'China'}]
+  # found 0 program(s)
+# (t=13.82) i=4, candidate=[{'ANSWER': 'Brazil'}, {'ANSWER': 'Tunisia'}]
+  # found 0 program(s)
+# (t=14.81) i=5, candidate=[{'ANSWER': 'China'}, {'ANSWER': 'Tunisia'}]
+  # found 0 program(s)
+# (t=15.80) i=6, candidate=[{'ANSWER': 'Brazil'}, {'ANSWER': 'Mexico'}]
+  # found 0 program(s)
+# (t=16.78) i=7, candidate=[{'ANSWER': 'China'}, {'ANSWER': 'Mexico'}]
+  # found 0 program(s)
+# (t=17.74) i=8, candidate=[{'ANSWER': 'Mexico'}, {'ANSWER': 'Tunisia'}]
+  # found 0 program(s)
+# (t=18.70) i=9, candidate=[{'ANSWER': 'Mexico'}]
+  # found 0 program(s)
+# (t=22.89) i=10, candidate=[{'ANSWER': 'Brazil'}, {'ANSWER': 'U.S.'}]
+  # found 0 program(s)
+# (t=23.87) i=11, candidate=[{'ANSWER': 'China'}, {'ANSWER': 'U.S.'}]
+  # found 0 program(s)
+# (t=24.83) i=12, candidate=[{'ANSWER': 'Tunisia'}, {'ANSWER': 'U.S.'}]
+  # found 0 program(s)
+# (t=25.81) i=13, candidate=[{'ANSWER': 'Mexico'}, {'ANSWER': 'U.S.'}]
+  # found 0 program(s)
+# (t=26.79) i=14, candidate=[{'ANSWER': 'U.S.'}]
+  # found 0 program(s)
+# (t=31.00) i=15, candidate=[{'ANSWER': 'Brazil'}, {'ANSWER': 'Pakistan'}]
+  # found 0 program(s)
+# (t=31.97) i=16, candidate=[{'ANSWER': 'China'}, {'ANSWER': 'Pakistan'}]
+  # found 0 program(s)
+# (t=32.96) i=17, candidate=[{'ANSWER': 'Pakistan'}, {'ANSWER': 'Tunisia'}]
+  # found 0 program(s)
+# (t=33.96) i=18, candidate=[{'ANSWER': 'Brazil'}, {'ANSWER': 'Spain'}]
+  # found 0 program(s)
+# (t=35.18) i=19, candidate=[{'ANSWER': 'Brazil'}, {'ANSWER': 'Egypt'}]
+  # found 0 program(s)
+# (t=36.18) i=20, candidate=[{'ANSWER': 'Brazil'}, {'ANSWER': 'Czech Rep.'}]
+  # found 0 program(s)
+# (t=37.17) i=21, candidate=[{'ANSWER': 'Brazil'}, {'ANSWER': 'Turkey'}]
+  # found 0 program(s)
+# (t=38.18) i=22, candidate=[{'ANSWER': 'Brazil'}, {'ANSWER': 'France'}]
+  # found 0 program(s)
+# (t=39.17) i=23, candidate=[{'ANSWER': 'China'}, {'ANSWER': 'Spain'}]
+  # found 0 program(s)
+# (t=40.16) i=24, candidate=[{'ANSWER': 'China'}, {'ANSWER': 'Egypt'}]
+  # found 0 program(s)
+# (t=41.16) i=25, candidate=[{'ANSWER': 'China'}, {'ANSWER': 'Czech Rep.'}]
+  # found 0 program(s)
+# (t=42.16) i=26, candidate=[{'ANSWER': 'China'}, {'ANSWER': 'Turkey'}]
+  # found 0 program(s)
+# (t=43.15) i=27, candidate=[{'ANSWER': 'China'}, {'ANSWER': 'France'}]
+  # found 0 program(s)
+# (t=44.15) i=28, candidate=[{'ANSWER': 'Spain'}, {'ANSWER': 'Tunisia'}]
+  # found 0 program(s)
+# (t=45.14) i=29, candidate=[{'ANSWER': 'Egypt'}, {'ANSWER': 'Tunisia'}]
+  # found 0 program(s)
+# (t=46.14) i=30, candidate=[{'ANSWER': 41}]
+  # found 0 program(s)
+# (t=49.32) i=31, candidate=[{'ANSWER': 37}]
+  # found 0 program(s)
+# (t=53.54) i=32, candidate=[{'ANSWER': 34}]
+  # found 0 program(s)
+# (t=57.77) i=33, candidate=[{'ANSWER': 34}]
+  # found 0 program(s)
+# (t=62.06) i=34, candidate=[{'ANSWER': 33}]
+  # found 0 program(s)
+# (t=66.31) i=35, candidate=[{'ANSWER': 32}]
+  # found 0 program(s)
+# (t=70.51) i=36, candidate=[{'ANSWER': 28}]
+  # found 0 program(s)
+# (t=74.72) i=37, candidate=[{'ANSWER': 28}]
+  # found 0 program(s)
+# (t=78.97) i=38, candidate=[{'ANSWER': 28}]
+  # found 0 program(s)
+# (t=83.24) i=39, candidate=[{'ANSWER': 25}]
+  # found 0 program(s)
+# ====> fallback strategy (retrieval) is triggered because no explanation is found so far
+# ====> retrieval_values: [10, 12, 13, 15, 16, 18, 2, 20, 22, 23, 24, 25, 26, 27, 28, 29, 31, 32, 33, 34, 35, 37, 40, 43, 44, 45, 47, 49, 5, 50, 51, 52, 60, 75, 81, 83, 84, 9, 'Brazil', 'Britain', 'China', 'Country', 'Czech Rep.', 'Egypt', 'France', 'Germany', 'Greece', 'Improve', 'India', 'Italy', 'Japan', 'Jordan', 'Lebanon', 'Mexico', 'Pakistan', 'Poland', 'Remain the same', 'Russia', 'Spain', 'Tunisia', 'Turkey', 'U.S.', 'Worsen', 'blue', 'color', 'opinion', 'orange', 'percentage', 'red']
+# (t=87.58) fallback i=0, candidate=[{'ANSWER': 10}]
+  # found 0 program(s)
+# (t=91.82) fallback i=1, candidate=[{'ANSWER': 12}]
+  # found 0 program(s)
+# (t=96.05) fallback i=2, candidate=[{'ANSWER': 13}]
+  # found 0 program(s)
+# (t=100.31) fallback i=3, candidate=[{'ANSWER': 15}]
+  # found 0 program(s)
+# (t=104.58) fallback i=4, candidate=[{'ANSWER': 16}]
+  # found 0 program(s)
+# (t=108.94) fallback i=5, candidate=[{'ANSWER': 18}]
+  # found 0 program(s)
+# (t=113.18) fallback i=6, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=117.71) fallback i=7, candidate=[{'ANSWER': 20}]
+  # found 0 program(s)
+# (t=122.01) fallback i=8, candidate=[{'ANSWER': 22}]
+  # found 0 program(s)
+# (t=126.47) fallback i=9, candidate=[{'ANSWER': 23}]
+  # found 0 program(s)
+# (t=130.79) fallback i=10, candidate=[{'ANSWER': 24}]
+  # found 0 program(s)
+# (t=135.09) fallback i=11, candidate=[{'ANSWER': 25}]
+  # found 0 program(s)
+# (t=139.41) fallback i=12, candidate=[{'ANSWER': 26}]
+  # found 0 program(s)
+# (t=143.80) fallback i=13, candidate=[{'ANSWER': 27}]
+  # found 0 program(s)
+# (t=148.15) fallback i=14, candidate=[{'ANSWER': 28}]
+  # found 0 program(s)
+# (t=152.47) fallback i=15, candidate=[{'ANSWER': 29}]
+  # found 0 program(s)
+# (t=156.78) fallback i=16, candidate=[{'ANSWER': 31}]
+  # found 0 program(s)
+# (t=161.08) fallback i=17, candidate=[{'ANSWER': 32}]
+  # found 0 program(s)
+# (t=165.38) fallback i=18, candidate=[{'ANSWER': 33}]
+  # found 0 program(s)
+# (t=169.64) fallback i=19, candidate=[{'ANSWER': 34}]
+  # found 0 program(s)
+# (t=173.92) fallback i=20, candidate=[{'ANSWER': 35}]
+  # found 0 program(s)
+# (t=178.19) fallback i=21, candidate=[{'ANSWER': 37}]
+  # found 0 program(s)
+# (t=182.50) fallback i=22, candidate=[{'ANSWER': 40}]
+  # found 0 program(s)
+# (t=186.80) fallback i=23, candidate=[{'ANSWER': 43}]
+  # found 0 program(s)
+# (t=191.05) fallback i=24, candidate=[{'ANSWER': 44}]
+  # found 0 program(s)
+# (t=195.30) fallback i=25, candidate=[{'ANSWER': 45}]
+  # found 0 program(s)
+# (t=199.55) fallback i=26, candidate=[{'ANSWER': 47}]
+  # found 0 program(s)
+# (t=203.81) fallback i=27, candidate=[{'ANSWER': 49}]
+  # found 0 program(s)
+# (t=208.09) fallback i=28, candidate=[{'ANSWER': 5}]
+  # found 0 program(s)
+# (t=212.34) fallback i=29, candidate=[{'ANSWER': 50}]
+  # found 3 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Improve@Str), ==, 2, 50@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'opinion', 'Improve'], '==', 'percentage', 50], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 50@Int), ==, 2, 50@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 50], '==', 'percentage', 50], ['percentage']]
+    # SelectCol(SelectRow1(@param0, ==, 2, 50@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'percentage', 50], ['percentage']]
+# (t=216.91) fallback i=30, candidate=[{'ANSWER': 51}]
+  # found 0 program(s)
+# (t=221.17) fallback i=31, candidate=[{'ANSWER': 52}]
+  # found 0 program(s)
+# (t=225.54) fallback i=32, candidate=[{'ANSWER': 60}]
+  # found 0 program(s)
+# (t=229.86) fallback i=33, candidate=[{'ANSWER': 75}]
+  # found 0 program(s)
+# (t=234.20) fallback i=34, candidate=[{'ANSWER': 81}]
+  # found 0 program(s)
+# (t=238.58) fallback i=35, candidate=[{'ANSWER': 83}]
+  # found 0 program(s)
+# (t=242.90) fallback i=36, candidate=[{'ANSWER': 84}]
+  # found 0 program(s)
+# (t=247.21) fallback i=37, candidate=[{'ANSWER': 9}]
+  # found 0 program(s)
+# (t=251.52) fallback i=38, candidate=[{'ANSWER': 'Brazil'}]
+  # found 0 program(s)
+# (t=255.86) fallback i=39, candidate=[{'ANSWER': 'Britain'}]
+  # found 0 program(s)
+# (t=260.23) fallback i=40, candidate=[{'ANSWER': 'China'}]
+  # found 0 program(s)
+# (t=264.62) fallback i=41, candidate=[{'ANSWER': 'Country'}]
+  # found 0 program(s)
+# (t=267.92) fallback i=42, candidate=[{'ANSWER': 'Czech Rep.'}]
+  # found 0 program(s)
+# (t=272.27) fallback i=43, candidate=[{'ANSWER': 'Egypt'}]
+  # found 3 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Improve@Str), ==, 2, 50@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'opinion', 'Improve'], '==', 'percentage', 50], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 50@Int), ==, 2, 50@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 50], '==', 'percentage', 50], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 2, 50@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'percentage', 50], ['Country']]
+# (t=276.68) fallback i=44, candidate=[{'ANSWER': 'France'}]
+  # found 0 program(s)
+# (t=281.07) fallback i=45, candidate=[{'ANSWER': 'Germany'}]
+  # found 0 program(s)
+# (t=285.45) fallback i=46, candidate=[{'ANSWER': 'Greece'}]
+  # found 0 program(s)
+# (t=289.80) fallback i=47, candidate=[{'ANSWER': 'Improve'}]
+  # found 3 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Improve@Str), ==, 2, 50@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'opinion', 'Improve'], '==', 'percentage', 50], ['opinion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 50@Int), ==, 2, 50@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 50], '==', 'percentage', 50], ['opinion']]
+    # SelectCol(SelectRow1(@param0, ==, 2, 50@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'percentage', 50], ['opinion']]
+# (t=294.10) fallback i=48, candidate=[{'ANSWER': 'India'}]
+  # found 0 program(s)
+# (t=298.40) fallback i=49, candidate=[{'ANSWER': 'Italy'}]
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 2.31, answer: Egypt
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Improve@Str), ==, 2, 50@Int), ['0'])
+# top-2, score: 2.23, answer: 50
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Improve@Str), ==, 2, 50@Int), ['2'])
+# top-3, score: 2.23, answer: Improve
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Improve@Str), ==, 2, 50@Int), ['1'])
+# top-4, score: 1.31, answer: Egypt
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 50@Int), ==, 2, 50@Int), ['0'])
+# top-5, score: 1.29, answer: Egypt
+  # tprog: SelectCol(SelectRow1(@param0, ==, 2, 50@Int), ['0'])
+# top-6, score: 1.23, answer: 50
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 50@Int), ==, 2, 50@Int), ['2'])
+# top-7, score: 1.23, answer: Improve
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 50@Int), ==, 2, 50@Int), ['1'])
+# top-8, score: 1.21, answer: 50
+  # tprog: SelectCol(SelectRow1(@param0, ==, 2, 50@Int), ['2'])
+# top-9, score: 1.21, answer: Improve
+  # tprog: SelectCol(SelectRow1(@param0, ==, 2, 50@Int), ['1'])

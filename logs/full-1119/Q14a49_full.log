@@ -1,0 +1,99 @@
+# parsed arguments: Namespace(benchmark='Q14a49', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'percentage', '12-17', '20', 'blue', 'age', '7', '1', 'color', 'male', '18-59', '0-4', '5-11', 'group', 'orange', '60+', '24', '10', '2', 'gender', '9', 'female'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+  Age group  Gender  Percentage   color
+0       0-4    Male           9  orange
+1       0-4  Female           9    blue
+2     12-17    Male           7  orange
+3     12-17  Female           7    blue
+4     18-59  Female          24    blue
+5     18-59    Male          20  orange
+6       60+  Female           2    blue
+7       60+    Male           1  orange
+8      5-11    Male          10  orange
+9      5-11  Female          10    blue
+# query is: How many age groups have a greater than ten percent population size?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0       1
+# inferred DSL terminals:
+  # ConstVal: ['Age group@Str', 'Percentage@Str', '<NULL>']
+     # cmap: [('percent', 'Percentage'), ('groups', 'Age group'), ('age', 'Age group')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '>', '>=', '<NULL>']
+     # bmap: [('greater', '>='), (None, '=='), ('greater', '>')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=1.25) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# ====> fallback strategy (retrieval) is triggered because no explanation is found so far
+# ====> retrieval_values: ['0-4', 1, 10, '12-17', '18-59', 2, 20, 24, '5-11', '60+', 7, 9, 'Age group', 'Female', 'Gender', 'Male', 'Percentage', 'blue', 'color', 'orange']
+# (t=2.50) fallback i=0, candidate=[{'ANSWER': '0-4'}]
+  # found 0 program(s)
+# (t=3.73) fallback i=1, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=4.96) fallback i=2, candidate=[{'ANSWER': 10}]
+  # found 4 program(s)
+    # Summarize(@param0, count, 0)
+      --> ['Summarize', 'input@0', 'count', 'Age group']
+    # Summarize(@param0, count, 1)
+      --> ['Summarize', 'input@0', 'count', 'Gender']
+    # Summarize(@param0, count, 2)
+      --> ['Summarize', 'input@0', 'count', 'Percentage']
+    # Summarize(@param0, count, 3)
+      --> ['Summarize', 'input@0', 'count', 'color']
+# (t=6.18) fallback i=3, candidate=[{'ANSWER': '12-17'}]
+  # found 0 program(s)
+# (t=7.40) fallback i=4, candidate=[{'ANSWER': '18-59'}]
+  # found 0 program(s)
+# (t=8.61) fallback i=5, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=9.83) fallback i=6, candidate=[{'ANSWER': 20}]
+  # found 0 program(s)
+# (t=11.04) fallback i=7, candidate=[{'ANSWER': 24}]
+  # found 0 program(s)
+# (t=12.26) fallback i=8, candidate=[{'ANSWER': '5-11'}]
+  # found 0 program(s)
+# (t=13.48) fallback i=9, candidate=[{'ANSWER': '60+'}]
+  # found 0 program(s)
+# (t=14.68) fallback i=10, candidate=[{'ANSWER': 7}]
+  # found 0 program(s)
+# (t=15.88) fallback i=11, candidate=[{'ANSWER': 9}]
+  # found 0 program(s)
+# (t=17.10) fallback i=12, candidate=[{'ANSWER': 'Age group'}]
+  # found 0 program(s)
+# (t=18.02) fallback i=13, candidate=[{'ANSWER': 'Female'}]
+  # found 0 program(s)
+# (t=19.24) fallback i=14, candidate=[{'ANSWER': 'Gender'}]
+  # found 0 program(s)
+# (t=20.15) fallback i=15, candidate=[{'ANSWER': 'Male'}]
+  # found 0 program(s)
+# (t=21.36) fallback i=16, candidate=[{'ANSWER': 'Percentage'}]
+  # found 0 program(s)
+# (t=22.28) fallback i=17, candidate=[{'ANSWER': 'blue'}]
+  # found 0 program(s)
+# (t=23.50) fallback i=18, candidate=[{'ANSWER': 'color'}]
+  # found 0 program(s)
+# (t=24.42) fallback i=19, candidate=[{'ANSWER': 'orange'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.50, answer: [10]
+  # tprog: Summarize(@param0, count, 0)
+# top-2, score: 1.42, answer: [10]
+  # tprog: Summarize(@param0, count, 2)
+# top-3, score: 1.33, answer: [10]
+  # tprog: Summarize(@param0, count, 1)
+# top-4, score: 1.33, answer: [10]
+  # tprog: Summarize(@param0, count, 3)

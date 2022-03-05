@@ -1,0 +1,40 @@
+# parsed arguments: Namespace(benchmark='Qd323a', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'highland', 'yoshino', 'district', 'inland', 'flat', '92', 'yamato', 'plain', 'blue', '1282', 'gojō,', 'population', 'color', '56'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                   District  Population color
+0  Yamato flat inland plain        1282  blue
+1           Yamato highland          56  blue
+2             Gojō, Yoshino          92  blue
+# query is: Approximately what is the population of Gojo Yoshino?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0     100
+# inferred DSL terminals:
+  # ConstVal: ['Population@Str', 'Gojō, Yoshino@Str', '<NULL>']
+     # cmap: [('yoshino', 'Gojō, Yoshino'), ('population', 'Population')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 92}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Gojō, Yoshino@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'District', 'Gojō, Yoshino'], ['Population']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Gojō, Yoshino@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'District', 'Gojō, Yoshino'], ['Population']]
+
+# ========== review report ========== #
+# top-1, score: 1.39, answer: 92
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Gojō, Yoshino@Str), ['1'])
+# top-2, score: 1.39, answer: 92
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Gojō, Yoshino@Str), ['-99', '-2'])

@@ -1,0 +1,77 @@
+# parsed arguments: Namespace(benchmark='Q3e142', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'american', 'african', 'color', 'latino', 'blue', 'race', 'percent', '57', '25', '27', 'white'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+               Race  Percent color
+0             White       57  blue
+1            Latino       27  blue
+2  African American       25  blue
+# query is: What two races are most similar in investment income?
+# expected output type:[dtype('O')]
+# expected output is:
+             ANSWER
+0  African American
+1            Latino
+# inferred DSL terminals:
+  # ConstVal: ['Race@Str', '<NULL>']
+     # cmap: [('races', 'Race')]
+  # AggrFunc: ['max', '<NULL>']
+     # amap: [('most', 'max')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('most', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'African American'}]
+  # found 0 program(s)
+# (t=0.52) i=1, candidate=[{'ANSWER': 'Latino'}]
+  # found 0 program(s)
+# (t=1.04) i=2, candidate=[{'ANSWER': 'White'}]
+  # found 10 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Race'], 'max', 'Percent'], 'eqmax', 'COL0'], ['Race']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Race'], 'max', 'Percent'], 'eqmax', 'COL0'], ['Race']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Race', 'Percent'], 'max', 'Percent'], 'eqmax', 'Percent'], ['Race']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Race', 'Percent'], 'max', 'Percent'], 'eqmax', 'Percent'], ['Race']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Race', 'Percent'], 'max', 'Percent'], 'eqmax', 'COL0'], ['Race']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Race', 'Percent'], 'max', 'Percent'], 'eqmax', 'COL0'], ['Race']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Race', 'color'], 'max', 'Percent'], 'eqmax', 'COL0'], ['Race']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Race', 'color'], 'max', 'Percent'], 'eqmax', 'COL0'], ['Race']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'Percent'], ['Race']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'Percent'], ['Race']]
+
+# ========== review report ========== #
+# top-1, score: 1.39, answer: White
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+# top-2, score: 1.39, answer: White
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+# top-3, score: 1.32, answer: White
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+# top-4, score: 1.32, answer: White
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+# top-5, score: 1.31, answer: White
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+# top-6, score: 1.31, answer: White
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+# top-7, score: 1.31, answer: White
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+# top-8, score: 1.31, answer: White
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+# top-9, score: 1.31, answer: White
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+# top-10, score: 1.31, answer: White
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])

@@ -1,0 +1,64 @@
+# parsed arguments: Namespace(benchmark='Q7aad2', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'7033231', 'us', 'blue', 'netherlands', 'norway', '67030000', 'germany', 'donations', 'finland', '2000000', 'kuwait', 'belgium', 'european', '1356852', '1000000', 'ireland', '2713704', '5475452', 'japan', 'color', 'country', '26000000', 'commission', '30033922', 'china'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                Country  Donations color
+0                    US   67030000  blue
+1   European Commission   30033922  blue
+2                 Japan   26000000  blue
+3           Netherlands    7033231  blue
+4                Norway    5475452  blue
+5               Germany    2713704  blue
+6                Kuwait    2000000  blue
+7               Finland    1356852  blue
+8               Belgium    1356852  blue
+9               Ireland    1356852  blue
+10                China    1000000  blue
+# query is: How much has the Netherlands donated to Syrian refugees?
+# expected output type:[dtype('int64')]
+# expected output is:
+    ANSWER
+0  7033231
+# inferred DSL terminals:
+  # ConstVal: ['Netherlands@Str', '<NULL>']
+     # cmap: [('netherlands', 'Netherlands')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 7033231}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Netherlands@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Netherlands'], ['Donations']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Netherlands@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Netherlands'], ['Donations']]
+# (t=0.23) i=1, candidate=[{'ANSWER': 14066462}]
+  # found 0 program(s)
+# (t=0.37) i=2, candidate=[{'ANSWER': 21099693}]
+  # found 0 program(s)
+# (t=0.51) i=3, candidate=[{'ANSWER': 15066462}]
+  # found 0 program(s)
+# (t=0.65) i=4, candidate=[{'ANSWER': 8033231}]
+  # found 0 program(s)
+# (t=0.80) i=5, candidate=[{'ANSWER': 9033231}]
+  # found 0 program(s)
+# (t=0.94) i=6, candidate=[{'ANSWER': 1000000}]
+  # found 0 program(s)
+# (t=1.17) i=7, candidate=[{'ANSWER': 2000000}]
+  # found 0 program(s)
+# (t=1.39) i=8, candidate=[{'ANSWER': 3000000}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.25, answer: [7033231]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Netherlands@Str), ['1'])
+# top-2, score: 2.25, answer: [7033231]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Netherlands@Str), ['-99', '-2'])

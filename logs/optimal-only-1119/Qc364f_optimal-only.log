@@ -1,0 +1,228 @@
+# parsed arguments: Namespace(benchmark='Qc364f', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'about', '5', '38', '28', '13', 'country', 'strength', '56', '14', '21', 'conditions', '34', 'percentage', 'ahead', 'family', '23', 'same', '73', '7', 'in', 'raising', 'to', 'moral', 'religion', 'society', 'practice', 'for', '18', 'values', '20', 'get', 'u.s.', '32', 'political', '69', 'statement', 'origin', 'orange', 'blue', '52', 'express', 'children', '26', 'opportunity', 'better', 'ties', '3', 'treatment', '64', '62', 'poor', 'response', 'color', '9', 'red', 'views', 'freedom'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                             statement  ...   color
+0             Opportunity to get ahead  ...    blue
+1   Freedom to express political views  ...    blue
+2                Treatment of the poor  ...    blue
+3      Conditions for raising children  ...    blue
+4         Freedom to practice religion  ...    blue
+5              Moral values of society  ...    blue
+6              Strength of family ties  ...    blue
+7             Opportunity to get ahead  ...  orange
+8   Freedom to express political views  ...  orange
+9                Treatment of the poor  ...  orange
+10     Conditions for raising children  ...  orange
+11        Freedom to practice religion  ...  orange
+12             Moral values of society  ...  orange
+13             Strength of family ties  ...  orange
+14            Opportunity to get ahead  ...     red
+15  Freedom to express political views  ...     red
+16               Treatment of the poor  ...     red
+17     Conditions for raising children  ...     red
+18        Freedom to practice religion  ...     red
+19             Moral values of society  ...     red
+20             Strength of family ties  ...     red
+
+[21 rows x 4 columns]
+# query is: what is the value of the blue scale for the strength of family ties
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      56
+# inferred DSL terminals:
+  # ConstVal: ['Strength of family ties@Str', 'Conditions for raising children@Str', 'Moral values of society@Str', 'blue@Str', '<NULL>']
+     # cmap: [('family', 'Strength of family ties'), ('blue', 'blue'), ('for', 'Conditions for raising children'), ('ties', 'Strength of family ties'), ('strength', 'Strength of family ties'), ('value', 'Moral values of society')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=6.99) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# ====> fallback strategy (retrieval) is triggered because no explanation is found so far
+# ====> retrieval_values: [13, 14, 18, 20, 21, 23, 26, 28, 3, 32, 34, 38, 5, 52, 56, 62, 64, 69, 7, 73, 9, 'About the same', 'Better in U.S.', 'Better in country of origin', 'Conditions for raising children', 'Freedom to express political views', 'Freedom to practice religion', 'Moral values of society', 'Opportunity to get ahead', 'Strength of family ties', 'Treatment of the poor', 'blue', 'color', 'orange', 'percentage', 'red', 'response', 'statement']
+# (t=14.23) fallback i=0, candidate=[{'ANSWER': 13}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 3, blue@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Conditions for raising children'], '==', 'color', 'blue'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Conditions for raising children@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'statement', 'Conditions for raising children'], ['percentage']]
+# (t=21.62) fallback i=1, candidate=[{'ANSWER': 14}]
+  # found 0 program(s)
+# (t=28.67) fallback i=2, candidate=[{'ANSWER': 18}]
+  # found 0 program(s)
+# (t=36.04) fallback i=3, candidate=[{'ANSWER': 20}]
+  # found 0 program(s)
+# (t=43.25) fallback i=4, candidate=[{'ANSWER': 21}]
+  # found 0 program(s)
+# (t=50.22) fallback i=5, candidate=[{'ANSWER': 23}]
+  # found 0 program(s)
+# (t=57.59) fallback i=6, candidate=[{'ANSWER': 26}]
+  # found 0 program(s)
+# (t=64.92) fallback i=7, candidate=[{'ANSWER': 28}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Moral values of society@Str), ==, 3, blue@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Moral values of society'], '==', 'color', 'blue'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Moral values of society@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'statement', 'Moral values of society'], ['percentage']]
+# (t=71.94) fallback i=8, candidate=[{'ANSWER': 3}]
+  # found 0 program(s)
+# (t=79.30) fallback i=9, candidate=[{'ANSWER': 32}]
+  # found 0 program(s)
+# (t=86.61) fallback i=10, candidate=[{'ANSWER': 34}]
+  # found 0 program(s)
+# (t=93.58) fallback i=11, candidate=[{'ANSWER': 38}]
+  # found 0 program(s)
+# (t=100.96) fallback i=12, candidate=[{'ANSWER': 5}]
+  # found 0 program(s)
+# (t=108.25) fallback i=13, candidate=[{'ANSWER': 52}]
+  # found 0 program(s)
+# (t=115.30) fallback i=14, candidate=[{'ANSWER': 56}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Strength of family ties@Str), ==, 3, blue@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Strength of family ties'], '==', 'color', 'blue'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Strength of family ties@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'statement', 'Strength of family ties'], ['percentage']]
+# (t=122.65) fallback i=15, candidate=[{'ANSWER': 62}]
+  # found 0 program(s)
+# (t=129.99) fallback i=16, candidate=[{'ANSWER': 64}]
+  # found 0 program(s)
+# (t=137.02) fallback i=17, candidate=[{'ANSWER': 69}]
+  # found 0 program(s)
+# (t=144.38) fallback i=18, candidate=[{'ANSWER': 7}]
+  # found 0 program(s)
+# (t=151.67) fallback i=19, candidate=[{'ANSWER': 73}]
+  # found 0 program(s)
+# (t=158.74) fallback i=20, candidate=[{'ANSWER': 9}]
+  # found 0 program(s)
+# (t=166.13) fallback i=21, candidate=[{'ANSWER': 'About the same'}]
+  # found 0 program(s)
+# (t=173.46) fallback i=22, candidate=[{'ANSWER': 'Better in U.S.'}]
+  # found 0 program(s)
+# (t=180.49) fallback i=23, candidate=[{'ANSWER': 'Better in country of origin'}]
+  # found 6 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Strength of family ties@Str), ==, 3, blue@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Strength of family ties'], '==', 'color', 'blue'], ['response']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 3, blue@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Conditions for raising children'], '==', 'color', 'blue'], ['response']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Moral values of society@Str), ==, 3, blue@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Moral values of society'], '==', 'color', 'blue'], ['response']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Strength of family ties@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'statement', 'Strength of family ties'], ['response']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Conditions for raising children@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'statement', 'Conditions for raising children'], ['response']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Moral values of society@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'statement', 'Moral values of society'], ['response']]
+# (t=187.85) fallback i=24, candidate=[{'ANSWER': 'Conditions for raising children'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 3, blue@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Conditions for raising children'], '==', 'color', 'blue'], ['statement']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Conditions for raising children@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'statement', 'Conditions for raising children'], ['statement']]
+# (t=195.12) fallback i=25, candidate=[{'ANSWER': 'Freedom to express political views'}]
+  # found 0 program(s)
+# (t=202.47) fallback i=26, candidate=[{'ANSWER': 'Freedom to practice religion'}]
+  # found 0 program(s)
+# (t=209.51) fallback i=27, candidate=[{'ANSWER': 'Moral values of society'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Moral values of society@Str), ==, 3, blue@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Moral values of society'], '==', 'color', 'blue'], ['statement']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Moral values of society@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'statement', 'Moral values of society'], ['statement']]
+# (t=216.89) fallback i=28, candidate=[{'ANSWER': 'Opportunity to get ahead'}]
+  # found 0 program(s)
+# (t=223.89) fallback i=29, candidate=[{'ANSWER': 'Strength of family ties'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Strength of family ties@Str), ==, 3, blue@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Strength of family ties'], '==', 'color', 'blue'], ['statement']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Strength of family ties@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'statement', 'Strength of family ties'], ['statement']]
+# (t=231.33) fallback i=30, candidate=[{'ANSWER': 'Treatment of the poor'}]
+  # found 0 program(s)
+# (t=238.59) fallback i=31, candidate=[{'ANSWER': 'blue'}]
+  # found 6 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Strength of family ties@Str), ==, 3, blue@Str), ['3'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Strength of family ties'], '==', 'color', 'blue'], ['color']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 3, blue@Str), ['3'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Conditions for raising children'], '==', 'color', 'blue'], ['color']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Moral values of society@Str), ==, 3, blue@Str), ['3'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Moral values of society'], '==', 'color', 'blue'], ['color']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Strength of family ties@Str), ['3'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'statement', 'Strength of family ties'], ['color']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Conditions for raising children@Str), ['3'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'statement', 'Conditions for raising children'], ['color']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Moral values of society@Str), ['3'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'statement', 'Moral values of society'], ['color']]
+# (t=245.55) fallback i=32, candidate=[{'ANSWER': 'color'}]
+  # found 0 program(s)
+# (t=252.94) fallback i=33, candidate=[{'ANSWER': 'orange'}]
+  # found 0 program(s)
+# (t=260.30) fallback i=34, candidate=[{'ANSWER': 'percentage'}]
+  # found 0 program(s)
+# (t=267.26) fallback i=35, candidate=[{'ANSWER': 'red'}]
+  # found 0 program(s)
+# (t=274.65) fallback i=36, candidate=[{'ANSWER': 'response'}]
+  # found 0 program(s)
+# (t=281.98) fallback i=37, candidate=[{'ANSWER': 'statement'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.38, answer: [56]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Strength of family ties@Str), ==, 3, blue@Str), ['2'])
+# top-2, score: 2.38, answer: [56]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Strength of family ties@Str), ['2'])
+# top-3, score: 2.38, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Strength of family ties@Str), ==, 3, blue@Str), ['1'])
+# top-4, score: 2.38, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Strength of family ties@Str), ['1'])
+# top-5, score: 2.38, answer: ['Strength of family ties']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Strength of family ties@Str), ==, 3, blue@Str), ['0'])
+# top-6, score: 2.38, answer: ['Strength of family ties']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Strength of family ties@Str), ['0'])
+# top-7, score: 2.38, answer: ['blue']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Strength of family ties@Str), ==, 3, blue@Str), ['3'])
+# top-8, score: 2.38, answer: ['blue']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Strength of family ties@Str), ['3'])
+# top-9, score: 2.23, answer: [13]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 3, blue@Str), ['2'])
+# top-10, score: 2.23, answer: [13]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Conditions for raising children@Str), ['2'])
+# top-11, score: 2.23, answer: [28]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Moral values of society@Str), ==, 3, blue@Str), ['2'])
+# top-12, score: 2.23, answer: [28]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Moral values of society@Str), ['2'])
+# top-13, score: 2.23, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 3, blue@Str), ['1'])
+# top-14, score: 2.23, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Moral values of society@Str), ==, 3, blue@Str), ['1'])
+# top-15, score: 2.23, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Conditions for raising children@Str), ['1'])
+# top-16, score: 2.23, answer: ['Better in country of origin']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Moral values of society@Str), ['1'])
+# top-17, score: 2.23, answer: ['Conditions for raising children']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 3, blue@Str), ['0'])
+# top-18, score: 2.23, answer: ['Conditions for raising children']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Conditions for raising children@Str), ['0'])
+# top-19, score: 2.23, answer: ['Moral values of society']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Moral values of society@Str), ==, 3, blue@Str), ['0'])
+# top-20, score: 2.23, answer: ['Moral values of society']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Moral values of society@Str), ['0'])
+# top-21, score: 2.23, answer: ['blue']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 3, blue@Str), ['3'])
+# top-22, score: 2.23, answer: ['blue']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Moral values of society@Str), ==, 3, blue@Str), ['3'])
+# top-23, score: 2.23, answer: ['blue']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Conditions for raising children@Str), ['3'])
+# top-24, score: 2.23, answer: ['blue']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Moral values of society@Str), ['3'])

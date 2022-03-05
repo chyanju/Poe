@@ -1,0 +1,68 @@
+# parsed arguments: Namespace(benchmark='Qc93fb', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'3939000', 'lrt', 'transportation', '3095000', 'blue', 'bus', '180000', 'mrt', 'ridership', 'color', '954000', 'taxi'}
+# input type: [dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+   ridership transportation color
+0    3939000            Bus  blue
+1    3095000            MRT  blue
+2     954000           Taxi  blue
+3     180000            LRT  blue
+# query is: What the difference between bus ridership and the LRT ridership?
+# expected output type:[dtype('int64')]
+# expected output is:
+    ANSWER
+0  3759000
+# inferred DSL terminals:
+  # ConstVal: ['ridership@Str', 'LRT@Str', 'Bus@Str', '<NULL>']
+     # cmap: [('ridership', 'ridership'), ('bus', 'Bus'), ('lrt', 'LRT')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(3759000, 4), (-3759000, 4)]
+  # [debug] high_values (no dup.): [(3759000, 4), (-3759000, 4)]
+  # [debug] filtered low_values (no dup.): [(2985000, 2), (2915000, 2), (844000, 2), (774000, 2), (-774000, 2), (-844000, 2), (-2915000, 2), (-2985000, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=1.47) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=2.93) i=2, candidate=[{'ANSWER': 3759000}]
+  # found 2 program(s)
+    # Contrast(@param0, diff, 1, LRT@Str, Bus@Str, 0)
+      --> ['Contrast', 'input@0', 'diff', 'transportation', 'LRT', 'Bus', 'ridership']
+    # Contrast(@param0, diff, 1, Bus@Str, LRT@Str, 0)
+      --> ['Contrast', 'input@0', 'diff', 'transportation', 'Bus', 'LRT', 'ridership']
+# (t=4.38) i=3, candidate=[{'ANSWER': -3759000}]
+  # found 0 program(s)
+# (t=5.83) i=4, candidate=[{'ANSWER': 2985000}]
+  # found 0 program(s)
+# (t=7.25) i=5, candidate=[{'ANSWER': 2915000}]
+  # found 0 program(s)
+# (t=8.68) i=6, candidate=[{'ANSWER': 844000}]
+  # found 0 program(s)
+# (t=10.10) i=7, candidate=[{'ANSWER': 774000}]
+  # found 0 program(s)
+# (t=11.54) i=8, candidate=[{'ANSWER': -774000}]
+  # found 0 program(s)
+# (t=12.98) i=9, candidate=[{'ANSWER': -844000}]
+  # found 0 program(s)
+# (t=14.42) i=10, candidate=[{'ANSWER': -2915000}]
+  # found 0 program(s)
+# (t=15.86) i=11, candidate=[{'ANSWER': -2985000}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.54, answer: [3759000]
+  # tprog: Contrast(@param0, diff, 1, LRT@Str, Bus@Str, 0)
+# top-2, score: 2.54, answer: [3759000]
+  # tprog: Contrast(@param0, diff, 1, Bus@Str, LRT@Str, 0)

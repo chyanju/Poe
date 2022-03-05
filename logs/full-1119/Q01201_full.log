@@ -1,0 +1,120 @@
+# parsed arguments: Namespace(benchmark='Q01201', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'unaffiliated', '11', 'orthodox', 'muslims', '37', '6', '3', 'growing', '49', 'christian', '73', 'native', 'religion', '68', '1', '12', '14', '10', '67', '42', '20', '7', '65', 'growth?', 'staying', 'orange', 'catholics', '63', 'color', 'am.', 'buddhists', '51', '34', '13', 'protestants', 'spirituality', 'pagan/earth-based', 'same', 'shrinking', 'blue', '61', '24', '17', '47', 'other', 'red', 'mormons', '8', 'jews', 'percentage', 'hindus', '19', 'non-christian'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                   Religion           Growth?  Percentage   color
+0                   Muslims           Growing          51    blue
+1                   Muslims  Staying the same          37     red
+2                   Muslims         Shrinking           7  orange
+3               Protestants           Growing          47    blue
+4               Protestants  Staying the same          42     red
+5               Protestants         Shrinking           6  orange
+6         Pagan/earth-based           Growing          34    blue
+7         Pagan/earth-based  Staying the same          49     red
+8         Pagan/earth-based         Shrinking           8  orange
+9   Native Am. Spirituality           Growing          24    blue
+10  Native Am. Spirituality  Staying the same          61     red
+11  Native Am. Spirituality         Shrinking           6  orange
+12                     Jews           Growing          19    blue
+13                     Jews  Staying the same          61     red
+14                     Jews         Shrinking           8  orange
+15                Catholics           Growing          14    blue
+16                Catholics  Staying the same          61     red
+17                Catholics         Shrinking          20  orange
+18             Unaffiliated           Growing          12    blue
+19             Unaffiliated  Staying the same          63     red
+20             Unaffiliated         Shrinking          17  orange
+21      Other non-Christian           Growing          13    blue
+22      Other non-Christian  Staying the same          65     red
+23      Other non-Christian         Shrinking           8  orange
+24                Buddhists           Growing          12    blue
+25                Buddhists  Staying the same          67     red
+26                Buddhists         Shrinking           8  orange
+27                  Mormons           Growing           3    blue
+28                  Mormons  Staying the same          68     red
+29                  Mormons         Shrinking          11  orange
+30       Orthodox Christian           Growing           3    blue
+31       Orthodox Christian  Staying the same          68     red
+32       Orthodox Christian         Shrinking          10  orange
+33                   Hindus           Growing           1    blue
+34                   Hindus  Staying the same          73     red
+35                   Hindus         Shrinking           8  orange
+# query is: how much more growth is there in Muslims than Protestants?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0       4
+# inferred DSL terminals:
+  # ConstVal: ['Growing@Str', 'Muslims@Str', 'Protestants@Str', 'Growth?@Str', '<NULL>']
+     # cmap: [('muslims', 'Muslims'), ('growth', 'Growing'), ('protestants', 'Protestants'), ('growth', 'Growth?')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>=', '>', '==', '<NULL>']
+     # bmap: [('more', '>'), ('more', '>='), (None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(4, 9), (-4, 9), (50, 6), (48, 6), (48, 6), (46, 6), (45, 6), (44, 6), (44, 6), (44, 6)]
+  # [debug] high_values (no dup.): [(4, 9), (-4, 9), (50, 6), (48, 6), (48, 6), (46, 6), (45, 6), (44, 6), (44, 6), (44, 6)]
+  # [debug] filtered low_values (no dup.): [(45, 3), (43, 3), (43, 3), (43, 3), (43, 3), (43, 3), (41, 3), (41, 3), (40, 3), (39, 3)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=6.62) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=12.08) i=2, candidate=[{'ANSWER': 4}]
+  # found 1 program(s)
+    # Contrast(SelectRow1(@param0, ==, 1, Growing@Str), -, 0, Muslims@Str, Protestants@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Growth?', 'Growing'], '-', 'Religion', 'Muslims', 'Protestants', 'Percentage']
+# (t=17.57) i=3, candidate=[{'ANSWER': -4}]
+  # found 1 program(s)
+    # Contrast(SelectRow1(@param0, ==, 1, Growing@Str), -, 0, Protestants@Str, Muslims@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Growth?', 'Growing'], '-', 'Religion', 'Protestants', 'Muslims', 'Percentage']
+# (t=23.02) i=4, candidate=[{'ANSWER': 50}]
+  # found 0 program(s)
+# (t=28.43) i=5, candidate=[{'ANSWER': 48}]
+  # found 0 program(s)
+# (t=33.86) i=6, candidate=[{'ANSWER': 48}]
+  # found 0 program(s)
+# (t=39.28) i=7, candidate=[{'ANSWER': 46}]
+  # found 0 program(s)
+# (t=44.70) i=8, candidate=[{'ANSWER': 45}]
+  # found 0 program(s)
+# (t=50.15) i=9, candidate=[{'ANSWER': 44}]
+  # found 0 program(s)
+# (t=55.60) i=10, candidate=[{'ANSWER': 44}]
+  # found 0 program(s)
+# (t=60.99) i=11, candidate=[{'ANSWER': 44}]
+  # found 0 program(s)
+# (t=66.35) i=12, candidate=[{'ANSWER': 45}]
+  # found 0 program(s)
+# (t=71.72) i=13, candidate=[{'ANSWER': 43}]
+  # found 0 program(s)
+# (t=77.13) i=14, candidate=[{'ANSWER': 43}]
+  # found 0 program(s)
+# (t=82.54) i=15, candidate=[{'ANSWER': 43}]
+  # found 0 program(s)
+# (t=87.95) i=16, candidate=[{'ANSWER': 43}]
+  # found 0 program(s)
+# (t=93.37) i=17, candidate=[{'ANSWER': 43}]
+  # found 0 program(s)
+# (t=98.76) i=18, candidate=[{'ANSWER': 41}]
+  # found 0 program(s)
+# (t=104.19) i=19, candidate=[{'ANSWER': 41}]
+  # found 0 program(s)
+# (t=109.61) i=20, candidate=[{'ANSWER': 40}]
+  # found 0 program(s)
+# (t=115.02) i=21, candidate=[{'ANSWER': 39}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.49, answer: [4]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Growing@Str), -, 0, Muslims@Str, Protestants@Str, 2)
+# top-2, score: 2.49, answer: [-4]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Growing@Str), -, 0, Protestants@Str, Muslims@Str, 2)

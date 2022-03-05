@@ -1,0 +1,119 @@
+# parsed arguments: Namespace(benchmark='Q5b58c', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'netherlands', 'finland', 'belgium', '7033231', '30033922', 'us', 'country', 'blue', 'commission', '1356852', 'germany', '2713704', 'kuwait', 'china', '26000000', '2000000', 'donations', 'japan', '1000000', 'color', 'ireland', 'norway', '5475452', 'european', '67030000'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                Country  Donations color
+0                    US   67030000  blue
+1   European Commission   30033922  blue
+2                 Japan   26000000  blue
+3           Netherlands    7033231  blue
+4                Norway    5475452  blue
+5               Germany    2713704  blue
+6                Kuwait    2000000  blue
+7               Finland    1356852  blue
+8               Belgium    1356852  blue
+9               Ireland    1356852  blue
+10                China    1000000  blue
+# query is: How much more donations does the US have in comparison to the European Commission?
+# expected output type:[dtype('int64')]
+# expected output is:
+     ANSWER
+0  36996078
+# inferred DSL terminals:
+  # ConstVal: ['US@Str', 'Donations@Str', 'European Commission@Str', '<NULL>']
+     # cmap: [('commission', 'European Commission'), ('us', 'US'), ('european', 'European Commission'), ('donations', 'Donations')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['==', '>', '>=', '<NULL>']
+     # bmap: [('more', '>='), (None, '=='), ('more', '>')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(36996078, 6), (-36996078, 6)]
+  # [debug] high_values (no dup.): [(36996078, 6), (-36996078, 6)]
+  # [debug] filtered low_values (no dup.): [(29033922, 3), (28677070, 3), (28677070, 3), (28677070, 3), (28033922, 3), (27320218, 3), (24558470, 3), (23000691, 3), (4033922, 3), (-4033922, 3)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 67030000}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'US'], ['Donations']]
+    # SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'US'], ['Donations']]
+# (t=1.62) i=1, candidate=[{'ANSWER': 30033922}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, European Commission@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'European Commission'], ['Donations']]
+    # SelectCol(SelectRow1(@param0, ==, 0, European Commission@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'European Commission'], ['Donations']]
+# (t=3.20) i=2, candidate=[{'ANSWER': 134060000}]
+  # found 0 program(s)
+# (t=4.63) i=3, candidate=[{'ANSWER': 97063922}]
+  # found 0 program(s)
+# (t=6.07) i=4, candidate=[{'ANSWER': 60067844}]
+  # found 0 program(s)
+# (t=7.50) i=5, candidate=[{'ANSWER': 68030000}]
+  # found 0 program(s)
+# (t=8.94) i=6, candidate=[{'ANSWER': 74063231}]
+  # found 0 program(s)
+# (t=10.35) i=7, candidate=[{'ANSWER': 31033922}]
+  # found 0 program(s)
+# (t=11.79) i=8, candidate=[{'ANSWER': 37067153}]
+  # found 0 program(s)
+# (t=13.23) i=9, candidate=[{'ANSWER': 1000000}]
+  # found 0 program(s)
+# (t=14.85) i=10, candidate=[{'ANSWER': 2000000}]
+  # found 0 program(s)
+# (t=16.48) i=11, candidate=[{'ANSWER': 8033231}]
+  # found 0 program(s)
+# (t=17.92) i=12, candidate=[{'ANSWER': 7033231}]
+  # found 0 program(s)
+# (t=19.55) i=13, candidate=[{'ANSWER': 14066462}]
+  # found 0 program(s)
+# (t=20.99) i=14, candidate=[{'ANSWER': 36996078}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, US@Str, European Commission@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Country', 'US', 'European Commission', 'Donations']
+# (t=22.43) i=15, candidate=[{'ANSWER': -36996078}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, European Commission@Str, US@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Country', 'European Commission', 'US', 'Donations']
+# (t=23.88) i=16, candidate=[{'ANSWER': 29033922}]
+  # found 0 program(s)
+# (t=25.35) i=17, candidate=[{'ANSWER': 28677070}]
+  # found 0 program(s)
+# (t=26.80) i=18, candidate=[{'ANSWER': 28677070}]
+  # found 0 program(s)
+# (t=28.25) i=19, candidate=[{'ANSWER': 28677070}]
+  # found 0 program(s)
+# (t=29.69) i=20, candidate=[{'ANSWER': 28033922}]
+  # found 0 program(s)
+# (t=31.14) i=21, candidate=[{'ANSWER': 27320218}]
+  # found 0 program(s)
+# (t=32.60) i=22, candidate=[{'ANSWER': 24558470}]
+  # found 0 program(s)
+# (t=34.05) i=23, candidate=[{'ANSWER': 23000691}]
+  # found 0 program(s)
+# (t=35.50) i=24, candidate=[{'ANSWER': 4033922}]
+  # found 0 program(s)
+# (t=36.95) i=25, candidate=[{'ANSWER': -4033922}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.50, answer: [36996078]
+  # tprog: Contrast(@param0, -, 0, US@Str, European Commission@Str, 1)
+# top-2, score: 2.50, answer: [-36996078]
+  # tprog: Contrast(@param0, -, 0, European Commission@Str, US@Str, 1)
+# top-3, score: 2.36, answer: [30033922]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, European Commission@Str), ['1'])
+# top-4, score: 2.36, answer: [30033922]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, European Commission@Str), ['-99', '-2'])
+# top-5, score: 2.29, answer: [67030000]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['1'])
+# top-6, score: 2.29, answer: [67030000]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['-99', '-2'])

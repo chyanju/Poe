@@ -1,0 +1,334 @@
+# parsed arguments: Namespace(benchmark='Qeda72', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'shrinking', 'same', '19', 'catholics', '8', '6', 'muslims', '67', '47', '63', '61', 'non-christian', 'native', '14', 'unaffiliated', 'religion', 'hindus', 'buddhists', '42', '68', '34', 'jews', 'percentage', '11', 'color', 'pagan/earth-based', 'mormons', 'orange', 'orthodox', '3', '10', 'growth?', '65', '51', '73', 'other', 'red', '7', '1', '49', 'christian', 'growing', '37', 'spirituality', 'am.', 'blue', '24', '17', '12', '13', 'protestants', 'staying', '20'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                   Religion           Growth?  Percentage   color
+0                   Muslims           Growing          51    blue
+1                   Muslims  Staying the same          37     red
+2                   Muslims         Shrinking           7  orange
+3               Protestants           Growing          47    blue
+4               Protestants  Staying the same          42     red
+5               Protestants         Shrinking           6  orange
+6         Pagan/earth-based           Growing          34    blue
+7         Pagan/earth-based  Staying the same          49     red
+8         Pagan/earth-based         Shrinking           8  orange
+9   Native Am. Spirituality           Growing          24    blue
+10  Native Am. Spirituality  Staying the same          61     red
+11  Native Am. Spirituality         Shrinking           6  orange
+12                     Jews           Growing          19    blue
+13                     Jews  Staying the same          61     red
+14                     Jews         Shrinking           8  orange
+15                Catholics           Growing          14    blue
+16                Catholics  Staying the same          61     red
+17                Catholics         Shrinking          20  orange
+18             Unaffiliated           Growing          12    blue
+19             Unaffiliated  Staying the same          63     red
+20             Unaffiliated         Shrinking          17  orange
+21      Other non-Christian           Growing          13    blue
+22      Other non-Christian  Staying the same          65     red
+23      Other non-Christian         Shrinking           8  orange
+24                Buddhists           Growing          12    blue
+25                Buddhists  Staying the same          67     red
+26                Buddhists         Shrinking           8  orange
+27                  Mormons           Growing           3    blue
+28                  Mormons  Staying the same          68     red
+29                  Mormons         Shrinking          11  orange
+30       Orthodox Christian           Growing           3    blue
+31       Orthodox Christian  Staying the same          68     red
+32       Orthodox Christian         Shrinking          10  orange
+33                   Hindus           Growing           1    blue
+34                   Hindus  Staying the same          73     red
+35                   Hindus         Shrinking           8  orange
+# query is: What is the percentage of blue protestants?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      47
+# inferred DSL terminals:
+  # ConstVal: ['1@Int', '3@Int', '6@Int', '7@Int', '8@Int', 'Hindus@Str', '10@Int', '11@Int', '12@Int', '13@Int', '14@Int', 'Percentage@Str', 'Mormons@Str', '17@Int', '19@Int', '20@Int', '24@Int', 'Growth?@Str', 'Muslims@Str', 'Growing@Str', 'Protestants@Str', '34@Int', '37@Int', 'Orthodox Christian@Str', 'Religion@Str', '42@Int', 'Jews@Str', '47@Int', '49@Int', '51@Int', 'color@Str', '61@Int', '63@Int', '65@Int', '67@Int', '68@Int', 'orange@Str', '73@Int', 'Pagan/earth-based@Str', 'Catholics@Str', 'Buddhists@Str', 'Native Am. Spirituality@Str', 'red@Str', 'Other non-Christian@Str', 'blue@Str', 'Staying the same@Str', 'Shrinking@Str', 'Unaffiliated@Str']
+     # cmap: [(None, 1), (None, 3), (None, 6), (None, 7), (None, 8), (None, 'Hindus'), (None, 10), (None, 11), (None, 12), (None, 13), (None, 14), (None, 'Percentage'), (None, 'Mormons'), (None, 17), (None, 19), (None, 20), (None, 24), (None, 'Growth?'), (None, 'Muslims'), (None, 'Growing'), (None, 'Protestants'), (None, 34), (None, 37), (None, 'Orthodox Christian'), (None, 'Religion'), (None, 42), (None, 'Jews'), (None, 47), (None, 49), (None, 51), (None, 'color'), (None, 61), (None, 63), (None, 65), (None, 67), (None, 68), (None, 'orange'), (None, 73), (None, 'Pagan/earth-based'), (None, 'Catholics'), (None, 'Buddhists'), (None, 'Native Am. Spirituality'), (None, 'red'), (None, 'Other non-Christian'), (None, 'blue'), (None, 'Staying the same'), (None, 'Shrinking'), (None, 'Unaffiliated')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 47}]
+  # found 69 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 49@Int), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<', 'Percentage', 49], 'eqmax', 'Percentage'], ['Percentage']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 47@Int), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<=', 'Percentage', 47], 'eqmax', 'Percentage'], ['Percentage']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Protestants@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Religion', 'Protestants'], 'eqmax', 'Percentage'], ['Percentage']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 47@Int), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>=', 'Percentage', 47], 'eqmin', 'Percentage'], ['Percentage']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 42@Int), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>', 'Percentage', 42], 'eqmin', 'Percentage'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 49@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 49], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 49@Int), >=, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 49], '>=', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 49@Int), >, 2, 42@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 49], '>', 'Percentage', 42], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 51@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 51], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 61@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 61], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 63@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 63], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 65@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 65], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 67@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 67], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 68@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 68], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 73@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 73], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 47@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 47], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 47@Int), >=, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 47], '>=', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 47@Int), >, 2, 42@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 47], '>', 'Percentage', 42], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 49@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 49], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 51@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 51], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 61@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 61], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 63@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 63], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 65@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 65], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 67@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 67], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 68@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 68], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 73@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 73], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Protestants@Str), ==, 1, Growing@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Protestants'], '==', 'Growth?', 'Growing'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Protestants@Str), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Protestants'], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Protestants@Str), ==, 3, blue@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Protestants'], '==', 'color', 'blue'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Protestants@Str), >=, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Protestants'], '>=', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Protestants@Str), >, 2, 42@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Protestants'], '>', 'Percentage', 42], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Growing@Str), ==, 0, Protestants@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Growth?', 'Growing'], '==', 'Religion', 'Protestants'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Growing@Str), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Growth?', 'Growing'], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Protestants@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'Religion', 'Protestants'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 1@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 1], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 3@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 3], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 6@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 6], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 7@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 7], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 8@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 8], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 10@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 10], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 11@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 11], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 12@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 12], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 13@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 13], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 14@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 14], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 17@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 17], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 19@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 19], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 20@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 20], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 24@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 24], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 34@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 34], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 37@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 37], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 42@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 42], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 47@Int), <, 2, 49@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 47], '<', 'Percentage', 49], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 47@Int), <=, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 47], '<=', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 47@Int), ==, 0, Protestants@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 47], '==', 'Religion', 'Protestants'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 47@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 47], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 1@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Percentage', 1], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 3@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Percentage', 3], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 6@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Percentage', 6], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 7@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Percentage', 7], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 8@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Percentage', 8], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 10@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Percentage', 10], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 11@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Percentage', 11], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 12@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Percentage', 12], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 13@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Percentage', 13], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 14@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Percentage', 14], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 17@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Percentage', 17], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 19@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Percentage', 19], '==', 'Percentage', 47], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 20@Int), ==, 2, 47@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Percentage', 20], '==', 'Percentage', 47], ['Percentage']]
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 49@Int), eqmax, 2), ['2'])
+# top-2, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 47@Int), eqmax, 2), ['2'])
+# top-3, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Protestants@Str), eqmax, 2), ['2'])
+# top-4, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 47@Int), eqmin, 2), ['2'])
+# top-5, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 42@Int), eqmin, 2), ['2'])
+# top-6, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 49@Int), ==, 2, 47@Int), ['2'])
+# top-7, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 49@Int), >=, 2, 47@Int), ['2'])
+# top-8, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 49@Int), >, 2, 42@Int), ['2'])
+# top-9, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 51@Int), ==, 2, 47@Int), ['2'])
+# top-10, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 61@Int), ==, 2, 47@Int), ['2'])
+# top-11, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 63@Int), ==, 2, 47@Int), ['2'])
+# top-12, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 65@Int), ==, 2, 47@Int), ['2'])
+# top-13, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 67@Int), ==, 2, 47@Int), ['2'])
+# top-14, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 68@Int), ==, 2, 47@Int), ['2'])
+# top-15, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 73@Int), ==, 2, 47@Int), ['2'])
+# top-16, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 47@Int), ==, 2, 47@Int), ['2'])
+# top-17, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 47@Int), >=, 2, 47@Int), ['2'])
+# top-18, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 47@Int), >, 2, 42@Int), ['2'])
+# top-19, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 49@Int), ==, 2, 47@Int), ['2'])
+# top-20, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 51@Int), ==, 2, 47@Int), ['2'])
+# top-21, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 61@Int), ==, 2, 47@Int), ['2'])
+# top-22, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 63@Int), ==, 2, 47@Int), ['2'])
+# top-23, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 65@Int), ==, 2, 47@Int), ['2'])
+# top-24, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 67@Int), ==, 2, 47@Int), ['2'])
+# top-25, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 68@Int), ==, 2, 47@Int), ['2'])
+# top-26, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 73@Int), ==, 2, 47@Int), ['2'])
+# top-27, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Protestants@Str), ==, 1, Growing@Str), ['2'])
+# top-28, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Protestants@Str), ==, 2, 47@Int), ['2'])
+# top-29, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Protestants@Str), ==, 3, blue@Str), ['2'])
+# top-30, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Protestants@Str), >=, 2, 47@Int), ['2'])
+# top-31, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Protestants@Str), >, 2, 42@Int), ['2'])
+# top-32, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Growing@Str), ==, 0, Protestants@Str), ['2'])
+# top-33, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Growing@Str), ==, 2, 47@Int), ['2'])
+# top-34, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Protestants@Str), ['2'])
+# top-35, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 2, 47@Int), ['2'])
+# top-36, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 1@Int), ==, 2, 47@Int), ['2'])
+# top-37, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 3@Int), ==, 2, 47@Int), ['2'])
+# top-38, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 6@Int), ==, 2, 47@Int), ['2'])
+# top-39, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 7@Int), ==, 2, 47@Int), ['2'])
+# top-40, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 8@Int), ==, 2, 47@Int), ['2'])
+# top-41, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 10@Int), ==, 2, 47@Int), ['2'])
+# top-42, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 11@Int), ==, 2, 47@Int), ['2'])
+# top-43, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 12@Int), ==, 2, 47@Int), ['2'])
+# top-44, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 13@Int), ==, 2, 47@Int), ['2'])
+# top-45, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 14@Int), ==, 2, 47@Int), ['2'])
+# top-46, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 17@Int), ==, 2, 47@Int), ['2'])
+# top-47, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 19@Int), ==, 2, 47@Int), ['2'])
+# top-48, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 20@Int), ==, 2, 47@Int), ['2'])
+# top-49, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 24@Int), ==, 2, 47@Int), ['2'])
+# top-50, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 34@Int), ==, 2, 47@Int), ['2'])
+# top-51, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 37@Int), ==, 2, 47@Int), ['2'])
+# top-52, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 42@Int), ==, 2, 47@Int), ['2'])
+# top-53, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 47@Int), <, 2, 49@Int), ['2'])
+# top-54, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 47@Int), <=, 2, 47@Int), ['2'])
+# top-55, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 47@Int), ==, 0, Protestants@Str), ['2'])
+# top-56, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 47@Int), ==, 2, 47@Int), ['2'])
+# top-57, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 1@Int), ==, 2, 47@Int), ['2'])
+# top-58, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 3@Int), ==, 2, 47@Int), ['2'])
+# top-59, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 6@Int), ==, 2, 47@Int), ['2'])
+# top-60, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 7@Int), ==, 2, 47@Int), ['2'])
+# top-61, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 8@Int), ==, 2, 47@Int), ['2'])
+# top-62, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 10@Int), ==, 2, 47@Int), ['2'])
+# top-63, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 11@Int), ==, 2, 47@Int), ['2'])
+# top-64, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 12@Int), ==, 2, 47@Int), ['2'])
+# top-65, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 13@Int), ==, 2, 47@Int), ['2'])
+# top-66, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 14@Int), ==, 2, 47@Int), ['2'])
+# top-67, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 17@Int), ==, 2, 47@Int), ['2'])
+# top-68, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 19@Int), ==, 2, 47@Int), ['2'])
+# top-69, score: 0.00, answer: [47]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 20@Int), ==, 2, 47@Int), ['2'])

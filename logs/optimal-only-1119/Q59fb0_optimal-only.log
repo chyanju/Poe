@@ -1,0 +1,57 @@
+# parsed arguments: Namespace(benchmark='Q59fb0', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'28029721', '37812334', 'to', 'color', 'egypt', 'jordan', 'turkey', '1700000', 'funds', '40221893', '15804557', 'country', 'regional', 'total', 'iraq', '22094911', 'blue', 'go', 'lebanon'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+    Country  Total funds go to color
+0    Jordan           40221893  blue
+1   Lebanon           37812334  blue
+2  Regional           28029721  blue
+3    Turkey           22094911  blue
+4      Iraq           15804557  blue
+5     Egypt            1700000  blue
+# query is: How much does Jordan get?
+# expected output type:[dtype('int64')]
+# expected output is:
+     ANSWER
+0  40221893
+# inferred DSL terminals:
+  # ConstVal: ['Jordan@Str', '<NULL>']
+     # cmap: [('jordan', 'Jordan')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 40221893}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Jordan@Str), ==, 0, Jordan@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Jordan'], '==', 'Country', 'Jordan'], ['Total funds go to']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Jordan@Str), ==, 0, Jordan@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Jordan'], '==', 'Country', 'Jordan'], ['Total funds go to']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Jordan@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Jordan'], ['Total funds go to']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Jordan@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Jordan'], ['Total funds go to']]
+# (t=0.36) i=1, candidate=[{'ANSWER': 80443786}]
+  # found 0 program(s)
+# (t=0.70) i=2, candidate=[{'ANSWER': 120665679}]
+  # found 0 program(s)
+# (t=1.05) i=3, candidate=[{'ANSWER': 160887572}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.34, answer: [40221893]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Jordan@Str), ['1'])
+# top-2, score: 2.34, answer: [40221893]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Jordan@Str), ['-99', '-2'])
+# top-3, score: 2.29, answer: [40221893]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Jordan@Str), ==, 0, Jordan@Str), ['1'])
+# top-4, score: 2.29, answer: [40221893]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Jordan@Str), ==, 0, Jordan@Str), ['-99', '-2'])

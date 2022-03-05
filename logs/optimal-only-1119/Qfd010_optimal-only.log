@@ -1,0 +1,62 @@
+# parsed arguments: Namespace(benchmark='Qfd010', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'1e-05', 'belgium', '0.0001', '0.0004', '0.0006', 'country', 'ireland', 'us', 'estonia', 'germany', 'china', 'norway', 'japan', 'netherlands', 'finland', '0.0005', '0.0003', 'color', 'generous', 'gdp', '0.0008', '0.0011', 'kuwait', 'by', 'blue', 'donations'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+        Country  Generous donations by GDP color
+0        Norway                    0.00110  blue
+1        Kuwait                    0.00110  blue
+2   Netherlands                    0.00080  blue
+3       Ireland                    0.00060  blue
+4       Estonia                    0.00060  blue
+5       Finland                    0.00050  blue
+6         Japan                    0.00040  blue
+7            US                    0.00040  blue
+8       Belgium                    0.00030  blue
+9       Germany                    0.00010  blue
+10        China                    0.00001  blue
+# query is: What is the Generous donation in the US by its GDP?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0  0.0004
+# inferred DSL terminals:
+  # ConstVal: ['Generous donations by GDP@Str', 'US@Str', '<NULL>']
+     # cmap: [('generous', 'Generous donations by GDP'), ('gdp', 'Generous donations by GDP'), ('by', 'Generous donations by GDP'), ('donation', 'Generous donations by GDP'), ('us', 'US')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 0.0004}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, US@Str), ==, 0, US@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'US'], '==', 'Country', 'US'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, US@Str), ==, 0, US@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'US'], '==', 'Country', 'US'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'US'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'US'], ['Generous donations by GDP']]
+# (t=1.07) i=1, candidate=[{'ANSWER': 0.0008}]
+  # found 0 program(s)
+# (t=2.12) i=2, candidate=[{'ANSWER': 0.0012000000000000001}]
+  # found 0 program(s)
+# (t=3.17) i=3, candidate=[{'ANSWER': 0.0016}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.60, answer: [0.0004]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['1'])
+# top-2, score: 2.60, answer: [0.0004]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['-99', '-2'])
+# top-3, score: 2.55, answer: [0.0004]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, US@Str), ==, 0, US@Str), ['1'])
+# top-4, score: 2.55, answer: [0.0004]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, US@Str), ==, 0, US@Str), ['-99', '-2'])

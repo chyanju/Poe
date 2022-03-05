@@ -1,0 +1,46 @@
+# parsed arguments: Namespace(benchmark='Qef3bb', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'population', '608036', '305982', 'danish', 'capital', '162829', '1823109', 'blue', 'skåne', 'north-east', '683886', 'color', 'region', 'remainder', 'south', 'west'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                  Region  Population color
+0  Danish Capital Region     1823109  blue
+1              Remainder      608036  blue
+2            South Skåne      683886  blue
+3             West Skåne      305982  blue
+4       North-East Skåne      162829  blue
+# query is: What is the population of South Skane?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0  683886
+# inferred DSL terminals:
+  # ConstVal: ['Population@Str', 'South Skåne@Str', '<NULL>']
+     # cmap: [('population', 'Population'), ('south', 'South Skåne')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 683886}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, South Skåne@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Region', 'South Skåne'], ['Population']]
+    # SelectCol(SelectRow1(@param0, ==, 0, South Skåne@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Region', 'South Skåne'], ['Population']]
+# (t=0.47) i=1, candidate=[{'ANSWER': 1367772}]
+  # found 0 program(s)
+# (t=0.81) i=2, candidate=[{'ANSWER': 2051658}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.43, answer: [683886]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, South Skåne@Str), ['1'])
+# top-2, score: 1.43, answer: [683886]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, South Skåne@Str), ['-99', '-2'])

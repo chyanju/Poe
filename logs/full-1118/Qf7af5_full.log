@@ -1,0 +1,119 @@
+# parsed arguments: Namespace(benchmark='Qf7af5', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'65-69', '75.12', '70-74', 'women', 'over', 'gender', '84.86', '80.77', 'group', 'men', '83.92', '75-79', 'age', '50-54', '75.43', 'color', '78.57', '68.83', '72.92', '72.6', 'aged', '65.69', '73.55', '16', '83.6', 'red', '63.8', '79.52', 'and', '84.23', '82.66', '60-64', '85.49', '55-59', 'percentage', '67.89', 'blue', 'orange', '75.75', 'all', '70.09', '80'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+               Age group gender  Percentage   color
+0   All aged 16 and over  Women       67.89     red
+1   All aged 16 and over    All       65.69    blue
+2   All aged 16 and over    Men       63.80  orange
+3            80 and over  Women       84.23     red
+4            80 and over    All       83.92    blue
+5            80 and over    Men       83.92  orange
+6                  55-59  Women       73.55     red
+7                  55-59    All       72.92    blue
+8                  55-59    Men       72.60  orange
+9                  60-64  Women       75.75     red
+10                 60-64    All       75.43    blue
+11                 60-64    Men       75.12  orange
+12                 75-79  Women       84.86     red
+13                 75-79    All       84.23    blue
+14                 75-79    Men       83.60  orange
+15                 65-69  Women       80.77     red
+16                 65-69    All       79.52    blue
+17                 65-69    Men       78.57  orange
+18                 50-54  Women       70.09     red
+19                 50-54    All       68.83    blue
+20                 50-54    Men       67.89  orange
+21                 70-74  Women       85.49     red
+22                 70-74    All       83.92    blue
+23                 70-74    Men       82.66  orange
+# query is: What is the value of the blue bar in the 60-64 age group?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0   75.43
+# inferred DSL terminals:
+  # ConstVal: ['60-64@Str', 'blue@Str', 'Age group@Str', '<NULL>']
+     # cmap: [('group', 'Age group'), ('age', 'Age group'), ('blue', 'blue'), (64, '60-64'), (60, '60-64')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 83.92}]
+  # found 0 program(s)
+# (t=2.03) i=1, candidate=[{'ANSWER': 167.84}]
+  # found 0 program(s)
+# (t=3.40) i=2, candidate=[{'ANSWER': 169.41}]
+  # found 0 program(s)
+# (t=4.78) i=3, candidate=[{'ANSWER': 166.57999999999998}]
+  # found 0 program(s)
+# (t=6.16) i=4, candidate=[{'ANSWER': 159.35000000000002}]
+  # found 0 program(s)
+# (t=7.55) i=5, candidate=[{'ANSWER': 149.61}]
+  # found 0 program(s)
+# (t=8.93) i=6, candidate=[{'ANSWER': 151.81}]
+  # found 0 program(s)
+# (t=10.30) i=7, candidate=[{'ANSWER': 159.04000000000002}]
+  # found 0 program(s)
+# (t=11.70) i=8, candidate=[{'ANSWER': 85.49}]
+  # found 0 program(s)
+# (t=13.75) i=9, candidate=[{'ANSWER': 170.98}]
+  # found 0 program(s)
+# (t=15.14) i=10, candidate=[{'ANSWER': 168.14999999999998}]
+  # found 0 program(s)
+# (t=16.52) i=11, candidate=[{'ANSWER': 160.92000000000002}]
+  # found 0 program(s)
+# (t=17.91) i=12, candidate=[{'ANSWER': 151.18}]
+  # found 0 program(s)
+# (t=19.28) i=13, candidate=[{'ANSWER': 153.38}]
+  # found 0 program(s)
+# (t=20.65) i=14, candidate=[{'ANSWER': 160.61}]
+  # found 0 program(s)
+# (t=22.03) i=15, candidate=[{'ANSWER': 82.66}]
+  # found 0 program(s)
+# (t=24.05) i=16, candidate=[{'ANSWER': 165.32}]
+  # found 0 program(s)
+# (t=25.42) i=17, candidate=[{'ANSWER': 158.09}]
+  # found 0 program(s)
+# (t=26.81) i=18, candidate=[{'ANSWER': 148.35}]
+  # found 0 program(s)
+# (t=28.18) i=19, candidate=[{'ANSWER': 150.55}]
+  # found 0 program(s)
+# (t=29.56) i=20, candidate=[{'ANSWER': 157.78}]
+  # found 0 program(s)
+# (t=30.92) i=21, candidate=[{'ANSWER': 75.43}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 60-64@Str), ==, 3, blue@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', '60-64'], '==', 'color', 'blue'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, 60-64@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'Age group', '60-64'], ['Percentage']]
+# (t=32.93) i=22, candidate=[{'ANSWER': 150.86}]
+  # found 0 program(s)
+# (t=34.30) i=23, candidate=[{'ANSWER': 141.12}]
+  # found 0 program(s)
+# (t=35.67) i=24, candidate=[{'ANSWER': 143.32}]
+  # found 0 program(s)
+# (t=37.04) i=25, candidate=[{'ANSWER': 65.69}]
+  # found 0 program(s)
+# (t=39.08) i=26, candidate=[{'ANSWER': 131.38}]
+  # found 0 program(s)
+# (t=40.46) i=27, candidate=[{'ANSWER': 133.57999999999998}]
+  # found 0 program(s)
+# (t=41.84) i=28, candidate=[{'ANSWER': 140.81}]
+  # found 0 program(s)
+# (t=43.24) i=29, candidate=[{'ANSWER': 67.89}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.45, answer: 75.43
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 60-64@Str), ==, 3, blue@Str), ['2'])
+# top-2, score: 2.45, answer: 75.43
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, 60-64@Str), ['2'])

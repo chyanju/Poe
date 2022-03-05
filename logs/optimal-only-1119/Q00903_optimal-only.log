@@ -1,0 +1,74 @@
+# parsed arguments: Namespace(benchmark='Q00903', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'north-east', 'south', '305982', 'danish', 'blue', '683886', 'region', 'capital', '608036', '1823109', '162829', 'remainder', 'color', 'population', 'skåne', 'west'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                  Region  Population color
+0  Danish Capital Region     1823109  blue
+1              Remainder      608036  blue
+2            South Skåne      683886  blue
+3             West Skåne      305982  blue
+4       North-East Skåne      162829  blue
+# query is: Which region has the smallest population?
+# expected output type:[dtype('O')]
+# expected output is:
+             ANSWER
+0  north-east skåne
+# inferred DSL terminals:
+  # ConstVal: ['Region@Str', 'Danish Capital Region@Str', 'Population@Str', '<NULL>']
+     # cmap: [('region', 'Danish Capital Region'), ('population', 'Population'), ('region', 'Region')]
+  # AggrFunc: ['min', '<NULL>']
+     # amap: [('smallest', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('smallest', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'North-East Skåne'}]
+  # found 10 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region'], 'min', 'Population'], 'eqmin', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region'], 'min', 'Population'], 'eqmin', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmin', 'Population'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmin', 'Population'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmin', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmin', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'min', 'Population'], 'eqmin', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'min', 'Population'], 'eqmin', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Population'], ['Region']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Population'], ['Region']]
+
+# ========== review report ========== #
+# top-1, score: 1.67, answer: ['North-East Skåne']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+# top-2, score: 1.67, answer: ['North-East Skåne']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+# top-3, score: 1.60, answer: ['North-East Skåne']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+# top-4, score: 1.60, answer: ['North-East Skåne']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+# top-5, score: 1.59, answer: ['North-East Skåne']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+# top-6, score: 1.59, answer: ['North-East Skåne']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+# top-7, score: 1.59, answer: ['North-East Skåne']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+# top-8, score: 1.59, answer: ['North-East Skåne']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-9, score: 1.59, answer: ['North-East Skåne']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+# top-10, score: 1.59, answer: ['North-East Skåne']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])

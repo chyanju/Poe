@@ -1,0 +1,77 @@
+# parsed arguments: Namespace(benchmark='Qdc482', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'70', 'esp', '52', '48', '49', '42', 'blue', 'aus', 'gbr', 'dnk', '54', '66', 'prt', 'usa', '61', 'che', 'color', 'nor', 'deu', '62', 'nld', '60', 'swe', 'ita', 'fin', '75', 'aut', '53', '59', '64', '57', '0', 'jpn', 'fra', 'irl', 'rating', 'bel', '76', '56', 'kor', 'can', 'country'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+   country  rating color
+0      USA      53  blue
+1      JPN      42  blue
+2      FRA      56  blue
+3      DEU      61  blue
+4      GBR      75  blue
+5      CAN      54  blue
+6      AUS      66  blue
+7      ESP      57  blue
+8      NLD      76  blue
+9      NOR      64  blue
+10     BEL      59  blue
+11     SWE      66  blue
+12     DNK      62  blue
+13     KOR      52  blue
+14     CHE      59  blue
+15     ITA      49  blue
+16     IRL      70  blue
+17     FIN      60  blue
+18     AUT      48  blue
+19     PRT       0  blue
+# query is: What's the sum of the rating of USA and Canada (CAN)?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0     107
+# inferred DSL terminals:
+  # ConstVal: ['CAN@Str', 'rating@Str', 'USA@Str', '<NULL>']
+     # cmap: [('can', 'CAN'), ('rating', 'rating'), ('usa', 'USA')]
+  # AggrFunc: ['sum', '<NULL>']
+     # amap: [('sum', 'sum')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 53}]
+  # found 3 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, USA@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'country', 'USA'], 'sum', 'rating']
+    # SelectCol(SelectRow1(@param0, ==, 0, USA@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'country', 'USA'], ['rating']]
+    # SelectCol(SelectRow1(@param0, ==, 0, USA@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'country', 'USA'], ['rating']]
+# (t=1.05) i=1, candidate=[{'ANSWER': 54}]
+  # found 3 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, CAN@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'country', 'CAN'], 'sum', 'rating']
+    # SelectCol(SelectRow1(@param0, ==, 0, CAN@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'country', 'CAN'], ['rating']]
+    # SelectCol(SelectRow1(@param0, ==, 0, CAN@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'country', 'CAN'], ['rating']]
+# (t=2.09) i=2, candidate=[{'ANSWER': 107}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.36, answer: [53]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, USA@Str), sum, 1)
+# top-2, score: 2.36, answer: [54]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, CAN@Str), sum, 1)
+# top-3, score: 2.30, answer: [53]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, USA@Str), ['1'])
+# top-4, score: 2.30, answer: [53]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, USA@Str), ['-99', '-2'])
+# top-5, score: 2.30, answer: [54]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, CAN@Str), ['1'])
+# top-6, score: 2.30, answer: [54]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, CAN@Str), ['-99', '-2'])

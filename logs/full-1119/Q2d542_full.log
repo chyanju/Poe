@@ -1,0 +1,94 @@
+# parsed arguments: Namespace(benchmark='Q2d542', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'5', 'income', '2', '9', '6', 'in', '-0.9', '-1.0', '-0.4', '8', 'blue', '10', '-1.8', '%', '-1.5', '1', '4', '-0.25', 'change', '0.1', '7', '-2.1', 'color', 'rank', '3', '0.2'}
+# input type: [dtype('int64'), dtype('float64'), dtype('O')]
+# input is:
+   income rank  % change in income color
+0            1               -1.80  blue
+1            2               -1.50  blue
+2            3               -1.00  blue
+3            4               -0.90  blue
+4            5               -0.40  blue
+5            6                0.10  blue
+6            7                0.20  blue
+7            8                0.10  blue
+8            9               -0.25  blue
+9           10               -2.10  blue
+# query is: What is the difference between income rank 1 and 5?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0     1.4
+# inferred DSL terminals:
+  # ConstVal: ['1@Int', 'income rank@Str', '% change in income@Str', '5@Int', '<NULL>']
+     # cmap: [(5, 5), ('income', '% change in income'), (1, 1), ('income', 'income rank'), ('rank', 'income rank')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(6.8, 4), (4.0, 4), (1.4, 4), (-1.4, 4), (-4.0, 4), (-6.8, 4)]
+  # [debug] high_values (no dup.): [(6.8, 4), (4.0, 4), (1.4, 4), (-1.4, 4), (-4.0, 4), (-6.8, 4)]
+  # [debug] filtered low_values (no dup.): [(11.8, 2), (10.8, 2), (10.4, 2), (9.8, 2), (9.4, 2), (9.0, 2), (8.8, 2), (8.4, 2), (8.0, 2), (7.8, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, 1@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'income rank', 1], ['income rank']]
+    # SelectCol(SelectRow1(@param0, ==, 0, 1@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'income rank', 1], ['income rank']]
+# (t=5.33) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=10.64) i=2, candidate=[{'ANSWER': 6.8}]
+  # found 0 program(s)
+# (t=15.77) i=3, candidate=[{'ANSWER': 4.0}]
+  # found 0 program(s)
+# (t=21.15) i=4, candidate=[{'ANSWER': 1.4}]
+  # found 2 program(s)
+    # Contrast(@param0, diff, 0, 1@Int, 5@Int, 1)
+      --> ['Contrast', 'input@0', 'diff', 'income rank', 1, 5, '% change in income']
+    # Contrast(@param0, diff, 0, 5@Int, 1@Int, 1)
+      --> ['Contrast', 'input@0', 'diff', 'income rank', 5, 1, '% change in income']
+# (t=26.28) i=5, candidate=[{'ANSWER': -1.4}]
+  # found 0 program(s)
+# (t=31.34) i=6, candidate=[{'ANSWER': -4.0}]
+  # found 0 program(s)
+# (t=36.45) i=7, candidate=[{'ANSWER': -6.8}]
+  # found 0 program(s)
+# (t=41.56) i=8, candidate=[{'ANSWER': 11.8}]
+  # found 0 program(s)
+# (t=46.65) i=9, candidate=[{'ANSWER': 10.8}]
+  # found 0 program(s)
+# (t=51.78) i=10, candidate=[{'ANSWER': 10.4}]
+  # found 0 program(s)
+# (t=56.84) i=11, candidate=[{'ANSWER': 9.8}]
+  # found 0 program(s)
+# (t=61.92) i=12, candidate=[{'ANSWER': 9.4}]
+  # found 0 program(s)
+# (t=67.01) i=13, candidate=[{'ANSWER': 9.0}]
+  # found 0 program(s)
+# (t=72.32) i=14, candidate=[{'ANSWER': 8.8}]
+  # found 0 program(s)
+# (t=77.39) i=15, candidate=[{'ANSWER': 8.4}]
+  # found 0 program(s)
+# (t=82.47) i=16, candidate=[{'ANSWER': 8.0}]
+  # found 0 program(s)
+# (t=87.74) i=17, candidate=[{'ANSWER': 7.8}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.64, answer: [1.4]
+  # tprog: Contrast(@param0, diff, 0, 1@Int, 5@Int, 1)
+# top-2, score: 1.64, answer: [1.4]
+  # tprog: Contrast(@param0, diff, 0, 5@Int, 1@Int, 1)
+# top-3, score: 1.44, answer: [1]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, 1@Int), ['0'])
+# top-4, score: 1.44, answer: [1]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, 1@Int), ['-1', '-2'])

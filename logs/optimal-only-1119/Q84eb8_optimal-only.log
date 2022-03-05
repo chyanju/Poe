@@ -1,0 +1,48 @@
+# parsed arguments: Namespace(benchmark='Q84eb8', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'flat', 'highland', 'blue', 'yoshino', 'color', '56', 'inland', '1282', 'yamato', '92', 'district', 'plain', 'gojō,', 'population'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                   District  Population color
+0  Yamato flat inland plain        1282  blue
+1           Yamato highland          56  blue
+2             Gojō, Yoshino          92  blue
+# query is: What is the population of Yamato highland?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      56
+# inferred DSL terminals:
+  # ConstVal: ['Population@Str', 'Yamato flat inland plain@Str', 'Yamato highland@Str', '<NULL>']
+     # cmap: [('yamato', 'Yamato flat inland plain'), ('highland', 'Yamato highland'), ('population', 'Population'), ('yamato', 'Yamato highland')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 56}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato highland@Str), ==, 0, Yamato highland@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], '==', 'District', 'Yamato highland'], ['Population']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato highland@Str), ==, 0, Yamato highland@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], '==', 'District', 'Yamato highland'], ['Population']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Yamato highland@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], ['Population']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Yamato highland@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], ['Population']]
+
+# ========== review report ========== #
+# top-1, score: 2.57, answer: [56]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Yamato highland@Str), ['1'])
+# top-2, score: 2.57, answer: [56]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Yamato highland@Str), ['-99', '-2'])
+# top-3, score: 2.52, answer: [56]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato highland@Str), ==, 0, Yamato highland@Str), ['1'])
+# top-4, score: 2.52, answer: [56]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato highland@Str), ==, 0, Yamato highland@Str), ['-99', '-2'])

@@ -1,0 +1,538 @@
+# parsed arguments: Namespace(benchmark='Q6507a', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'growing', 'protestants', 'native', '61', 'religion', 'shrinking', 'staying', 'catholics', '73', 'color', '34', '3', '68', 'am.', 'red', 'buddhists', '8', 'spirituality', 'non-christian', 'unaffiliated', '11', 'hindus', 'jews', 'growth?', '14', '67', '1', 'percentage', '47', 'christian', '49', '13', '37', '24', 'pagan/earth-based', 'same', 'muslims', 'orange', 'blue', 'mormons', 'other', '6', 'orthodox', '19', '10', '12', '7', '42', '17', '20', '63', '51', '65'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                   Religion           Growth?  Percentage   color
+0                   Muslims           Growing          51    blue
+1                   Muslims  Staying the same          37     red
+2                   Muslims         Shrinking           7  orange
+3               Protestants           Growing          47    blue
+4               Protestants  Staying the same          42     red
+5               Protestants         Shrinking           6  orange
+6         Pagan/earth-based           Growing          34    blue
+7         Pagan/earth-based  Staying the same          49     red
+8         Pagan/earth-based         Shrinking           8  orange
+9   Native Am. Spirituality           Growing          24    blue
+10  Native Am. Spirituality  Staying the same          61     red
+11  Native Am. Spirituality         Shrinking           6  orange
+12                     Jews           Growing          19    blue
+13                     Jews  Staying the same          61     red
+14                     Jews         Shrinking           8  orange
+15                Catholics           Growing          14    blue
+16                Catholics  Staying the same          61     red
+17                Catholics         Shrinking          20  orange
+18             Unaffiliated           Growing          12    blue
+19             Unaffiliated  Staying the same          63     red
+20             Unaffiliated         Shrinking          17  orange
+21      Other non-Christian           Growing          13    blue
+22      Other non-Christian  Staying the same          65     red
+23      Other non-Christian         Shrinking           8  orange
+24                Buddhists           Growing          12    blue
+25                Buddhists  Staying the same          67     red
+26                Buddhists         Shrinking           8  orange
+27                  Mormons           Growing           3    blue
+28                  Mormons  Staying the same          68     red
+29                  Mormons         Shrinking          11  orange
+30       Orthodox Christian           Growing           3    blue
+31       Orthodox Christian  Staying the same          68     red
+32       Orthodox Christian         Shrinking          10  orange
+33                   Hindus           Growing           1    blue
+34                   Hindus  Staying the same          73     red
+35                   Hindus         Shrinking           8  orange
+# query is: What is the percentage of orange Hindus?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0       8
+# inferred DSL terminals:
+  # ConstVal: ['1@Int', '3@Int', '6@Int', '7@Int', '8@Int', 'Staying the same@Str', '11@Int', '12@Int', '13@Int', '14@Int', '10@Int', '17@Int', '19@Int', '20@Int', 'color@Str', 'Unaffiliated@Str', '24@Int', 'red@Str', 'Shrinking@Str', 'Growth?@Str', 'Hindus@Str', '34@Int', 'Percentage@Str', '37@Int', 'Orthodox Christian@Str', 'Muslims@Str', '42@Int', 'Pagan/earth-based@Str', '47@Int', 'Mormons@Str', '49@Int', '51@Int', 'Growing@Str', 'Buddhists@Str', '61@Int', '63@Int', '65@Int', '67@Int', '68@Int', '73@Int', 'Catholics@Str', 'Native Am. Spirituality@Str', 'orange@Str', 'blue@Str', 'Jews@Str', 'Protestants@Str', 'Religion@Str', 'Other non-Christian@Str']
+     # cmap: [(None, 1), (None, 3), (None, 6), (None, 7), (None, 8), (None, 'Staying the same'), (None, 11), (None, 12), (None, 13), (None, 14), (None, 10), (None, 17), (None, 19), (None, 20), (None, 'color'), (None, 'Unaffiliated'), (None, 24), (None, 'red'), (None, 'Shrinking'), (None, 'Growth?'), (None, 'Hindus'), (None, 34), (None, 'Percentage'), (None, 37), (None, 'Orthodox Christian'), (None, 'Muslims'), (None, 42), (None, 'Pagan/earth-based'), (None, 47), (None, 'Mormons'), (None, 49), (None, 51), (None, 'Growing'), (None, 'Buddhists'), (None, 61), (None, 63), (None, 65), (None, 67), (None, 68), (None, 73), (None, 'Catholics'), (None, 'Native Am. Spirituality'), (None, 'orange'), (None, 'blue'), (None, 'Jews'), (None, 'Protestants'), (None, 'Religion'), (None, 'Other non-Christian')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 7}]
+  # found 120 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 8@Int), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<', 'Percentage', 8], 'eqmax', 'Percentage'], ['Percentage']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 7@Int), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<=', 'Percentage', 7], 'eqmax', 'Percentage'], ['Percentage']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Muslims@Str), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], 'eqmin', 'Percentage'], ['Percentage']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 7@Int), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>=', 'Percentage', 7], 'eqmin', 'Percentage'], ['Percentage']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 6@Int), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>', 'Percentage', 6], 'eqmin', 'Percentage'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 8@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 8], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 8@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 8], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 8@Int), >=, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 8], '>=', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 8@Int), >, 2, 6@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 8], '>', 'Percentage', 6], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 11@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 11], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 11@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 11], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 12@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 12], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 12@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 12], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 13@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 13], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 13@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 13], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 14@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 14], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 14@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 14], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 10@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 10], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 10@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 10], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 17@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 17], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 17@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 17], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 19@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 19], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 19@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 19], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 20], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 20], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 24], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 24], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 34@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 34], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 34@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 34], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 37@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 37], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 37@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 37], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 42@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 42], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 47@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 47], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 49@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 49], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 51@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 51], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 61@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 61], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 63@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 63], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 65@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 65], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 67@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 67], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 68@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 68], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 73@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 73], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 7@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 7], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 7@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 7], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 7@Int), >=, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 7], '>=', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 7@Int), >, 2, 6@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 7], '>', 'Percentage', 6], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 8@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 8], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 8@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 8], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 11@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 11], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 11@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 11], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 12@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 12], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 12@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 12], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 13@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 13], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 13@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 13], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 14@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 14], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 14@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 14], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 10@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 10], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 10@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 10], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 17@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 17], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 17@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 17], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 19], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 19], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 20@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 20], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 20@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 20], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 24@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 24], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 24@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 24], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 34@Int), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 34], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 34@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 34], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 37@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 37], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 42@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 42], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 47@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 47], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 49@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 49], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 51@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 51], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 61@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 61], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 63@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 63], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 65@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 65], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 67@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 67], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 68@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 68], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 73@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 73], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 8@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<', 'Percentage', 8], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 11@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<', 'Percentage', 11], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 12@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<', 'Percentage', 12], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 13@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<', 'Percentage', 13], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 14@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<', 'Percentage', 14], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 10@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<', 'Percentage', 10], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 17@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<', 'Percentage', 17], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 19@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<', 'Percentage', 19], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 20@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<', 'Percentage', 20], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 24@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<', 'Percentage', 24], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 34@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<', 'Percentage', 34], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 37@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<', 'Percentage', 37], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<=', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 8@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<=', 'Percentage', 8], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 11@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<=', 'Percentage', 11], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 12@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<=', 'Percentage', 12], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 13@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<=', 'Percentage', 13], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 14@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<=', 'Percentage', 14], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 10@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<=', 'Percentage', 10], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 17@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<=', 'Percentage', 17], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 19@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<=', 'Percentage', 19], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 20@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<=', 'Percentage', 20], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 24@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<=', 'Percentage', 24], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 34@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '<=', 'Percentage', 34], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), ==, 1, Shrinking@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '==', 'Growth?', 'Shrinking'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), ==, 3, orange@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Muslims'], '==', 'color', 'orange'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Shrinking@Str), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Growth?', 'Shrinking'], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Shrinking@Str), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Growth?', 'Shrinking'], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, orange@Str), ==, 0, Muslims@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'orange'], '==', 'Religion', 'Muslims'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, orange@Str), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'orange'], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 1@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 1], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 3@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 3], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 6@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 6], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 7@Int), <, 2, 8@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 7], '<', 'Percentage', 8], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 7@Int), <=, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 7], '<=', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 7@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Percentage', 7], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 1@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Percentage', 1], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 3@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Percentage', 3], '==', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 6@Int), <, 2, 8@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Percentage', 6], '<', 'Percentage', 8], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 6@Int), <=, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Percentage', 6], '<=', 'Percentage', 7], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 6@Int), ==, 2, 7@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Percentage', 6], '==', 'Percentage', 7], ['Percentage']]
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 8@Int), eqmax, 2), ['2'])
+# top-2, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 7@Int), eqmax, 2), ['2'])
+# top-3, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Muslims@Str), eqmin, 2), ['2'])
+# top-4, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 7@Int), eqmin, 2), ['2'])
+# top-5, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 6@Int), eqmin, 2), ['2'])
+# top-6, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 8@Int), ==, 0, Muslims@Str), ['2'])
+# top-7, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 8@Int), ==, 2, 7@Int), ['2'])
+# top-8, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 8@Int), >=, 2, 7@Int), ['2'])
+# top-9, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 8@Int), >, 2, 6@Int), ['2'])
+# top-10, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 11@Int), ==, 0, Muslims@Str), ['2'])
+# top-11, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 11@Int), ==, 2, 7@Int), ['2'])
+# top-12, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 12@Int), ==, 0, Muslims@Str), ['2'])
+# top-13, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 12@Int), ==, 2, 7@Int), ['2'])
+# top-14, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 13@Int), ==, 0, Muslims@Str), ['2'])
+# top-15, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 13@Int), ==, 2, 7@Int), ['2'])
+# top-16, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 14@Int), ==, 0, Muslims@Str), ['2'])
+# top-17, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 14@Int), ==, 2, 7@Int), ['2'])
+# top-18, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 10@Int), ==, 0, Muslims@Str), ['2'])
+# top-19, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 10@Int), ==, 2, 7@Int), ['2'])
+# top-20, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 17@Int), ==, 0, Muslims@Str), ['2'])
+# top-21, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 17@Int), ==, 2, 7@Int), ['2'])
+# top-22, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 19@Int), ==, 0, Muslims@Str), ['2'])
+# top-23, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 19@Int), ==, 2, 7@Int), ['2'])
+# top-24, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20@Int), ==, 0, Muslims@Str), ['2'])
+# top-25, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20@Int), ==, 2, 7@Int), ['2'])
+# top-26, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24@Int), ==, 0, Muslims@Str), ['2'])
+# top-27, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24@Int), ==, 2, 7@Int), ['2'])
+# top-28, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 34@Int), ==, 0, Muslims@Str), ['2'])
+# top-29, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 34@Int), ==, 2, 7@Int), ['2'])
+# top-30, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 37@Int), ==, 0, Muslims@Str), ['2'])
+# top-31, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 37@Int), ==, 2, 7@Int), ['2'])
+# top-32, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 42@Int), ==, 2, 7@Int), ['2'])
+# top-33, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 47@Int), ==, 2, 7@Int), ['2'])
+# top-34, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 49@Int), ==, 2, 7@Int), ['2'])
+# top-35, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 51@Int), ==, 2, 7@Int), ['2'])
+# top-36, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 61@Int), ==, 2, 7@Int), ['2'])
+# top-37, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 63@Int), ==, 2, 7@Int), ['2'])
+# top-38, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 65@Int), ==, 2, 7@Int), ['2'])
+# top-39, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 67@Int), ==, 2, 7@Int), ['2'])
+# top-40, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 68@Int), ==, 2, 7@Int), ['2'])
+# top-41, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 73@Int), ==, 2, 7@Int), ['2'])
+# top-42, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 7@Int), ==, 0, Muslims@Str), ['2'])
+# top-43, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 7@Int), ==, 2, 7@Int), ['2'])
+# top-44, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 7@Int), >=, 2, 7@Int), ['2'])
+# top-45, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 7@Int), >, 2, 6@Int), ['2'])
+# top-46, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 8@Int), ==, 0, Muslims@Str), ['2'])
+# top-47, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 8@Int), ==, 2, 7@Int), ['2'])
+# top-48, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 11@Int), ==, 0, Muslims@Str), ['2'])
+# top-49, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 11@Int), ==, 2, 7@Int), ['2'])
+# top-50, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 12@Int), ==, 0, Muslims@Str), ['2'])
+# top-51, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 12@Int), ==, 2, 7@Int), ['2'])
+# top-52, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 13@Int), ==, 0, Muslims@Str), ['2'])
+# top-53, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 13@Int), ==, 2, 7@Int), ['2'])
+# top-54, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 14@Int), ==, 0, Muslims@Str), ['2'])
+# top-55, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 14@Int), ==, 2, 7@Int), ['2'])
+# top-56, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 10@Int), ==, 0, Muslims@Str), ['2'])
+# top-57, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 10@Int), ==, 2, 7@Int), ['2'])
+# top-58, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 17@Int), ==, 0, Muslims@Str), ['2'])
+# top-59, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 17@Int), ==, 2, 7@Int), ['2'])
+# top-60, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19@Int), ==, 0, Muslims@Str), ['2'])
+# top-61, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19@Int), ==, 2, 7@Int), ['2'])
+# top-62, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 20@Int), ==, 0, Muslims@Str), ['2'])
+# top-63, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 20@Int), ==, 2, 7@Int), ['2'])
+# top-64, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 24@Int), ==, 0, Muslims@Str), ['2'])
+# top-65, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 24@Int), ==, 2, 7@Int), ['2'])
+# top-66, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 34@Int), ==, 0, Muslims@Str), ['2'])
+# top-67, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 34@Int), ==, 2, 7@Int), ['2'])
+# top-68, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 37@Int), ==, 2, 7@Int), ['2'])
+# top-69, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 42@Int), ==, 2, 7@Int), ['2'])
+# top-70, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 47@Int), ==, 2, 7@Int), ['2'])
+# top-71, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 49@Int), ==, 2, 7@Int), ['2'])
+# top-72, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 51@Int), ==, 2, 7@Int), ['2'])
+# top-73, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 61@Int), ==, 2, 7@Int), ['2'])
+# top-74, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 63@Int), ==, 2, 7@Int), ['2'])
+# top-75, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 65@Int), ==, 2, 7@Int), ['2'])
+# top-76, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 67@Int), ==, 2, 7@Int), ['2'])
+# top-77, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 68@Int), ==, 2, 7@Int), ['2'])
+# top-78, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 73@Int), ==, 2, 7@Int), ['2'])
+# top-79, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 8@Int), ['2'])
+# top-80, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 11@Int), ['2'])
+# top-81, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 12@Int), ['2'])
+# top-82, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 13@Int), ['2'])
+# top-83, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 14@Int), ['2'])
+# top-84, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 10@Int), ['2'])
+# top-85, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 17@Int), ['2'])
+# top-86, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 19@Int), ['2'])
+# top-87, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 20@Int), ['2'])
+# top-88, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 24@Int), ['2'])
+# top-89, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 34@Int), ['2'])
+# top-90, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <, 2, 37@Int), ['2'])
+# top-91, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 7@Int), ['2'])
+# top-92, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 8@Int), ['2'])
+# top-93, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 11@Int), ['2'])
+# top-94, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 12@Int), ['2'])
+# top-95, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 13@Int), ['2'])
+# top-96, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 14@Int), ['2'])
+# top-97, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 10@Int), ['2'])
+# top-98, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 17@Int), ['2'])
+# top-99, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 19@Int), ['2'])
+# top-100, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 20@Int), ['2'])
+# top-101, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 24@Int), ['2'])
+# top-102, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), <=, 2, 34@Int), ['2'])
+# top-103, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), ==, 1, Shrinking@Str), ['2'])
+# top-104, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), ==, 2, 7@Int), ['2'])
+# top-105, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Muslims@Str), ==, 3, orange@Str), ['2'])
+# top-106, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Shrinking@Str), ==, 0, Muslims@Str), ['2'])
+# top-107, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Shrinking@Str), ==, 2, 7@Int), ['2'])
+# top-108, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, orange@Str), ==, 0, Muslims@Str), ['2'])
+# top-109, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, orange@Str), ==, 2, 7@Int), ['2'])
+# top-110, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 1@Int), ==, 2, 7@Int), ['2'])
+# top-111, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 3@Int), ==, 2, 7@Int), ['2'])
+# top-112, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 6@Int), ==, 2, 7@Int), ['2'])
+# top-113, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 7@Int), <, 2, 8@Int), ['2'])
+# top-114, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 7@Int), <=, 2, 7@Int), ['2'])
+# top-115, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 7@Int), ==, 2, 7@Int), ['2'])
+# top-116, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 1@Int), ==, 2, 7@Int), ['2'])
+# top-117, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 3@Int), ==, 2, 7@Int), ['2'])
+# top-118, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 6@Int), <, 2, 8@Int), ['2'])
+# top-119, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 6@Int), <=, 2, 7@Int), ['2'])
+# top-120, score: 0.00, answer: [7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 6@Int), ==, 2, 7@Int), ['2'])

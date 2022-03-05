@@ -1,0 +1,82 @@
+# parsed arguments: Namespace(benchmark='Q4fb4e', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'2713704', 'japan', 'netherlands', 'germany', '1000000', '1356852', 'blue', 'country', 'belgium', 'commission', 'finland', '2000000', 'color', 'us', 'kuwait', '30033922', 'norway', 'european', 'ireland', '7033231', 'china', 'donations', '67030000', '5475452', '26000000'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                Country  Donations color
+0                    US   67030000  blue
+1   European Commission   30033922  blue
+2                 Japan   26000000  blue
+3           Netherlands    7033231  blue
+4                Norway    5475452  blue
+5               Germany    2713704  blue
+6                Kuwait    2000000  blue
+7               Finland    1356852  blue
+8               Belgium    1356852  blue
+9               Ireland    1356852  blue
+10                China    1000000  blue
+# query is: Does the European Commission donated more or less than the 50% of the donations made by the US?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0   less
+# inferred DSL terminals:
+  # ConstVal: ['US@Str', 'European Commission@Str', 'Donations@Str', '<NULL>']
+     # cmap: [('commission', 'European Commission'), ('european', 'European Commission'), ('donations', 'Donations'), ('us', 'US')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('more or less', 'diff')]
+  # BoolFunc: ['>=', '==', '<', '>', '<=', '<NULL>']
+     # bmap: [('more', '>='), ('less', '<='), ('more', '>'), (None, '=='), ('less', '<')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(36996078, 6), (-36996078, 6)]
+  # [debug] high_values (no dup.): [(29033922, 3), (28677070, 3), (28677070, 3), (28677070, 3), (28033922, 3), (27320218, 3), (24558470, 3), (23000691, 3), (4033922, 3), (-4033922, 3)]
+  # [debug] fallback (comparison) answers are added
+# ====> fallback strategy (selection) is triggered
+  # [debug] fallback (selection) answers: ['European Commission', 'US', 'Donations']
+  # [debug] fallback (selection) answers (no dup.): ['Donations']
+  # [debug] 1 fallback (selection) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'European Commission'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, European Commission@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'European Commission'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, European Commission@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'European Commission'], ['Country']]
+# (t=1.61) i=1, candidate=[{'ANSWER': 'US'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'US'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'US'], ['Country']]
+# (t=3.22) i=2, candidate=[{'ANSWER': 'Netherlands'}]
+  # found 0 program(s)
+# (t=4.81) i=3, candidate=[{'ANSWER': 36996078}]
+  # found 2 program(s)
+    # Contrast(@param0, diff, 0, US@Str, European Commission@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'Country', 'US', 'European Commission', 'Donations']
+    # Contrast(@param0, diff, 0, European Commission@Str, US@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'Country', 'European Commission', 'US', 'Donations']
+# (t=6.25) i=4, candidate=[{'ANSWER': -36996078}]
+  # found 0 program(s)
+# (t=7.68) i=5, candidate=[{'ANSWER': 'Donations'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.42, answer: 36996078
+  # tprog: Contrast(@param0, diff, 0, US@Str, European Commission@Str, 1)
+# top-2, score: 2.42, answer: 36996078
+  # tprog: Contrast(@param0, diff, 0, European Commission@Str, US@Str, 1)
+# top-3, score: 2.25, answer: European Commission
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, European Commission@Str), ['0'])
+# top-4, score: 2.25, answer: European Commission
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, European Commission@Str), ['-1', '-2'])
+# top-5, score: 2.20, answer: US
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['0'])
+# top-6, score: 2.20, answer: US
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['-1', '-2'])

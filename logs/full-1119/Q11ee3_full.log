@@ -1,0 +1,189 @@
+# parsed arguments: Namespace(benchmark='Q11ee3', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'7.4', 'orange', '0.4', '75.2', 'singapore', 'hong', 'south', 'country', 'monaco', '1.0', 'color', 'australia', 'rwanda', '0.1', 'kong', '1.8', '21.5', '25.4', '3.9', '18.0', '9.7', 'indonesia', 'germany', 'france', 'maldives', 'brazil', 'kilometers', '16.6', '25.2', '6.8', 'macau', 'india', 'japan', '17.1', 'bangladesh', '7.5', 'urban', 'per', 'urban/total', '2.5', '6.4', '0.2', '20.8', 'total', 'egypt', 'korea', '11.8', '5.1', 'persons', '0.5', 'square', 'blue', '26.0'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+        Country Urban/total  Persons per square kilometers   color
+0         Macau       Urban                           26.0  orange
+1         Macau       Total                           20.8    blue
+2         Japan       Urban                            3.9  orange
+3         Japan       Total                            0.5    blue
+4      Maldives       Urban                           21.5  orange
+5      Maldives       Total                            1.0    blue
+6        Rwanda       Urban                           18.0  orange
+7        Rwanda       Total                            0.5    blue
+8        Monaco       Urban                           17.1  orange
+9        Monaco       Total                           17.1    blue
+10    Australia       Urban                            1.8    blue
+11   Bangladesh       Urban                           75.2  orange
+12   Bangladesh       Total                            1.0    blue
+13    Indonesia       Urban                           16.6  orange
+14    Indonesia       Total                            0.1    blue
+15        Egypt       Urban                            5.1  orange
+16        Egypt       Total                            0.1    blue
+17        India       Urban                           25.2  orange
+18        India       Total                            0.4    blue
+19       France       Urban                            2.5  orange
+20       France       Total                            0.1    blue
+21      Germany       Urban                            6.8  orange
+22      Germany       Total                            0.2    blue
+23  South Korea       Urban                           11.8  orange
+24  South Korea       Total                            0.5    blue
+25    Hong Kong       Urban                           25.4  orange
+26    Hong Kong       Total                            6.4    blue
+27       Brazil       Urban                            9.7    blue
+28    Singapore       Urban                            7.5  orange
+29    Singapore       Total                            7.4    blue
+# query is: What is the total population density of Rwanda?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0     0.5
+# inferred DSL terminals:
+  # ConstVal: ['Total@Str', 'Rwanda@Str', 'Urban/total@Str', '<NULL>']
+     # cmap: [('rwanda', 'Rwanda'), ('total', 'Total'), ('total', 'Urban/total')]
+  # AggrFunc: ['count', 'sum', '<NULL>']
+     # amap: [('total', 'sum'), ('total', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': '<type error>'}]
+  # found 0 program(s)
+# ====> fallback strategy (retrieval) is triggered because no explanation is found so far
+# ====> retrieval_values: [0.1, 0.2, 0.4, 0.5, 1.0, 1.8, 11.8, 16.6, 17.1, 18.0, 2.5, 20.8, 21.5, 25.2, 25.4, 26.0, 3.9, 5.1, 6.4, 6.8, 7.4, 7.5, 75.2, 9.7, 'Australia', 'Bangladesh', 'Brazil', 'Country', 'Egypt', 'France', 'Germany', 'Hong Kong', 'India', 'Indonesia', 'Japan', 'Macau', 'Maldives', 'Monaco', 'Persons per square kilometers', 'Rwanda', 'Singapore', 'South Korea', 'Total', 'Urban', 'Urban/total', 'blue', 'color', 'orange']
+# (t=2.06) fallback i=0, candidate=[{'ANSWER': 0.1}]
+  # found 0 program(s)
+# (t=4.77) fallback i=1, candidate=[{'ANSWER': 0.2}]
+  # found 0 program(s)
+# (t=7.51) fallback i=2, candidate=[{'ANSWER': 0.4}]
+  # found 0 program(s)
+# (t=10.22) fallback i=3, candidate=[{'ANSWER': 0.5}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Rwanda@Str), ==, 1, Total@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Rwanda'], '==', 'Urban/total', 'Total'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Total@Str), ==, 0, Rwanda@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Total'], '==', 'Country', 'Rwanda'], ['Persons per square kilometers']]
+# (t=12.93) fallback i=4, candidate=[{'ANSWER': 1.0}]
+  # found 0 program(s)
+# (t=15.65) fallback i=5, candidate=[{'ANSWER': 1.8}]
+  # found 0 program(s)
+# (t=18.34) fallback i=6, candidate=[{'ANSWER': 11.8}]
+  # found 0 program(s)
+# (t=20.97) fallback i=7, candidate=[{'ANSWER': 16.6}]
+  # found 0 program(s)
+# (t=23.59) fallback i=8, candidate=[{'ANSWER': 17.1}]
+  # found 0 program(s)
+# (t=26.28) fallback i=9, candidate=[{'ANSWER': 18.0}]
+  # found 0 program(s)
+# (t=28.96) fallback i=10, candidate=[{'ANSWER': 2.5}]
+  # found 0 program(s)
+# (t=31.64) fallback i=11, candidate=[{'ANSWER': 20.8}]
+  # found 0 program(s)
+# (t=34.30) fallback i=12, candidate=[{'ANSWER': 21.5}]
+  # found 0 program(s)
+# (t=36.98) fallback i=13, candidate=[{'ANSWER': 25.2}]
+  # found 0 program(s)
+# (t=39.64) fallback i=14, candidate=[{'ANSWER': 25.4}]
+  # found 0 program(s)
+# (t=42.31) fallback i=15, candidate=[{'ANSWER': 26.0}]
+  # found 0 program(s)
+# (t=44.97) fallback i=16, candidate=[{'ANSWER': 3.9}]
+  # found 0 program(s)
+# (t=47.94) fallback i=17, candidate=[{'ANSWER': 5.1}]
+  # found 0 program(s)
+# (t=50.62) fallback i=18, candidate=[{'ANSWER': 6.4}]
+  # found 0 program(s)
+# (t=53.30) fallback i=19, candidate=[{'ANSWER': 6.8}]
+  # found 0 program(s)
+# (t=55.95) fallback i=20, candidate=[{'ANSWER': 7.4}]
+  # found 0 program(s)
+# (t=58.61) fallback i=21, candidate=[{'ANSWER': 7.5}]
+  # found 0 program(s)
+# (t=61.24) fallback i=22, candidate=[{'ANSWER': 75.2}]
+  # found 0 program(s)
+# (t=63.92) fallback i=23, candidate=[{'ANSWER': 9.7}]
+  # found 0 program(s)
+# (t=66.62) fallback i=24, candidate=[{'ANSWER': 'Australia'}]
+  # found 0 program(s)
+# (t=69.32) fallback i=25, candidate=[{'ANSWER': 'Bangladesh'}]
+  # found 0 program(s)
+# (t=71.98) fallback i=26, candidate=[{'ANSWER': 'Brazil'}]
+  # found 0 program(s)
+# (t=74.64) fallback i=27, candidate=[{'ANSWER': 'Country'}]
+  # found 0 program(s)
+# (t=76.68) fallback i=28, candidate=[{'ANSWER': 'Egypt'}]
+  # found 0 program(s)
+# (t=79.35) fallback i=29, candidate=[{'ANSWER': 'France'}]
+  # found 0 program(s)
+# (t=82.00) fallback i=30, candidate=[{'ANSWER': 'Germany'}]
+  # found 0 program(s)
+# (t=84.66) fallback i=31, candidate=[{'ANSWER': 'Hong Kong'}]
+  # found 0 program(s)
+# (t=87.33) fallback i=32, candidate=[{'ANSWER': 'India'}]
+  # found 0 program(s)
+# (t=89.99) fallback i=33, candidate=[{'ANSWER': 'Indonesia'}]
+  # found 0 program(s)
+# (t=92.66) fallback i=34, candidate=[{'ANSWER': 'Japan'}]
+  # found 0 program(s)
+# (t=95.31) fallback i=35, candidate=[{'ANSWER': 'Macau'}]
+  # found 0 program(s)
+# (t=97.95) fallback i=36, candidate=[{'ANSWER': 'Maldives'}]
+  # found 0 program(s)
+# (t=100.55) fallback i=37, candidate=[{'ANSWER': 'Monaco'}]
+  # found 0 program(s)
+# (t=103.53) fallback i=38, candidate=[{'ANSWER': 'Persons per square kilometers'}]
+  # found 0 program(s)
+# (t=105.56) fallback i=39, candidate=[{'ANSWER': 'Rwanda'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Rwanda@Str), ==, 1, Total@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Rwanda'], '==', 'Urban/total', 'Total'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Total@Str), ==, 0, Rwanda@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Total'], '==', 'Country', 'Rwanda'], ['Country']]
+# (t=108.26) fallback i=40, candidate=[{'ANSWER': 'Singapore'}]
+  # found 0 program(s)
+# (t=110.95) fallback i=41, candidate=[{'ANSWER': 'South Korea'}]
+  # found 0 program(s)
+# (t=113.63) fallback i=42, candidate=[{'ANSWER': 'Total'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Rwanda@Str), ==, 1, Total@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Rwanda'], '==', 'Urban/total', 'Total'], ['Urban/total']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Total@Str), ==, 0, Rwanda@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Total'], '==', 'Country', 'Rwanda'], ['Urban/total']]
+# (t=116.30) fallback i=43, candidate=[{'ANSWER': 'Urban'}]
+  # found 0 program(s)
+# (t=118.97) fallback i=44, candidate=[{'ANSWER': 'Urban/total'}]
+  # found 0 program(s)
+# (t=120.98) fallback i=45, candidate=[{'ANSWER': 'blue'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Rwanda@Str), ==, 1, Total@Str), ['3'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Rwanda'], '==', 'Urban/total', 'Total'], ['color']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Total@Str), ==, 0, Rwanda@Str), ['3'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Total'], '==', 'Country', 'Rwanda'], ['color']]
+# (t=123.63) fallback i=46, candidate=[{'ANSWER': 'color'}]
+  # found 0 program(s)
+# (t=125.64) fallback i=47, candidate=[{'ANSWER': 'orange'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.34, answer: [0.5]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Rwanda@Str), ==, 1, Total@Str), ['2'])
+# top-2, score: 2.34, answer: [0.5]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Total@Str), ==, 0, Rwanda@Str), ['2'])
+# top-3, score: 2.34, answer: ['Rwanda']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Rwanda@Str), ==, 1, Total@Str), ['0'])
+# top-4, score: 2.34, answer: ['Rwanda']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Total@Str), ==, 0, Rwanda@Str), ['0'])
+# top-5, score: 2.34, answer: ['Total']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Rwanda@Str), ==, 1, Total@Str), ['1'])
+# top-6, score: 2.34, answer: ['Total']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Total@Str), ==, 0, Rwanda@Str), ['1'])
+# top-7, score: 2.34, answer: ['blue']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Rwanda@Str), ==, 1, Total@Str), ['3'])
+# top-8, score: 2.34, answer: ['blue']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Total@Str), ==, 0, Rwanda@Str), ['3'])

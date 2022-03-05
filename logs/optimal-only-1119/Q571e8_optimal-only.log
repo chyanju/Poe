@@ -1,0 +1,88 @@
+# parsed arguments: Namespace(benchmark='Q571e8', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'3.2', 'reports', 'quinnipiac', '0.8', 'marist', '2.9', '(ppp)', 'house', '3.1', '-1.3', 'yougov', 'polling', '&', '(nbc/marist)', '-1.4', 'spread', 'blue', 'orange', 'fox', 'public', '1.9', 'surveyusa', 'rasmussen', 'research)', 'post', 'effect', 'research', '2.4', 'gallup', 'color', '/', '-1.7', '(opinion', '0.4', 'republican', 'abc', '-2.5', '(robbins', 'washington', 'ipsos', 'cnn', 'democratic', 'news', 'pollster', 'pew', 'policy', '-1.5', 'shaw)'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                       Pollster      spread  House Effect   color
+0                  Pew Research  Democratic           3.2    blue
+1   Public Policy Polling (PPP)  Democratic           3.1    blue
+2                         Ipsos  Democratic           2.9    blue
+3                     SurveyUSA  Democratic           2.4    blue
+4           Marist (NBC/Marist)  Democratic           1.9    blue
+5                        YouGov  Democratic           0.8    blue
+6        CNN (Opinion Research)  Democratic           0.4    blue
+7             Rasmussen Reports  Republican          -1.3  orange
+8    Washington Post / ABC News  Republican          -1.4  orange
+9     Fox News (Robbins & Shaw)  Republican          -1.5  orange
+10                   Quinnipiac  Republican          -1.7  orange
+11                       Gallup  Republican          -2.5  orange
+# query is: How much higher is the value of SurveyUSA than the value of YouGov?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0     1.6
+# inferred DSL terminals:
+  # ConstVal: ['SurveyUSA@Str', 'YouGov@Str', '<NULL>']
+     # cmap: [('yougov', 'YouGov'), ('surveyusa', 'SurveyUSA')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('higher', '-')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(1.5999999999999999, 4), (-1.5999999999999999, 4)]
+  # [debug] high_values (no dup.): [(1.5999999999999999, 4), (-1.5999999999999999, 4)]
+  # [debug] filtered low_values (no dup.): [(4.9, 2), (4.1, 2), (3.9, 2), (3.8, 2), (3.7, 2), (3.3, 2), (2.5, 2), (2.4000000000000004, 2), (2.3, 2), (2.3, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=2.06) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=4.10) i=2, candidate=[{'ANSWER': 1.5999999999999999}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, SurveyUSA@Str, YouGov@Str, 2)
+      --> ['Contrast', 'input@0', '-', 'Pollster', 'SurveyUSA', 'YouGov', 'House Effect']
+# (t=6.14) i=3, candidate=[{'ANSWER': -1.5999999999999999}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, YouGov@Str, SurveyUSA@Str, 2)
+      --> ['Contrast', 'input@0', '-', 'Pollster', 'YouGov', 'SurveyUSA', 'House Effect']
+# (t=8.18) i=4, candidate=[{'ANSWER': 4.9}]
+  # found 0 program(s)
+# (t=10.48) i=5, candidate=[{'ANSWER': 4.1}]
+  # found 0 program(s)
+# (t=12.52) i=6, candidate=[{'ANSWER': 3.9}]
+  # found 0 program(s)
+# (t=14.57) i=7, candidate=[{'ANSWER': 3.8}]
+  # found 0 program(s)
+# (t=16.63) i=8, candidate=[{'ANSWER': 3.7}]
+  # found 0 program(s)
+# (t=18.70) i=9, candidate=[{'ANSWER': 3.3}]
+  # found 0 program(s)
+# (t=21.10) i=10, candidate=[{'ANSWER': 2.5}]
+  # found 0 program(s)
+# (t=23.15) i=11, candidate=[{'ANSWER': 2.4000000000000004}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, SurveyUSA@Str), ==, 0, SurveyUSA@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'SurveyUSA'], '==', 'Pollster', 'SurveyUSA'], ['House Effect']]
+    # SelectCol(SelectRow1(@param0, ==, 0, SurveyUSA@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Pollster', 'SurveyUSA'], ['House Effect']]
+# (t=25.20) i=12, candidate=[{'ANSWER': 2.3}]
+  # found 0 program(s)
+# (t=27.26) i=13, candidate=[{'ANSWER': 2.3}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.37, answer: [1.5999999999999999]
+  # tprog: Contrast(@param0, -, 0, SurveyUSA@Str, YouGov@Str, 2)
+# top-2, score: 2.37, answer: [-1.5999999999999999]
+  # tprog: Contrast(@param0, -, 0, YouGov@Str, SurveyUSA@Str, 2)
+# top-3, score: 2.22, answer: [2.4000000000000004]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, SurveyUSA@Str), ['2'])
+# top-4, score: 2.17, answer: [2.4000000000000004]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, SurveyUSA@Str), ==, 0, SurveyUSA@Str), ['2'])

@@ -1,0 +1,66 @@
+# parsed arguments: Namespace(benchmark='Q527b9', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'101', '46', 'blue', 'guatemala', '183', 'country', '133', '30', 'salvador', 'amphibians', 'nicaragua', 'el', '182', 'honduras', 'panama', 'belize', 'color', 'costa', '61', 'rica'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       Country  Amphibians color
+0       Belize          46  blue
+1   Costa Rica         183  blue
+2  El Salvador          30  blue
+3    Guatemala         133  blue
+4     Honduras         101  blue
+5    Nicaragua          61  blue
+6       Panama         182  blue
+# query is: How many amphibians species have Belize and El Salvador together?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      76
+# inferred DSL terminals:
+  # ConstVal: ['El Salvador@Str', 'Amphibians@Str', 'Belize@Str', '<NULL>']
+     # cmap: [('salvador', 'El Salvador'), ('belize', 'Belize'), ('amphibians', 'Amphibians'), ('el', 'El Salvador')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 6 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, El Salvador@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'El Salvador'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, El Salvador@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'El Salvador'], 'count', 'Amphibians']
+    # Summarize(SelectRow1(@param0, ==, 0, El Salvador@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'El Salvador'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Belize@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Belize'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, Belize@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Belize'], 'count', 'Amphibians']
+    # Summarize(SelectRow1(@param0, ==, 0, Belize@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Belize'], 'count', 'color']
+# (t=2.34) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=4.65) i=2, candidate=[{'ANSWER': 3}]
+  # found 0 program(s)
+# (t=6.97) i=3, candidate=[{'ANSWER': 4}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.52, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, El Salvador@Str), count, 1)
+# top-2, score: 2.42, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, El Salvador@Str), count, 0)
+# top-3, score: 2.42, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, El Salvador@Str), count, 2)
+# top-4, score: 2.42, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Belize@Str), count, 1)
+# top-5, score: 2.33, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Belize@Str), count, 0)
+# top-6, score: 2.33, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Belize@Str), count, 2)

@@ -1,0 +1,59 @@
+# parsed arguments: Namespace(benchmark='Qa37e7', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'506.89', 'blue', 'gojō,', 'area', 'inland', 'highland', 'district', 'plain', 'yoshino', '2346.84', '837.27', 'size', 'color', 'flat', '(km²)', 'yamato'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                   District  Area Size (km²) color
+0  Yamato flat inland plain           837.27  blue
+1           Yamato highland           506.89  blue
+2             Gojō, Yoshino          2346.84  blue
+# query is: How much larger is the area of the inland plain relative to the highland size?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0  330.38
+# inferred DSL terminals:
+  # ConstVal: ['Yamato flat inland plain@Str', 'Area Size (km²)@Str', 'Yamato highland@Str', '<NULL>']
+     # cmap: [('plain', 'Yamato flat inland plain'), ('highland', 'Yamato highland'), ('area', 'Area Size (km²)'), ('inland', 'Yamato flat inland plain'), ('size', 'Area Size (km²)')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('larger', '-')]
+  # BoolFunc: ['==', '>=', '>', '<NULL>']
+     # bmap: [('larger', '>='), (None, '=='), ('larger', '>')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(330.38, 6), (-330.38, 6)]
+  # [debug] high_values (no dup.): [(330.38, 6), (-330.38, 6)]
+  # [debug] filtered low_values (no dup.): [(1509.5700000000002, 3), (-1509.5700000000002, 3), (1839.9500000000003, 2), (-1839.9500000000003, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=1.44) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=2.85) i=2, candidate=[{'ANSWER': 330.38}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Yamato flat inland plain@Str, Yamato highland@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'District', 'Yamato flat inland plain', 'Yamato highland', 'Area Size (km²)']
+# (t=4.26) i=3, candidate=[{'ANSWER': -330.38}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Yamato highland@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'District', 'Yamato highland', 'Yamato flat inland plain', 'Area Size (km²)']
+# (t=5.67) i=4, candidate=[{'ANSWER': 1509.5700000000002}]
+  # found 0 program(s)
+# (t=7.07) i=5, candidate=[{'ANSWER': -1509.5700000000002}]
+  # found 0 program(s)
+# (t=8.49) i=6, candidate=[{'ANSWER': 1839.9500000000003}]
+  # found 0 program(s)
+# (t=9.91) i=7, candidate=[{'ANSWER': -1839.9500000000003}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.54, answer: [330.38]
+  # tprog: Contrast(@param0, -, 0, Yamato flat inland plain@Str, Yamato highland@Str, 1)
+# top-2, score: 1.54, answer: [-330.38]
+  # tprog: Contrast(@param0, -, 0, Yamato highland@Str, Yamato flat inland plain@Str, 1)

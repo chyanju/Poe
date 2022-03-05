@@ -1,0 +1,53 @@
+# parsed arguments: Namespace(benchmark='Q26b38', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'oliver', 'blue', 'color', 'dobson', '8.1', 'percent', 'james', 'adrian', 'fraser', '18.9', 'candidate', 'frank', 'rainbow', 'george', 'majority', '43.2', '0.4', 'weiss', '13.9', 'jill', 'margot', '29.3'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+              Candidate  percent color
+0          Frank Dobson     43.2  blue
+1           Jill Fraser     29.3  blue
+2          Margot James     18.9  blue
+3         Adrian Oliver      8.1  blue
+4  Rainbow George Weiss      0.4  blue
+5              Majority     13.9  blue
+# query is: How much more of a percentage does Margot James have over Rainbow George Weiss?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0    18.5
+# inferred DSL terminals:
+  # ConstVal: ['percent@Str', 'Margot James@Str', 'Rainbow George Weiss@Str', '<NULL>']
+     # cmap: [('margot', 'Margot James'), ('percentage', 'percent'), ('weiss', 'Rainbow George Weiss'), ('james', 'Margot James'), ('rainbow', 'Rainbow George Weiss'), ('george', 'Rainbow George Weiss')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>=', '>', '==', '<NULL>']
+     # bmap: [('more', '>='), ('more', '>'), (None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(18.5, 12), (-18.5, 12)]
+  # [debug] high_values (no dup.): [(42.800000000000004, 4), (28.900000000000002, 4), (13.5, 4), (7.699999999999999, 4), (-7.699999999999999, 4), (-13.5, 4), (-28.900000000000002, 4), (-42.800000000000004, 4), (24.300000000000004, 3), (10.799999999999999, 3)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=1.45) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=2.91) i=2, candidate=[{'ANSWER': 18.5}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Margot James@Str, Rainbow George Weiss@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Candidate', 'Margot James', 'Rainbow George Weiss', 'percent']
+# (t=4.36) i=3, candidate=[{'ANSWER': -18.5}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Rainbow George Weiss@Str, Margot James@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Candidate', 'Rainbow George Weiss', 'Margot James', 'percent']
+
+# ========== review report ========== #
+# top-1, score: 2.64, answer: 18.5
+  # tprog: Contrast(@param0, -, 0, Margot James@Str, Rainbow George Weiss@Str, 1)
+# top-2, score: 2.64, answer: -18.5
+  # tprog: Contrast(@param0, -, 0, Rainbow George Weiss@Str, Margot James@Str, 1)

@@ -1,0 +1,155 @@
+# parsed arguments: Namespace(benchmark='Q5d606', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'hong', '21.5', 'orange', 'indonesia', '75.2', '0.5', 'egypt', '25.4', 'france', '7.5', '17.1', 'total', '0.1', 'south', 'monaco', '25.2', 'blue', '1.0', '2.5', 'australia', '6.4', '3.9', 'india', 'singapore', 'country', 'kilometers', '7.4', '9.7', '26.0', 'urban', '0.4', 'bangladesh', 'maldives', 'kong', 'japan', 'persons', '18.0', 'urban/total', 'rwanda', '5.1', '1.8', '16.6', '6.8', 'germany', 'korea', 'per', '11.8', 'square', '20.8', 'brazil', '0.2', 'color', 'macau'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+        Country Urban/total  Persons per square kilometers   color
+0         Egypt       Urban                            5.1  orange
+1         Egypt       Total                            0.1    blue
+2        Rwanda       Urban                           18.0  orange
+3        Rwanda       Total                            0.5    blue
+4        Brazil       Urban                            9.7    blue
+5     Singapore       Urban                            7.5  orange
+6     Singapore       Total                            7.4    blue
+7         Macau       Urban                           26.0  orange
+8         Macau       Total                           20.8    blue
+9     Australia       Urban                            1.8    blue
+10        India       Urban                           25.2  orange
+11        India       Total                            0.4    blue
+12       France       Urban                            2.5  orange
+13       France       Total                            0.1    blue
+14        Japan       Urban                            3.9  orange
+15        Japan       Total                            0.5    blue
+16   Bangladesh       Urban                           75.2  orange
+17   Bangladesh       Total                            1.0    blue
+18      Germany       Urban                            6.8  orange
+19      Germany       Total                            0.2    blue
+20     Maldives       Urban                           21.5  orange
+21     Maldives       Total                            1.0    blue
+22    Indonesia       Urban                           16.6  orange
+23    Indonesia       Total                            0.1    blue
+24       Monaco       Urban                           17.1  orange
+25       Monaco       Total                           17.1    blue
+26    Hong Kong       Urban                           25.4  orange
+27    Hong Kong       Total                            6.4    blue
+28  South Korea       Urban                           11.8  orange
+29  South Korea       Total                            0.5    blue
+# query is: Which country or principality has the smallest difference between urban population density and overall population density?
+# expected output type:[dtype('O')]
+# expected output is:
+   ANSWER
+0  Monaco
+# inferred DSL terminals:
+  # ConstVal: ['Urban/total@Str', 'Urban@Str', 'Country@Str', '<NULL>']
+     # cmap: [('urban', 'Urban/total'), ('country', 'Country'), ('urban', 'Urban')]
+  # AggrFunc: ['min', 'sum', '<NULL>']
+     # amap: [('smallest', 'min'), ('overall', 'sum')]
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('smallest', 'eqmin')]
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(73.4, 4), (72.7, 4), (71.3, 4), (70.10000000000001, 4), (68.4, 4), (67.7, 4), (65.5, 4), (63.400000000000006, 4), (58.6, 4), (58.1, 4)]
+  # [debug] high_values (no dup.): [(75.10000000000001, 2), (75.10000000000001, 2), (75.10000000000001, 2), (75.0, 2), (74.8, 2), (74.7, 2), (74.7, 2), (74.7, 2), (74.2, 2), (74.2, 2)]
+  # [debug] fallback (comparison) answers are added
+# ====> fallback strategy (selection) is triggered
+  # [debug] fallback (selection) answers: ['Urban/total', 'Urban', 'Country']
+  # [debug] fallback (selection) answers (no dup.): ['Urban/total', 'Urban', 'Country']
+  # [debug] 3 fallback (selection) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Egypt'}]
+  # found 0 program(s)
+# (t=4.12) i=1, candidate=[{'ANSWER': 'Singapore'}]
+  # found 0 program(s)
+# (t=8.21) i=2, candidate=[{'ANSWER': 'Australia'}]
+  # found 4 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Urban@Str), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Urban'], 'eqmin', 'Persons per square kilometers'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], sum, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'sum', 'Persons per square kilometers'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], sum, 2), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'sum', 'Persons per square kilometers'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Urban@Str), ==, 1, Urban@Str), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Urban'], '==', 'Urban/total', 'Urban'], 'eqmin', 'Persons per square kilometers'], ['Country']]
+# (t=12.32) i=3, candidate=[{'ANSWER': 'Rwanda'}]
+  # found 0 program(s)
+# (t=16.41) i=4, candidate=[{'ANSWER': 'Maldives'}]
+  # found 0 program(s)
+# (t=20.45) i=5, candidate=[{'ANSWER': 'Brazil'}]
+  # found 0 program(s)
+# (t=24.53) i=6, candidate=[{'ANSWER': 'India'}]
+  # found 0 program(s)
+# (t=28.56) i=7, candidate=[{'ANSWER': 'Japan'}]
+  # found 0 program(s)
+# (t=32.59) i=8, candidate=[{'ANSWER': 'Macau'}]
+  # found 0 program(s)
+# (t=36.84) i=9, candidate=[{'ANSWER': 'France'}]
+  # found 0 program(s)
+# (t=40.87) i=10, candidate=[{'ANSWER': 'Germany'}]
+  # found 0 program(s)
+# (t=44.96) i=11, candidate=[{'ANSWER': 'South Korea'}]
+  # found 0 program(s)
+# (t=49.01) i=12, candidate=[{'ANSWER': 'Monaco'}]
+  # found 0 program(s)
+# (t=53.03) i=13, candidate=[{'ANSWER': 'Bangladesh'}]
+  # found 0 program(s)
+# (t=57.07) i=14, candidate=[{'ANSWER': 'Indonesia'}]
+  # found 0 program(s)
+# (t=61.07) i=15, candidate=[{'ANSWER': 'Hong Kong'}]
+  # found 0 program(s)
+# (t=65.20) i=16, candidate=[{'ANSWER': 73.4}]
+  # found 0 program(s)
+# (t=68.31) i=17, candidate=[{'ANSWER': 72.7}]
+  # found 0 program(s)
+# (t=71.41) i=18, candidate=[{'ANSWER': 71.3}]
+  # found 0 program(s)
+# (t=74.52) i=19, candidate=[{'ANSWER': 70.10000000000001}]
+  # found 0 program(s)
+# (t=77.64) i=20, candidate=[{'ANSWER': 68.4}]
+  # found 0 program(s)
+# (t=80.75) i=21, candidate=[{'ANSWER': 67.7}]
+  # found 0 program(s)
+# (t=83.88) i=22, candidate=[{'ANSWER': 65.5}]
+  # found 0 program(s)
+# (t=86.96) i=23, candidate=[{'ANSWER': 63.400000000000006}]
+  # found 0 program(s)
+# (t=90.03) i=24, candidate=[{'ANSWER': 58.6}]
+  # found 0 program(s)
+# (t=93.10) i=25, candidate=[{'ANSWER': 58.1}]
+  # found 0 program(s)
+# (t=96.17) i=26, candidate=[{'ANSWER': 'Urban/total'}]
+  # found 0 program(s)
+# (t=99.29) i=27, candidate=[{'ANSWER': 'Urban'}]
+  # found 4 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Urban@Str), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Urban'], 'eqmin', 'Persons per square kilometers'], ['Urban/total']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], sum, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Urban/total', 'color'], 'sum', 'Persons per square kilometers'], 'eqmin', 'COL0'], ['Urban/total']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], sum, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Urban/total', 'color'], 'sum', 'Persons per square kilometers'], 'eqmin', 'COL0'], ['Urban/total']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Urban@Str), ==, 1, Urban@Str), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Urban'], '==', 'Urban/total', 'Urban'], 'eqmin', 'Persons per square kilometers'], ['Urban/total']]
+# (t=103.43) i=28, candidate=[{'ANSWER': 'Country'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.29, answer: Australia
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Urban@Str), eqmin, 2), ['0'])
+# top-2, score: 2.26, answer: Australia
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Urban@Str), ==, 1, Urban@Str), eqmin, 2), ['0'])
+# top-3, score: 2.23, answer: Urban
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Urban@Str), eqmin, 2), ['1'])
+# top-4, score: 2.20, answer: Urban
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Urban@Str), ==, 1, Urban@Str), eqmin, 2), ['1'])
+# top-5, score: 1.29, answer: Australia
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], sum, 2), eqmin, 1), ['0'])
+# top-6, score: 1.29, answer: Australia
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], sum, 2), eqmin, 1), ['-1'])
+# top-7, score: 1.28, answer: Urban
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], sum, 2), eqmin, 2), ['0'])
+# top-8, score: 1.28, answer: Urban
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], sum, 2), eqmin, 2), ['-1', '-2'])

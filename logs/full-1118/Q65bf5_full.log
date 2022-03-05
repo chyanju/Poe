@@ -1,0 +1,67 @@
+# parsed arguments: Namespace(benchmark='Q65bf5', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'56', 'can', '64', '62', 'kor', 'rating', 'nor', 'fra', 'aus', '61', 'blue', 'bel', 'che', '48', 'aut', 'color', 'esp', '66', 'dnk', 'ita', 'fin', 'prt', 'deu', '75', '60', '52', '70', '0', '54', '42', '49', 'jpn', 'irl', '59', '53', 'gbr', 'usa', 'swe', '76', 'country', 'nld', '57'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+   country  rating color
+0      USA      53  blue
+1      JPN      42  blue
+2      FRA      56  blue
+3      DEU      61  blue
+4      GBR      75  blue
+5      CAN      54  blue
+6      AUS      66  blue
+7      ESP      57  blue
+8      NLD      76  blue
+9      NOR      64  blue
+10     BEL      59  blue
+11     SWE      66  blue
+12     DNK      62  blue
+13     KOR      52  blue
+14     CHE      59  blue
+15     ITA      49  blue
+16     IRL      70  blue
+17     FIN      60  blue
+18     AUT      48  blue
+19     PRT       0  blue
+# query is: How much more does USA have than JPN?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      11
+# inferred DSL terminals:
+  # ConstVal: ['USA@Str', 'JPN@Str', '<NULL>']
+     # cmap: [('usa', 'USA'), ('jpn', 'JPN')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>=', '==', '>', '<NULL>']
+     # bmap: [('more', '>'), ('more', '>='), (None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(11, 4), (-11, 4)]
+  # [debug] high_values (no dup.): [(53, 2), (42, 2), (34, 2), (33, 2), (28, 2), (24, 2), (24, 2), (23, 2), (22, 2), (22, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=0.63) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=1.25) i=2, candidate=[{'ANSWER': 11}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, USA@Str, JPN@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'country', 'USA', 'JPN', 'rating']
+# (t=1.87) i=3, candidate=[{'ANSWER': -11}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, JPN@Str, USA@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'country', 'JPN', 'USA', 'rating']
+
+# ========== review report ========== #
+# top-1, score: 2.52, answer: 11
+  # tprog: Contrast(@param0, -, 0, USA@Str, JPN@Str, 1)
+# top-2, score: 2.52, answer: -11
+  # tprog: Contrast(@param0, -, 0, JPN@Str, USA@Str, 1)

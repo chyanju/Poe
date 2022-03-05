@@ -1,0 +1,84 @@
+# parsed arguments: Namespace(benchmark='Q5e116', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'color', '-1.4', '3.1', '0.8', 'effect', '(ppp)', '-2.5', 'pew', 'quinnipiac', 'polling', '3.2', '&', '0.4', '(opinion', '/', 'shaw)', 'research', 'public', 'yougov', 'news', 'spread', 'house', 'policy', 'rasmussen', '1.9', 'fox', 'republican', 'surveyusa', '-1.3', 'orange', 'washington', 'marist', 'reports', '2.9', '(nbc/marist)', 'abc', 'gallup', 'pollster', '(robbins', '-1.7', '-1.5', 'blue', 'research)', 'cnn', 'democratic', 'post', 'ipsos', '2.4'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                       Pollster      spread  House Effect   color
+0                  Pew Research  Democratic           3.2    blue
+1   Public Policy Polling (PPP)  Democratic           3.1    blue
+2                         Ipsos  Democratic           2.9    blue
+3                     SurveyUSA  Democratic           2.4    blue
+4           Marist (NBC/Marist)  Democratic           1.9    blue
+5                        YouGov  Democratic           0.8    blue
+6        CNN (Opinion Research)  Democratic           0.4    blue
+7             Rasmussen Reports  Republican          -1.3  orange
+8    Washington Post / ABC News  Republican          -1.4  orange
+9     Fox News (Robbins & Shaw)  Republican          -1.5  orange
+10                   Quinnipiac  Republican          -1.7  orange
+11                       Gallup  Republican          -2.5  orange
+# query is: What is the difference between the value of Gallup and Quinnipiac?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0     0.8
+# inferred DSL terminals:
+  # ConstVal: ['Quinnipiac@Str', 'Gallup@Str', '<NULL>']
+     # cmap: [('quinnipiac', 'Quinnipiac'), ('gallup', 'Gallup')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(0.8, 4), (-0.8, 4)]
+  # [debug] high_values (no dup.): [(0.8, 4), (-0.8, 4)]
+  # [debug] filtered low_values (no dup.): [(5.7, 2), (5.6, 2), (5.4, 2), (4.9, 2), (4.9, 2), (4.8, 2), (4.6, 2), (4.4, 2), (4.1, 2), (3.5999999999999996, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=2.06) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=4.10) i=2, candidate=[{'ANSWER': 3}]
+  # found 0 program(s)
+# (t=6.16) i=3, candidate=[{'ANSWER': 4}]
+  # found 0 program(s)
+# (t=8.21) i=4, candidate=[{'ANSWER': 0.8}]
+  # found 2 program(s)
+    # Contrast(@param0, diff, 0, Quinnipiac@Str, Gallup@Str, 2)
+      --> ['Contrast', 'input@0', 'diff', 'Pollster', 'Quinnipiac', 'Gallup', 'House Effect']
+    # Contrast(@param0, diff, 0, Gallup@Str, Quinnipiac@Str, 2)
+      --> ['Contrast', 'input@0', 'diff', 'Pollster', 'Gallup', 'Quinnipiac', 'House Effect']
+# (t=10.55) i=5, candidate=[{'ANSWER': -0.8}]
+  # found 0 program(s)
+# (t=12.59) i=6, candidate=[{'ANSWER': 5.7}]
+  # found 0 program(s)
+# (t=14.63) i=7, candidate=[{'ANSWER': 5.6}]
+  # found 0 program(s)
+# (t=16.67) i=8, candidate=[{'ANSWER': 5.4}]
+  # found 0 program(s)
+# (t=18.71) i=9, candidate=[{'ANSWER': 4.9}]
+  # found 0 program(s)
+# (t=21.03) i=10, candidate=[{'ANSWER': 4.9}]
+  # found 0 program(s)
+# (t=23.06) i=11, candidate=[{'ANSWER': 4.8}]
+  # found 0 program(s)
+# (t=25.09) i=12, candidate=[{'ANSWER': 4.6}]
+  # found 0 program(s)
+# (t=27.13) i=13, candidate=[{'ANSWER': 4.4}]
+  # found 0 program(s)
+# (t=29.18) i=14, candidate=[{'ANSWER': 4.1}]
+  # found 0 program(s)
+# (t=31.50) i=15, candidate=[{'ANSWER': 3.5999999999999996}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.42, answer: [0.8]
+  # tprog: Contrast(@param0, diff, 0, Quinnipiac@Str, Gallup@Str, 2)
+# top-2, score: 2.42, answer: [0.8]
+  # tprog: Contrast(@param0, diff, 0, Gallup@Str, Quinnipiac@Str, 2)

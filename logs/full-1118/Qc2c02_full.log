@@ -1,0 +1,81 @@
+# parsed arguments: Namespace(benchmark='Qc2c02', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'dobson', 'candidate', 'majority', 'votes', '10070', 'margot', 'fraser', 'oliver', 'blue', 'george', 'weiss', 'adrian', '152', 'jill', 'frank', 'rainbow', '2798', '4787', 'james', 'color', '6482', '14857'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+              Candidate  Votes color
+0          Frank Dobson  14857  blue
+1           Jill Fraser  10070  blue
+2          Margot James   6482  blue
+3         Adrian Oliver   2798  blue
+4  Rainbow George Weiss    152  blue
+5              Majority   4787  blue
+# query is: How many more votes does Frank Dobson have in comparison to Adrian Oliver?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0   12059
+# inferred DSL terminals:
+  # ConstVal: ['Votes@Str', 'Frank Dobson@Str', 'Adrian Oliver@Str', '<NULL>']
+     # cmap: [('votes', 'Votes'), ('frank', 'Frank Dobson'), ('adrian', 'Adrian Oliver'), ('dobson', 'Frank Dobson'), ('oliver', 'Adrian Oliver')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>=', '==', '>', '<NULL>']
+     # bmap: [('more', '>='), (None, '=='), ('more', '>')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(12059, 9), (-12059, 9)]
+  # [debug] high_values (no dup.): [(14705, 3), (10070, 3), (8375, 3), (7272, 3), (4787, 3), (3684, 3), (2646, 3), (1989, 3), (-1989, 3), (-2646, 3)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 14857}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Frank Dobson@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Frank Dobson'], ['Votes']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Frank Dobson@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Frank Dobson'], ['Votes']]
+# (t=1.88) i=1, candidate=[{'ANSWER': 29714}]
+  # found 0 program(s)
+# (t=3.58) i=2, candidate=[{'ANSWER': 32512}]
+  # found 0 program(s)
+# (t=5.25) i=3, candidate=[{'ANSWER': 17655}]
+  # found 0 program(s)
+# (t=6.94) i=4, candidate=[{'ANSWER': 35310}]
+  # found 0 program(s)
+# (t=8.62) i=5, candidate=[{'ANSWER': 20453}]
+  # found 0 program(s)
+# (t=10.28) i=6, candidate=[{'ANSWER': 2798}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Adrian Oliver@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Adrian Oliver'], ['Votes']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Adrian Oliver@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Adrian Oliver'], ['Votes']]
+# (t=12.15) i=7, candidate=[{'ANSWER': 5596}]
+  # found 0 program(s)
+# (t=13.83) i=8, candidate=[{'ANSWER': 12059}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Frank Dobson@Str, Adrian Oliver@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Candidate', 'Frank Dobson', 'Adrian Oliver', 'Votes']
+# (t=15.53) i=9, candidate=[{'ANSWER': -12059}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Adrian Oliver@Str, Frank Dobson@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Candidate', 'Adrian Oliver', 'Frank Dobson', 'Votes']
+
+# ========== review report ========== #
+# top-1, score: 2.60, answer: 12059
+  # tprog: Contrast(@param0, -, 0, Frank Dobson@Str, Adrian Oliver@Str, 1)
+# top-2, score: 2.60, answer: -12059
+  # tprog: Contrast(@param0, -, 0, Adrian Oliver@Str, Frank Dobson@Str, 1)
+# top-3, score: 2.37, answer: 14857
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Frank Dobson@Str), ['1'])
+# top-4, score: 2.37, answer: 14857
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Frank Dobson@Str), ['-99', '-2'])
+# top-5, score: 2.37, answer: 2798
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Adrian Oliver@Str), ['1'])
+# top-6, score: 2.37, answer: 2798
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Adrian Oliver@Str), ['-99', '-2'])

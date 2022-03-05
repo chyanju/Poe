@@ -1,0 +1,75 @@
+# parsed arguments: Namespace(benchmark='Q025e1', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'40221893', 'funds', 'jordan', 'total', 'regional', 'turkey', 'egypt', 'color', 'to', '15804557', '37812334', '1700000', '28029721', 'country', '22094911', 'go', 'iraq', 'lebanon', 'blue'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+    Country  Total funds go to color
+0    Jordan           40221893  blue
+1   Lebanon           37812334  blue
+2  Regional           28029721  blue
+3    Turkey           22094911  blue
+4      Iraq           15804557  blue
+5     Egypt            1700000  blue
+# query is: Which country gets the most money?
+# expected output type:[dtype('O')]
+# expected output is:
+   ANSWER
+0  Jordan
+# inferred DSL terminals:
+  # ConstVal: ['Country@Str', '<NULL>']
+     # cmap: [('country', 'Country')]
+  # AggrFunc: ['max', '<NULL>']
+     # amap: [('most', 'max')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('most', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Jordan'}]
+  # found 10 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'max', 'Total funds go to'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'max', 'Total funds go to'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Total funds go to'], 'max', 'Total funds go to'], 'eqmax', 'Total funds go to'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Total funds go to'], 'max', 'Total funds go to'], 'eqmax', 'Total funds go to'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Total funds go to'], 'max', 'Total funds go to'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Total funds go to'], 'max', 'Total funds go to'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'max', 'Total funds go to'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'max', 'Total funds go to'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'Total funds go to'], ['Country']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'Total funds go to'], ['Country']]
+
+# ========== review report ========== #
+# top-1, score: 1.50, answer: ['Jordan']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+# top-2, score: 1.50, answer: ['Jordan']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+# top-3, score: 1.43, answer: ['Jordan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+# top-4, score: 1.43, answer: ['Jordan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+# top-5, score: 1.42, answer: ['Jordan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+# top-6, score: 1.42, answer: ['Jordan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+# top-7, score: 1.42, answer: ['Jordan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+# top-8, score: 1.42, answer: ['Jordan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+# top-9, score: 1.42, answer: ['Jordan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+# top-10, score: 1.42, answer: ['Jordan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])

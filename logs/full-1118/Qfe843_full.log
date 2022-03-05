@@ -1,0 +1,106 @@
+# parsed arguments: Namespace(benchmark='Qfe843', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'32', 'rep.', 'worsen', '9', '43', '25', 'country', 'opinion', 'same', '22', '34', '35', 'poland', '52', 'u.s.', 'japan', 'improve', '23', '49', 'russia', 'italy', '33', '60', '83', '45', 'jordan', '20', '75', 'percentage', '10', 'blue', '16', 'mexico', '81', 'red', 'egypt', 'france', 'orange', '24', '44', 'pakistan', '29', 'greece', '13', 'color', '47', 'brazil', 'lebanon', '28', 'remain', '5', '12', 'tunisia', 'turkey', '37', 'spain', '26', '27', 'germany', 'india', '15', '50', '40', '18', '84', 'china', 'britain', '2', 'czech', '51', '31'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       Country          opinion  percentage   color
+0       Brazil          Improve          84    blue
+1       Brazil  Remain the same          12  orange
+2       Brazil           Worsen           5     red
+3        China          Improve          83    blue
+4        China  Remain the same           9  orange
+..         ...              ...         ...     ...
+58  Czech Rep.  Remain the same          27  orange
+59  Czech Rep.           Worsen          60     red
+60      Greece          Improve           9    blue
+61      Greece  Remain the same          10  orange
+62      Greece           Worsen          81     red
+
+[63 rows x 4 columns]
+# query is: What is the average percentage of responses for "remaining the same" for japan, China, and the U.S.?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      28
+# inferred DSL terminals:
+  # ConstVal: ['Japan@Str', 'percentage@Str', 'China@Str', 'Remain the same@Str', 'U.S.@Str', '<NULL>']
+     # cmap: [('remaining', 'Remain the same'), ('u.s.', 'U.S.'), ('china', 'China'), ('japan', 'Japan'), ('same', 'Remain the same'), ('percentage', 'percentage')]
+  # AggrFunc: ['mean', '<NULL>']
+     # amap: [('average', 'mean')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 9.0}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, China@Str), ==, 1, Remain the same@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'China'], '==', 'opinion', 'Remain the same'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Remain the same@Str), ==, 0, China@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'opinion', 'Remain the same'], '==', 'Country', 'China'], ['percentage']]
+# (t=6.73) i=1, candidate=[{'ANSWER': 27.0}]
+  # found 0 program(s)
+# (t=13.49) i=2, candidate=[{'ANSWER': 2.0}]
+  # found 0 program(s)
+# (t=20.17) i=3, candidate=[{'ANSWER': 12.0}]
+  # found 0 program(s)
+# (t=26.88) i=4, candidate=[{'ANSWER': 83.0}]
+  # found 0 program(s)
+# (t=33.56) i=5, candidate=[{'ANSWER': 37.0}]
+  # found 0 program(s)
+# (t=40.22) i=6, candidate=[{'ANSWER': 22.0}]
+  # found 0 program(s)
+# (t=46.90) i=7, candidate=[{'ANSWER': 44.0}]
+  # found 0 program(s)
+# (t=53.90) i=8, candidate=[{'ANSWER': 16.0}]
+  # found 0 program(s)
+# (t=60.67) i=9, candidate=[{'ANSWER': 20.0}]
+  # found 0 program(s)
+# (t=67.43) i=10, candidate=[{'ANSWER': 5.0}]
+  # found 0 program(s)
+# (t=74.27) i=11, candidate=[{'ANSWER': 35.0}]
+  # found 0 program(s)
+# (t=81.00) i=12, candidate=[{'ANSWER': 26.0}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, U.S.@Str), ==, 1, Remain the same@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'U.S.'], '==', 'opinion', 'Remain the same'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Remain the same@Str), ==, 0, U.S.@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'opinion', 'Remain the same'], '==', 'Country', 'U.S.'], ['percentage']]
+# (t=87.68) i=13, candidate=[{'ANSWER': 32.0}]
+  # found 0 program(s)
+# (t=94.39) i=14, candidate=[{'ANSWER': 29.0}]
+  # found 0 program(s)
+# (t=101.14) i=15, candidate=[{'ANSWER': 52.0}]
+  # found 0 program(s)
+# (t=107.91) i=16, candidate=[{'ANSWER': 40.0}]
+  # found 0 program(s)
+# (t=114.64) i=17, candidate=[{'ANSWER': 75.0}]
+  # found 0 program(s)
+# (t=121.33) i=18, candidate=[{'ANSWER': 13.0}]
+  # found 0 program(s)
+# (t=127.96) i=19, candidate=[{'ANSWER': 33.0}]
+  # found 0 program(s)
+# (t=134.61) i=20, candidate=[{'ANSWER': 10.0}]
+  # found 0 program(s)
+# (t=141.30) i=21, candidate=[{'ANSWER': 18.0}]
+  # found 0 program(s)
+# (t=148.33) i=22, candidate=[{'ANSWER': 60.0}]
+  # found 0 program(s)
+# (t=155.01) i=23, candidate=[{'ANSWER': 47.0}]
+  # found 0 program(s)
+# (t=161.79) i=24, candidate=[{'ANSWER': 25.0}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.33, answer: 9.0
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, China@Str), ==, 1, Remain the same@Str), ['2'])
+# top-2, score: 2.33, answer: 9.0
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Remain the same@Str), ==, 0, China@Str), ['2'])
+# top-3, score: 2.33, answer: 26.0
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, U.S.@Str), ==, 1, Remain the same@Str), ['2'])
+# top-4, score: 2.33, answer: 26.0
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Remain the same@Str), ==, 0, U.S.@Str), ['2'])

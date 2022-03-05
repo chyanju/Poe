@@ -1,0 +1,134 @@
+# parsed arguments: Namespace(benchmark='Q194bf', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'75.43', 'over', '84.86', '85.49', '83.92', '80.77', 'and', '55-59', '72.6', '70-74', '50-54', 'women', 'red', 'group', '82.66', '67.89', '75.75', '84.23', 'aged', 'orange', 'color', 'age', '16', '73.55', '80', '70.09', 'gender', '75-79', '83.6', 'percentage', '65-69', '68.83', 'blue', '75.12', 'men', '65.69', '78.57', '60-64', '79.52', '63.8', 'all', '72.92'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+               Age group gender  Percentage   color
+0                  60-64  Women       75.75     red
+1                  60-64    All       75.43    blue
+2                  60-64    Men       75.12  orange
+3   All aged 16 and over  Women       67.89     red
+4   All aged 16 and over    All       65.69    blue
+5   All aged 16 and over    Men       63.80  orange
+6                  70-74  Women       85.49     red
+7                  70-74    All       83.92    blue
+8                  70-74    Men       82.66  orange
+9                  75-79  Women       84.86     red
+10                 75-79    All       84.23    blue
+11                 75-79    Men       83.60  orange
+12                 55-59  Women       73.55     red
+13                 55-59    All       72.92    blue
+14                 55-59    Men       72.60  orange
+15           80 and over  Women       84.23     red
+16           80 and over    All       83.92    blue
+17           80 and over    Men       83.92  orange
+18                 50-54  Women       70.09     red
+19                 50-54    All       68.83    blue
+20                 50-54    Men       67.89  orange
+21                 65-69  Women       80.77     red
+22                 65-69    All       79.52    blue
+23                 65-69    Men       78.57  orange
+# query is: Did a higher percentage of women in age group 65-69 or age group 80 and over feel belonging?
+# expected output type:[dtype('O')]
+# expected output is:
+        ANSWER
+0  80 and over
+# inferred DSL terminals:
+  # ConstVal: ['80 and over@Str', 'Women@Str', 'Age group@Str', 'Percentage@Str', 'All aged 16 and over@Str', '65-69@Str', '<NULL>']
+     # cmap: [('age', 'Age group'), (80, '80 and over'), (69, '65-69'), ('percentage', 'Percentage'), ('and', '80 and over'), (65, '65-69'), ('over', '80 and over'), ('and', 'All aged 16 and over'), ('over', 'All aged 16 and over'), ('women', 'Women'), ('group', 'Age group')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('higher', '-')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(16.340000000000003, 20), (3.460000000000008, 20), (0.3100000000000023, 20), (0.3100000000000023, 20), (-0.3100000000000023, 20), (-0.3100000000000023, 20), (-3.460000000000008, 20), (-16.340000000000003, 20), (16.03, 16), (16.03, 16)]
+  # [debug] high_values (no dup.): [(16.340000000000003, 20), (3.460000000000008, 20), (0.3100000000000023, 20), (0.3100000000000023, 20), (-0.3100000000000023, 20), (-0.3100000000000023, 20), (-3.460000000000008, 20), (-16.340000000000003, 20), (16.03, 16), (16.03, 16)]
+  # [debug] filtered low_values (no dup.): [(16.340000000000003, 5), (15.400000000000006, 5), (11.63000000000001, 5), (11.310000000000002, 5), (9.11, 5), (8.799999999999997, 5), (1.5700000000000074, 5), (0.6300000000000097, 5), (0.3100000000000023, 5), (0.0, 5)]
+  # [debug] fallback (comparison) answers are added
+# ====> fallback strategy (selection) is triggered
+  # [debug] fallback (selection) answers: ['80 and over', 'Women', 'Age group', 'Percentage', 'All aged 16 and over', '65-69']
+  # [debug] fallback (selection) answers (no dup.): ['Women', 'Age group', 'Percentage', '65-69']
+  # [debug] 4 fallback (selection) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': '50-54'}]
+  # found 0 program(s)
+# (t=17.27) i=1, candidate=[{'ANSWER': '60-64'}]
+  # found 0 program(s)
+# (t=34.37) i=2, candidate=[{'ANSWER': '55-59'}]
+  # found 0 program(s)
+# (t=51.49) i=3, candidate=[{'ANSWER': '75-79'}]
+  # found 0 program(s)
+# (t=68.57) i=4, candidate=[{'ANSWER': 'All aged 16 and over'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, All aged 16 and over@Str), ==, 1, Women@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', 'All aged 16 and over'], '==', 'gender', 'Women'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Women@Str), ==, 0, All aged 16 and over@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'gender', 'Women'], '==', 'Age group', 'All aged 16 and over'], ['Age group']]
+# (t=85.57) i=5, candidate=[{'ANSWER': '70-74'}]
+  # found 0 program(s)
+# (t=102.61) i=6, candidate=[{'ANSWER': '80 and over'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 80 and over@Str), ==, 1, Women@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', '80 and over'], '==', 'gender', 'Women'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Women@Str), ==, 0, 80 and over@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'gender', 'Women'], '==', 'Age group', '80 and over'], ['Age group']]
+# (t=119.57) i=7, candidate=[{'ANSWER': 16.340000000000003}]
+  # found 1 program(s)
+    # Contrast(SelectRow1(@param0, ==, 1, Women@Str), -, 0, 80 and over@Str, All aged 16 and over@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'gender', 'Women'], '-', 'Age group', '80 and over', 'All aged 16 and over', 'Percentage']
+# (t=134.83) i=8, candidate=[{'ANSWER': 3.460000000000008}]
+  # found 1 program(s)
+    # Contrast(SelectRow1(@param0, ==, 1, Women@Str), -, 0, 80 and over@Str, 65-69@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'gender', 'Women'], '-', 'Age group', '80 and over', '65-69', 'Percentage']
+# (t=149.89) i=9, candidate=[{'ANSWER': 0.3100000000000023}]
+  # found 0 program(s)
+# (t=164.90) i=10, candidate=[{'ANSWER': 0.3100000000000023}]
+  # found 0 program(s)
+# (t=180.05) i=11, candidate=[{'ANSWER': -0.3100000000000023}]
+  # found 0 program(s)
+# (t=195.41) i=12, candidate=[{'ANSWER': -0.3100000000000023}]
+  # found 0 program(s)
+# (t=210.74) i=13, candidate=[{'ANSWER': -3.460000000000008}]
+  # found 1 program(s)
+    # Contrast(SelectRow1(@param0, ==, 1, Women@Str), -, 0, 65-69@Str, 80 and over@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'gender', 'Women'], '-', 'Age group', '65-69', '80 and over', 'Percentage']
+# (t=226.09) i=14, candidate=[{'ANSWER': -16.340000000000003}]
+  # found 1 program(s)
+    # Contrast(SelectRow1(@param0, ==, 1, Women@Str), -, 0, All aged 16 and over@Str, 80 and over@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'gender', 'Women'], '-', 'Age group', 'All aged 16 and over', '80 and over', 'Percentage']
+# (t=241.38) i=15, candidate=[{'ANSWER': 16.03}]
+  # found 0 program(s)
+# (t=256.60) i=16, candidate=[{'ANSWER': 16.03}]
+  # found 0 program(s)
+# (t=271.88) i=17, candidate=[{'ANSWER': 16.340000000000003}]
+  # found 1 program(s)
+    # Contrast(SelectRow1(@param0, ==, 1, Women@Str), -, 0, 80 and over@Str, All aged 16 and over@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'gender', 'Women'], '-', 'Age group', '80 and over', 'All aged 16 and over', 'Percentage']
+# (t=287.10) i=18, candidate=[{'ANSWER': 15.400000000000006}]
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 2.41, answer: ['80 and over']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 80 and over@Str), ==, 1, Women@Str), ['0'])
+# top-2, score: 2.41, answer: ['80 and over']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Women@Str), ==, 0, 80 and over@Str), ['0'])
+# top-3, score: 2.35, answer: ['All aged 16 and over']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, All aged 16 and over@Str), ==, 1, Women@Str), ['0'])
+# top-4, score: 2.35, answer: ['All aged 16 and over']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Women@Str), ==, 0, All aged 16 and over@Str), ['0'])
+# top-5, score: 2.12, answer: [3.460000000000008]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Women@Str), -, 0, 80 and over@Str, 65-69@Str, 2)
+# top-6, score: 2.12, answer: [-3.460000000000008]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Women@Str), -, 0, 65-69@Str, 80 and over@Str, 2)
+# top-7, score: 2.01, answer: [16.340000000000003]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Women@Str), -, 0, 80 and over@Str, All aged 16 and over@Str, 2)
+# top-8, score: 2.01, answer: [-16.340000000000003]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Women@Str), -, 0, All aged 16 and over@Str, 80 and over@Str, 2)
+# top-9, score: 2.01, answer: [16.340000000000003]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Women@Str), -, 0, 80 and over@Str, All aged 16 and over@Str, 2)

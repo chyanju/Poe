@@ -1,0 +1,45 @@
+# parsed arguments: Namespace(benchmark='Qfe6d9', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'fraser', '6482', '14857', 'rainbow', 'weiss', '2798', 'frank', 'james', 'margot', 'jill', '10070', 'votes', 'blue', 'oliver', '152', 'george', 'candidate', 'dobson', 'color', 'majority', '4787', 'adrian'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+              Candidate  Votes color
+0          Frank Dobson  14857  blue
+1           Jill Fraser  10070  blue
+2          Margot James   6482  blue
+3         Adrian Oliver   2798  blue
+4  Rainbow George Weiss    152  blue
+5              Majority   4787  blue
+# query is: How many votes did Jill Fraser receive?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0   10070
+# inferred DSL terminals:
+  # ConstVal: ['Jill Fraser@Str', 'Votes@Str', '<NULL>']
+     # cmap: [('jill', 'Jill Fraser'), ('votes', 'Votes'), ('fraser', 'Jill Fraser')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 10070}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Jill Fraser'], ['Votes']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Jill Fraser'], ['Votes']]
+# (t=0.70) i=1, candidate=[{'ANSWER': 20140}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.57, answer: 10070
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ['1'])
+# top-2, score: 2.57, answer: 10070
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ['-99', '-2'])

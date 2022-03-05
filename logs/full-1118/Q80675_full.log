@@ -1,0 +1,829 @@
+# parsed arguments: Namespace(benchmark='Q80675', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'683886', 'skåne', '608036', 'capital', 'remainder', 'danish', '305982', '1823109', 'north-east', 'population', 'blue', '162829', 'region', 'west', 'south', 'color'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                  Region  Population color
+0  Danish Capital Region     1823109  blue
+1              Remainder      608036  blue
+2            South Skåne      683886  blue
+3             West Skåne      305982  blue
+4       North-East Skåne      162829  blue
+# query is: What is the difference in numbers between the most populated and least populated regions?
+# expected output type:[dtype('int64')]
+# expected output is:
+    ANSWER
+0  1660280
+# inferred DSL terminals:
+  # ConstVal: ['Danish Capital Region@Str', 'Region@Str', '<NULL>']
+     # cmap: [('regions', 'Danish Capital Region'), ('regions', 'Region')]
+  # AggrFunc: ['max', 'min', '<NULL>']
+     # amap: [('least', 'min'), ('most', 'max')]
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', 'eqmin', '<NULL>']
+     # imap: [('most', 'eqmax'), ('least', 'eqmin')]
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: []
+  # [debug] high_values (no dup.): [(1660280, 2), (1517127, 2), (1215073, 2), (1139223, 2), (-1139223, 2), (-1215073, 2), (-1517127, 2), (-1660280, 2), (521057, 1), (445207, 1)]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=0.72) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# ====> fallback strategy (retrieval) is triggered because no explanation is found so far
+# ====> retrieval_values: [162829, 1823109, 305982, 608036, 683886, 'Danish Capital Region', 'North-East Skåne', 'Population', 'Region', 'Remainder', 'South Skåne', 'West Skåne', 'blue', 'color']
+# (t=1.42) fallback i=0, candidate=[{'ANSWER': 162829}]
+  # found 59 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region'], 'max', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region'], 'max', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region'], 'min', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region'], 'min', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'max', 'Population'], 'eqmin', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'max', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'max', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'max', 'Population'], 'eqmin', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'max', 'Population'], 'eqmin', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'max', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'max', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'max', 'Population'], 'eqmin', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'min', 'Population'], 'eqmin', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'min', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'min', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'min', 'Population'], 'eqmin', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'min', 'Population'], 'eqmin', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'min', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'min', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'min', 'Population'], 'eqmin', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmin', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmin', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmin', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmin', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmin', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmin', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmin', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmin', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'max', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'max', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'min', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'min', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmin', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmin', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmin', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmin', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmin', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmin', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmin', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmin', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Population'], ['Population']]
+    # Summarize(@param0, min, 1)
+      --> ['Summarize', 'input@0', 'min', 'Population']
+# (t=3.50) fallback i=1, candidate=[{'ANSWER': 1823109}]
+  # found 63 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region'], 'max', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region'], 'max', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region'], 'min', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region'], 'min', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'max', 'Population'], 'eqmax', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'max', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'max', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'max', 'Population'], 'eqmax', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'max', 'Population'], 'eqmax', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'max', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'max', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'max', 'Population'], 'eqmax', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'min', 'Population'], 'eqmax', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'min', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'min', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'min', 'Population'], 'eqmax', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'min', 'Population'], 'eqmax', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'min', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'min', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'min', 'Population'], 'eqmax', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmax', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmax', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmax', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmax', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmax', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmax', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmax', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmax', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'max', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'max', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'min', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'min', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmax', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmax', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmax', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmax', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmax', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmax', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmax', 'COL0'], ['Population']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmax', 'COL0'], ['Population']]
+    # Summarize(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), max, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'Danish Capital Region'], 'max', 'Population']
+    # Summarize(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), min, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'Danish Capital Region'], 'min', 'Population']
+    # SelectCol(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Region', 'Danish Capital Region'], ['Population']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Region', 'Danish Capital Region'], ['Population']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'Population'], ['Population']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'Population'], ['Population']]
+    # Summarize(@param0, max, 1)
+      --> ['Summarize', 'input@0', 'max', 'Population']
+# (t=5.57) fallback i=2, candidate=[{'ANSWER': 305982}]
+  # found 0 program(s)
+# (t=7.46) fallback i=3, candidate=[{'ANSWER': 608036}]
+  # found 0 program(s)
+# (t=9.35) fallback i=4, candidate=[{'ANSWER': 683886}]
+  # found 0 program(s)
+# (t=11.24) fallback i=5, candidate=[{'ANSWER': 'Danish Capital Region'}]
+  # found 20 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region'], 'max', 'Population'], 'eqmax', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region'], 'max', 'Population'], 'eqmax', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region'], 'min', 'Population'], 'eqmax', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region'], 'min', 'Population'], 'eqmax', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmax', 'Population'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmax', 'Population'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmax', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmax', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmax', 'Population'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmax', 'Population'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmax', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmax', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'max', 'Population'], 'eqmax', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'max', 'Population'], 'eqmax', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'min', 'Population'], 'eqmax', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'min', 'Population'], 'eqmax', 'COL0'], ['Region']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Region', 'Danish Capital Region'], ['Region']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Region', 'Danish Capital Region'], ['Region']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'Population'], ['Region']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'Population'], ['Region']]
+# (t=13.18) fallback i=6, candidate=[{'ANSWER': 'North-East Skåne'}]
+  # found 18 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region'], 'max', 'Population'], 'eqmin', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region'], 'max', 'Population'], 'eqmin', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region'], 'min', 'Population'], 'eqmin', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region'], 'min', 'Population'], 'eqmin', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmin', 'Population'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmin', 'Population'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmin', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'max', 'Population'], 'eqmin', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmin', 'Population'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmin', 'Population'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmin', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'min', 'Population'], 'eqmin', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'max', 'Population'], 'eqmin', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'max', 'Population'], 'eqmin', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'min', 'Population'], 'eqmin', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'min', 'Population'], 'eqmin', 'COL0'], ['Region']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Population'], ['Region']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Population'], ['Region']]
+# (t=15.12) fallback i=7, candidate=[{'ANSWER': 'Population'}]
+  # found 0 program(s)
+# (t=15.81) fallback i=8, candidate=[{'ANSWER': 'Region'}]
+  # found 0 program(s)
+# (t=16.50) fallback i=9, candidate=[{'ANSWER': 'Remainder'}]
+  # found 0 program(s)
+# (t=18.62) fallback i=10, candidate=[{'ANSWER': 'South Skåne'}]
+  # found 0 program(s)
+# (t=20.51) fallback i=11, candidate=[{'ANSWER': 'West Skåne'}]
+  # found 0 program(s)
+# (t=22.40) fallback i=12, candidate=[{'ANSWER': 'blue'}]
+  # found 30 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'max', 'Population'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'max', 'Population'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'max', 'Population'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'max', 'Population'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'min', 'Population'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'min', 'Population'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'min', 'Population'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'color'], 'min', 'Population'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmax', 'Population'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmax', 'Population'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmin', 'Population'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmin', 'Population'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'max', 'Population'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmax', 'Population'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmax', 'Population'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmin', 'Population'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmin', 'Population'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'min', 'Population'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Region', 'Danish Capital Region'], ['color']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Region', 'Danish Capital Region'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'Population'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'Population'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Population'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Population'], ['color']]
+# (t=24.37) fallback i=13, candidate=[{'ANSWER': 'color'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.32, answer: 162829
+  # tprog: Summarize(@param0, min, 1)
+# top-2, score: 1.32, answer: 1823109
+  # tprog: Summarize(@param0, max, 1)
+# top-3, score: 1.31, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['1'])
+# top-4, score: 1.31, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['-99'])
+# top-5, score: 1.31, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['1'])
+# top-6, score: 1.31, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['-99'])
+# top-7, score: 1.31, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['0'])
+# top-8, score: 1.31, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['-1'])
+# top-9, score: 1.31, answer: North-East Skåne
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['0'])
+# top-10, score: 1.31, answer: North-East Skåne
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['-1'])
+# top-11, score: 1.31, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+# top-12, score: 1.31, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+# top-13, score: 1.31, answer: North-East Skåne
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+# top-14, score: 1.31, answer: North-East Skåne
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+# top-15, score: 1.31, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['1'])
+# top-16, score: 1.31, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['2'])
+# top-17, score: 1.31, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-99', '-1'])
+# top-18, score: 1.31, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-99', '-2'])
+# top-19, score: 1.31, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['1'])
+# top-20, score: 1.31, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['2'])
+# top-21, score: 1.31, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-99', '-1'])
+# top-22, score: 1.31, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-99', '-2'])
+# top-23, score: 1.31, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['2'])
+# top-24, score: 1.31, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-99', '-1'])
+# top-25, score: 1.31, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['1'])
+# top-26, score: 1.31, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['2'])
+# top-27, score: 1.31, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-99', '-1'])
+# top-28, score: 1.31, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-99', '-2'])
+# top-29, score: 1.31, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['1'])
+# top-30, score: 1.31, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['2'])
+# top-31, score: 1.31, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-99', '-1'])
+# top-32, score: 1.31, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-99', '-2'])
+# top-33, score: 1.31, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['2'])
+# top-34, score: 1.31, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-99', '-1'])
+# top-35, score: 1.31, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['0'])
+# top-36, score: 1.31, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-1', '-2'])
+# top-37, score: 1.31, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['0'])
+# top-38, score: 1.31, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-1', '-2'])
+# top-39, score: 1.31, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['0'])
+# top-40, score: 1.31, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-1', '-2'])
+# top-41, score: 1.31, answer: North-East Skåne
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['0'])
+# top-42, score: 1.31, answer: North-East Skåne
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-1', '-2'])
+# top-43, score: 1.31, answer: North-East Skåne
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['0'])
+# top-44, score: 1.31, answer: North-East Skåne
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-1', '-2'])
+# top-45, score: 1.31, answer: North-East Skåne
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['0'])
+# top-46, score: 1.31, answer: North-East Skåne
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-1', '-2'])
+# top-47, score: 1.31, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['1'])
+# top-48, score: 1.31, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-99', '-2'])
+# top-49, score: 1.31, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['1'])
+# top-50, score: 1.31, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-99', '-2'])
+# top-51, score: 1.27, answer: 1823109
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), max, 1)
+# top-52, score: 1.27, answer: 1823109
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), min, 1)
+# top-53, score: 1.24, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['1'])
+# top-54, score: 1.24, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-99'])
+# top-55, score: 1.24, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['0'])
+# top-56, score: 1.24, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['1'])
+# top-57, score: 1.24, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['-99'])
+# top-58, score: 1.24, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['-1'])
+# top-59, score: 1.24, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['0'])
+# top-60, score: 1.24, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['1'])
+# top-61, score: 1.24, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['-99'])
+# top-62, score: 1.24, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['-1'])
+# top-63, score: 1.24, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['1'])
+# top-64, score: 1.24, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-99'])
+# top-65, score: 1.24, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['0'])
+# top-66, score: 1.24, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['1'])
+# top-67, score: 1.24, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['-99'])
+# top-68, score: 1.24, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['-1'])
+# top-69, score: 1.24, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['0'])
+# top-70, score: 1.24, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['1'])
+# top-71, score: 1.24, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['-99'])
+# top-72, score: 1.24, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['-1'])
+# top-73, score: 1.24, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+# top-74, score: 1.24, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+# top-75, score: 1.24, answer: North-East Skåne
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+# top-76, score: 1.24, answer: North-East Skåne
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+# top-77, score: 1.24, answer: 162829
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['1'])
+# top-78, score: 1.24, answer: 162829
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-99', '-2'])
+# top-79, score: 1.24, answer: 1823109
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['1'])
+# top-80, score: 1.24, answer: 1823109
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['-99', '-2'])
+# top-81, score: 1.24, answer: blue
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['2'])
+# top-82, score: 1.24, answer: blue
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['-99', '-1'])
+# top-83, score: 1.24, answer: blue
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['2'])
+# top-84, score: 1.24, answer: blue
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-99', '-1'])
+# top-85, score: 1.23, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['1'])
+# top-86, score: 1.23, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['2'])
+# top-87, score: 1.23, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-1'])
+# top-88, score: 1.23, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-2'])
+# top-89, score: 1.23, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['1'])
+# top-90, score: 1.23, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['2'])
+# top-91, score: 1.23, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-1'])
+# top-92, score: 1.23, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-2'])
+# top-93, score: 1.23, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['2'])
+# top-94, score: 1.23, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+# top-95, score: 1.23, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['0'])
+# top-96, score: 1.23, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['2'])
+# top-97, score: 1.23, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['-99', '-1'])
+# top-98, score: 1.23, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['-1', '-2'])
+# top-99, score: 1.23, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['0'])
+# top-100, score: 1.23, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['2'])
+# top-101, score: 1.23, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['-99', '-1'])
+# top-102, score: 1.23, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['-1', '-2'])
+# top-103, score: 1.23, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['1'])
+# top-104, score: 1.23, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['2'])
+# top-105, score: 1.23, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-99', '-1'])
+# top-106, score: 1.23, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-99', '-2'])
+# top-107, score: 1.23, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['1'])
+# top-108, score: 1.23, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['2'])
+# top-109, score: 1.23, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-99', '-1'])
+# top-110, score: 1.23, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-99', '-2'])
+# top-111, score: 1.23, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['2'])
+# top-112, score: 1.23, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-99', '-1'])
+# top-113, score: 1.23, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['0'])
+# top-114, score: 1.23, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['2'])
+# top-115, score: 1.23, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['-99', '-1'])
+# top-116, score: 1.23, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['-1', '-2'])
+# top-117, score: 1.23, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['0'])
+# top-118, score: 1.23, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['2'])
+# top-119, score: 1.23, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['-99', '-1'])
+# top-120, score: 1.23, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['-1', '-2'])
+# top-121, score: 1.23, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+# top-122, score: 1.23, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+# top-123, score: 1.23, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+# top-124, score: 1.23, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+# top-125, score: 1.23, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+# top-126, score: 1.23, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+# top-127, score: 1.23, answer: North-East Skåne
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+# top-128, score: 1.23, answer: North-East Skåne
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+# top-129, score: 1.23, answer: North-East Skåne
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+# top-130, score: 1.23, answer: North-East Skåne
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-131, score: 1.23, answer: North-East Skåne
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+# top-132, score: 1.23, answer: North-East Skåne
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-133, score: 1.23, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['1'])
+# top-134, score: 1.23, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-99', '-2'])
+# top-135, score: 1.23, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['1'])
+# top-136, score: 1.23, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-99', '-2'])
+# top-137, score: 1.23, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['1'])
+# top-138, score: 1.23, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['-99', '-2'])
+# top-139, score: 1.23, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['1'])
+# top-140, score: 1.23, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['-99', '-2'])
+# top-141, score: 1.23, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['1'])
+# top-142, score: 1.23, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['-99', '-2'])
+# top-143, score: 1.23, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['1'])
+# top-144, score: 1.23, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['-99', '-2'])
+# top-145, score: 1.21, answer: 1823109
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), ['1'])
+# top-146, score: 1.21, answer: 1823109
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), ['-99', '-2'])
+# top-147, score: 1.21, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), ['0'])
+# top-148, score: 1.21, answer: Danish Capital Region
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), ['-1', '-2'])
+# top-149, score: 1.21, answer: blue
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), ['2'])
+# top-150, score: 1.21, answer: blue
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), ['-99', '-1'])
+# top-151, score: 1.17, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['0'])
+# top-152, score: 1.17, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['1'])
+# top-153, score: 1.17, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-99'])
+# top-154, score: 1.17, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-1'])
+# top-155, score: 1.17, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['0'])
+# top-156, score: 1.17, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['1'])
+# top-157, score: 1.17, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-99'])
+# top-158, score: 1.17, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-1'])
+# top-159, score: 1.17, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['0'])
+# top-160, score: 1.17, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['1'])
+# top-161, score: 1.17, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-99'])
+# top-162, score: 1.17, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-1'])
+# top-163, score: 1.17, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['0'])
+# top-164, score: 1.17, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['1'])
+# top-165, score: 1.17, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-99'])
+# top-166, score: 1.17, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-1'])
+# top-167, score: 1.16, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['0'])
+# top-168, score: 1.16, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['2'])
+# top-169, score: 1.16, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-99', '-1'])
+# top-170, score: 1.16, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-1', '-2'])
+# top-171, score: 1.16, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['0'])
+# top-172, score: 1.16, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['2'])
+# top-173, score: 1.16, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+# top-174, score: 1.16, answer: 162829
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-175, score: 1.16, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['0'])
+# top-176, score: 1.16, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['2'])
+# top-177, score: 1.16, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-1'])
+# top-178, score: 1.16, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-1', '-2'])
+# top-179, score: 1.16, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['0'])
+# top-180, score: 1.16, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['2'])
+# top-181, score: 1.16, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-1'])
+# top-182, score: 1.16, answer: 1823109
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+# top-183, score: 1.16, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['1'])
+# top-184, score: 1.16, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-2'])
+# top-185, score: 1.16, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['1'])
+# top-186, score: 1.16, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-2'])
+# top-187, score: 1.16, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['1'])
+# top-188, score: 1.16, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-99', '-2'])
+# top-189, score: 1.16, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['1'])
+# top-190, score: 1.16, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-99', '-2'])

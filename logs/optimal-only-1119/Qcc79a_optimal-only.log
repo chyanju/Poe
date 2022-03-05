@@ -1,0 +1,123 @@
+# parsed arguments: Namespace(benchmark='Qcc79a', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'24', '60+', '2', '5-11', '1', '0-4', 'percentage', '7', 'color', 'group', '20', '12-17', '18-59', '10', '9', 'gender', 'male', 'female', 'blue', 'age', 'orange'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+  Age group  Gender  Percentage   color
+0       0-4    Male           9  orange
+1       0-4  Female           9    blue
+2     12-17    Male           7  orange
+3     12-17  Female           7    blue
+4     18-59  Female          24    blue
+5     18-59    Male          20  orange
+6       60+  Female           2    blue
+7       60+    Male           1  orange
+8      5-11    Male          10  orange
+9      5-11  Female          10    blue
+# query is: Are there more male or female syrian refugees between the ages of 18-59?
+# expected output type:[dtype('O')]
+# expected output is:
+   ANSWER
+0  Female
+# inferred DSL terminals:
+  # ConstVal: ['Age group@Str', '18-59@Str', 'Female@Str', 'Male@Str', '<NULL>']
+     # cmap: [('ages', 'Age group'), (59, '18-59'), (18, '18-59'), ('female', 'Female'), ('male', 'Male')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>=', '>', '==', '<NULL>']
+     # bmap: [('more', '>='), ('more', '>'), (None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(4, 16), (-4, 16), (23, 8), (22, 8), (19, 8), (18, 8), (17, 8), (17, 8), (15, 8), (15, 8)]
+  # [debug] high_values (no dup.): [(4, 16), (-4, 16), (23, 8), (22, 8), (19, 8), (18, 8), (17, 8), (17, 8), (15, 8), (15, 8)]
+  # [debug] filtered low_values (no dup.): []
+# ====> fallback strategy (selection) is triggered
+  # [debug] fallback (selection) answers: ['Age group', '18-59', 'Female', 'Male']
+  # [debug] fallback (selection) answers (no dup.): ['Age group', '18-59']
+  # [debug] 2 fallback (selection) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Female'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 18-59@Str), ==, 1, Female@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', '18-59'], '==', 'Gender', 'Female'], ['Gender']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Female@Str), ==, 0, 18-59@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Gender', 'Female'], '==', 'Age group', '18-59'], ['Gender']]
+# (t=10.58) i=1, candidate=[{'ANSWER': 'Female'}, {'ANSWER': 'Male'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 18-59@Str), ==, 0, 18-59@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', '18-59'], '==', 'Age group', '18-59'], ['Gender']]
+    # SelectCol(SelectRow1(@param0, ==, 0, 18-59@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Age group', '18-59'], ['Gender']]
+# (t=21.39) i=2, candidate=[{'ANSWER': 'Male'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 18-59@Str), ==, 1, Male@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', '18-59'], '==', 'Gender', 'Male'], ['Gender']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Male@Str), ==, 0, 18-59@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Gender', 'Male'], '==', 'Age group', '18-59'], ['Gender']]
+# (t=32.16) i=3, candidate=[{'ANSWER': 4}]
+  # found 1 program(s)
+    # Contrast(SelectRow1(@param0, ==, 0, 18-59@Str), -, 1, Female@Str, Male@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Age group', '18-59'], '-', 'Gender', 'Female', 'Male', 'Percentage']
+# (t=42.56) i=4, candidate=[{'ANSWER': -4}]
+  # found 1 program(s)
+    # Contrast(SelectRow1(@param0, ==, 0, 18-59@Str), -, 1, Male@Str, Female@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Age group', '18-59'], '-', 'Gender', 'Male', 'Female', 'Percentage']
+# (t=53.40) i=5, candidate=[{'ANSWER': 23}]
+  # found 0 program(s)
+# (t=64.23) i=6, candidate=[{'ANSWER': 22}]
+  # found 0 program(s)
+# (t=74.71) i=7, candidate=[{'ANSWER': 19}]
+  # found 0 program(s)
+# (t=85.62) i=8, candidate=[{'ANSWER': 18}]
+  # found 0 program(s)
+# (t=96.41) i=9, candidate=[{'ANSWER': 17}]
+  # found 0 program(s)
+# (t=107.18) i=10, candidate=[{'ANSWER': 17}]
+  # found 0 program(s)
+# (t=117.61) i=11, candidate=[{'ANSWER': 15}]
+  # found 0 program(s)
+# (t=128.52) i=12, candidate=[{'ANSWER': 15}]
+  # found 0 program(s)
+# (t=139.25) i=13, candidate=[{'ANSWER': 'Age group'}]
+  # found 0 program(s)
+# (t=149.72) i=14, candidate=[{'ANSWER': '18-59'}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 18-59@Str), ==, 1, Female@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', '18-59'], '==', 'Gender', 'Female'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 18-59@Str), ==, 1, Male@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', '18-59'], '==', 'Gender', 'Male'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Female@Str), ==, 0, 18-59@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Gender', 'Female'], '==', 'Age group', '18-59'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Male@Str), ==, 0, 18-59@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Gender', 'Male'], '==', 'Age group', '18-59'], ['Age group']]
+
+# ========== review report ========== #
+# top-1, score: 2.52, answer: [4]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, 18-59@Str), -, 1, Female@Str, Male@Str, 2)
+# top-2, score: 2.52, answer: [-4]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, 18-59@Str), -, 1, Male@Str, Female@Str, 2)
+# top-3, score: 2.38, answer: ['Female']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 18-59@Str), ==, 1, Female@Str), ['1'])
+# top-4, score: 2.38, answer: ['Female']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Female@Str), ==, 0, 18-59@Str), ['1'])
+# top-5, score: 2.38, answer: ['Male']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 18-59@Str), ==, 1, Male@Str), ['1'])
+# top-6, score: 2.38, answer: ['Male']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Male@Str), ==, 0, 18-59@Str), ['1'])
+# top-7, score: 2.38, answer: ['18-59']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 18-59@Str), ==, 1, Female@Str), ['0'])
+# top-8, score: 2.38, answer: ['18-59']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 18-59@Str), ==, 1, Male@Str), ['0'])
+# top-9, score: 2.38, answer: ['18-59']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Female@Str), ==, 0, 18-59@Str), ['0'])
+# top-10, score: 2.38, answer: ['18-59']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Male@Str), ==, 0, 18-59@Str), ['0'])
+# top-11, score: 1.36, answer: ['Female', 'Male']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, 18-59@Str), ['1'])
+# top-12, score: 1.31, answer: ['Female', 'Male']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 18-59@Str), ==, 0, 18-59@Str), ['1'])

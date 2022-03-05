@@ -1,0 +1,48 @@
+# parsed arguments: Namespace(benchmark='Q15046', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'neither', 'disagree', 'strongly', 'or', '82', '69', 'agree', 'percentage', 'color', '53', 'blue'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                       agree  percentage color
+0             Strongly agree          82  blue
+1  Neither agree or disagree          69  blue
+2          Strongly disagree          53  blue
+# query is: What do the three percentages on the three bars add up to?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0     204
+# inferred DSL terminals:
+  # ConstVal: ['percentage@Str', '<NULL>']
+     # cmap: [('percentages', 'percentage')]
+  # AggrFunc: ['sum', '<NULL>']
+     # amap: [('add', 'sum')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 82}]
+  # found 0 program(s)
+# (t=0.32) i=1, candidate=[{'ANSWER': 151}]
+  # found 0 program(s)
+# (t=0.63) i=2, candidate=[{'ANSWER': 69}]
+  # found 0 program(s)
+# (t=0.94) i=3, candidate=[{'ANSWER': 204}]
+  # found 1 program(s)
+    # Summarize(@param0, sum, 1)
+      --> ['Summarize', 'input@0', 'sum', 'percentage']
+# (t=1.26) i=4, candidate=[{'ANSWER': 135}]
+  # found 0 program(s)
+# (t=1.57) i=5, candidate=[{'ANSWER': 122}]
+  # found 0 program(s)
+# (t=1.88) i=6, candidate=[{'ANSWER': 53}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.42, answer: [204]
+  # tprog: Summarize(@param0, sum, 1)

@@ -1,0 +1,92 @@
+# parsed arguments: Namespace(benchmark='Qada6c', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'temperature', '-0.21', 'thatcher', 'blue', 'red', 'color', '-3.62', '3.14', '-1.05', 'rainfall', 'administration', '0.76', '11.53', '-1.29', 'brown', 'orange', '1.77', '2.98', '-1.71', 'category', 'major', '-4.18', '-3.95', '2.55', '8.8', 'cameron', 'blair', '7.5', 'percentage', 'sunshine'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+   administration     category  percentage   color
+0           Major  Temperature        2.98     red
+1           Major     Sunshine        2.55  orange
+2           Major     Rainfall       -3.62    blue
+3           Brown  Temperature       -3.95     red
+4           Brown     Sunshine        1.77  orange
+5           Brown     Rainfall       -0.21    blue
+6         Cameron  Temperature       -4.18     red
+7         Cameron     Sunshine       -1.29  orange
+8         Cameron     Rainfall       -1.71    blue
+9           Blair  Temperature        7.50     red
+10          Blair     Sunshine        3.14  orange
+11          Blair     Rainfall        8.80    blue
+12       Thatcher  Temperature        0.76     red
+13       Thatcher     Sunshine       -1.05  orange
+14       Thatcher     Rainfall       11.53    blue
+# query is: Which administration had the lowest percentage of rainfall?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0  Major
+# inferred DSL terminals:
+  # ConstVal: ['Rainfall@Str', 'percentage@Str', 'administration@Str', '<NULL>']
+     # cmap: [('rainfall', 'Rainfall'), ('percentage', 'percentage'), ('administration', 'administration')]
+  # AggrFunc: ['min', '<NULL>']
+     # amap: [('lowest', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('lowest', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Blair'}]
+  # found 0 program(s)
+# (t=4.35) i=1, candidate=[{'ANSWER': 'Brown'}]
+  # found 0 program(s)
+# (t=8.96) i=2, candidate=[{'ANSWER': 'Cameron'}]
+  # found 11 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration'], 'min', 'percentage'], 'eqmin', 'COL0'], ['administration']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration'], 'min', 'percentage'], 'eqmin', 'COL0'], ['administration']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration', 'category'], 'min', 'percentage'], 'eqmin', 'COL0'], ['administration']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration', 'category'], 'min', 'percentage'], 'eqmin', 'COL0'], ['administration']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration', 'percentage'], 'min', 'percentage'], 'eqmin', 'percentage'], ['administration']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration', 'percentage'], 'min', 'percentage'], 'eqmin', 'percentage'], ['administration']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration', 'percentage'], 'min', 'percentage'], 'eqmin', 'COL0'], ['administration']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration', 'percentage'], 'min', 'percentage'], 'eqmin', 'COL0'], ['administration']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration', 'color'], 'min', 'percentage'], 'eqmin', 'COL0'], ['administration']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration', 'color'], 'min', 'percentage'], 'eqmin', 'COL0'], ['administration']]
+    # SelectCol(SelectRow0(@param0, eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'percentage'], ['administration']]
+
+# ========== review report ========== #
+# top-1, score: 1.54, answer: ['Cameron']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 2), ['0'])
+# top-2, score: 1.48, answer: ['Cameron']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['0'])
+# top-3, score: 1.48, answer: ['Cameron']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['-1'])
+# top-4, score: 1.47, answer: ['Cameron']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['0'])
+# top-5, score: 1.47, answer: ['Cameron']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-6, score: 1.47, answer: ['Cameron']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['0'])
+# top-7, score: 1.47, answer: ['Cameron']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['-1', '-2'])
+# top-8, score: 1.47, answer: ['Cameron']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['0'])
+# top-9, score: 1.47, answer: ['Cameron']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-10, score: 1.47, answer: ['Cameron']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['0'])
+# top-11, score: 1.47, answer: ['Cameron']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['-1', '-2'])

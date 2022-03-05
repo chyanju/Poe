@@ -1,0 +1,54 @@
+# parsed arguments: Namespace(benchmark='Q9ff52', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'japan', 'donations', '2000000', 'blue', '1356852', 'us', '26000000', 'belgium', '67030000', 'ireland', 'china', '1000000', '2713704', 'netherlands', 'norway', 'commission', 'country', 'germany', 'european', '5475452', 'finland', '7033231', '30033922', 'kuwait', 'color'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                Country  Donations color
+0                    US   67030000  blue
+1   European Commission   30033922  blue
+2                 Japan   26000000  blue
+3           Netherlands    7033231  blue
+4                Norway    5475452  blue
+5               Germany    2713704  blue
+6                Kuwait    2000000  blue
+7               Finland    1356852  blue
+8               Belgium    1356852  blue
+9               Ireland    1356852  blue
+10                China    1000000  blue
+# query is: How many donations has the European Commission provided?
+# expected output type:[dtype('int64')]
+# expected output is:
+     ANSWER
+0  30033922
+# inferred DSL terminals:
+  # ConstVal: ['European Commission@Str', 'Donations@Str', '<NULL>']
+     # cmap: [('commission', 'European Commission'), ('donations', 'Donations'), ('european', 'European Commission')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 30033922}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, European Commission@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'European Commission'], ['Donations']]
+    # SelectCol(SelectRow1(@param0, ==, 0, European Commission@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'European Commission'], ['Donations']]
+# (t=0.68) i=1, candidate=[{'ANSWER': 60067844}]
+  # found 0 program(s)
+# (t=1.24) i=2, candidate=[{'ANSWER': 90101766}]
+  # found 0 program(s)
+# (t=1.80) i=3, candidate=[{'ANSWER': 120135688}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.52, answer: 30033922
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, European Commission@Str), ['1'])
+# top-2, score: 2.52, answer: 30033922
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, European Commission@Str), ['-99', '-2'])

@@ -1,0 +1,203 @@
+# parsed arguments: Namespace(benchmark='Qd9eef', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'75', 'jpn', '70', '76', 'fra', 'gbr', '52', 'aut', 'nld', 'prt', 'kor', '60', 'bel', 'fin', 'irl', 'dnk', '66', 'deu', 'che', '62', '49', '48', '42', '61', 'swe', 'esp', 'usa', 'rating', 'aus', 'can', '57', 'nor', 'blue', '53', '64', 'ita', 'country', 'color', '0', '54', '56', '59'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+   country  rating color
+0      USA      53  blue
+1      JPN      42  blue
+2      FRA      56  blue
+3      DEU      61  blue
+4      GBR      75  blue
+5      CAN      54  blue
+6      AUS      66  blue
+7      ESP      57  blue
+8      NLD      76  blue
+9      NOR      64  blue
+10     BEL      59  blue
+11     SWE      66  blue
+12     DNK      62  blue
+13     KOR      52  blue
+14     CHE      59  blue
+15     ITA      49  blue
+16     IRL      70  blue
+17     FIN      60  blue
+18     AUT      48  blue
+19     PRT       0  blue
+# query is: Which country has the worst rating?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0    PRT
+# inferred DSL terminals:
+  # ConstVal: ['rating@Str', 'country@Str', '<NULL>']
+     # cmap: [('rating', 'rating'), ('country', 'country')]
+  # AggrFunc: ['min', 'max', '<NULL>']
+     # amap: [('worst', 'max'), ('worst', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', 'eqmin', '<NULL>']
+     # imap: [('worst', 'eqmin'), ('worst', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'PRT'}]
+  # found 18 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'min', 'rating'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'min', 'rating'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'max', 'rating'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'max', 'rating'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'rating'], 'min', 'rating'], 'eqmin', 'rating'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'rating'], 'min', 'rating'], 'eqmin', 'rating'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'rating'], 'min', 'rating'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'rating'], 'min', 'rating'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'rating'], 'max', 'rating'], 'eqmin', 'rating'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'rating'], 'max', 'rating'], 'eqmin', 'rating'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'rating'], 'max', 'rating'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'rating'], 'max', 'rating'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'min', 'rating'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'min', 'rating'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'rating'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'rating'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'rating'], ['country']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'rating'], ['country']]
+# (t=1.75) i=1, candidate=[{'ANSWER': 'NLD'}]
+  # found 18 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'min', 'rating'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'min', 'rating'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'max', 'rating'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'max', 'rating'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'rating'], 'min', 'rating'], 'eqmax', 'rating'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'rating'], 'min', 'rating'], 'eqmax', 'rating'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'rating'], 'min', 'rating'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'rating'], 'min', 'rating'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'rating'], 'max', 'rating'], 'eqmax', 'rating'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'rating'], 'max', 'rating'], 'eqmax', 'rating'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'rating'], 'max', 'rating'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'rating'], 'max', 'rating'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'min', 'rating'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'min', 'rating'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'rating'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'rating'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'rating'], ['country']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'rating'], ['country']]
+# (t=3.52) i=2, candidate=[{'ANSWER': 'CAN'}]
+  # found 0 program(s)
+# (t=5.18) i=3, candidate=[{'ANSWER': 'USA'}]
+  # found 0 program(s)
+# (t=6.86) i=4, candidate=[{'ANSWER': 'GBR'}]
+  # found 0 program(s)
+# (t=8.54) i=5, candidate=[{'ANSWER': 'AUT'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.67, answer: PRT
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+# top-2, score: 1.67, answer: PRT
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+# top-3, score: 1.67, answer: NLD
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+# top-4, score: 1.67, answer: NLD
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+# top-5, score: 1.60, answer: PRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+# top-6, score: 1.60, answer: PRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+# top-7, score: 1.60, answer: PRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['0'])
+# top-8, score: 1.60, answer: PRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['-1'])
+# top-9, score: 1.60, answer: NLD
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['0'])
+# top-10, score: 1.60, answer: NLD
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['-1'])
+# top-11, score: 1.60, answer: NLD
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+# top-12, score: 1.60, answer: NLD
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+# top-13, score: 1.59, answer: PRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+# top-14, score: 1.59, answer: PRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+# top-15, score: 1.59, answer: PRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+# top-16, score: 1.59, answer: PRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-17, score: 1.59, answer: PRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['0'])
+# top-18, score: 1.59, answer: PRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-1', '-2'])
+# top-19, score: 1.59, answer: PRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['0'])
+# top-20, score: 1.59, answer: PRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-1', '-2'])
+# top-21, score: 1.59, answer: PRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+# top-22, score: 1.59, answer: PRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-23, score: 1.59, answer: PRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['0'])
+# top-24, score: 1.59, answer: PRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-1', '-2'])
+# top-25, score: 1.59, answer: NLD
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['0'])
+# top-26, score: 1.59, answer: NLD
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-1', '-2'])
+# top-27, score: 1.59, answer: NLD
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['0'])
+# top-28, score: 1.59, answer: NLD
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-1', '-2'])
+# top-29, score: 1.59, answer: NLD
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+# top-30, score: 1.59, answer: NLD
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+# top-31, score: 1.59, answer: NLD
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+# top-32, score: 1.59, answer: NLD
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+# top-33, score: 1.59, answer: NLD
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['0'])
+# top-34, score: 1.59, answer: NLD
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-1', '-2'])
+# top-35, score: 1.59, answer: NLD
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+# top-36, score: 1.59, answer: NLD
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])

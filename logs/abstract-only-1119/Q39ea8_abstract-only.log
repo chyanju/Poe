@@ -1,0 +1,1066 @@
+/home/ubuntu/Watson/trinity/interpreter/watson4vis.py:117: RuntimeWarning: overflow encountered in long_scalars
+  lambda x: self._np_value_hash(x)*10 + self._np_value_type(x)
+/home/ubuntu/Watson/trinity/interpreter/watson4vis.py:1141: RuntimeWarning: overflow encountered in long_scalars
+  tmp_op = lambda x,y: x*y
+# parsed arguments: Namespace(benchmark='Q39ea8', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'1802720000', 'prt', 'fra', 'bel', '1349570000', 'nld', '776670000', 'ita', 'fin', 'dnk', '5404860000', '799520000', 'kor', '456310000', '458880000', 'gbr', '1372000000', 'irl', '2289930000', '4870750000', 'jpn', 'aut', 'deu', 'country', 'can', '672630000', '405800000', 'esp', 'usa', '7020280000', 'color', 'aus', 'donation', '2329560000', 'blue', '2301450000', '1890450000', '1363080000', '372190000', '18014480000', '4769530000', 'che', 'nor', 'swe'}
+# input type: [dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+       donation Country color
+0   18014480000     USA  blue
+1    7020280000     JPN  blue
+2    5404860000     FRA  blue
+3    4870750000     DEU  blue
+4    4769530000     GBR  blue
+5    2329560000     CAN  blue
+6    2301450000     AUS  blue
+7    2289930000     ESP  blue
+8    1890450000     NLD  blue
+9    1802720000     NOR  blue
+10   1372000000     BEL  blue
+11   1363080000     SWE  blue
+12   1349570000     DNK  blue
+13    799520000     KOR  blue
+14    776670000     CHE  blue
+15    672630000     ITA  blue
+16    458880000     IRL  blue
+17    456310000     FIN  blue
+18    405800000     AUT  blue
+19    372190000     PRT  blue
+# query is: How many countries have donated more than 5,000,000,000 but less than 10,000,000,000?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0       2
+# inferred DSL terminals:
+  # ConstVal: ['18014480000@Int', '1802720000@Int', 'NOR@Str', '1372000000@Int', '799520000@Int', '458880000@Int', 'CAN@Str', '4769530000@Int', '2301450000@Int', '2289930000@Int', 'AUT@Str', 'PRT@Str', 'FRA@Str', 'Country@Str', 'AUS@Str', 'SWE@Str', '4870750000@Int', '776670000@Int', '372190000@Int', 'JPN@Str', 'DEU@Str', '7020280000@Int', '2329560000@Int', '1363080000@Int', '405800000@Int', 'CHE@Str', 'KOR@Str', 'IRL@Str', '1890450000@Int', '1349570000@Int', 'NLD@Str', 'USA@Str', 'ESP@Str', 'GBR@Str', 'DNK@Str', '5404860000@Int', 'color@Str', 'FIN@Str', 'donation@Str', 'blue@Str', '672630000@Int', '456310000@Int', 'BEL@Str', 'ITA@Str']
+     # cmap: [(None, 18014480000), (None, 1802720000), (None, 'NOR'), (None, 1372000000), (None, 799520000), (None, 458880000), (None, 'CAN'), (None, 4769530000), (None, 2301450000), (None, 2289930000), (None, 'AUT'), (None, 'PRT'), (None, 'FRA'), (None, 'Country'), (None, 'AUS'), (None, 'SWE'), (None, 4870750000), (None, 776670000), (None, 372190000), (None, 'JPN'), (None, 'DEU'), (None, 7020280000), (None, 2329560000), (None, 1363080000), (None, 405800000), (None, 'CHE'), (None, 'KOR'), (None, 'IRL'), (None, 1890450000), (None, 1349570000), (None, 'NLD'), (None, 'USA'), (None, 'ESP'), (None, 'GBR'), (None, 'DNK'), (None, 5404860000), (None, 'color'), (None, 'FIN'), (None, 'donation'), (None, 'blue'), (None, 672630000), (None, 456310000), (None, 'BEL'), (None, 'ITA')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 255 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 0), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'count', 'donation'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 0), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'count', 'donation'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'count', 'donation'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 0), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'count', 'donation'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'count', 'Country'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 1), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'count', 'Country'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'count', 'Country'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 1), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'count', 'Country'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 2), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'count', 'color'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 2), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'count', 'color'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 2), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'count', 'color'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 2), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'count', 'color'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'count', 'donation'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'count', 'donation'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'count', 'donation'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'count', 'donation'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'count', 'Country'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'count', 'Country'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'count', 'Country'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'count', 'Country'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'count', 'color'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'count', 'color'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'count', 'color'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'count', 'color'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'count', 'donation'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'count', 'donation'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'count', 'donation'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'count', 'donation'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'count', 'Country'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'count', 'Country'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'count', 'Country'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'count', 'Country'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'count', 'color'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'count', 'color'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'count', 'color'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'count', 'color'], 'eqmax', 'donation'], ['COL0']]
+    # Summarize(SelectRow1(@param0, <, 0, 405800000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'donation', 405800000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, <, 0, 405800000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'donation', 405800000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, <, 0, 405800000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'donation', 405800000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, <=, 0, 372190000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'donation', 372190000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, <=, 0, 372190000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'donation', 372190000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, <=, 0, 372190000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'donation', 372190000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 18014480000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 18014480000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 18014480000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 18014480000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 18014480000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 18014480000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 1802720000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 1802720000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 1802720000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 1802720000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 1802720000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 1802720000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 1372000000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 1372000000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 1372000000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 1372000000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 1372000000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 1372000000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 799520000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 799520000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 799520000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 799520000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 799520000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 799520000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 458880000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 458880000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 458880000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 458880000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 458880000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 458880000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 4769530000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 4769530000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 4769530000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 4769530000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 4769530000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 4769530000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 2301450000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 2301450000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 2301450000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 2301450000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 2301450000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 2301450000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 2289930000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 2289930000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 2289930000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 2289930000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 2289930000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 2289930000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 4870750000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 4870750000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 4870750000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 4870750000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 4870750000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 4870750000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 776670000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 776670000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 776670000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 776670000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 776670000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 776670000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 372190000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 372190000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 372190000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 372190000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 372190000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 372190000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 7020280000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 7020280000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 7020280000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 7020280000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 7020280000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 7020280000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 2329560000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 2329560000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 2329560000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 2329560000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 2329560000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 2329560000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 1363080000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 1363080000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 1363080000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 1363080000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 1363080000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 1363080000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 405800000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 405800000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 405800000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 405800000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 405800000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 405800000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 1890450000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 1890450000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 1890450000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 1890450000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 1890450000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 1890450000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 1349570000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 1349570000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 1349570000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 1349570000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 1349570000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 1349570000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 5404860000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 5404860000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 5404860000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 5404860000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 5404860000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 5404860000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 672630000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 672630000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 672630000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 672630000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 672630000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 672630000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 456310000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 456310000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 0, 456310000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 456310000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, 456310000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'donation', 456310000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, NOR@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'NOR'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, NOR@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'NOR'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, NOR@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'NOR'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, CAN@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'CAN'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, CAN@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'CAN'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, CAN@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'CAN'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, AUT@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'AUT'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, AUT@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'AUT'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, AUT@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'AUT'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, PRT@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'PRT'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, PRT@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'PRT'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, PRT@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'PRT'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, FRA@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'FRA'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, FRA@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'FRA'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, FRA@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'FRA'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, AUS@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'AUS'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, AUS@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'AUS'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, AUS@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'AUS'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, SWE@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'SWE'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, SWE@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'SWE'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, SWE@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'SWE'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, JPN@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'JPN'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, JPN@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'JPN'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, JPN@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'JPN'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, DEU@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'DEU'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, DEU@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'DEU'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, DEU@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'DEU'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, CHE@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'CHE'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, CHE@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'CHE'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, CHE@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'CHE'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, KOR@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'KOR'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, KOR@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'KOR'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, KOR@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'KOR'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, IRL@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'IRL'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, IRL@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'IRL'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, IRL@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'IRL'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, NLD@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'NLD'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, NLD@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'NLD'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, NLD@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'NLD'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, USA@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'USA'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, USA@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'USA'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, USA@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'USA'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, ESP@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'ESP'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, ESP@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'ESP'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, ESP@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'ESP'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, GBR@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'GBR'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, GBR@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'GBR'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, GBR@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'GBR'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, DNK@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'DNK'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, DNK@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'DNK'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, DNK@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'DNK'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, FIN@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'FIN'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, FIN@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'FIN'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, FIN@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'FIN'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, BEL@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'BEL'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, BEL@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'BEL'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, BEL@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'BEL'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, ITA@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'ITA'], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, ==, 1, ITA@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'ITA'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, ITA@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'ITA'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, >=, 0, 18014480000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'donation', 18014480000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, >=, 0, 18014480000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'donation', 18014480000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, >=, 0, 18014480000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'donation', 18014480000], 'count', 'color']
+    # Summarize(SelectRow1(@param0, >, 0, 7020280000@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'donation', 7020280000], 'count', 'donation']
+    # Summarize(SelectRow1(@param0, >, 0, 7020280000@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'donation', 7020280000], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, >, 0, 7020280000@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'donation', 7020280000], 'count', 'color']
+    # Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, NOR@Str, NOR@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 18014480000], '/', 'Country', 'NOR', 'NOR', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, CAN@Str, CAN@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 18014480000], '/', 'Country', 'CAN', 'CAN', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, AUT@Str, AUT@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 18014480000], '/', 'Country', 'AUT', 'AUT', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, PRT@Str, PRT@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 18014480000], '/', 'Country', 'PRT', 'PRT', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, FRA@Str, FRA@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 18014480000], '/', 'Country', 'FRA', 'FRA', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, AUS@Str, AUS@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 18014480000], '/', 'Country', 'AUS', 'AUS', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, SWE@Str, SWE@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 18014480000], '/', 'Country', 'SWE', 'SWE', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, JPN@Str, JPN@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 18014480000], '/', 'Country', 'JPN', 'JPN', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, DEU@Str, DEU@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 18014480000], '/', 'Country', 'DEU', 'DEU', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, CHE@Str, CHE@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 18014480000], '/', 'Country', 'CHE', 'CHE', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, KOR@Str, KOR@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 18014480000], '/', 'Country', 'KOR', 'KOR', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, IRL@Str, IRL@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 18014480000], '/', 'Country', 'IRL', 'IRL', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, NLD@Str, NLD@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 18014480000], '/', 'Country', 'NLD', 'NLD', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, ESP@Str, ESP@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 18014480000], '/', 'Country', 'ESP', 'ESP', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, GBR@Str, GBR@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 18014480000], '/', 'Country', 'GBR', 'GBR', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, DNK@Str, DNK@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 18014480000], '/', 'Country', 'DNK', 'DNK', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, FIN@Str, FIN@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 18014480000], '/', 'Country', 'FIN', 'FIN', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, BEL@Str, BEL@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 18014480000], '/', 'Country', 'BEL', 'BEL', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, ITA@Str, ITA@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 18014480000], '/', 'Country', 'ITA', 'ITA', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, AUT@Str, AUT@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 1802720000], '/', 'Country', 'AUT', 'AUT', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, PRT@Str, PRT@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 1802720000], '/', 'Country', 'PRT', 'PRT', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, SWE@Str, SWE@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 1802720000], '/', 'Country', 'SWE', 'SWE', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, CHE@Str, CHE@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 1802720000], '/', 'Country', 'CHE', 'CHE', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, KOR@Str, KOR@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 1802720000], '/', 'Country', 'KOR', 'KOR', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, IRL@Str, IRL@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 1802720000], '/', 'Country', 'IRL', 'IRL', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, DNK@Str, DNK@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 1802720000], '/', 'Country', 'DNK', 'DNK', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, FIN@Str, FIN@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 1802720000], '/', 'Country', 'FIN', 'FIN', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, BEL@Str, BEL@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 1802720000], '/', 'Country', 'BEL', 'BEL', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, ITA@Str, ITA@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 1802720000], '/', 'Country', 'ITA', 'ITA', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 1372000000@Int), /, 1, AUT@Str, AUT@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 1372000000], '/', 'Country', 'AUT', 'AUT', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 1372000000@Int), /, 1, PRT@Str, PRT@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 1372000000], '/', 'Country', 'PRT', 'PRT', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 1372000000@Int), /, 1, SWE@Str, SWE@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 1372000000], '/', 'Country', 'SWE', 'SWE', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 1372000000@Int), /, 1, CHE@Str, CHE@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 1372000000], '/', 'Country', 'CHE', 'CHE', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 1372000000@Int), /, 1, KOR@Str, KOR@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 1372000000], '/', 'Country', 'KOR', 'KOR', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 1372000000@Int), /, 1, IRL@Str, IRL@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 1372000000], '/', 'Country', 'IRL', 'IRL', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 1372000000@Int), /, 1, DNK@Str, DNK@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 1372000000], '/', 'Country', 'DNK', 'DNK', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 1372000000@Int), /, 1, FIN@Str, FIN@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 1372000000], '/', 'Country', 'FIN', 'FIN', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 1372000000@Int), /, 1, ITA@Str, ITA@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 1372000000], '/', 'Country', 'ITA', 'ITA', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 799520000@Int), /, 1, AUT@Str, AUT@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 799520000], '/', 'Country', 'AUT', 'AUT', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 799520000@Int), /, 1, PRT@Str, PRT@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 799520000], '/', 'Country', 'PRT', 'PRT', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 799520000@Int), /, 1, CHE@Str, CHE@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 799520000], '/', 'Country', 'CHE', 'CHE', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 799520000@Int), /, 1, IRL@Str, IRL@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 799520000], '/', 'Country', 'IRL', 'IRL', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 799520000@Int), /, 1, FIN@Str, FIN@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 799520000], '/', 'Country', 'FIN', 'FIN', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 799520000@Int), /, 1, ITA@Str, ITA@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 799520000], '/', 'Country', 'ITA', 'ITA', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 458880000@Int), /, 1, AUT@Str, AUT@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 458880000], '/', 'Country', 'AUT', 'AUT', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 458880000@Int), /, 1, PRT@Str, PRT@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 458880000], '/', 'Country', 'PRT', 'PRT', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 458880000@Int), /, 1, FIN@Str, FIN@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 458880000], '/', 'Country', 'FIN', 'FIN', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, NOR@Str, NOR@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 4769530000], '/', 'Country', 'NOR', 'NOR', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, CAN@Str, CAN@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 4769530000], '/', 'Country', 'CAN', 'CAN', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, AUT@Str, AUT@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 4769530000], '/', 'Country', 'AUT', 'AUT', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, PRT@Str, PRT@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 4769530000], '/', 'Country', 'PRT', 'PRT', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, AUS@Str, AUS@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 4769530000], '/', 'Country', 'AUS', 'AUS', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, SWE@Str, SWE@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 4769530000], '/', 'Country', 'SWE', 'SWE', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, CHE@Str, CHE@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 4769530000], '/', 'Country', 'CHE', 'CHE', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, KOR@Str, KOR@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 4769530000], '/', 'Country', 'KOR', 'KOR', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, IRL@Str, IRL@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 4769530000], '/', 'Country', 'IRL', 'IRL', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, NLD@Str, NLD@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 4769530000], '/', 'Country', 'NLD', 'NLD', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, ESP@Str, ESP@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 4769530000], '/', 'Country', 'ESP', 'ESP', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, DNK@Str, DNK@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 4769530000], '/', 'Country', 'DNK', 'DNK', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, FIN@Str, FIN@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 4769530000], '/', 'Country', 'FIN', 'FIN', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, BEL@Str, BEL@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 4769530000], '/', 'Country', 'BEL', 'BEL', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, ITA@Str, ITA@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 4769530000], '/', 'Country', 'ITA', 'ITA', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, NOR@Str, NOR@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2301450000], '/', 'Country', 'NOR', 'NOR', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, AUT@Str, AUT@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2301450000], '/', 'Country', 'AUT', 'AUT', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, PRT@Str, PRT@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2301450000], '/', 'Country', 'PRT', 'PRT', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, SWE@Str, SWE@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2301450000], '/', 'Country', 'SWE', 'SWE', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, CHE@Str, CHE@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2301450000], '/', 'Country', 'CHE', 'CHE', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, KOR@Str, KOR@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2301450000], '/', 'Country', 'KOR', 'KOR', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, IRL@Str, IRL@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2301450000], '/', 'Country', 'IRL', 'IRL', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, NLD@Str, NLD@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2301450000], '/', 'Country', 'NLD', 'NLD', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, ESP@Str, ESP@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2301450000], '/', 'Country', 'ESP', 'ESP', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, DNK@Str, DNK@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2301450000], '/', 'Country', 'DNK', 'DNK', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, FIN@Str, FIN@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2301450000], '/', 'Country', 'FIN', 'FIN', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, BEL@Str, BEL@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2301450000], '/', 'Country', 'BEL', 'BEL', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, ITA@Str, ITA@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2301450000], '/', 'Country', 'ITA', 'ITA', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, NOR@Str, NOR@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2289930000], '/', 'Country', 'NOR', 'NOR', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, AUT@Str, AUT@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2289930000], '/', 'Country', 'AUT', 'AUT', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, PRT@Str, PRT@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2289930000], '/', 'Country', 'PRT', 'PRT', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, SWE@Str, SWE@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2289930000], '/', 'Country', 'SWE', 'SWE', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, CHE@Str, CHE@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2289930000], '/', 'Country', 'CHE', 'CHE', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, KOR@Str, KOR@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2289930000], '/', 'Country', 'KOR', 'KOR', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, IRL@Str, IRL@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2289930000], '/', 'Country', 'IRL', 'IRL', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, NLD@Str, NLD@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2289930000], '/', 'Country', 'NLD', 'NLD', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, DNK@Str, DNK@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2289930000], '/', 'Country', 'DNK', 'DNK', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, FIN@Str, FIN@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2289930000], '/', 'Country', 'FIN', 'FIN', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, BEL@Str, BEL@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2289930000], '/', 'Country', 'BEL', 'BEL', 'donation']
+    # Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, ITA@Str, ITA@Str, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'donation', 2289930000], '/', 'Country', 'ITA', 'ITA', 'donation']
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 0), eqmin, 0), ['1'])
+# top-2, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 0), eqmin, 0), ['-99'])
+# top-3, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 0), eqmax, 0), ['1'])
+# top-4, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 0), eqmax, 0), ['-99'])
+# top-5, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 1), eqmin, 0), ['1'])
+# top-6, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 1), eqmin, 0), ['-99'])
+# top-7, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 1), eqmax, 0), ['1'])
+# top-8, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 1), eqmax, 0), ['-99'])
+# top-9, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 2), eqmin, 0), ['1'])
+# top-10, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 2), eqmin, 0), ['-99'])
+# top-11, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 2), eqmax, 0), ['1'])
+# top-12, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], count, 2), eqmax, 0), ['-99'])
+# top-13, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 0), ['2'])
+# top-14, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 0), ['-99', '-1'])
+# top-15, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 0), ['2'])
+# top-16, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 0), ['-99', '-1'])
+# top-17, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 0), ['2'])
+# top-18, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 0), ['-99', '-1'])
+# top-19, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 0), ['2'])
+# top-20, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 0), ['-99', '-1'])
+# top-21, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 0), ['2'])
+# top-22, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 0), ['-99', '-1'])
+# top-23, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 0), ['2'])
+# top-24, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 0), ['-99', '-1'])
+# top-25, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmin, 0), ['2'])
+# top-26, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmin, 0), ['-99', '-1'])
+# top-27, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 0), ['2'])
+# top-28, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 0), ['-99', '-1'])
+# top-29, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmin, 0), ['2'])
+# top-30, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmin, 0), ['-99', '-1'])
+# top-31, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 0), ['2'])
+# top-32, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 0), ['-99', '-1'])
+# top-33, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmin, 0), ['2'])
+# top-34, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmin, 0), ['-99', '-1'])
+# top-35, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 0), ['2'])
+# top-36, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 0), ['-99', '-1'])
+# top-37, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 0, 405800000@Int), count, 0)
+# top-38, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 0, 405800000@Int), count, 1)
+# top-39, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 0, 405800000@Int), count, 2)
+# top-40, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 0, 372190000@Int), count, 0)
+# top-41, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 0, 372190000@Int), count, 1)
+# top-42, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 0, 372190000@Int), count, 2)
+# top-43, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 18014480000@Int), count, 0)
+# top-44, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 18014480000@Int), count, 1)
+# top-45, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 18014480000@Int), count, 2)
+# top-46, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 1802720000@Int), count, 0)
+# top-47, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 1802720000@Int), count, 1)
+# top-48, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 1802720000@Int), count, 2)
+# top-49, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 1372000000@Int), count, 0)
+# top-50, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 1372000000@Int), count, 1)
+# top-51, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 1372000000@Int), count, 2)
+# top-52, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 799520000@Int), count, 0)
+# top-53, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 799520000@Int), count, 1)
+# top-54, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 799520000@Int), count, 2)
+# top-55, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 458880000@Int), count, 0)
+# top-56, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 458880000@Int), count, 1)
+# top-57, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 458880000@Int), count, 2)
+# top-58, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 4769530000@Int), count, 0)
+# top-59, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 4769530000@Int), count, 1)
+# top-60, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 4769530000@Int), count, 2)
+# top-61, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2301450000@Int), count, 0)
+# top-62, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2301450000@Int), count, 1)
+# top-63, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2301450000@Int), count, 2)
+# top-64, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2289930000@Int), count, 0)
+# top-65, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2289930000@Int), count, 1)
+# top-66, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2289930000@Int), count, 2)
+# top-67, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 4870750000@Int), count, 0)
+# top-68, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 4870750000@Int), count, 1)
+# top-69, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 4870750000@Int), count, 2)
+# top-70, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 776670000@Int), count, 0)
+# top-71, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 776670000@Int), count, 1)
+# top-72, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 776670000@Int), count, 2)
+# top-73, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 372190000@Int), count, 0)
+# top-74, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 372190000@Int), count, 1)
+# top-75, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 372190000@Int), count, 2)
+# top-76, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 7020280000@Int), count, 0)
+# top-77, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 7020280000@Int), count, 1)
+# top-78, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 7020280000@Int), count, 2)
+# top-79, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2329560000@Int), count, 0)
+# top-80, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2329560000@Int), count, 1)
+# top-81, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2329560000@Int), count, 2)
+# top-82, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 1363080000@Int), count, 0)
+# top-83, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 1363080000@Int), count, 1)
+# top-84, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 1363080000@Int), count, 2)
+# top-85, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 405800000@Int), count, 0)
+# top-86, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 405800000@Int), count, 1)
+# top-87, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 405800000@Int), count, 2)
+# top-88, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 1890450000@Int), count, 0)
+# top-89, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 1890450000@Int), count, 1)
+# top-90, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 1890450000@Int), count, 2)
+# top-91, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 1349570000@Int), count, 0)
+# top-92, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 1349570000@Int), count, 1)
+# top-93, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 1349570000@Int), count, 2)
+# top-94, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 5404860000@Int), count, 0)
+# top-95, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 5404860000@Int), count, 1)
+# top-96, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 5404860000@Int), count, 2)
+# top-97, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 672630000@Int), count, 0)
+# top-98, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 672630000@Int), count, 1)
+# top-99, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 672630000@Int), count, 2)
+# top-100, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 456310000@Int), count, 0)
+# top-101, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 456310000@Int), count, 1)
+# top-102, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 456310000@Int), count, 2)
+# top-103, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, NOR@Str), count, 0)
+# top-104, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, NOR@Str), count, 1)
+# top-105, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, NOR@Str), count, 2)
+# top-106, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, CAN@Str), count, 0)
+# top-107, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, CAN@Str), count, 1)
+# top-108, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, CAN@Str), count, 2)
+# top-109, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, AUT@Str), count, 0)
+# top-110, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, AUT@Str), count, 1)
+# top-111, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, AUT@Str), count, 2)
+# top-112, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, PRT@Str), count, 0)
+# top-113, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, PRT@Str), count, 1)
+# top-114, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, PRT@Str), count, 2)
+# top-115, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, FRA@Str), count, 0)
+# top-116, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, FRA@Str), count, 1)
+# top-117, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, FRA@Str), count, 2)
+# top-118, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, AUS@Str), count, 0)
+# top-119, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, AUS@Str), count, 1)
+# top-120, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, AUS@Str), count, 2)
+# top-121, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, SWE@Str), count, 0)
+# top-122, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, SWE@Str), count, 1)
+# top-123, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, SWE@Str), count, 2)
+# top-124, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, JPN@Str), count, 0)
+# top-125, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, JPN@Str), count, 1)
+# top-126, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, JPN@Str), count, 2)
+# top-127, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, DEU@Str), count, 0)
+# top-128, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, DEU@Str), count, 1)
+# top-129, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, DEU@Str), count, 2)
+# top-130, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, CHE@Str), count, 0)
+# top-131, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, CHE@Str), count, 1)
+# top-132, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, CHE@Str), count, 2)
+# top-133, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, KOR@Str), count, 0)
+# top-134, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, KOR@Str), count, 1)
+# top-135, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, KOR@Str), count, 2)
+# top-136, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, IRL@Str), count, 0)
+# top-137, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, IRL@Str), count, 1)
+# top-138, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, IRL@Str), count, 2)
+# top-139, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, NLD@Str), count, 0)
+# top-140, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, NLD@Str), count, 1)
+# top-141, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, NLD@Str), count, 2)
+# top-142, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, USA@Str), count, 0)
+# top-143, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, USA@Str), count, 1)
+# top-144, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, USA@Str), count, 2)
+# top-145, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, ESP@Str), count, 0)
+# top-146, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, ESP@Str), count, 1)
+# top-147, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, ESP@Str), count, 2)
+# top-148, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, GBR@Str), count, 0)
+# top-149, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, GBR@Str), count, 1)
+# top-150, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, GBR@Str), count, 2)
+# top-151, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, DNK@Str), count, 0)
+# top-152, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, DNK@Str), count, 1)
+# top-153, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, DNK@Str), count, 2)
+# top-154, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, FIN@Str), count, 0)
+# top-155, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, FIN@Str), count, 1)
+# top-156, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, FIN@Str), count, 2)
+# top-157, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, BEL@Str), count, 0)
+# top-158, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, BEL@Str), count, 1)
+# top-159, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, BEL@Str), count, 2)
+# top-160, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, ITA@Str), count, 0)
+# top-161, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, ITA@Str), count, 1)
+# top-162, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, ITA@Str), count, 2)
+# top-163, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 0, 18014480000@Int), count, 0)
+# top-164, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 0, 18014480000@Int), count, 1)
+# top-165, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 0, 18014480000@Int), count, 2)
+# top-166, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 0, 7020280000@Int), count, 0)
+# top-167, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 0, 7020280000@Int), count, 1)
+# top-168, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 0, 7020280000@Int), count, 2)
+# top-169, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, NOR@Str, NOR@Str, 0)
+# top-170, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, CAN@Str, CAN@Str, 0)
+# top-171, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, AUT@Str, AUT@Str, 0)
+# top-172, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, PRT@Str, PRT@Str, 0)
+# top-173, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, FRA@Str, FRA@Str, 0)
+# top-174, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, AUS@Str, AUS@Str, 0)
+# top-175, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, SWE@Str, SWE@Str, 0)
+# top-176, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, JPN@Str, JPN@Str, 0)
+# top-177, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, DEU@Str, DEU@Str, 0)
+# top-178, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, CHE@Str, CHE@Str, 0)
+# top-179, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, KOR@Str, KOR@Str, 0)
+# top-180, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, IRL@Str, IRL@Str, 0)
+# top-181, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, NLD@Str, NLD@Str, 0)
+# top-182, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, ESP@Str, ESP@Str, 0)
+# top-183, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, GBR@Str, GBR@Str, 0)
+# top-184, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, DNK@Str, DNK@Str, 0)
+# top-185, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, FIN@Str, FIN@Str, 0)
+# top-186, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, BEL@Str, BEL@Str, 0)
+# top-187, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 18014480000@Int), /, 1, ITA@Str, ITA@Str, 0)
+# top-188, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, AUT@Str, AUT@Str, 0)
+# top-189, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, PRT@Str, PRT@Str, 0)
+# top-190, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, SWE@Str, SWE@Str, 0)
+# top-191, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, CHE@Str, CHE@Str, 0)
+# top-192, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, KOR@Str, KOR@Str, 0)
+# top-193, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, IRL@Str, IRL@Str, 0)
+# top-194, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, DNK@Str, DNK@Str, 0)
+# top-195, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, FIN@Str, FIN@Str, 0)
+# top-196, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, BEL@Str, BEL@Str, 0)
+# top-197, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 1802720000@Int), /, 1, ITA@Str, ITA@Str, 0)
+# top-198, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 1372000000@Int), /, 1, AUT@Str, AUT@Str, 0)
+# top-199, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 1372000000@Int), /, 1, PRT@Str, PRT@Str, 0)
+# top-200, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 1372000000@Int), /, 1, SWE@Str, SWE@Str, 0)
+# top-201, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 1372000000@Int), /, 1, CHE@Str, CHE@Str, 0)
+# top-202, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 1372000000@Int), /, 1, KOR@Str, KOR@Str, 0)
+# top-203, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 1372000000@Int), /, 1, IRL@Str, IRL@Str, 0)
+# top-204, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 1372000000@Int), /, 1, DNK@Str, DNK@Str, 0)
+# top-205, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 1372000000@Int), /, 1, FIN@Str, FIN@Str, 0)
+# top-206, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 1372000000@Int), /, 1, ITA@Str, ITA@Str, 0)
+# top-207, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 799520000@Int), /, 1, AUT@Str, AUT@Str, 0)
+# top-208, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 799520000@Int), /, 1, PRT@Str, PRT@Str, 0)
+# top-209, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 799520000@Int), /, 1, CHE@Str, CHE@Str, 0)
+# top-210, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 799520000@Int), /, 1, IRL@Str, IRL@Str, 0)
+# top-211, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 799520000@Int), /, 1, FIN@Str, FIN@Str, 0)
+# top-212, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 799520000@Int), /, 1, ITA@Str, ITA@Str, 0)
+# top-213, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 458880000@Int), /, 1, AUT@Str, AUT@Str, 0)
+# top-214, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 458880000@Int), /, 1, PRT@Str, PRT@Str, 0)
+# top-215, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 458880000@Int), /, 1, FIN@Str, FIN@Str, 0)
+# top-216, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, NOR@Str, NOR@Str, 0)
+# top-217, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, CAN@Str, CAN@Str, 0)
+# top-218, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, AUT@Str, AUT@Str, 0)
+# top-219, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, PRT@Str, PRT@Str, 0)
+# top-220, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, AUS@Str, AUS@Str, 0)
+# top-221, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, SWE@Str, SWE@Str, 0)
+# top-222, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, CHE@Str, CHE@Str, 0)
+# top-223, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, KOR@Str, KOR@Str, 0)
+# top-224, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, IRL@Str, IRL@Str, 0)
+# top-225, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, NLD@Str, NLD@Str, 0)
+# top-226, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, ESP@Str, ESP@Str, 0)
+# top-227, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, DNK@Str, DNK@Str, 0)
+# top-228, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, FIN@Str, FIN@Str, 0)
+# top-229, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, BEL@Str, BEL@Str, 0)
+# top-230, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 4769530000@Int), /, 1, ITA@Str, ITA@Str, 0)
+# top-231, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, NOR@Str, NOR@Str, 0)
+# top-232, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, AUT@Str, AUT@Str, 0)
+# top-233, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, PRT@Str, PRT@Str, 0)
+# top-234, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, SWE@Str, SWE@Str, 0)
+# top-235, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, CHE@Str, CHE@Str, 0)
+# top-236, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, KOR@Str, KOR@Str, 0)
+# top-237, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, IRL@Str, IRL@Str, 0)
+# top-238, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, NLD@Str, NLD@Str, 0)
+# top-239, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, ESP@Str, ESP@Str, 0)
+# top-240, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, DNK@Str, DNK@Str, 0)
+# top-241, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, FIN@Str, FIN@Str, 0)
+# top-242, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, BEL@Str, BEL@Str, 0)
+# top-243, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2301450000@Int), /, 1, ITA@Str, ITA@Str, 0)
+# top-244, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, NOR@Str, NOR@Str, 0)
+# top-245, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, AUT@Str, AUT@Str, 0)
+# top-246, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, PRT@Str, PRT@Str, 0)
+# top-247, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, SWE@Str, SWE@Str, 0)
+# top-248, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, CHE@Str, CHE@Str, 0)
+# top-249, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, KOR@Str, KOR@Str, 0)
+# top-250, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, IRL@Str, IRL@Str, 0)
+# top-251, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, NLD@Str, NLD@Str, 0)
+# top-252, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, DNK@Str, DNK@Str, 0)
+# top-253, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, FIN@Str, FIN@Str, 0)
+# top-254, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, BEL@Str, BEL@Str, 0)
+# top-255, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 0, 2289930000@Int), /, 1, ITA@Str, ITA@Str, 0)

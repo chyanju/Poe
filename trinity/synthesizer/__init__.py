@@ -1,0 +1,2 @@
+from .watson4vis import Watson4VisSynthesizer
+from .watson4vis_pause import Watson4VisPauseSynthesizer

@@ -1,0 +1,211 @@
+# parsed arguments: Namespace(benchmark='Qbba20', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'2011', '828', '2007', 'blue', '1413', 'deaths', '2004', '1115', '2000', '971', '2009', '4140', '2010', '1294', '2012', '1138', '2005', '1230', '2001', '2008', '1103', '771', '1999', '2006', 'year', 'color', '884', '1459', '1582', '2003', '794', '2002'}
+# input type: [dtype('int64'), dtype('int64'), dtype('O')]
+# input is:
+    year  deaths color
+0   2012     794  blue
+1   2011     828  blue
+2   2010    1115  blue
+3   2009    1103  blue
+4   2008     884  blue
+5   2007     971  blue
+6   2006    1294  blue
+7   2005    1459  blue
+8   2004     771  blue
+9   2003    1230  blue
+10  2002    1413  blue
+11  2001    4140  blue
+12  2000    1582  blue
+13  1999    1138  blue
+# query is: How many more deaths from 2004 until 2005?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0     688
+# inferred DSL terminals:
+  # ConstVal: ['2004@Int', '2005@Int', 'deaths@Str', '<NULL>']
+     # cmap: [(2004, 2004), ('deaths', 'deaths'), (2005, 2005)]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>', '>=', '==', '<NULL>']
+     # bmap: [('more', '>='), ('more', '>'), (None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(1234, 4), (688, 4), (545, 4), (1, 4), (-1, 4), (-545, 4), (-688, 4), (-1234, 4)]
+  # [debug] high_values (no dup.): [(3369, 2), (2681, 2), (2136, 2), (2135, 2), (1241, 2), (1240, 2), (1239, 2), (1238, 2), (1237, 2), (1236, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 2005}]
+  # found 8 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 0, 2004@Int), ==, 0, 2005@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 2004], '==', 'year', 2005], ['year']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 0, 2004@Int), ==, 0, 2005@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 2004], '==', 'year', 2005], ['year']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 0, 2004@Int), ==, 0, 2005@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 2004], '==', 'year', 2005], ['year']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 0, 2004@Int), ==, 0, 2005@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 2004], '==', 'year', 2005], ['year']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 0, 2005@Int), ==, 0, 2005@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 2005], '==', 'year', 2005], ['year']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 0, 2005@Int), ==, 0, 2005@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 2005], '==', 'year', 2005], ['year']]
+    # SelectCol(SelectRow1(@param0, ==, 0, 2005@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'year', 2005], ['year']]
+    # SelectCol(SelectRow1(@param0, ==, 0, 2005@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'year', 2005], ['year']]
+# (t=6.12) i=1, candidate=[{'ANSWER': 2004}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 0, 2004@Int), ==, 0, 2004@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 2004], '==', 'year', 2004], ['year']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 0, 2004@Int), ==, 0, 2004@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 2004], '==', 'year', 2004], ['year']]
+    # SelectCol(SelectRow1(@param0, ==, 0, 2004@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'year', 2004], ['year']]
+    # SelectCol(SelectRow1(@param0, ==, 0, 2004@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'year', 2004], ['year']]
+# (t=12.13) i=2, candidate=[{'ANSWER': 2008}]
+  # found 0 program(s)
+# (t=18.12) i=3, candidate=[{'ANSWER': 2011}]
+  # found 0 program(s)
+# (t=24.17) i=4, candidate=[{'ANSWER': 2003}]
+  # found 0 program(s)
+# (t=30.19) i=5, candidate=[{'ANSWER': 2012}]
+  # found 0 program(s)
+# (t=36.19) i=6, candidate=[{'ANSWER': 2009}]
+  # found 0 program(s)
+# (t=42.12) i=7, candidate=[{'ANSWER': 1234}]
+  # found 0 program(s)
+# (t=46.99) i=8, candidate=[{'ANSWER': 688}]
+  # found 2 program(s)
+    # Contrast(SelectRow1(@param0, >=, 0, 2004@Int), -, 0, 2005@Int, 2004@Int, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'year', 2004], '-', 'year', 2005, 2004, 'deaths']
+    # Contrast(@param0, -, 0, 2005@Int, 2004@Int, 1)
+      --> ['Contrast', 'input@0', '-', 'year', 2005, 2004, 'deaths']
+# (t=51.63) i=9, candidate=[{'ANSWER': 545}]
+  # found 0 program(s)
+# (t=56.31) i=10, candidate=[{'ANSWER': 1}]
+  # found 18 program(s)
+    # Summarize(SelectRow1(@param0, >, 1, 2004@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'deaths', 2004], 'count', 'year']
+    # Summarize(SelectRow1(@param0, >, 1, 2004@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'deaths', 2004], 'count', 'deaths']
+    # Summarize(SelectRow1(@param0, >, 1, 2004@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'deaths', 2004], 'count', 'color']
+    # Summarize(SelectRow1(@param0, >, 1, 2005@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'deaths', 2005], 'count', 'year']
+    # Summarize(SelectRow1(@param0, >, 1, 2005@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'deaths', 2005], 'count', 'deaths']
+    # Summarize(SelectRow1(@param0, >, 1, 2005@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'deaths', 2005], 'count', 'color']
+    # Summarize(SelectRow1(@param0, >=, 1, 2004@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'deaths', 2004], 'count', 'year']
+    # Summarize(SelectRow1(@param0, >=, 1, 2004@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'deaths', 2004], 'count', 'deaths']
+    # Summarize(SelectRow1(@param0, >=, 1, 2004@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'deaths', 2004], 'count', 'color']
+    # Summarize(SelectRow1(@param0, >=, 1, 2005@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'deaths', 2005], 'count', 'year']
+    # Summarize(SelectRow1(@param0, >=, 1, 2005@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'deaths', 2005], 'count', 'deaths']
+    # Summarize(SelectRow1(@param0, >=, 1, 2005@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'deaths', 2005], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 2004@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2004], 'count', 'year']
+    # Summarize(SelectRow1(@param0, ==, 0, 2004@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2004], 'count', 'deaths']
+    # Summarize(SelectRow1(@param0, ==, 0, 2004@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2004], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, 2005@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2005], 'count', 'year']
+    # Summarize(SelectRow1(@param0, ==, 0, 2005@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2005], 'count', 'deaths']
+    # Summarize(SelectRow1(@param0, ==, 0, 2005@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2005], 'count', 'color']
+# (t=61.02) i=11, candidate=[{'ANSWER': -1}]
+  # found 0 program(s)
+# (t=65.70) i=12, candidate=[{'ANSWER': -545}]
+  # found 0 program(s)
+# (t=70.36) i=13, candidate=[{'ANSWER': -688}]
+  # found 2 program(s)
+    # Contrast(SelectRow1(@param0, >=, 0, 2004@Int), -, 0, 2004@Int, 2005@Int, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'year', 2004], '-', 'year', 2004, 2005, 'deaths']
+    # Contrast(@param0, -, 0, 2004@Int, 2005@Int, 1)
+      --> ['Contrast', 'input@0', '-', 'year', 2004, 2005, 'deaths']
+# (t=75.03) i=14, candidate=[{'ANSWER': -1234}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.64, answer: 688
+  # tprog: Contrast(@param0, -, 0, 2005@Int, 2004@Int, 1)
+# top-2, score: 1.64, answer: -688
+  # tprog: Contrast(@param0, -, 0, 2004@Int, 2005@Int, 1)
+# top-3, score: 1.62, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 2004@Int), count, 0)
+# top-4, score: 1.62, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 2004@Int), count, 1)
+# top-5, score: 1.62, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 2004@Int), count, 2)
+# top-6, score: 1.62, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 2005@Int), count, 0)
+# top-7, score: 1.62, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 2005@Int), count, 1)
+# top-8, score: 1.62, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 2005@Int), count, 2)
+# top-9, score: 1.62, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 2004@Int), count, 0)
+# top-10, score: 1.62, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 2004@Int), count, 1)
+# top-11, score: 1.62, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 2004@Int), count, 2)
+# top-12, score: 1.62, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 2005@Int), count, 0)
+# top-13, score: 1.62, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 2005@Int), count, 1)
+# top-14, score: 1.62, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 2005@Int), count, 2)
+# top-15, score: 1.59, answer: 688
+  # tprog: Contrast(SelectRow1(@param0, >=, 0, 2004@Int), -, 0, 2005@Int, 2004@Int, 1)
+# top-16, score: 1.59, answer: -688
+  # tprog: Contrast(SelectRow1(@param0, >=, 0, 2004@Int), -, 0, 2004@Int, 2005@Int, 1)
+# top-17, score: 1.50, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2004@Int), count, 1)
+# top-18, score: 1.50, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2005@Int), count, 1)
+# top-19, score: 1.47, answer: 2005
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 0, 2004@Int), ==, 0, 2005@Int), ['0'])
+# top-20, score: 1.47, answer: 2005
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 0, 2004@Int), ==, 0, 2005@Int), ['-1', '-2'])
+# top-21, score: 1.47, answer: 2005
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 0, 2004@Int), ==, 0, 2005@Int), ['0'])
+# top-22, score: 1.47, answer: 2005
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 0, 2004@Int), ==, 0, 2005@Int), ['-1', '-2'])
+# top-23, score: 1.38, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2004@Int), count, 0)
+# top-24, score: 1.38, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2004@Int), count, 2)
+# top-25, score: 1.38, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2005@Int), count, 0)
+# top-26, score: 1.38, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 2005@Int), count, 2)
+# top-27, score: 1.34, answer: 2005
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 0, 2005@Int), ==, 0, 2005@Int), ['0'])
+# top-28, score: 1.34, answer: 2005
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 0, 2005@Int), ==, 0, 2005@Int), ['-1', '-2'])
+# top-29, score: 1.34, answer: 2004
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 0, 2004@Int), ==, 0, 2004@Int), ['0'])
+# top-30, score: 1.34, answer: 2004
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 0, 2004@Int), ==, 0, 2004@Int), ['-1', '-2'])
+# top-31, score: 1.27, answer: 2005
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, 2005@Int), ['0'])
+# top-32, score: 1.27, answer: 2005
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, 2005@Int), ['-1', '-2'])
+# top-33, score: 1.27, answer: 2004
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, 2004@Int), ['0'])
+# top-34, score: 1.27, answer: 2004
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, 2004@Int), ['-1', '-2'])

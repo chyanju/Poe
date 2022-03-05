@@ -1,0 +1,62 @@
+# parsed arguments: Namespace(benchmark='Qac289', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'2008', '419.33', 'apr', 'color', '2006', '190.64', 'blue', '574.29', '287.76', '536.12', '560.19', '404.91', '515.25', '458.16', 'nov', '2005', 'mar', '292.96', '401.9', '395.97', '510.0', 'oct', '495.85', '564.3', '337.99', '187.99', '463.29', 'price', '460.48', '338.53', '414.86', '440.47', '526.8', '497.91', '619.98', '693.0', '277.27', '102.37', 'aug', '390.0', '461.67', '473.75', 'may', '378.53', '526.42', '181.98', 'sep', '529.94', '432.66', '583.0', 'dec', '386.6', '471.38', '220.0', '2009', '362.62', '372.14', '2007', '307.65', 'date', '1', 'jan', '294.15', '180.51', '421.59', '484.81', 'feb', '501.5', '2004', '567.27', '316.46', '449.45', '691.48', '585.8', '129.6', '522.7', '195.62', '417.23', '192.79', '359.36', '471.18', '443.05', '400.52', '348.06', 'jul', '476.39', '286.0', '707.0', '417.94', 'jun', '2010', '371.82'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+          date   price color
+0   Aug 1 2004  102.37  blue
+1   Sep 1 2004  129.60  blue
+2   Oct 1 2004  190.64  blue
+3   Nov 1 2004  181.98  blue
+4   Dec 1 2004  192.79  blue
+..         ...     ...   ...
+63  Nov 1 2009  583.00  blue
+64  Dec 1 2009  619.98  blue
+65  Jan 1 2010  529.94  blue
+66  Feb 1 2010  526.80  blue
+67  Mar 1 2010  560.19  blue
+
+[68 rows x 3 columns]
+# query is: What was the highest stock price of Google from 2005-2010?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0     707
+# inferred DSL terminals:
+  # ConstVal: ['price@Str', 'Mar 1 2010@Str', 'Dec 1 2005@Str', 'Sep 1 2005@Str', 'Aug 1 2005@Str', 'May 1 2005@Str', 'Nov 1 2005@Str', 'Feb 1 2010@Str', 'Jan 1 2005@Str', 'Jan 1 2010@Str', 'Jul 1 2005@Str', 'Jun 1 2005@Str', 'Feb 1 2005@Str', 'Oct 1 2005@Str', 'Apr 1 2005@Str', 'Mar 1 2005@Str', '<NULL>']
+     # cmap: [(2010, 'Mar 1 2010'), (2005, 'Oct 1 2005'), (2005, 'Feb 1 2005'), (2005, 'Jun 1 2005'), (2005, 'Apr 1 2005'), (2010, 'Jan 1 2010'), ('price', 'price'), (2005, 'Dec 1 2005'), (2005, 'Aug 1 2005'), (2005, 'Sep 1 2005'), (2005, 'Nov 1 2005'), (2005, 'Jan 1 2005'), (2010, 'Feb 1 2010'), (2005, 'Jul 1 2005'), (2005, 'Mar 1 2005'), (2005, 'May 1 2005')]
+  # AggrFunc: ['max', '<NULL>']
+     # amap: [('highest', 'max')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('highest', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 536.12}]
+  # found 0 program(s)
+# (t=60.35) i=1, candidate=[{'ANSWER': 583.0}]
+  # found 0 program(s)
+# (t=120.69) i=2, candidate=[{'ANSWER': 619.98}]
+  # found 0 program(s)
+# (t=181.19) i=3, candidate=[{'ANSWER': 529.94}]
+  # found 3 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, Jan 1 2010@Str), max, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'date', 'Jan 1 2010'], 'max', 'price']
+    # SelectCol(SelectRow1(@param0, ==, 0, Jan 1 2010@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'date', 'Jan 1 2010'], ['price']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Jan 1 2010@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'date', 'Jan 1 2010'], ['price']]
+# (t=241.77) i=4, candidate=[{'ANSWER': 526.8}]
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 1.40, answer: 529.94
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Jan 1 2010@Str), max, 1)
+# top-2, score: 1.32, answer: 529.94
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Jan 1 2010@Str), ['1'])
+# top-3, score: 1.32, answer: 529.94
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Jan 1 2010@Str), ['-99', '-2'])

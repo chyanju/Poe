@@ -1,0 +1,93 @@
+# parsed arguments: Namespace(benchmark='Qc36aa', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'2015', 'year', '80.7', '30.64', '2013', '167.05', '2001', '2010', '2014', '113.29', 'blue', '2008', '2002', '37.89', '32.17', '2004', '74.1', '2007', '32.83', '189.4', '2003', '156.34', '2012', '2011', '2009', '2006', '64.2', 'revenue', '82.84', 'color', '2005', '45.42', '94.52', '34.77'}
+# input type: [dtype('int64'), dtype('float64'), dtype('O')]
+# input is:
+    year  revenue color
+0   2015   189.40  blue
+1   2014   167.05  blue
+2   2013   156.34  blue
+3   2012   113.29  blue
+4   2011    94.52  blue
+5   2010    82.84  blue
+6   2009    80.70  blue
+7   2008    74.10  blue
+8   2007    64.20  blue
+9   2006    45.42  blue
+10  2005    37.89  blue
+11  2004    34.77  blue
+12  2003    32.83  blue
+13  2002    32.17  blue
+14  2001    30.64  blue
+# query is: What is the difference in revenue at Infocomm Industry from 2002 and 2010?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0   50.67
+# inferred DSL terminals:
+  # ConstVal: ['2002@Int', '2010@Int', 'revenue@Str', '<NULL>']
+     # cmap: [(2002, 2002), (2010, 2010), ('revenue', 'revenue')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(1977.83, 4), (1919.16, 4), (50.67, 4), (8.0, 4), (-8.0, 4), (-50.67, 4), (-1919.16, 4), (-1977.83, 4)]
+  # [debug] high_values (no dup.): [(1977.83, 4), (1919.16, 4), (50.67, 4), (8.0, 4), (-8.0, 4), (-50.67, 4), (-1919.16, 4), (-1977.83, 4)]
+  # [debug] filtered low_values (no dup.): [(1982.83, 2), (1981.83, 2), (1980.83, 2), (1979.83, 2), (1979.36, 2), (1978.83, 2), (1977.17, 2), (1976.83, 2), (1975.83, 2), (1975.23, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=3.06) i=1, candidate=[{'ANSWER': 1977.83}]
+  # found 0 program(s)
+# (t=6.11) i=2, candidate=[{'ANSWER': 1919.16}]
+  # found 0 program(s)
+# (t=9.18) i=3, candidate=[{'ANSWER': 50.67}]
+  # found 2 program(s)
+    # Contrast(@param0, diff, 0, 2002@Int, 2010@Int, 1)
+      --> ['Contrast', 'input@0', 'diff', 'year', 2002, 2010, 'revenue']
+    # Contrast(@param0, diff, 0, 2010@Int, 2002@Int, 1)
+      --> ['Contrast', 'input@0', 'diff', 'year', 2010, 2002, 'revenue']
+# (t=12.25) i=4, candidate=[{'ANSWER': 8.0}]
+  # found 0 program(s)
+# (t=15.57) i=5, candidate=[{'ANSWER': -8.0}]
+  # found 0 program(s)
+# (t=18.58) i=6, candidate=[{'ANSWER': -50.67}]
+  # found 0 program(s)
+# (t=21.60) i=7, candidate=[{'ANSWER': -1919.16}]
+  # found 0 program(s)
+# (t=24.64) i=8, candidate=[{'ANSWER': -1977.83}]
+  # found 0 program(s)
+# (t=27.68) i=9, candidate=[{'ANSWER': 1982.83}]
+  # found 0 program(s)
+# (t=30.69) i=10, candidate=[{'ANSWER': 1981.83}]
+  # found 0 program(s)
+# (t=34.05) i=11, candidate=[{'ANSWER': 1980.83}]
+  # found 0 program(s)
+# (t=37.08) i=12, candidate=[{'ANSWER': 1979.83}]
+  # found 0 program(s)
+# (t=40.09) i=13, candidate=[{'ANSWER': 1979.36}]
+  # found 0 program(s)
+# (t=43.11) i=14, candidate=[{'ANSWER': 1978.83}]
+  # found 0 program(s)
+# (t=46.12) i=15, candidate=[{'ANSWER': 1977.17}]
+  # found 0 program(s)
+# (t=49.12) i=16, candidate=[{'ANSWER': 1976.83}]
+  # found 0 program(s)
+# (t=52.46) i=17, candidate=[{'ANSWER': 1975.83}]
+  # found 0 program(s)
+# (t=55.47) i=18, candidate=[{'ANSWER': 1975.23}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.45, answer: [50.67]
+  # tprog: Contrast(@param0, diff, 0, 2002@Int, 2010@Int, 1)
+# top-2, score: 1.45, answer: [50.67]
+  # tprog: Contrast(@param0, diff, 0, 2010@Int, 2002@Int, 1)

@@ -1,0 +1,127 @@
+# parsed arguments: Namespace(benchmark='Q73c84', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'672630000', 'aut', 'jpn', 'color', 'aus', '1372000000', 'irl', '2301450000', '4870750000', 'swe', 'usa', 'che', '799520000', 'prt', 'dnk', '405800000', '458880000', 'gbr', 'deu', 'nor', 'bel', 'blue', '5404860000', 'can', '1363080000', '2329560000', 'ita', '1802720000', '372190000', 'nld', '456310000', '776670000', '18014480000', '1890450000', 'esp', 'donation', 'kor', 'fin', '7020280000', 'country', '4769530000', 'fra', '1349570000', '2289930000'}
+# input type: [dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+       donation Country color
+0   18014480000     USA  blue
+1    7020280000     JPN  blue
+2    5404860000     FRA  blue
+3    4870750000     DEU  blue
+4    4769530000     GBR  blue
+5    2329560000     CAN  blue
+6    2301450000     AUS  blue
+7    2289930000     ESP  blue
+8    1890450000     NLD  blue
+9    1802720000     NOR  blue
+10   1372000000     BEL  blue
+11   1363080000     SWE  blue
+12   1349570000     DNK  blue
+13    799520000     KOR  blue
+14    776670000     CHE  blue
+15    672630000     ITA  blue
+16    458880000     IRL  blue
+17    456310000     FIN  blue
+18    405800000     AUT  blue
+19    372190000     PRT  blue
+# query is: Which Country has given the least aid?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0    PRT
+# inferred DSL terminals:
+  # ConstVal: ['Country@Str', '<NULL>']
+     # cmap: [('country', 'Country')]
+  # AggrFunc: ['min', '<NULL>']
+     # amap: [('least', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('least', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'PRT'}]
+  # found 10 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'min', 'donation'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'min', 'donation'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'min', 'donation'], 'eqmin', 'donation'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'min', 'donation'], 'eqmin', 'donation'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'min', 'donation'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'min', 'donation'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'min', 'donation'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'min', 'donation'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(@param0, eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'donation'], ['Country']]
+    # SelectCol(SelectRow0(@param0, eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'donation'], ['Country']]
+# (t=0.58) i=1, candidate=[{'ANSWER': 'NOR'}]
+  # found 0 program(s)
+# (t=1.12) i=2, candidate=[{'ANSWER': 'USA'}]
+  # found 0 program(s)
+# (t=1.65) i=3, candidate=[{'ANSWER': 'ESP'}]
+  # found 0 program(s)
+# (t=2.19) i=4, candidate=[{'ANSWER': 'IRL'}]
+  # found 0 program(s)
+# (t=2.73) i=5, candidate=[{'ANSWER': 'DEU'}]
+  # found 0 program(s)
+# (t=3.27) i=6, candidate=[{'ANSWER': 'NLD'}]
+  # found 0 program(s)
+# (t=3.81) i=7, candidate=[{'ANSWER': 'AUT'}]
+  # found 0 program(s)
+# (t=4.35) i=8, candidate=[{'ANSWER': 'AUS'}]
+  # found 0 program(s)
+# (t=4.89) i=9, candidate=[{'ANSWER': 'BEL'}]
+  # found 0 program(s)
+# (t=5.42) i=10, candidate=[{'ANSWER': 'KOR'}]
+  # found 0 program(s)
+# (t=5.95) i=11, candidate=[{'ANSWER': 'SWE'}]
+  # found 0 program(s)
+# (t=6.48) i=12, candidate=[{'ANSWER': 'JPN'}]
+  # found 0 program(s)
+# (t=7.01) i=13, candidate=[{'ANSWER': 'CHE'}]
+  # found 0 program(s)
+# (t=7.55) i=14, candidate=[{'ANSWER': 'CAN'}]
+  # found 0 program(s)
+# (t=8.08) i=15, candidate=[{'ANSWER': 'GBR'}]
+  # found 0 program(s)
+# (t=8.61) i=16, candidate=[{'ANSWER': 'DNK'}]
+  # found 0 program(s)
+# (t=9.14) i=17, candidate=[{'ANSWER': 'ITA'}]
+  # found 0 program(s)
+# (t=9.93) i=18, candidate=[{'ANSWER': 'FIN'}]
+  # found 0 program(s)
+# (t=10.45) i=19, candidate=[{'ANSWER': 'FRA'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.45, answer: ['PRT']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 0), ['1'])
+# top-2, score: 1.45, answer: ['PRT']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 0), ['-99', '-2'])
+# top-3, score: 1.39, answer: ['PRT']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 1), ['0'])
+# top-4, score: 1.39, answer: ['PRT']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 1), ['-1'])
+# top-5, score: 1.38, answer: ['PRT']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['1'])
+# top-6, score: 1.38, answer: ['PRT']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['-99', '-2'])
+# top-7, score: 1.38, answer: ['PRT']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['1'])
+# top-8, score: 1.38, answer: ['PRT']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['-99', '-2'])
+# top-9, score: 1.38, answer: ['PRT']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['0'])
+# top-10, score: 1.38, answer: ['PRT']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['-1', '-2'])

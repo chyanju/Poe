@@ -1,0 +1,63 @@
+# parsed arguments: Namespace(benchmark='Q90986', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'92', 'yoshino', 'highland', 'inland', 'yamato', 'flat', 'district', 'population', '1282', '56', 'blue', 'plain', 'gojō,', 'color'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                   District  Population color
+0  Yamato flat inland plain        1282  blue
+1           Yamato highland          56  blue
+2             Gojō, Yoshino          92  blue
+# query is: Approximiately what is the difference in population between Gojo and Yamato?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      36
+# inferred DSL terminals:
+  # ConstVal: ['Yamato highland@Str', 'Population@Str', 'Yamato flat inland plain@Str', '<NULL>']
+     # cmap: [('yamato', 'Yamato highland'), ('population', 'Population'), ('yamato', 'Yamato flat inland plain')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(1226, 4), (-1226, 4)]
+  # [debug] high_values (no dup.): [(1226, 4), (-1226, 4)]
+  # [debug] filtered low_values (no dup.): [(1190, 2), (36, 2), (-36, 2), (-1190, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=2.62) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=5.21) i=2, candidate=[{'ANSWER': 3}]
+  # found 0 program(s)
+# (t=7.80) i=3, candidate=[{'ANSWER': 4}]
+  # found 0 program(s)
+# (t=10.41) i=4, candidate=[{'ANSWER': 1226}]
+  # found 2 program(s)
+    # Contrast(@param0, diff, 0, Yamato highland@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'District', 'Yamato highland', 'Yamato flat inland plain', 'Population']
+    # Contrast(@param0, diff, 0, Yamato flat inland plain@Str, Yamato highland@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'District', 'Yamato flat inland plain', 'Yamato highland', 'Population']
+# (t=12.99) i=5, candidate=[{'ANSWER': -1226}]
+  # found 0 program(s)
+# (t=15.90) i=6, candidate=[{'ANSWER': 1190}]
+  # found 0 program(s)
+# (t=18.53) i=7, candidate=[{'ANSWER': 36}]
+  # found 0 program(s)
+# (t=21.15) i=8, candidate=[{'ANSWER': -36}]
+  # found 0 program(s)
+# (t=23.74) i=9, candidate=[{'ANSWER': -1190}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.42, answer: [1226]
+  # tprog: Contrast(@param0, diff, 0, Yamato highland@Str, Yamato flat inland plain@Str, 1)
+# top-2, score: 1.42, answer: [1226]
+  # tprog: Contrast(@param0, diff, 0, Yamato flat inland plain@Str, Yamato highland@Str, 1)

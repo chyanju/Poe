@@ -1,0 +1,103 @@
+# parsed arguments: Namespace(benchmark='Q8bb1d', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'orange', 'color', 'yellow', 'teal', '3239173', '4746856', 'il', '44', '10604510', 'tx', '2027307', '3277946', '5355235', '1558919', '13', '24', '1140516', '5120254', '1938695', '14', '1208495', '8819342', 'to', '2472223', '2141490', '25', '3853788', 'green', 'red', '2704659', '2159981', '1420518', 'ny', '17', '4114496', '4782119', 'ca', '3414001', '45', '1999120', '925060', '1607297', 'pa', '1203944', '1575308', '1345341', 'and', '64', '1910571', '679201', '5', '2454721', '2607672', '3596343', 'purple', '18', '1311479', 'state', '7017731', '737462', 'years', '3187797', '894368', '5656528', '3157759', '1058031', 'age_range', 'blue', 'over', '4499890', 'fl', '725973', 'under', '65', 'population'}
+# input type: [dtype('O'), dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+   State  population          age_range   color
+0     CA     2704659      Under 5 Years  purple
+1     CA     4499890      5 to 13 Years   green
+2     CA     2159981     14 to 17 Years    blue
+3     CA     3853788     18 to 24 Years  orange
+4     CA    10604510     25 to 44 Years     red
+5     CA     8819342     45 to 64 Years    teal
+6     CA     4114496  65 Years and Over  yellow
+7     FL     1140516      Under 5 Years  purple
+8     FL     1938695      5 to 13 Years   green
+9     FL      925060     14 to 17 Years    blue
+10    FL     1607297     18 to 24 Years  orange
+11    FL     4782119     25 to 44 Years     red
+12    FL     4746856     45 to 64 Years    teal
+13    FL     3187797  65 Years and Over  yellow
+14    PA      737462      Under 5 Years  purple
+15    PA     1345341      5 to 13 Years   green
+16    PA      679201     14 to 17 Years    blue
+17    PA     1203944     18 to 24 Years  orange
+18    PA     3157759     25 to 44 Years     red
+19    PA     3414001     45 to 64 Years    teal
+20    PA     1910571  65 Years and Over  yellow
+21    NY     1208495      Under 5 Years  purple
+22    NY     2141490      5 to 13 Years   green
+23    NY     1058031     14 to 17 Years    blue
+24    NY     1999120     18 to 24 Years  orange
+25    NY     5355235     25 to 44 Years     red
+26    NY     5120254     45 to 64 Years    teal
+27    NY     2607672  65 Years and Over  yellow
+28    TX     2027307      Under 5 Years  purple
+29    TX     3277946      5 to 13 Years   green
+30    TX     1420518     14 to 17 Years    blue
+31    TX     2454721     18 to 24 Years  orange
+32    TX     7017731     25 to 44 Years     red
+33    TX     5656528     45 to 64 Years    teal
+34    TX     2472223  65 Years and Over  yellow
+35    IL      894368      Under 5 Years  purple
+36    IL     1558919      5 to 13 Years   green
+37    IL      725973     14 to 17 Years    blue
+38    IL     1311479     18 to 24 Years  orange
+39    IL     3596343     25 to 44 Years     red
+40    IL     3239173     45 to 64 Years    teal
+41    IL     1575308  65 Years and Over  yellow
+# query is: How many more children under 5 years old did CA have compared to NY?
+# expected output type:[dtype('int64')]
+# expected output is:
+    ANSWER
+0  1496164
+# inferred DSL terminals:
+  # ConstVal: ['CA@Str', 'Under 5 Years@Str', 'NY@Str', '14 to 17 Years@Str', '45 to 64 Years@Str', '25 to 44 Years@Str', '5 to 13 Years@Str', '65 Years and Over@Str', '18 to 24 Years@Str', '<NULL>']
+     # cmap: [('years', '65 Years and Over'), ('to', '18 to 24 Years'), (5, '5 to 13 Years'), ('to', '5 to 13 Years'), ('ca', 'CA'), ('under', 'Under 5 Years'), ('to', '45 to 64 Years'), ('to', '14 to 17 Years'), ('years', '45 to 64 Years'), ('years', '18 to 24 Years'), ('years', '5 to 13 Years'), ('to', '25 to 44 Years'), (5, 'Under 5 Years'), ('years', '14 to 17 Years'), ('ny', 'NY'), ('years', '25 to 44 Years'), ('years', 'Under 5 Years')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>=', '==', '>', '<NULL>']
+     # bmap: [('more', '>'), ('more', '>='), (None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(3291395, 25), (2358400, 25), (1795231, 25), (1496164, 25), (932995, 25), (563169, 25), (-563169, 25), (-932995, 25), (-1496164, 25), (-1795231, 25)]
+  # [debug] high_values (no dup.): []
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': '<type error>'}]
+  # found 0 program(s)
+# (t=47.97) i=1, candidate=[{'ANSWER': 3291395}]
+  # found 0 program(s)
+# (t=96.29) i=2, candidate=[{'ANSWER': 2358400}]
+  # found 1 program(s)
+    # Contrast(SelectRow1(@param0, ==, 2, 5 to 13 Years@Str), -, 0, CA@Str, NY@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'age_range', '5 to 13 Years'], '-', 'State', 'CA', 'NY', 'population']
+# (t=144.33) i=3, candidate=[{'ANSWER': 1795231}]
+  # found 1 program(s)
+    # Contrast(SelectRow1(@param0, ==, 0, CA@Str), -, 2, 5 to 13 Years@Str, Under 5 Years@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'State', 'CA'], '-', 'age_range', '5 to 13 Years', 'Under 5 Years', 'population']
+# (t=192.57) i=4, candidate=[{'ANSWER': 1496164}]
+  # found 1 program(s)
+    # Contrast(SelectRow1(@param0, ==, 2, Under 5 Years@Str), -, 0, CA@Str, NY@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'age_range', 'Under 5 Years'], '-', 'State', 'CA', 'NY', 'population']
+# (t=240.79) i=5, candidate=[{'ANSWER': 932995}]
+  # found 1 program(s)
+    # Contrast(SelectRow1(@param0, ==, 0, NY@Str), -, 2, 5 to 13 Years@Str, Under 5 Years@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'State', 'NY'], '-', 'age_range', '5 to 13 Years', 'Under 5 Years', 'population']
+# (t=289.47) i=6, candidate=[{'ANSWER': 563169}]
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 2.52, answer: 2358400
+  # tprog: Contrast(SelectRow1(@param0, ==, 2, 5 to 13 Years@Str), -, 0, CA@Str, NY@Str, 1)
+# top-2, score: 2.52, answer: 1496164
+  # tprog: Contrast(SelectRow1(@param0, ==, 2, Under 5 Years@Str), -, 0, CA@Str, NY@Str, 1)
+# top-3, score: 2.02, answer: 1795231
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, CA@Str), -, 2, 5 to 13 Years@Str, Under 5 Years@Str, 1)
+# top-4, score: 2.02, answer: 932995
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, NY@Str), -, 2, 5 to 13 Years@Str, Under 5 Years@Str, 1)

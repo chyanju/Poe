@@ -1,0 +1,120 @@
+# parsed arguments: Namespace(benchmark='Q916fc', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'belize', 'honduras', '699', 'birds', 'salvador', 'color', 'panama', '632', 'nicaragua', 'guatemala', '838', '904', 'costa', 'el', 'rica', '434', '544', 'country', '684', 'blue'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       Country  Birds color
+0       Belize    544  blue
+1   Costa Rica    838  blue
+2  El Salvador    434  blue
+3    Guatemala    684  blue
+4     Honduras    699  blue
+5    Nicaragua    632  blue
+6       Panama    904  blue
+# query is: How many more bird species does Nicaragua have compared to El Salvador?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0     198
+# inferred DSL terminals:
+  # ConstVal: ['Birds@Str', 'Nicaragua@Str', 'El Salvador@Str', '<NULL>']
+     # cmap: [('nicaragua', 'Nicaragua'), ('bird', 'Birds'), ('salvador', 'El Salvador'), ('el', 'El Salvador')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>', '==', '>=', '<NULL>']
+     # bmap: [('more', '>'), ('more', '>='), (None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(198, 6), (-198, 6)]
+  # [debug] high_values (no dup.): [(470, 3), (404, 3), (265, 3), (250, 3), (110, 3), (-110, 3), (-250, 3), (-265, 3), (-404, 3), (-470, 3)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 434}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, El Salvador@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'El Salvador'], ['Birds']]
+    # SelectCol(SelectRow1(@param0, ==, 0, El Salvador@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'El Salvador'], ['Birds']]
+# (t=1.91) i=1, candidate=[{'ANSWER': 684}]
+  # found 0 program(s)
+# (t=3.82) i=2, candidate=[{'ANSWER': 868}]
+  # found 0 program(s)
+# (t=5.53) i=3, candidate=[{'ANSWER': 1118}]
+  # found 0 program(s)
+# (t=7.24) i=4, candidate=[{'ANSWER': 1368}]
+  # found 0 program(s)
+# (t=8.96) i=5, candidate=[{'ANSWER': 1066}]
+  # found 0 program(s)
+# (t=10.67) i=6, candidate=[{'ANSWER': 1316}]
+  # found 0 program(s)
+# (t=12.36) i=7, candidate=[{'ANSWER': 632}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Nicaragua@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Nicaragua'], ['Birds']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Nicaragua@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Nicaragua'], ['Birds']]
+# (t=14.24) i=8, candidate=[{'ANSWER': 1264}]
+  # found 0 program(s)
+# (t=15.94) i=9, candidate=[{'ANSWER': 1133}]
+  # found 0 program(s)
+# (t=17.66) i=10, candidate=[{'ANSWER': 1272}]
+  # found 0 program(s)
+# (t=19.35) i=11, candidate=[{'ANSWER': 978}]
+  # found 0 program(s)
+# (t=21.06) i=12, candidate=[{'ANSWER': 1383}]
+  # found 0 program(s)
+# (t=22.77) i=13, candidate=[{'ANSWER': 1522}]
+  # found 0 program(s)
+# (t=24.47) i=14, candidate=[{'ANSWER': 1228}]
+  # found 0 program(s)
+# (t=26.16) i=15, candidate=[{'ANSWER': 1331}]
+  # found 0 program(s)
+# (t=27.87) i=16, candidate=[{'ANSWER': 1470}]
+  # found 0 program(s)
+# (t=29.58) i=17, candidate=[{'ANSWER': 1176}]
+  # found 0 program(s)
+# (t=31.29) i=18, candidate=[{'ANSWER': 699}]
+  # found 0 program(s)
+# (t=33.17) i=19, candidate=[{'ANSWER': 1398}]
+  # found 0 program(s)
+# (t=34.87) i=20, candidate=[{'ANSWER': 1537}]
+  # found 0 program(s)
+# (t=36.58) i=21, candidate=[{'ANSWER': 1243}]
+  # found 0 program(s)
+# (t=38.29) i=22, candidate=[{'ANSWER': 838}]
+  # found 0 program(s)
+# (t=40.16) i=23, candidate=[{'ANSWER': 1676}]
+  # found 0 program(s)
+# (t=41.87) i=24, candidate=[{'ANSWER': 1382}]
+  # found 0 program(s)
+# (t=43.58) i=25, candidate=[{'ANSWER': 544}]
+  # found 0 program(s)
+# (t=45.67) i=26, candidate=[{'ANSWER': 1088}]
+  # found 0 program(s)
+# (t=47.38) i=27, candidate=[{'ANSWER': 198}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Nicaragua@Str, El Salvador@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Country', 'Nicaragua', 'El Salvador', 'Birds']
+# (t=49.07) i=28, candidate=[{'ANSWER': -198}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, El Salvador@Str, Nicaragua@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Country', 'El Salvador', 'Nicaragua', 'Birds']
+
+# ========== review report ========== #
+# top-1, score: 2.56, answer: 198
+  # tprog: Contrast(@param0, -, 0, Nicaragua@Str, El Salvador@Str, 1)
+# top-2, score: 2.56, answer: -198
+  # tprog: Contrast(@param0, -, 0, El Salvador@Str, Nicaragua@Str, 1)
+# top-3, score: 2.39, answer: 434
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, El Salvador@Str), ['1'])
+# top-4, score: 2.39, answer: 434
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, El Salvador@Str), ['-99', '-2'])
+# top-5, score: 2.31, answer: 632
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Nicaragua@Str), ['1'])
+# top-6, score: 2.31, answer: 632
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Nicaragua@Str), ['-99', '-2'])

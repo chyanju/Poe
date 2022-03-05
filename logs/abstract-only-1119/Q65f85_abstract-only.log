@@ -1,0 +1,988 @@
+# parsed arguments: Namespace(benchmark='Q65f85', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'3792145', '75', '70', 'pink', '45', '8507934', '60', '0', 'people', '10', '10119296', '10563233', 'sum', '85', '10552146', '9659493', '9692669', '336303', '2912655', '5123399', '9735380', '10069564', '11320252', '9518507', '15', '35', 'gender', '4355644', '9310714', '5', '6921268', 'age', '20', '10237419', '55', '5184855', '65', '11475182', '5668961', '4453623', '8911133', 'female', '40', '6459082', '1981156', '10205879', '11488578', 'gray', '9731315', '970357', '25', '9925006', '80', 'color', 'male', '30', '4804784', '90', '9324244', '1064581', '10022524', '11635647', '10261253', '3221898', '50', '1902638'}
+# input type: [dtype('int64'), dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+    age  Sum of people  gender color
+0     0        9735380    Male  gray
+1     0        9310714  Female  pink
+2     5       10552146    Male  gray
+3     5       10069564  Female  pink
+4    10       10563233    Male  gray
+5    10       10022524  Female  pink
+6    15       10237419    Male  gray
+7    15        9692669  Female  pink
+8    20        9731315    Male  gray
+9    20        9324244  Female  pink
+10   25        9659493    Male  gray
+11   25        9518507  Female  pink
+12   30       10205879    Male  gray
+13   30       10119296  Female  pink
+14   35       11475182    Male  gray
+15   35       11635647  Female  pink
+16   40       11320252    Male  gray
+17   40       11488578  Female  pink
+18   45        9925006    Male  gray
+19   45       10261253  Female  pink
+20   50        8507934    Male  gray
+21   50        8911133  Female  pink
+22   55        6459082    Male  gray
+23   55        6921268  Female  pink
+24   60        5123399    Male  gray
+25   60        5668961  Female  pink
+26   65        4453623    Male  gray
+27   65        4804784  Female  pink
+28   70        3792145    Male  gray
+29   70        5184855  Female  pink
+30   75        2912655    Male  gray
+31   75        4355644  Female  pink
+32   80        1902638    Male  gray
+33   80        3221898  Female  pink
+34   85         970357    Male  gray
+35   85        1981156  Female  pink
+36   90         336303    Male  gray
+37   90        1064581  Female  pink
+# query is: How many females are under 10?
+# expected output type:[dtype('int64')]
+# expected output is:
+     ANSWER
+0  19380278
+# inferred DSL terminals:
+  # ConstVal: ['0@Int', '10119296@Int', '5@Int', '10261253@Int', '1064581@Int', '10@Int', '3221898@Int', '9925006@Int', 'pink@Str', '15@Int', '3792145@Int', '2912655@Int', '20@Int', '25@Int', '8911133@Int', '30@Int', '8507934@Int', '10563233@Int', '35@Int', '40@Int', '9518507@Int', '45@Int', '1902638@Int', '336303@Int', '4804784@Int', '50@Int', '6921268@Int', 'Female@Str', '10205879@Int', '55@Int', 'gray@Str', '10069564@Int', '11320252@Int', '60@Int', '11635647@Int', '4355644@Int', '65@Int', '11488578@Int', 'Sum of people@Str', '70@Int', '5123399@Int', '6459082@Int', '75@Int', '80@Int', '10552146@Int', 'gender@Str', '9735380@Int', '9324244@Int', '85@Int', '5184855@Int', '90@Int', 'color@Str', '5668961@Int', 'age@Str', '1981156@Int', '9659493@Int', '10237419@Int', '11475182@Int', '9731315@Int', 'Male@Str', '970357@Int', '4453623@Int', '9310714@Int', '10022524@Int', '9692669@Int']
+     # cmap: [(None, 0), (None, 10119296), (None, 5), (None, 10261253), (None, 1064581), (None, 10), (None, 3221898), (None, 9925006), (None, 'pink'), (None, 15), (None, 3792145), (None, 2912655), (None, 20), (None, 25), (None, 8911133), (None, 30), (None, 8507934), (None, 10563233), (None, 35), (None, 40), (None, 9518507), (None, 45), (None, 1902638), (None, 336303), (None, 4804784), (None, 50), (None, 6921268), (None, 'Female'), (None, 10205879), (None, 55), (None, 'gray'), (None, 10069564), (None, 11320252), (None, 60), (None, 11635647), (None, 4355644), (None, 65), (None, 11488578), (None, 'Sum of people'), (None, 70), (None, 5123399), (None, 6459082), (None, 75), (None, 80), (None, 10552146), (None, 'gender'), (None, 9735380), (None, 9324244), (None, 85), (None, 5184855), (None, 90), (None, 'color'), (None, 5668961), (None, 'age'), (None, 1981156), (None, 9659493), (None, 10237419), (None, 11475182), (None, 9731315), (None, 'Male'), (None, 970357), (None, 4453623), (None, 9310714), (None, 10022524), (None, 9692669)]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 232 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people'], 'count', 'age'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people'], 'count', 'age'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people'], 'count', 'age'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people'], 'count', 'age'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people'], 'count', 'Sum of people'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people'], 'count', 'Sum of people'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people'], 'count', 'Sum of people'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people'], 'count', 'Sum of people'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people'], 'count', 'gender'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people'], 'count', 'gender'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people'], 'count', 'gender'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people'], 'count', 'gender'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 3), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people'], 'count', 'color'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 3), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people'], 'count', 'color'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 3), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people'], 'count', 'color'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 3), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people'], 'count', 'color'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['age', 'Sum of people'], 'count', 'age'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['age', 'Sum of people'], 'count', 'age'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['age', 'Sum of people'], 'count', 'age'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['age', 'Sum of people'], 'count', 'age'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['age', 'Sum of people'], 'count', 'Sum of people'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['age', 'Sum of people'], 'count', 'Sum of people'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['age', 'Sum of people'], 'count', 'Sum of people'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['age', 'Sum of people'], 'count', 'Sum of people'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['age', 'Sum of people'], 'count', 'gender'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['age', 'Sum of people'], 'count', 'gender'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['age', 'Sum of people'], 'count', 'gender'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['age', 'Sum of people'], 'count', 'gender'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 3), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['age', 'Sum of people'], 'count', 'color'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 3), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['age', 'Sum of people'], 'count', 'color'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 3), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['age', 'Sum of people'], 'count', 'color'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 3), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['age', 'Sum of people'], 'count', 'color'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'count', 'age'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'count', 'age'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'count', 'age'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'count', 'age'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'count', 'Sum of people'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'count', 'Sum of people'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'count', 'Sum of people'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'count', 'Sum of people'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'count', 'gender'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'count', 'gender'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'count', 'gender'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'count', 'gender'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'count', 'color'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'count', 'color'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'count', 'color'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'count', 'color'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 0), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'color'], 'count', 'age'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 0), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'color'], 'count', 'age'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 0), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'color'], 'count', 'age'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 0), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'color'], 'count', 'age'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'color'], 'count', 'Sum of people'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'color'], 'count', 'Sum of people'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'color'], 'count', 'Sum of people'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'color'], 'count', 'Sum of people'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 2), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'color'], 'count', 'gender'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 2), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'color'], 'count', 'gender'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 2), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'color'], 'count', 'gender'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 2), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'color'], 'count', 'gender'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 3), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'color'], 'count', 'color'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 3), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'color'], 'count', 'color'], 'eqmin', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 3), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'color'], 'count', 'color'], 'eqmax', 'Sum of people'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 3), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'color'], 'count', 'color'], 'eqmax', 'Sum of people'], ['COL0']]
+    # Summarize(SelectRow1(@param0, <, 1, 970357@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'Sum of people', 970357], 'count', 'age']
+    # Summarize(SelectRow1(@param0, <, 1, 970357@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'Sum of people', 970357], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, <, 1, 970357@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'Sum of people', 970357], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, <, 1, 970357@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'Sum of people', 970357], 'count', 'color']
+    # Summarize(SelectRow1(@param0, <=, 1, 336303@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'Sum of people', 336303], 'count', 'age']
+    # Summarize(SelectRow1(@param0, <=, 1, 336303@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'Sum of people', 336303], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, <=, 1, 336303@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'Sum of people', 336303], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, <=, 1, 336303@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'Sum of people', 336303], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 10119296@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10119296], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 10119296@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10119296], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 10119296@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10119296], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 10119296@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10119296], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 10261253@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10261253], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 10261253@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10261253], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 10261253@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10261253], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 10261253@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10261253], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 1064581@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 1064581], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 1064581@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 1064581], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 1064581@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 1064581], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 1064581@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 1064581], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 3221898@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 3221898], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 3221898@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 3221898], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 3221898@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 3221898], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 3221898@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 3221898], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 9925006@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9925006], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 9925006@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9925006], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 9925006@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9925006], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 9925006@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9925006], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 3792145@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 3792145], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 3792145@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 3792145], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 3792145@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 3792145], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 3792145@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 3792145], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 2912655@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 2912655], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 2912655@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 2912655], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 2912655@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 2912655], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 2912655@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 2912655], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 8911133@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 8911133], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 8911133@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 8911133], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 8911133@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 8911133], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 8911133@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 8911133], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 8507934@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 8507934], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 8507934@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 8507934], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 8507934@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 8507934], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 8507934@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 8507934], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 10563233@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10563233], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 10563233@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10563233], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 10563233@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10563233], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 10563233@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10563233], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 9518507@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9518507], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 9518507@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9518507], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 9518507@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9518507], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 9518507@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9518507], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 1902638@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 1902638], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 1902638@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 1902638], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 1902638@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 1902638], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 1902638@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 1902638], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 336303@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 336303], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 336303@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 336303], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 336303@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 336303], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 336303@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 336303], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 4804784@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 4804784], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 4804784@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 4804784], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 4804784@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 4804784], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 4804784@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 4804784], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 6921268@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 6921268], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 6921268@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 6921268], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 6921268@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 6921268], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 6921268@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 6921268], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 10205879@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10205879], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 10205879@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10205879], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 10205879@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10205879], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 10205879@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10205879], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 10069564@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10069564], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 10069564@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10069564], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 10069564@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10069564], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 10069564@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10069564], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 11320252@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 11320252], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 11320252@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 11320252], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 11320252@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 11320252], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 11320252@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 11320252], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 11635647@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 11635647], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 11635647@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 11635647], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 11635647@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 11635647], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 11635647@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 11635647], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 4355644@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 4355644], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 4355644@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 4355644], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 4355644@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 4355644], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 4355644@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 4355644], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 11488578@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 11488578], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 11488578@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 11488578], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 11488578@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 11488578], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 11488578@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 11488578], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 5123399@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 5123399], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 5123399@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 5123399], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 5123399@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 5123399], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 5123399@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 5123399], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 6459082@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 6459082], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 6459082@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 6459082], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 6459082@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 6459082], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 6459082@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 6459082], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 10552146@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10552146], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 10552146@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10552146], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 10552146@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10552146], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 10552146@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10552146], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 9735380@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9735380], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 9735380@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9735380], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 9735380@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9735380], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 9735380@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9735380], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 9324244@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9324244], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 9324244@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9324244], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 9324244@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9324244], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 9324244@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9324244], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 5184855@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 5184855], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 5184855@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 5184855], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 5184855@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 5184855], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 5184855@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 5184855], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 5668961@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 5668961], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 5668961@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 5668961], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 5668961@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 5668961], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 5668961@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 5668961], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 1981156@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 1981156], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 1981156@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 1981156], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 1981156@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 1981156], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 1981156@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 1981156], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 9659493@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9659493], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 9659493@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9659493], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 9659493@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9659493], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 9659493@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9659493], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 10237419@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10237419], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 10237419@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10237419], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 10237419@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10237419], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 10237419@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10237419], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 11475182@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 11475182], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 11475182@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 11475182], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 11475182@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 11475182], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 11475182@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 11475182], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 9731315@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9731315], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 9731315@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9731315], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 9731315@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9731315], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 9731315@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9731315], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 970357@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 970357], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 970357@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 970357], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 970357@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 970357], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 970357@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 970357], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 4453623@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 4453623], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 4453623@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 4453623], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 4453623@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 4453623], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 4453623@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 4453623], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 9310714@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9310714], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 9310714@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9310714], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 9310714@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9310714], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 9310714@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9310714], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 10022524@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10022524], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 10022524@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10022524], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 10022524@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10022524], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 10022524@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 10022524], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 9692669@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9692669], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 1, 9692669@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9692669], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 1, 9692669@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9692669], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 1, 9692669@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Sum of people', 9692669], 'count', 'color']
+    # Summarize(SelectRow1(@param0, >=, 1, 11635647@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'Sum of people', 11635647], 'count', 'age']
+    # Summarize(SelectRow1(@param0, >=, 1, 11635647@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'Sum of people', 11635647], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, >=, 1, 11635647@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'Sum of people', 11635647], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, >=, 1, 11635647@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'Sum of people', 11635647], 'count', 'color']
+    # Summarize(SelectRow1(@param0, >, 1, 11488578@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'Sum of people', 11488578], 'count', 'age']
+    # Summarize(SelectRow1(@param0, >, 1, 11488578@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'Sum of people', 11488578], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, >, 1, 11488578@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'Sum of people', 11488578], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, >, 1, 11488578@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'Sum of people', 11488578], 'count', 'color']
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmin, 0), ['1'])
+# top-2, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmin, 0), ['-99'])
+# top-3, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmax, 0), ['1'])
+# top-4, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmax, 0), ['-99'])
+# top-5, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmin, 0), ['1'])
+# top-6, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmin, 0), ['-99'])
+# top-7, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmax, 0), ['1'])
+# top-8, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmax, 0), ['-99'])
+# top-9, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmin, 0), ['1'])
+# top-10, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmin, 0), ['-99'])
+# top-11, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmax, 0), ['1'])
+# top-12, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmax, 0), ['-99'])
+# top-13, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 3), eqmin, 0), ['1'])
+# top-14, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 3), eqmin, 0), ['-99'])
+# top-15, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 3), eqmax, 0), ['1'])
+# top-16, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 3), eqmax, 0), ['-99'])
+# top-17, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['2'])
+# top-18, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['-99', '-1'])
+# top-19, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['2'])
+# top-20, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['-99', '-1'])
+# top-21, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['2'])
+# top-22, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['-99', '-1'])
+# top-23, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['2'])
+# top-24, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['-99', '-1'])
+# top-25, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['2'])
+# top-26, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['-99', '-1'])
+# top-27, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['2'])
+# top-28, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['-99', '-1'])
+# top-29, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 3), eqmin, 1), ['2'])
+# top-30, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 3), eqmin, 1), ['-99', '-1'])
+# top-31, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 3), eqmax, 1), ['2'])
+# top-32, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 3), eqmax, 1), ['-99', '-1'])
+# top-33, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 0), ['2'])
+# top-34, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 0), ['-99', '-1'])
+# top-35, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 0), ['2'])
+# top-36, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 0), ['-99', '-1'])
+# top-37, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 0), ['2'])
+# top-38, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 0), ['-99', '-1'])
+# top-39, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 0), ['2'])
+# top-40, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 0), ['-99', '-1'])
+# top-41, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 0), ['2'])
+# top-42, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 0), ['-99', '-1'])
+# top-43, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 0), ['2'])
+# top-44, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 0), ['-99', '-1'])
+# top-45, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmin, 0), ['2'])
+# top-46, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmin, 0), ['-99', '-1'])
+# top-47, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmax, 0), ['2'])
+# top-48, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmax, 0), ['-99', '-1'])
+# top-49, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 0), eqmin, 0), ['2'])
+# top-50, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 0), eqmin, 0), ['-99', '-1'])
+# top-51, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 0), eqmax, 0), ['2'])
+# top-52, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 0), eqmax, 0), ['-99', '-1'])
+# top-53, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 1), eqmin, 0), ['2'])
+# top-54, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 1), eqmin, 0), ['-99', '-1'])
+# top-55, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 1), eqmax, 0), ['2'])
+# top-56, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 1), eqmax, 0), ['-99', '-1'])
+# top-57, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 2), eqmin, 0), ['2'])
+# top-58, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 2), eqmin, 0), ['-99', '-1'])
+# top-59, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 2), eqmax, 0), ['2'])
+# top-60, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 2), eqmax, 0), ['-99', '-1'])
+# top-61, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 3), eqmin, 0), ['2'])
+# top-62, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 3), eqmin, 0), ['-99', '-1'])
+# top-63, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 3), eqmax, 0), ['2'])
+# top-64, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], count, 3), eqmax, 0), ['-99', '-1'])
+# top-65, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 1, 970357@Int), count, 0)
+# top-66, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 1, 970357@Int), count, 1)
+# top-67, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 1, 970357@Int), count, 2)
+# top-68, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 1, 970357@Int), count, 3)
+# top-69, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 1, 336303@Int), count, 0)
+# top-70, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 1, 336303@Int), count, 1)
+# top-71, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 1, 336303@Int), count, 2)
+# top-72, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 1, 336303@Int), count, 3)
+# top-73, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10119296@Int), count, 0)
+# top-74, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10119296@Int), count, 1)
+# top-75, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10119296@Int), count, 2)
+# top-76, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10119296@Int), count, 3)
+# top-77, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10261253@Int), count, 0)
+# top-78, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10261253@Int), count, 1)
+# top-79, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10261253@Int), count, 2)
+# top-80, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10261253@Int), count, 3)
+# top-81, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 1064581@Int), count, 0)
+# top-82, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 1064581@Int), count, 1)
+# top-83, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 1064581@Int), count, 2)
+# top-84, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 1064581@Int), count, 3)
+# top-85, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 3221898@Int), count, 0)
+# top-86, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 3221898@Int), count, 1)
+# top-87, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 3221898@Int), count, 2)
+# top-88, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 3221898@Int), count, 3)
+# top-89, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9925006@Int), count, 0)
+# top-90, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9925006@Int), count, 1)
+# top-91, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9925006@Int), count, 2)
+# top-92, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9925006@Int), count, 3)
+# top-93, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 3792145@Int), count, 0)
+# top-94, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 3792145@Int), count, 1)
+# top-95, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 3792145@Int), count, 2)
+# top-96, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 3792145@Int), count, 3)
+# top-97, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 2912655@Int), count, 0)
+# top-98, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 2912655@Int), count, 1)
+# top-99, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 2912655@Int), count, 2)
+# top-100, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 2912655@Int), count, 3)
+# top-101, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 8911133@Int), count, 0)
+# top-102, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 8911133@Int), count, 1)
+# top-103, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 8911133@Int), count, 2)
+# top-104, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 8911133@Int), count, 3)
+# top-105, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 8507934@Int), count, 0)
+# top-106, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 8507934@Int), count, 1)
+# top-107, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 8507934@Int), count, 2)
+# top-108, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 8507934@Int), count, 3)
+# top-109, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10563233@Int), count, 0)
+# top-110, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10563233@Int), count, 1)
+# top-111, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10563233@Int), count, 2)
+# top-112, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10563233@Int), count, 3)
+# top-113, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9518507@Int), count, 0)
+# top-114, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9518507@Int), count, 1)
+# top-115, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9518507@Int), count, 2)
+# top-116, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9518507@Int), count, 3)
+# top-117, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 1902638@Int), count, 0)
+# top-118, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 1902638@Int), count, 1)
+# top-119, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 1902638@Int), count, 2)
+# top-120, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 1902638@Int), count, 3)
+# top-121, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 336303@Int), count, 0)
+# top-122, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 336303@Int), count, 1)
+# top-123, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 336303@Int), count, 2)
+# top-124, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 336303@Int), count, 3)
+# top-125, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 4804784@Int), count, 0)
+# top-126, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 4804784@Int), count, 1)
+# top-127, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 4804784@Int), count, 2)
+# top-128, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 4804784@Int), count, 3)
+# top-129, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 6921268@Int), count, 0)
+# top-130, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 6921268@Int), count, 1)
+# top-131, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 6921268@Int), count, 2)
+# top-132, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 6921268@Int), count, 3)
+# top-133, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10205879@Int), count, 0)
+# top-134, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10205879@Int), count, 1)
+# top-135, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10205879@Int), count, 2)
+# top-136, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10205879@Int), count, 3)
+# top-137, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10069564@Int), count, 0)
+# top-138, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10069564@Int), count, 1)
+# top-139, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10069564@Int), count, 2)
+# top-140, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10069564@Int), count, 3)
+# top-141, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11320252@Int), count, 0)
+# top-142, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11320252@Int), count, 1)
+# top-143, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11320252@Int), count, 2)
+# top-144, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11320252@Int), count, 3)
+# top-145, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11635647@Int), count, 0)
+# top-146, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11635647@Int), count, 1)
+# top-147, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11635647@Int), count, 2)
+# top-148, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11635647@Int), count, 3)
+# top-149, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 4355644@Int), count, 0)
+# top-150, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 4355644@Int), count, 1)
+# top-151, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 4355644@Int), count, 2)
+# top-152, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 4355644@Int), count, 3)
+# top-153, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11488578@Int), count, 0)
+# top-154, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11488578@Int), count, 1)
+# top-155, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11488578@Int), count, 2)
+# top-156, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11488578@Int), count, 3)
+# top-157, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 5123399@Int), count, 0)
+# top-158, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 5123399@Int), count, 1)
+# top-159, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 5123399@Int), count, 2)
+# top-160, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 5123399@Int), count, 3)
+# top-161, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 6459082@Int), count, 0)
+# top-162, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 6459082@Int), count, 1)
+# top-163, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 6459082@Int), count, 2)
+# top-164, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 6459082@Int), count, 3)
+# top-165, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10552146@Int), count, 0)
+# top-166, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10552146@Int), count, 1)
+# top-167, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10552146@Int), count, 2)
+# top-168, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10552146@Int), count, 3)
+# top-169, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9735380@Int), count, 0)
+# top-170, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9735380@Int), count, 1)
+# top-171, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9735380@Int), count, 2)
+# top-172, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9735380@Int), count, 3)
+# top-173, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9324244@Int), count, 0)
+# top-174, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9324244@Int), count, 1)
+# top-175, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9324244@Int), count, 2)
+# top-176, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9324244@Int), count, 3)
+# top-177, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 5184855@Int), count, 0)
+# top-178, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 5184855@Int), count, 1)
+# top-179, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 5184855@Int), count, 2)
+# top-180, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 5184855@Int), count, 3)
+# top-181, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 5668961@Int), count, 0)
+# top-182, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 5668961@Int), count, 1)
+# top-183, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 5668961@Int), count, 2)
+# top-184, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 5668961@Int), count, 3)
+# top-185, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 1981156@Int), count, 0)
+# top-186, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 1981156@Int), count, 1)
+# top-187, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 1981156@Int), count, 2)
+# top-188, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 1981156@Int), count, 3)
+# top-189, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9659493@Int), count, 0)
+# top-190, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9659493@Int), count, 1)
+# top-191, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9659493@Int), count, 2)
+# top-192, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9659493@Int), count, 3)
+# top-193, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10237419@Int), count, 0)
+# top-194, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10237419@Int), count, 1)
+# top-195, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10237419@Int), count, 2)
+# top-196, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10237419@Int), count, 3)
+# top-197, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11475182@Int), count, 0)
+# top-198, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11475182@Int), count, 1)
+# top-199, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11475182@Int), count, 2)
+# top-200, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11475182@Int), count, 3)
+# top-201, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9731315@Int), count, 0)
+# top-202, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9731315@Int), count, 1)
+# top-203, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9731315@Int), count, 2)
+# top-204, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9731315@Int), count, 3)
+# top-205, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 970357@Int), count, 0)
+# top-206, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 970357@Int), count, 1)
+# top-207, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 970357@Int), count, 2)
+# top-208, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 970357@Int), count, 3)
+# top-209, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 4453623@Int), count, 0)
+# top-210, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 4453623@Int), count, 1)
+# top-211, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 4453623@Int), count, 2)
+# top-212, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 4453623@Int), count, 3)
+# top-213, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9310714@Int), count, 0)
+# top-214, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9310714@Int), count, 1)
+# top-215, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9310714@Int), count, 2)
+# top-216, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9310714@Int), count, 3)
+# top-217, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10022524@Int), count, 0)
+# top-218, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10022524@Int), count, 1)
+# top-219, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10022524@Int), count, 2)
+# top-220, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 10022524@Int), count, 3)
+# top-221, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9692669@Int), count, 0)
+# top-222, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9692669@Int), count, 1)
+# top-223, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9692669@Int), count, 2)
+# top-224, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 9692669@Int), count, 3)
+# top-225, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 11635647@Int), count, 0)
+# top-226, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 11635647@Int), count, 1)
+# top-227, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 11635647@Int), count, 2)
+# top-228, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 11635647@Int), count, 3)
+# top-229, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 11488578@Int), count, 0)
+# top-230, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 11488578@Int), count, 1)
+# top-231, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 11488578@Int), count, 2)
+# top-232, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 11488578@Int), count, 3)

@@ -1,0 +1,92 @@
+# parsed arguments: Namespace(benchmark='Qd780a', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'jill', 'margot', 'votes', 'majority', 'oliver', '6482', 'fraser', 'candidate', 'james', 'weiss', 'rainbow', '4787', 'color', '152', '2798', 'george', 'dobson', 'adrian', 'blue', '14857', 'frank', '10070'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+              Candidate  Votes color
+0          Frank Dobson  14857  blue
+1           Jill Fraser  10070  blue
+2          Margot James   6482  blue
+3         Adrian Oliver   2798  blue
+4  Rainbow George Weiss    152  blue
+5              Majority   4787  blue
+# query is: How many more votes did Margot James receive compared to Rainbow George Weiss?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0    6330
+# inferred DSL terminals:
+  # ConstVal: ['Rainbow George Weiss@Str', 'Votes@Str', 'Margot James@Str', '<NULL>']
+     # cmap: [('weiss', 'Rainbow George Weiss'), ('james', 'Margot James'), ('george', 'Rainbow George Weiss'), ('rainbow', 'Rainbow George Weiss'), ('votes', 'Votes'), ('margot', 'Margot James')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['==', '>', '>=', '<NULL>']
+     # bmap: [('more', '>='), (None, '=='), ('more', '>')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(6330, 12), (-6330, 12)]
+  # [debug] high_values (no dup.): [(6330, 12), (-6330, 12)]
+  # [debug] filtered low_values (no dup.): [(14705, 4), (9918, 4), (4635, 4), (2646, 4), (-2646, 4), (-4635, 4), (-9918, 4), (-14705, 4), (8375, 3), (3684, 3)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 6482}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Margot James@Str), ==, 0, Margot James@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Candidate', 'Margot James'], '==', 'Candidate', 'Margot James'], ['Votes']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Margot James@Str), ==, 0, Margot James@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Candidate', 'Margot James'], '==', 'Candidate', 'Margot James'], ['Votes']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Margot James@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Margot James'], ['Votes']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Margot James@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Margot James'], ['Votes']]
+# (t=2.85) i=1, candidate=[{'ANSWER': 12964}]
+  # found 0 program(s)
+# (t=5.68) i=2, candidate=[{'ANSWER': 19446}]
+  # found 0 program(s)
+# (t=8.53) i=3, candidate=[{'ANSWER': 6330}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Margot James@Str, Rainbow George Weiss@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Candidate', 'Margot James', 'Rainbow George Weiss', 'Votes']
+# (t=11.34) i=4, candidate=[{'ANSWER': -6330}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Rainbow George Weiss@Str, Margot James@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Candidate', 'Rainbow George Weiss', 'Margot James', 'Votes']
+# (t=14.45) i=5, candidate=[{'ANSWER': 14705}]
+  # found 0 program(s)
+# (t=17.31) i=6, candidate=[{'ANSWER': 9918}]
+  # found 0 program(s)
+# (t=20.15) i=7, candidate=[{'ANSWER': 4635}]
+  # found 0 program(s)
+# (t=22.96) i=8, candidate=[{'ANSWER': 2646}]
+  # found 0 program(s)
+# (t=25.75) i=9, candidate=[{'ANSWER': -2646}]
+  # found 0 program(s)
+# (t=28.55) i=10, candidate=[{'ANSWER': -4635}]
+  # found 0 program(s)
+# (t=31.69) i=11, candidate=[{'ANSWER': -9918}]
+  # found 0 program(s)
+# (t=34.56) i=12, candidate=[{'ANSWER': -14705}]
+  # found 0 program(s)
+# (t=37.39) i=13, candidate=[{'ANSWER': 8375}]
+  # found 0 program(s)
+# (t=40.23) i=14, candidate=[{'ANSWER': 3684}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.68, answer: [6330]
+  # tprog: Contrast(@param0, -, 0, Margot James@Str, Rainbow George Weiss@Str, 1)
+# top-2, score: 2.68, answer: [-6330]
+  # tprog: Contrast(@param0, -, 0, Rainbow George Weiss@Str, Margot James@Str, 1)
+# top-3, score: 2.37, answer: [6482]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Margot James@Str), ['1'])
+# top-4, score: 2.37, answer: [6482]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Margot James@Str), ['-99', '-2'])
+# top-5, score: 2.32, answer: [6482]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Margot James@Str), ==, 0, Margot James@Str), ['1'])
+# top-6, score: 2.32, answer: [6482]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Margot James@Str), ==, 0, Margot James@Str), ['-99', '-2'])

@@ -1,0 +1,73 @@
+# parsed arguments: Namespace(benchmark='Q03a03', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'954000', 'mrt', '3939000', 'bus', '3095000', 'taxi', 'lrt', 'color', 'transportation', 'blue', 'ridership', '180000'}
+# input type: [dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+   ridership transportation color
+0    3939000            Bus  blue
+1    3095000            MRT  blue
+2     954000           Taxi  blue
+3     180000            LRT  blue
+# query is: Which transportation has the lowest ridership?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0    LRT
+# inferred DSL terminals:
+  # ConstVal: ['ridership@Str', 'transportation@Str', '<NULL>']
+     # cmap: [('ridership', 'ridership'), ('transportation', 'transportation')]
+  # AggrFunc: ['min', '<NULL>']
+     # amap: [('lowest', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('lowest', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'LRT'}]
+  # found 10 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['transportation'], 'min', 'ridership'], 'eqmin', 'COL0'], ['transportation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['transportation'], 'min', 'ridership'], 'eqmin', 'COL0'], ['transportation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['ridership', 'transportation'], 'min', 'ridership'], 'eqmin', 'ridership'], ['transportation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['ridership', 'transportation'], 'min', 'ridership'], 'eqmin', 'ridership'], ['transportation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['ridership', 'transportation'], 'min', 'ridership'], 'eqmin', 'COL0'], ['transportation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['ridership', 'transportation'], 'min', 'ridership'], 'eqmin', 'COL0'], ['transportation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['transportation', 'color'], 'min', 'ridership'], 'eqmin', 'COL0'], ['transportation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['transportation', 'color'], 'min', 'ridership'], 'eqmin', 'COL0'], ['transportation']]
+    # SelectCol(SelectRow0(@param0, eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'ridership'], ['transportation']]
+    # SelectCol(SelectRow0(@param0, eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'ridership'], ['transportation']]
+
+# ========== review report ========== #
+# top-1, score: 1.67, answer: LRT
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 0), ['1'])
+# top-2, score: 1.67, answer: LRT
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 0), ['-99', '-2'])
+# top-3, score: 1.60, answer: LRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 1), ['0'])
+# top-4, score: 1.60, answer: LRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 1), ['-1'])
+# top-5, score: 1.59, answer: LRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['1'])
+# top-6, score: 1.59, answer: LRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['-99', '-2'])
+# top-7, score: 1.59, answer: LRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['1'])
+# top-8, score: 1.59, answer: LRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['-99', '-2'])
+# top-9, score: 1.59, answer: LRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['0'])
+# top-10, score: 1.59, answer: LRT
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['-1', '-2'])

@@ -1,0 +1,46 @@
+# parsed arguments: Namespace(benchmark='Q9e356', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'48', 'blue', 'african', 'race', '57', 'latino', 'percent', 'white', '38', 'color', 'american'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+               Race  Percent color
+0             White       57  blue
+1            Latino       48  blue
+2  African American       38  blue
+# query is: If you add the marriage rates of whites and Latinos, what percentage is derived?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0     105
+# inferred DSL terminals:
+  # ConstVal: ['Percent@Str', 'White@Str', '<NULL>']
+     # cmap: [('whites', 'White'), ('percentage', 'Percent')]
+  # AggrFunc: ['sum', '<NULL>']
+     # amap: [('add', 'sum')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 48}]
+  # found 0 program(s)
+# (t=0.51) i=1, candidate=[{'ANSWER': 57}]
+  # found 3 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, White@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Race', 'White'], 'sum', 'Percent']
+    # SelectCol(SelectRow1(@param0, ==, 0, White@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Race', 'White'], ['Percent']]
+    # SelectCol(SelectRow1(@param0, ==, 0, White@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Race', 'White'], ['Percent']]
+
+# ========== review report ========== #
+# top-1, score: 2.34, answer: 57
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, White@Str), sum, 1)
+# top-2, score: 2.29, answer: 57
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, White@Str), ['1'])
+# top-3, score: 2.29, answer: 57
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, White@Str), ['-99', '-2'])

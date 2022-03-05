@@ -1,0 +1,31 @@
+# First, specify the types that will be used
+enum ColInt {
+    "0", "1", "2", "3", "4", "5"
+}
+enumset ColList[2] {
+    "0", "1", "2", "3", "4", "5", "-99", "-1", "-2", "-3", "-4", "-5"
+}
+
+<ConstVal>
+<AggrFunc>
+<NumFunc>
+<BoolFunc>
+<IndFunc>
+
+value Table;
+value Empty;
+
+# Next, specify the input/output of the synthesized program
+program Watson(Table) -> Table;
+
+# Finally, specify the production rules
+func empty: Empty -> Empty;
+func SelectCol: Table r -> Table a, ColList b;
+func Gather: Table r -> Table a, ColList b;
+func Spread: Table r -> Table a, ColInt b, ColInt c, ColInt d;
+func Mutate: Table r -> Table a, NumFunc b, ColInt c, ColInt d;
+func SelectRow0: Table r -> Table a, IndFunc b, ColInt c;
+func SelectRow1: Table r -> Table a, BoolFunc b, ColInt c, ConstVal d;
+func GroupSum: Table r -> Table a, ColList b, AggrFunc c, ColInt d;
+func Summarize: Table r -> Table a, AggrFunc c, ColInt d;
+func Contrast: Table r -> Table a, NumFunc b, ColInt c, ConstVal d, ConstVal e, ColInt f;

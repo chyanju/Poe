@@ -1,0 +1,72 @@
+# parsed arguments: Namespace(benchmark='Qb2a38', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'2.55', 'blair', '3.14', '2.98', '-3.62', 'cameron', 'color', 'blue', '-1.05', '-3.95', '11.53', 'category', 'major', '0.76', '-4.18', 'percentage', 'administration', '-1.29', 'thatcher', 'brown', '7.5', '8.8', 'rainfall', 'temperature', 'red', '-1.71', 'sunshine', '1.77', '-0.21', 'orange'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+   administration     category  percentage   color
+0           Blair  Temperature        7.50     red
+1           Blair     Sunshine        3.14  orange
+2           Blair     Rainfall        8.80    blue
+3           Brown  Temperature       -3.95     red
+4           Brown     Sunshine        1.77  orange
+5           Brown     Rainfall       -0.21    blue
+6        Thatcher  Temperature        0.76     red
+7        Thatcher     Sunshine       -1.05  orange
+8        Thatcher     Rainfall       11.53    blue
+9         Cameron  Temperature       -4.18     red
+10        Cameron     Sunshine       -1.29  orange
+11        Cameron     Rainfall       -1.71    blue
+12          Major  Temperature        2.98     red
+13          Major     Sunshine        2.55  orange
+14          Major     Rainfall       -3.62    blue
+# query is: What percentage of sunshine did Blair get?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0    3.14
+# inferred DSL terminals:
+  # ConstVal: ['percentage@Str', 'Sunshine@Str', 'Blair@Str', '<NULL>']
+     # cmap: [('blair', 'Blair'), ('percentage', 'percentage'), ('sunshine', 'Sunshine')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 2.55}]
+  # found 0 program(s)
+# (t=2.02) i=1, candidate=[{'ANSWER': -3.62}]
+  # found 0 program(s)
+# (t=4.02) i=2, candidate=[{'ANSWER': 2.98}]
+  # found 0 program(s)
+# (t=6.02) i=3, candidate=[{'ANSWER': 3.14}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Blair@Str), ==, 1, Sunshine@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'administration', 'Blair'], '==', 'category', 'Sunshine'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Sunshine@Str), ==, 0, Blair@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'category', 'Sunshine'], '==', 'administration', 'Blair'], ['percentage']]
+# (t=8.02) i=4, candidate=[{'ANSWER': 1.77}]
+  # found 0 program(s)
+# (t=10.05) i=5, candidate=[{'ANSWER': 7.5}]
+  # found 0 program(s)
+# (t=12.11) i=6, candidate=[{'ANSWER': -1.05}]
+  # found 0 program(s)
+# (t=14.15) i=7, candidate=[{'ANSWER': -3.95}]
+  # found 0 program(s)
+# (t=16.19) i=8, candidate=[{'ANSWER': -1.29}]
+  # found 0 program(s)
+# (t=18.20) i=9, candidate=[{'ANSWER': 8.8}]
+  # found 0 program(s)
+# (t=20.22) i=10, candidate=[{'ANSWER': -1.71}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.52, answer: 3.14
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Blair@Str), ==, 1, Sunshine@Str), ['2'])
+# top-2, score: 2.52, answer: 3.14
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Sunshine@Str), ==, 0, Blair@Str), ['2'])

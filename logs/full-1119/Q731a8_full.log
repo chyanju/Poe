@@ -1,0 +1,169 @@
+# parsed arguments: Namespace(benchmark='Q731a8', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'lebanon', 'greece', 'no', '32', 'hard', 'germany', 'turkey', '73', 'india', 'mexico', 'spain', '40', '54', 'britain', '41', '56', '46', '53', '45', '42', 'u.s.', '27', 'egypt', '50', 'work', 'russia', 'japan', '64', 'succeed', 'blue', 'czech', '43', '57', '51', 'guarantee', 'country', '30', '35', '65', 'orange', '20', '67', 'china', 'france', '77', 'poland', '59', '39', 'response', 'percentage', 'jordan', 'pakistan', 'italy', 'tunisia', 'rep.', '33', '81', '24', '69', '31', '37', '48', 'most', 'brazil', 'if', '15', 'color'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       country                   response  percentage   color
+0         U.S.     Hard work no guarantee          20    blue
+1         U.S.  Most succeed if work hard          77  orange
+2      Britain     Hard work no guarantee          41    blue
+3      Britain  Most succeed if work hard          57  orange
+4        Spain     Hard work no guarantee          43    blue
+5        Spain  Most succeed if work hard          56  orange
+6   Czech Rep.     Hard work no guarantee          43    blue
+7   Czech Rep.  Most succeed if work hard          54  orange
+8      Germany     Hard work no guarantee          48    blue
+9      Germany  Most succeed if work hard          51  orange
+10      Poland     Hard work no guarantee          43    blue
+11      Poland  Most succeed if work hard          48  orange
+12      France     Hard work no guarantee          54    blue
+13      France  Most succeed if work hard          46  orange
+14       Italy     Hard work no guarantee          46    blue
+15       Italy  Most succeed if work hard          43  orange
+16      Greece     Hard work no guarantee          51    blue
+17      Greece  Most succeed if work hard          43  orange
+18      Russia     Hard work no guarantee          53    blue
+19      Russia  Most succeed if work hard          35  orange
+20    Pakistan     Hard work no guarantee          15    blue
+21    Pakistan  Most succeed if work hard          81  orange
+22     Tunisia     Hard work no guarantee          24    blue
+23     Tunisia  Most succeed if work hard          73  orange
+24      Jordan     Hard work no guarantee          37    blue
+25      Jordan  Most succeed if work hard          57  orange
+26       Egypt     Hard work no guarantee          42    blue
+27       Egypt  Most succeed if work hard          53  orange
+28      Turkey     Hard work no guarantee          39    blue
+29      Turkey  Most succeed if work hard          50  orange
+30     Lebanon     Hard work no guarantee          64    blue
+31     Lebanon  Most succeed if work hard          32  orange
+32       India     Hard work no guarantee          27    blue
+33       India  Most succeed if work hard          67  orange
+34       China     Hard work no guarantee          33    blue
+35       China  Most succeed if work hard          45  orange
+36       Japan     Hard work no guarantee          59    blue
+37       Japan  Most succeed if work hard          40  orange
+38      Brazil     Hard work no guarantee          30    blue
+39      Brazil  Most succeed if work hard          69  orange
+40      Mexico     Hard work no guarantee          31    blue
+41      Mexico  Most succeed if work hard          65  orange
+# query is: Which country has the highest percentage of "Most succeed if work hard"?
+# expected output type:[dtype('O')]
+# expected output is:
+     ANSWER
+0  Pakistan
+# inferred DSL terminals:
+  # ConstVal: ['percentage@Str', 'Most succeed if work hard@Str', 'country@Str', 'Hard work no guarantee@Str', '<NULL>']
+     # cmap: [('succeed', 'Most succeed if work hard'), ('percentage', 'percentage'), ('if', 'Most succeed if work hard'), ('country', 'country'), ('work', 'Most succeed if work hard'), ('work', 'Hard work no guarantee'), ('most', 'Most succeed if work hard'), ('hard', 'Most succeed if work hard'), ('hard', 'Hard work no guarantee')]
+  # AggrFunc: ['max', '<NULL>']
+     # amap: [('most', 'max')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('most', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Mexico'}]
+  # found 0 program(s)
+# (t=4.48) i=1, candidate=[{'ANSWER': 'U.S.'}]
+  # found 0 program(s)
+# (t=8.98) i=2, candidate=[{'ANSWER': 'Britain'}]
+  # found 0 program(s)
+# (t=13.57) i=3, candidate=[{'ANSWER': 'Spain'}]
+  # found 0 program(s)
+# (t=18.13) i=4, candidate=[{'ANSWER': 'Pakistan'}]
+  # found 13 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Most succeed if work hard@Str), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'response', 'Most succeed if work hard'], 'eqmax', 'percentage'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'max', 'percentage'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'max', 'percentage'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'response'], 'max', 'percentage'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'response'], 'max', 'percentage'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(@param0, eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'percentage'], ['country']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Most succeed if work hard@Str), ==, 1, Most succeed if work hard@Str), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Most succeed if work hard'], '==', 'response', 'Most succeed if work hard'], 'eqmax', 'percentage'], ['country']]
+# (t=22.62) i=5, candidate=[{'ANSWER': 'Czech Rep.'}]
+  # found 0 program(s)
+# (t=27.12) i=6, candidate=[{'ANSWER': 'Brazil'}]
+  # found 0 program(s)
+# (t=31.80) i=7, candidate=[{'ANSWER': 'Egypt'}]
+  # found 0 program(s)
+# (t=36.58) i=8, candidate=[{'ANSWER': 'Lebanon'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Hard work no guarantee@Str), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'response', 'Hard work no guarantee'], 'eqmax', 'percentage'], ['country']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Hard work no guarantee@Str), ==, 1, Hard work no guarantee@Str), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Hard work no guarantee'], '==', 'response', 'Hard work no guarantee'], 'eqmax', 'percentage'], ['country']]
+# (t=41.28) i=9, candidate=[{'ANSWER': 'Turkey'}]
+  # found 0 program(s)
+# (t=46.06) i=10, candidate=[{'ANSWER': 'Jordan'}]
+  # found 0 program(s)
+# (t=50.86) i=11, candidate=[{'ANSWER': 'Russia'}]
+  # found 0 program(s)
+# (t=55.60) i=12, candidate=[{'ANSWER': 'Germany'}]
+  # found 0 program(s)
+# (t=60.24) i=13, candidate=[{'ANSWER': 'Poland'}]
+  # found 0 program(s)
+# (t=64.64) i=14, candidate=[{'ANSWER': 'India'}]
+  # found 0 program(s)
+# (t=69.08) i=15, candidate=[{'ANSWER': 'France'}]
+  # found 0 program(s)
+# (t=73.57) i=16, candidate=[{'ANSWER': 'Tunisia'}]
+  # found 0 program(s)
+# (t=78.26) i=17, candidate=[{'ANSWER': 'Greece'}]
+  # found 0 program(s)
+# (t=82.68) i=18, candidate=[{'ANSWER': 'Japan'}]
+  # found 0 program(s)
+# (t=87.15) i=19, candidate=[{'ANSWER': 'Italy'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.68, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Most succeed if work hard@Str), eqmax, 2), ['0'])
+# top-2, score: 2.65, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Most succeed if work hard@Str), ==, 1, Most succeed if work hard@Str), eqmax, 2), ['0'])
+# top-3, score: 1.52, answer: ['Lebanon']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Hard work no guarantee@Str), eqmax, 2), ['0'])
+# top-4, score: 1.49, answer: ['Lebanon']
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Hard work no guarantee@Str), ==, 1, Hard work no guarantee@Str), eqmax, 2), ['0'])
+# top-5, score: 1.42, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 2), ['0'])
+# top-6, score: 1.35, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['0'])
+# top-7, score: 1.35, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['-1'])
+# top-8, score: 1.34, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['0'])
+# top-9, score: 1.34, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-10, score: 1.34, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['0'])
+# top-11, score: 1.34, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+# top-12, score: 1.34, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['0'])
+# top-13, score: 1.34, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-14, score: 1.34, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['0'])
+# top-15, score: 1.34, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['-1', '-2'])

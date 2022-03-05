@@ -1,0 +1,74 @@
+# parsed arguments: Namespace(benchmark='Qc9125', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'latino', '57', 'percent', 'color', 'african', 'white', 'race', 'american', '38', 'blue', '48'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+               Race  Percent color
+0             White       57  blue
+1            Latino       48  blue
+2  African American       38  blue
+# query is: Which race shown for marriage rate of the given variables is the smallest?
+# expected output type:[dtype('O')]
+# expected output is:
+             ANSWER
+0  African American
+# inferred DSL terminals:
+  # ConstVal: ['Race@Str', '<NULL>']
+     # cmap: [('race', 'Race')]
+  # AggrFunc: ['min', '<NULL>']
+     # amap: [('smallest', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('smallest', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'African American'}]
+  # found 10 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Race'], 'min', 'Percent'], 'eqmin', 'COL0'], ['Race']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Race'], 'min', 'Percent'], 'eqmin', 'COL0'], ['Race']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Race', 'Percent'], 'min', 'Percent'], 'eqmin', 'Percent'], ['Race']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Race', 'Percent'], 'min', 'Percent'], 'eqmin', 'Percent'], ['Race']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Race', 'Percent'], 'min', 'Percent'], 'eqmin', 'COL0'], ['Race']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Race', 'Percent'], 'min', 'Percent'], 'eqmin', 'COL0'], ['Race']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Race', 'color'], 'min', 'Percent'], 'eqmin', 'COL0'], ['Race']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Race', 'color'], 'min', 'Percent'], 'eqmin', 'COL0'], ['Race']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Percent'], ['Race']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Percent'], ['Race']]
+# (t=0.57) i=1, candidate=[{'ANSWER': 'Latino'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.32, answer: ['African American']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+# top-2, score: 1.32, answer: ['African American']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+# top-3, score: 1.25, answer: ['African American']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+# top-4, score: 1.25, answer: ['African American']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+# top-5, score: 1.24, answer: ['African American']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+# top-6, score: 1.24, answer: ['African American']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+# top-7, score: 1.24, answer: ['African American']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+# top-8, score: 1.24, answer: ['African American']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-9, score: 1.24, answer: ['African American']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+# top-10, score: 1.24, answer: ['African American']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])

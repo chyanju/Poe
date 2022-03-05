@@ -1,0 +1,1149 @@
+# parsed arguments: Namespace(benchmark='Qb39e8', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'28029721', 'total', 'blue', '37812334', 'go', 'color', 'regional', 'funds', 'turkey', '22094911', '15804557', 'lebanon', 'jordan', 'to', 'country', '40221893', 'iraq', 'egypt', '1700000'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+    Country  Total funds go to color
+0    Jordan           40221893  blue
+1   Lebanon           37812334  blue
+2  Regional           28029721  blue
+3    Turkey           22094911  blue
+4      Iraq           15804557  blue
+5     Egypt            1700000  blue
+# query is: Which countries get less than Turkey?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0  Egypt
+1   Iraq
+# inferred DSL terminals:
+  # ConstVal: ['1700000@Int', 'Iraq@Str', '40221893@Int', 'Turkey@Str', 'Egypt@Str', 'blue@Str', 'Country@Str', '15804557@Int', '37812334@Int', 'Lebanon@Str', 'Regional@Str', 'color@Str', '28029721@Int', 'Jordan@Str', 'Total funds go to@Str', '22094911@Int']
+     # cmap: [(None, 1700000), (None, 'Iraq'), (None, 40221893), (None, 'Turkey'), (None, 'Egypt'), (None, 'blue'), (None, 'Country'), (None, 15804557), (None, 37812334), (None, 'Lebanon'), (None, 'Regional'), (None, 'color'), (None, 28029721), (None, 'Jordan'), (None, 'Total funds go to'), (None, 22094911)]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Iraq'}]
+  # found 280 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, <, 1, 22094911@Int), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<', 'Total funds go to', 22094911], 'eqmax', 'Total funds go to'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <, 1, 22094911@Int), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<', 'Total funds go to', 22094911], 'eqmax', 'Total funds go to'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <=, 1, 15804557@Int), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 15804557], 'eqmax', 'Total funds go to'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <=, 1, 15804557@Int), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 15804557], 'eqmax', 'Total funds go to'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >=, 1, 15804557@Int), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>=', 'Total funds go to', 15804557], 'eqmin', 'Total funds go to'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >=, 1, 15804557@Int), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>=', 'Total funds go to', 15804557], 'eqmin', 'Total funds go to'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >, 1, 1700000@Int), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>', 'Total funds go to', 1700000], 'eqmin', 'Total funds go to'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >, 1, 1700000@Int), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>', 'Total funds go to', 1700000], 'eqmin', 'Total funds go to'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, !=, 0, Egypt@Str), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '!=', 'Country', 'Egypt'], 'eqmin', 'Total funds go to'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, !=, 0, Egypt@Str), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '!=', 'Country', 'Egypt'], 'eqmin', 'Total funds go to'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, !=, 1, 1700000@Int), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 1700000], 'eqmin', 'Total funds go to'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, !=, 1, 1700000@Int), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 1700000], 'eqmin', 'Total funds go to'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 40221893@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 40221893], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 40221893@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 40221893], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 40221893@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 40221893], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 40221893@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 40221893], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 37812334@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 37812334], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 37812334@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 37812334], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 37812334@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 37812334], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 37812334@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 37812334], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 28029721@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 28029721], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 28029721@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 28029721], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 28029721@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 28029721], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 28029721@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 28029721], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 22094911], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 22094911], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 22094911], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 22094911], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), >=, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 22094911], '>=', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), >=, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 22094911], '>=', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), >, 1, 1700000@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 22094911], '>', 'Total funds go to', 1700000], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), >, 1, 1700000@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 22094911], '>', 'Total funds go to', 1700000], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), !=, 0, Egypt@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 22094911], '!=', 'Country', 'Egypt'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), !=, 0, Egypt@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 22094911], '!=', 'Country', 'Egypt'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), !=, 1, 1700000@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 22094911], '!=', 'Total funds go to', 1700000], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), !=, 1, 1700000@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Total funds go to', 22094911], '!=', 'Total funds go to', 1700000], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 40221893@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 40221893], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 40221893@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 40221893], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 40221893@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 40221893], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 40221893@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 40221893], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 15804557], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 15804557], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 15804557], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 15804557], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), >=, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 15804557], '>=', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), >=, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 15804557], '>=', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), >, 1, 1700000@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 15804557], '>', 'Total funds go to', 1700000], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), >, 1, 1700000@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 15804557], '>', 'Total funds go to', 1700000], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), !=, 0, Egypt@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 15804557], '!=', 'Country', 'Egypt'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), !=, 0, Egypt@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 15804557], '!=', 'Country', 'Egypt'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), !=, 1, 1700000@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 15804557], '!=', 'Total funds go to', 1700000], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), !=, 1, 1700000@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 15804557], '!=', 'Total funds go to', 1700000], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 37812334@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 37812334], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 37812334@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 37812334], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 37812334@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 37812334], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 37812334@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 37812334], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 28029721@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 28029721], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 28029721@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 28029721], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 28029721@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 28029721], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 28029721@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 28029721], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 22094911@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 22094911], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 22094911@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 22094911], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 22094911@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 22094911], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 22094911@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Total funds go to', 22094911], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, blue@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, blue@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, blue@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, blue@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 1700000@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Total funds go to', 1700000], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 1700000@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Total funds go to', 1700000], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 1700000@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Total funds go to', 1700000], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 1700000@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Total funds go to', 1700000], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 15804557@Int), <, 1, 22094911@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Total funds go to', 15804557], '<', 'Total funds go to', 22094911], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 15804557@Int), <, 1, 22094911@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Total funds go to', 15804557], '<', 'Total funds go to', 22094911], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 15804557@Int), <=, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Total funds go to', 15804557], '<=', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 15804557@Int), <=, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Total funds go to', 15804557], '<=', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 15804557@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Total funds go to', 15804557], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 15804557@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Total funds go to', 15804557], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 15804557@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Total funds go to', 15804557], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 15804557@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Total funds go to', 15804557], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 1700000@Int), <, 1, 22094911@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Total funds go to', 1700000], '<', 'Total funds go to', 22094911], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 1700000@Int), <, 1, 22094911@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Total funds go to', 1700000], '<', 'Total funds go to', 22094911], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 1700000@Int), <=, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Total funds go to', 1700000], '<=', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 1700000@Int), <=, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Total funds go to', 1700000], '<=', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 1700000@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Total funds go to', 1700000], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 1700000@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Total funds go to', 1700000], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 1700000@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Total funds go to', 1700000], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 1700000@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'Total funds go to', 1700000], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 1700000@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 1700000], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 1700000@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 1700000], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 1700000@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 1700000], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 1700000@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 1700000], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 40221893@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 40221893], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 40221893@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 40221893], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 40221893@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 40221893], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 40221893@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 40221893], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Turkey@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Turkey'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Turkey@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Turkey'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Turkey@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Turkey'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Turkey@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Turkey'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Egypt@Str), <, 1, 22094911@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Egypt'], '<', 'Total funds go to', 22094911], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Egypt@Str), <, 1, 22094911@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Egypt'], '<', 'Total funds go to', 22094911], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Egypt@Str), <=, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Egypt'], '<=', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Egypt@Str), <=, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Egypt'], '<=', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Egypt@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Egypt'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Egypt@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Egypt'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Egypt@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Egypt'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Egypt@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Egypt'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, blue@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'blue'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, blue@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'blue'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, blue@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'blue'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, blue@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'blue'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Country@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Country'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Country@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Country'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Country@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Country'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Country@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Country'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 15804557@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 15804557], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 15804557@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 15804557], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 15804557@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 15804557], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 15804557@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 15804557], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 37812334@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 37812334], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 37812334@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 37812334], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 37812334@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 37812334], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 37812334@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 37812334], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Lebanon@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Lebanon'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Lebanon@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Lebanon'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Lebanon@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Lebanon'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Lebanon@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Lebanon'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Regional@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Regional'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Regional@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Regional'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Regional@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Regional'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Regional@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Regional'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, color@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'color'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, color@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'color'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, color@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'color'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, color@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'color'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 28029721@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 28029721], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 28029721@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 28029721], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 28029721@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 28029721], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 28029721@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 28029721], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Jordan@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Jordan'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Jordan@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Jordan'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Jordan@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Jordan'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Jordan@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Jordan'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Total funds go to@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Total funds go to'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Total funds go to@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Total funds go to'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Total funds go to@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Total funds go to'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Total funds go to@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 'Total funds go to'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 22094911@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 22094911], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 22094911@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 22094911], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 22094911@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 22094911], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 22094911@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Country', 22094911], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 1700000@Int), <, 1, 22094911@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 1700000], '<', 'Total funds go to', 22094911], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 1700000@Int), <, 1, 22094911@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 1700000], '<', 'Total funds go to', 22094911], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 1700000@Int), <=, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 1700000], '<=', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 1700000@Int), <=, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 1700000], '<=', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 1700000@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 1700000], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 1700000@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 1700000], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 1700000@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 1700000], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 1700000@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 1700000], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Iraq@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Iraq'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Iraq@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Iraq'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Iraq@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Iraq'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Iraq@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Iraq'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 40221893@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 40221893], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 40221893@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 40221893], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 40221893@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 40221893], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 40221893@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 40221893], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Turkey@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Turkey'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Turkey@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Turkey'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Turkey@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Turkey'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Turkey@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Turkey'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Egypt@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Egypt'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Egypt@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Egypt'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Egypt@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Egypt'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Egypt@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Egypt'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, blue@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'blue'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, blue@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'blue'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, blue@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'blue'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, blue@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'blue'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Country@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Country'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Country@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Country'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Country@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Country'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Country@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Country'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 37812334@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 37812334], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 37812334@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 37812334], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 37812334@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 37812334], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 37812334@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 37812334], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Lebanon@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Lebanon'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Lebanon@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Lebanon'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Lebanon@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Lebanon'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Lebanon@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Lebanon'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Regional@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Regional'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Regional@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Regional'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Regional@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Regional'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Regional@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Regional'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, color@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'color'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, color@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'color'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, color@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'color'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, color@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'color'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 28029721@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 28029721], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 28029721@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 28029721], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 28029721@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 28029721], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 28029721@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 28029721], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Jordan@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Jordan'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Jordan@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Jordan'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Jordan@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Jordan'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Jordan@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Jordan'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Total funds go to@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Total funds go to'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Total funds go to@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Total funds go to'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Total funds go to@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Total funds go to'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Total funds go to@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 'Total funds go to'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 22094911@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 22094911], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 22094911@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 22094911], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 22094911@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 22094911], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 22094911@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Total funds go to', 22094911], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 1700000@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 1700000], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 1700000@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 1700000], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 1700000@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 1700000], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 1700000@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 1700000], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Iraq@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Iraq'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Iraq@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Iraq'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Iraq@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Iraq'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Iraq@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Iraq'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 40221893@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 40221893], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 40221893@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 40221893], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 40221893@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 40221893], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 40221893@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 40221893], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Turkey@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Turkey'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Turkey@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Turkey'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Turkey@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Turkey'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Turkey@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Turkey'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Egypt@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Egypt'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Egypt@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Egypt'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Egypt@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Egypt'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Egypt@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Egypt'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Country@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Country'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Country@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Country'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Country@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Country'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Country@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Country'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 15804557@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 15804557], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 15804557@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 15804557], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 15804557@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 15804557], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 15804557@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 15804557], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 37812334@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 37812334], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 37812334@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 37812334], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 37812334@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 37812334], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 37812334@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 37812334], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Lebanon@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Lebanon'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Lebanon@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Lebanon'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Lebanon@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Lebanon'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Lebanon@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Lebanon'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Regional@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Regional'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Regional@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Regional'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Regional@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Regional'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Regional@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Regional'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, color@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'color'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, color@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'color'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, color@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'color'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, color@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'color'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 28029721@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 28029721], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 28029721@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 28029721], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 28029721@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 28029721], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 28029721@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 28029721], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Jordan@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Jordan'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Jordan@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Jordan'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Jordan@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Jordan'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Jordan@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Jordan'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Total funds go to@Str), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Total funds go to'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Total funds go to@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Total funds go to'], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Total funds go to@Str), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Total funds go to'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Total funds go to@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'Total funds go to'], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 22094911@Int), ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 22094911], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 22094911@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 22094911], '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 22094911@Int), ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 22094911], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 22094911@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 22094911], '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Iraq@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Iraq@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Iraq'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 1, 15804557@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Total funds go to', 15804557], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 1, 15804557@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Total funds go to', 15804557], ['Country']]
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <, 1, 22094911@Int), eqmax, 1), ['0'])
+# top-2, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <, 1, 22094911@Int), eqmax, 1), ['-1', '-2'])
+# top-3, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <=, 1, 15804557@Int), eqmax, 1), ['0'])
+# top-4, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <=, 1, 15804557@Int), eqmax, 1), ['-1', '-2'])
+# top-5, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >=, 1, 15804557@Int), eqmin, 1), ['0'])
+# top-6, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >=, 1, 15804557@Int), eqmin, 1), ['-1', '-2'])
+# top-7, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >, 1, 1700000@Int), eqmin, 1), ['0'])
+# top-8, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >, 1, 1700000@Int), eqmin, 1), ['-1', '-2'])
+# top-9, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, !=, 0, Egypt@Str), eqmin, 1), ['0'])
+# top-10, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, !=, 0, Egypt@Str), eqmin, 1), ['-1', '-2'])
+# top-11, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, !=, 1, 1700000@Int), eqmin, 1), ['0'])
+# top-12, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, !=, 1, 1700000@Int), eqmin, 1), ['-1', '-2'])
+# top-13, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 40221893@Int), ==, 0, Iraq@Str), ['0'])
+# top-14, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 40221893@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-15, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 40221893@Int), ==, 1, 15804557@Int), ['0'])
+# top-16, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 40221893@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-17, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 37812334@Int), ==, 0, Iraq@Str), ['0'])
+# top-18, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 37812334@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-19, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 37812334@Int), ==, 1, 15804557@Int), ['0'])
+# top-20, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 37812334@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-21, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 28029721@Int), ==, 0, Iraq@Str), ['0'])
+# top-22, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 28029721@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-23, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 28029721@Int), ==, 1, 15804557@Int), ['0'])
+# top-24, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 28029721@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-25, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), ==, 0, Iraq@Str), ['0'])
+# top-26, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-27, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), ==, 1, 15804557@Int), ['0'])
+# top-28, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-29, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), >=, 1, 15804557@Int), ['0'])
+# top-30, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), >=, 1, 15804557@Int), ['-1', '-2'])
+# top-31, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), >, 1, 1700000@Int), ['0'])
+# top-32, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), >, 1, 1700000@Int), ['-1', '-2'])
+# top-33, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), !=, 0, Egypt@Str), ['0'])
+# top-34, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), !=, 0, Egypt@Str), ['-1', '-2'])
+# top-35, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), !=, 1, 1700000@Int), ['0'])
+# top-36, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 22094911@Int), !=, 1, 1700000@Int), ['-1', '-2'])
+# top-37, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 40221893@Int), ==, 0, Iraq@Str), ['0'])
+# top-38, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 40221893@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-39, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 40221893@Int), ==, 1, 15804557@Int), ['0'])
+# top-40, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 40221893@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-41, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), ==, 0, Iraq@Str), ['0'])
+# top-42, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-43, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), ==, 1, 15804557@Int), ['0'])
+# top-44, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-45, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), >=, 1, 15804557@Int), ['0'])
+# top-46, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), >=, 1, 15804557@Int), ['-1', '-2'])
+# top-47, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), >, 1, 1700000@Int), ['0'])
+# top-48, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), >, 1, 1700000@Int), ['-1', '-2'])
+# top-49, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), !=, 0, Egypt@Str), ['0'])
+# top-50, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), !=, 0, Egypt@Str), ['-1', '-2'])
+# top-51, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), !=, 1, 1700000@Int), ['0'])
+# top-52, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 15804557@Int), !=, 1, 1700000@Int), ['-1', '-2'])
+# top-53, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 37812334@Int), ==, 0, Iraq@Str), ['0'])
+# top-54, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 37812334@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-55, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 37812334@Int), ==, 1, 15804557@Int), ['0'])
+# top-56, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 37812334@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-57, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 28029721@Int), ==, 0, Iraq@Str), ['0'])
+# top-58, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 28029721@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-59, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 28029721@Int), ==, 1, 15804557@Int), ['0'])
+# top-60, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 28029721@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-61, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 22094911@Int), ==, 0, Iraq@Str), ['0'])
+# top-62, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 22094911@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-63, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 22094911@Int), ==, 1, 15804557@Int), ['0'])
+# top-64, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 22094911@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-65, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, blue@Str), ==, 0, Iraq@Str), ['0'])
+# top-66, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, blue@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-67, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, blue@Str), ==, 1, 15804557@Int), ['0'])
+# top-68, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, blue@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-69, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 1700000@Int), ==, 0, Iraq@Str), ['0'])
+# top-70, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 1700000@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-71, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 1700000@Int), ==, 1, 15804557@Int), ['0'])
+# top-72, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 1700000@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-73, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 15804557@Int), <, 1, 22094911@Int), ['0'])
+# top-74, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 15804557@Int), <, 1, 22094911@Int), ['-1', '-2'])
+# top-75, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 15804557@Int), <=, 1, 15804557@Int), ['0'])
+# top-76, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 15804557@Int), <=, 1, 15804557@Int), ['-1', '-2'])
+# top-77, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 15804557@Int), ==, 0, Iraq@Str), ['0'])
+# top-78, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 15804557@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-79, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 15804557@Int), ==, 1, 15804557@Int), ['0'])
+# top-80, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 15804557@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-81, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 1700000@Int), <, 1, 22094911@Int), ['0'])
+# top-82, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 1700000@Int), <, 1, 22094911@Int), ['-1', '-2'])
+# top-83, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 1700000@Int), <=, 1, 15804557@Int), ['0'])
+# top-84, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 1700000@Int), <=, 1, 15804557@Int), ['-1', '-2'])
+# top-85, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 1700000@Int), ==, 0, Iraq@Str), ['0'])
+# top-86, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 1700000@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-87, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 1700000@Int), ==, 1, 15804557@Int), ['0'])
+# top-88, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 1700000@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-89, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 1700000@Int), ==, 0, Iraq@Str), ['0'])
+# top-90, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 1700000@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-91, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 1700000@Int), ==, 1, 15804557@Int), ['0'])
+# top-92, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 1700000@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-93, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 40221893@Int), ==, 0, Iraq@Str), ['0'])
+# top-94, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 40221893@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-95, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 40221893@Int), ==, 1, 15804557@Int), ['0'])
+# top-96, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 40221893@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-97, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Turkey@Str), ==, 0, Iraq@Str), ['0'])
+# top-98, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Turkey@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-99, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Turkey@Str), ==, 1, 15804557@Int), ['0'])
+# top-100, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Turkey@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-101, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Egypt@Str), <, 1, 22094911@Int), ['0'])
+# top-102, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Egypt@Str), <, 1, 22094911@Int), ['-1', '-2'])
+# top-103, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Egypt@Str), <=, 1, 15804557@Int), ['0'])
+# top-104, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Egypt@Str), <=, 1, 15804557@Int), ['-1', '-2'])
+# top-105, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Egypt@Str), ==, 0, Iraq@Str), ['0'])
+# top-106, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Egypt@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-107, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Egypt@Str), ==, 1, 15804557@Int), ['0'])
+# top-108, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Egypt@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-109, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, blue@Str), ==, 0, Iraq@Str), ['0'])
+# top-110, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, blue@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-111, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, blue@Str), ==, 1, 15804557@Int), ['0'])
+# top-112, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, blue@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-113, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Country@Str), ==, 0, Iraq@Str), ['0'])
+# top-114, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Country@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-115, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Country@Str), ==, 1, 15804557@Int), ['0'])
+# top-116, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Country@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-117, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 15804557@Int), ==, 0, Iraq@Str), ['0'])
+# top-118, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 15804557@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-119, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 15804557@Int), ==, 1, 15804557@Int), ['0'])
+# top-120, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 15804557@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-121, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 37812334@Int), ==, 0, Iraq@Str), ['0'])
+# top-122, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 37812334@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-123, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 37812334@Int), ==, 1, 15804557@Int), ['0'])
+# top-124, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 37812334@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-125, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Lebanon@Str), ==, 0, Iraq@Str), ['0'])
+# top-126, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Lebanon@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-127, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Lebanon@Str), ==, 1, 15804557@Int), ['0'])
+# top-128, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Lebanon@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-129, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Regional@Str), ==, 0, Iraq@Str), ['0'])
+# top-130, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Regional@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-131, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Regional@Str), ==, 1, 15804557@Int), ['0'])
+# top-132, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Regional@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-133, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, color@Str), ==, 0, Iraq@Str), ['0'])
+# top-134, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, color@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-135, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, color@Str), ==, 1, 15804557@Int), ['0'])
+# top-136, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, color@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-137, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 28029721@Int), ==, 0, Iraq@Str), ['0'])
+# top-138, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 28029721@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-139, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 28029721@Int), ==, 1, 15804557@Int), ['0'])
+# top-140, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 28029721@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-141, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Jordan@Str), ==, 0, Iraq@Str), ['0'])
+# top-142, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Jordan@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-143, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Jordan@Str), ==, 1, 15804557@Int), ['0'])
+# top-144, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Jordan@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-145, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Total funds go to@Str), ==, 0, Iraq@Str), ['0'])
+# top-146, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Total funds go to@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-147, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Total funds go to@Str), ==, 1, 15804557@Int), ['0'])
+# top-148, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Total funds go to@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-149, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 22094911@Int), ==, 0, Iraq@Str), ['0'])
+# top-150, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 22094911@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-151, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 22094911@Int), ==, 1, 15804557@Int), ['0'])
+# top-152, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 22094911@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-153, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 1700000@Int), <, 1, 22094911@Int), ['0'])
+# top-154, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 1700000@Int), <, 1, 22094911@Int), ['-1', '-2'])
+# top-155, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 1700000@Int), <=, 1, 15804557@Int), ['0'])
+# top-156, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 1700000@Int), <=, 1, 15804557@Int), ['-1', '-2'])
+# top-157, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 1700000@Int), ==, 0, Iraq@Str), ['0'])
+# top-158, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 1700000@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-159, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 1700000@Int), ==, 1, 15804557@Int), ['0'])
+# top-160, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 1700000@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-161, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Iraq@Str), ==, 0, Iraq@Str), ['0'])
+# top-162, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Iraq@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-163, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Iraq@Str), ==, 1, 15804557@Int), ['0'])
+# top-164, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Iraq@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-165, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 40221893@Int), ==, 0, Iraq@Str), ['0'])
+# top-166, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 40221893@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-167, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 40221893@Int), ==, 1, 15804557@Int), ['0'])
+# top-168, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 40221893@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-169, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Turkey@Str), ==, 0, Iraq@Str), ['0'])
+# top-170, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Turkey@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-171, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Turkey@Str), ==, 1, 15804557@Int), ['0'])
+# top-172, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Turkey@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-173, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Egypt@Str), ==, 0, Iraq@Str), ['0'])
+# top-174, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Egypt@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-175, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Egypt@Str), ==, 1, 15804557@Int), ['0'])
+# top-176, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Egypt@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-177, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, blue@Str), ==, 0, Iraq@Str), ['0'])
+# top-178, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, blue@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-179, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, blue@Str), ==, 1, 15804557@Int), ['0'])
+# top-180, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, blue@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-181, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Country@Str), ==, 0, Iraq@Str), ['0'])
+# top-182, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Country@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-183, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Country@Str), ==, 1, 15804557@Int), ['0'])
+# top-184, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Country@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-185, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 37812334@Int), ==, 0, Iraq@Str), ['0'])
+# top-186, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 37812334@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-187, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 37812334@Int), ==, 1, 15804557@Int), ['0'])
+# top-188, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 37812334@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-189, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Lebanon@Str), ==, 0, Iraq@Str), ['0'])
+# top-190, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Lebanon@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-191, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Lebanon@Str), ==, 1, 15804557@Int), ['0'])
+# top-192, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Lebanon@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-193, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Regional@Str), ==, 0, Iraq@Str), ['0'])
+# top-194, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Regional@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-195, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Regional@Str), ==, 1, 15804557@Int), ['0'])
+# top-196, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Regional@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-197, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, color@Str), ==, 0, Iraq@Str), ['0'])
+# top-198, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, color@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-199, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, color@Str), ==, 1, 15804557@Int), ['0'])
+# top-200, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, color@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-201, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 28029721@Int), ==, 0, Iraq@Str), ['0'])
+# top-202, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 28029721@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-203, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 28029721@Int), ==, 1, 15804557@Int), ['0'])
+# top-204, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 28029721@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-205, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Jordan@Str), ==, 0, Iraq@Str), ['0'])
+# top-206, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Jordan@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-207, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Jordan@Str), ==, 1, 15804557@Int), ['0'])
+# top-208, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Jordan@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-209, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Total funds go to@Str), ==, 0, Iraq@Str), ['0'])
+# top-210, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Total funds go to@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-211, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Total funds go to@Str), ==, 1, 15804557@Int), ['0'])
+# top-212, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Total funds go to@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-213, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 22094911@Int), ==, 0, Iraq@Str), ['0'])
+# top-214, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 22094911@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-215, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 22094911@Int), ==, 1, 15804557@Int), ['0'])
+# top-216, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 22094911@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-217, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 1700000@Int), ==, 0, Iraq@Str), ['0'])
+# top-218, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 1700000@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-219, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 1700000@Int), ==, 1, 15804557@Int), ['0'])
+# top-220, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 1700000@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-221, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Iraq@Str), ==, 0, Iraq@Str), ['0'])
+# top-222, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Iraq@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-223, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Iraq@Str), ==, 1, 15804557@Int), ['0'])
+# top-224, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Iraq@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-225, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 40221893@Int), ==, 0, Iraq@Str), ['0'])
+# top-226, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 40221893@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-227, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 40221893@Int), ==, 1, 15804557@Int), ['0'])
+# top-228, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 40221893@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-229, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Turkey@Str), ==, 0, Iraq@Str), ['0'])
+# top-230, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Turkey@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-231, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Turkey@Str), ==, 1, 15804557@Int), ['0'])
+# top-232, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Turkey@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-233, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Egypt@Str), ==, 0, Iraq@Str), ['0'])
+# top-234, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Egypt@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-235, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Egypt@Str), ==, 1, 15804557@Int), ['0'])
+# top-236, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Egypt@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-237, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Country@Str), ==, 0, Iraq@Str), ['0'])
+# top-238, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Country@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-239, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Country@Str), ==, 1, 15804557@Int), ['0'])
+# top-240, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Country@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-241, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 15804557@Int), ==, 0, Iraq@Str), ['0'])
+# top-242, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 15804557@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-243, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 15804557@Int), ==, 1, 15804557@Int), ['0'])
+# top-244, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 15804557@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-245, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 37812334@Int), ==, 0, Iraq@Str), ['0'])
+# top-246, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 37812334@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-247, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 37812334@Int), ==, 1, 15804557@Int), ['0'])
+# top-248, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 37812334@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-249, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Lebanon@Str), ==, 0, Iraq@Str), ['0'])
+# top-250, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Lebanon@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-251, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Lebanon@Str), ==, 1, 15804557@Int), ['0'])
+# top-252, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Lebanon@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-253, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Regional@Str), ==, 0, Iraq@Str), ['0'])
+# top-254, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Regional@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-255, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Regional@Str), ==, 1, 15804557@Int), ['0'])
+# top-256, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Regional@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-257, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, color@Str), ==, 0, Iraq@Str), ['0'])
+# top-258, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, color@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-259, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, color@Str), ==, 1, 15804557@Int), ['0'])
+# top-260, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, color@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-261, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 28029721@Int), ==, 0, Iraq@Str), ['0'])
+# top-262, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 28029721@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-263, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 28029721@Int), ==, 1, 15804557@Int), ['0'])
+# top-264, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 28029721@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-265, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Jordan@Str), ==, 0, Iraq@Str), ['0'])
+# top-266, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Jordan@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-267, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Jordan@Str), ==, 1, 15804557@Int), ['0'])
+# top-268, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Jordan@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-269, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Total funds go to@Str), ==, 0, Iraq@Str), ['0'])
+# top-270, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Total funds go to@Str), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-271, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Total funds go to@Str), ==, 1, 15804557@Int), ['0'])
+# top-272, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Total funds go to@Str), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-273, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 22094911@Int), ==, 0, Iraq@Str), ['0'])
+# top-274, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 22094911@Int), ==, 0, Iraq@Str), ['-1', '-2'])
+# top-275, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 22094911@Int), ==, 1, 15804557@Int), ['0'])
+# top-276, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 22094911@Int), ==, 1, 15804557@Int), ['-1', '-2'])
+# top-277, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Iraq@Str), ['0'])
+# top-278, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Iraq@Str), ['-1', '-2'])
+# top-279, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, 15804557@Int), ['0'])
+# top-280, score: 0.00, answer: ['Iraq']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, 15804557@Int), ['-1', '-2'])

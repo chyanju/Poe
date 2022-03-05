@@ -1,0 +1,1337 @@
+# parsed arguments: Namespace(benchmark='Q09b49', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'(nbc/marist)', 'orange', '1.9', '-1.5', 'washington', 'democratic', 'effect', '2.4', 'abc', '-1.4', 'ipsos', '(ppp)', '&', '3.1', '2.9', 'gallup', '0.4', 'fox', 'quinnipiac', 'post', 'yougov', 'reports', 'polling', '(robbins', '(opinion', 'research', '-1.3', '-1.7', 'news', 'color', 'cnn', 'blue', 'research)', 'surveyusa', 'marist', 'policy', '-2.5', 'pew', 'shaw)', '3.2', 'public', '0.8', 'republican', '/', 'spread', 'house', 'rasmussen', 'pollster'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                       Pollster      spread  House Effect   color
+0                  Pew Research  Democratic           3.2    blue
+1   Public Policy Polling (PPP)  Democratic           3.1    blue
+2                         Ipsos  Democratic           2.9    blue
+3                     SurveyUSA  Democratic           2.4    blue
+4           Marist (NBC/Marist)  Democratic           1.9    blue
+5                        YouGov  Democratic           0.8    blue
+6        CNN (Opinion Research)  Democratic           0.4    blue
+7             Rasmussen Reports  Republican          -1.3  orange
+8    Washington Post / ABC News  Republican          -1.4  orange
+9     Fox News (Robbins & Shaw)  Republican          -1.5  orange
+10                   Quinnipiac  Republican          -1.7  orange
+11                       Gallup  Republican          -2.5  orange
+# query is: Whats the difference between the maximum and minimum values?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0     5.7
+# inferred DSL terminals:
+  # ConstVal: ['<NULL>']
+     # cmap: []
+  # AggrFunc: ['max', 'min', '<NULL>']
+     # amap: [('minimum', 'min'), ('maximum', 'max')]
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', 'eqmax', '<NULL>']
+     # imap: [('maximum', 'eqmax'), ('minimum', 'eqmin')]
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: []
+  # [debug] high_values (no dup.): []
+  # [debug] filtered low_values (no dup.): []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=0.22) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# ====> fallback strategy (retrieval) is triggered because no explanation is found so far
+# ====> retrieval_values: [-1.3, -1.4, -1.5, -1.7, -2.5, 0.4, 0.8, 1.9, 2.4, 2.9, 3.1, 3.2, 'CNN (Opinion Research)', 'Democratic', 'Fox News (Robbins & Shaw)', 'Gallup', 'House Effect', 'Ipsos', 'Marist (NBC/Marist)', 'Pew Research', 'Pollster', 'Public Policy Polling (PPP)', 'Quinnipiac', 'Rasmussen Reports', 'Republican', 'SurveyUSA', 'Washington Post / ABC News', 'YouGov', 'blue', 'color', 'orange', 'spread']
+# (t=0.44) fallback i=0, candidate=[{'ANSWER': -1.3}]
+  # found 6 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+# (t=2.73) fallback i=1, candidate=[{'ANSWER': -1.4}]
+  # found 0 program(s)
+# (t=5.00) fallback i=2, candidate=[{'ANSWER': -1.5}]
+  # found 0 program(s)
+# (t=7.28) fallback i=3, candidate=[{'ANSWER': -1.7}]
+  # found 0 program(s)
+# (t=9.55) fallback i=4, candidate=[{'ANSWER': -2.5}]
+  # found 84 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmin, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmin, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['3'], min, 2), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['3'], min, 2), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(@param0, eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'House Effect'], ['House Effect']]
+    # Summarize(@param0, min, 2)
+      --> ['Summarize', 'input@0', 'min', 'House Effect']
+# (t=12.08) fallback i=5, candidate=[{'ANSWER': 0.4}]
+  # found 6 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['3'], min, 2), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['3'], min, 2), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+# (t=14.34) fallback i=6, candidate=[{'ANSWER': 0.8}]
+  # found 0 program(s)
+# (t=16.58) fallback i=7, candidate=[{'ANSWER': 1.9}]
+  # found 0 program(s)
+# (t=18.84) fallback i=8, candidate=[{'ANSWER': 2.4}]
+  # found 0 program(s)
+# (t=21.10) fallback i=9, candidate=[{'ANSWER': 2.9}]
+  # found 0 program(s)
+# (t=23.65) fallback i=10, candidate=[{'ANSWER': 3.1}]
+  # found 0 program(s)
+# (t=25.91) fallback i=11, candidate=[{'ANSWER': 3.2}]
+  # found 84 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmax, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['House Effect']]
+    # SelectCol(SelectRow0(@param0, eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'House Effect'], ['House Effect']]
+    # Summarize(@param0, max, 2)
+      --> ['Summarize', 'input@0', 'max', 'House Effect']
+# (t=28.45) fallback i=12, candidate=[{'ANSWER': 'CNN (Opinion Research)'}]
+  # found 0 program(s)
+# (t=30.71) fallback i=13, candidate=[{'ANSWER': 'Democratic'}]
+  # found 21 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(@param0, eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'House Effect'], ['spread']]
+# (t=33.02) fallback i=14, candidate=[{'ANSWER': 'Fox News (Robbins & Shaw)'}]
+  # found 0 program(s)
+# (t=35.29) fallback i=15, candidate=[{'ANSWER': 'Gallup'}]
+  # found 21 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(@param0, eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'House Effect'], ['Pollster']]
+# (t=37.67) fallback i=16, candidate=[{'ANSWER': 'House Effect'}]
+  # found 0 program(s)
+# (t=37.89) fallback i=17, candidate=[{'ANSWER': 'Ipsos'}]
+  # found 0 program(s)
+# (t=40.15) fallback i=18, candidate=[{'ANSWER': 'Marist (NBC/Marist)'}]
+  # found 0 program(s)
+# (t=42.42) fallback i=19, candidate=[{'ANSWER': 'Pew Research'}]
+  # found 21 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(@param0, eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'House Effect'], ['Pollster']]
+# (t=44.76) fallback i=20, candidate=[{'ANSWER': 'Pollster'}]
+  # found 0 program(s)
+# (t=44.97) fallback i=21, candidate=[{'ANSWER': 'Public Policy Polling (PPP)'}]
+  # found 0 program(s)
+# (t=47.25) fallback i=22, candidate=[{'ANSWER': 'Quinnipiac'}]
+  # found 0 program(s)
+# (t=49.85) fallback i=23, candidate=[{'ANSWER': 'Rasmussen Reports'}]
+  # found 0 program(s)
+# (t=52.10) fallback i=24, candidate=[{'ANSWER': 'Republican'}]
+  # found 21 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['spread']]
+    # SelectCol(SelectRow0(@param0, eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'House Effect'], ['spread']]
+# (t=54.44) fallback i=25, candidate=[{'ANSWER': 'SurveyUSA'}]
+  # found 0 program(s)
+# (t=56.70) fallback i=26, candidate=[{'ANSWER': 'Washington Post / ABC News'}]
+  # found 0 program(s)
+# (t=58.96) fallback i=27, candidate=[{'ANSWER': 'YouGov'}]
+  # found 0 program(s)
+# (t=61.22) fallback i=28, candidate=[{'ANSWER': 'blue'}]
+  # found 21 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['3'], min, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['3'], min, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmax', 'House Effect'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmax', 'House Effect'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmax, 2), ['3'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'House Effect'], ['color']]
+# (t=63.53) fallback i=29, candidate=[{'ANSWER': 'color'}]
+  # found 0 program(s)
+# (t=63.74) fallback i=30, candidate=[{'ANSWER': 'orange'}]
+  # found 21 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['3'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['3'], min, 2), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmin', 'House Effect'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'max', 'House Effect'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmin, 2), ['3'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'House Effect'], ['color']]
+# (t=66.07) fallback i=31, candidate=[{'ANSWER': 'spread'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.35, answer: [-2.5]
+  # tprog: Summarize(@param0, min, 2)
+# top-2, score: 1.35, answer: [3.2]
+  # tprog: Summarize(@param0, max, 2)
+# top-3, score: 1.30, answer: [-1.3]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmin, 1), ['1'])
+# top-4, score: 1.30, answer: [-1.3]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmin, 1), ['-99'])
+# top-5, score: 1.30, answer: [-1.3]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmin, 1), ['1'])
+# top-6, score: 1.30, answer: [-1.3]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmin, 1), ['-99'])
+# top-7, score: 1.30, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmin, 1), ['1'])
+# top-8, score: 1.30, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmin, 1), ['-99'])
+# top-9, score: 1.30, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmin, 0), ['0'])
+# top-10, score: 1.30, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmin, 0), ['1'])
+# top-11, score: 1.30, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmin, 0), ['-99'])
+# top-12, score: 1.30, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmin, 0), ['-1'])
+# top-13, score: 1.30, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmin, 1), ['0'])
+# top-14, score: 1.30, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmin, 1), ['1'])
+# top-15, score: 1.30, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmin, 1), ['-99'])
+# top-16, score: 1.30, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmin, 1), ['-1'])
+# top-17, score: 1.30, answer: [0.4]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmax, 1), ['1'])
+# top-18, score: 1.30, answer: [0.4]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmax, 1), ['-99'])
+# top-19, score: 1.30, answer: [0.4]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['3'], min, 2), eqmax, 1), ['1'])
+# top-20, score: 1.30, answer: [0.4]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['3'], min, 2), eqmax, 1), ['-99'])
+# top-21, score: 1.30, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmax, 1), ['1'])
+# top-22, score: 1.30, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmax, 1), ['-99'])
+# top-23, score: 1.30, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmax, 0), ['0'])
+# top-24, score: 1.30, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmax, 0), ['1'])
+# top-25, score: 1.30, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmax, 0), ['-99'])
+# top-26, score: 1.30, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmax, 0), ['-1'])
+# top-27, score: 1.30, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmax, 1), ['0'])
+# top-28, score: 1.30, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmax, 1), ['1'])
+# top-29, score: 1.30, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmax, 1), ['-99'])
+# top-30, score: 1.30, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmax, 1), ['-1'])
+# top-31, score: 1.30, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmax, 1), ['0'])
+# top-32, score: 1.30, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmax, 1), ['-1'])
+# top-33, score: 1.30, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmin, 1), ['0'])
+# top-34, score: 1.30, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmin, 1), ['-1'])
+# top-35, score: 1.30, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmax, 1), ['0'])
+# top-36, score: 1.30, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmax, 1), ['-1'])
+# top-37, score: 1.30, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmin, 1), ['0'])
+# top-38, score: 1.30, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmin, 1), ['-1'])
+# top-39, score: 1.30, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['3'], min, 2), eqmax, 1), ['0'])
+# top-40, score: 1.30, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['3'], min, 2), eqmax, 1), ['-1'])
+# top-41, score: 1.30, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmin, 1), ['0'])
+# top-42, score: 1.30, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmin, 1), ['-1'])
+# top-43, score: 1.29, answer: [-1.3]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmin, 2), ['2'])
+# top-44, score: 1.29, answer: [-1.3]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmin, 2), ['-99', '-1'])
+# top-45, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmin, 2), ['2'])
+# top-46, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmin, 2), ['-99', '-1'])
+# top-47, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 1), ['1'])
+# top-48, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 1), ['2'])
+# top-49, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 1), ['-99', '-1'])
+# top-50, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 1), ['-99', '-2'])
+# top-51, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 2), ['1'])
+# top-52, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 2), ['2'])
+# top-53, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 2), ['-99', '-1'])
+# top-54, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 2), ['-99', '-2'])
+# top-55, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmin, 2), ['2'])
+# top-56, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmin, 2), ['-99', '-1'])
+# top-57, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 1), ['1'])
+# top-58, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 1), ['2'])
+# top-59, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 1), ['-99', '-1'])
+# top-60, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 1), ['-99', '-2'])
+# top-61, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 2), ['1'])
+# top-62, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 2), ['2'])
+# top-63, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 2), ['-99', '-1'])
+# top-64, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 2), ['-99', '-2'])
+# top-65, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 0), ['0'])
+# top-66, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 0), ['2'])
+# top-67, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 0), ['-99', '-1'])
+# top-68, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 0), ['-1', '-2'])
+# top-69, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 2), ['0'])
+# top-70, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 2), ['2'])
+# top-71, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 2), ['-99', '-1'])
+# top-72, score: 1.29, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 2), ['-1', '-2'])
+# top-73, score: 1.29, answer: [0.4]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmax, 2), ['2'])
+# top-74, score: 1.29, answer: [0.4]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmax, 2), ['-99', '-1'])
+# top-75, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmax, 2), ['2'])
+# top-76, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmax, 2), ['-99', '-1'])
+# top-77, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 1), ['1'])
+# top-78, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 1), ['2'])
+# top-79, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 1), ['-99', '-1'])
+# top-80, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 1), ['-99', '-2'])
+# top-81, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 2), ['1'])
+# top-82, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 2), ['2'])
+# top-83, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 2), ['-99', '-1'])
+# top-84, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 2), ['-99', '-2'])
+# top-85, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmax, 2), ['2'])
+# top-86, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmax, 2), ['-99', '-1'])
+# top-87, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 1), ['1'])
+# top-88, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 1), ['2'])
+# top-89, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 1), ['-99', '-1'])
+# top-90, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 1), ['-99', '-2'])
+# top-91, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 2), ['1'])
+# top-92, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 2), ['2'])
+# top-93, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 2), ['-99', '-1'])
+# top-94, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 2), ['-99', '-2'])
+# top-95, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 0), ['0'])
+# top-96, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 0), ['2'])
+# top-97, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 0), ['-99', '-1'])
+# top-98, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 0), ['-1', '-2'])
+# top-99, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 2), ['0'])
+# top-100, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 2), ['2'])
+# top-101, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 2), ['-99', '-1'])
+# top-102, score: 1.29, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 2), ['-1', '-2'])
+# top-103, score: 1.29, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmax, 2), ['1'])
+# top-104, score: 1.29, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmax, 2), ['-99', '-2'])
+# top-105, score: 1.29, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 1), ['0'])
+# top-106, score: 1.29, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 1), ['-1', '-2'])
+# top-107, score: 1.29, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 2), ['0'])
+# top-108, score: 1.29, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmax, 2), ['-1', '-2'])
+# top-109, score: 1.29, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmax, 2), ['0'])
+# top-110, score: 1.29, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmax, 2), ['-1', '-2'])
+# top-111, score: 1.29, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmin, 2), ['0'])
+# top-112, score: 1.29, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmin, 2), ['-1', '-2'])
+# top-113, score: 1.29, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 1), ['0'])
+# top-114, score: 1.29, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 1), ['-1', '-2'])
+# top-115, score: 1.29, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 2), ['0'])
+# top-116, score: 1.29, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmin, 2), ['-1', '-2'])
+# top-117, score: 1.29, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmin, 2), ['0'])
+# top-118, score: 1.29, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmin, 2), ['-1', '-2'])
+# top-119, score: 1.29, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmax, 2), ['0'])
+# top-120, score: 1.29, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmax, 2), ['-1', '-2'])
+# top-121, score: 1.29, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 1), ['0'])
+# top-122, score: 1.29, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 1), ['-1', '-2'])
+# top-123, score: 1.29, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 2), ['0'])
+# top-124, score: 1.29, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmax, 2), ['-1', '-2'])
+# top-125, score: 1.29, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmax, 2), ['0'])
+# top-126, score: 1.29, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmax, 2), ['-1', '-2'])
+# top-127, score: 1.29, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmin, 2), ['1'])
+# top-128, score: 1.29, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmin, 2), ['-99', '-2'])
+# top-129, score: 1.29, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 1), ['0'])
+# top-130, score: 1.29, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 1), ['-1', '-2'])
+# top-131, score: 1.29, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 2), ['0'])
+# top-132, score: 1.29, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmin, 2), ['-1', '-2'])
+# top-133, score: 1.29, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmin, 2), ['0'])
+# top-134, score: 1.29, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmin, 2), ['-1', '-2'])
+# top-135, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmax, 2), ['1'])
+# top-136, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmax, 2), ['-99', '-2'])
+# top-137, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmax, 2), ['1'])
+# top-138, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmax, 2), ['-99', '-2'])
+# top-139, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 0), ['1'])
+# top-140, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 0), ['-99', '-2'])
+# top-141, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 2), ['1'])
+# top-142, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmax, 2), ['-99', '-2'])
+# top-143, score: 1.29, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmin, 2), ['1'])
+# top-144, score: 1.29, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmin, 2), ['-99', '-2'])
+# top-145, score: 1.29, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmin, 2), ['1'])
+# top-146, score: 1.29, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmin, 2), ['-99', '-2'])
+# top-147, score: 1.29, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 0), ['1'])
+# top-148, score: 1.29, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 0), ['-99', '-2'])
+# top-149, score: 1.29, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 2), ['1'])
+# top-150, score: 1.29, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmin, 2), ['-99', '-2'])
+# top-151, score: 1.27, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 2), ['2'])
+# top-152, score: 1.27, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 2), ['2'])
+# top-153, score: 1.27, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 2), ['1'])
+# top-154, score: 1.27, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 2), ['0'])
+# top-155, score: 1.27, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 2), ['0'])
+# top-156, score: 1.27, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 2), ['1'])
+# top-157, score: 1.27, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 2), ['3'])
+# top-158, score: 1.27, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 2), ['3'])
+# top-159, score: 1.20, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['1'])
+# top-160, score: 1.20, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['-99'])
+# top-161, score: 1.20, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmin, 1), ['1'])
+# top-162, score: 1.20, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmin, 1), ['-99'])
+# top-163, score: 1.20, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmin, 0), ['0'])
+# top-164, score: 1.20, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmin, 0), ['1'])
+# top-165, score: 1.20, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmin, 0), ['-99'])
+# top-166, score: 1.20, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmin, 0), ['-1'])
+# top-167, score: 1.20, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmin, 1), ['0'])
+# top-168, score: 1.20, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmin, 1), ['1'])
+# top-169, score: 1.20, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmin, 1), ['-99'])
+# top-170, score: 1.20, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 2), eqmin, 1), ['-1'])
+# top-171, score: 1.20, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['3'], min, 2), eqmin, 1), ['1'])
+# top-172, score: 1.20, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['3'], min, 2), eqmin, 1), ['-99'])
+# top-173, score: 1.20, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['1'])
+# top-174, score: 1.20, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['-99'])
+# top-175, score: 1.20, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['1'])
+# top-176, score: 1.20, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['-99'])
+# top-177, score: 1.20, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 0), ['0'])
+# top-178, score: 1.20, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 0), ['1'])
+# top-179, score: 1.20, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 0), ['-99'])
+# top-180, score: 1.20, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 0), ['-1'])
+# top-181, score: 1.20, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 1), ['0'])
+# top-182, score: 1.20, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 1), ['1'])
+# top-183, score: 1.20, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 1), ['-99'])
+# top-184, score: 1.20, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 1), ['-1'])
+# top-185, score: 1.20, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmax, 1), ['1'])
+# top-186, score: 1.20, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmax, 1), ['-99'])
+# top-187, score: 1.20, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['0'])
+# top-188, score: 1.20, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['-1'])
+# top-189, score: 1.20, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['0'])
+# top-190, score: 1.20, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['-1'])
+# top-191, score: 1.20, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['0'])
+# top-192, score: 1.20, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['-1'])
+# top-193, score: 1.20, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmin, 1), ['0'])
+# top-194, score: 1.20, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 2), eqmin, 1), ['-1'])
+# top-195, score: 1.20, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmax, 1), ['0'])
+# top-196, score: 1.20, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmax, 1), ['-1'])
+# top-197, score: 1.20, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['3'], min, 2), eqmin, 1), ['0'])
+# top-198, score: 1.20, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['3'], min, 2), eqmin, 1), ['-1'])
+# top-199, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['2'])
+# top-200, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-99', '-1'])
+# top-201, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['1'])
+# top-202, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['2'])
+# top-203, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['-99', '-1'])
+# top-204, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['-99', '-2'])
+# top-205, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['1'])
+# top-206, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['2'])
+# top-207, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['-99', '-1'])
+# top-208, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['-99', '-2'])
+# top-209, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['2'])
+# top-210, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['-99', '-1'])
+# top-211, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 1), ['1'])
+# top-212, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 1), ['2'])
+# top-213, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 1), ['-99', '-1'])
+# top-214, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 1), ['-99', '-2'])
+# top-215, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 2), ['1'])
+# top-216, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 2), ['2'])
+# top-217, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 2), ['-99', '-1'])
+# top-218, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 2), ['-99', '-2'])
+# top-219, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmin, 2), ['2'])
+# top-220, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmin, 2), ['-99', '-1'])
+# top-221, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 0), ['0'])
+# top-222, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 0), ['2'])
+# top-223, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 0), ['-99', '-1'])
+# top-224, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 0), ['-1', '-2'])
+# top-225, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 2), ['0'])
+# top-226, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 2), ['2'])
+# top-227, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 2), ['-99', '-1'])
+# top-228, score: 1.19, answer: [-2.5]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-229, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['2'])
+# top-230, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-99', '-1'])
+# top-231, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['1'])
+# top-232, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['2'])
+# top-233, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-99', '-1'])
+# top-234, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-99', '-2'])
+# top-235, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['1'])
+# top-236, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['2'])
+# top-237, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-99', '-1'])
+# top-238, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-99', '-2'])
+# top-239, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['2'])
+# top-240, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['-99', '-1'])
+# top-241, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['1'])
+# top-242, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['2'])
+# top-243, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['-99', '-1'])
+# top-244, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['-99', '-2'])
+# top-245, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['1'])
+# top-246, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['2'])
+# top-247, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['-99', '-1'])
+# top-248, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['-99', '-2'])
+# top-249, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['2'])
+# top-250, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['-99', '-1'])
+# top-251, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['0'])
+# top-252, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['2'])
+# top-253, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['-99', '-1'])
+# top-254, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['-1', '-2'])
+# top-255, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['0'])
+# top-256, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['2'])
+# top-257, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['-99', '-1'])
+# top-258, score: 1.19, answer: [3.2]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-259, score: 1.19, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['1'])
+# top-260, score: 1.19, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-99', '-2'])
+# top-261, score: 1.19, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['0'])
+# top-262, score: 1.19, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+# top-263, score: 1.19, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['0'])
+# top-264, score: 1.19, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-265, score: 1.19, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['0'])
+# top-266, score: 1.19, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-267, score: 1.19, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['0'])
+# top-268, score: 1.19, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-269, score: 1.19, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['0'])
+# top-270, score: 1.19, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['-1', '-2'])
+# top-271, score: 1.19, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['0'])
+# top-272, score: 1.19, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-273, score: 1.19, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['0'])
+# top-274, score: 1.19, answer: ['Gallup']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-275, score: 1.19, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['0'])
+# top-276, score: 1.19, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-277, score: 1.19, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['0'])
+# top-278, score: 1.19, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+# top-279, score: 1.19, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['0'])
+# top-280, score: 1.19, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-281, score: 1.19, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['0'])
+# top-282, score: 1.19, answer: ['Pew Research']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-283, score: 1.19, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['1'])
+# top-284, score: 1.19, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-99', '-2'])
+# top-285, score: 1.19, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 1), ['0'])
+# top-286, score: 1.19, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 1), ['-1', '-2'])
+# top-287, score: 1.19, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 2), ['0'])
+# top-288, score: 1.19, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-289, score: 1.19, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmin, 2), ['0'])
+# top-290, score: 1.19, answer: ['Republican']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-291, score: 1.19, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['1'])
+# top-292, score: 1.19, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['-99', '-2'])
+# top-293, score: 1.19, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['1'])
+# top-294, score: 1.19, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['-99', '-2'])
+# top-295, score: 1.19, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['1'])
+# top-296, score: 1.19, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['-99', '-2'])
+# top-297, score: 1.19, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['1'])
+# top-298, score: 1.19, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['-99', '-2'])
+# top-299, score: 1.19, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['1'])
+# top-300, score: 1.19, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['-99', '-2'])
+# top-301, score: 1.19, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmin, 2), ['1'])
+# top-302, score: 1.19, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], min, 2), eqmin, 2), ['-99', '-2'])
+# top-303, score: 1.19, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 0), ['1'])
+# top-304, score: 1.19, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 0), ['-99', '-2'])
+# top-305, score: 1.19, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 2), ['1'])
+# top-306, score: 1.19, answer: ['orange']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], min, 2), eqmin, 2), ['-99', '-2'])

@@ -1,0 +1,92 @@
+# parsed arguments: Namespace(benchmark='Qb7db0', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'finland', 'germany', '0.0005', '0.0011', 'blue', 'donations', 'ireland', 'generous', '1e-05', '0.0006', 'netherlands', 'us', 'estonia', '0.0004', '0.0001', 'japan', 'country', 'gdp', 'belgium', 'by', 'color', 'norway', '0.0008', '0.0003', 'kuwait', 'china'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+        Country  Generous donations by GDP color
+0        Norway                    0.00110  blue
+1        Kuwait                    0.00110  blue
+2   Netherlands                    0.00080  blue
+3       Ireland                    0.00060  blue
+4       Estonia                    0.00060  blue
+5       Finland                    0.00050  blue
+6         Japan                    0.00040  blue
+7            US                    0.00040  blue
+8       Belgium                    0.00030  blue
+9       Germany                    0.00010  blue
+10        China                    0.00001  blue
+# query is: What is the sum of Estonia + Japan + Kuwait?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0  0.0021
+# inferred DSL terminals:
+  # ConstVal: ['Kuwait@Str', 'Japan@Str', 'Estonia@Str', '<NULL>']
+     # cmap: [('japan', 'Japan'), ('estonia', 'Estonia'), ('kuwait', 'Kuwait')]
+  # AggrFunc: ['sum', '<NULL>']
+     # amap: [('sum', 'sum')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 0.0011}]
+  # found 3 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, Kuwait@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Kuwait'], 'sum', 'Generous donations by GDP']
+    # SelectCol(SelectRow1(@param0, ==, 0, Kuwait@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Kuwait'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Kuwait@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Kuwait'], ['Generous donations by GDP']]
+# (t=1.03) i=1, candidate=[{'ANSWER': 0.0022}]
+  # found 0 program(s)
+# (t=1.85) i=2, candidate=[{'ANSWER': 0.0017000000000000001}]
+  # found 0 program(s)
+# (t=2.67) i=3, candidate=[{'ANSWER': 0.0006}]
+  # found 3 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, Estonia@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Estonia'], 'sum', 'Generous donations by GDP']
+    # SelectCol(SelectRow1(@param0, ==, 0, Estonia@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Estonia'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Estonia@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Estonia'], ['Generous donations by GDP']]
+# (t=3.68) i=4, candidate=[{'ANSWER': 0.0012}]
+  # found 0 program(s)
+# (t=4.50) i=5, candidate=[{'ANSWER': 0.0015}]
+  # found 0 program(s)
+# (t=5.32) i=6, candidate=[{'ANSWER': 0.001}]
+  # found 0 program(s)
+# (t=6.14) i=7, candidate=[{'ANSWER': 0.0004}]
+  # found 3 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, Japan@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Japan'], 'sum', 'Generous donations by GDP']
+    # SelectCol(SelectRow1(@param0, ==, 0, Japan@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Japan'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Japan@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Japan'], ['Generous donations by GDP']]
+# (t=7.17) i=8, candidate=[{'ANSWER': 0.0008}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.33, answer: 0.0011
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Kuwait@Str), sum, 1)
+# top-2, score: 2.33, answer: 0.0006
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Estonia@Str), sum, 1)
+# top-3, score: 2.33, answer: 0.0004
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Japan@Str), sum, 1)
+# top-4, score: 2.24, answer: 0.0011
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Kuwait@Str), ['1'])
+# top-5, score: 2.24, answer: 0.0011
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Kuwait@Str), ['-99', '-2'])
+# top-6, score: 2.24, answer: 0.0006
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Estonia@Str), ['1'])
+# top-7, score: 2.24, answer: 0.0006
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Estonia@Str), ['-99', '-2'])
+# top-8, score: 2.24, answer: 0.0004
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Japan@Str), ['1'])
+# top-9, score: 2.24, answer: 0.0004
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Japan@Str), ['-99', '-2'])

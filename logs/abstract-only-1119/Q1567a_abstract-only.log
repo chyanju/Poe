@@ -1,0 +1,2110 @@
+# parsed arguments: Namespace(benchmark='Q1567a', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'35-49', 'red', '2007', '9.11', 'age', '23.2', '19.07', '2001', 'color', '20.1', '8.08', '26.02', '24.98', 'year', 'orange', 'under', '50-64', '65+', '35', '27.05', '30.06', 'percent', '7.14', '24.05', 'blue', '2012'}
+# input type: [dtype('O'), dtype('int64'), dtype('float64'), dtype('O')]
+# input is:
+         Age  year  percent   color
+0   Under 35  2001    30.06    blue
+1   Under 35  2012    26.02     red
+2   Under 35  2007    24.05  orange
+3      50-64  2001    23.20    blue
+4      50-64  2007    20.10  orange
+5      50-64  2012    19.07     red
+6        65+  2001     9.11    blue
+7        65+  2007     8.08  orange
+8        65+  2012     7.14     red
+9      35-49  2001    27.05    blue
+10     35-49  2007    26.02  orange
+11     35-49  2012    24.98     red
+# query is: Which is the least risk averse group?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0    65+
+# inferred DSL terminals:
+  # ConstVal: ['7.14@Float', '8.08@Float', '9.11@Float', '19.07@Float', '20.1@Float', 'color@Str', '23.2@Float', '24.05@Float', '24.98@Float', '26.02@Float', '27.05@Float', '30.06@Float', 'year@Str', '50-64@Str', '65+@Str', 'percent@Str', '35-49@Str', 'red@Str', 'Under 35@Str', '2001@Int', '2007@Int', 'orange@Str', '2012@Int', 'Age@Str', 'blue@Str']
+     # cmap: [(None, 7.14), (None, 8.08), (None, 9.11), (None, 19.07), (None, 20.1), (None, 'color'), (None, 23.2), (None, 24.05), (None, 24.98), (None, 26.02), (None, 27.05), (None, 30.06), (None, 'year'), (None, '50-64'), (None, '65+'), (None, 'percent'), (None, '35-49'), (None, 'red'), (None, 'Under 35'), (None, 2001), (None, 2007), (None, 'orange'), (None, 2012), (None, 'Age'), (None, 'blue')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': '50-64'}]
+  # found 519 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 20.1@Float), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<', 'percent', 20.1], 'eqmax', 'percent'], ['Age']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 23.2@Float), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<', 'percent', 23.2], 'eqmax', 'percent'], ['Age']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 24.05@Float), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<', 'percent', 24.05], 'eqmax', 'percent'], ['Age']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 19.07@Float), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<=', 'percent', 19.07], 'eqmax', 'percent'], ['Age']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 20.1@Float), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<=', 'percent', 20.1], 'eqmax', 'percent'], ['Age']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 23.2@Float), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<=', 'percent', 23.2], 'eqmax', 'percent'], ['Age']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, 50-64@Str), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], 'eqmin', 'year'], ['Age']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, 50-64@Str), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], 'eqmin', 'percent'], ['Age']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, 50-64@Str), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], 'eqmax', 'year'], ['Age']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, 50-64@Str), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], 'eqmax', 'percent'], ['Age']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 19.07@Float), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>=', 'percent', 19.07], 'eqmin', 'percent'], ['Age']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 20.1@Float), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>=', 'percent', 20.1], 'eqmin', 'percent'], ['Age']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 23.2@Float), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>=', 'percent', 23.2], 'eqmin', 'percent'], ['Age']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 9.11@Float), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>', 'percent', 9.11], 'eqmin', 'percent'], ['Age']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 19.07@Float), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>', 'percent', 19.07], 'eqmin', 'percent'], ['Age']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 20.1@Float), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>', 'percent', 20.1], 'eqmin', 'percent'], ['Age']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, !=, 0, 65+@Str), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '!=', 'Age', '65+'], 'eqmin', 'percent'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 2007@Int), ==, 0, 50-64@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'year', 2007], '==', 'Age', '50-64'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 2007@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'year', 2007], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 2012@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'year', 2012], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 2012@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'year', 2012], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20.1@Float), ==, 0, 50-64@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 20.1], '==', 'Age', '50-64'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20.1@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 20.1], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20.1@Float), >=, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 20.1], '>=', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20.1@Float), >, 2, 9.11@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 20.1], '>', 'percent', 9.11], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20.1@Float), !=, 0, 65+@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 20.1], '!=', 'Age', '65+'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 23.2@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 23.2], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 23.2@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 23.2], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 23.2@Float), >=, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 23.2], '>=', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 23.2@Float), >, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 23.2], '>', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24.05@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 24.05], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24.05@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 24.05], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24.05@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 24.05], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24.05@Float), >=, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 24.05], '>=', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24.05@Float), >, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 24.05], '>', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24.98@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 24.98], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24.98@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 24.98], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24.98@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 24.98], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 26.02@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 26.02], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 26.02@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 26.02], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 26.02@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 26.02], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 27.05@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 27.05], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 27.05@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 27.05], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 27.05@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 27.05], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 30.06@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 30.06], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 30.06@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 30.06], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 30.06@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 30.06], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2001@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 2001], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2001@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 2001], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2001@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 2001], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2007@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 2007], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2007@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 2007], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2007@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 2007], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2012@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 2012], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2012@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 2012], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2012@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percent', 2012], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 2001@Int), ==, 0, 50-64@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'year', 2001], '==', 'Age', '50-64'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 2001@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'year', 2001], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 2007@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'year', 2007], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 2007@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'year', 2007], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 2012@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'year', 2012], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 2012@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'year', 2012], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 2012@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'year', 2012], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19.07@Float), ==, 0, 50-64@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 19.07], '==', 'Age', '50-64'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19.07@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 19.07], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19.07@Float), >=, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 19.07], '>=', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19.07@Float), >, 2, 9.11@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 19.07], '>', 'percent', 9.11], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19.07@Float), !=, 0, 65+@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 19.07], '!=', 'Age', '65+'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 20.1@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 20.1], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 20.1@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 20.1], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 20.1@Float), >=, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 20.1], '>=', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 20.1@Float), >, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 20.1], '>', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 23.2@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 23.2], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 23.2@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 23.2], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 23.2@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 23.2], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 23.2@Float), >=, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 23.2], '>=', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 23.2@Float), >, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 23.2], '>', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 24.05@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 24.05], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 24.05@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 24.05], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 24.05@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 24.05], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 24.98@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 24.98], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 24.98@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 24.98], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 24.98@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 24.98], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 26.02@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 26.02], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 26.02@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 26.02], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 26.02@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 26.02], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 27.05@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 27.05], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 27.05@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 27.05], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 27.05@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 27.05], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 30.06@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 30.06], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 30.06@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 30.06], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 30.06@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 30.06], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2001@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 2001], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2001@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 2001], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2001@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 2001], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2007@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 2007], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2007@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 2007], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2007@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 2007], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2012@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 2012], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2012@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 2012], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2012@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percent', 2012], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), <, 1, 2007@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '<', 'year', 2007], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), <, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '<', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), <=, 1, 2001@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '<=', 'year', 2001], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), <=, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '<=', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 1, 2001@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '==', 'year', 2001], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 1, 2007@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '==', 'year', 2007], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 1, 2012@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '==', 'year', 2012], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 3, red@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '==', 'color', 'red'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 3, orange@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '==', 'color', 'orange'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 3, blue@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '==', 'color', 'blue'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), >=, 1, 2012@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '>=', 'year', 2012], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), >=, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '>=', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), >, 1, 2007@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '>', 'year', 2007], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), >, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '>', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2001@Int), ==, 0, 50-64@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'year', 2001], '==', 'Age', '50-64'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2001@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'year', 2001], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2007@Int), ==, 0, 50-64@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'year', 2007], '==', 'Age', '50-64'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2007@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'year', 2007], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2012@Int), ==, 0, 50-64@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'year', 2012], '==', 'Age', '50-64'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2012@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'year', 2012], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, red@Str), ==, 0, 50-64@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'red'], '==', 'Age', '50-64'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, red@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'red'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, orange@Str), ==, 0, 50-64@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'orange'], '==', 'Age', '50-64'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, orange@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'orange'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, 50-64@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'Age', '50-64'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 7.14@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 7.14], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 7.14@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 7.14], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 7.14@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 7.14], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 8.08@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 8.08], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 8.08@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 8.08], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 8.08@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 8.08], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 9.11@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 9.11], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 9.11@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 9.11], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 9.11@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 9.11], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 19.07@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 19.07], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 19.07@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 19.07], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 19.07@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 19.07], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 20.1@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 20.1], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 20.1@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 20.1], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 20.1@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 20.1], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 23.2@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 23.2], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 23.2@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 23.2], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 23.2@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 23.2], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 24.05@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 24.05], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 24.05@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 24.05], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 24.05@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 24.05], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 24.98@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 24.98], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 24.98@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 24.98], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 24.98@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 24.98], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 26.02@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 26.02], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 26.02@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 26.02], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 26.02@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 26.02], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 27.05@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 27.05], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 27.05@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 27.05], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 27.05@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 27.05], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 30.06@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 30.06], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 30.06@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 30.06], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 30.06@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 30.06], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 2001@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 2001], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 2001@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 2001], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 2001@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 2001], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 2007@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 2007], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 2007@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 2007], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 2012@Int), ==, 0, 50-64@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 2012], '==', 'Age', '50-64'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 2012@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'year', 2012], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 7.14@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 7.14], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 7.14@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 7.14], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 7.14@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 7.14], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 8.08@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 8.08], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 8.08@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 8.08], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 8.08@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 8.08], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 9.11@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 9.11], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 9.11@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 9.11], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 9.11@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 9.11], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 19.07@Float), <, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 19.07], '<', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 19.07@Float), <=, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 19.07], '<=', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 19.07@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 19.07], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 19.07@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 19.07], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 19.07@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 19.07], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 20.1@Float), <, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 20.1], '<', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 20.1@Float), <=, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 20.1], '<=', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 20.1@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 20.1], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 20.1@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 20.1], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 23.2@Float), <, 2, 24.05@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 23.2], '<', 'percent', 24.05], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 23.2@Float), <=, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 23.2], '<=', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 23.2@Float), ==, 0, 50-64@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 23.2], '==', 'Age', '50-64'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 23.2@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percent', 23.2], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 7.14@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 7.14], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 7.14@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 7.14], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 7.14@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 7.14], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 8.08@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 8.08], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 8.08@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 8.08], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 8.08@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 8.08], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 9.11@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 9.11], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 9.11@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 9.11], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 9.11@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 9.11], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 19.07@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 19.07], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 19.07@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 19.07], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 19.07@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 19.07], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 20.1@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 20.1], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 20.1@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 20.1], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 20.1@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 20.1], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 23.2@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 23.2], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 23.2@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 23.2], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 23.2@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 23.2], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 24.05@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 24.05], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 24.05@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 24.05], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 24.05@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 24.05], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 24.98@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 24.98], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 24.98@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 24.98], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 24.98@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 24.98], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 26.02@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 26.02], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 26.02@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 26.02], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 26.02@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 26.02], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 27.05@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 27.05], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 27.05@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 27.05], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 27.05@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 27.05], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 30.06@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 30.06], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 30.06@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 30.06], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 30.06@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 30.06], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 2001@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 2001], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 2001@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 2001], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 2007@Int), ==, 0, 50-64@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 2007], '==', 'Age', '50-64'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 2007@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'year', 2007], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 7.14@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percent', 7.14], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 7.14@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percent', 7.14], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 7.14@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percent', 7.14], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 8.08@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percent', 8.08], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 8.08@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percent', 8.08], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 8.08@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percent', 8.08], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 9.11@Float), <, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percent', 9.11], '<', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 9.11@Float), <=, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percent', 9.11], '<=', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 9.11@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percent', 9.11], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 9.11@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percent', 9.11], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 9.11@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percent', 9.11], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 19.07@Float), <, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percent', 19.07], '<', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 19.07@Float), <=, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percent', 19.07], '<=', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 19.07@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percent', 19.07], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 19.07@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percent', 19.07], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 20.1@Float), <, 2, 24.05@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percent', 20.1], '<', 'percent', 24.05], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 20.1@Float), <=, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percent', 20.1], '<=', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 20.1@Float), ==, 0, 50-64@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percent', 20.1], '==', 'Age', '50-64'], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 20.1@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percent', 20.1], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 7.14@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 7.14], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 7.14@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 7.14], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 7.14@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 7.14], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 8.08@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 8.08], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 8.08@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 8.08], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 8.08@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 8.08], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 9.11@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 9.11], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 9.11@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 9.11], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 9.11@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 9.11], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 19.07@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 19.07], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 19.07@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 19.07], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 19.07@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 19.07], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 20.1@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 20.1], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 20.1@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 20.1], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 20.1@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 20.1], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, color@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'color'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, color@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'color'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, color@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'color'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 23.2@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 23.2], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 23.2@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 23.2], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 23.2@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 23.2], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 24.05@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 24.05], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 24.05@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 24.05], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 24.05@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 24.05], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 24.98@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 24.98], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 24.98@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 24.98], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 24.98@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 24.98], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 26.02@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 26.02], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 26.02@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 26.02], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 26.02@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 26.02], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 27.05@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 27.05], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 27.05@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 27.05], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 27.05@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 27.05], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 30.06@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 30.06], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 30.06@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 30.06], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 30.06@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 30.06], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, year@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'year'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, year@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'year'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, year@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'year'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 65+@Str), <, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', '65+'], '<', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 65+@Str), <=, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', '65+'], '<=', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 65+@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', '65+'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 65+@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', '65+'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 65+@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', '65+'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, percent@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'percent'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, percent@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'percent'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, percent@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'percent'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 35-49@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', '35-49'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 35-49@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', '35-49'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 35-49@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', '35-49'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, red@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'red'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, red@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'red'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, red@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'red'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Under 35@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'Under 35'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Under 35@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'Under 35'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Under 35@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'Under 35'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 2001@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 2001], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 2001@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 2001], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 2001@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 2001], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 2007@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 2007], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 2007@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 2007], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 2007@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 2007], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, orange@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'orange'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, orange@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'orange'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, orange@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'orange'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 2012@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 2012], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 2012@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 2012], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 2012@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 2012], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Age@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'Age'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Age@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'Age'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Age@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'Age'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, blue@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'blue'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, blue@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'blue'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, blue@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Age', 'blue'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 7.14@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 7.14], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 7.14@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 7.14], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 7.14@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 7.14], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 8.08@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 8.08], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 8.08@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 8.08], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 8.08@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 8.08], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 9.11@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 9.11], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 9.11@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 9.11], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 9.11@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 9.11], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 19.07@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 19.07], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 19.07@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 19.07], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 19.07@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 19.07], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 20.1@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 20.1], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 20.1@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 20.1], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 20.1@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 20.1], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, color@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'color'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, color@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'color'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, color@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'color'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 23.2@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 23.2], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 23.2@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 23.2], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 23.2@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 23.2], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 24.05@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 24.05], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 24.05@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 24.05], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 24.05@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 24.05], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 24.98@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 24.98], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 24.98@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 24.98], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 24.98@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 24.98], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 26.02@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 26.02], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 26.02@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 26.02], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 26.02@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 26.02], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 27.05@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 27.05], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 27.05@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 27.05], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 27.05@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 27.05], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 30.06@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 30.06], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 30.06@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 30.06], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 30.06@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 30.06], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, year@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'year'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, year@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'year'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, year@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'year'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 50-64@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', '50-64'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 50-64@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', '50-64'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 50-64@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', '50-64'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 65+@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', '65+'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 65+@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', '65+'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 65+@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', '65+'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, percent@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'percent'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, percent@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'percent'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, percent@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'percent'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 35-49@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', '35-49'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 35-49@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', '35-49'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 35-49@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', '35-49'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, red@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'red'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, red@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'red'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, red@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'red'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Under 35@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'Under 35'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Under 35@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'Under 35'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Under 35@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'Under 35'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 2001@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 2001], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 2001@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 2001], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 2007@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 2007], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 2007@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 2007], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, orange@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'orange'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, orange@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'orange'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, orange@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'orange'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 2012@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 2012], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 2012@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 2012], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Age@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'Age'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Age@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'Age'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Age@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'Age'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, blue@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'blue'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, blue@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'blue'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, blue@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'year', 'blue'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 7.14@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 7.14], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 7.14@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 7.14], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 7.14@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 7.14], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 8.08@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 8.08], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 8.08@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 8.08], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 8.08@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 8.08], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 9.11@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 9.11], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 9.11@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 9.11], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 9.11@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 9.11], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 19.07@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 19.07], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 19.07@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 19.07], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 20.1@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 20.1], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 20.1@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 20.1], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, color@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'color'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, color@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'color'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, color@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'color'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 23.2@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 23.2], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 23.2@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 23.2], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 24.05@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 24.05], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 24.05@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 24.05], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 24.05@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 24.05], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 24.98@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 24.98], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 24.98@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 24.98], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 24.98@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 24.98], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 26.02@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 26.02], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 26.02@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 26.02], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 26.02@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 26.02], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 27.05@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 27.05], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 27.05@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 27.05], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 27.05@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 27.05], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 30.06@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 30.06], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 30.06@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 30.06], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 30.06@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 30.06], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, year@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'year'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, year@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'year'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, year@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'year'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 50-64@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', '50-64'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 50-64@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', '50-64'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 50-64@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', '50-64'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 65+@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', '65+'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 65+@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', '65+'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 65+@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', '65+'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, percent@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'percent'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, percent@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'percent'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, percent@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'percent'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 35-49@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', '35-49'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 35-49@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', '35-49'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 35-49@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', '35-49'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, red@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'red'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, red@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'red'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, red@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'red'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Under 35@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'Under 35'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Under 35@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'Under 35'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Under 35@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'Under 35'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 2001@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 2001], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 2001@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 2001], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 2001@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 2001], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 2007@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 2007], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 2007@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 2007], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 2007@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 2007], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, orange@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'orange'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, orange@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'orange'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, orange@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'orange'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 2012@Int), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 2012], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 2012@Int), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 2012], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 2012@Int), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 2012], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Age@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'Age'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Age@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'Age'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Age@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'Age'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, blue@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'blue'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, blue@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'blue'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, blue@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'percent', 'blue'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 7.14@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 7.14], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 7.14@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 7.14], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 7.14@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 7.14], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 8.08@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 8.08], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 8.08@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 8.08], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 8.08@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 8.08], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 9.11@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 9.11], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 9.11@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 9.11], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 9.11@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 9.11], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 19.07@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 19.07], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 19.07@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 19.07], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 19.07@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 19.07], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 20.1@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 20.1], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 20.1@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 20.1], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 20.1@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 20.1], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, color@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'color'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, color@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'color'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, color@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'color'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 23.2@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 23.2], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 23.2@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 23.2], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 23.2@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 23.2], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 24.05@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 24.05], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 24.05@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 24.05], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 24.05@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 24.05], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 24.98@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 24.98], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 24.98@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 24.98], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 24.98@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 24.98], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 26.02@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 26.02], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 26.02@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 26.02], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 26.02@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 26.02], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 27.05@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 27.05], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 27.05@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 27.05], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 27.05@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 27.05], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 30.06@Float), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 30.06], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 30.06@Float), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 30.06], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 30.06@Float), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 30.06], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, year@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'year'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, year@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'year'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, year@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'year'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 50-64@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', '50-64'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 50-64@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', '50-64'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 50-64@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', '50-64'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 65+@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', '65+'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 65+@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', '65+'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 65+@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', '65+'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, percent@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'percent'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, percent@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'percent'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, percent@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'percent'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 35-49@Str), ==, 2, 19.07@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', '35-49'], '==', 'percent', 19.07], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 35-49@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', '35-49'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 35-49@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', '35-49'], '==', 'percent', 23.2], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, red@Str), ==, 2, 20.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'red'], '==', 'percent', 20.1], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, red@Str), ==, 2, 23.2@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'red'], '==', 'percent', 23.2], ['Age']]
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 20.1@Float), eqmax, 2), ['0'])
+# top-2, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 23.2@Float), eqmax, 2), ['0'])
+# top-3, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 24.05@Float), eqmax, 2), ['0'])
+# top-4, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 19.07@Float), eqmax, 2), ['0'])
+# top-5, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 20.1@Float), eqmax, 2), ['0'])
+# top-6, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 23.2@Float), eqmax, 2), ['0'])
+# top-7, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, 50-64@Str), eqmin, 1), ['0'])
+# top-8, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, 50-64@Str), eqmin, 2), ['0'])
+# top-9, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, 50-64@Str), eqmax, 1), ['0'])
+# top-10, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, 50-64@Str), eqmax, 2), ['0'])
+# top-11, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 19.07@Float), eqmin, 2), ['0'])
+# top-12, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 20.1@Float), eqmin, 2), ['0'])
+# top-13, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 23.2@Float), eqmin, 2), ['0'])
+# top-14, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 9.11@Float), eqmin, 2), ['0'])
+# top-15, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 19.07@Float), eqmin, 2), ['0'])
+# top-16, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 20.1@Float), eqmin, 2), ['0'])
+# top-17, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, !=, 0, 65+@Str), eqmin, 2), ['0'])
+# top-18, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 2007@Int), ==, 0, 50-64@Str), ['0'])
+# top-19, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 2007@Int), ==, 2, 23.2@Float), ['0'])
+# top-20, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 2012@Int), ==, 2, 20.1@Float), ['0'])
+# top-21, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 1, 2012@Int), ==, 2, 23.2@Float), ['0'])
+# top-22, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20.1@Float), ==, 0, 50-64@Str), ['0'])
+# top-23, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20.1@Float), ==, 2, 19.07@Float), ['0'])
+# top-24, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20.1@Float), >=, 2, 19.07@Float), ['0'])
+# top-25, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20.1@Float), >, 2, 9.11@Float), ['0'])
+# top-26, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20.1@Float), !=, 0, 65+@Str), ['0'])
+# top-27, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 23.2@Float), ==, 2, 19.07@Float), ['0'])
+# top-28, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 23.2@Float), ==, 2, 20.1@Float), ['0'])
+# top-29, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 23.2@Float), >=, 2, 20.1@Float), ['0'])
+# top-30, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 23.2@Float), >, 2, 19.07@Float), ['0'])
+# top-31, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24.05@Float), ==, 2, 19.07@Float), ['0'])
+# top-32, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24.05@Float), ==, 2, 20.1@Float), ['0'])
+# top-33, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24.05@Float), ==, 2, 23.2@Float), ['0'])
+# top-34, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24.05@Float), >=, 2, 23.2@Float), ['0'])
+# top-35, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24.05@Float), >, 2, 20.1@Float), ['0'])
+# top-36, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24.98@Float), ==, 2, 19.07@Float), ['0'])
+# top-37, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24.98@Float), ==, 2, 20.1@Float), ['0'])
+# top-38, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24.98@Float), ==, 2, 23.2@Float), ['0'])
+# top-39, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 26.02@Float), ==, 2, 19.07@Float), ['0'])
+# top-40, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 26.02@Float), ==, 2, 20.1@Float), ['0'])
+# top-41, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 26.02@Float), ==, 2, 23.2@Float), ['0'])
+# top-42, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 27.05@Float), ==, 2, 19.07@Float), ['0'])
+# top-43, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 27.05@Float), ==, 2, 20.1@Float), ['0'])
+# top-44, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 27.05@Float), ==, 2, 23.2@Float), ['0'])
+# top-45, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 30.06@Float), ==, 2, 19.07@Float), ['0'])
+# top-46, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 30.06@Float), ==, 2, 20.1@Float), ['0'])
+# top-47, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 30.06@Float), ==, 2, 23.2@Float), ['0'])
+# top-48, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2001@Int), ==, 2, 19.07@Float), ['0'])
+# top-49, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2001@Int), ==, 2, 20.1@Float), ['0'])
+# top-50, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2001@Int), ==, 2, 23.2@Float), ['0'])
+# top-51, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2007@Int), ==, 2, 19.07@Float), ['0'])
+# top-52, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2007@Int), ==, 2, 20.1@Float), ['0'])
+# top-53, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2007@Int), ==, 2, 23.2@Float), ['0'])
+# top-54, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2012@Int), ==, 2, 19.07@Float), ['0'])
+# top-55, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2012@Int), ==, 2, 20.1@Float), ['0'])
+# top-56, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2012@Int), ==, 2, 23.2@Float), ['0'])
+# top-57, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 2001@Int), ==, 0, 50-64@Str), ['0'])
+# top-58, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 2001@Int), ==, 2, 23.2@Float), ['0'])
+# top-59, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 2007@Int), ==, 2, 20.1@Float), ['0'])
+# top-60, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 2007@Int), ==, 2, 23.2@Float), ['0'])
+# top-61, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 2012@Int), ==, 2, 19.07@Float), ['0'])
+# top-62, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 2012@Int), ==, 2, 20.1@Float), ['0'])
+# top-63, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 1, 2012@Int), ==, 2, 23.2@Float), ['0'])
+# top-64, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19.07@Float), ==, 0, 50-64@Str), ['0'])
+# top-65, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19.07@Float), ==, 2, 19.07@Float), ['0'])
+# top-66, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19.07@Float), >=, 2, 19.07@Float), ['0'])
+# top-67, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19.07@Float), >, 2, 9.11@Float), ['0'])
+# top-68, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19.07@Float), !=, 0, 65+@Str), ['0'])
+# top-69, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 20.1@Float), ==, 2, 19.07@Float), ['0'])
+# top-70, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 20.1@Float), ==, 2, 20.1@Float), ['0'])
+# top-71, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 20.1@Float), >=, 2, 20.1@Float), ['0'])
+# top-72, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 20.1@Float), >, 2, 19.07@Float), ['0'])
+# top-73, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 23.2@Float), ==, 2, 19.07@Float), ['0'])
+# top-74, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 23.2@Float), ==, 2, 20.1@Float), ['0'])
+# top-75, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 23.2@Float), ==, 2, 23.2@Float), ['0'])
+# top-76, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 23.2@Float), >=, 2, 23.2@Float), ['0'])
+# top-77, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 23.2@Float), >, 2, 20.1@Float), ['0'])
+# top-78, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 24.05@Float), ==, 2, 19.07@Float), ['0'])
+# top-79, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 24.05@Float), ==, 2, 20.1@Float), ['0'])
+# top-80, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 24.05@Float), ==, 2, 23.2@Float), ['0'])
+# top-81, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 24.98@Float), ==, 2, 19.07@Float), ['0'])
+# top-82, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 24.98@Float), ==, 2, 20.1@Float), ['0'])
+# top-83, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 24.98@Float), ==, 2, 23.2@Float), ['0'])
+# top-84, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 26.02@Float), ==, 2, 19.07@Float), ['0'])
+# top-85, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 26.02@Float), ==, 2, 20.1@Float), ['0'])
+# top-86, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 26.02@Float), ==, 2, 23.2@Float), ['0'])
+# top-87, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 27.05@Float), ==, 2, 19.07@Float), ['0'])
+# top-88, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 27.05@Float), ==, 2, 20.1@Float), ['0'])
+# top-89, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 27.05@Float), ==, 2, 23.2@Float), ['0'])
+# top-90, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 30.06@Float), ==, 2, 19.07@Float), ['0'])
+# top-91, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 30.06@Float), ==, 2, 20.1@Float), ['0'])
+# top-92, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 30.06@Float), ==, 2, 23.2@Float), ['0'])
+# top-93, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2001@Int), ==, 2, 19.07@Float), ['0'])
+# top-94, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2001@Int), ==, 2, 20.1@Float), ['0'])
+# top-95, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2001@Int), ==, 2, 23.2@Float), ['0'])
+# top-96, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2007@Int), ==, 2, 19.07@Float), ['0'])
+# top-97, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2007@Int), ==, 2, 20.1@Float), ['0'])
+# top-98, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2007@Int), ==, 2, 23.2@Float), ['0'])
+# top-99, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2012@Int), ==, 2, 19.07@Float), ['0'])
+# top-100, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2012@Int), ==, 2, 20.1@Float), ['0'])
+# top-101, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2012@Int), ==, 2, 23.2@Float), ['0'])
+# top-102, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), <, 1, 2007@Int), ['0'])
+# top-103, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), <, 2, 20.1@Float), ['0'])
+# top-104, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), <=, 1, 2001@Int), ['0'])
+# top-105, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), <=, 2, 19.07@Float), ['0'])
+# top-106, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 1, 2001@Int), ['0'])
+# top-107, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 1, 2007@Int), ['0'])
+# top-108, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 1, 2012@Int), ['0'])
+# top-109, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 2, 19.07@Float), ['0'])
+# top-110, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 2, 20.1@Float), ['0'])
+# top-111, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 2, 23.2@Float), ['0'])
+# top-112, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 3, red@Str), ['0'])
+# top-113, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 3, orange@Str), ['0'])
+# top-114, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 3, blue@Str), ['0'])
+# top-115, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), >=, 1, 2012@Int), ['0'])
+# top-116, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), >=, 2, 23.2@Float), ['0'])
+# top-117, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), >, 1, 2007@Int), ['0'])
+# top-118, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), >, 2, 20.1@Float), ['0'])
+# top-119, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2001@Int), ==, 0, 50-64@Str), ['0'])
+# top-120, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2001@Int), ==, 2, 23.2@Float), ['0'])
+# top-121, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2007@Int), ==, 0, 50-64@Str), ['0'])
+# top-122, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2007@Int), ==, 2, 20.1@Float), ['0'])
+# top-123, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2012@Int), ==, 0, 50-64@Str), ['0'])
+# top-124, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2012@Int), ==, 2, 19.07@Float), ['0'])
+# top-125, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, red@Str), ==, 0, 50-64@Str), ['0'])
+# top-126, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, red@Str), ==, 2, 19.07@Float), ['0'])
+# top-127, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, orange@Str), ==, 0, 50-64@Str), ['0'])
+# top-128, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, orange@Str), ==, 2, 20.1@Float), ['0'])
+# top-129, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, 50-64@Str), ['0'])
+# top-130, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 2, 23.2@Float), ['0'])
+# top-131, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 7.14@Float), ==, 2, 19.07@Float), ['0'])
+# top-132, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 7.14@Float), ==, 2, 20.1@Float), ['0'])
+# top-133, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 7.14@Float), ==, 2, 23.2@Float), ['0'])
+# top-134, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 8.08@Float), ==, 2, 19.07@Float), ['0'])
+# top-135, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 8.08@Float), ==, 2, 20.1@Float), ['0'])
+# top-136, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 8.08@Float), ==, 2, 23.2@Float), ['0'])
+# top-137, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 9.11@Float), ==, 2, 19.07@Float), ['0'])
+# top-138, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 9.11@Float), ==, 2, 20.1@Float), ['0'])
+# top-139, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 9.11@Float), ==, 2, 23.2@Float), ['0'])
+# top-140, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 19.07@Float), ==, 2, 19.07@Float), ['0'])
+# top-141, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 19.07@Float), ==, 2, 20.1@Float), ['0'])
+# top-142, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 19.07@Float), ==, 2, 23.2@Float), ['0'])
+# top-143, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 20.1@Float), ==, 2, 19.07@Float), ['0'])
+# top-144, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 20.1@Float), ==, 2, 20.1@Float), ['0'])
+# top-145, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 20.1@Float), ==, 2, 23.2@Float), ['0'])
+# top-146, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 23.2@Float), ==, 2, 19.07@Float), ['0'])
+# top-147, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 23.2@Float), ==, 2, 20.1@Float), ['0'])
+# top-148, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 23.2@Float), ==, 2, 23.2@Float), ['0'])
+# top-149, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 24.05@Float), ==, 2, 19.07@Float), ['0'])
+# top-150, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 24.05@Float), ==, 2, 20.1@Float), ['0'])
+# top-151, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 24.05@Float), ==, 2, 23.2@Float), ['0'])
+# top-152, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 24.98@Float), ==, 2, 19.07@Float), ['0'])
+# top-153, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 24.98@Float), ==, 2, 20.1@Float), ['0'])
+# top-154, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 24.98@Float), ==, 2, 23.2@Float), ['0'])
+# top-155, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 26.02@Float), ==, 2, 19.07@Float), ['0'])
+# top-156, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 26.02@Float), ==, 2, 20.1@Float), ['0'])
+# top-157, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 26.02@Float), ==, 2, 23.2@Float), ['0'])
+# top-158, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 27.05@Float), ==, 2, 19.07@Float), ['0'])
+# top-159, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 27.05@Float), ==, 2, 20.1@Float), ['0'])
+# top-160, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 27.05@Float), ==, 2, 23.2@Float), ['0'])
+# top-161, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 30.06@Float), ==, 2, 19.07@Float), ['0'])
+# top-162, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 30.06@Float), ==, 2, 20.1@Float), ['0'])
+# top-163, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 30.06@Float), ==, 2, 23.2@Float), ['0'])
+# top-164, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 2001@Int), ==, 2, 19.07@Float), ['0'])
+# top-165, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 2001@Int), ==, 2, 20.1@Float), ['0'])
+# top-166, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 2001@Int), ==, 2, 23.2@Float), ['0'])
+# top-167, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 2007@Int), ==, 2, 19.07@Float), ['0'])
+# top-168, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 2007@Int), ==, 2, 20.1@Float), ['0'])
+# top-169, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 2012@Int), ==, 0, 50-64@Str), ['0'])
+# top-170, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 1, 2012@Int), ==, 2, 19.07@Float), ['0'])
+# top-171, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 7.14@Float), ==, 2, 19.07@Float), ['0'])
+# top-172, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 7.14@Float), ==, 2, 20.1@Float), ['0'])
+# top-173, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 7.14@Float), ==, 2, 23.2@Float), ['0'])
+# top-174, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 8.08@Float), ==, 2, 19.07@Float), ['0'])
+# top-175, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 8.08@Float), ==, 2, 20.1@Float), ['0'])
+# top-176, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 8.08@Float), ==, 2, 23.2@Float), ['0'])
+# top-177, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 9.11@Float), ==, 2, 19.07@Float), ['0'])
+# top-178, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 9.11@Float), ==, 2, 20.1@Float), ['0'])
+# top-179, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 9.11@Float), ==, 2, 23.2@Float), ['0'])
+# top-180, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 19.07@Float), <, 2, 20.1@Float), ['0'])
+# top-181, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 19.07@Float), <=, 2, 19.07@Float), ['0'])
+# top-182, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 19.07@Float), ==, 2, 19.07@Float), ['0'])
+# top-183, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 19.07@Float), ==, 2, 20.1@Float), ['0'])
+# top-184, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 19.07@Float), ==, 2, 23.2@Float), ['0'])
+# top-185, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 20.1@Float), <, 2, 23.2@Float), ['0'])
+# top-186, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 20.1@Float), <=, 2, 20.1@Float), ['0'])
+# top-187, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 20.1@Float), ==, 2, 20.1@Float), ['0'])
+# top-188, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 20.1@Float), ==, 2, 23.2@Float), ['0'])
+# top-189, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 23.2@Float), <, 2, 24.05@Float), ['0'])
+# top-190, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 23.2@Float), <=, 2, 23.2@Float), ['0'])
+# top-191, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 23.2@Float), ==, 0, 50-64@Str), ['0'])
+# top-192, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 23.2@Float), ==, 2, 23.2@Float), ['0'])
+# top-193, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 7.14@Float), ==, 2, 19.07@Float), ['0'])
+# top-194, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 7.14@Float), ==, 2, 20.1@Float), ['0'])
+# top-195, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 7.14@Float), ==, 2, 23.2@Float), ['0'])
+# top-196, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 8.08@Float), ==, 2, 19.07@Float), ['0'])
+# top-197, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 8.08@Float), ==, 2, 20.1@Float), ['0'])
+# top-198, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 8.08@Float), ==, 2, 23.2@Float), ['0'])
+# top-199, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 9.11@Float), ==, 2, 19.07@Float), ['0'])
+# top-200, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 9.11@Float), ==, 2, 20.1@Float), ['0'])
+# top-201, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 9.11@Float), ==, 2, 23.2@Float), ['0'])
+# top-202, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 19.07@Float), ==, 2, 19.07@Float), ['0'])
+# top-203, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 19.07@Float), ==, 2, 20.1@Float), ['0'])
+# top-204, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 19.07@Float), ==, 2, 23.2@Float), ['0'])
+# top-205, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 20.1@Float), ==, 2, 19.07@Float), ['0'])
+# top-206, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 20.1@Float), ==, 2, 20.1@Float), ['0'])
+# top-207, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 20.1@Float), ==, 2, 23.2@Float), ['0'])
+# top-208, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 23.2@Float), ==, 2, 19.07@Float), ['0'])
+# top-209, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 23.2@Float), ==, 2, 20.1@Float), ['0'])
+# top-210, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 23.2@Float), ==, 2, 23.2@Float), ['0'])
+# top-211, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 24.05@Float), ==, 2, 19.07@Float), ['0'])
+# top-212, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 24.05@Float), ==, 2, 20.1@Float), ['0'])
+# top-213, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 24.05@Float), ==, 2, 23.2@Float), ['0'])
+# top-214, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 24.98@Float), ==, 2, 19.07@Float), ['0'])
+# top-215, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 24.98@Float), ==, 2, 20.1@Float), ['0'])
+# top-216, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 24.98@Float), ==, 2, 23.2@Float), ['0'])
+# top-217, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 26.02@Float), ==, 2, 19.07@Float), ['0'])
+# top-218, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 26.02@Float), ==, 2, 20.1@Float), ['0'])
+# top-219, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 26.02@Float), ==, 2, 23.2@Float), ['0'])
+# top-220, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 27.05@Float), ==, 2, 19.07@Float), ['0'])
+# top-221, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 27.05@Float), ==, 2, 20.1@Float), ['0'])
+# top-222, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 27.05@Float), ==, 2, 23.2@Float), ['0'])
+# top-223, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 30.06@Float), ==, 2, 19.07@Float), ['0'])
+# top-224, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 30.06@Float), ==, 2, 20.1@Float), ['0'])
+# top-225, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 30.06@Float), ==, 2, 23.2@Float), ['0'])
+# top-226, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 2001@Int), ==, 2, 19.07@Float), ['0'])
+# top-227, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 2001@Int), ==, 2, 20.1@Float), ['0'])
+# top-228, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 2007@Int), ==, 0, 50-64@Str), ['0'])
+# top-229, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 1, 2007@Int), ==, 2, 19.07@Float), ['0'])
+# top-230, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 7.14@Float), ==, 2, 19.07@Float), ['0'])
+# top-231, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 7.14@Float), ==, 2, 20.1@Float), ['0'])
+# top-232, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 7.14@Float), ==, 2, 23.2@Float), ['0'])
+# top-233, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 8.08@Float), ==, 2, 19.07@Float), ['0'])
+# top-234, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 8.08@Float), ==, 2, 20.1@Float), ['0'])
+# top-235, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 8.08@Float), ==, 2, 23.2@Float), ['0'])
+# top-236, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 9.11@Float), <, 2, 20.1@Float), ['0'])
+# top-237, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 9.11@Float), <=, 2, 19.07@Float), ['0'])
+# top-238, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 9.11@Float), ==, 2, 19.07@Float), ['0'])
+# top-239, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 9.11@Float), ==, 2, 20.1@Float), ['0'])
+# top-240, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 9.11@Float), ==, 2, 23.2@Float), ['0'])
+# top-241, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 19.07@Float), <, 2, 23.2@Float), ['0'])
+# top-242, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 19.07@Float), <=, 2, 20.1@Float), ['0'])
+# top-243, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 19.07@Float), ==, 2, 20.1@Float), ['0'])
+# top-244, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 19.07@Float), ==, 2, 23.2@Float), ['0'])
+# top-245, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 20.1@Float), <, 2, 24.05@Float), ['0'])
+# top-246, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 20.1@Float), <=, 2, 23.2@Float), ['0'])
+# top-247, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 20.1@Float), ==, 0, 50-64@Str), ['0'])
+# top-248, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 20.1@Float), ==, 2, 23.2@Float), ['0'])
+# top-249, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 7.14@Float), ==, 2, 19.07@Float), ['0'])
+# top-250, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 7.14@Float), ==, 2, 20.1@Float), ['0'])
+# top-251, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 7.14@Float), ==, 2, 23.2@Float), ['0'])
+# top-252, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 8.08@Float), ==, 2, 19.07@Float), ['0'])
+# top-253, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 8.08@Float), ==, 2, 20.1@Float), ['0'])
+# top-254, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 8.08@Float), ==, 2, 23.2@Float), ['0'])
+# top-255, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 9.11@Float), ==, 2, 19.07@Float), ['0'])
+# top-256, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 9.11@Float), ==, 2, 20.1@Float), ['0'])
+# top-257, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 9.11@Float), ==, 2, 23.2@Float), ['0'])
+# top-258, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 19.07@Float), ==, 2, 19.07@Float), ['0'])
+# top-259, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 19.07@Float), ==, 2, 20.1@Float), ['0'])
+# top-260, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 19.07@Float), ==, 2, 23.2@Float), ['0'])
+# top-261, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 20.1@Float), ==, 2, 19.07@Float), ['0'])
+# top-262, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 20.1@Float), ==, 2, 20.1@Float), ['0'])
+# top-263, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 20.1@Float), ==, 2, 23.2@Float), ['0'])
+# top-264, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, color@Str), ==, 2, 19.07@Float), ['0'])
+# top-265, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, color@Str), ==, 2, 20.1@Float), ['0'])
+# top-266, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, color@Str), ==, 2, 23.2@Float), ['0'])
+# top-267, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 23.2@Float), ==, 2, 19.07@Float), ['0'])
+# top-268, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 23.2@Float), ==, 2, 20.1@Float), ['0'])
+# top-269, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 23.2@Float), ==, 2, 23.2@Float), ['0'])
+# top-270, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 24.05@Float), ==, 2, 19.07@Float), ['0'])
+# top-271, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 24.05@Float), ==, 2, 20.1@Float), ['0'])
+# top-272, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 24.05@Float), ==, 2, 23.2@Float), ['0'])
+# top-273, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 24.98@Float), ==, 2, 19.07@Float), ['0'])
+# top-274, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 24.98@Float), ==, 2, 20.1@Float), ['0'])
+# top-275, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 24.98@Float), ==, 2, 23.2@Float), ['0'])
+# top-276, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 26.02@Float), ==, 2, 19.07@Float), ['0'])
+# top-277, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 26.02@Float), ==, 2, 20.1@Float), ['0'])
+# top-278, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 26.02@Float), ==, 2, 23.2@Float), ['0'])
+# top-279, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 27.05@Float), ==, 2, 19.07@Float), ['0'])
+# top-280, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 27.05@Float), ==, 2, 20.1@Float), ['0'])
+# top-281, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 27.05@Float), ==, 2, 23.2@Float), ['0'])
+# top-282, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 30.06@Float), ==, 2, 19.07@Float), ['0'])
+# top-283, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 30.06@Float), ==, 2, 20.1@Float), ['0'])
+# top-284, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 30.06@Float), ==, 2, 23.2@Float), ['0'])
+# top-285, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, year@Str), ==, 2, 19.07@Float), ['0'])
+# top-286, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, year@Str), ==, 2, 20.1@Float), ['0'])
+# top-287, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, year@Str), ==, 2, 23.2@Float), ['0'])
+# top-288, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 65+@Str), <, 2, 20.1@Float), ['0'])
+# top-289, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 65+@Str), <=, 2, 19.07@Float), ['0'])
+# top-290, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 65+@Str), ==, 2, 19.07@Float), ['0'])
+# top-291, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 65+@Str), ==, 2, 20.1@Float), ['0'])
+# top-292, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 65+@Str), ==, 2, 23.2@Float), ['0'])
+# top-293, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, percent@Str), ==, 2, 19.07@Float), ['0'])
+# top-294, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, percent@Str), ==, 2, 20.1@Float), ['0'])
+# top-295, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, percent@Str), ==, 2, 23.2@Float), ['0'])
+# top-296, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 35-49@Str), ==, 2, 19.07@Float), ['0'])
+# top-297, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 35-49@Str), ==, 2, 20.1@Float), ['0'])
+# top-298, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 35-49@Str), ==, 2, 23.2@Float), ['0'])
+# top-299, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, red@Str), ==, 2, 19.07@Float), ['0'])
+# top-300, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, red@Str), ==, 2, 20.1@Float), ['0'])
+# top-301, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, red@Str), ==, 2, 23.2@Float), ['0'])
+# top-302, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Under 35@Str), ==, 2, 19.07@Float), ['0'])
+# top-303, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Under 35@Str), ==, 2, 20.1@Float), ['0'])
+# top-304, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Under 35@Str), ==, 2, 23.2@Float), ['0'])
+# top-305, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 2001@Int), ==, 2, 19.07@Float), ['0'])
+# top-306, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 2001@Int), ==, 2, 20.1@Float), ['0'])
+# top-307, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 2001@Int), ==, 2, 23.2@Float), ['0'])
+# top-308, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 2007@Int), ==, 2, 19.07@Float), ['0'])
+# top-309, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 2007@Int), ==, 2, 20.1@Float), ['0'])
+# top-310, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 2007@Int), ==, 2, 23.2@Float), ['0'])
+# top-311, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, orange@Str), ==, 2, 19.07@Float), ['0'])
+# top-312, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, orange@Str), ==, 2, 20.1@Float), ['0'])
+# top-313, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, orange@Str), ==, 2, 23.2@Float), ['0'])
+# top-314, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 2012@Int), ==, 2, 19.07@Float), ['0'])
+# top-315, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 2012@Int), ==, 2, 20.1@Float), ['0'])
+# top-316, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 2012@Int), ==, 2, 23.2@Float), ['0'])
+# top-317, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Age@Str), ==, 2, 19.07@Float), ['0'])
+# top-318, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Age@Str), ==, 2, 20.1@Float), ['0'])
+# top-319, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Age@Str), ==, 2, 23.2@Float), ['0'])
+# top-320, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, blue@Str), ==, 2, 19.07@Float), ['0'])
+# top-321, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, blue@Str), ==, 2, 20.1@Float), ['0'])
+# top-322, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, blue@Str), ==, 2, 23.2@Float), ['0'])
+# top-323, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 7.14@Float), ==, 2, 19.07@Float), ['0'])
+# top-324, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 7.14@Float), ==, 2, 20.1@Float), ['0'])
+# top-325, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 7.14@Float), ==, 2, 23.2@Float), ['0'])
+# top-326, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 8.08@Float), ==, 2, 19.07@Float), ['0'])
+# top-327, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 8.08@Float), ==, 2, 20.1@Float), ['0'])
+# top-328, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 8.08@Float), ==, 2, 23.2@Float), ['0'])
+# top-329, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 9.11@Float), ==, 2, 19.07@Float), ['0'])
+# top-330, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 9.11@Float), ==, 2, 20.1@Float), ['0'])
+# top-331, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 9.11@Float), ==, 2, 23.2@Float), ['0'])
+# top-332, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 19.07@Float), ==, 2, 19.07@Float), ['0'])
+# top-333, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 19.07@Float), ==, 2, 20.1@Float), ['0'])
+# top-334, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 19.07@Float), ==, 2, 23.2@Float), ['0'])
+# top-335, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 20.1@Float), ==, 2, 19.07@Float), ['0'])
+# top-336, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 20.1@Float), ==, 2, 20.1@Float), ['0'])
+# top-337, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 20.1@Float), ==, 2, 23.2@Float), ['0'])
+# top-338, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, color@Str), ==, 2, 19.07@Float), ['0'])
+# top-339, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, color@Str), ==, 2, 20.1@Float), ['0'])
+# top-340, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, color@Str), ==, 2, 23.2@Float), ['0'])
+# top-341, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 23.2@Float), ==, 2, 19.07@Float), ['0'])
+# top-342, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 23.2@Float), ==, 2, 20.1@Float), ['0'])
+# top-343, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 23.2@Float), ==, 2, 23.2@Float), ['0'])
+# top-344, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 24.05@Float), ==, 2, 19.07@Float), ['0'])
+# top-345, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 24.05@Float), ==, 2, 20.1@Float), ['0'])
+# top-346, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 24.05@Float), ==, 2, 23.2@Float), ['0'])
+# top-347, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 24.98@Float), ==, 2, 19.07@Float), ['0'])
+# top-348, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 24.98@Float), ==, 2, 20.1@Float), ['0'])
+# top-349, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 24.98@Float), ==, 2, 23.2@Float), ['0'])
+# top-350, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 26.02@Float), ==, 2, 19.07@Float), ['0'])
+# top-351, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 26.02@Float), ==, 2, 20.1@Float), ['0'])
+# top-352, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 26.02@Float), ==, 2, 23.2@Float), ['0'])
+# top-353, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 27.05@Float), ==, 2, 19.07@Float), ['0'])
+# top-354, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 27.05@Float), ==, 2, 20.1@Float), ['0'])
+# top-355, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 27.05@Float), ==, 2, 23.2@Float), ['0'])
+# top-356, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 30.06@Float), ==, 2, 19.07@Float), ['0'])
+# top-357, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 30.06@Float), ==, 2, 20.1@Float), ['0'])
+# top-358, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 30.06@Float), ==, 2, 23.2@Float), ['0'])
+# top-359, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, year@Str), ==, 2, 19.07@Float), ['0'])
+# top-360, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, year@Str), ==, 2, 20.1@Float), ['0'])
+# top-361, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, year@Str), ==, 2, 23.2@Float), ['0'])
+# top-362, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 50-64@Str), ==, 2, 19.07@Float), ['0'])
+# top-363, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 50-64@Str), ==, 2, 20.1@Float), ['0'])
+# top-364, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 50-64@Str), ==, 2, 23.2@Float), ['0'])
+# top-365, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 65+@Str), ==, 2, 19.07@Float), ['0'])
+# top-366, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 65+@Str), ==, 2, 20.1@Float), ['0'])
+# top-367, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 65+@Str), ==, 2, 23.2@Float), ['0'])
+# top-368, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, percent@Str), ==, 2, 19.07@Float), ['0'])
+# top-369, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, percent@Str), ==, 2, 20.1@Float), ['0'])
+# top-370, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, percent@Str), ==, 2, 23.2@Float), ['0'])
+# top-371, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 35-49@Str), ==, 2, 19.07@Float), ['0'])
+# top-372, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 35-49@Str), ==, 2, 20.1@Float), ['0'])
+# top-373, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 35-49@Str), ==, 2, 23.2@Float), ['0'])
+# top-374, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, red@Str), ==, 2, 19.07@Float), ['0'])
+# top-375, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, red@Str), ==, 2, 20.1@Float), ['0'])
+# top-376, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, red@Str), ==, 2, 23.2@Float), ['0'])
+# top-377, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Under 35@Str), ==, 2, 19.07@Float), ['0'])
+# top-378, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Under 35@Str), ==, 2, 20.1@Float), ['0'])
+# top-379, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Under 35@Str), ==, 2, 23.2@Float), ['0'])
+# top-380, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 2001@Int), ==, 2, 19.07@Float), ['0'])
+# top-381, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 2001@Int), ==, 2, 20.1@Float), ['0'])
+# top-382, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 2007@Int), ==, 2, 19.07@Float), ['0'])
+# top-383, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 2007@Int), ==, 2, 23.2@Float), ['0'])
+# top-384, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, orange@Str), ==, 2, 19.07@Float), ['0'])
+# top-385, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, orange@Str), ==, 2, 20.1@Float), ['0'])
+# top-386, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, orange@Str), ==, 2, 23.2@Float), ['0'])
+# top-387, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 2012@Int), ==, 2, 20.1@Float), ['0'])
+# top-388, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 2012@Int), ==, 2, 23.2@Float), ['0'])
+# top-389, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Age@Str), ==, 2, 19.07@Float), ['0'])
+# top-390, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Age@Str), ==, 2, 20.1@Float), ['0'])
+# top-391, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Age@Str), ==, 2, 23.2@Float), ['0'])
+# top-392, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, blue@Str), ==, 2, 19.07@Float), ['0'])
+# top-393, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, blue@Str), ==, 2, 20.1@Float), ['0'])
+# top-394, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, blue@Str), ==, 2, 23.2@Float), ['0'])
+# top-395, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 7.14@Float), ==, 2, 19.07@Float), ['0'])
+# top-396, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 7.14@Float), ==, 2, 20.1@Float), ['0'])
+# top-397, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 7.14@Float), ==, 2, 23.2@Float), ['0'])
+# top-398, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 8.08@Float), ==, 2, 19.07@Float), ['0'])
+# top-399, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 8.08@Float), ==, 2, 20.1@Float), ['0'])
+# top-400, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 8.08@Float), ==, 2, 23.2@Float), ['0'])
+# top-401, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 9.11@Float), ==, 2, 19.07@Float), ['0'])
+# top-402, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 9.11@Float), ==, 2, 20.1@Float), ['0'])
+# top-403, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 9.11@Float), ==, 2, 23.2@Float), ['0'])
+# top-404, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 19.07@Float), ==, 2, 20.1@Float), ['0'])
+# top-405, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 19.07@Float), ==, 2, 23.2@Float), ['0'])
+# top-406, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 20.1@Float), ==, 2, 19.07@Float), ['0'])
+# top-407, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 20.1@Float), ==, 2, 23.2@Float), ['0'])
+# top-408, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, color@Str), ==, 2, 19.07@Float), ['0'])
+# top-409, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, color@Str), ==, 2, 20.1@Float), ['0'])
+# top-410, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, color@Str), ==, 2, 23.2@Float), ['0'])
+# top-411, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 23.2@Float), ==, 2, 19.07@Float), ['0'])
+# top-412, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 23.2@Float), ==, 2, 20.1@Float), ['0'])
+# top-413, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 24.05@Float), ==, 2, 19.07@Float), ['0'])
+# top-414, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 24.05@Float), ==, 2, 20.1@Float), ['0'])
+# top-415, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 24.05@Float), ==, 2, 23.2@Float), ['0'])
+# top-416, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 24.98@Float), ==, 2, 19.07@Float), ['0'])
+# top-417, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 24.98@Float), ==, 2, 20.1@Float), ['0'])
+# top-418, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 24.98@Float), ==, 2, 23.2@Float), ['0'])
+# top-419, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 26.02@Float), ==, 2, 19.07@Float), ['0'])
+# top-420, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 26.02@Float), ==, 2, 20.1@Float), ['0'])
+# top-421, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 26.02@Float), ==, 2, 23.2@Float), ['0'])
+# top-422, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 27.05@Float), ==, 2, 19.07@Float), ['0'])
+# top-423, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 27.05@Float), ==, 2, 20.1@Float), ['0'])
+# top-424, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 27.05@Float), ==, 2, 23.2@Float), ['0'])
+# top-425, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 30.06@Float), ==, 2, 19.07@Float), ['0'])
+# top-426, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 30.06@Float), ==, 2, 20.1@Float), ['0'])
+# top-427, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 30.06@Float), ==, 2, 23.2@Float), ['0'])
+# top-428, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, year@Str), ==, 2, 19.07@Float), ['0'])
+# top-429, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, year@Str), ==, 2, 20.1@Float), ['0'])
+# top-430, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, year@Str), ==, 2, 23.2@Float), ['0'])
+# top-431, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 50-64@Str), ==, 2, 19.07@Float), ['0'])
+# top-432, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 50-64@Str), ==, 2, 20.1@Float), ['0'])
+# top-433, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 50-64@Str), ==, 2, 23.2@Float), ['0'])
+# top-434, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 65+@Str), ==, 2, 19.07@Float), ['0'])
+# top-435, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 65+@Str), ==, 2, 20.1@Float), ['0'])
+# top-436, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 65+@Str), ==, 2, 23.2@Float), ['0'])
+# top-437, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, percent@Str), ==, 2, 19.07@Float), ['0'])
+# top-438, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, percent@Str), ==, 2, 20.1@Float), ['0'])
+# top-439, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, percent@Str), ==, 2, 23.2@Float), ['0'])
+# top-440, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 35-49@Str), ==, 2, 19.07@Float), ['0'])
+# top-441, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 35-49@Str), ==, 2, 20.1@Float), ['0'])
+# top-442, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 35-49@Str), ==, 2, 23.2@Float), ['0'])
+# top-443, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, red@Str), ==, 2, 19.07@Float), ['0'])
+# top-444, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, red@Str), ==, 2, 20.1@Float), ['0'])
+# top-445, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, red@Str), ==, 2, 23.2@Float), ['0'])
+# top-446, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Under 35@Str), ==, 2, 19.07@Float), ['0'])
+# top-447, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Under 35@Str), ==, 2, 20.1@Float), ['0'])
+# top-448, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Under 35@Str), ==, 2, 23.2@Float), ['0'])
+# top-449, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 2001@Int), ==, 2, 19.07@Float), ['0'])
+# top-450, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 2001@Int), ==, 2, 20.1@Float), ['0'])
+# top-451, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 2001@Int), ==, 2, 23.2@Float), ['0'])
+# top-452, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 2007@Int), ==, 2, 19.07@Float), ['0'])
+# top-453, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 2007@Int), ==, 2, 20.1@Float), ['0'])
+# top-454, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 2007@Int), ==, 2, 23.2@Float), ['0'])
+# top-455, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, orange@Str), ==, 2, 19.07@Float), ['0'])
+# top-456, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, orange@Str), ==, 2, 20.1@Float), ['0'])
+# top-457, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, orange@Str), ==, 2, 23.2@Float), ['0'])
+# top-458, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 2012@Int), ==, 2, 19.07@Float), ['0'])
+# top-459, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 2012@Int), ==, 2, 20.1@Float), ['0'])
+# top-460, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, 2012@Int), ==, 2, 23.2@Float), ['0'])
+# top-461, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Age@Str), ==, 2, 19.07@Float), ['0'])
+# top-462, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Age@Str), ==, 2, 20.1@Float), ['0'])
+# top-463, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, Age@Str), ==, 2, 23.2@Float), ['0'])
+# top-464, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, blue@Str), ==, 2, 19.07@Float), ['0'])
+# top-465, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, blue@Str), ==, 2, 20.1@Float), ['0'])
+# top-466, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 2, blue@Str), ==, 2, 23.2@Float), ['0'])
+# top-467, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 7.14@Float), ==, 2, 19.07@Float), ['0'])
+# top-468, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 7.14@Float), ==, 2, 20.1@Float), ['0'])
+# top-469, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 7.14@Float), ==, 2, 23.2@Float), ['0'])
+# top-470, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 8.08@Float), ==, 2, 19.07@Float), ['0'])
+# top-471, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 8.08@Float), ==, 2, 20.1@Float), ['0'])
+# top-472, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 8.08@Float), ==, 2, 23.2@Float), ['0'])
+# top-473, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 9.11@Float), ==, 2, 19.07@Float), ['0'])
+# top-474, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 9.11@Float), ==, 2, 20.1@Float), ['0'])
+# top-475, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 9.11@Float), ==, 2, 23.2@Float), ['0'])
+# top-476, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 19.07@Float), ==, 2, 19.07@Float), ['0'])
+# top-477, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 19.07@Float), ==, 2, 20.1@Float), ['0'])
+# top-478, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 19.07@Float), ==, 2, 23.2@Float), ['0'])
+# top-479, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 20.1@Float), ==, 2, 19.07@Float), ['0'])
+# top-480, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 20.1@Float), ==, 2, 20.1@Float), ['0'])
+# top-481, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 20.1@Float), ==, 2, 23.2@Float), ['0'])
+# top-482, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, color@Str), ==, 2, 19.07@Float), ['0'])
+# top-483, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, color@Str), ==, 2, 20.1@Float), ['0'])
+# top-484, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, color@Str), ==, 2, 23.2@Float), ['0'])
+# top-485, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 23.2@Float), ==, 2, 19.07@Float), ['0'])
+# top-486, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 23.2@Float), ==, 2, 20.1@Float), ['0'])
+# top-487, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 23.2@Float), ==, 2, 23.2@Float), ['0'])
+# top-488, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 24.05@Float), ==, 2, 19.07@Float), ['0'])
+# top-489, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 24.05@Float), ==, 2, 20.1@Float), ['0'])
+# top-490, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 24.05@Float), ==, 2, 23.2@Float), ['0'])
+# top-491, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 24.98@Float), ==, 2, 19.07@Float), ['0'])
+# top-492, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 24.98@Float), ==, 2, 20.1@Float), ['0'])
+# top-493, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 24.98@Float), ==, 2, 23.2@Float), ['0'])
+# top-494, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 26.02@Float), ==, 2, 19.07@Float), ['0'])
+# top-495, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 26.02@Float), ==, 2, 20.1@Float), ['0'])
+# top-496, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 26.02@Float), ==, 2, 23.2@Float), ['0'])
+# top-497, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 27.05@Float), ==, 2, 19.07@Float), ['0'])
+# top-498, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 27.05@Float), ==, 2, 20.1@Float), ['0'])
+# top-499, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 27.05@Float), ==, 2, 23.2@Float), ['0'])
+# top-500, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 30.06@Float), ==, 2, 19.07@Float), ['0'])
+# top-501, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 30.06@Float), ==, 2, 20.1@Float), ['0'])
+# top-502, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 30.06@Float), ==, 2, 23.2@Float), ['0'])
+# top-503, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, year@Str), ==, 2, 19.07@Float), ['0'])
+# top-504, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, year@Str), ==, 2, 20.1@Float), ['0'])
+# top-505, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, year@Str), ==, 2, 23.2@Float), ['0'])
+# top-506, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 50-64@Str), ==, 2, 19.07@Float), ['0'])
+# top-507, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 50-64@Str), ==, 2, 20.1@Float), ['0'])
+# top-508, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 50-64@Str), ==, 2, 23.2@Float), ['0'])
+# top-509, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 65+@Str), ==, 2, 19.07@Float), ['0'])
+# top-510, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 65+@Str), ==, 2, 20.1@Float), ['0'])
+# top-511, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 65+@Str), ==, 2, 23.2@Float), ['0'])
+# top-512, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, percent@Str), ==, 2, 19.07@Float), ['0'])
+# top-513, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, percent@Str), ==, 2, 20.1@Float), ['0'])
+# top-514, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, percent@Str), ==, 2, 23.2@Float), ['0'])
+# top-515, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 35-49@Str), ==, 2, 19.07@Float), ['0'])
+# top-516, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 35-49@Str), ==, 2, 20.1@Float), ['0'])
+# top-517, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, 35-49@Str), ==, 2, 23.2@Float), ['0'])
+# top-518, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, red@Str), ==, 2, 20.1@Float), ['0'])
+# top-519, score: 0.00, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, red@Str), ==, 2, 23.2@Float), ['0'])

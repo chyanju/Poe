@@ -1,0 +1,61 @@
+# parsed arguments: Namespace(benchmark='Qc6c0d', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'and', '122.1', '54.2', '6.3', 'wales', 'nan', '5', '32.7', 'asian', '13.0', 'service', 'network', 'cost(£million)', '18.8', '54.3', '4', '152.5', 'radio', 'extra', '2', '76.0', 'gàidheal', 'bbc', '62.1', '7.2', '5.6', '2012/13', '11.5', 'total', '3', 'live', '17.6', 'foyle', 'color', '23.8', '1xtra', '1', '6', '11.8', 'scotland', 'local', 'sports', 'music', 'cymru', 'ulster', 'blue'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                                 Service  2012/13 Total Cost(£million) color
+0                            BBC Radio 1                          54.2  blue
+1                        BBC Radio 1Xtra                          11.8  blue
+2                            BBC Radio 2                          62.1  blue
+3                            BBC Radio 3                          54.3  blue
+4                            BBC Radio 4                         122.1  blue
+5                      BBC Radio 4 Extra                           7.2  blue
+6                       BBC Radio 5 Live                          76.0  blue
+7          BBC Radio 5 Live Sports Extra                           5.6  blue
+8                      BBC Radio 6 Music                          11.5  blue
+9                      BBC Asian Network                          13.0  blue
+10                       BBC Local Radio                         152.5  blue
+11                    BBC Radio Scotland                          32.7  blue
+12                BBC Radio nan Gàidheal                           6.3  blue
+13                       BBC Radio Wales                          18.8  blue
+14                       BBC Radio Cymru                          17.6  blue
+15  BBC Radio Ulster and BBC Radio Foyle                          23.8  blue
+# query is: Which service cost 122.1 million pounds?
+# expected output type:[dtype('O')]
+# expected output is:
+        ANSWER
+0  BBC Radio 4
+# inferred DSL terminals:
+  # ConstVal: ['2012/13 Total Cost(£million)@Str', 'Service@Str', '122.1@Float', '<NULL>']
+     # cmap: [(122.1, 122.1), ('million', '2012/13 Total Cost(£million)'), ('service', 'Service'), ('cost', '2012/13 Total Cost(£million)')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'BBC Radio 4'}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 122.1@Float), ==, 1, 122.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 122.1], '==', '2012/13 Total Cost(£million)', 122.1], ['Service']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 122.1@Float), ==, 1, 122.1@Float), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 122.1], '==', '2012/13 Total Cost(£million)', 122.1], ['Service']]
+    # SelectCol(SelectRow1(@param0, ==, 1, 122.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 122.1], ['Service']]
+    # SelectCol(SelectRow1(@param0, ==, 1, 122.1@Float), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 122.1], ['Service']]
+
+# ========== review report ========== #
+# top-1, score: 1.81, answer: ['BBC Radio 4']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, 122.1@Float), ['0'])
+# top-2, score: 1.81, answer: ['BBC Radio 4']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, 122.1@Float), ['-1', '-2'])
+# top-3, score: 1.76, answer: ['BBC Radio 4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 122.1@Float), ==, 1, 122.1@Float), ['0'])
+# top-4, score: 1.76, answer: ['BBC Radio 4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 122.1@Float), ==, 1, 122.1@Float), ['-1', '-2'])

@@ -1,0 +1,54 @@
+# parsed arguments: Namespace(benchmark='Qef3bb', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'capital', 'north-east', 'population', '162829', 'remainder', 'south', 'danish', 'region', 'blue', '1823109', 'west', 'color', 'skåne', '608036', '305982', '683886'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                  Region  Population color
+0  Danish Capital Region     1823109  blue
+1              Remainder      608036  blue
+2            South Skåne      683886  blue
+3             West Skåne      305982  blue
+4       North-East Skåne      162829  blue
+# query is: What is the population of South Skane?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0  683886
+# inferred DSL terminals:
+  # ConstVal: ['Population@Str', 'South Skåne@Str', '<NULL>']
+     # cmap: [('south', 'South Skåne'), ('population', 'Population')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 683886}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, South Skåne@Str), ==, 0, South Skåne@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Region', 'South Skåne'], '==', 'Region', 'South Skåne'], ['Population']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, South Skåne@Str), ==, 0, South Skåne@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Region', 'South Skåne'], '==', 'Region', 'South Skåne'], ['Population']]
+    # SelectCol(SelectRow1(@param0, ==, 0, South Skåne@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Region', 'South Skåne'], ['Population']]
+    # SelectCol(SelectRow1(@param0, ==, 0, South Skåne@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Region', 'South Skåne'], ['Population']]
+# (t=1.06) i=1, candidate=[{'ANSWER': 1367772}]
+  # found 0 program(s)
+# (t=2.10) i=2, candidate=[{'ANSWER': 2051658}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.43, answer: [683886]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, South Skåne@Str), ['1'])
+# top-2, score: 1.43, answer: [683886]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, South Skåne@Str), ['-99', '-2'])
+# top-3, score: 1.38, answer: [683886]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, South Skåne@Str), ==, 0, South Skåne@Str), ['1'])
+# top-4, score: 1.38, answer: [683886]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, South Skåne@Str), ==, 0, South Skåne@Str), ['-99', '-2'])

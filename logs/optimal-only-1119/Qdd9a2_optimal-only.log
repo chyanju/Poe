@@ -1,0 +1,300 @@
+# parsed arguments: Namespace(benchmark='Qdd9a2', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'netherlands', '0.0005', '0.0008', 'norway', 'blue', 'japan', '0.0001', 'belgium', 'donations', 'us', 'generous', 'gdp', '1e-05', '0.0006', 'finland', 'country', 'by', 'china', '0.0011', 'ireland', 'color', 'kuwait', 'germany', '0.0004', '0.0003', 'estonia'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+        Country  Generous donations by GDP color
+0        Norway                    0.00110  blue
+1        Kuwait                    0.00110  blue
+2   Netherlands                    0.00080  blue
+3       Ireland                    0.00060  blue
+4       Estonia                    0.00060  blue
+5       Finland                    0.00050  blue
+6         Japan                    0.00040  blue
+7            US                    0.00040  blue
+8       Belgium                    0.00030  blue
+9       Germany                    0.00010  blue
+10        China                    0.00001  blue
+# query is: Which country is least generous by GPD?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0  China
+# inferred DSL terminals:
+  # ConstVal: ['Generous donations by GDP@Str', 'Country@Str', '<NULL>']
+     # cmap: [('country', 'Country'), ('by', 'Generous donations by GDP'), ('generous', 'Generous donations by GDP')]
+  # AggrFunc: ['min', '<NULL>']
+     # amap: [('least', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('least', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Germany'}]
+  # found 0 program(s)
+# ====> fallback strategy (retrieval) is triggered because no explanation is found so far
+# ====> retrieval_values: [0.0001, 0.0003, 0.0004, 0.0005, 0.0006, 0.0008, 0.0011, 1e-05, 'Belgium', 'China', 'Country', 'Estonia', 'Finland', 'Generous donations by GDP', 'Germany', 'Ireland', 'Japan', 'Kuwait', 'Netherlands', 'Norway', 'US', 'blue', 'color']
+# (t=1.28) fallback i=0, candidate=[{'ANSWER': 0.0001}]
+  # found 0 program(s)
+# (t=2.56) fallback i=1, candidate=[{'ANSWER': 0.0003}]
+  # found 0 program(s)
+# (t=3.83) fallback i=2, candidate=[{'ANSWER': 0.0004}]
+  # found 0 program(s)
+# (t=5.09) fallback i=3, candidate=[{'ANSWER': 0.0005}]
+  # found 0 program(s)
+# (t=6.35) fallback i=4, candidate=[{'ANSWER': 0.0006}]
+  # found 0 program(s)
+# (t=7.62) fallback i=5, candidate=[{'ANSWER': 0.0008}]
+  # found 0 program(s)
+# (t=8.89) fallback i=6, candidate=[{'ANSWER': 0.0011}]
+  # found 0 program(s)
+# (t=10.15) fallback i=7, candidate=[{'ANSWER': 1e-05}]
+  # found 33 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'Generous donations by GDP'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'Generous donations by GDP'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'Generous donations by GDP'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'Generous donations by GDP'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'Generous donations by GDP'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'Generous donations by GDP'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'Generous donations by GDP'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'Generous donations by GDP'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'min', 'Generous donations by GDP'], 'eqmin', 'Generous donations by GDP'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'min', 'Generous donations by GDP'], 'eqmin', 'Generous donations by GDP'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'min', 'Generous donations by GDP'], 'eqmin', 'Generous donations by GDP'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'min', 'Generous donations by GDP'], 'eqmin', 'Generous donations by GDP'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Generous donations by GDP'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Generous donations by GDP'], ['Generous donations by GDP']]
+    # Summarize(@param0, min, 1)
+      --> ['Summarize', 'input@0', 'min', 'Generous donations by GDP']
+# (t=11.81) fallback i=8, candidate=[{'ANSWER': 'Belgium'}]
+  # found 0 program(s)
+# (t=13.09) fallback i=9, candidate=[{'ANSWER': 'China'}]
+  # found 10 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'Generous donations by GDP'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'Generous donations by GDP'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Generous donations by GDP'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Generous donations by GDP'], ['Country']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Generous donations by GDP'], ['Country']]
+# (t=14.39) fallback i=10, candidate=[{'ANSWER': 'Country'}]
+  # found 0 program(s)
+# (t=15.66) fallback i=11, candidate=[{'ANSWER': 'Estonia'}]
+  # found 0 program(s)
+# (t=16.93) fallback i=12, candidate=[{'ANSWER': 'Finland'}]
+  # found 0 program(s)
+# (t=18.21) fallback i=13, candidate=[{'ANSWER': 'Generous donations by GDP'}]
+  # found 0 program(s)
+# (t=19.48) fallback i=14, candidate=[{'ANSWER': 'Germany'}]
+  # found 0 program(s)
+# (t=20.74) fallback i=15, candidate=[{'ANSWER': 'Ireland'}]
+  # found 0 program(s)
+# (t=22.01) fallback i=16, candidate=[{'ANSWER': 'Japan'}]
+  # found 0 program(s)
+# (t=23.27) fallback i=17, candidate=[{'ANSWER': 'Kuwait'}]
+  # found 0 program(s)
+# (t=24.87) fallback i=18, candidate=[{'ANSWER': 'Netherlands'}]
+  # found 0 program(s)
+# (t=26.12) fallback i=19, candidate=[{'ANSWER': 'Norway'}]
+  # found 0 program(s)
+# (t=27.40) fallback i=20, candidate=[{'ANSWER': 'US'}]
+  # found 0 program(s)
+# (t=28.68) fallback i=21, candidate=[{'ANSWER': 'blue'}]
+  # found 10 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'min', 'Generous donations by GDP'], 'eqmin', 'Generous donations by GDP'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'min', 'Generous donations by GDP'], 'eqmin', 'Generous donations by GDP'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'min', 'Generous donations by GDP'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Generous donations by GDP'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Generous donations by GDP'], ['color']]
+# (t=30.00) fallback i=22, candidate=[{'ANSWER': 'color'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.74, answer: ['China']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+# top-2, score: 1.74, answer: ['China']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+# top-3, score: 1.68, answer: [1e-05]
+  # tprog: Summarize(@param0, min, 1)
+# top-4, score: 1.67, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['1'])
+# top-5, score: 1.67, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-99'])
+# top-6, score: 1.67, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+# top-7, score: 1.67, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+# top-8, score: 1.66, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['1'])
+# top-9, score: 1.66, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['2'])
+# top-10, score: 1.66, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-1'])
+# top-11, score: 1.66, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-2'])
+# top-12, score: 1.66, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['1'])
+# top-13, score: 1.66, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['2'])
+# top-14, score: 1.66, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-1'])
+# top-15, score: 1.66, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-2'])
+# top-16, score: 1.66, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['2'])
+# top-17, score: 1.66, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+# top-18, score: 1.66, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+# top-19, score: 1.66, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+# top-20, score: 1.66, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+# top-21, score: 1.66, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-22, score: 1.66, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+# top-23, score: 1.66, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-24, score: 1.66, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['1'])
+# top-25, score: 1.66, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-99', '-2'])
+# top-26, score: 1.60, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['1'])
+# top-27, score: 1.60, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-99', '-2'])
+# top-28, score: 1.60, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['2'])
+# top-29, score: 1.60, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-99', '-1'])
+# top-30, score: 1.53, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['0'])
+# top-31, score: 1.53, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['1'])
+# top-32, score: 1.53, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-99'])
+# top-33, score: 1.53, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-1'])
+# top-34, score: 1.53, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['0'])
+# top-35, score: 1.53, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['1'])
+# top-36, score: 1.53, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-99'])
+# top-37, score: 1.53, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-1'])
+# top-38, score: 1.53, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmin, 1), ['1'])
+# top-39, score: 1.53, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmin, 1), ['-99'])
+# top-40, score: 1.53, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmin, 1), ['0'])
+# top-41, score: 1.53, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmin, 1), ['-1'])
+# top-42, score: 1.52, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['0'])
+# top-43, score: 1.52, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['2'])
+# top-44, score: 1.52, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-99', '-1'])
+# top-45, score: 1.52, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-1', '-2'])
+# top-46, score: 1.52, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['0'])
+# top-47, score: 1.52, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['2'])
+# top-48, score: 1.52, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+# top-49, score: 1.52, answer: [1e-05]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-50, score: 1.52, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['1'])
+# top-51, score: 1.52, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-99', '-2'])
+# top-52, score: 1.52, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['1'])
+# top-53, score: 1.52, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-99', '-2'])

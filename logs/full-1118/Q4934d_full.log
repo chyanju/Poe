@@ -1,0 +1,112 @@
+# parsed arguments: Namespace(benchmark='Q4934d', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'aix', '80', 'osx', '193', 'blue', '81', 'lin_x86', '636', '100', 'multiple', 'color', '7240', 'ios', 'php', '300', 'cgi', '2139', 'platform', 'jsp', 'asp', 'unix', '1664', '230', '190', 'hardware', 'windows', 'linux', 'bsd', '1426', '863', 'count', '162', 'solaris', '15233'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+    Platform  count color
+0        bsd     80  blue
+1        aix     81  blue
+2        ios    100  blue
+3        jsp    162  blue
+4    solaris    190  blue
+5    lin_x86    193  blue
+6        osx    230  blue
+7       unix    300  blue
+8        cgi    636  blue
+9   hardware    863  blue
+10       asp   1426  blue
+11  multiple   1664  blue
+12     linux   2139  blue
+13   windows   7240  blue
+14       php  15233  blue
+# query is: Which software platform has the highest value?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0    php
+# inferred DSL terminals:
+  # ConstVal: ['Platform@Str', '<NULL>']
+     # cmap: [('platform', 'Platform')]
+  # AggrFunc: ['max', '<NULL>']
+     # amap: [('highest', 'max')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('highest', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'bsd'}]
+  # found 0 program(s)
+# (t=0.58) i=1, candidate=[{'ANSWER': 'php'}]
+  # found 10 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform'], 'max', 'count'], 'eqmax', 'COL0'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform'], 'max', 'count'], 'eqmax', 'COL0'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform', 'count'], 'max', 'count'], 'eqmax', 'count'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform', 'count'], 'max', 'count'], 'eqmax', 'count'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform', 'count'], 'max', 'count'], 'eqmax', 'COL0'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform', 'count'], 'max', 'count'], 'eqmax', 'COL0'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform', 'color'], 'max', 'count'], 'eqmax', 'COL0'], ['Platform']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Platform', 'color'], 'max', 'count'], 'eqmax', 'COL0'], ['Platform']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'count'], ['Platform']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'count'], ['Platform']]
+# (t=1.17) i=2, candidate=[{'ANSWER': 'windows'}]
+  # found 0 program(s)
+# (t=1.73) i=3, candidate=[{'ANSWER': 'lin_x86'}]
+  # found 0 program(s)
+# (t=2.30) i=4, candidate=[{'ANSWER': 'multiple'}]
+  # found 0 program(s)
+# (t=2.85) i=5, candidate=[{'ANSWER': 'unix'}]
+  # found 0 program(s)
+# (t=3.41) i=6, candidate=[{'ANSWER': 'cgi'}]
+  # found 0 program(s)
+# (t=3.98) i=7, candidate=[{'ANSWER': 'jsp'}]
+  # found 0 program(s)
+# (t=4.55) i=8, candidate=[{'ANSWER': 'hardware'}]
+  # found 0 program(s)
+# (t=5.10) i=9, candidate=[{'ANSWER': 'ios'}]
+  # found 0 program(s)
+# (t=5.65) i=10, candidate=[{'ANSWER': 'aix'}]
+  # found 0 program(s)
+# (t=6.21) i=11, candidate=[{'ANSWER': 'asp'}]
+  # found 0 program(s)
+# (t=6.76) i=12, candidate=[{'ANSWER': 'linux'}]
+  # found 0 program(s)
+# (t=7.32) i=13, candidate=[{'ANSWER': 'osx'}]
+  # found 0 program(s)
+# (t=7.88) i=14, candidate=[{'ANSWER': 'solaris'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.45, answer: php
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+# top-2, score: 1.45, answer: php
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+# top-3, score: 1.39, answer: php
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+# top-4, score: 1.39, answer: php
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+# top-5, score: 1.38, answer: php
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+# top-6, score: 1.38, answer: php
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+# top-7, score: 1.38, answer: php
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+# top-8, score: 1.38, answer: php
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+# top-9, score: 1.38, answer: php
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+# top-10, score: 1.38, answer: php
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])

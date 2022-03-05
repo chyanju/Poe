@@ -1,0 +1,78 @@
+# parsed arguments: Namespace(benchmark='Q52b65', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'46', 'panama', 'el', 'color', 'nicaragua', '182', 'country', 'amphibians', '61', '30', 'guatemala', 'rica', 'costa', '101', '183', 'belize', 'salvador', '133', 'honduras', 'blue'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       Country  Amphibians color
+0       Belize          46  blue
+1   Costa Rica         183  blue
+2  El Salvador          30  blue
+3    Guatemala         133  blue
+4     Honduras         101  blue
+5    Nicaragua          61  blue
+6       Panama         182  blue
+# query is: Who has more Amphibians species: Costs Rica, or Panama?
+# expected output type:[dtype('O')]
+# expected output is:
+       ANSWER
+0  Costa Rica
+# inferred DSL terminals:
+  # ConstVal: ['Panama@Str', 'Amphibians@Str', 'Costa Rica@Str', '<NULL>']
+     # cmap: [('panama', 'Panama'), ('rica', 'Costa Rica'), ('amphibians', 'Amphibians')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>=', '==', '>', '<NULL>']
+     # bmap: [(None, '=='), ('more', '>'), ('more', '>=')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(1, 4), (-1, 4)]
+  # [debug] high_values (no dup.): [(153, 2), (152, 2), (137, 2), (136, 2), (122, 2), (121, 2), (82, 2), (81, 2), (50, 2), (49, 2)]
+  # [debug] fallback (comparison) answers are added
+# ====> fallback strategy (selection) is triggered
+  # [debug] fallback (selection) answers: ['Panama', 'Amphibians', 'Costa Rica']
+  # [debug] fallback (selection) answers (no dup.): ['Amphibians']
+  # [debug] 1 fallback (selection) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Costa Rica'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Costa Rica@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Costa Rica'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Costa Rica@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Costa Rica'], ['Country']]
+# (t=1.65) i=1, candidate=[{'ANSWER': 'Panama'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Panama'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Panama'], ['Country']]
+# (t=3.28) i=2, candidate=[{'ANSWER': 'Belize'}]
+  # found 0 program(s)
+# (t=4.89) i=3, candidate=[{'ANSWER': 1}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Costa Rica@Str, Panama@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Country', 'Costa Rica', 'Panama', 'Amphibians']
+# (t=6.33) i=4, candidate=[{'ANSWER': -1}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Panama@Str, Costa Rica@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Country', 'Panama', 'Costa Rica', 'Amphibians']
+# (t=7.78) i=5, candidate=[{'ANSWER': 'Amphibians'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.59, answer: 1
+  # tprog: Contrast(@param0, -, 0, Costa Rica@Str, Panama@Str, 1)
+# top-2, score: 2.59, answer: -1
+  # tprog: Contrast(@param0, -, 0, Panama@Str, Costa Rica@Str, 1)
+# top-3, score: 2.25, answer: Panama
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['0'])
+# top-4, score: 2.25, answer: Panama
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['-1', '-2'])
+# top-5, score: 1.25, answer: Costa Rica
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Costa Rica@Str), ['0'])
+# top-6, score: 1.25, answer: Costa Rica
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Costa Rica@Str), ['-1', '-2'])

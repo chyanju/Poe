@@ -1,0 +1,89 @@
+# parsed arguments: Namespace(benchmark='Q7b516', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'75.12', '65-69', '60-64', 'over', 'percentage', '72.6', '68.83', '82.66', '67.89', '80', '75.43', 'men', '65.69', '83.92', 'group', '55-59', '63.8', '50-54', 'all', '16', 'gender', '78.57', '70-74', '73.55', '75.75', '84.86', '85.49', 'and', 'age', 'aged', 'women', '84.23', 'red', '72.92', 'color', '79.52', '75-79', 'orange', '80.77', '83.6', 'blue', '70.09'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+               Age group gender  Percentage   color
+0                  60-64  Women       75.75     red
+1                  60-64    All       75.43    blue
+2                  60-64    Men       75.12  orange
+3   All aged 16 and over  Women       67.89     red
+4   All aged 16 and over    All       65.69    blue
+5   All aged 16 and over    Men       63.80  orange
+6                  70-74  Women       85.49     red
+7                  70-74    All       83.92    blue
+8                  70-74    Men       82.66  orange
+9                  75-79  Women       84.86     red
+10                 75-79    All       84.23    blue
+11                 75-79    Men       83.60  orange
+12                 55-59  Women       73.55     red
+13                 55-59    All       72.92    blue
+14                 55-59    Men       72.60  orange
+15           80 and over  Women       84.23     red
+16           80 and over    All       83.92    blue
+17           80 and over    Men       83.92  orange
+18                 50-54  Women       70.09     red
+19                 50-54    All       68.83    blue
+20                 50-54    Men       67.89  orange
+21                 65-69  Women       80.77     red
+22                 65-69    All       79.52    blue
+23                 65-69    Men       78.57  orange
+# query is: What percentage of men age 50-54 feel they belong in their neighborhood?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0   67.89
+# inferred DSL terminals:
+  # ConstVal: ['Age group@Str', 'Percentage@Str', 'Men@Str', '50-54@Str', '<NULL>']
+     # cmap: [('men', 'Men'), (54, '50-54'), ('age', 'Age group'), (50, '50-54'), ('percentage', 'Percentage')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 72.6}]
+  # found 0 program(s)
+# (t=3.42) i=1, candidate=[{'ANSWER': 72.92}]
+  # found 0 program(s)
+# (t=6.79) i=2, candidate=[{'ANSWER': 73.55}]
+  # found 0 program(s)
+# (t=10.21) i=3, candidate=[{'ANSWER': 83.92}]
+  # found 0 program(s)
+# (t=13.61) i=4, candidate=[{'ANSWER': 75.12}]
+  # found 0 program(s)
+# (t=17.01) i=5, candidate=[{'ANSWER': 75.43}]
+  # found 0 program(s)
+# (t=20.41) i=6, candidate=[{'ANSWER': 78.57}]
+  # found 0 program(s)
+# (t=23.82) i=7, candidate=[{'ANSWER': 82.66}]
+  # found 0 program(s)
+# (t=27.22) i=8, candidate=[{'ANSWER': 79.52}]
+  # found 0 program(s)
+# (t=30.63) i=9, candidate=[{'ANSWER': 84.23}]
+  # found 0 program(s)
+# (t=34.00) i=10, candidate=[{'ANSWER': 83.6}]
+  # found 0 program(s)
+# (t=37.42) i=11, candidate=[{'ANSWER': 80.77}]
+  # found 0 program(s)
+# (t=40.80) i=12, candidate=[{'ANSWER': 75.75}]
+  # found 0 program(s)
+# (t=44.18) i=13, candidate=[{'ANSWER': 67.89}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-54@Str), ==, 1, Men@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', '50-54'], '==', 'gender', 'Men'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Men@Str), ==, 0, 50-54@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'gender', 'Men'], '==', 'Age group', '50-54'], ['Percentage']]
+# (t=47.58) i=14, candidate=[{'ANSWER': 68.83}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.48, answer: [67.89]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-54@Str), ==, 1, Men@Str), ['2'])
+# top-2, score: 2.48, answer: [67.89]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Men@Str), ==, 0, 50-54@Str), ['2'])

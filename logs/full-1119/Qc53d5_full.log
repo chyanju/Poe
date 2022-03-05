@@ -1,0 +1,76 @@
+# parsed arguments: Namespace(benchmark='Qc53d5', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'blue', 'neither', '53', 'strongly', 'or', 'color', '69', '82', 'percentage', 'agree', 'disagree'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                       agree  percentage color
+0             Strongly agree          82  blue
+1  Neither agree or disagree          69  blue
+2          Strongly disagree          53  blue
+# query is: What is the difference between Strongly Agree and Strongly Disagree
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      29
+# inferred DSL terminals:
+  # ConstVal: ['Strongly disagree@Str', 'Strongly agree@Str', 'agree@Str', 'Neither agree or disagree@Str', '<NULL>']
+     # cmap: [('agree', 'Strongly agree'), ('agree', 'agree'), ('agree', 'Neither agree or disagree'), ('strongly', 'Strongly disagree'), ('disagree', 'Neither agree or disagree'), ('disagree', 'Strongly disagree'), ('strongly', 'Strongly agree')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(29, 9), (16, 9), (13, 9), (-13, 9), (-16, 9), (-29, 9)]
+  # [debug] high_values (no dup.): [(29, 9), (16, 9), (13, 9), (-13, 9), (-16, 9), (-29, 9)]
+  # [debug] filtered low_values (no dup.): []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=2.84) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=5.67) i=2, candidate=[{'ANSWER': 3}]
+  # found 0 program(s)
+# (t=8.49) i=3, candidate=[{'ANSWER': 29}]
+  # found 2 program(s)
+    # Contrast(@param0, diff, 0, Strongly disagree@Str, Strongly agree@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'agree', 'Strongly disagree', 'Strongly agree', 'percentage']
+    # Contrast(@param0, diff, 0, Strongly agree@Str, Strongly disagree@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'agree', 'Strongly agree', 'Strongly disagree', 'percentage']
+# (t=11.33) i=4, candidate=[{'ANSWER': 16}]
+  # found 2 program(s)
+    # Contrast(@param0, diff, 0, Strongly disagree@Str, Neither agree or disagree@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'agree', 'Strongly disagree', 'Neither agree or disagree', 'percentage']
+    # Contrast(@param0, diff, 0, Neither agree or disagree@Str, Strongly disagree@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'agree', 'Neither agree or disagree', 'Strongly disagree', 'percentage']
+# (t=14.19) i=5, candidate=[{'ANSWER': 13}]
+  # found 2 program(s)
+    # Contrast(@param0, diff, 0, Strongly agree@Str, Neither agree or disagree@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'agree', 'Strongly agree', 'Neither agree or disagree', 'percentage']
+    # Contrast(@param0, diff, 0, Neither agree or disagree@Str, Strongly agree@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'agree', 'Neither agree or disagree', 'Strongly agree', 'percentage']
+# (t=17.06) i=6, candidate=[{'ANSWER': -13}]
+  # found 0 program(s)
+# (t=19.91) i=7, candidate=[{'ANSWER': -16}]
+  # found 0 program(s)
+# (t=22.77) i=8, candidate=[{'ANSWER': -29}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.54, answer: [29]
+  # tprog: Contrast(@param0, diff, 0, Strongly disagree@Str, Strongly agree@Str, 1)
+# top-2, score: 2.54, answer: [29]
+  # tprog: Contrast(@param0, diff, 0, Strongly agree@Str, Strongly disagree@Str, 1)
+# top-3, score: 2.54, answer: [16]
+  # tprog: Contrast(@param0, diff, 0, Strongly disagree@Str, Neither agree or disagree@Str, 1)
+# top-4, score: 2.54, answer: [16]
+  # tprog: Contrast(@param0, diff, 0, Neither agree or disagree@Str, Strongly disagree@Str, 1)
+# top-5, score: 2.54, answer: [13]
+  # tprog: Contrast(@param0, diff, 0, Strongly agree@Str, Neither agree or disagree@Str, 1)
+# top-6, score: 2.54, answer: [13]
+  # tprog: Contrast(@param0, diff, 0, Neither agree or disagree@Str, Strongly agree@Str, 1)

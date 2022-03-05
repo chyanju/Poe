@@ -1,0 +1,70 @@
+# parsed arguments: Namespace(benchmark='Q528ea', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'blue', 'percentage', '82', '53', 'or', '69', 'color', 'neither', 'strongly', 'disagree', 'agree'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                       agree  percentage color
+0             Strongly agree          82  blue
+1  Neither agree or disagree          69  blue
+2          Strongly disagree          53  blue
+# query is: How many strongly agree
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      82
+# inferred DSL terminals:
+  # ConstVal: ['agree@Str', 'Strongly agree@Str', 'Strongly disagree@Str', 'Neither agree or disagree@Str', '<NULL>']
+     # cmap: [('agree', 'agree'), ('agree', 'Strongly agree'), ('strongly', 'Strongly disagree'), ('strongly', 'Strongly agree'), ('agree', 'Neither agree or disagree')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 9 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, Strongly agree@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'agree', 'Strongly agree'], 'count', 'agree']
+    # Summarize(SelectRow1(@param0, ==, 0, Strongly agree@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'agree', 'Strongly agree'], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 0, Strongly agree@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'agree', 'Strongly agree'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Strongly disagree@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'agree', 'Strongly disagree'], 'count', 'agree']
+    # Summarize(SelectRow1(@param0, ==, 0, Strongly disagree@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'agree', 'Strongly disagree'], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 0, Strongly disagree@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'agree', 'Strongly disagree'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Neither agree or disagree@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'agree', 'Neither agree or disagree'], 'count', 'agree']
+    # Summarize(SelectRow1(@param0, ==, 0, Neither agree or disagree@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'agree', 'Neither agree or disagree'], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 0, Neither agree or disagree@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'agree', 'Neither agree or disagree'], 'count', 'color']
+# (t=1.71) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.88, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Strongly agree@Str), count, 0)
+# top-2, score: 2.88, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Strongly agree@Str), count, 1)
+# top-3, score: 2.88, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Strongly agree@Str), count, 2)
+# top-4, score: 1.88, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Strongly disagree@Str), count, 0)
+# top-5, score: 1.88, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Strongly disagree@Str), count, 1)
+# top-6, score: 1.88, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Strongly disagree@Str), count, 2)
+# top-7, score: 1.62, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Neither agree or disagree@Str), count, 0)
+# top-8, score: 1.62, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Neither agree or disagree@Str), count, 1)
+# top-9, score: 1.62, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Neither agree or disagree@Str), count, 2)

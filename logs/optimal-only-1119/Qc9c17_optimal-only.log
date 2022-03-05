@@ -1,0 +1,60 @@
+# parsed arguments: Namespace(benchmark='Qc9c17', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'82.84', '156.34', '2009', '2011', '2005', '2007', '2004', '2015', '167.05', '94.52', '2003', 'revenue', '113.29', '2014', '2002', 'year', '32.17', '30.64', '2006', '37.89', '2001', '2008', '74.1', '2013', '45.42', '64.2', '34.77', '32.83', 'color', '80.7', '2010', '189.4', '2012', 'blue'}
+# input type: [dtype('int64'), dtype('float64'), dtype('O')]
+# input is:
+    year  revenue color
+0   2015   189.40  blue
+1   2014   167.05  blue
+2   2013   156.34  blue
+3   2012   113.29  blue
+4   2011    94.52  blue
+5   2010    82.84  blue
+6   2009    80.70  blue
+7   2008    74.10  blue
+8   2007    64.20  blue
+9   2006    45.42  blue
+10  2005    37.89  blue
+11  2004    34.77  blue
+12  2003    32.83  blue
+13  2002    32.17  blue
+14  2001    30.64  blue
+# query is: What was Infocomm Industries revenue in the year 2009?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0    80.7
+# inferred DSL terminals:
+  # ConstVal: ['revenue@Str', 'year@Str', '2009@Int', '<NULL>']
+     # cmap: [('revenue', 'revenue'), ('year', 'year'), (2009, 2009)]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 80.7}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 2009@Int), ==, 0, 2009@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'year', 2009], '==', 'year', 2009], ['revenue']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 2009@Int), ==, 0, 2009@Int), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'year', 2009], '==', 'year', 2009], ['revenue']]
+    # SelectCol(SelectRow1(@param0, ==, 0, 2009@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'year', 2009], ['revenue']]
+    # SelectCol(SelectRow1(@param0, ==, 0, 2009@Int), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'year', 2009], ['revenue']]
+
+# ========== review report ========== #
+# top-1, score: 1.48, answer: [80.7]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, 2009@Int), ['1'])
+# top-2, score: 1.48, answer: [80.7]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, 2009@Int), ['-99', '-2'])
+# top-3, score: 1.42, answer: [80.7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 2009@Int), ==, 0, 2009@Int), ['1'])
+# top-4, score: 1.42, answer: [80.7]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 2009@Int), ==, 0, 2009@Int), ['-99', '-2'])

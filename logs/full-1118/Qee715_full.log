@@ -1,0 +1,67 @@
+# parsed arguments: Namespace(benchmark='Qee715', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'405800000', '1349570000', 'aut', 'jpn', '1802720000', '18014480000', 'esp', '672630000', 'ita', 'fin', 'prt', 'gbr', 'country', '776670000', 'deu', '1372000000', 'swe', 'kor', 'can', 'dnk', 'donation', '4769530000', '799520000', 'aus', 'che', 'nor', 'color', '4870750000', '2289930000', '1890450000', 'nld', '456310000', '2301450000', 'blue', 'usa', '1363080000', 'bel', '458880000', 'fra', '7020280000', '2329560000', '372190000', 'irl', '5404860000'}
+# input type: [dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+       donation Country color
+0   18014480000     USA  blue
+1    7020280000     JPN  blue
+2    5404860000     FRA  blue
+3    4870750000     DEU  blue
+4    4769530000     GBR  blue
+5    2329560000     CAN  blue
+6    2301450000     AUS  blue
+7    2289930000     ESP  blue
+8    1890450000     NLD  blue
+9    1802720000     NOR  blue
+10   1372000000     BEL  blue
+11   1363080000     SWE  blue
+12   1349570000     DNK  blue
+13    799520000     KOR  blue
+14    776670000     CHE  blue
+15    672630000     ITA  blue
+16    458880000     IRL  blue
+17    456310000     FIN  blue
+18    405800000     AUT  blue
+19    372190000     PRT  blue
+# query is: What is the difference donation value between USA and JPN?
+# expected output type:[dtype('int64')]
+# expected output is:
+        ANSWER
+0  10994200000
+# inferred DSL terminals:
+  # ConstVal: ['JPN@Str', 'USA@Str', 'donation@Str', '<NULL>']
+     # cmap: [('usa', 'USA'), ('donation', 'donation'), ('jpn', 'JPN')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(10994200000, 4), (-10994200000, 4)]
+  # [debug] high_values (no dup.): [(17642290000, 2), (17608680000, 2), (17558170000, 2), (17555600000, 2), (17341850000, 2), (17237810000, 2), (17214960000, 2), (16664910000, 2), (16651400000, 2), (16642480000, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=1.46) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=2.90) i=2, candidate=[{'ANSWER': 10994200000}]
+  # found 2 program(s)
+    # Contrast(@param0, diff, 1, JPN@Str, USA@Str, 0)
+      --> ['Contrast', 'input@0', 'diff', 'Country', 'JPN', 'USA', 'donation']
+    # Contrast(@param0, diff, 1, USA@Str, JPN@Str, 0)
+      --> ['Contrast', 'input@0', 'diff', 'Country', 'USA', 'JPN', 'donation']
+# (t=4.34) i=3, candidate=[{'ANSWER': -10994200000}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.54, answer: 10994200000
+  # tprog: Contrast(@param0, diff, 1, JPN@Str, USA@Str, 0)
+# top-2, score: 2.54, answer: 10994200000
+  # tprog: Contrast(@param0, diff, 1, USA@Str, JPN@Str, 0)

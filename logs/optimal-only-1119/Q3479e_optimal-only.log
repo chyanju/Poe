@@ -1,0 +1,73 @@
+# parsed arguments: Namespace(benchmark='Q3479e', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'blue', '162829', 'population', 'north-east', 'capital', 'skåne', '608036', '683886', 'region', 'remainder', '1823109', 'danish', 'south', '305982', 'color', 'west'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                  Region  Population color
+0  Danish Capital Region     1823109  blue
+1              Remainder      608036  blue
+2            South Skåne      683886  blue
+3             West Skåne      305982  blue
+4       North-East Skåne      162829  blue
+# query is: What is the difference in population between South Skane and Remainder?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0   75850
+# inferred DSL terminals:
+  # ConstVal: ['Population@Str', 'Remainder@Str', 'South Skåne@Str', '<NULL>']
+     # cmap: [('remainder', 'Remainder'), ('south', 'South Skåne'), ('population', 'Population')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(75850, 4), (-75850, 4)]
+  # [debug] high_values (no dup.): [(75850, 4), (-75850, 4)]
+  # [debug] filtered low_values (no dup.): [(1215073, 2), (1139223, 2), (521057, 2), (445207, 2), (377904, 2), (302054, 2), (-302054, 2), (-377904, 2), (-445207, 2), (-521057, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=2.64) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=5.25) i=2, candidate=[{'ANSWER': 75850}]
+  # found 2 program(s)
+    # Contrast(@param0, diff, 0, Remainder@Str, South Skåne@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'Region', 'Remainder', 'South Skåne', 'Population']
+    # Contrast(@param0, diff, 0, South Skåne@Str, Remainder@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'Region', 'South Skåne', 'Remainder', 'Population']
+# (t=7.87) i=3, candidate=[{'ANSWER': -75850}]
+  # found 0 program(s)
+# (t=10.47) i=4, candidate=[{'ANSWER': 1215073}]
+  # found 0 program(s)
+# (t=13.12) i=5, candidate=[{'ANSWER': 1139223}]
+  # found 0 program(s)
+# (t=16.06) i=6, candidate=[{'ANSWER': 521057}]
+  # found 0 program(s)
+# (t=18.72) i=7, candidate=[{'ANSWER': 445207}]
+  # found 0 program(s)
+# (t=21.34) i=8, candidate=[{'ANSWER': 377904}]
+  # found 0 program(s)
+# (t=23.95) i=9, candidate=[{'ANSWER': 302054}]
+  # found 0 program(s)
+# (t=26.58) i=10, candidate=[{'ANSWER': -302054}]
+  # found 0 program(s)
+# (t=29.22) i=11, candidate=[{'ANSWER': -377904}]
+  # found 0 program(s)
+# (t=32.19) i=12, candidate=[{'ANSWER': -445207}]
+  # found 0 program(s)
+# (t=34.81) i=13, candidate=[{'ANSWER': -521057}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.51, answer: [75850]
+  # tprog: Contrast(@param0, diff, 0, Remainder@Str, South Skåne@Str, 1)
+# top-2, score: 2.51, answer: [75850]
+  # tprog: Contrast(@param0, diff, 0, South Skåne@Str, Remainder@Str, 1)

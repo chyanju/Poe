@@ -1,0 +1,164 @@
+# parsed arguments: Namespace(benchmark='Qb0a85', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'32', '41', 'antonio', 'cavaliers', 'cleveland', 'pistons', 'blue', 'color', 'division', 'central', 'pacers', 'x-houston', 'y-atlanta', 'indiana', 'detroit', 'spurs', 'l', '66', 'hawks', '45', 'rockets', 'x-san'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+      Central Division   L color
+0      y-Atlanta Hawks  32  blue
+1    x-Houston Rockets  41  blue
+2  x-San Antonio Spurs  41  blue
+3  Cleveland Cavaliers  45  blue
+4       Indiana Pacers  45  blue
+5      Detroit Pistons  66  blue
+# query is: How many more points did the Detroit Pistons get over the Cleveland Cavaliers?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      21
+# inferred DSL terminals:
+  # ConstVal: ['Cleveland Cavaliers@Str', 'Detroit Pistons@Str', '<NULL>']
+     # cmap: [('detroit', 'Detroit Pistons'), ('cleveland', 'Cleveland Cavaliers'), ('cavaliers', 'Cleveland Cavaliers'), ('pistons', 'Detroit Pistons')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>=', '>', '==', '<NULL>']
+     # bmap: [(None, '=='), ('more', '>'), ('more', '>=')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(21, 9), (-21, 9)]
+  # [debug] high_values (no dup.): [(21, 9), (-21, 9)]
+  # [debug] filtered low_values (no dup.): [(34, 3), (25, 3), (25, 3), (21, 3), (13, 3), (4, 3), (4, 3), (0, 3), (-4, 3), (-4, 3)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 6 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Central Division', 'Cleveland Cavaliers'], 'count', 'Central Division']
+    # Summarize(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Central Division', 'Cleveland Cavaliers'], 'count', 'L']
+    # Summarize(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Central Division', 'Cleveland Cavaliers'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Detroit Pistons@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Central Division', 'Detroit Pistons'], 'count', 'Central Division']
+    # Summarize(SelectRow1(@param0, ==, 0, Detroit Pistons@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Central Division', 'Detroit Pistons'], 'count', 'L']
+    # Summarize(SelectRow1(@param0, ==, 0, Detroit Pistons@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Central Division', 'Detroit Pistons'], 'count', 'color']
+# (t=1.41) i=1, candidate=[{'ANSWER': 21}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Detroit Pistons@Str, Cleveland Cavaliers@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Central Division', 'Detroit Pistons', 'Cleveland Cavaliers', 'L']
+# (t=2.78) i=2, candidate=[{'ANSWER': -21}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Cleveland Cavaliers@Str, Detroit Pistons@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Central Division', 'Cleveland Cavaliers', 'Detroit Pistons', 'L']
+# (t=4.15) i=3, candidate=[{'ANSWER': 34}]
+  # found 0 program(s)
+# (t=5.51) i=4, candidate=[{'ANSWER': 25}]
+  # found 0 program(s)
+# (t=6.90) i=5, candidate=[{'ANSWER': 25}]
+  # found 0 program(s)
+# (t=8.29) i=6, candidate=[{'ANSWER': 21}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Detroit Pistons@Str, Cleveland Cavaliers@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Central Division', 'Detroit Pistons', 'Cleveland Cavaliers', 'L']
+# (t=9.69) i=7, candidate=[{'ANSWER': 13}]
+  # found 0 program(s)
+# (t=11.07) i=8, candidate=[{'ANSWER': 4}]
+  # found 0 program(s)
+# (t=12.73) i=9, candidate=[{'ANSWER': 4}]
+  # found 0 program(s)
+# (t=14.09) i=10, candidate=[{'ANSWER': 0}]
+  # found 16 program(s)
+    # Summarize(SelectRow1(@param0, ==, 1, Cleveland Cavaliers@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'L', 'Cleveland Cavaliers'], 'count', 'Central Division']
+    # Summarize(SelectRow1(@param0, ==, 1, Cleveland Cavaliers@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'L', 'Cleveland Cavaliers'], 'count', 'L']
+    # Summarize(SelectRow1(@param0, ==, 1, Cleveland Cavaliers@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'L', 'Cleveland Cavaliers'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, Detroit Pistons@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'L', 'Detroit Pistons'], 'count', 'Central Division']
+    # Summarize(SelectRow1(@param0, ==, 1, Detroit Pistons@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'L', 'Detroit Pistons'], 'count', 'L']
+    # Summarize(SelectRow1(@param0, ==, 1, Detroit Pistons@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'L', 'Detroit Pistons'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, Cleveland Cavaliers@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Cleveland Cavaliers'], 'count', 'Central Division']
+    # Summarize(SelectRow1(@param0, ==, 2, Cleveland Cavaliers@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Cleveland Cavaliers'], 'count', 'L']
+    # Summarize(SelectRow1(@param0, ==, 2, Cleveland Cavaliers@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Cleveland Cavaliers'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, Detroit Pistons@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Detroit Pistons'], 'count', 'Central Division']
+    # Summarize(SelectRow1(@param0, ==, 2, Detroit Pistons@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Detroit Pistons'], 'count', 'L']
+    # Summarize(SelectRow1(@param0, ==, 2, Detroit Pistons@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Detroit Pistons'], 'count', 'color']
+    # Contrast(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), -, 0, Cleveland Cavaliers@Str, Cleveland Cavaliers@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Central Division', 'Cleveland Cavaliers'], '-', 'Central Division', 'Cleveland Cavaliers', 'Cleveland Cavaliers', 'L']
+    # Contrast(SelectRow1(@param0, ==, 0, Detroit Pistons@Str), -, 0, Detroit Pistons@Str, Detroit Pistons@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Central Division', 'Detroit Pistons'], '-', 'Central Division', 'Detroit Pistons', 'Detroit Pistons', 'L']
+    # Contrast(@param0, -, 0, Cleveland Cavaliers@Str, Cleveland Cavaliers@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Central Division', 'Cleveland Cavaliers', 'Cleveland Cavaliers', 'L']
+    # Contrast(@param0, -, 0, Detroit Pistons@Str, Detroit Pistons@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Central Division', 'Detroit Pistons', 'Detroit Pistons', 'L']
+# (t=15.47) i=11, candidate=[{'ANSWER': -4}]
+  # found 0 program(s)
+# (t=16.83) i=12, candidate=[{'ANSWER': -4}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.53, answer: [21]
+  # tprog: Contrast(@param0, -, 0, Detroit Pistons@Str, Cleveland Cavaliers@Str, 1)
+# top-2, score: 2.53, answer: [-21]
+  # tprog: Contrast(@param0, -, 0, Cleveland Cavaliers@Str, Detroit Pistons@Str, 1)
+# top-3, score: 2.53, answer: [21]
+  # tprog: Contrast(@param0, -, 0, Detroit Pistons@Str, Cleveland Cavaliers@Str, 1)
+# top-4, score: 2.37, answer: [0]
+  # tprog: Contrast(@param0, -, 0, Cleveland Cavaliers@Str, Cleveland Cavaliers@Str, 1)
+# top-5, score: 2.37, answer: [0]
+  # tprog: Contrast(@param0, -, 0, Detroit Pistons@Str, Detroit Pistons@Str, 1)
+# top-6, score: 2.36, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), count, 0)
+# top-7, score: 2.36, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), count, 1)
+# top-8, score: 2.36, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), count, 2)
+# top-9, score: 2.36, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Detroit Pistons@Str), count, 0)
+# top-10, score: 2.36, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Detroit Pistons@Str), count, 1)
+# top-11, score: 2.36, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Detroit Pistons@Str), count, 2)
+# top-12, score: 2.36, answer: [0]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Cleveland Cavaliers@Str), count, 0)
+# top-13, score: 2.36, answer: [0]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Cleveland Cavaliers@Str), count, 1)
+# top-14, score: 2.36, answer: [0]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Cleveland Cavaliers@Str), count, 2)
+# top-15, score: 2.36, answer: [0]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Detroit Pistons@Str), count, 0)
+# top-16, score: 2.36, answer: [0]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Detroit Pistons@Str), count, 1)
+# top-17, score: 2.36, answer: [0]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Detroit Pistons@Str), count, 2)
+# top-18, score: 2.36, answer: [0]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Cleveland Cavaliers@Str), count, 0)
+# top-19, score: 2.36, answer: [0]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Cleveland Cavaliers@Str), count, 1)
+# top-20, score: 2.36, answer: [0]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Cleveland Cavaliers@Str), count, 2)
+# top-21, score: 2.36, answer: [0]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Detroit Pistons@Str), count, 0)
+# top-22, score: 2.36, answer: [0]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Detroit Pistons@Str), count, 1)
+# top-23, score: 2.36, answer: [0]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Detroit Pistons@Str), count, 2)
+# top-24, score: 2.32, answer: [0]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), -, 0, Cleveland Cavaliers@Str, Cleveland Cavaliers@Str, 1)
+# top-25, score: 2.32, answer: [0]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, Detroit Pistons@Str), -, 0, Detroit Pistons@Str, Detroit Pistons@Str, 1)

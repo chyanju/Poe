@@ -1,0 +1,56 @@
+# parsed arguments: Namespace(benchmark='Qb8f18', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'50', 'pacers', 'w', 'hawks', 'y-atlanta', 'rockets', 'x-san', 'blue', 'pistons', 'central', 'color', 'antonio', 'indiana', 'division', 'detroit', 'x-houston', 'spurs', '37', 'cavaliers', '16', '41', 'cleveland'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+      Central Division   W color
+0      y-Atlanta Hawks  50  blue
+1    x-Houston Rockets  41  blue
+2  x-San Antonio Spurs  41  blue
+3  Cleveland Cavaliers  37  blue
+4       Indiana Pacers  37  blue
+5      Detroit Pistons  16  blue
+# query is: What basketball teams have 41 wins in the Central Division?
+# expected output type:[dtype('O')]
+# expected output is:
+                ANSWER
+0    x-Houston Rockets
+1  x-San Antonio Spurs
+# inferred DSL terminals:
+  # ConstVal: ['41@Int', 'Central Division@Str', '<NULL>']
+     # cmap: [(41, 41), ('division', 'Central Division'), ('central', 'Central Division')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'x-Houston Rockets'}]
+  # found 0 program(s)
+# (t=1.07) i=1, candidate=[{'ANSWER': 'x-San Antonio Spurs'}]
+  # found 0 program(s)
+# (t=2.13) i=2, candidate=[{'ANSWER': 'x-Houston Rockets'}, {'ANSWER': 'x-San Antonio Spurs'}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 41@Int), ==, 1, 41@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'W', 41], '==', 'W', 41], ['Central Division']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 41@Int), ==, 1, 41@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'W', 41], '==', 'W', 41], ['Central Division']]
+    # SelectCol(SelectRow1(@param0, ==, 1, 41@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'W', 41], ['Central Division']]
+    # SelectCol(SelectRow1(@param0, ==, 1, 41@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'W', 41], ['Central Division']]
+
+# ========== review report ========== #
+# top-1, score: 1.44, answer: ['x-Houston Rockets', 'x-San Antonio Spurs']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, 41@Int), ['0'])
+# top-2, score: 1.44, answer: ['x-Houston Rockets', 'x-San Antonio Spurs']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, 41@Int), ['-1', '-2'])
+# top-3, score: 1.39, answer: ['x-Houston Rockets', 'x-San Antonio Spurs']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 41@Int), ==, 1, 41@Int), ['0'])
+# top-4, score: 1.39, answer: ['x-Houston Rockets', 'x-San Antonio Spurs']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 41@Int), ==, 1, 41@Int), ['-1', '-2'])

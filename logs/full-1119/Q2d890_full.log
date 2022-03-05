@@ -1,0 +1,77 @@
+# parsed arguments: Namespace(benchmark='Q2d890', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'38', 'color', 'latino', 'blue', 'race', 'american', 'white', '57', 'african', '48', 'percent'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+               Race  Percent color
+0             White       57  blue
+1            Latino       48  blue
+2  African American       38  blue
+# query is: Is the value Latino marriage rate minus African American m.r. bigger than 10?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0     No
+# inferred DSL terminals:
+  # ConstVal: ['Latino@Str', 'African American@Str', '<NULL>']
+     # cmap: [('african', 'African American'), ('american', 'African American'), ('latino', 'Latino')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('minus', '-')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(10, 6), (-10, 6)]
+  # [debug] high_values (no dup.): [(10, 6), (-10, 6)]
+  # [debug] filtered low_values (no dup.): [(19, 3), (-19, 3), (9, 2), (-9, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Latino'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Latino@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Race', 'Latino'], ['Race']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Latino@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Race', 'Latino'], ['Race']]
+# (t=0.74) i=1, candidate=[{'ANSWER': 'African American'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, African American@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Race', 'African American'], ['Race']]
+    # SelectCol(SelectRow1(@param0, ==, 0, African American@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Race', 'African American'], ['Race']]
+# (t=1.47) i=2, candidate=[{'ANSWER': 'White'}]
+  # found 0 program(s)
+# (t=2.19) i=3, candidate=[{'ANSWER': 10}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Latino@Str, African American@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Race', 'Latino', 'African American', 'Percent']
+# (t=2.80) i=4, candidate=[{'ANSWER': -10}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, African American@Str, Latino@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Race', 'African American', 'Latino', 'Percent']
+# (t=3.42) i=5, candidate=[{'ANSWER': 19}]
+  # found 0 program(s)
+# (t=4.02) i=6, candidate=[{'ANSWER': -19}]
+  # found 0 program(s)
+# (t=4.62) i=7, candidate=[{'ANSWER': 9}]
+  # found 0 program(s)
+# (t=5.23) i=8, candidate=[{'ANSWER': -9}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.45, answer: [10]
+  # tprog: Contrast(@param0, -, 0, Latino@Str, African American@Str, 1)
+# top-2, score: 2.45, answer: [-10]
+  # tprog: Contrast(@param0, -, 0, African American@Str, Latino@Str, 1)
+# top-3, score: 2.30, answer: ['African American']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, African American@Str), ['0'])
+# top-4, score: 2.30, answer: ['African American']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, African American@Str), ['-1', '-2'])
+# top-5, score: 2.22, answer: ['Latino']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Latino@Str), ['0'])
+# top-6, score: 2.22, answer: ['Latino']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Latino@Str), ['-1', '-2'])

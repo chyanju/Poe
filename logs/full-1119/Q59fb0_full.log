@@ -1,0 +1,49 @@
+# parsed arguments: Namespace(benchmark='Q59fb0', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'blue', '1700000', 'regional', 'country', 'total', 'go', '28029721', '22094911', 'color', 'iraq', '37812334', '15804557', 'lebanon', 'jordan', 'to', 'turkey', 'funds', '40221893', 'egypt'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+    Country  Total funds go to color
+0    Jordan           40221893  blue
+1   Lebanon           37812334  blue
+2  Regional           28029721  blue
+3    Turkey           22094911  blue
+4      Iraq           15804557  blue
+5     Egypt            1700000  blue
+# query is: How much does Jordan get?
+# expected output type:[dtype('int64')]
+# expected output is:
+     ANSWER
+0  40221893
+# inferred DSL terminals:
+  # ConstVal: ['Jordan@Str', '<NULL>']
+     # cmap: [('jordan', 'Jordan')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 40221893}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Jordan@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Jordan'], ['Total funds go to']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Jordan@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Jordan'], ['Total funds go to']]
+# (t=0.23) i=1, candidate=[{'ANSWER': 80443786}]
+  # found 0 program(s)
+# (t=0.37) i=2, candidate=[{'ANSWER': 120665679}]
+  # found 0 program(s)
+# (t=0.51) i=3, candidate=[{'ANSWER': 160887572}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.34, answer: [40221893]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Jordan@Str), ['1'])
+# top-2, score: 2.34, answer: [40221893]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Jordan@Str), ['-99', '-2'])

@@ -1,0 +1,87 @@
+# parsed arguments: Namespace(benchmark='Q65f85', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'1902638', '5668961', 'age', '35', 'female', '5184855', 'people', '970357', '4355644', '11320252', 'gray', '30', '5123399', '2912655', '1064581', 'color', 'gender', 'male', '9735380', '11635647', '45', '10205879', '55', '90', '10552146', 'pink', '70', '50', '10', '75', '10563233', '80', '85', '6459082', '10022524', '4453623', '9324244', '10069564', '9659493', '11488578', '10119296', '9692669', '8507934', '60', '3792145', '9518507', '10237419', '9925006', '9731315', '4804784', '10261253', '25', '40', '20', '8911133', '9310714', 'sum', '11475182', '65', '15', '336303', '1981156', '0', '5', '3221898', '6921268'}
+# input type: [dtype('int64'), dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+    age  Sum of people  gender color
+0     0        9735380    Male  gray
+1     0        9310714  Female  pink
+2     5       10552146    Male  gray
+3     5       10069564  Female  pink
+4    10       10563233    Male  gray
+5    10       10022524  Female  pink
+6    15       10237419    Male  gray
+7    15        9692669  Female  pink
+8    20        9731315    Male  gray
+9    20        9324244  Female  pink
+10   25        9659493    Male  gray
+11   25        9518507  Female  pink
+12   30       10205879    Male  gray
+13   30       10119296  Female  pink
+14   35       11475182    Male  gray
+15   35       11635647  Female  pink
+16   40       11320252    Male  gray
+17   40       11488578  Female  pink
+18   45        9925006    Male  gray
+19   45       10261253  Female  pink
+20   50        8507934    Male  gray
+21   50        8911133  Female  pink
+22   55        6459082    Male  gray
+23   55        6921268  Female  pink
+24   60        5123399    Male  gray
+25   60        5668961  Female  pink
+26   65        4453623    Male  gray
+27   65        4804784  Female  pink
+28   70        3792145    Male  gray
+29   70        5184855  Female  pink
+30   75        2912655    Male  gray
+31   75        4355644  Female  pink
+32   80        1902638    Male  gray
+33   80        3221898  Female  pink
+34   85         970357    Male  gray
+35   85        1981156  Female  pink
+36   90         336303    Male  gray
+37   90        1064581  Female  pink
+# query is: How many females are under 10?
+# expected output type:[dtype('int64')]
+# expected output is:
+     ANSWER
+0  19380278
+# inferred DSL terminals:
+  # ConstVal: ['Female@Str', '10@Int', '<NULL>']
+     # cmap: [(10, 10), ('females', 'Female')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=1.42) i=1, candidate=[{'ANSWER': 2}]
+  # found 4 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, 10@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'age', 10], 'count', 'age']
+    # Summarize(SelectRow1(@param0, ==, 0, 10@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'age', 10], 'count', 'Sum of people']
+    # Summarize(SelectRow1(@param0, ==, 0, 10@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'age', 10], 'count', 'gender']
+    # Summarize(SelectRow1(@param0, ==, 0, 10@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'age', 10], 'count', 'color']
+# (t=2.84) i=2, candidate=[{'ANSWER': 3}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.46, answer: 2
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 10@Int), count, 0)
+# top-2, score: 1.46, answer: 2
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 10@Int), count, 1)
+# top-3, score: 1.46, answer: 2
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 10@Int), count, 2)
+# top-4, score: 1.46, answer: 2
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 10@Int), count, 3)

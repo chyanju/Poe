@@ -1,0 +1,105 @@
+# parsed arguments: Namespace(benchmark='Qfb9fb', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'brazil', '5.1', 'indonesia', 'country', 'blue', 'india', 'germany', 'south', 'persons', 'monaco', '0.2', '0.1', '17.1', '7.5', '20.8', 'total', 'macau', 'color', '6.4', 'rwanda', '11.8', 'per', 'japan', 'singapore', '21.5', 'australia', 'orange', 'hong', '1.0', 'korea', 'urban/total', '25.4', '0.5', '26.0', '2.5', 'urban', '75.2', '25.2', '9.7', 'kong', '18.0', 'kilometers', '6.8', 'maldives', 'egypt', '7.4', 'square', '0.4', '1.8', '16.6', '3.9', 'bangladesh', 'france'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+        Country Urban/total  Persons per square kilometers   color
+0         Macau       Urban                           26.0  orange
+1         Macau       Total                           20.8    blue
+2         Japan       Urban                            3.9  orange
+3         Japan       Total                            0.5    blue
+4      Maldives       Urban                           21.5  orange
+5      Maldives       Total                            1.0    blue
+6        Rwanda       Urban                           18.0  orange
+7        Rwanda       Total                            0.5    blue
+8        Monaco       Urban                           17.1  orange
+9        Monaco       Total                           17.1    blue
+10    Australia       Urban                            1.8    blue
+11   Bangladesh       Urban                           75.2  orange
+12   Bangladesh       Total                            1.0    blue
+13    Indonesia       Urban                           16.6  orange
+14    Indonesia       Total                            0.1    blue
+15        Egypt       Urban                            5.1  orange
+16        Egypt       Total                            0.1    blue
+17        India       Urban                           25.2  orange
+18        India       Total                            0.4    blue
+19       France       Urban                            2.5  orange
+20       France       Total                            0.1    blue
+21      Germany       Urban                            6.8  orange
+22      Germany       Total                            0.2    blue
+23  South Korea       Urban                           11.8  orange
+24  South Korea       Total                            0.5    blue
+25    Hong Kong       Urban                           25.4  orange
+26    Hong Kong       Total                            6.4    blue
+27       Brazil       Urban                            9.7    blue
+28    Singapore       Urban                            7.5  orange
+29    Singapore       Total                            7.4    blue
+# query is: What is the average persons per square kilometer of urban regions of South Korea and Japan combined?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0    7.85
+# inferred DSL terminals:
+  # ConstVal: ['South Korea@Str', 'Persons per square kilometers@Str', 'Urban@Str', 'Japan@Str', 'Urban/total@Str', '<NULL>']
+     # cmap: [('japan', 'Japan'), ('south', 'South Korea'), ('square', 'Persons per square kilometers'), ('urban', 'Urban/total'), ('korea', 'South Korea'), ('urban', 'Urban'), ('persons', 'Persons per square kilometers'), ('per', 'Persons per square kilometers'), ('kilometer', 'Persons per square kilometers')]
+  # AggrFunc: ['mean', '<NULL>']
+     # amap: [('average', 'mean')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 0.2}]
+  # found 0 program(s)
+# (t=5.80) i=1, candidate=[{'ANSWER': 26.0}]
+  # found 0 program(s)
+# (t=11.61) i=2, candidate=[{'ANSWER': 0.4}]
+  # found 0 program(s)
+# (t=17.41) i=3, candidate=[{'ANSWER': 2.5}]
+  # found 0 program(s)
+# (t=23.20) i=4, candidate=[{'ANSWER': 17.1}]
+  # found 0 program(s)
+# (t=28.98) i=5, candidate=[{'ANSWER': 18.0}]
+  # found 0 program(s)
+# (t=34.76) i=6, candidate=[{'ANSWER': 3.9}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Japan@Str), ==, 1, Urban@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Japan'], '==', 'Urban/total', 'Urban'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Urban@Str), ==, 0, Japan@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Urban'], '==', 'Country', 'Japan'], ['Persons per square kilometers']]
+# (t=40.53) i=7, candidate=[{'ANSWER': 21.5}]
+  # found 0 program(s)
+# (t=46.33) i=8, candidate=[{'ANSWER': 0.1}]
+  # found 0 program(s)
+# (t=52.12) i=9, candidate=[{'ANSWER': 16.6}]
+  # found 0 program(s)
+# (t=57.90) i=10, candidate=[{'ANSWER': 1.0}]
+  # found 0 program(s)
+# (t=63.70) i=11, candidate=[{'ANSWER': 75.2}]
+  # found 0 program(s)
+# (t=69.49) i=12, candidate=[{'ANSWER': 11.8}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, South Korea@Str), ==, 1, Urban@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'South Korea'], '==', 'Urban/total', 'Urban'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Urban@Str), ==, 0, South Korea@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Urban'], '==', 'Country', 'South Korea'], ['Persons per square kilometers']]
+# (t=75.30) i=13, candidate=[{'ANSWER': 0.5}]
+  # found 0 program(s)
+# (t=81.14) i=14, candidate=[{'ANSWER': 20.8}]
+  # found 0 program(s)
+# (t=87.18) i=15, candidate=[{'ANSWER': 6.8}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.50, answer: [11.8]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, South Korea@Str), ==, 1, Urban@Str), ['2'])
+# top-2, score: 2.50, answer: [11.8]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Urban@Str), ==, 0, South Korea@Str), ['2'])
+# top-3, score: 2.44, answer: [3.9]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Japan@Str), ==, 1, Urban@Str), ['2'])
+# top-4, score: 2.44, answer: [3.9]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Urban@Str), ==, 0, Japan@Str), ['2'])

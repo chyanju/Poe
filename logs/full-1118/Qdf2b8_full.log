@@ -1,0 +1,139 @@
+# parsed arguments: Namespace(benchmark='Qdf2b8', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'poland', 'uk', '0.616', '25.249', '11.613', 'finland', '3.959', '6.246', '1.408', '1.496', '0.88', '25.601', 'latvia', 'slovakia', 'france', 'color', 'luxembourg', 'slovenia', 'hungary', 'greece', '5.103', 'portugal', '2.023', 'austria', 'republic', 'lithuania', '2.551', '15.748', '2.199', '16.628', 'ireland', 'denmark', '0.176', '4.223', '0.792', 'netherlands', '0.264', 'czech', 'rebate', '2.375', 'cyprus', 'spain', '1.144', '1.232', '20.938', 'pre', '1.672', 'sweden', '10.821', 'romania', 'belgium', 'orange', 'estonia', 'germany', 'country', '6.51', 'budgetcategory', '14.78', '19.795', 'budget', 'malta', '1.76', 'post', '0.44', '0.0', '18.651', 'italy', 'blue', '2.727', 'bulgaria', '5.367', '3.695'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+           country  budgetcategory  budget   color
+0        Lithuania   Pre UK rebate   0.440  orange
+1        Lithuania  Post UK rebate   0.440    blue
+2           Latvia   Pre UK rebate   0.176  orange
+3           Latvia  Post UK rebate   0.176    blue
+4         Slovenia   Pre UK rebate   0.616  orange
+5         Slovenia  Post UK rebate   0.616    blue
+6         Bulgaria   Pre UK rebate   0.616  orange
+7         Bulgaria  Post UK rebate   0.616    blue
+8         Slovakia   Pre UK rebate   0.792  orange
+9         Slovakia  Post UK rebate   0.880    blue
+10         Ireland   Pre UK rebate   1.408  orange
+11         Ireland  Post UK rebate   1.496    blue
+12           Italy   Pre UK rebate  15.748  orange
+13           Italy  Post UK rebate  16.628    blue
+14         Estonia   Pre UK rebate   0.176  orange
+15         Estonia  Post UK rebate   0.176    blue
+16         Denmark   Pre UK rebate   2.551  orange
+17         Denmark  Post UK rebate   2.727    blue
+18          Greece   Pre UK rebate   2.199  orange
+19          Greece  Post UK rebate   2.375    blue
+20         Belgium   Pre UK rebate   5.103  orange
+21         Belgium  Post UK rebate   5.367    blue
+22         Hungary   Pre UK rebate   1.144  orange
+23         Hungary  Post UK rebate   1.232    blue
+24  Czech Republic   Pre UK rebate   1.760  orange
+25  Czech Republic  Post UK rebate   1.760    blue
+26          Poland   Pre UK rebate   3.959  orange
+27          Poland  Post UK rebate   4.223    blue
+28         Romania   Pre UK rebate   1.408  orange
+29         Romania  Post UK rebate   1.496    blue
+30          Cyprus   Pre UK rebate   0.264  orange
+31          Cyprus  Post UK rebate   0.264    blue
+32              UK   Pre UK rebate  18.651  orange
+33              UK  Post UK rebate  14.780    blue
+34     Netherlands   Pre UK rebate   6.246  orange
+35     Netherlands  Post UK rebate   6.510    blue
+36        Portugal   Pre UK rebate   1.672  orange
+37        Portugal  Post UK rebate   1.760    blue
+38          Sweden   Pre UK rebate   3.695  orange
+39          Sweden  Post UK rebate   3.695    blue
+40           Malta   Pre UK rebate   0.000  orange
+41           Malta  Post UK rebate   0.000    blue
+42         Germany   Pre UK rebate  25.249  orange
+43         Germany  Post UK rebate  25.601    blue
+44           Spain   Pre UK rebate  10.821  orange
+45           Spain  Post UK rebate  11.613    blue
+46         Finland   Pre UK rebate   2.023  orange
+47         Finland  Post UK rebate   2.199    blue
+48          France   Pre UK rebate  19.795  orange
+49          France  Post UK rebate  20.938    blue
+50      Luxembourg   Pre UK rebate   0.440  orange
+51      Luxembourg  Post UK rebate   0.440    blue
+52         Austria   Pre UK rebate   2.727  orange
+53         Austria  Post UK rebate   2.727    blue
+# query is: Difference between the France budget of Pre and Post UK rebate
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0   1.143
+# inferred DSL terminals:
+  # ConstVal: ['budget@Str', 'UK@Str', 'Pre UK rebate@Str', 'Post UK rebate@Str', 'France@Str', '<NULL>']
+     # cmap: [('france', 'France'), ('uk', 'UK'), ('post', 'Post UK rebate'), ('pre', 'Pre UK rebate'), ('budget', 'budget'), ('uk', 'Post UK rebate'), ('uk', 'Pre UK rebate'), ('rebate', 'Pre UK rebate'), ('rebate', 'Post UK rebate')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(6.1579999999999995, 25), (5.015000000000002, 25), (3.8710000000000004, 25), (2.286999999999999, 25), (1.144000000000002, 25), (1.1429999999999971, 25), (-1.1429999999999971, 25), (-1.144000000000002, 25), (-2.286999999999999, 25), (-3.8710000000000004, 25)]
+  # [debug] high_values (no dup.): []
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=9.73) i=1, candidate=[{'ANSWER': 6.1579999999999995}]
+  # found 2 program(s)
+    # Contrast(SelectRow1(@param0, ==, 1, Post UK rebate@Str), diff, 0, UK@Str, France@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'budgetcategory', 'Post UK rebate'], 'diff', 'country', 'UK', 'France', 'budget']
+    # Contrast(SelectRow1(@param0, ==, 1, Post UK rebate@Str), diff, 0, France@Str, UK@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'budgetcategory', 'Post UK rebate'], 'diff', 'country', 'France', 'UK', 'budget']
+# (t=19.54) i=2, candidate=[{'ANSWER': 5.015000000000002}]
+  # found 0 program(s)
+# (t=29.45) i=3, candidate=[{'ANSWER': 3.8710000000000004}]
+  # found 2 program(s)
+    # Contrast(SelectRow1(@param0, ==, 0, UK@Str), diff, 1, Pre UK rebate@Str, Post UK rebate@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'country', 'UK'], 'diff', 'budgetcategory', 'Pre UK rebate', 'Post UK rebate', 'budget']
+    # Contrast(SelectRow1(@param0, ==, 0, UK@Str), diff, 1, Post UK rebate@Str, Pre UK rebate@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'country', 'UK'], 'diff', 'budgetcategory', 'Post UK rebate', 'Pre UK rebate', 'budget']
+# (t=39.26) i=4, candidate=[{'ANSWER': 2.286999999999999}]
+  # found 0 program(s)
+# (t=49.16) i=5, candidate=[{'ANSWER': 1.144000000000002}]
+  # found 2 program(s)
+    # Contrast(SelectRow1(@param0, ==, 1, Pre UK rebate@Str), diff, 0, UK@Str, France@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'budgetcategory', 'Pre UK rebate'], 'diff', 'country', 'UK', 'France', 'budget']
+    # Contrast(SelectRow1(@param0, ==, 1, Pre UK rebate@Str), diff, 0, France@Str, UK@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'budgetcategory', 'Pre UK rebate'], 'diff', 'country', 'France', 'UK', 'budget']
+# (t=58.99) i=6, candidate=[{'ANSWER': 1.1429999999999971}]
+  # found 2 program(s)
+    # Contrast(SelectRow1(@param0, ==, 0, France@Str), diff, 1, Pre UK rebate@Str, Post UK rebate@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'country', 'France'], 'diff', 'budgetcategory', 'Pre UK rebate', 'Post UK rebate', 'budget']
+    # Contrast(SelectRow1(@param0, ==, 0, France@Str), diff, 1, Post UK rebate@Str, Pre UK rebate@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'country', 'France'], 'diff', 'budgetcategory', 'Post UK rebate', 'Pre UK rebate', 'budget']
+# (t=68.75) i=7, candidate=[{'ANSWER': -1.1429999999999971}]
+  # found 0 program(s)
+# (t=78.45) i=8, candidate=[{'ANSWER': -1.144000000000002}]
+  # found 0 program(s)
+# (t=88.25) i=9, candidate=[{'ANSWER': -2.286999999999999}]
+  # found 0 program(s)
+# (t=98.06) i=10, candidate=[{'ANSWER': -3.8710000000000004}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.73, answer: 1.1429999999999971
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, France@Str), diff, 1, Pre UK rebate@Str, Post UK rebate@Str, 2)
+# top-2, score: 2.73, answer: 1.1429999999999971
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, France@Str), diff, 1, Post UK rebate@Str, Pre UK rebate@Str, 2)
+# top-3, score: 2.64, answer: 6.1579999999999995
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Post UK rebate@Str), diff, 0, UK@Str, France@Str, 2)
+# top-4, score: 2.64, answer: 6.1579999999999995
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Post UK rebate@Str), diff, 0, France@Str, UK@Str, 2)
+# top-5, score: 2.64, answer: 3.8710000000000004
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, UK@Str), diff, 1, Pre UK rebate@Str, Post UK rebate@Str, 2)
+# top-6, score: 2.64, answer: 3.8710000000000004
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, UK@Str), diff, 1, Post UK rebate@Str, Pre UK rebate@Str, 2)
+# top-7, score: 2.64, answer: 1.144000000000002
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Pre UK rebate@Str), diff, 0, UK@Str, France@Str, 2)
+# top-8, score: 2.64, answer: 1.144000000000002
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Pre UK rebate@Str), diff, 0, France@Str, UK@Str, 2)

@@ -1,0 +1,90 @@
+# parsed arguments: Namespace(benchmark='Q01dff', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'population', 'west', 'region', 'blue', 'danish', 'capital', '162829', '305982', '683886', 'color', 'north-east', '1823109', '608036', 'skåne', 'remainder', 'south'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                  Region  Population color
+0  Danish Capital Region     1823109  blue
+1              Remainder      608036  blue
+2            South Skåne      683886  blue
+3             West Skåne      305982  blue
+4       North-East Skåne      162829  blue
+# query is: What is the total population of South Skane and West Skane?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0  989868
+# inferred DSL terminals:
+  # ConstVal: ['South Skåne@Str', 'Population@Str', 'West Skåne@Str', '<NULL>']
+     # cmap: [('south', 'South Skåne'), ('population', 'Population'), ('west', 'West Skåne')]
+  # AggrFunc: ['count', 'sum', '<NULL>']
+     # amap: [('total', 'sum'), ('total', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 683886}]
+  # found 5 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, South Skåne@Str), ==, 0, South Skåne@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Region', 'South Skåne'], '==', 'Region', 'South Skåne'], ['Population']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, South Skåne@Str), ==, 0, South Skåne@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Region', 'South Skåne'], '==', 'Region', 'South Skåne'], ['Population']]
+    # Summarize(SelectRow1(@param0, ==, 0, South Skåne@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'South Skåne'], 'sum', 'Population']
+    # SelectCol(SelectRow1(@param0, ==, 0, South Skåne@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Region', 'South Skåne'], ['Population']]
+    # SelectCol(SelectRow1(@param0, ==, 0, South Skåne@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Region', 'South Skåne'], ['Population']]
+# (t=2.42) i=1, candidate=[{'ANSWER': 305982}]
+  # found 5 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, West Skåne@Str), ==, 0, West Skåne@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Region', 'West Skåne'], '==', 'Region', 'West Skåne'], ['Population']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, West Skåne@Str), ==, 0, West Skåne@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Region', 'West Skåne'], '==', 'Region', 'West Skåne'], ['Population']]
+    # Summarize(SelectRow1(@param0, ==, 0, West Skåne@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'West Skåne'], 'sum', 'Population']
+    # SelectCol(SelectRow1(@param0, ==, 0, West Skåne@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Region', 'West Skåne'], ['Population']]
+    # SelectCol(SelectRow1(@param0, ==, 0, West Skåne@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Region', 'West Skåne'], ['Population']]
+# (t=4.85) i=2, candidate=[{'ANSWER': 1367772}]
+  # found 0 program(s)
+# (t=7.29) i=3, candidate=[{'ANSWER': 989868}]
+  # found 0 program(s)
+# (t=9.72) i=4, candidate=[{'ANSWER': 611964}]
+  # found 0 program(s)
+# (t=12.41) i=5, candidate=[{'ANSWER': 846715}]
+  # found 0 program(s)
+# (t=14.80) i=6, candidate=[{'ANSWER': 468811}]
+  # found 0 program(s)
+# (t=17.19) i=7, candidate=[{'ANSWER': 162829}]
+  # found 0 program(s)
+# (t=19.58) i=8, candidate=[{'ANSWER': 325658}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.40, answer: [683886]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, South Skåne@Str), sum, 1)
+# top-2, score: 1.40, answer: [305982]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, West Skåne@Str), sum, 1)
+# top-3, score: 1.32, answer: [683886]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, South Skåne@Str), ['1'])
+# top-4, score: 1.32, answer: [683886]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, South Skåne@Str), ['-99', '-2'])
+# top-5, score: 1.32, answer: [305982]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, West Skåne@Str), ['1'])
+# top-6, score: 1.32, answer: [305982]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, West Skåne@Str), ['-99', '-2'])
+# top-7, score: 1.27, answer: [683886]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, South Skåne@Str), ==, 0, South Skåne@Str), ['1'])
+# top-8, score: 1.27, answer: [683886]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, South Skåne@Str), ==, 0, South Skåne@Str), ['-99', '-2'])
+# top-9, score: 1.27, answer: [305982]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, West Skåne@Str), ==, 0, West Skåne@Str), ['1'])
+# top-10, score: 1.27, answer: [305982]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, West Skåne@Str), ==, 0, West Skåne@Str), ['-99', '-2'])

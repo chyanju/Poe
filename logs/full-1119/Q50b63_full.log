@@ -1,0 +1,156 @@
+# parsed arguments: Namespace(benchmark='Q50b63', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'2008', '2015', '325.044', '125.734', '169.598', '129.505', '223.809', 'year', 'color', '167.543', '516.031', '262.799', 'cases', '2013', '168.827', '166.061', '2000', '2004', '184.211', '174.935', '2007', '2014', '2005', '2016', '456.216', '344.23', '297.551', '186.108', '2011', '1999', '1998', '2006', '2003', '2010', '2002', 'blue', '2009', '149.338', '533.909', '2001', '2012', '2017', '123.061', '408.037'}
+# input type: [dtype('float64'), dtype('int64'), dtype('O')]
+# input is:
+      cases  year color
+0   129.505  1998  blue
+1   123.061  1999  blue
+2   125.734  2000  blue
+3   149.338  2001  blue
+4   166.061  2002  blue
+5   169.598  2003  blue
+6   167.543  2004  blue
+7   184.211  2005  blue
+8   168.827  2006  blue
+9   174.935  2007  blue
+10  186.108  2008  blue
+11  223.809  2009  blue
+12  262.799  2010  blue
+13  297.551  2011  blue
+14  325.044  2012  blue
+15  344.230  2013  blue
+16  408.037  2014  blue
+17  456.216  2015  blue
+18  516.031  2016  blue
+19  533.909  2017  blue
+# query is: How many more pending cases were in Us immigration courts in 2017 versus 2001
+# expected output type:[dtype('float64')]
+# expected output is:
+    ANSWER
+0  384.571
+# inferred DSL terminals:
+  # ConstVal: ['cases@Str', '2001@Int', '2017@Int', '<NULL>']
+     # cmap: [(2017, 2017), (2001, 2001), ('cases', 'cases')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>=', '==', '>', '<NULL>']
+     # bmap: [('more', '>='), (None, '=='), ('more', '>')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(1867.662, 4), (1467.091, 4), (384.571, 4), (16.0, 4), (-16.0, 4), (-384.571, 4), (-1467.091, 4), (-1867.662, 4)]
+  # [debug] high_values (no dup.): [(1867.662, 4), (1467.091, 4), (384.571, 4), (16.0, 4), (-16.0, 4), (-384.571, 4), (-1467.091, 4), (-1867.662, 4)]
+  # [debug] filtered low_values (no dup.): [(1893.939, 2), (1891.266, 2), (1887.495, 2), (1877.939, 2), (1875.266, 2), (1871.495, 2), (1866.662, 2), (1865.662, 2), (1864.662, 2), (1863.662, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 9 program(s)
+    # Summarize(SelectRow1(@param0, >=, 1, 2017@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'year', 2017], 'count', 'cases']
+    # Summarize(SelectRow1(@param0, >=, 1, 2017@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'year', 2017], 'count', 'year']
+    # Summarize(SelectRow1(@param0, >=, 1, 2017@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'year', 2017], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 2001@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2001], 'count', 'cases']
+    # Summarize(SelectRow1(@param0, ==, 1, 2001@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2001], 'count', 'year']
+    # Summarize(SelectRow1(@param0, ==, 1, 2001@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2001], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 2017@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2017], 'count', 'cases']
+    # Summarize(SelectRow1(@param0, ==, 1, 2017@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2017], 'count', 'year']
+    # Summarize(SelectRow1(@param0, ==, 1, 2017@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2017], 'count', 'color']
+# (t=4.99) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=9.89) i=2, candidate=[{'ANSWER': 1867.662}]
+  # found 0 program(s)
+# (t=14.82) i=3, candidate=[{'ANSWER': 1467.091}]
+  # found 0 program(s)
+# (t=19.74) i=4, candidate=[{'ANSWER': 384.571}]
+  # found 2 program(s)
+    # Contrast(SelectRow1(@param0, >=, 1, 2001@Int), -, 1, 2017@Int, 2001@Int, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'year', 2001], '-', 'year', 2017, 2001, 'cases']
+    # Contrast(@param0, -, 1, 2017@Int, 2001@Int, 0)
+      --> ['Contrast', 'input@0', '-', 'year', 2017, 2001, 'cases']
+# (t=24.63) i=5, candidate=[{'ANSWER': 16.0}]
+  # found 3 program(s)
+    # Summarize(SelectRow1(@param0, >, 1, 2001@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'year', 2001], 'count', 'cases']
+    # Summarize(SelectRow1(@param0, >, 1, 2001@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'year', 2001], 'count', 'year']
+    # Summarize(SelectRow1(@param0, >, 1, 2001@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'year', 2001], 'count', 'color']
+# (t=29.53) i=6, candidate=[{'ANSWER': -16.0}]
+  # found 0 program(s)
+# (t=34.50) i=7, candidate=[{'ANSWER': -384.571}]
+  # found 2 program(s)
+    # Contrast(SelectRow1(@param0, >=, 1, 2001@Int), -, 1, 2001@Int, 2017@Int, 0)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'year', 2001], '-', 'year', 2001, 2017, 'cases']
+    # Contrast(@param0, -, 1, 2001@Int, 2017@Int, 0)
+      --> ['Contrast', 'input@0', '-', 'year', 2001, 2017, 'cases']
+# (t=39.47) i=8, candidate=[{'ANSWER': -1467.091}]
+  # found 0 program(s)
+# (t=44.45) i=9, candidate=[{'ANSWER': -1867.662}]
+  # found 0 program(s)
+# (t=49.40) i=10, candidate=[{'ANSWER': 1893.939}]
+  # found 0 program(s)
+# (t=54.39) i=11, candidate=[{'ANSWER': 1891.266}]
+  # found 0 program(s)
+# (t=59.32) i=12, candidate=[{'ANSWER': 1887.495}]
+  # found 0 program(s)
+# (t=64.30) i=13, candidate=[{'ANSWER': 1877.939}]
+  # found 0 program(s)
+# (t=69.21) i=14, candidate=[{'ANSWER': 1875.266}]
+  # found 0 program(s)
+# (t=74.15) i=15, candidate=[{'ANSWER': 1871.495}]
+  # found 0 program(s)
+# (t=79.12) i=16, candidate=[{'ANSWER': 1866.662}]
+  # found 0 program(s)
+# (t=84.11) i=17, candidate=[{'ANSWER': 1865.662}]
+  # found 0 program(s)
+# (t=89.06) i=18, candidate=[{'ANSWER': 1864.662}]
+  # found 0 program(s)
+# (t=94.01) i=19, candidate=[{'ANSWER': 1863.662}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.43, answer: [384.571]
+  # tprog: Contrast(@param0, -, 1, 2017@Int, 2001@Int, 0)
+# top-2, score: 1.43, answer: [-384.571]
+  # tprog: Contrast(@param0, -, 1, 2001@Int, 2017@Int, 0)
+# top-3, score: 1.41, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 2017@Int), count, 0)
+# top-4, score: 1.41, answer: [16.0]
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 2001@Int), count, 0)
+# top-5, score: 1.38, answer: [384.571]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 2001@Int), -, 1, 2017@Int, 2001@Int, 0)
+# top-6, score: 1.38, answer: [-384.571]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 2001@Int), -, 1, 2001@Int, 2017@Int, 0)
+# top-7, score: 1.34, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 2017@Int), count, 1)
+# top-8, score: 1.34, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 2017@Int), count, 2)
+# top-9, score: 1.34, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 2001@Int), count, 0)
+# top-10, score: 1.34, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 2017@Int), count, 0)
+# top-11, score: 1.34, answer: [16.0]
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 2001@Int), count, 1)
+# top-12, score: 1.34, answer: [16.0]
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 2001@Int), count, 2)
+# top-13, score: 1.27, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 2001@Int), count, 1)
+# top-14, score: 1.27, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 2001@Int), count, 2)
+# top-15, score: 1.27, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 2017@Int), count, 1)
+# top-16, score: 1.27, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 2017@Int), count, 2)

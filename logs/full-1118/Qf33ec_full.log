@@ -1,0 +1,55 @@
+# parsed arguments: Namespace(benchmark='Qf33ec', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'rank', '0.2', '9', 'in', '5', '2', '-0.9', '0.1', '-0.25', 'color', '-1.0', '-0.4', 'blue', '-2.1', '%', '8', '3', '4', 'change', '7', 'income', '-1.8', '6', '10', '-1.5', '1'}
+# input type: [dtype('int64'), dtype('float64'), dtype('O')]
+# input is:
+   income rank  % change in income color
+0            1               -1.80  blue
+1            2               -1.50  blue
+2            3               -1.00  blue
+3            4               -0.90  blue
+4            5               -0.40  blue
+5            6                0.10  blue
+6            7                0.20  blue
+7            8                0.10  blue
+8            9               -0.25  blue
+9           10               -2.10  blue
+# query is: What is the value of rank 4
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0    -0.9
+# inferred DSL terminals:
+  # ConstVal: ['4@Int', 'income rank@Str', '<NULL>']
+     # cmap: [(4, 4), ('rank', 'income rank')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 4}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, 4@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'income rank', 4], ['income rank']]
+    # SelectCol(SelectRow1(@param0, ==, 0, 4@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'income rank', 4], ['income rank']]
+# (t=0.67) i=1, candidate=[{'ANSWER': 3}]
+  # found 0 program(s)
+# (t=1.35) i=2, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=2.02) i=3, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=2.68) i=4, candidate=[{'ANSWER': 5}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.43, answer: 4
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, 4@Int), ['0'])
+# top-2, score: 1.43, answer: 4
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, 4@Int), ['-1', '-2'])

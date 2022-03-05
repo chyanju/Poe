@@ -1,0 +1,77 @@
+# parsed arguments: Namespace(benchmark='Qc8032', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'george', 'majority', 'votes', 'adrian', 'blue', 'frank', 'rainbow', '10070', 'margot', '14857', '152', 'weiss', 'color', 'candidate', 'fraser', 'james', '2798', 'jill', 'oliver', '6482', '4787', 'dobson'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+              Candidate  Votes color
+0          Frank Dobson  14857  blue
+1           Jill Fraser  10070  blue
+2          Margot James   6482  blue
+3         Adrian Oliver   2798  blue
+4  Rainbow George Weiss    152  blue
+5              Majority   4787  blue
+# query is: Who is least likely to win?
+# expected output type:[dtype('O')]
+# expected output is:
+                 ANSWER
+0  Rainbow George Weiss
+# inferred DSL terminals:
+  # ConstVal: ['<NULL>']
+     # cmap: []
+  # AggrFunc: ['min', '<NULL>']
+     # amap: [('least', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('least', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Rainbow George Weiss'}]
+  # found 10 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Candidate'], 'min', 'Votes'], 'eqmin', 'COL0'], ['Candidate']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Candidate'], 'min', 'Votes'], 'eqmin', 'COL0'], ['Candidate']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Candidate', 'Votes'], 'min', 'Votes'], 'eqmin', 'Votes'], ['Candidate']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Candidate', 'Votes'], 'min', 'Votes'], 'eqmin', 'Votes'], ['Candidate']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Candidate', 'Votes'], 'min', 'Votes'], 'eqmin', 'COL0'], ['Candidate']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Candidate', 'Votes'], 'min', 'Votes'], 'eqmin', 'COL0'], ['Candidate']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Candidate', 'color'], 'min', 'Votes'], 'eqmin', 'COL0'], ['Candidate']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Candidate', 'color'], 'min', 'Votes'], 'eqmin', 'COL0'], ['Candidate']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Votes'], ['Candidate']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Votes'], ['Candidate']]
+# (t=0.27) i=1, candidate=[{'ANSWER': 'Frank Dobson'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.33, answer: ['Rainbow George Weiss']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+# top-2, score: 1.33, answer: ['Rainbow George Weiss']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+# top-3, score: 1.27, answer: ['Rainbow George Weiss']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+# top-4, score: 1.27, answer: ['Rainbow George Weiss']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+# top-5, score: 1.26, answer: ['Rainbow George Weiss']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+# top-6, score: 1.26, answer: ['Rainbow George Weiss']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+# top-7, score: 1.26, answer: ['Rainbow George Weiss']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+# top-8, score: 1.26, answer: ['Rainbow George Weiss']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-9, score: 1.26, answer: ['Rainbow George Weiss']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+# top-10, score: 1.26, answer: ['Rainbow George Weiss']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])

@@ -1,0 +1,66 @@
+# parsed arguments: Namespace(benchmark='Q87e3c', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'64', 'in', 'red', 'religion', 'express', 'practice', '5', 'about', '26', '9', 'blue', '52', '3', '28', 'strength', 'same', 'percentage', 'better', 'raising', 'get', '73', 'moral', 'color', 'country', 'to', '56', 'society', '20', '69', '23', '34', '18', '7', '38', 'values', 'ties', 'family', 'response', '32', 'opportunity', 'u.s.', '62', 'ahead', 'poor', 'statement', 'orange', 'conditions', 'views', 'treatment', 'children', 'political', '21', '13', 'for', '14', 'freedom', 'origin'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                             statement  ...   color
+0             Opportunity to get ahead  ...    blue
+1   Freedom to express political views  ...    blue
+2                Treatment of the poor  ...    blue
+3      Conditions for raising children  ...    blue
+4         Freedom to practice religion  ...    blue
+5              Moral values of society  ...    blue
+6              Strength of family ties  ...    blue
+7             Opportunity to get ahead  ...  orange
+8   Freedom to express political views  ...  orange
+9                Treatment of the poor  ...  orange
+10     Conditions for raising children  ...  orange
+11        Freedom to practice religion  ...  orange
+12             Moral values of society  ...  orange
+13             Strength of family ties  ...  orange
+14            Opportunity to get ahead  ...     red
+15  Freedom to express political views  ...     red
+16               Treatment of the poor  ...     red
+17     Conditions for raising children  ...     red
+18        Freedom to practice religion  ...     red
+19             Moral values of society  ...     red
+20             Strength of family ties  ...     red
+
+[21 rows x 4 columns]
+# query is: what is the red value for treatment of the poor
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      21
+# inferred DSL terminals:
+  # ConstVal: ['Moral values of society@Str', 'Treatment of the poor@Str', 'Conditions for raising children@Str', 'red@Str', '<NULL>']
+     # cmap: [('treatment', 'Treatment of the poor'), ('poor', 'Treatment of the poor'), ('for', 'Conditions for raising children'), ('value', 'Moral values of society'), ('red', 'red')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 21}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Treatment of the poor@Str), ==, 3, red@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Treatment of the poor'], '==', 'color', 'red'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, red@Str), ==, 0, Treatment of the poor@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'red'], '==', 'statement', 'Treatment of the poor'], ['percentage']]
+# (t=7.03) i=1, candidate=[{'ANSWER': 64}]
+  # found 0 program(s)
+# (t=14.24) i=2, candidate=[{'ANSWER': 9}]
+  # found 0 program(s)
+# (t=21.46) i=3, candidate=[{'ANSWER': 5}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.39, answer: [21]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Treatment of the poor@Str), ==, 3, red@Str), ['2'])
+# top-2, score: 2.39, answer: [21]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, red@Str), ==, 0, Treatment of the poor@Str), ['2'])

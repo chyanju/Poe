@@ -1,0 +1,116 @@
+# parsed arguments: Namespace(benchmark='Qc3b22', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'ulster', 'gàidheal', '7.2', '5.6', 'foyle', '62.1', '18.8', '3', 'bbc', '11.5', 'total', '54.2', 'cymru', '122.1', '6', '17.6', 'local', '32.7', '23.8', 'service', 'sports', 'live', '5', 'extra', '152.5', '1', '1xtra', 'music', '54.3', '13.0', 'wales', '2', '4', 'color', 'and', 'radio', 'scotland', '6.3', 'cost(£million)', '11.8', 'blue', 'asian', '76.0', '2012/13', 'nan', 'network'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                                 Service  2012/13 Total Cost(£million) color
+0                            BBC Radio 1                          54.2  blue
+1                        BBC Radio 1Xtra                          11.8  blue
+2                            BBC Radio 2                          62.1  blue
+3                            BBC Radio 3                          54.3  blue
+4                            BBC Radio 4                         122.1  blue
+5                      BBC Radio 4 Extra                           7.2  blue
+6                       BBC Radio 5 Live                          76.0  blue
+7          BBC Radio 5 Live Sports Extra                           5.6  blue
+8                      BBC Radio 6 Music                          11.5  blue
+9                      BBC Asian Network                          13.0  blue
+10                       BBC Local Radio                         152.5  blue
+11                    BBC Radio Scotland                          32.7  blue
+12                BBC Radio nan Gàidheal                           6.3  blue
+13                       BBC Radio Wales                          18.8  blue
+14                       BBC Radio Cymru                          17.6  blue
+15  BBC Radio Ulster and BBC Radio Foyle                          23.8  blue
+# query is: What is the value for BBC Radio 4?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0   122.1
+# inferred DSL terminals:
+  # ConstVal: ['BBC Radio 2@Str', 'BBC Radio nan Gàidheal@Str', 'BBC Radio Cymru@Str', 'BBC Radio 5 Live Sports Extra@Str', 'BBC Radio 1Xtra@Str', 'BBC Radio 6 Music@Str', 'BBC Local Radio@Str', 'BBC Radio 1@Str', 'BBC Radio Ulster and BBC Radio Foyle@Str', 'BBC Radio 5 Live@Str', 'BBC Radio 4@Str', 'BBC Radio 3@Str', 'BBC Radio Wales@Str', 'BBC Radio 4 Extra@Str', 'BBC Asian Network@Str', 'BBC Radio Scotland@Str', '<NULL>']
+     # cmap: [('bbc', 'BBC Radio 4'), ('radio', 'BBC Radio 4'), ('bbc', 'BBC Radio 2'), ('radio', 'BBC Radio 2'), ('bbc', 'BBC Radio 1'), ('radio', 'BBC Radio 1'), ('bbc', 'BBC Radio Scotland'), ('radio', 'BBC Radio Scotland'), (4, 'BBC Radio 4'), ('bbc', 'BBC Radio Ulster and BBC Radio Foyle'), ('bbc', 'BBC Radio 4 Extra'), ('radio', 'BBC Radio 4 Extra'), ('bbc', 'BBC Radio nan Gàidheal'), ('radio', 'BBC Radio nan Gàidheal'), ('radio', 'BBC Radio Ulster and BBC Radio Foyle'), ('bbc', 'BBC Radio Wales'), ('radio', 'BBC Radio Wales'), ('bbc', 'BBC Radio 5 Live'), ('radio', 'BBC Radio 5 Live'), ('bbc', 'BBC Radio 1Xtra'), ('bbc', 'BBC Local Radio'), ('radio', 'BBC Local Radio'), ('bbc', 'BBC Radio Cymru'), ('radio', 'BBC Radio Cymru'), ('radio', 'BBC Radio 1Xtra'), ('bbc', 'BBC Asian Network'), ('bbc', 'BBC Radio 3'), ('radio', 'BBC Radio 3'), (4, 'BBC Radio 4 Extra'), ('bbc', 'BBC Radio 5 Live Sports Extra'), ('radio', 'BBC Radio 5 Live Sports Extra'), ('bbc', 'BBC Radio 6 Music'), ('radio', 'BBC Radio 6 Music')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 122.1}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, BBC Radio 4@Str), ==, 0, BBC Radio 4@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 4'], '==', 'Service', 'BBC Radio 4'], ['2012/13 Total Cost(£million)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, BBC Radio 4@Str), ==, 0, BBC Radio 4@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 4'], '==', 'Service', 'BBC Radio 4'], ['2012/13 Total Cost(£million)']]
+    # SelectCol(SelectRow1(@param0, ==, 0, BBC Radio 4@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 4'], ['2012/13 Total Cost(£million)']]
+    # SelectCol(SelectRow1(@param0, ==, 0, BBC Radio 4@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 4'], ['2012/13 Total Cost(£million)']]
+# (t=77.22) i=1, candidate=[{'ANSWER': 7.2}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, BBC Radio 4 Extra@Str), ==, 0, BBC Radio 4 Extra@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 4 Extra'], '==', 'Service', 'BBC Radio 4 Extra'], ['2012/13 Total Cost(£million)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, BBC Radio 4 Extra@Str), ==, 0, BBC Radio 4 Extra@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 4 Extra'], '==', 'Service', 'BBC Radio 4 Extra'], ['2012/13 Total Cost(£million)']]
+    # SelectCol(SelectRow1(@param0, ==, 0, BBC Radio 4 Extra@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 4 Extra'], ['2012/13 Total Cost(£million)']]
+    # SelectCol(SelectRow1(@param0, ==, 0, BBC Radio 4 Extra@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 4 Extra'], ['2012/13 Total Cost(£million)']]
+# (t=154.67) i=2, candidate=[{'ANSWER': 54.3}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, BBC Radio 3@Str), ==, 0, BBC Radio 3@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 3'], '==', 'Service', 'BBC Radio 3'], ['2012/13 Total Cost(£million)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, BBC Radio 3@Str), ==, 0, BBC Radio 3@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 3'], '==', 'Service', 'BBC Radio 3'], ['2012/13 Total Cost(£million)']]
+    # SelectCol(SelectRow1(@param0, ==, 0, BBC Radio 3@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 3'], ['2012/13 Total Cost(£million)']]
+    # SelectCol(SelectRow1(@param0, ==, 0, BBC Radio 3@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 3'], ['2012/13 Total Cost(£million)']]
+# (t=232.32) i=3, candidate=[{'ANSWER': 11.8}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, BBC Radio 1Xtra@Str), ==, 0, BBC Radio 1Xtra@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 1Xtra'], '==', 'Service', 'BBC Radio 1Xtra'], ['2012/13 Total Cost(£million)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, BBC Radio 1Xtra@Str), ==, 0, BBC Radio 1Xtra@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 1Xtra'], '==', 'Service', 'BBC Radio 1Xtra'], ['2012/13 Total Cost(£million)']]
+    # SelectCol(SelectRow1(@param0, ==, 0, BBC Radio 1Xtra@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 1Xtra'], ['2012/13 Total Cost(£million)']]
+    # SelectCol(SelectRow1(@param0, ==, 0, BBC Radio 1Xtra@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 1Xtra'], ['2012/13 Total Cost(£million)']]
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 1.52, answer: [122.1]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, BBC Radio 4@Str), ['1'])
+# top-2, score: 1.52, answer: [122.1]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, BBC Radio 4@Str), ['-99', '-2'])
+# top-3, score: 1.52, answer: [7.2]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, BBC Radio 4 Extra@Str), ['1'])
+# top-4, score: 1.52, answer: [7.2]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, BBC Radio 4 Extra@Str), ['-99', '-2'])
+# top-5, score: 1.47, answer: [122.1]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, BBC Radio 4@Str), ==, 0, BBC Radio 4@Str), ['1'])
+# top-6, score: 1.47, answer: [122.1]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, BBC Radio 4@Str), ==, 0, BBC Radio 4@Str), ['-99', '-2'])
+# top-7, score: 1.47, answer: [7.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, BBC Radio 4 Extra@Str), ==, 0, BBC Radio 4 Extra@Str), ['1'])
+# top-8, score: 1.47, answer: [7.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, BBC Radio 4 Extra@Str), ==, 0, BBC Radio 4 Extra@Str), ['-99', '-2'])
+# top-9, score: 1.39, answer: [54.3]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, BBC Radio 3@Str), ['1'])
+# top-10, score: 1.39, answer: [54.3]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, BBC Radio 3@Str), ['-99', '-2'])
+# top-11, score: 1.39, answer: [11.8]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, BBC Radio 1Xtra@Str), ['1'])
+# top-12, score: 1.39, answer: [11.8]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, BBC Radio 1Xtra@Str), ['-99', '-2'])
+# top-13, score: 1.34, answer: [54.3]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, BBC Radio 3@Str), ==, 0, BBC Radio 3@Str), ['1'])
+# top-14, score: 1.34, answer: [54.3]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, BBC Radio 3@Str), ==, 0, BBC Radio 3@Str), ['-99', '-2'])
+# top-15, score: 1.34, answer: [11.8]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, BBC Radio 1Xtra@Str), ==, 0, BBC Radio 1Xtra@Str), ['1'])
+# top-16, score: 1.34, answer: [11.8]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, BBC Radio 1Xtra@Str), ==, 0, BBC Radio 1Xtra@Str), ['-99', '-2'])

@@ -1,0 +1,201 @@
+# parsed arguments: Namespace(benchmark='Qbe9c1', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'77', '40', 'orange', 'percentage', '46', 'greece', 'spain', '35', 'no', '27', 'japan', 'jordan', '32', 'mexico', '64', 'country', '73', '45', 'blue', 'guarantee', '67', 'most', '51', 'response', 'if', 'hard', 'czech', 'work', 'china', 'brazil', 'color', '50', '20', '54', 'tunisia', '39', '37', 'poland', 'italy', '42', 'egypt', 'france', 'rep.', '81', 'russia', 'turkey', '57', 'pakistan', '65', '30', 'lebanon', '43', '59', '48', '33', 'u.s.', 'germany', '56', 'britain', '24', '31', 'succeed', '15', '41', 'india', '69', '53'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       country                   response  percentage   color
+0         U.S.     Hard work no guarantee          20    blue
+1         U.S.  Most succeed if work hard          77  orange
+2      Britain     Hard work no guarantee          41    blue
+3      Britain  Most succeed if work hard          57  orange
+4        Spain     Hard work no guarantee          43    blue
+5        Spain  Most succeed if work hard          56  orange
+6   Czech Rep.     Hard work no guarantee          43    blue
+7   Czech Rep.  Most succeed if work hard          54  orange
+8      Germany     Hard work no guarantee          48    blue
+9      Germany  Most succeed if work hard          51  orange
+10      Poland     Hard work no guarantee          43    blue
+11      Poland  Most succeed if work hard          48  orange
+12      France     Hard work no guarantee          54    blue
+13      France  Most succeed if work hard          46  orange
+14       Italy     Hard work no guarantee          46    blue
+15       Italy  Most succeed if work hard          43  orange
+16      Greece     Hard work no guarantee          51    blue
+17      Greece  Most succeed if work hard          43  orange
+18      Russia     Hard work no guarantee          53    blue
+19      Russia  Most succeed if work hard          35  orange
+20    Pakistan     Hard work no guarantee          15    blue
+21    Pakistan  Most succeed if work hard          81  orange
+22     Tunisia     Hard work no guarantee          24    blue
+23     Tunisia  Most succeed if work hard          73  orange
+24      Jordan     Hard work no guarantee          37    blue
+25      Jordan  Most succeed if work hard          57  orange
+26       Egypt     Hard work no guarantee          42    blue
+27       Egypt  Most succeed if work hard          53  orange
+28      Turkey     Hard work no guarantee          39    blue
+29      Turkey  Most succeed if work hard          50  orange
+30     Lebanon     Hard work no guarantee          64    blue
+31     Lebanon  Most succeed if work hard          32  orange
+32       India     Hard work no guarantee          27    blue
+33       India  Most succeed if work hard          67  orange
+34       China     Hard work no guarantee          33    blue
+35       China  Most succeed if work hard          45  orange
+36       Japan     Hard work no guarantee          59    blue
+37       Japan  Most succeed if work hard          40  orange
+38      Brazil     Hard work no guarantee          30    blue
+39      Brazil  Most succeed if work hard          69  orange
+40      Mexico     Hard work no guarantee          31    blue
+41      Mexico  Most succeed if work hard          65  orange
+# query is: Is China more or less optimistic about hard work leading to success than the US?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0   Less
+# inferred DSL terminals:
+  # ConstVal: ['China@Str', 'Hard work no guarantee@Str', 'Most succeed if work hard@Str', '<NULL>']
+     # cmap: [('hard', 'Hard work no guarantee'), ('work', 'Most succeed if work hard'), ('china', 'China'), ('work', 'Hard work no guarantee'), ('hard', 'Most succeed if work hard')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('more or less', 'diff')]
+  # BoolFunc: ['>=', '<', '>', '==', '<=', '<NULL>']
+     # bmap: [('less', '<'), ('less', '<='), ('more', '>='), (None, '=='), ('more', '>')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(12, 16), (-12, 16), (48, 12), (44, 12), (40, 12), (36, 12), (36, 12), (34, 12), (32, 12), (32, 12)]
+  # [debug] high_values (no dup.): []
+  # [debug] fallback (comparison) answers are added
+# ====> fallback strategy (selection) is triggered
+  # [debug] fallback (selection) answers: ['China', 'Hard work no guarantee', 'Most succeed if work hard']
+  # [debug] fallback (selection) answers (no dup.): ['Hard work no guarantee', 'Most succeed if work hard']
+  # [debug] 2 fallback (selection) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'China'}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, China@Str), ==, 1, Hard work no guarantee@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'country', 'China'], '==', 'response', 'Hard work no guarantee'], ['country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, China@Str), ==, 1, Most succeed if work hard@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'country', 'China'], '==', 'response', 'Most succeed if work hard'], ['country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Hard work no guarantee@Str), ==, 0, China@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Hard work no guarantee'], '==', 'country', 'China'], ['country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Most succeed if work hard@Str), ==, 0, China@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Most succeed if work hard'], '==', 'country', 'China'], ['country']]
+# (t=3.69) i=1, candidate=[{'ANSWER': 'China'}, {'ANSWER': 'Mexico'}]
+  # found 0 program(s)
+# (t=4.39) i=2, candidate=[{'ANSWER': 'Britain'}, {'ANSWER': 'China'}]
+  # found 0 program(s)
+# (t=5.07) i=3, candidate=[{'ANSWER': 'China'}, {'ANSWER': 'U.S.'}]
+  # found 0 program(s)
+# (t=5.76) i=4, candidate=[{'ANSWER': 'China'}, {'ANSWER': 'Russia'}]
+  # found 0 program(s)
+# (t=6.45) i=5, candidate=[{'ANSWER': 'China'}, {'ANSWER': 'Turkey'}]
+  # found 0 program(s)
+# (t=7.13) i=6, candidate=[{'ANSWER': 'China'}, {'ANSWER': 'France'}]
+  # found 0 program(s)
+# (t=7.82) i=7, candidate=[{'ANSWER': 'China'}, {'ANSWER': 'India'}]
+  # found 0 program(s)
+# (t=8.51) i=8, candidate=[{'ANSWER': 'China'}, {'ANSWER': 'Egypt'}]
+  # found 0 program(s)
+# (t=9.20) i=9, candidate=[{'ANSWER': 'China'}, {'ANSWER': 'Italy'}]
+  # found 0 program(s)
+# (t=9.89) i=10, candidate=[{'ANSWER': 'Brazil'}, {'ANSWER': 'China'}]
+  # found 0 program(s)
+# (t=10.57) i=11, candidate=[{'ANSWER': 'China'}, {'ANSWER': 'Spain'}]
+  # found 0 program(s)
+# (t=11.25) i=12, candidate=[{'ANSWER': 'China'}, {'ANSWER': 'Jordan'}]
+  # found 0 program(s)
+# (t=11.94) i=13, candidate=[{'ANSWER': 'Mexico'}]
+  # found 0 program(s)
+# (t=15.61) i=14, candidate=[{'ANSWER': 'Britain'}, {'ANSWER': 'Mexico'}]
+  # found 0 program(s)
+# (t=16.29) i=15, candidate=[{'ANSWER': 'Mexico'}, {'ANSWER': 'U.S.'}]
+  # found 0 program(s)
+# (t=16.98) i=16, candidate=[{'ANSWER': 'Mexico'}, {'ANSWER': 'Russia'}]
+  # found 0 program(s)
+# (t=17.67) i=17, candidate=[{'ANSWER': 'Mexico'}, {'ANSWER': 'Turkey'}]
+  # found 0 program(s)
+# (t=18.35) i=18, candidate=[{'ANSWER': 'France'}, {'ANSWER': 'Mexico'}]
+  # found 0 program(s)
+# (t=19.03) i=19, candidate=[{'ANSWER': 'India'}, {'ANSWER': 'Mexico'}]
+  # found 0 program(s)
+# (t=19.70) i=20, candidate=[{'ANSWER': 'Egypt'}, {'ANSWER': 'Mexico'}]
+  # found 0 program(s)
+# (t=20.62) i=21, candidate=[{'ANSWER': 'Italy'}, {'ANSWER': 'Mexico'}]
+  # found 0 program(s)
+# (t=21.30) i=22, candidate=[{'ANSWER': 'Brazil'}, {'ANSWER': 'Mexico'}]
+  # found 0 program(s)
+# (t=21.98) i=23, candidate=[{'ANSWER': 'Mexico'}, {'ANSWER': 'Spain'}]
+  # found 0 program(s)
+# (t=22.66) i=24, candidate=[{'ANSWER': 'Jordan'}, {'ANSWER': 'Mexico'}]
+  # found 0 program(s)
+# (t=23.35) i=25, candidate=[{'ANSWER': 'Britain'}]
+  # found 0 program(s)
+# (t=27.06) i=26, candidate=[{'ANSWER': 'Britain'}, {'ANSWER': 'U.S.'}]
+  # found 0 program(s)
+# (t=27.75) i=27, candidate=[{'ANSWER': 'Britain'}, {'ANSWER': 'Russia'}]
+  # found 0 program(s)
+# (t=28.43) i=28, candidate=[{'ANSWER': 'Britain'}, {'ANSWER': 'Turkey'}]
+  # found 0 program(s)
+# (t=29.12) i=29, candidate=[{'ANSWER': 'Britain'}, {'ANSWER': 'France'}]
+  # found 0 program(s)
+# (t=29.81) i=30, candidate=[{'ANSWER': 12}]
+  # found 2 program(s)
+    # Contrast(SelectRow1(@param0, ==, 0, China@Str), diff, 1, Hard work no guarantee@Str, Most succeed if work hard@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'country', 'China'], 'diff', 'response', 'Hard work no guarantee', 'Most succeed if work hard', 'percentage']
+    # Contrast(SelectRow1(@param0, ==, 0, China@Str), diff, 1, Most succeed if work hard@Str, Hard work no guarantee@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'country', 'China'], 'diff', 'response', 'Most succeed if work hard', 'Hard work no guarantee', 'percentage']
+# (t=32.60) i=31, candidate=[{'ANSWER': -12}]
+  # found 0 program(s)
+# (t=35.39) i=32, candidate=[{'ANSWER': 48}]
+  # found 0 program(s)
+# (t=39.09) i=33, candidate=[{'ANSWER': 44}]
+  # found 0 program(s)
+# (t=41.87) i=34, candidate=[{'ANSWER': 40}]
+  # found 0 program(s)
+# (t=45.60) i=35, candidate=[{'ANSWER': 36}]
+  # found 0 program(s)
+# (t=48.38) i=36, candidate=[{'ANSWER': 36}]
+  # found 0 program(s)
+# (t=51.15) i=37, candidate=[{'ANSWER': 34}]
+  # found 0 program(s)
+# (t=53.94) i=38, candidate=[{'ANSWER': 32}]
+  # found 0 program(s)
+# (t=57.65) i=39, candidate=[{'ANSWER': 32}]
+  # found 0 program(s)
+# (t=61.30) i=40, candidate=[{'ANSWER': 'Hard work no guarantee'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, China@Str), ==, 1, Hard work no guarantee@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'country', 'China'], '==', 'response', 'Hard work no guarantee'], ['response']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Hard work no guarantee@Str), ==, 0, China@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Hard work no guarantee'], '==', 'country', 'China'], ['response']]
+# (t=64.97) i=41, candidate=[{'ANSWER': 'Most succeed if work hard'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, China@Str), ==, 1, Most succeed if work hard@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'country', 'China'], '==', 'response', 'Most succeed if work hard'], ['response']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Most succeed if work hard@Str), ==, 0, China@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Most succeed if work hard'], '==', 'country', 'China'], ['response']]
+
+# ========== review report ========== #
+# top-1, score: 2.29, answer: China
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, China@Str), ==, 1, Hard work no guarantee@Str), ['0'])
+# top-2, score: 2.29, answer: China
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, China@Str), ==, 1, Most succeed if work hard@Str), ['0'])
+# top-3, score: 2.29, answer: China
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Hard work no guarantee@Str), ==, 0, China@Str), ['0'])
+# top-4, score: 2.29, answer: China
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Most succeed if work hard@Str), ==, 0, China@Str), ['0'])
+# top-5, score: 2.29, answer: Hard work no guarantee
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, China@Str), ==, 1, Hard work no guarantee@Str), ['1'])
+# top-6, score: 2.29, answer: Hard work no guarantee
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Hard work no guarantee@Str), ==, 0, China@Str), ['1'])
+# top-7, score: 2.29, answer: Most succeed if work hard
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, China@Str), ==, 1, Most succeed if work hard@Str), ['1'])
+# top-8, score: 2.29, answer: Most succeed if work hard
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Most succeed if work hard@Str), ==, 0, China@Str), ['1'])
+# top-9, score: 1.86, answer: 12
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, China@Str), diff, 1, Hard work no guarantee@Str, Most succeed if work hard@Str, 2)
+# top-10, score: 1.86, answer: 12
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, China@Str), diff, 1, Most succeed if work hard@Str, Hard work no guarantee@Str, 2)

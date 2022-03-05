@@ -1,0 +1,121 @@
+# parsed arguments: Namespace(benchmark='Qa90aa', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'52', 'orange', '62', '84', '55', 'red', 'phys', 'undergrad', 'social', '91', 'bio', 'env', 'design', '42', 'resources', 'blue', 'major', '61', 'yellow', 'nat', 'engineering', 'business', 'sciences', 'purple', 'color', 'percent', '67', '53', 'arts', 'programs', 'sci', 'chemistry', 'math', 'humanities', '60', 'green', 'brown', 'ls', 'gray'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+              major  percent   color
+0       LS Programs       42  yellow
+1      Bio Sciences       52    blue
+2      LS Undergrad       53  yellow
+3     Math Phys Sci       55  orange
+4     Nat Resources       60   brown
+5   Arts Humanities       61    gray
+6   Social Sciences       61   brown
+7         Chemistry       62     red
+8        Env Design       67   green
+9       Engineering       84  orange
+10         Business       91  purple
+# query is: Do Math Phys Sci or Env Design majors have a larger percentage in the graph?
+# expected output type:[dtype('O')]
+# expected output is:
+       ANSWER
+0  Env Design
+# inferred DSL terminals:
+  # ConstVal: ['Env Design@Str', 'percent@Str', 'major@Str', 'Math Phys Sci@Str', '<NULL>']
+     # cmap: [('phys', 'Math Phys Sci'), ('majors', 'major'), ('sci', 'Math Phys Sci'), ('env', 'Env Design'), ('math', 'Math Phys Sci'), ('percentage', 'percent'), ('design', 'Env Design')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('larger', '-')]
+  # BoolFunc: ['==', '>=', '>', '<NULL>']
+     # bmap: [('larger', '>'), ('larger', '>='), (None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(12, 12), (-12, 12)]
+  # [debug] high_values (no dup.): [(12, 12), (-12, 12)]
+  # [debug] filtered low_values (no dup.): [(36, 4), (29, 4), (13, 4), (7, 4), (6, 4), (6, 4), (5, 4), (3, 4), (2, 4), (-2, 4)]
+  # [debug] fallback (comparison) answers are added
+# ====> fallback strategy (selection) is triggered
+  # [debug] fallback (selection) answers: ['Env Design', 'percent', 'major', 'Math Phys Sci']
+  # [debug] fallback (selection) answers (no dup.): ['percent', 'major']
+  # [debug] 2 fallback (selection) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Math Phys Sci'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Math Phys Sci@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'major', 'Math Phys Sci'], ['major']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Math Phys Sci@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'major', 'Math Phys Sci'], ['major']]
+# (t=3.14) i=1, candidate=[{'ANSWER': 'Engineering'}]
+  # found 0 program(s)
+# (t=6.24) i=2, candidate=[{'ANSWER': 'Env Design'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Env Design@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'major', 'Env Design'], ['major']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Env Design@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'major', 'Env Design'], ['major']]
+# (t=9.36) i=3, candidate=[{'ANSWER': 'Business'}]
+  # found 0 program(s)
+# (t=12.47) i=4, candidate=[{'ANSWER': 'Chemistry'}]
+  # found 0 program(s)
+# (t=15.57) i=5, candidate=[{'ANSWER': 'Social Sciences'}]
+  # found 0 program(s)
+# (t=18.68) i=6, candidate=[{'ANSWER': 'LS Undergrad'}]
+  # found 0 program(s)
+# (t=21.76) i=7, candidate=[{'ANSWER': 'Bio Sciences'}]
+  # found 0 program(s)
+# (t=24.84) i=8, candidate=[{'ANSWER': 'LS Programs'}]
+  # found 0 program(s)
+# (t=27.92) i=9, candidate=[{'ANSWER': 'Nat Resources'}]
+  # found 0 program(s)
+# (t=30.99) i=10, candidate=[{'ANSWER': 'Arts Humanities'}]
+  # found 0 program(s)
+# (t=34.02) i=11, candidate=[{'ANSWER': 12}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Env Design@Str, Math Phys Sci@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'major', 'Env Design', 'Math Phys Sci', 'percent']
+# (t=36.92) i=12, candidate=[{'ANSWER': -12}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Math Phys Sci@Str, Env Design@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'major', 'Math Phys Sci', 'Env Design', 'percent']
+# (t=39.84) i=13, candidate=[{'ANSWER': 36}]
+  # found 0 program(s)
+# (t=42.75) i=14, candidate=[{'ANSWER': 29}]
+  # found 0 program(s)
+# (t=45.65) i=15, candidate=[{'ANSWER': 13}]
+  # found 0 program(s)
+# (t=48.56) i=16, candidate=[{'ANSWER': 7}]
+  # found 0 program(s)
+# (t=51.43) i=17, candidate=[{'ANSWER': 6}]
+  # found 0 program(s)
+# (t=54.30) i=18, candidate=[{'ANSWER': 6}]
+  # found 0 program(s)
+# (t=57.19) i=19, candidate=[{'ANSWER': 5}]
+  # found 0 program(s)
+# (t=60.11) i=20, candidate=[{'ANSWER': 3}]
+  # found 0 program(s)
+# (t=63.04) i=21, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=65.94) i=22, candidate=[{'ANSWER': -2}]
+  # found 0 program(s)
+# (t=68.81) i=23, candidate=[{'ANSWER': 'percent'}]
+  # found 0 program(s)
+# (t=71.68) i=24, candidate=[{'ANSWER': 'major'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.68, answer: [12]
+  # tprog: Contrast(@param0, -, 0, Env Design@Str, Math Phys Sci@Str, 1)
+# top-2, score: 2.68, answer: [-12]
+  # tprog: Contrast(@param0, -, 0, Math Phys Sci@Str, Env Design@Str, 1)
+# top-3, score: 2.41, answer: ['Math Phys Sci']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Math Phys Sci@Str), ['0'])
+# top-4, score: 2.41, answer: ['Math Phys Sci']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Math Phys Sci@Str), ['-1', '-2'])
+# top-5, score: 2.34, answer: ['Env Design']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Env Design@Str), ['0'])
+# top-6, score: 2.34, answer: ['Env Design']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Env Design@Str), ['-1', '-2'])

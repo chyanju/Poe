@@ -1,0 +1,91 @@
+# parsed arguments: Namespace(benchmark='Qa2a2a', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'1349570000', 'kor', '456310000', 'country', '372190000', '2329560000', 'fra', '4870750000', '5404860000', '4769530000', 'irl', 'nor', '7020280000', '458880000', '405800000', 'gbr', 'can', '1890450000', 'esp', 'bel', '1802720000', 'ita', 'jpn', '18014480000', 'aut', '2301450000', '2289930000', 'color', 'dnk', 'aus', '1363080000', 'donation', 'che', '1372000000', 'fin', '799520000', '776670000', 'deu', 'blue', 'nld', '672630000', 'usa', 'swe', 'prt'}
+# input type: [dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+       donation Country color
+0   18014480000     USA  blue
+1    7020280000     JPN  blue
+2    5404860000     FRA  blue
+3    4870750000     DEU  blue
+4    4769530000     GBR  blue
+5    2329560000     CAN  blue
+6    2301450000     AUS  blue
+7    2289930000     ESP  blue
+8    1890450000     NLD  blue
+9    1802720000     NOR  blue
+10   1372000000     BEL  blue
+11   1363080000     SWE  blue
+12   1349570000     DNK  blue
+13    799520000     KOR  blue
+14    776670000     CHE  blue
+15    672630000     ITA  blue
+16    458880000     IRL  blue
+17    456310000     FIN  blue
+18    405800000     AUT  blue
+19    372190000     PRT  blue
+# query is: Which country is the highest donor?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0    USA
+# inferred DSL terminals:
+  # ConstVal: ['Country@Str', '<NULL>']
+     # cmap: [('country', 'Country')]
+  # AggrFunc: ['max', '<NULL>']
+     # amap: [('highest', 'max')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('highest', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'USA'}]
+  # found 10 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'max', 'donation'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'max', 'donation'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'max', 'donation'], 'eqmax', 'donation'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'max', 'donation'], 'eqmax', 'donation'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'max', 'donation'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'Country'], 'max', 'donation'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'max', 'donation'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'max', 'donation'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(@param0, eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'donation'], ['Country']]
+    # SelectCol(SelectRow0(@param0, eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'donation'], ['Country']]
+# (t=0.57) i=1, candidate=[{'ANSWER': 'JPN'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.50, answer: ['USA']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 0), ['1'])
+# top-2, score: 1.50, answer: ['USA']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 0), ['-99', '-2'])
+# top-3, score: 1.43, answer: ['USA']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 1), ['0'])
+# top-4, score: 1.43, answer: ['USA']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 1), ['-1'])
+# top-5, score: 1.42, answer: ['USA']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['1'])
+# top-6, score: 1.42, answer: ['USA']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['-99', '-2'])
+# top-7, score: 1.42, answer: ['USA']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['1'])
+# top-8, score: 1.42, answer: ['USA']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['-99', '-2'])
+# top-9, score: 1.42, answer: ['USA']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['0'])
+# top-10, score: 1.42, answer: ['USA']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['-1', '-2'])

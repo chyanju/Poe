@@ -1,0 +1,719 @@
+# parsed arguments: Namespace(benchmark='Q948c4', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'china', 'percentage', '2', 'russia', 'opinion', '25', 'poland', 'same', 'japan', 'worsen', '34', '27', '35', 'britain', 'egypt', 'turkey', 'orange', '84', 'color', 'jordan', '83', '45', '16', 'tunisia', '23', 'italy', 'pakistan', '33', '49', 'greece', '12', '29', 'france', '47', 'country', 'improve', '13', '50', '37', 'india', '18', 'blue', '20', '40', '60', '52', '32', '31', '44', '15', '22', '51', '9', 'red', 'germany', '28', 'u.s.', '5', 'remain', '81', 'brazil', '43', '75', '10', 'czech', '26', 'spain', 'lebanon', 'rep.', 'mexico', '24'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       Country          opinion  percentage   color
+0       Brazil          Improve          84    blue
+1       Brazil  Remain the same          12  orange
+2       Brazil           Worsen           5     red
+3        China          Improve          83    blue
+4        China  Remain the same           9  orange
+..         ...              ...         ...     ...
+58  Czech Rep.  Remain the same          27  orange
+59  Czech Rep.           Worsen          60     red
+60      Greece          Improve           9    blue
+61      Greece  Remain the same          10  orange
+62      Greece           Worsen          81     red
+
+[63 rows x 4 columns]
+# query is: how many countries' economy will improve based on the majority people's opinions?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0       5
+# inferred DSL terminals:
+  # ConstVal: ['2@Int', 'blue@Str', '5@Int', 'percentage@Str', '9@Int', 'Pakistan@Str', 'Japan@Str', '12@Int', '13@Int', 'Brazil@Str', '15@Int', '16@Int', '10@Int', '18@Int', 'opinion@Str', '20@Int', '22@Int', 'Egypt@Str', '24@Int', '25@Int', '26@Int', '27@Int', '28@Int', '29@Int', '23@Int', '31@Int', '32@Int', 'Turkey@Str', 'Worsen@Str', '35@Int', '34@Int', '37@Int', '33@Int', 'Czech Rep.@Str', '40@Int', 'Country@Str', '43@Int', 'orange@Str', 'red@Str', '45@Int', '44@Int', 'Spain@Str', '47@Int', '50@Int', '51@Int', '52@Int', '49@Int', 'color@Str', 'Italy@Str', 'Tunisia@Str', 'France@Str', '60@Int', 'Germany@Str', 'Lebanon@Str', '75@Int', 'China@Str', 'Jordan@Str', '81@Int', 'Improve@Str', '84@Int', '83@Int', 'Mexico@Str', 'India@Str', 'Greece@Str', 'Remain the same@Str', 'Poland@Str', 'U.S.@Str', 'Britain@Str', 'Russia@Str']
+     # cmap: [(None, 2), (None, 'blue'), (None, 5), (None, 'percentage'), (None, 9), (None, 'Pakistan'), (None, 'Japan'), (None, 12), (None, 13), (None, 'Brazil'), (None, 15), (None, 16), (None, 10), (None, 18), (None, 'opinion'), (None, 20), (None, 22), (None, 'Egypt'), (None, 24), (None, 25), (None, 26), (None, 27), (None, 28), (None, 29), (None, 23), (None, 31), (None, 32), (None, 'Turkey'), (None, 'Worsen'), (None, 35), (None, 34), (None, 37), (None, 33), (None, 'Czech Rep.'), (None, 40), (None, 'Country'), (None, 43), (None, 'orange'), (None, 'red'), (None, 45), (None, 44), (None, 'Spain'), (None, 47), (None, 50), (None, 51), (None, 52), (None, 49), (None, 'color'), (None, 'Italy'), (None, 'Tunisia'), (None, 'France'), (None, 60), (None, 'Germany'), (None, 'Lebanon'), (None, 75), (None, 'China'), (None, 'Jordan'), (None, 81), (None, 'Improve'), (None, 84), (None, 83), (None, 'Mexico'), (None, 'India'), (None, 'Greece'), (None, 'Remain the same'), (None, 'Poland'), (None, 'U.S.'), (None, 'Britain'), (None, 'Russia')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 171 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 0), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'count', 'Country'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 0), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'count', 'Country'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'count', 'Country'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 0), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'count', 'Country'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'count', 'opinion'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 1), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'count', 'opinion'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'count', 'opinion'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 1), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'count', 'opinion'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 2), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'count', 'percentage'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 2), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'count', 'percentage'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 2), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'count', 'percentage'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 2), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'count', 'percentage'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 3), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'count', 'color'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 3), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'count', 'color'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 3), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'count', 'color'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 3), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'count', 'color'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'Country'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'Country'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'Country'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'Country'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'opinion'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'opinion'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'opinion'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'opinion'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'percentage'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'percentage'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'percentage'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'percentage'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'color'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'color'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'color'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'color'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['opinion', 'percentage'], 'count', 'Country'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['opinion', 'percentage'], 'count', 'Country'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['opinion', 'percentage'], 'count', 'Country'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['opinion', 'percentage'], 'count', 'Country'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['opinion', 'percentage'], 'count', 'opinion'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['opinion', 'percentage'], 'count', 'opinion'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['opinion', 'percentage'], 'count', 'opinion'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['opinion', 'percentage'], 'count', 'opinion'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['opinion', 'percentage'], 'count', 'percentage'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['opinion', 'percentage'], 'count', 'percentage'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['opinion', 'percentage'], 'count', 'percentage'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['opinion', 'percentage'], 'count', 'percentage'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['opinion', 'percentage'], 'count', 'color'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['opinion', 'percentage'], 'count', 'color'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['opinion', 'percentage'], 'count', 'color'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['opinion', 'percentage'], 'count', 'color'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 0), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'count', 'Country'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 0), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'count', 'Country'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 0), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'count', 'Country'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 0), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'count', 'Country'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'count', 'opinion'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'count', 'opinion'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'count', 'opinion'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'count', 'opinion'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 2), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'count', 'percentage'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 2), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'count', 'percentage'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 2), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'count', 'percentage'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 2), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'count', 'percentage'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 3), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'count', 'color'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 3), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'count', 'color'], 'eqmin', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 3), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'count', 'color'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 3), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'count', 'color'], 'eqmax', 'percentage'], ['COL0']]
+    # Summarize(SelectRow1(@param0, <, 2, 5@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'percentage', 5], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, <, 2, 5@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'percentage', 5], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, <, 2, 5@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'percentage', 5], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, <, 2, 5@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'percentage', 5], 'count', 'color']
+    # Summarize(SelectRow1(@param0, <=, 2, 2@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'percentage', 2], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, <=, 2, 2@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'percentage', 2], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, <=, 2, 2@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'percentage', 2], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, <=, 2, 2@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'percentage', 2], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 2@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 2], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 2@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 2], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 2@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 2], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 2@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 2], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 5@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 5], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 5@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 5], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 5@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 5], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 5@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 5], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 13@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 13], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 13@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 13], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 13@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 13], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 13@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 13], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 15@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 15], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 15@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 15], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 15@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 15], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 15@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 15], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 10@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 10], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 10@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 10], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 10@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 10], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 10@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 10], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 18@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 18], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 18@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 18], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 18@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 18], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 18@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 18], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 24@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 24], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 24@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 24], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 24@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 24], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 24@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 24], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 28@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 28], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 28@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 28], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 28@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 28], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 28@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 28], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 23@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 23], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 23@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 23], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 23@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 23], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 23@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 23], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 31@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 31], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 31@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 31], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 31@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 31], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 31@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 31], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 34@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 34], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 34@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 34], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 34@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 34], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 34@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 34], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 37@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 37], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 37@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 37], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 37@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 37], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 37@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 37], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 40@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 40], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 40@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 40], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 40@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 40], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 40@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 40], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 50@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 50], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 50@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 50], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 50@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 50], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 50@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 50], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 51@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 51], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 51@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 51], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 51@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 51], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 51@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 51], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 52@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 52], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 52@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 52], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 52@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 52], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 52@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 52], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 49@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 49], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 49@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 49], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 49@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 49], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 49@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 49], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 60@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 60], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 60@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 60], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 60@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 60], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 60@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 60], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 75@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 75], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 75@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 75], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 75@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 75], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 75@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 75], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 81@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 81], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 81@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 81], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 81@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 81], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 81@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 81], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 84@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 84], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 84@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 84], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 84@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 84], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 84@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 84], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 83@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 83], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, 83@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 83], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, ==, 2, 83@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 83], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 2, 83@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'percentage', 83], 'count', 'color']
+    # Summarize(SelectRow1(@param0, >=, 2, 84@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'percentage', 84], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, >=, 2, 84@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'percentage', 84], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, >=, 2, 84@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'percentage', 84], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, >=, 2, 84@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'percentage', 84], 'count', 'color']
+    # Summarize(SelectRow1(@param0, >, 2, 83@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'percentage', 83], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, >, 2, 83@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'percentage', 83], 'count', 'opinion']
+    # Summarize(SelectRow1(@param0, >, 2, 83@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'percentage', 83], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, >, 2, 83@Int), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'percentage', 83], 'count', 'color']
+    # Contrast(SelectRow1(@param0, <, 2, 5@Int), /, 0, China@Str, China@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'percentage', 5], '/', 'Country', 'China', 'China', 'percentage']
+    # Contrast(SelectRow1(@param0, <, 2, 5@Int), /, 1, Worsen@Str, Worsen@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'percentage', 5], '/', 'opinion', 'Worsen', 'Worsen', 'percentage']
+    # Contrast(SelectRow1(@param0, <, 2, 5@Int), /, 3, red@Str, red@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'percentage', 5], '/', 'color', 'red', 'red', 'percentage']
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 0), eqmin, 0), ['1'])
+# top-2, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 0), eqmin, 0), ['-99'])
+# top-3, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 0), eqmax, 0), ['1'])
+# top-4, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 0), eqmax, 0), ['-99'])
+# top-5, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 1), eqmin, 0), ['1'])
+# top-6, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 1), eqmin, 0), ['-99'])
+# top-7, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 1), eqmax, 0), ['1'])
+# top-8, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 1), eqmax, 0), ['-99'])
+# top-9, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 2), eqmin, 0), ['1'])
+# top-10, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 2), eqmin, 0), ['-99'])
+# top-11, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 2), eqmax, 0), ['1'])
+# top-12, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 2), eqmax, 0), ['-99'])
+# top-13, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 3), eqmin, 0), ['1'])
+# top-14, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 3), eqmin, 0), ['-99'])
+# top-15, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 3), eqmax, 0), ['1'])
+# top-16, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 3), eqmax, 0), ['-99'])
+# top-17, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmin, 1), ['2'])
+# top-18, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmin, 1), ['-99', '-1'])
+# top-19, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 1), ['2'])
+# top-20, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 1), ['-99', '-1'])
+# top-21, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmin, 1), ['2'])
+# top-22, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmin, 1), ['-99', '-1'])
+# top-23, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 1), ['2'])
+# top-24, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 1), ['-99', '-1'])
+# top-25, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmin, 1), ['2'])
+# top-26, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmin, 1), ['-99', '-1'])
+# top-27, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 1), ['2'])
+# top-28, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 1), ['-99', '-1'])
+# top-29, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmin, 1), ['2'])
+# top-30, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmin, 1), ['-99', '-1'])
+# top-31, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmax, 1), ['2'])
+# top-32, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmax, 1), ['-99', '-1'])
+# top-33, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 1), ['2'])
+# top-34, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 1), ['-99', '-1'])
+# top-35, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 1), ['2'])
+# top-36, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 1), ['-99', '-1'])
+# top-37, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 1), ['2'])
+# top-38, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 1), ['-99', '-1'])
+# top-39, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 1), ['2'])
+# top-40, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 1), ['-99', '-1'])
+# top-41, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 1), ['2'])
+# top-42, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 1), ['-99', '-1'])
+# top-43, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 1), ['2'])
+# top-44, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 1), ['-99', '-1'])
+# top-45, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmin, 1), ['2'])
+# top-46, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmin, 1), ['-99', '-1'])
+# top-47, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmax, 1), ['2'])
+# top-48, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmax, 1), ['-99', '-1'])
+# top-49, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 0), eqmin, 0), ['2'])
+# top-50, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 0), eqmin, 0), ['-99', '-1'])
+# top-51, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 0), eqmax, 0), ['2'])
+# top-52, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 0), eqmax, 0), ['-99', '-1'])
+# top-53, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 1), eqmin, 0), ['2'])
+# top-54, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 1), eqmin, 0), ['-99', '-1'])
+# top-55, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 1), eqmax, 0), ['2'])
+# top-56, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 1), eqmax, 0), ['-99', '-1'])
+# top-57, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 2), eqmin, 0), ['2'])
+# top-58, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 2), eqmin, 0), ['-99', '-1'])
+# top-59, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 2), eqmax, 0), ['2'])
+# top-60, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 2), eqmax, 0), ['-99', '-1'])
+# top-61, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 3), eqmin, 0), ['2'])
+# top-62, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 3), eqmin, 0), ['-99', '-1'])
+# top-63, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 3), eqmax, 0), ['2'])
+# top-64, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 3), eqmax, 0), ['-99', '-1'])
+# top-65, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 2, 5@Int), count, 0)
+# top-66, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 2, 5@Int), count, 1)
+# top-67, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 2, 5@Int), count, 2)
+# top-68, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 2, 5@Int), count, 3)
+# top-69, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 2, 2@Int), count, 0)
+# top-70, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 2, 2@Int), count, 1)
+# top-71, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 2, 2@Int), count, 2)
+# top-72, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 2, 2@Int), count, 3)
+# top-73, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 2@Int), count, 0)
+# top-74, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 2@Int), count, 1)
+# top-75, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 2@Int), count, 2)
+# top-76, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 2@Int), count, 3)
+# top-77, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 5@Int), count, 0)
+# top-78, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 5@Int), count, 1)
+# top-79, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 5@Int), count, 2)
+# top-80, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 5@Int), count, 3)
+# top-81, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 13@Int), count, 0)
+# top-82, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 13@Int), count, 1)
+# top-83, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 13@Int), count, 2)
+# top-84, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 13@Int), count, 3)
+# top-85, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 15@Int), count, 0)
+# top-86, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 15@Int), count, 1)
+# top-87, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 15@Int), count, 2)
+# top-88, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 15@Int), count, 3)
+# top-89, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 10@Int), count, 0)
+# top-90, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 10@Int), count, 1)
+# top-91, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 10@Int), count, 2)
+# top-92, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 10@Int), count, 3)
+# top-93, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 18@Int), count, 0)
+# top-94, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 18@Int), count, 1)
+# top-95, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 18@Int), count, 2)
+# top-96, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 18@Int), count, 3)
+# top-97, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 24@Int), count, 0)
+# top-98, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 24@Int), count, 1)
+# top-99, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 24@Int), count, 2)
+# top-100, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 24@Int), count, 3)
+# top-101, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 28@Int), count, 0)
+# top-102, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 28@Int), count, 1)
+# top-103, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 28@Int), count, 2)
+# top-104, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 28@Int), count, 3)
+# top-105, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 23@Int), count, 0)
+# top-106, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 23@Int), count, 1)
+# top-107, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 23@Int), count, 2)
+# top-108, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 23@Int), count, 3)
+# top-109, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 31@Int), count, 0)
+# top-110, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 31@Int), count, 1)
+# top-111, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 31@Int), count, 2)
+# top-112, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 31@Int), count, 3)
+# top-113, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 34@Int), count, 0)
+# top-114, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 34@Int), count, 1)
+# top-115, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 34@Int), count, 2)
+# top-116, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 34@Int), count, 3)
+# top-117, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 37@Int), count, 0)
+# top-118, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 37@Int), count, 1)
+# top-119, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 37@Int), count, 2)
+# top-120, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 37@Int), count, 3)
+# top-121, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 40@Int), count, 0)
+# top-122, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 40@Int), count, 1)
+# top-123, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 40@Int), count, 2)
+# top-124, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 40@Int), count, 3)
+# top-125, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 50@Int), count, 0)
+# top-126, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 50@Int), count, 1)
+# top-127, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 50@Int), count, 2)
+# top-128, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 50@Int), count, 3)
+# top-129, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 51@Int), count, 0)
+# top-130, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 51@Int), count, 1)
+# top-131, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 51@Int), count, 2)
+# top-132, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 51@Int), count, 3)
+# top-133, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 52@Int), count, 0)
+# top-134, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 52@Int), count, 1)
+# top-135, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 52@Int), count, 2)
+# top-136, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 52@Int), count, 3)
+# top-137, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 49@Int), count, 0)
+# top-138, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 49@Int), count, 1)
+# top-139, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 49@Int), count, 2)
+# top-140, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 49@Int), count, 3)
+# top-141, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 60@Int), count, 0)
+# top-142, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 60@Int), count, 1)
+# top-143, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 60@Int), count, 2)
+# top-144, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 60@Int), count, 3)
+# top-145, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 75@Int), count, 0)
+# top-146, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 75@Int), count, 1)
+# top-147, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 75@Int), count, 2)
+# top-148, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 75@Int), count, 3)
+# top-149, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 81@Int), count, 0)
+# top-150, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 81@Int), count, 1)
+# top-151, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 81@Int), count, 2)
+# top-152, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 81@Int), count, 3)
+# top-153, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 84@Int), count, 0)
+# top-154, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 84@Int), count, 1)
+# top-155, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 84@Int), count, 2)
+# top-156, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 84@Int), count, 3)
+# top-157, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 83@Int), count, 0)
+# top-158, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 83@Int), count, 1)
+# top-159, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 83@Int), count, 2)
+# top-160, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 83@Int), count, 3)
+# top-161, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 2, 84@Int), count, 0)
+# top-162, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 2, 84@Int), count, 1)
+# top-163, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 2, 84@Int), count, 2)
+# top-164, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 2, 84@Int), count, 3)
+# top-165, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 2, 83@Int), count, 0)
+# top-166, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 2, 83@Int), count, 1)
+# top-167, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 2, 83@Int), count, 2)
+# top-168, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 2, 83@Int), count, 3)
+# top-169, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 5@Int), /, 0, China@Str, China@Str, 2)
+# top-170, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 5@Int), /, 1, Worsen@Str, Worsen@Str, 2)
+# top-171, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 5@Int), /, 3, red@Str, red@Str, 2)

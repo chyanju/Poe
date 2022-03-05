@@ -1,0 +1,967 @@
+# parsed arguments: Namespace(benchmark='Q80675', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'west', 'region', '1823109', 'skåne', 'south', 'capital', '683886', 'north-east', 'remainder', '305982', 'blue', '608036', '162829', 'population', 'color', 'danish'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                  Region  Population color
+0  Danish Capital Region     1823109  blue
+1              Remainder      608036  blue
+2            South Skåne      683886  blue
+3             West Skåne      305982  blue
+4       North-East Skåne      162829  blue
+# query is: What is the difference in numbers between the most populated and least populated regions?
+# expected output type:[dtype('int64')]
+# expected output is:
+    ANSWER
+0  1660280
+# inferred DSL terminals:
+  # ConstVal: ['color@Str', '608036@Int', '1823109@Int', 'West Skåne@Str', 'Population@Str', 'Danish Capital Region@Str', 'Region@Str', '162829@Int', '683886@Int', 'North-East Skåne@Str', 'blue@Str', 'South Skåne@Str', '305982@Int', 'Remainder@Str']
+     # cmap: [(None, 'color'), (None, 608036), (None, 1823109), (None, 'West Skåne'), (None, 'Population'), (None, 'Danish Capital Region'), (None, 'Region'), (None, 162829), (None, 683886), (None, 'North-East Skåne'), (None, 'blue'), (None, 'South Skåne'), (None, 305982), (None, 'Remainder')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 235 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'Region'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'Region'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'Region'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'Region'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'color'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'color'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'color'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'color'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'count', 'Region'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'count', 'Region'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'count', 'Region'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'count', 'Region'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'count', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'count', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'count', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'count', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'count', 'color'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'count', 'color'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'count', 'color'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Region', 'Population'], 'count', 'color'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'Region'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'Region'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'Region'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'Region'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'color'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'color'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'color'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'color'], 'eqmax', 'Population'], ['COL0']]
+    # Summarize(SelectRow1(@param0, <, 1, 305982@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'Population', 305982], 'count', 'Region']
+    # Summarize(SelectRow1(@param0, <, 1, 305982@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'Population', 305982], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, <, 1, 305982@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'Population', 305982], 'count', 'color']
+    # Summarize(SelectRow1(@param0, <=, 1, 162829@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'Population', 162829], 'count', 'Region']
+    # Summarize(SelectRow1(@param0, <=, 1, 162829@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'Population', 162829], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, <=, 1, 162829@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'Population', 162829], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, West Skåne@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'West Skåne'], 'count', 'Region']
+    # Summarize(SelectRow1(@param0, ==, 0, West Skåne@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'West Skåne'], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, ==, 0, West Skåne@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'West Skåne'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'Danish Capital Region'], 'count', 'Region']
+    # Summarize(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'Danish Capital Region'], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'Danish Capital Region'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, North-East Skåne@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'North-East Skåne'], 'count', 'Region']
+    # Summarize(SelectRow1(@param0, ==, 0, North-East Skåne@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'North-East Skåne'], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, ==, 0, North-East Skåne@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'North-East Skåne'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, South Skåne@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'South Skåne'], 'count', 'Region']
+    # Summarize(SelectRow1(@param0, ==, 0, South Skåne@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'South Skåne'], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, ==, 0, South Skåne@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'South Skåne'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Remainder@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'Remainder'], 'count', 'Region']
+    # Summarize(SelectRow1(@param0, ==, 0, Remainder@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'Remainder'], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, ==, 0, Remainder@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'Remainder'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 608036@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 608036], 'count', 'Region']
+    # Summarize(SelectRow1(@param0, ==, 1, 608036@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 608036], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, ==, 1, 608036@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 608036], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 1823109@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 1823109], 'count', 'Region']
+    # Summarize(SelectRow1(@param0, ==, 1, 1823109@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 1823109], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, ==, 1, 1823109@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 1823109], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 162829@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 162829], 'count', 'Region']
+    # Summarize(SelectRow1(@param0, ==, 1, 162829@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 162829], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, ==, 1, 162829@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 162829], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 683886@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 683886], 'count', 'Region']
+    # Summarize(SelectRow1(@param0, ==, 1, 683886@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 683886], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, ==, 1, 683886@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 683886], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 305982@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 305982], 'count', 'Region']
+    # Summarize(SelectRow1(@param0, ==, 1, 305982@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 305982], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, ==, 1, 305982@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 305982], 'count', 'color']
+    # Summarize(SelectRow1(@param0, >=, 1, 1823109@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'Population', 1823109], 'count', 'Region']
+    # Summarize(SelectRow1(@param0, >=, 1, 1823109@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'Population', 1823109], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, >=, 1, 1823109@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'Population', 1823109], 'count', 'color']
+    # Summarize(SelectRow1(@param0, >, 1, 683886@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'Population', 683886], 'count', 'Region']
+    # Summarize(SelectRow1(@param0, >, 1, 683886@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'Population', 683886], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, >, 1, 683886@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'Population', 683886], 'count', 'color']
+    # Contrast(SelectRow1(@param0, <, 1, 608036@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'Population', 608036], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, <, 1, 608036@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'Population', 608036], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, <, 1, 1823109@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'Population', 1823109], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, <, 1, 1823109@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'Population', 1823109], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, <, 1, 1823109@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'Population', 1823109], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, <, 1, 1823109@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'Population', 1823109], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, <, 1, 683886@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'Population', 683886], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, <, 1, 683886@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'Population', 683886], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, <, 1, 683886@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'Population', 683886], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, <, 1, 305982@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'Population', 305982], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, <, 1, 305982@Int), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'Population', 305982], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 608036@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 608036], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 608036@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 608036], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 608036@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 608036], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 1823109@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 1823109], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 1823109@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 1823109], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 1823109@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 1823109], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 1823109@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 1823109], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 1823109@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 1823109], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 162829@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 162829], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 162829@Int), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 162829], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 683886@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 683886], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 683886@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 683886], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 683886@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 683886], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 683886@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 683886], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 305982@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 305982], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 305982@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 305982], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 0, West Skåne@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Region', 'West Skåne'], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 0, West Skåne@Str), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Region', 'West Skåne'], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Region', 'Danish Capital Region'], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Region', 'Danish Capital Region'], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 0, North-East Skåne@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Region', 'North-East Skåne'], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 0, North-East Skåne@Str), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Region', 'North-East Skåne'], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 0, South Skåne@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Region', 'South Skåne'], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 0, South Skåne@Str), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Region', 'South Skåne'], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 0, Remainder@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Region', 'Remainder'], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 0, Remainder@Str), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Region', 'Remainder'], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 1, 608036@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Population', 608036], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 1, 608036@Int), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Population', 608036], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 1, 1823109@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Population', 1823109], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 1, 1823109@Int), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Population', 1823109], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 1, 162829@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Population', 162829], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 1, 162829@Int), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Population', 162829], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 1, 683886@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Population', 683886], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 1, 683886@Int), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Population', 683886], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 1, 305982@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Population', 305982], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 1, 305982@Int), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Population', 305982], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 2, blue@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 2, blue@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 2, blue@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 2, blue@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 2, blue@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 608036@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 608036], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 608036@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 608036], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 608036@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 608036], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 1823109@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 1823109], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 1823109@Int), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 1823109], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 162829@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 162829], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 162829@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 162829], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 162829@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 162829], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 162829@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 162829], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 162829@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 162829], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 683886@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 683886], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 683886@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 683886], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 305982@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 305982], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 305982@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 305982], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 305982@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 305982], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 305982@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 305982], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, >, 1, 608036@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>', 'Population', 608036], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, >, 1, 608036@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>', 'Population', 608036], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, >, 1, 162829@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>', 'Population', 162829], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, >, 1, 162829@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>', 'Population', 162829], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, >, 1, 162829@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>', 'Population', 162829], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, >, 1, 162829@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>', 'Population', 162829], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, >, 1, 683886@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>', 'Population', 683886], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, >, 1, 683886@Int), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>', 'Population', 683886], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, >, 1, 305982@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>', 'Population', 305982], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, >, 1, 305982@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>', 'Population', 305982], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, >, 1, 305982@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>', 'Population', 305982], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, color@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'color'], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, color@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'color'], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, color@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'color'], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, color@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'color'], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, color@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'color'], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 608036@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 608036], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 608036@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 608036], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 608036@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 608036], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 608036@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 608036], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 608036@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 608036], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 1823109@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 1823109], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 1823109@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 1823109], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 1823109@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 1823109], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 1823109@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 1823109], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 1823109@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 1823109], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, West Skåne@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'West Skåne'], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, West Skåne@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'West Skåne'], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, West Skåne@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'West Skåne'], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, West Skåne@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'West Skåne'], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Population@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'Population'], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Population@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'Population'], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Population@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'Population'], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Population@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'Population'], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Population@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'Population'], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Danish Capital Region@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'Danish Capital Region'], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Danish Capital Region@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'Danish Capital Region'], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Danish Capital Region@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'Danish Capital Region'], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Danish Capital Region@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'Danish Capital Region'], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Region@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'Region'], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Region@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'Region'], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Region@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'Region'], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Region@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'Region'], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Region@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'Region'], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 162829@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 162829], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 162829@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 162829], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 162829@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 162829], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 162829@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 162829], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 162829@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 162829], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 683886@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 683886], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 683886@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 683886], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 683886@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 683886], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 683886@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 683886], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 683886@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 683886], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, North-East Skåne@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'North-East Skåne'], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, North-East Skåne@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'North-East Skåne'], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, North-East Skåne@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'North-East Skåne'], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, North-East Skåne@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'North-East Skåne'], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, blue@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'blue'], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, blue@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'blue'], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, blue@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'blue'], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, blue@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'blue'], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, blue@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'blue'], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, South Skåne@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'South Skåne'], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, South Skåne@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'South Skåne'], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, South Skåne@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'South Skåne'], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, South Skåne@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'South Skåne'], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 305982@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 305982], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 305982@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 305982], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 305982@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 305982], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 305982@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 305982], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 305982@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 305982], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Remainder@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'Remainder'], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Remainder@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'Remainder'], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Remainder@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'Remainder'], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Remainder@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Region', 'Remainder'], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, color@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'color'], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, color@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'color'], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, color@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'color'], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, color@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'color'], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, color@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'color'], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, 608036@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 608036], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, 608036@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 608036], '/', 'Region', 'Danish Capital Region', 'Danish Capital Region', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, 608036@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 608036], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, 608036@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 608036], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, 1823109@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 1823109], '/', 'Region', 'West Skåne', 'West Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, 1823109@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 1823109], '/', 'Region', 'North-East Skåne', 'North-East Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, 1823109@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 1823109], '/', 'Region', 'South Skåne', 'South Skåne', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, 1823109@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 1823109], '/', 'Region', 'Remainder', 'Remainder', 'Population']
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmin, 0), ['1'])
+# top-2, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmin, 0), ['-99'])
+# top-3, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmax, 0), ['1'])
+# top-4, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmax, 0), ['-99'])
+# top-5, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmin, 0), ['1'])
+# top-6, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmin, 0), ['-99'])
+# top-7, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmax, 0), ['1'])
+# top-8, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmax, 0), ['-99'])
+# top-9, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmin, 0), ['1'])
+# top-10, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmin, 0), ['-99'])
+# top-11, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmax, 0), ['1'])
+# top-12, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmax, 0), ['-99'])
+# top-13, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['2'])
+# top-14, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['-99', '-1'])
+# top-15, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['2'])
+# top-16, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['-99', '-1'])
+# top-17, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['2'])
+# top-18, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['-99', '-1'])
+# top-19, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['2'])
+# top-20, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['-99', '-1'])
+# top-21, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['2'])
+# top-22, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['-99', '-1'])
+# top-23, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['2'])
+# top-24, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['-99', '-1'])
+# top-25, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 0), ['2'])
+# top-26, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 0), ['-99', '-1'])
+# top-27, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 0), ['2'])
+# top-28, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 0), ['-99', '-1'])
+# top-29, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 0), ['2'])
+# top-30, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 0), ['-99', '-1'])
+# top-31, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 0), ['2'])
+# top-32, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 0), ['-99', '-1'])
+# top-33, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 0), ['2'])
+# top-34, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 0), ['-99', '-1'])
+# top-35, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 0), ['2'])
+# top-36, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 0), ['-99', '-1'])
+# top-37, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 1, 305982@Int), count, 0)
+# top-38, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 1, 305982@Int), count, 1)
+# top-39, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 1, 305982@Int), count, 2)
+# top-40, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 1, 162829@Int), count, 0)
+# top-41, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 1, 162829@Int), count, 1)
+# top-42, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 1, 162829@Int), count, 2)
+# top-43, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, West Skåne@Str), count, 0)
+# top-44, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, West Skåne@Str), count, 1)
+# top-45, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, West Skåne@Str), count, 2)
+# top-46, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), count, 0)
+# top-47, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), count, 1)
+# top-48, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), count, 2)
+# top-49, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, North-East Skåne@Str), count, 0)
+# top-50, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, North-East Skåne@Str), count, 1)
+# top-51, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, North-East Skåne@Str), count, 2)
+# top-52, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, South Skåne@Str), count, 0)
+# top-53, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, South Skåne@Str), count, 1)
+# top-54, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, South Skåne@Str), count, 2)
+# top-55, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Remainder@Str), count, 0)
+# top-56, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Remainder@Str), count, 1)
+# top-57, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Remainder@Str), count, 2)
+# top-58, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 608036@Int), count, 0)
+# top-59, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 608036@Int), count, 1)
+# top-60, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 608036@Int), count, 2)
+# top-61, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 1823109@Int), count, 0)
+# top-62, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 1823109@Int), count, 1)
+# top-63, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 1823109@Int), count, 2)
+# top-64, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 162829@Int), count, 0)
+# top-65, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 162829@Int), count, 1)
+# top-66, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 162829@Int), count, 2)
+# top-67, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 683886@Int), count, 0)
+# top-68, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 683886@Int), count, 1)
+# top-69, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 683886@Int), count, 2)
+# top-70, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 305982@Int), count, 0)
+# top-71, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 305982@Int), count, 1)
+# top-72, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 305982@Int), count, 2)
+# top-73, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 1823109@Int), count, 0)
+# top-74, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 1823109@Int), count, 1)
+# top-75, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 1823109@Int), count, 2)
+# top-76, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 683886@Int), count, 0)
+# top-77, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 683886@Int), count, 1)
+# top-78, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 683886@Int), count, 2)
+# top-79, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 608036@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-80, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 608036@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-81, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 1823109@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-82, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 1823109@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-83, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 1823109@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-84, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 1823109@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-85, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 683886@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-86, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 683886@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-87, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 683886@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-88, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 305982@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-89, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 305982@Int), /, 2, blue@Str, blue@Str, 1)
+# top-90, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 608036@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-91, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 608036@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-92, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 608036@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-93, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 1823109@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-94, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 1823109@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-95, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 1823109@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-96, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 1823109@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-97, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 1823109@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-98, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 162829@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-99, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 162829@Int), /, 2, blue@Str, blue@Str, 1)
+# top-100, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 683886@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-101, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 683886@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-102, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 683886@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-103, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 683886@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-104, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 305982@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-105, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 305982@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-106, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, West Skåne@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-107, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, West Skåne@Str), /, 2, blue@Str, blue@Str, 1)
+# top-108, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-109, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), /, 2, blue@Str, blue@Str, 1)
+# top-110, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, North-East Skåne@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-111, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, North-East Skåne@Str), /, 2, blue@Str, blue@Str, 1)
+# top-112, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, South Skåne@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-113, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, South Skåne@Str), /, 2, blue@Str, blue@Str, 1)
+# top-114, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, Remainder@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-115, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, Remainder@Str), /, 2, blue@Str, blue@Str, 1)
+# top-116, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, 608036@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-117, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, 608036@Int), /, 2, blue@Str, blue@Str, 1)
+# top-118, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, 1823109@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-119, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, 1823109@Int), /, 2, blue@Str, blue@Str, 1)
+# top-120, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, 162829@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-121, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, 162829@Int), /, 2, blue@Str, blue@Str, 1)
+# top-122, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, 683886@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-123, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, 683886@Int), /, 2, blue@Str, blue@Str, 1)
+# top-124, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, 305982@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-125, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, 305982@Int), /, 2, blue@Str, blue@Str, 1)
+# top-126, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 2, blue@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-127, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 2, blue@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-128, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 2, blue@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-129, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 2, blue@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-130, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 2, blue@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-131, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 608036@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-132, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 608036@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-133, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 608036@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-134, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 1823109@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-135, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 1823109@Int), /, 2, blue@Str, blue@Str, 1)
+# top-136, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 162829@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-137, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 162829@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-138, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 162829@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-139, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 162829@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-140, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 162829@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-141, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 683886@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-142, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 683886@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-143, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 305982@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-144, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 305982@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-145, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 305982@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-146, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 305982@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-147, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >, 1, 608036@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-148, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >, 1, 608036@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-149, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >, 1, 162829@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-150, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >, 1, 162829@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-151, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >, 1, 162829@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-152, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >, 1, 162829@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-153, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >, 1, 683886@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-154, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >, 1, 683886@Int), /, 2, blue@Str, blue@Str, 1)
+# top-155, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >, 1, 305982@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-156, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >, 1, 305982@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-157, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >, 1, 305982@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-158, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, color@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-159, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, color@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-160, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, color@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-161, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, color@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-162, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, color@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-163, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 608036@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-164, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 608036@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-165, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 608036@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-166, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 608036@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-167, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 608036@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-168, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 1823109@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-169, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 1823109@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-170, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 1823109@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-171, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 1823109@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-172, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 1823109@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-173, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, West Skåne@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-174, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, West Skåne@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-175, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, West Skåne@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-176, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, West Skåne@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-177, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Population@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-178, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Population@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-179, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Population@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-180, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Population@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-181, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Population@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-182, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Danish Capital Region@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-183, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Danish Capital Region@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-184, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Danish Capital Region@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-185, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Danish Capital Region@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-186, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Region@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-187, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Region@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-188, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Region@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-189, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Region@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-190, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Region@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-191, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 162829@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-192, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 162829@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-193, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 162829@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-194, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 162829@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-195, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 162829@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-196, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 683886@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-197, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 683886@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-198, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 683886@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-199, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 683886@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-200, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 683886@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-201, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, North-East Skåne@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-202, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, North-East Skåne@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-203, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, North-East Skåne@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-204, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, North-East Skåne@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-205, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, blue@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-206, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, blue@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-207, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, blue@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-208, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, blue@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-209, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, blue@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-210, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, South Skåne@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-211, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, South Skåne@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-212, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, South Skåne@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-213, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, South Skåne@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-214, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 305982@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-215, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 305982@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-216, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 305982@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-217, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 305982@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-218, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 305982@Int), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-219, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Remainder@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-220, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Remainder@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-221, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Remainder@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-222, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Remainder@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-223, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, color@Str), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-224, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, color@Str), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-225, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, color@Str), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-226, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, color@Str), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-227, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, color@Str), /, 0, Remainder@Str, Remainder@Str, 1)
+# top-228, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, 608036@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-229, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, 608036@Int), /, 0, Danish Capital Region@Str, Danish Capital Region@Str, 1)
+# top-230, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, 608036@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-231, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, 608036@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-232, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, 1823109@Int), /, 0, West Skåne@Str, West Skåne@Str, 1)
+# top-233, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, 1823109@Int), /, 0, North-East Skåne@Str, North-East Skåne@Str, 1)
+# top-234, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, 1823109@Int), /, 0, South Skåne@Str, South Skåne@Str, 1)
+# top-235, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, 1823109@Int), /, 0, Remainder@Str, Remainder@Str, 1)

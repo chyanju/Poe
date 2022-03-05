@@ -1,0 +1,104 @@
+# parsed arguments: Namespace(benchmark='Qd22bb', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'-3.95', '-0.21', '-4.18', '8.8', '-1.05', 'administration', '0.76', '2.98', '7.5', 'percentage', 'thatcher', '11.53', 'blue', 'red', 'major', '2.55', '1.77', '-1.29', 'category', '-1.71', 'cameron', '3.14', 'blair', 'temperature', 'sunshine', 'color', 'orange', 'brown', 'rainfall', '-3.62'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+   administration     category  percentage   color
+0           Blair  Temperature        7.50     red
+1           Blair     Sunshine        3.14  orange
+2           Blair     Rainfall        8.80    blue
+3           Brown  Temperature       -3.95     red
+4           Brown     Sunshine        1.77  orange
+5           Brown     Rainfall       -0.21    blue
+6        Thatcher  Temperature        0.76     red
+7        Thatcher     Sunshine       -1.05  orange
+8        Thatcher     Rainfall       11.53    blue
+9         Cameron  Temperature       -4.18     red
+10        Cameron     Sunshine       -1.29  orange
+11        Cameron     Rainfall       -1.71    blue
+12          Major  Temperature        2.98     red
+13          Major     Sunshine        2.55  orange
+14          Major     Rainfall       -3.62    blue
+# query is: Which administration had the highest rainfall?
+# expected output type:[dtype('O')]
+# expected output is:
+     ANSWER
+0  Thatcher
+# inferred DSL terminals:
+  # ConstVal: ['Rainfall@Str', 'administration@Str', '<NULL>']
+     # cmap: [('rainfall', 'Rainfall'), ('administration', 'administration')]
+  # AggrFunc: ['max', '<NULL>']
+     # amap: [('highest', 'max')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('highest', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Brown'}]
+  # found 0 program(s)
+# (t=1.67) i=1, candidate=[{'ANSWER': 'Blair'}]
+  # found 0 program(s)
+# (t=3.34) i=2, candidate=[{'ANSWER': 'Cameron'}]
+  # found 0 program(s)
+# (t=5.00) i=3, candidate=[{'ANSWER': 'Thatcher'}]
+  # found 13 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Rainfall@Str), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'category', 'Rainfall'], 'eqmax', 'percentage'], ['administration']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration'], 'max', 'percentage'], 'eqmax', 'COL0'], ['administration']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration'], 'max', 'percentage'], 'eqmax', 'COL0'], ['administration']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration', 'category'], 'max', 'percentage'], 'eqmax', 'COL0'], ['administration']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration', 'category'], 'max', 'percentage'], 'eqmax', 'COL0'], ['administration']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration', 'percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['administration']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration', 'percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['administration']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration', 'percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['administration']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration', 'percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['administration']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration', 'color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['administration']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['administration', 'color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['administration']]
+    # SelectCol(SelectRow0(@param0, eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'percentage'], ['administration']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Rainfall@Str), ==, 1, Rainfall@Str), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'category', 'Rainfall'], '==', 'category', 'Rainfall'], 'eqmax', 'percentage'], ['administration']]
+# (t=6.71) i=4, candidate=[{'ANSWER': 'Major'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.60, answer: Thatcher
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Rainfall@Str), eqmax, 2), ['0'])
+# top-2, score: 2.57, answer: Thatcher
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Rainfall@Str), ==, 1, Rainfall@Str), eqmax, 2), ['0'])
+# top-3, score: 1.50, answer: Thatcher
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 2), ['0'])
+# top-4, score: 1.43, answer: Thatcher
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['0'])
+# top-5, score: 1.43, answer: Thatcher
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['-1'])
+# top-6, score: 1.42, answer: Thatcher
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['0'])
+# top-7, score: 1.42, answer: Thatcher
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-8, score: 1.42, answer: Thatcher
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['0'])
+# top-9, score: 1.42, answer: Thatcher
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+# top-10, score: 1.42, answer: Thatcher
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['0'])
+# top-11, score: 1.42, answer: Thatcher
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-12, score: 1.42, answer: Thatcher
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['0'])
+# top-13, score: 1.42, answer: Thatcher
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['-1', '-2'])

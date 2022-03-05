@@ -1,0 +1,88 @@
+# parsed arguments: Namespace(benchmark='Q51d56', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'white', 'latino', '48', 'african', 'percent', 'race', 'blue', 'american', '38', 'color', '57'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+               Race  Percent color
+0             White       57  blue
+1            Latino       48  blue
+2  African American       38  blue
+# query is: How many marriages are there in White couples more than in African American?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      19
+# inferred DSL terminals:
+  # ConstVal: ['White@Str', 'African American@Str', '<NULL>']
+     # cmap: [('american', 'African American'), ('white', 'White'), ('african', 'African American')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>=', '>', '==', '<NULL>']
+     # bmap: [('more', '>='), (None, '=='), ('more', '>')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(19, 6), (-19, 6)]
+  # [debug] high_values (no dup.): [(10, 3), (-10, 3), (9, 2), (-9, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 6 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, White@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Race', 'White'], 'count', 'Race']
+    # Summarize(SelectRow1(@param0, ==, 0, White@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Race', 'White'], 'count', 'Percent']
+    # Summarize(SelectRow1(@param0, ==, 0, White@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Race', 'White'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, African American@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Race', 'African American'], 'count', 'Race']
+    # Summarize(SelectRow1(@param0, ==, 0, African American@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Race', 'African American'], 'count', 'Percent']
+    # Summarize(SelectRow1(@param0, ==, 0, African American@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Race', 'African American'], 'count', 'color']
+# (t=0.83) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=1.66) i=2, candidate=[{'ANSWER': 3}]
+  # found 3 program(s)
+    # Summarize(@param0, count, 0)
+      --> ['Summarize', 'input@0', 'count', 'Race']
+    # Summarize(@param0, count, 1)
+      --> ['Summarize', 'input@0', 'count', 'Percent']
+    # Summarize(@param0, count, 2)
+      --> ['Summarize', 'input@0', 'count', 'color']
+# (t=2.49) i=3, candidate=[{'ANSWER': 19}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, White@Str, African American@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Race', 'White', 'African American', 'Percent']
+# (t=3.33) i=4, candidate=[{'ANSWER': -19}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, African American@Str, White@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Race', 'African American', 'White', 'Percent']
+
+# ========== review report ========== #
+# top-1, score: 2.45, answer: 19
+  # tprog: Contrast(@param0, -, 0, White@Str, African American@Str, 1)
+# top-2, score: 2.45, answer: -19
+  # tprog: Contrast(@param0, -, 0, African American@Str, White@Str, 1)
+# top-3, score: 2.36, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, African American@Str), count, 0)
+# top-4, score: 2.36, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, African American@Str), count, 1)
+# top-5, score: 2.36, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, African American@Str), count, 2)
+# top-6, score: 2.28, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, White@Str), count, 0)
+# top-7, score: 2.28, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, White@Str), count, 1)
+# top-8, score: 2.28, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, White@Str), count, 2)
+# top-9, score: 1.33, answer: 3
+  # tprog: Summarize(@param0, count, 0)
+# top-10, score: 1.33, answer: 3
+  # tprog: Summarize(@param0, count, 1)
+# top-11, score: 1.33, answer: 3
+  # tprog: Summarize(@param0, count, 2)

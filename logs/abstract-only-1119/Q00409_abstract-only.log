@@ -1,0 +1,232 @@
+# parsed arguments: Namespace(benchmark='Q00409', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'15', '11475182', '10069564', 'gender', '40', '80', 'sum', '90', '10552146', '85', '3792145', '5668961', 'female', '0', 'people', '8911133', '10', '55', '20', '45', 'age', '11635647', '970357', '25', '10205879', '10022524', '11488578', '9731315', 'gray', '10237419', '4355644', '6921268', '6459082', '10119296', '8507934', '4453623', '9659493', '1902638', '10563233', 'color', '35', '5', '70', '60', '1064581', '10261253', '5123399', '5184855', '9925006', '75', '9310714', '9518507', '9735380', '3221898', '336303', 'pink', '50', '9692669', '30', 'male', '2912655', '9324244', '4804784', '1981156', '65', '11320252'}
+# input type: [dtype('int64'), dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+    age  Sum of people  gender color
+0     0        9735380    Male  gray
+1     0        9310714  Female  pink
+2     5       10552146    Male  gray
+3     5       10069564  Female  pink
+4    10       10563233    Male  gray
+5    10       10022524  Female  pink
+6    15       10237419    Male  gray
+7    15        9692669  Female  pink
+8    20        9731315    Male  gray
+9    20        9324244  Female  pink
+10   25        9659493    Male  gray
+11   25        9518507  Female  pink
+12   30       10205879    Male  gray
+13   30       10119296  Female  pink
+14   35       11475182    Male  gray
+15   35       11635647  Female  pink
+16   40       11320252    Male  gray
+17   40       11488578  Female  pink
+18   45        9925006    Male  gray
+19   45       10261253  Female  pink
+20   50        8507934    Male  gray
+21   50        8911133  Female  pink
+22   55        6459082    Male  gray
+23   55        6921268  Female  pink
+24   60        5123399    Male  gray
+25   60        5668961  Female  pink
+26   65        4453623    Male  gray
+27   65        4804784  Female  pink
+28   70        3792145    Male  gray
+29   70        5184855  Female  pink
+30   75        2912655    Male  gray
+31   75        4355644  Female  pink
+32   80        1902638    Male  gray
+33   80        3221898  Female  pink
+34   85         970357    Male  gray
+35   85        1981156  Female  pink
+36   90         336303    Male  gray
+37   90        1064581  Female  pink
+# query is: what is  the overall population at the age 60?
+# expected output type:[dtype('int64')]
+# expected output is:
+     ANSWER
+0  10792360
+# inferred DSL terminals:
+  # ConstVal: ['0@Int', '10119296@Int', 'gender@Str', '5@Int', '10261253@Int', '1064581@Int', '10@Int', '3221898@Int', '9925006@Int', '15@Int', '2912655@Int', '3792145@Int', 'color@Str', '20@Int', '25@Int', '8911133@Int', '30@Int', '8507934@Int', '10563233@Int', '35@Int', '40@Int', '9518507@Int', '45@Int', '1902638@Int', '336303@Int', '4804784@Int', '50@Int', '6921268@Int', '10205879@Int', '55@Int', 'Sum of people@Str', '10069564@Int', '11320252@Int', '60@Int', '11635647@Int', '4355644@Int', 'pink@Str', '11488578@Int', '65@Int', '70@Int', '5123399@Int', '6459082@Int', '75@Int', 'age@Str', '80@Int', '10552146@Int', '9735380@Int', '9324244@Int', '85@Int', '5184855@Int', '90@Int', '5668961@Int', '1981156@Int', '9659493@Int', '10237419@Int', 'Male@Str', '11475182@Int', 'gray@Str', '9731315@Int', 'Female@Str', '970357@Int', '4453623@Int', '9310714@Int', '10022524@Int', '9692669@Int']
+     # cmap: [(None, 0), (None, 10119296), (None, 'gender'), (None, 5), (None, 10261253), (None, 1064581), (None, 10), (None, 3221898), (None, 9925006), (None, 15), (None, 2912655), (None, 3792145), (None, 'color'), (None, 20), (None, 25), (None, 8911133), (None, 30), (None, 8507934), (None, 10563233), (None, 35), (None, 40), (None, 9518507), (None, 45), (None, 1902638), (None, 336303), (None, 4804784), (None, 50), (None, 6921268), (None, 10205879), (None, 55), (None, 'Sum of people'), (None, 10069564), (None, 11320252), (None, 60), (None, 11635647), (None, 4355644), (None, 'pink'), (None, 11488578), (None, 65), (None, 70), (None, 5123399), (None, 6459082), (None, 75), (None, 'age'), (None, 80), (None, 10552146), (None, 9735380), (None, 9324244), (None, 85), (None, 5184855), (None, 90), (None, 5668961), (None, 1981156), (None, 9659493), (None, 10237419), (None, 'Male'), (None, 11475182), (None, 'gray'), (None, 9731315), (None, 'Female'), (None, 970357), (None, 4453623), (None, 9310714), (None, 10022524), (None, 9692669)]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 5123399}]
+  # found 43 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, <, 0, 65@Int), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<', 'age', 65], 'eqmin', 'Sum of people'], ['Sum of people']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <, 1, 5184855@Int), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<', 'Sum of people', 5184855], 'eqmin', 'age'], ['Sum of people']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <, 1, 5184855@Int), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<', 'Sum of people', 5184855], 'eqmax', 'Sum of people'], ['Sum of people']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <, 1, 5668961@Int), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<', 'Sum of people', 5668961], 'eqmin', 'age'], ['Sum of people']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <=, 0, 60@Int), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<=', 'age', 60], 'eqmin', 'Sum of people'], ['Sum of people']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <=, 1, 5123399@Int), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<=', 'Sum of people', 5123399], 'eqmin', 'age'], ['Sum of people']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <=, 1, 5123399@Int), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<=', 'Sum of people', 5123399], 'eqmax', 'Sum of people'], ['Sum of people']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <=, 1, 5184855@Int), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<=', 'Sum of people', 5184855], 'eqmin', 'age'], ['Sum of people']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, 60@Int), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'age', 60], 'eqmin', 'Sum of people'], ['Sum of people']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >=, 1, 5123399@Int), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>=', 'Sum of people', 5123399], 'eqmin', 'Sum of people'], ['Sum of people']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >, 1, 4804784@Int), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>', 'Sum of people', 4804784], 'eqmin', 'Sum of people'], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 10119296@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 10119296], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 10261253@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 10261253], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 1064581@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 1064581], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 3221898@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 3221898], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 9925006@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 9925006], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 2912655@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 2912655], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 3792145@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 3792145], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 8911133@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 8911133], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 8507934@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 8507934], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 10563233@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 10563233], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 9518507@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 9518507], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 1902638@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 1902638], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 336303@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 336303], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 4804784@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 4804784], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 6921268@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 6921268], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 10205879@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 10205879], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 10069564@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 10069564], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 11320252@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 11320252], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 11635647@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 11635647], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 4355644@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 4355644], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 11488578@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 11488578], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 65@Int), <, 1, 5184855@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 65], '<', 'Sum of people', 5184855], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 65@Int), <, 1, 5668961@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 65], '<', 'Sum of people', 5668961], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 65@Int), <=, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 65], '<=', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 65@Int), <=, 1, 5184855@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 65], '<=', 'Sum of people', 5184855], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 65@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 65], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 70@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 70], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 5123399@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 5123399], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 6459082@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 6459082], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 75@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 75], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 80@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 80], '==', 'Sum of people', 5123399], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 10552146@Int), ==, 1, 5123399@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'age', 10552146], '==', 'Sum of people', 5123399], ['Sum of people']]
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <, 0, 65@Int), eqmin, 1), ['1'])
+# top-2, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <, 1, 5184855@Int), eqmin, 0), ['1'])
+# top-3, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <, 1, 5184855@Int), eqmax, 1), ['1'])
+# top-4, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <, 1, 5668961@Int), eqmin, 0), ['1'])
+# top-5, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <=, 0, 60@Int), eqmin, 1), ['1'])
+# top-6, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <=, 1, 5123399@Int), eqmin, 0), ['1'])
+# top-7, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <=, 1, 5123399@Int), eqmax, 1), ['1'])
+# top-8, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <=, 1, 5184855@Int), eqmin, 0), ['1'])
+# top-9, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, 60@Int), eqmin, 1), ['1'])
+# top-10, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >=, 1, 5123399@Int), eqmin, 1), ['1'])
+# top-11, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >, 1, 4804784@Int), eqmin, 1), ['1'])
+# top-12, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 10119296@Int), ==, 1, 5123399@Int), ['1'])
+# top-13, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 10261253@Int), ==, 1, 5123399@Int), ['1'])
+# top-14, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 1064581@Int), ==, 1, 5123399@Int), ['1'])
+# top-15, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 3221898@Int), ==, 1, 5123399@Int), ['1'])
+# top-16, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 9925006@Int), ==, 1, 5123399@Int), ['1'])
+# top-17, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 2912655@Int), ==, 1, 5123399@Int), ['1'])
+# top-18, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 3792145@Int), ==, 1, 5123399@Int), ['1'])
+# top-19, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 8911133@Int), ==, 1, 5123399@Int), ['1'])
+# top-20, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 8507934@Int), ==, 1, 5123399@Int), ['1'])
+# top-21, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 10563233@Int), ==, 1, 5123399@Int), ['1'])
+# top-22, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 9518507@Int), ==, 1, 5123399@Int), ['1'])
+# top-23, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 1902638@Int), ==, 1, 5123399@Int), ['1'])
+# top-24, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 336303@Int), ==, 1, 5123399@Int), ['1'])
+# top-25, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 4804784@Int), ==, 1, 5123399@Int), ['1'])
+# top-26, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 6921268@Int), ==, 1, 5123399@Int), ['1'])
+# top-27, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 10205879@Int), ==, 1, 5123399@Int), ['1'])
+# top-28, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 10069564@Int), ==, 1, 5123399@Int), ['1'])
+# top-29, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 11320252@Int), ==, 1, 5123399@Int), ['1'])
+# top-30, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 11635647@Int), ==, 1, 5123399@Int), ['1'])
+# top-31, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 4355644@Int), ==, 1, 5123399@Int), ['1'])
+# top-32, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 11488578@Int), ==, 1, 5123399@Int), ['1'])
+# top-33, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 65@Int), <, 1, 5184855@Int), ['1'])
+# top-34, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 65@Int), <, 1, 5668961@Int), ['1'])
+# top-35, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 65@Int), <=, 1, 5123399@Int), ['1'])
+# top-36, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 65@Int), <=, 1, 5184855@Int), ['1'])
+# top-37, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 65@Int), ==, 1, 5123399@Int), ['1'])
+# top-38, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 70@Int), ==, 1, 5123399@Int), ['1'])
+# top-39, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 5123399@Int), ==, 1, 5123399@Int), ['1'])
+# top-40, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 6459082@Int), ==, 1, 5123399@Int), ['1'])
+# top-41, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 75@Int), ==, 1, 5123399@Int), ['1'])
+# top-42, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 80@Int), ==, 1, 5123399@Int), ['1'])
+# top-43, score: 0.00, answer: [5123399]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 0, 10552146@Int), ==, 1, 5123399@Int), ['1'])

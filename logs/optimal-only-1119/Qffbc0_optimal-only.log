@@ -1,0 +1,105 @@
+# parsed arguments: Namespace(benchmark='Qffbc0', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'ireland', 'us', '1e-05', '0.0008', 'donations', 'kuwait', 'generous', '0.0001', 'norway', 'china', '0.0006', 'by', 'gdp', 'color', 'blue', 'estonia', '0.0011', 'country', '0.0003', 'germany', 'japan', 'finland', '0.0004', '0.0005', 'netherlands', 'belgium'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+        Country  Generous donations by GDP color
+0        Norway                    0.00110  blue
+1        Kuwait                    0.00110  blue
+2   Netherlands                    0.00080  blue
+3       Ireland                    0.00060  blue
+4       Estonia                    0.00060  blue
+5       Finland                    0.00050  blue
+6         Japan                    0.00040  blue
+7            US                    0.00040  blue
+8       Belgium                    0.00030  blue
+9       Germany                    0.00010  blue
+10        China                    0.00001  blue
+# query is: How much more generous is Japan than the USA?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0       0
+# inferred DSL terminals:
+  # ConstVal: ['Generous donations by GDP@Str', 'Japan@Str', '<NULL>']
+     # cmap: [('generous', 'Generous donations by GDP'), ('japan', 'Japan')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>=', '==', '>', '<NULL>']
+     # bmap: [(None, '=='), ('more', '>'), ('more', '>=')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: []
+  # [debug] high_values (no dup.): []
+  # [debug] filtered low_values (no dup.): [(0.0007000000000000001, 2), (0.0007000000000000001, 2), (0.0004, 2), (0.00039, 2), (0.00030000000000000003, 2), (0.00019999999999999993, 2), (0.00019999999999999993, 2), (0.00010000000000000005, 2), (9.999999999999999e-05, 2), (0.0, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=1.24) i=1, candidate=[{'ANSWER': 0.0007000000000000001}]
+  # found 0 program(s)
+# (t=2.49) i=2, candidate=[{'ANSWER': 0.0007000000000000001}]
+  # found 0 program(s)
+# (t=3.73) i=3, candidate=[{'ANSWER': 0.0004}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Japan@Str), ==, 0, Japan@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Japan'], '==', 'Country', 'Japan'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Japan@Str), ==, 0, Japan@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Japan'], '==', 'Country', 'Japan'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Japan@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Japan'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Japan@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Japan'], ['Generous donations by GDP']]
+# (t=4.98) i=4, candidate=[{'ANSWER': 0.00039}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Japan@Str), ==, 0, Japan@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Japan'], '==', 'Country', 'Japan'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Japan@Str), ==, 0, Japan@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Japan'], '==', 'Country', 'Japan'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Japan@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Japan'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Japan@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Japan'], ['Generous donations by GDP']]
+# (t=6.23) i=5, candidate=[{'ANSWER': 0.00030000000000000003}]
+  # found 0 program(s)
+# (t=7.46) i=6, candidate=[{'ANSWER': 0.00019999999999999993}]
+  # found 0 program(s)
+# (t=8.70) i=7, candidate=[{'ANSWER': 0.00019999999999999993}]
+  # found 0 program(s)
+# (t=9.93) i=8, candidate=[{'ANSWER': 0.00010000000000000005}]
+  # found 0 program(s)
+# (t=11.17) i=9, candidate=[{'ANSWER': 9.999999999999999e-05}]
+  # found 0 program(s)
+# (t=12.41) i=10, candidate=[{'ANSWER': 0.0}]
+  # found 2 program(s)
+    # Contrast(SelectRow1(@param0, ==, 0, Japan@Str), -, 0, Japan@Str, Japan@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Country', 'Japan'], '-', 'Country', 'Japan', 'Japan', 'Generous donations by GDP']
+    # Contrast(@param0, -, 0, Japan@Str, Japan@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Country', 'Japan', 'Japan', 'Generous donations by GDP']
+
+# ========== review report ========== #
+# top-1, score: 2.48, answer: [0.0]
+  # tprog: Contrast(@param0, -, 0, Japan@Str, Japan@Str, 1)
+# top-2, score: 2.42, answer: [0.0]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, Japan@Str), -, 0, Japan@Str, Japan@Str, 1)
+# top-3, score: 2.37, answer: [0.0004]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Japan@Str), ['1'])
+# top-4, score: 2.37, answer: [0.0004]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Japan@Str), ['-99', '-2'])
+# top-5, score: 2.37, answer: [0.00039]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Japan@Str), ['1'])
+# top-6, score: 2.37, answer: [0.00039]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Japan@Str), ['-99', '-2'])
+# top-7, score: 2.31, answer: [0.0004]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Japan@Str), ==, 0, Japan@Str), ['1'])
+# top-8, score: 2.31, answer: [0.0004]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Japan@Str), ==, 0, Japan@Str), ['-99', '-2'])
+# top-9, score: 2.31, answer: [0.00039]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Japan@Str), ==, 0, Japan@Str), ['1'])
+# top-10, score: 2.31, answer: [0.00039]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Japan@Str), ==, 0, Japan@Str), ['-99', '-2'])

@@ -1,0 +1,49 @@
+# parsed arguments: Namespace(benchmark='Q92b46', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'yougov', 'color', '-1.4', 'surveyusa', '1.9', 'gallup', '(ppp)', 'ipsos', 'public', 'marist', 'research)', 'news', '3.1', '-1.7', 'republican', '(nbc/marist)', '/', '-1.5', 'post', '-2.5', 'quinnipiac', 'democratic', 'policy', 'effect', '(opinion', 'fox', '0.8', '3.2', 'pew', 'rasmussen', 'blue', 'reports', '2.9', '0.4', 'abc', 'orange', 'pollster', 'research', '&', 'shaw)', 'house', '2.4', 'washington', '-1.3', 'spread', '(robbins', 'cnn', 'polling'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                       Pollster      spread  House Effect   color
+0                  Pew Research  Democratic           3.2    blue
+1   Public Policy Polling (PPP)  Democratic           3.1    blue
+2                         Ipsos  Democratic           2.9    blue
+3                     SurveyUSA  Democratic           2.4    blue
+4           Marist (NBC/Marist)  Democratic           1.9    blue
+5                        YouGov  Democratic           0.8    blue
+6        CNN (Opinion Research)  Democratic           0.4    blue
+7             Rasmussen Reports  Republican          -1.3  orange
+8    Washington Post / ABC News  Republican          -1.4  orange
+9     Fox News (Robbins & Shaw)  Republican          -1.5  orange
+10                   Quinnipiac  Republican          -1.7  orange
+11                       Gallup  Republican          -2.5  orange
+# query is: What position is Ipsos in?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0       3
+# inferred DSL terminals:
+  # ConstVal: ['Washington Post / ABC News@Str', 'CNN (Opinion Research)@Str', 'Ipsos@Str', '<NULL>']
+     # cmap: [('position', 'CNN (Opinion Research)'), ('ipsos', 'Ipsos'), ('position', 'Washington Post / ABC News')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Democratic'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Pollster', 'CNN (Opinion Research)'], ['spread']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Ipsos@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Pollster', 'Ipsos'], ['spread']]
+
+# ========== review report ========== #
+# top-1, score: 2.34, answer: Democratic
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Ipsos@Str), ['1'])
+# top-2, score: 1.34, answer: Democratic
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), ['1'])

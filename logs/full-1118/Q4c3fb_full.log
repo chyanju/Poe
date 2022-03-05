@@ -1,0 +1,173 @@
+# parsed arguments: Namespace(benchmark='Q4c3fb', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'1.408', 'netherlands', '0.792', 'germany', 'denmark', '5.103', '4.223', '2.551', '3.695', 'bulgaria', 'cyprus', 'romania', '14.78', '25.601', 'greece', '2.199', 'orange', 'slovenia', '1.232', '2.023', 'post', '0.176', 'italy', 'pre', 'uk', '18.651', 'color', 'slovakia', '16.628', 'czech', '0.0', 'estonia', 'blue', '1.144', '1.672', '1.76', 'republic', '3.959', '20.938', 'malta', '19.795', 'hungary', 'poland', 'latvia', '11.613', 'france', 'portugal', 'country', '5.367', 'sweden', '0.616', 'budget', '2.727', '2.375', 'austria', '0.88', '1.496', '0.264', 'rebate', '10.821', 'belgium', '6.51', 'spain', 'lithuania', 'budgetcategory', '0.44', '15.748', 'finland', '6.246', '25.249', 'luxembourg', 'ireland'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+           country  budgetcategory  budget   color
+0        Lithuania   Pre UK rebate   0.440  orange
+1        Lithuania  Post UK rebate   0.440    blue
+2           Latvia   Pre UK rebate   0.176  orange
+3           Latvia  Post UK rebate   0.176    blue
+4         Slovenia   Pre UK rebate   0.616  orange
+5         Slovenia  Post UK rebate   0.616    blue
+6         Bulgaria   Pre UK rebate   0.616  orange
+7         Bulgaria  Post UK rebate   0.616    blue
+8         Slovakia   Pre UK rebate   0.792  orange
+9         Slovakia  Post UK rebate   0.880    blue
+10         Ireland   Pre UK rebate   1.408  orange
+11         Ireland  Post UK rebate   1.496    blue
+12           Italy   Pre UK rebate  15.748  orange
+13           Italy  Post UK rebate  16.628    blue
+14         Estonia   Pre UK rebate   0.176  orange
+15         Estonia  Post UK rebate   0.176    blue
+16         Denmark   Pre UK rebate   2.551  orange
+17         Denmark  Post UK rebate   2.727    blue
+18          Greece   Pre UK rebate   2.199  orange
+19          Greece  Post UK rebate   2.375    blue
+20         Belgium   Pre UK rebate   5.103  orange
+21         Belgium  Post UK rebate   5.367    blue
+22         Hungary   Pre UK rebate   1.144  orange
+23         Hungary  Post UK rebate   1.232    blue
+24  Czech Republic   Pre UK rebate   1.760  orange
+25  Czech Republic  Post UK rebate   1.760    blue
+26          Poland   Pre UK rebate   3.959  orange
+27          Poland  Post UK rebate   4.223    blue
+28         Romania   Pre UK rebate   1.408  orange
+29         Romania  Post UK rebate   1.496    blue
+30          Cyprus   Pre UK rebate   0.264  orange
+31          Cyprus  Post UK rebate   0.264    blue
+32              UK   Pre UK rebate  18.651  orange
+33              UK  Post UK rebate  14.780    blue
+34     Netherlands   Pre UK rebate   6.246  orange
+35     Netherlands  Post UK rebate   6.510    blue
+36        Portugal   Pre UK rebate   1.672  orange
+37        Portugal  Post UK rebate   1.760    blue
+38          Sweden   Pre UK rebate   3.695  orange
+39          Sweden  Post UK rebate   3.695    blue
+40           Malta   Pre UK rebate   0.000  orange
+41           Malta  Post UK rebate   0.000    blue
+42         Germany   Pre UK rebate  25.249  orange
+43         Germany  Post UK rebate  25.601    blue
+44           Spain   Pre UK rebate  10.821  orange
+45           Spain  Post UK rebate  11.613    blue
+46         Finland   Pre UK rebate   2.023  orange
+47         Finland  Post UK rebate   2.199    blue
+48          France   Pre UK rebate  19.795  orange
+49          France  Post UK rebate  20.938    blue
+50      Luxembourg   Pre UK rebate   0.440  orange
+51      Luxembourg  Post UK rebate   0.440    blue
+52         Austria   Pre UK rebate   2.727  orange
+53         Austria  Post UK rebate   2.727    blue
+# query is: Budget of Slovenia Pre UK rebate
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0   0.616
+# inferred DSL terminals:
+  # ConstVal: ['UK@Str', 'budget@Str', 'Slovenia@Str', 'Pre UK rebate@Str', 'Post UK rebate@Str', '<NULL>']
+     # cmap: [('slovenia', 'Slovenia'), ('budget', 'budget'), ('uk', 'UK'), ('uk', 'Pre UK rebate'), ('pre', 'Pre UK rebate'), ('rebate', 'Pre UK rebate'), ('uk', 'Post UK rebate'), ('rebate', 'Post UK rebate')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 0.44}]
+  # found 0 program(s)
+# (t=6.29) i=1, candidate=[{'ANSWER': 25.249}]
+  # found 0 program(s)
+# (t=12.66) i=2, candidate=[{'ANSWER': 15.748}]
+  # found 0 program(s)
+# (t=18.93) i=3, candidate=[{'ANSWER': 2.727}]
+  # found 0 program(s)
+# (t=25.31) i=4, candidate=[{'ANSWER': 0.176}]
+  # found 0 program(s)
+# (t=31.69) i=5, candidate=[{'ANSWER': 0.616}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Slovenia@Str), ==, 1, Pre UK rebate@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'country', 'Slovenia'], '==', 'budgetcategory', 'Pre UK rebate'], ['budget']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Slovenia@Str), ==, 1, Post UK rebate@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'country', 'Slovenia'], '==', 'budgetcategory', 'Post UK rebate'], ['budget']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Pre UK rebate@Str), ==, 0, Slovenia@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'budgetcategory', 'Pre UK rebate'], '==', 'country', 'Slovenia'], ['budget']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Post UK rebate@Str), ==, 0, Slovenia@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'budgetcategory', 'Post UK rebate'], '==', 'country', 'Slovenia'], ['budget']]
+# (t=38.07) i=6, candidate=[{'ANSWER': 20.938}]
+  # found 0 program(s)
+# (t=44.37) i=7, candidate=[{'ANSWER': 18.651}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, UK@Str), ==, 1, Pre UK rebate@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'country', 'UK'], '==', 'budgetcategory', 'Pre UK rebate'], ['budget']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Pre UK rebate@Str), ==, 0, UK@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'budgetcategory', 'Pre UK rebate'], '==', 'country', 'UK'], ['budget']]
+# (t=50.67) i=8, candidate=[{'ANSWER': 0.0}]
+  # found 0 program(s)
+# (t=56.96) i=9, candidate=[{'ANSWER': 6.246}]
+  # found 0 program(s)
+# (t=63.50) i=10, candidate=[{'ANSWER': 1.672}]
+  # found 0 program(s)
+# (t=69.80) i=11, candidate=[{'ANSWER': 0.792}]
+  # found 0 program(s)
+# (t=76.15) i=12, candidate=[{'ANSWER': 3.695}]
+  # found 0 program(s)
+# (t=82.50) i=13, candidate=[{'ANSWER': 2.551}]
+  # found 0 program(s)
+# (t=88.85) i=14, candidate=[{'ANSWER': 5.367}]
+  # found 0 program(s)
+# (t=95.25) i=15, candidate=[{'ANSWER': 1.408}]
+  # found 0 program(s)
+# (t=101.63) i=16, candidate=[{'ANSWER': 19.795}]
+  # found 0 program(s)
+# (t=107.93) i=17, candidate=[{'ANSWER': 2.199}]
+  # found 0 program(s)
+# (t=114.24) i=18, candidate=[{'ANSWER': 11.613}]
+  # found 0 program(s)
+# (t=120.56) i=19, candidate=[{'ANSWER': 5.103}]
+  # found 0 program(s)
+# (t=126.88) i=20, candidate=[{'ANSWER': 1.144}]
+  # found 0 program(s)
+# (t=133.24) i=21, candidate=[{'ANSWER': 0.264}]
+  # found 0 program(s)
+# (t=139.62) i=22, candidate=[{'ANSWER': 10.821}]
+  # found 0 program(s)
+# (t=146.00) i=23, candidate=[{'ANSWER': 1.76}]
+  # found 0 program(s)
+# (t=152.37) i=24, candidate=[{'ANSWER': 2.023}]
+  # found 0 program(s)
+# (t=158.78) i=25, candidate=[{'ANSWER': 3.959}]
+  # found 0 program(s)
+# (t=165.49) i=26, candidate=[{'ANSWER': 25.601}]
+  # found 0 program(s)
+# (t=171.94) i=27, candidate=[{'ANSWER': 4.223}]
+  # found 0 program(s)
+# (t=178.29) i=28, candidate=[{'ANSWER': 0.88}]
+  # found 0 program(s)
+# (t=184.58) i=29, candidate=[{'ANSWER': 14.78}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, UK@Str), ==, 1, Post UK rebate@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'country', 'UK'], '==', 'budgetcategory', 'Post UK rebate'], ['budget']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Post UK rebate@Str), ==, 0, UK@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'budgetcategory', 'Post UK rebate'], '==', 'country', 'UK'], ['budget']]
+
+# ========== review report ========== #
+# top-1, score: 2.92, answer: 0.616
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Slovenia@Str), ==, 1, Pre UK rebate@Str), ['2'])
+# top-2, score: 2.92, answer: 0.616
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Pre UK rebate@Str), ==, 0, Slovenia@Str), ['2'])
+# top-3, score: 2.76, answer: 0.616
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Slovenia@Str), ==, 1, Post UK rebate@Str), ['2'])
+# top-4, score: 2.76, answer: 0.616
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Post UK rebate@Str), ==, 0, Slovenia@Str), ['2'])
+# top-5, score: 2.76, answer: 18.651
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, UK@Str), ==, 1, Pre UK rebate@Str), ['2'])
+# top-6, score: 2.76, answer: 18.651
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Pre UK rebate@Str), ==, 0, UK@Str), ['2'])
+# top-7, score: 2.59, answer: 14.78
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, UK@Str), ==, 1, Post UK rebate@Str), ['2'])
+# top-8, score: 2.59, answer: 14.78
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Post UK rebate@Str), ==, 0, UK@Str), ['2'])

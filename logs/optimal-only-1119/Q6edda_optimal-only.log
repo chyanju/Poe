@@ -1,0 +1,935 @@
+# parsed arguments: Namespace(benchmark='Q6edda', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'886580000', 'color', '2388330000', '899670000', '1655460000', '2415910000', '849210000', '2327780000', '925510000', 'irq', 'sdn', 'eth', 'blue', 'moz', 'chn', 'country', 'uga', 'ken', 'tza', 'pak', 'gha', '821580000', '1215280000', 'zaf', 'donation', '1033040000', '2006940000', 'cog', 'cod', '1031740000', '5472120000', 'nga', '1538320000', '1158820000', '1824530000', 'idn', '1357330000', 'bgd', '1927720000', 'vnm', '2219230000', 'hti', 'afg', 'ind'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+   country    donation color
+0      AFG  5472120000  blue
+1      PAK  2415910000  blue
+2      COD  2388330000  blue
+3      HTI  2327780000  blue
+4      IND  2219230000  blue
+5      IRQ  2006940000  blue
+6      ETH  1927720000  blue
+7      VNM  1824530000  blue
+8      TZA  1655460000  blue
+9      SDN  1538320000  blue
+10     MOZ  1357330000  blue
+11     COG  1215280000  blue
+12     KEN  1158820000  blue
+13     UGA  1033040000  blue
+14     IDN  1031740000  blue
+15     CHN   925510000  blue
+16     GHA   899670000  blue
+17     BGD   886580000  blue
+18     NGA   849210000  blue
+19     ZAF   821580000  blue
+# query is: What is the difference in donations between the highest amount and the lowest amount received?
+# expected output type:[dtype('int64')]
+# expected output is:
+       ANSWER
+0  4650540000
+# inferred DSL terminals:
+  # ConstVal: ['donation@Str', '<NULL>']
+     # cmap: [('donations', 'donation')]
+  # AggrFunc: ['min', 'max', '<NULL>']
+     # amap: [('lowest', 'min'), ('highest', 'max')]
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', 'eqmin', '<NULL>']
+     # imap: [('lowest', 'eqmin'), ('highest', 'eqmax')]
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: []
+  # [debug] high_values (no dup.): []
+  # [debug] filtered low_values (no dup.): []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# ====> fallback strategy (retrieval) is triggered because no explanation is found so far
+# ====> retrieval_values: [1031740000, 1033040000, 1158820000, 1215280000, 1357330000, 1538320000, 1655460000, 1824530000, 1927720000, 2006940000, 2219230000, 2327780000, 2388330000, 2415910000, 5472120000, 821580000, 849210000, 886580000, 899670000, 925510000, 'AFG', 'BGD', 'CHN', 'COD', 'COG', 'ETH', 'GHA', 'HTI', 'IDN', 'IND', 'IRQ', 'KEN', 'MOZ', 'NGA', 'PAK', 'SDN', 'TZA', 'UGA', 'VNM', 'ZAF', 'blue', 'color', 'country', 'donation']
+# (t=0.96) fallback i=0, candidate=[{'ANSWER': 1031740000}]
+  # found 0 program(s)
+# (t=1.91) fallback i=1, candidate=[{'ANSWER': 1033040000}]
+  # found 0 program(s)
+# (t=2.86) fallback i=2, candidate=[{'ANSWER': 1158820000}]
+  # found 0 program(s)
+# (t=3.79) fallback i=3, candidate=[{'ANSWER': 1215280000}]
+  # found 0 program(s)
+# (t=4.73) fallback i=4, candidate=[{'ANSWER': 1357330000}]
+  # found 0 program(s)
+# (t=5.66) fallback i=5, candidate=[{'ANSWER': 1538320000}]
+  # found 0 program(s)
+# (t=6.59) fallback i=6, candidate=[{'ANSWER': 1655460000}]
+  # found 0 program(s)
+# (t=7.52) fallback i=7, candidate=[{'ANSWER': 1824530000}]
+  # found 0 program(s)
+# (t=8.45) fallback i=8, candidate=[{'ANSWER': 1927720000}]
+  # found 0 program(s)
+# (t=9.66) fallback i=9, candidate=[{'ANSWER': 2006940000}]
+  # found 0 program(s)
+# (t=10.59) fallback i=10, candidate=[{'ANSWER': 2219230000}]
+  # found 0 program(s)
+# (t=11.53) fallback i=11, candidate=[{'ANSWER': 2327780000}]
+  # found 0 program(s)
+# (t=12.46) fallback i=12, candidate=[{'ANSWER': 2388330000}]
+  # found 0 program(s)
+# (t=13.38) fallback i=13, candidate=[{'ANSWER': 2415910000}]
+  # found 0 program(s)
+# (t=14.31) fallback i=14, candidate=[{'ANSWER': 5472120000}]
+  # found 63 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'min', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'min', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'max', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'max', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'min', 'donation'], 'eqmax', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'min', 'donation'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'min', 'donation'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'min', 'donation'], 'eqmax', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'min', 'donation'], 'eqmax', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'min', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'min', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'min', 'donation'], 'eqmax', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'max', 'donation'], 'eqmax', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'max', 'donation'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'max', 'donation'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'max', 'donation'], 'eqmax', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'max', 'donation'], 'eqmax', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'max', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'max', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'max', 'donation'], 'eqmax', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'max', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'max', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'max', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'max', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmax', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmax', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmax', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmax', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmax', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmax', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmax', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmax', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'min', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'min', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmax', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmax', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmax', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmax', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmax', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmax', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmax', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmax', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmax', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'donation'], ['donation']]
+    # Summarize(@param0, max, 1)
+      --> ['Summarize', 'input@0', 'max', 'donation']
+# (t=15.44) fallback i=15, candidate=[{'ANSWER': 821580000}]
+  # found 63 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'min', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'min', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'max', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'max', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'min', 'donation'], 'eqmin', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'min', 'donation'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'min', 'donation'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'min', 'donation'], 'eqmin', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'min', 'donation'], 'eqmin', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'min', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'min', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'min', 'donation'], 'eqmin', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'max', 'donation'], 'eqmin', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'max', 'donation'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'max', 'donation'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'max', 'donation'], 'eqmin', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'max', 'donation'], 'eqmin', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'max', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'max', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation'], 'max', 'donation'], 'eqmin', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'donation'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmin', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmin', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmin', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmin', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmin', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmin', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmin', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmin', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'min', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'min', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmin', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmin', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmin', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmin', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmin', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmin', 'donation'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmin', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmin', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmin', 'COL0'], ['donation']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'donation'], ['donation']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'donation'], ['donation']]
+    # Summarize(@param0, min, 1)
+      --> ['Summarize', 'input@0', 'min', 'donation']
+# (t=16.56) fallback i=16, candidate=[{'ANSWER': 849210000}]
+  # found 0 program(s)
+# (t=17.50) fallback i=17, candidate=[{'ANSWER': 886580000}]
+  # found 0 program(s)
+# (t=18.45) fallback i=18, candidate=[{'ANSWER': 899670000}]
+  # found 0 program(s)
+# (t=19.40) fallback i=19, candidate=[{'ANSWER': 925510000}]
+  # found 0 program(s)
+# (t=20.34) fallback i=20, candidate=[{'ANSWER': 'AFG'}]
+  # found 18 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'min', 'donation'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'min', 'donation'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'max', 'donation'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'max', 'donation'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmax', 'donation'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmax', 'donation'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmax', 'donation'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmax', 'donation'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'min', 'donation'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'min', 'donation'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'donation'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'donation'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'donation'], ['country']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'donation'], ['country']]
+# (t=21.34) fallback i=21, candidate=[{'ANSWER': 'BGD'}]
+  # found 0 program(s)
+# (t=22.60) fallback i=22, candidate=[{'ANSWER': 'CHN'}]
+  # found 0 program(s)
+# (t=23.55) fallback i=23, candidate=[{'ANSWER': 'COD'}]
+  # found 0 program(s)
+# (t=24.51) fallback i=24, candidate=[{'ANSWER': 'COG'}]
+  # found 0 program(s)
+# (t=25.45) fallback i=25, candidate=[{'ANSWER': 'ETH'}]
+  # found 0 program(s)
+# (t=26.39) fallback i=26, candidate=[{'ANSWER': 'GHA'}]
+  # found 0 program(s)
+# (t=27.33) fallback i=27, candidate=[{'ANSWER': 'HTI'}]
+  # found 0 program(s)
+# (t=28.28) fallback i=28, candidate=[{'ANSWER': 'IDN'}]
+  # found 0 program(s)
+# (t=29.22) fallback i=29, candidate=[{'ANSWER': 'IND'}]
+  # found 0 program(s)
+# (t=30.16) fallback i=30, candidate=[{'ANSWER': 'IRQ'}]
+  # found 0 program(s)
+# (t=31.09) fallback i=31, candidate=[{'ANSWER': 'KEN'}]
+  # found 0 program(s)
+# (t=32.02) fallback i=32, candidate=[{'ANSWER': 'MOZ'}]
+  # found 0 program(s)
+# (t=32.96) fallback i=33, candidate=[{'ANSWER': 'NGA'}]
+  # found 0 program(s)
+# (t=33.91) fallback i=34, candidate=[{'ANSWER': 'PAK'}]
+  # found 0 program(s)
+# (t=35.17) fallback i=35, candidate=[{'ANSWER': 'SDN'}]
+  # found 0 program(s)
+# (t=36.10) fallback i=36, candidate=[{'ANSWER': 'TZA'}]
+  # found 0 program(s)
+# (t=37.03) fallback i=37, candidate=[{'ANSWER': 'UGA'}]
+  # found 0 program(s)
+# (t=37.97) fallback i=38, candidate=[{'ANSWER': 'VNM'}]
+  # found 0 program(s)
+# (t=38.90) fallback i=39, candidate=[{'ANSWER': 'ZAF'}]
+  # found 18 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'min', 'donation'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'min', 'donation'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'max', 'donation'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'max', 'donation'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmin', 'donation'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmin', 'donation'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'min', 'donation'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmin', 'donation'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmin', 'donation'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'min', 'donation'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'min', 'donation'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'donation'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'donation'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'donation'], ['country']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'donation'], ['country']]
+# (t=39.90) fallback i=40, candidate=[{'ANSWER': 'blue'}]
+  # found 36 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'donation'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'donation'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'donation'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'min', 'donation'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'max', 'donation'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'max', 'donation'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'max', 'donation'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'max', 'donation'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'min', 'donation'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'min', 'donation'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'min', 'donation'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'min', 'donation'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'donation'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'donation'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'donation'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'donation'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmax', 'donation'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmax', 'donation'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmin', 'donation'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmin', 'donation'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'min', 'donation'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmax', 'donation'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmax', 'donation'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmin', 'donation'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmin', 'donation'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['donation', 'color'], 'max', 'donation'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'donation'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'donation'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'donation'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'donation'], ['color']]
+# (t=40.93) fallback i=41, candidate=[{'ANSWER': 'color'}]
+  # found 0 program(s)
+# (t=41.87) fallback i=42, candidate=[{'ANSWER': 'country'}]
+  # found 0 program(s)
+# (t=42.80) fallback i=43, candidate=[{'ANSWER': 'donation'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.38, answer: [5472120000]
+  # tprog: Summarize(@param0, max, 1)
+# top-2, score: 1.38, answer: [821580000]
+  # tprog: Summarize(@param0, min, 1)
+# top-3, score: 1.30, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['1'])
+# top-4, score: 1.30, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['-99'])
+# top-5, score: 1.30, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['0'])
+# top-6, score: 1.30, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['1'])
+# top-7, score: 1.30, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['-99'])
+# top-8, score: 1.30, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['-1'])
+# top-9, score: 1.30, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['0'])
+# top-10, score: 1.30, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['1'])
+# top-11, score: 1.30, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['-99'])
+# top-12, score: 1.30, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['-1'])
+# top-13, score: 1.30, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmin, 1), ['1'])
+# top-14, score: 1.30, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmin, 1), ['-99'])
+# top-15, score: 1.30, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['1'])
+# top-16, score: 1.30, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['-99', '-2'])
+# top-17, score: 1.30, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['1'])
+# top-18, score: 1.30, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['-99'])
+# top-19, score: 1.30, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['0'])
+# top-20, score: 1.30, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['1'])
+# top-21, score: 1.30, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['-99'])
+# top-22, score: 1.30, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['-1'])
+# top-23, score: 1.30, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['0'])
+# top-24, score: 1.30, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['1'])
+# top-25, score: 1.30, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['-99'])
+# top-26, score: 1.30, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['-1'])
+# top-27, score: 1.30, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmax, 1), ['1'])
+# top-28, score: 1.30, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmax, 1), ['-99'])
+# top-29, score: 1.30, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['1'])
+# top-30, score: 1.30, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-99', '-2'])
+# top-31, score: 1.30, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['0'])
+# top-32, score: 1.30, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['-1'])
+# top-33, score: 1.30, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+# top-34, score: 1.30, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+# top-35, score: 1.30, answer: ['ZAF']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['0'])
+# top-36, score: 1.30, answer: ['ZAF']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['-1'])
+# top-37, score: 1.30, answer: ['ZAF']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+# top-38, score: 1.30, answer: ['ZAF']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+# top-39, score: 1.30, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmax, 1), ['0'])
+# top-40, score: 1.30, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmax, 1), ['-1'])
+# top-41, score: 1.30, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmin, 1), ['0'])
+# top-42, score: 1.30, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmin, 1), ['-1'])
+# top-43, score: 1.30, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['2'])
+# top-44, score: 1.30, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['-99', '-1'])
+# top-45, score: 1.30, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['2'])
+# top-46, score: 1.30, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-99', '-1'])
+# top-47, score: 1.29, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['1'])
+# top-48, score: 1.29, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['2'])
+# top-49, score: 1.29, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-99', '-1'])
+# top-50, score: 1.29, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-99', '-2'])
+# top-51, score: 1.29, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['1'])
+# top-52, score: 1.29, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['2'])
+# top-53, score: 1.29, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-99', '-1'])
+# top-54, score: 1.29, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-99', '-2'])
+# top-55, score: 1.29, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['2'])
+# top-56, score: 1.29, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-99', '-1'])
+# top-57, score: 1.29, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['0'])
+# top-58, score: 1.29, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['2'])
+# top-59, score: 1.29, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['-99', '-1'])
+# top-60, score: 1.29, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['-1', '-2'])
+# top-61, score: 1.29, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['0'])
+# top-62, score: 1.29, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['2'])
+# top-63, score: 1.29, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['-99', '-1'])
+# top-64, score: 1.29, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['-1', '-2'])
+# top-65, score: 1.29, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['1'])
+# top-66, score: 1.29, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['2'])
+# top-67, score: 1.29, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-99', '-1'])
+# top-68, score: 1.29, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-99', '-2'])
+# top-69, score: 1.29, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['1'])
+# top-70, score: 1.29, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['2'])
+# top-71, score: 1.29, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-99', '-1'])
+# top-72, score: 1.29, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-99', '-2'])
+# top-73, score: 1.29, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['2'])
+# top-74, score: 1.29, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-99', '-1'])
+# top-75, score: 1.29, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['0'])
+# top-76, score: 1.29, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['2'])
+# top-77, score: 1.29, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['-99', '-1'])
+# top-78, score: 1.29, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['-1', '-2'])
+# top-79, score: 1.29, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['0'])
+# top-80, score: 1.29, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['2'])
+# top-81, score: 1.29, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['-99', '-1'])
+# top-82, score: 1.29, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['-1', '-2'])
+# top-83, score: 1.29, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['0'])
+# top-84, score: 1.29, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-1', '-2'])
+# top-85, score: 1.29, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['0'])
+# top-86, score: 1.29, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-1', '-2'])
+# top-87, score: 1.29, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['0'])
+# top-88, score: 1.29, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-1', '-2'])
+# top-89, score: 1.29, answer: ['ZAF']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['0'])
+# top-90, score: 1.29, answer: ['ZAF']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-1', '-2'])
+# top-91, score: 1.29, answer: ['ZAF']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['0'])
+# top-92, score: 1.29, answer: ['ZAF']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-1', '-2'])
+# top-93, score: 1.29, answer: ['ZAF']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['0'])
+# top-94, score: 1.29, answer: ['ZAF']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-1', '-2'])
+# top-95, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['1'])
+# top-96, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-99', '-2'])
+# top-97, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['1'])
+# top-98, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-99', '-2'])
+# top-99, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['1'])
+# top-100, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['-99', '-2'])
+# top-101, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['1'])
+# top-102, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['-99', '-2'])
+# top-103, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['1'])
+# top-104, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['-99', '-2'])
+# top-105, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['1'])
+# top-106, score: 1.29, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['-99', '-2'])
+# top-107, score: 1.23, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['1'])
+# top-108, score: 1.23, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-99'])
+# top-109, score: 1.23, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['0'])
+# top-110, score: 1.23, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['1'])
+# top-111, score: 1.23, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-99'])
+# top-112, score: 1.23, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-1'])
+# top-113, score: 1.23, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['0'])
+# top-114, score: 1.23, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['1'])
+# top-115, score: 1.23, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-99'])
+# top-116, score: 1.23, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-1'])
+# top-117, score: 1.23, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmax, 1), ['1'])
+# top-118, score: 1.23, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmax, 1), ['-99'])
+# top-119, score: 1.23, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['1'])
+# top-120, score: 1.23, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-99'])
+# top-121, score: 1.23, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['0'])
+# top-122, score: 1.23, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['1'])
+# top-123, score: 1.23, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-99'])
+# top-124, score: 1.23, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-1'])
+# top-125, score: 1.23, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['0'])
+# top-126, score: 1.23, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['1'])
+# top-127, score: 1.23, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-99'])
+# top-128, score: 1.23, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-1'])
+# top-129, score: 1.23, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmin, 1), ['1'])
+# top-130, score: 1.23, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmin, 1), ['-99'])
+# top-131, score: 1.23, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+# top-132, score: 1.23, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+# top-133, score: 1.23, answer: ['ZAF']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+# top-134, score: 1.23, answer: ['ZAF']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+# top-135, score: 1.23, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmin, 1), ['0'])
+# top-136, score: 1.23, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], min, 1), eqmin, 1), ['-1'])
+# top-137, score: 1.23, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmax, 1), ['0'])
+# top-138, score: 1.23, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmax, 1), ['-1'])
+# top-139, score: 1.22, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['1'])
+# top-140, score: 1.22, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['2'])
+# top-141, score: 1.22, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-99', '-1'])
+# top-142, score: 1.22, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-99', '-2'])
+# top-143, score: 1.22, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['1'])
+# top-144, score: 1.22, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['2'])
+# top-145, score: 1.22, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-99', '-1'])
+# top-146, score: 1.22, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-99', '-2'])
+# top-147, score: 1.22, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['2'])
+# top-148, score: 1.22, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-99', '-1'])
+# top-149, score: 1.22, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['0'])
+# top-150, score: 1.22, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['2'])
+# top-151, score: 1.22, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-1'])
+# top-152, score: 1.22, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-1', '-2'])
+# top-153, score: 1.22, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['0'])
+# top-154, score: 1.22, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['2'])
+# top-155, score: 1.22, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-1'])
+# top-156, score: 1.22, answer: [5472120000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+# top-157, score: 1.22, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['1'])
+# top-158, score: 1.22, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['2'])
+# top-159, score: 1.22, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-1'])
+# top-160, score: 1.22, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-2'])
+# top-161, score: 1.22, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['1'])
+# top-162, score: 1.22, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['2'])
+# top-163, score: 1.22, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-1'])
+# top-164, score: 1.22, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-2'])
+# top-165, score: 1.22, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['2'])
+# top-166, score: 1.22, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+# top-167, score: 1.22, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['0'])
+# top-168, score: 1.22, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['2'])
+# top-169, score: 1.22, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-99', '-1'])
+# top-170, score: 1.22, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-1', '-2'])
+# top-171, score: 1.22, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['0'])
+# top-172, score: 1.22, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['2'])
+# top-173, score: 1.22, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+# top-174, score: 1.22, answer: [821580000]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-175, score: 1.22, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+# top-176, score: 1.22, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+# top-177, score: 1.22, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+# top-178, score: 1.22, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+# top-179, score: 1.22, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+# top-180, score: 1.22, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+# top-181, score: 1.22, answer: ['ZAF']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+# top-182, score: 1.22, answer: ['ZAF']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+# top-183, score: 1.22, answer: ['ZAF']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+# top-184, score: 1.22, answer: ['ZAF']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-185, score: 1.22, answer: ['ZAF']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+# top-186, score: 1.22, answer: ['ZAF']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-187, score: 1.22, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['1'])
+# top-188, score: 1.22, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-99', '-2'])
+# top-189, score: 1.22, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['1'])
+# top-190, score: 1.22, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-99', '-2'])
+# top-191, score: 1.22, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['1'])
+# top-192, score: 1.22, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-99', '-2'])
+# top-193, score: 1.22, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['1'])
+# top-194, score: 1.22, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-99', '-2'])
+# top-195, score: 1.22, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['1'])
+# top-196, score: 1.22, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-2'])
+# top-197, score: 1.22, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['1'])
+# top-198, score: 1.22, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-2'])

@@ -1,0 +1,480 @@
+# parsed arguments: Namespace(benchmark='Qfb9fb', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'18.0', '2.5', '26.0', 'kong', '20.8', 'australia', 'south', 'japan', 'country', 'color', 'urban', 'india', 'brazil', '7.5', '7.4', 'square', 'total', 'per', 'singapore', '21.5', 'hong', 'urban/total', '1.0', '0.5', 'monaco', 'macau', '5.1', '0.4', '3.9', 'france', '25.4', 'korea', '0.1', 'indonesia', '1.8', '6.8', 'rwanda', 'persons', 'bangladesh', '75.2', '17.1', '16.6', 'egypt', 'germany', '0.2', '25.2', 'orange', '6.4', '9.7', '11.8', 'maldives', 'kilometers', 'blue'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+        Country Urban/total  Persons per square kilometers   color
+0         Macau       Urban                           26.0  orange
+1         Macau       Total                           20.8    blue
+2         Japan       Urban                            3.9  orange
+3         Japan       Total                            0.5    blue
+4      Maldives       Urban                           21.5  orange
+5      Maldives       Total                            1.0    blue
+6        Rwanda       Urban                           18.0  orange
+7        Rwanda       Total                            0.5    blue
+8        Monaco       Urban                           17.1  orange
+9        Monaco       Total                           17.1    blue
+10    Australia       Urban                            1.8    blue
+11   Bangladesh       Urban                           75.2  orange
+12   Bangladesh       Total                            1.0    blue
+13    Indonesia       Urban                           16.6  orange
+14    Indonesia       Total                            0.1    blue
+15        Egypt       Urban                            5.1  orange
+16        Egypt       Total                            0.1    blue
+17        India       Urban                           25.2  orange
+18        India       Total                            0.4    blue
+19       France       Urban                            2.5  orange
+20       France       Total                            0.1    blue
+21      Germany       Urban                            6.8  orange
+22      Germany       Total                            0.2    blue
+23  South Korea       Urban                           11.8  orange
+24  South Korea       Total                            0.5    blue
+25    Hong Kong       Urban                           25.4  orange
+26    Hong Kong       Total                            6.4    blue
+27       Brazil       Urban                            9.7    blue
+28    Singapore       Urban                            7.5  orange
+29    Singapore       Total                            7.4    blue
+# query is: What is the average persons per square kilometer of urban regions of South Korea and Japan combined?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0    7.85
+# inferred DSL terminals:
+  # ConstVal: ['0.5@Float', '1.0@Float', '1.8@Float', '3.9@Float', 'Maldives@Str', '5.1@Float', 'Monaco@Str', '0.4@Float', '2.5@Float', '6.8@Float', '6.4@Float', '11.8@Float', '9.7@Float', '7.5@Float', 'South Korea@Str', '7.4@Float', '16.6@Float', '17.1@Float', '18.0@Float', 'Urban/total@Str', '20.8@Float', 'Total@Str', '21.5@Float', 'Bangladesh@Str', 'Germany@Str', '25.2@Float', '26.0@Float', '25.4@Float', 'Macau@Str', 'color@Str', 'France@Str', 'Urban@Str', '0.2@Float', 'India@Str', '0.1@Float', 'Egypt@Str', 'Country@Str', 'Indonesia@Str', 'Persons per square kilometers@Str', '75.2@Float', 'Australia@Str', 'Hong Kong@Str', 'Japan@Str', 'Singapore@Str', 'Brazil@Str', 'Rwanda@Str', 'orange@Str', 'blue@Str']
+     # cmap: [(None, 0.5), (None, 1.0), (None, 1.8), (None, 3.9), (None, 'Maldives'), (None, 5.1), (None, 'Monaco'), (None, 0.4), (None, 2.5), (None, 6.8), (None, 6.4), (None, 11.8), (None, 9.7), (None, 7.5), (None, 'South Korea'), (None, 7.4), (None, 16.6), (None, 17.1), (None, 18.0), (None, 'Urban/total'), (None, 20.8), (None, 'Total'), (None, 21.5), (None, 'Bangladesh'), (None, 'Germany'), (None, 25.2), (None, 26.0), (None, 25.4), (None, 'Macau'), (None, 'color'), (None, 'France'), (None, 'Urban'), (None, 0.2), (None, 'India'), (None, 0.1), (None, 'Egypt'), (None, 'Country'), (None, 'Indonesia'), (None, 'Persons per square kilometers'), (None, 75.2), (None, 'Australia'), (None, 'Hong Kong'), (None, 'Japan'), (None, 'Singapore'), (None, 'Brazil'), (None, 'Rwanda'), (None, 'orange'), (None, 'blue')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 0.2}]
+  # found 107 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 0.4@Float), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 0.4], 'eqmax', 'Persons per square kilometers'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 0.2@Float), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 0.2], 'eqmax', 'Persons per square kilometers'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Germany@Str), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], 'eqmin', 'Persons per square kilometers'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 0.2@Float), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>=', 'Persons per square kilometers', 0.2], 'eqmin', 'Persons per square kilometers'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 0.1@Float), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>', 'Persons per square kilometers', 0.1], 'eqmin', 'Persons per square kilometers'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, !=, 2, 0.1@Float), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '!=', 'Persons per square kilometers', 0.1], 'eqmin', 'Persons per square kilometers'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 0.5@Float), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 0.5], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 0.5@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 0.5], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 1.0@Float), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 1.0], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 1.0@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 1.0], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 1.8@Float), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 1.8], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 1.8@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 1.8], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 3.9@Float), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 3.9], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 3.9@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 3.9], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 5.1@Float), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 5.1], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 5.1@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 5.1], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 0.4@Float), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 0.4], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 0.4@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 0.4], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 0.4@Float), >=, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 0.4], '>=', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 0.4@Float), >, 2, 0.1@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 0.4], '>', 'Persons per square kilometers', 0.1], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 0.4@Float), !=, 2, 0.1@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 0.4], '!=', 'Persons per square kilometers', 0.1], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2.5@Float), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 2.5], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2.5@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 2.5], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 6.8@Float), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 6.8], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 6.8@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 6.8], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 6.4@Float), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 6.4], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 6.4@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 6.4], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 11.8@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 11.8], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 9.7@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 9.7], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 7.5@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 7.5], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 7.4@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 7.4], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 16.6@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 16.6], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 17.1@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 17.1], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 18.0@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 18.0], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20.8@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 20.8], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 21.5@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 21.5], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 25.2@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 25.2], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 26.0@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 26.0], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 25.4@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 25.4], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 75.2@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Persons per square kilometers', 75.2], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 0.5@Float), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 0.5], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 0.5@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 0.5], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 1.0@Float), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 1.0], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 1.0@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 1.0], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 1.8@Float), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 1.8], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 1.8@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 1.8], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 3.9@Float), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 3.9], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 3.9@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 3.9], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 5.1@Float), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 5.1], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 5.1@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 5.1], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 0.4@Float), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 0.4], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 0.4@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 0.4], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2.5@Float), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 2.5], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2.5@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 2.5], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 6.8@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 6.8], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 6.4@Float), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 6.4], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 6.4@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 6.4], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 11.8@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 11.8], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 9.7@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 9.7], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 7.5@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 7.5], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 7.4@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 7.4], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 16.6@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 16.6], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 17.1@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 17.1], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 18.0@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 18.0], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 20.8@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 20.8], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 21.5@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 21.5], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 25.2@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 25.2], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 26.0@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 26.0], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 25.4@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 25.4], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 0.2@Float), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 0.2], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 0.2@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 0.2], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 0.2@Float), >=, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 0.2], '>=', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 0.2@Float), >, 2, 0.1@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 0.2], '>', 'Persons per square kilometers', 0.1], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 0.2@Float), !=, 2, 0.1@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 0.2], '!=', 'Persons per square kilometers', 0.1], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 75.2@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Persons per square kilometers', 75.2], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <, 2, 0.5@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '<', 'Persons per square kilometers', 0.5], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <, 2, 1.0@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '<', 'Persons per square kilometers', 1.0], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <, 2, 1.8@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '<', 'Persons per square kilometers', 1.8], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <, 2, 3.9@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '<', 'Persons per square kilometers', 3.9], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <, 2, 5.1@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '<', 'Persons per square kilometers', 5.1], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <, 2, 0.4@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '<', 'Persons per square kilometers', 0.4], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <, 2, 2.5@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '<', 'Persons per square kilometers', 2.5], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <, 2, 6.8@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '<', 'Persons per square kilometers', 6.8], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <, 2, 6.4@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '<', 'Persons per square kilometers', 6.4], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <=, 2, 0.5@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '<=', 'Persons per square kilometers', 0.5], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <=, 2, 1.0@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '<=', 'Persons per square kilometers', 1.0], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <=, 2, 1.8@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '<=', 'Persons per square kilometers', 1.8], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <=, 2, 3.9@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '<=', 'Persons per square kilometers', 3.9], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <=, 2, 5.1@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '<=', 'Persons per square kilometers', 5.1], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <=, 2, 0.4@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '<=', 'Persons per square kilometers', 0.4], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <=, 2, 2.5@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '<=', 'Persons per square kilometers', 2.5], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <=, 2, 6.4@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '<=', 'Persons per square kilometers', 6.4], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <=, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '<=', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), ==, 1, Total@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '==', 'Urban/total', 'Total'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), ==, 3, blue@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '==', 'color', 'blue'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), !=, 1, Urban@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '!=', 'Urban/total', 'Urban'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), !=, 2, 6.8@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '!=', 'Persons per square kilometers', 6.8], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), !=, 3, orange@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Germany'], '!=', 'color', 'orange'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Total@Str), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Total'], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Total@Str), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Total'], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Germany@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'Country', 'Germany'], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 0.2@Float), <, 2, 0.4@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Persons per square kilometers', 0.2], '<', 'Persons per square kilometers', 0.4], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 0.2@Float), <=, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Persons per square kilometers', 0.2], '<=', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 0.2@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Persons per square kilometers', 0.2], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 0.1@Float), ==, 2, 0.2@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'Persons per square kilometers', 0.1], '==', 'Persons per square kilometers', 0.2], ['Persons per square kilometers']]
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 0.4@Float), eqmax, 2), ['2'])
+# top-2, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 0.2@Float), eqmax, 2), ['2'])
+# top-3, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Germany@Str), eqmin, 2), ['2'])
+# top-4, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 0.2@Float), eqmin, 2), ['2'])
+# top-5, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 0.1@Float), eqmin, 2), ['2'])
+# top-6, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, !=, 2, 0.1@Float), eqmin, 2), ['2'])
+# top-7, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 0.5@Float), ==, 0, Germany@Str), ['2'])
+# top-8, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 0.5@Float), ==, 2, 0.2@Float), ['2'])
+# top-9, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 1.0@Float), ==, 0, Germany@Str), ['2'])
+# top-10, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 1.0@Float), ==, 2, 0.2@Float), ['2'])
+# top-11, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 1.8@Float), ==, 0, Germany@Str), ['2'])
+# top-12, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 1.8@Float), ==, 2, 0.2@Float), ['2'])
+# top-13, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 3.9@Float), ==, 0, Germany@Str), ['2'])
+# top-14, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 3.9@Float), ==, 2, 0.2@Float), ['2'])
+# top-15, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 5.1@Float), ==, 0, Germany@Str), ['2'])
+# top-16, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 5.1@Float), ==, 2, 0.2@Float), ['2'])
+# top-17, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 0.4@Float), ==, 0, Germany@Str), ['2'])
+# top-18, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 0.4@Float), ==, 2, 0.2@Float), ['2'])
+# top-19, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 0.4@Float), >=, 2, 0.2@Float), ['2'])
+# top-20, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 0.4@Float), >, 2, 0.1@Float), ['2'])
+# top-21, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 0.4@Float), !=, 2, 0.1@Float), ['2'])
+# top-22, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2.5@Float), ==, 0, Germany@Str), ['2'])
+# top-23, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 2.5@Float), ==, 2, 0.2@Float), ['2'])
+# top-24, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 6.8@Float), ==, 0, Germany@Str), ['2'])
+# top-25, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 6.8@Float), ==, 2, 0.2@Float), ['2'])
+# top-26, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 6.4@Float), ==, 0, Germany@Str), ['2'])
+# top-27, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 6.4@Float), ==, 2, 0.2@Float), ['2'])
+# top-28, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 11.8@Float), ==, 2, 0.2@Float), ['2'])
+# top-29, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 9.7@Float), ==, 2, 0.2@Float), ['2'])
+# top-30, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 7.5@Float), ==, 2, 0.2@Float), ['2'])
+# top-31, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 7.4@Float), ==, 2, 0.2@Float), ['2'])
+# top-32, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 16.6@Float), ==, 2, 0.2@Float), ['2'])
+# top-33, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 17.1@Float), ==, 2, 0.2@Float), ['2'])
+# top-34, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 18.0@Float), ==, 2, 0.2@Float), ['2'])
+# top-35, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20.8@Float), ==, 2, 0.2@Float), ['2'])
+# top-36, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 21.5@Float), ==, 2, 0.2@Float), ['2'])
+# top-37, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 25.2@Float), ==, 2, 0.2@Float), ['2'])
+# top-38, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 26.0@Float), ==, 2, 0.2@Float), ['2'])
+# top-39, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 25.4@Float), ==, 2, 0.2@Float), ['2'])
+# top-40, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 75.2@Float), ==, 2, 0.2@Float), ['2'])
+# top-41, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 0.5@Float), ==, 0, Germany@Str), ['2'])
+# top-42, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 0.5@Float), ==, 2, 0.2@Float), ['2'])
+# top-43, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 1.0@Float), ==, 0, Germany@Str), ['2'])
+# top-44, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 1.0@Float), ==, 2, 0.2@Float), ['2'])
+# top-45, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 1.8@Float), ==, 0, Germany@Str), ['2'])
+# top-46, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 1.8@Float), ==, 2, 0.2@Float), ['2'])
+# top-47, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 3.9@Float), ==, 0, Germany@Str), ['2'])
+# top-48, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 3.9@Float), ==, 2, 0.2@Float), ['2'])
+# top-49, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 5.1@Float), ==, 0, Germany@Str), ['2'])
+# top-50, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 5.1@Float), ==, 2, 0.2@Float), ['2'])
+# top-51, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 0.4@Float), ==, 0, Germany@Str), ['2'])
+# top-52, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 0.4@Float), ==, 2, 0.2@Float), ['2'])
+# top-53, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2.5@Float), ==, 0, Germany@Str), ['2'])
+# top-54, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2.5@Float), ==, 2, 0.2@Float), ['2'])
+# top-55, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 6.8@Float), ==, 2, 0.2@Float), ['2'])
+# top-56, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 6.4@Float), ==, 0, Germany@Str), ['2'])
+# top-57, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 6.4@Float), ==, 2, 0.2@Float), ['2'])
+# top-58, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 11.8@Float), ==, 2, 0.2@Float), ['2'])
+# top-59, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 9.7@Float), ==, 2, 0.2@Float), ['2'])
+# top-60, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 7.5@Float), ==, 2, 0.2@Float), ['2'])
+# top-61, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 7.4@Float), ==, 2, 0.2@Float), ['2'])
+# top-62, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 16.6@Float), ==, 2, 0.2@Float), ['2'])
+# top-63, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 17.1@Float), ==, 2, 0.2@Float), ['2'])
+# top-64, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 18.0@Float), ==, 2, 0.2@Float), ['2'])
+# top-65, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 20.8@Float), ==, 2, 0.2@Float), ['2'])
+# top-66, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 21.5@Float), ==, 2, 0.2@Float), ['2'])
+# top-67, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 25.2@Float), ==, 2, 0.2@Float), ['2'])
+# top-68, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 26.0@Float), ==, 2, 0.2@Float), ['2'])
+# top-69, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 25.4@Float), ==, 2, 0.2@Float), ['2'])
+# top-70, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 0.2@Float), ==, 0, Germany@Str), ['2'])
+# top-71, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 0.2@Float), ==, 2, 0.2@Float), ['2'])
+# top-72, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 0.2@Float), >=, 2, 0.2@Float), ['2'])
+# top-73, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 0.2@Float), >, 2, 0.1@Float), ['2'])
+# top-74, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 0.2@Float), !=, 2, 0.1@Float), ['2'])
+# top-75, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 75.2@Float), ==, 2, 0.2@Float), ['2'])
+# top-76, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <, 2, 0.5@Float), ['2'])
+# top-77, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <, 2, 1.0@Float), ['2'])
+# top-78, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <, 2, 1.8@Float), ['2'])
+# top-79, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <, 2, 3.9@Float), ['2'])
+# top-80, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <, 2, 5.1@Float), ['2'])
+# top-81, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <, 2, 0.4@Float), ['2'])
+# top-82, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <, 2, 2.5@Float), ['2'])
+# top-83, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <, 2, 6.8@Float), ['2'])
+# top-84, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <, 2, 6.4@Float), ['2'])
+# top-85, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <=, 2, 0.5@Float), ['2'])
+# top-86, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <=, 2, 1.0@Float), ['2'])
+# top-87, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <=, 2, 1.8@Float), ['2'])
+# top-88, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <=, 2, 3.9@Float), ['2'])
+# top-89, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <=, 2, 5.1@Float), ['2'])
+# top-90, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <=, 2, 0.4@Float), ['2'])
+# top-91, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <=, 2, 2.5@Float), ['2'])
+# top-92, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <=, 2, 6.4@Float), ['2'])
+# top-93, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), <=, 2, 0.2@Float), ['2'])
+# top-94, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), ==, 1, Total@Str), ['2'])
+# top-95, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), ==, 2, 0.2@Float), ['2'])
+# top-96, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), ==, 3, blue@Str), ['2'])
+# top-97, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), !=, 1, Urban@Str), ['2'])
+# top-98, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), !=, 2, 6.8@Float), ['2'])
+# top-99, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Germany@Str), !=, 3, orange@Str), ['2'])
+# top-100, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Total@Str), ==, 0, Germany@Str), ['2'])
+# top-101, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Total@Str), ==, 2, 0.2@Float), ['2'])
+# top-102, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Germany@Str), ['2'])
+# top-103, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 2, 0.2@Float), ['2'])
+# top-104, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 0.2@Float), <, 2, 0.4@Float), ['2'])
+# top-105, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 0.2@Float), <=, 2, 0.2@Float), ['2'])
+# top-106, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 0.2@Float), ==, 2, 0.2@Float), ['2'])
+# top-107, score: 0.00, answer: [0.2]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 0.1@Float), ==, 2, 0.2@Float), ['2'])

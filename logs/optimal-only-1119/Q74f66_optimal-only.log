@@ -1,0 +1,125 @@
+# parsed arguments: Namespace(benchmark='Q74f66', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'0.4', '9.7', 'macau', '7.5', 'persons', 'per', 'color', '0.5', '0.1', '1.8', 'total', 'monaco', 'india', 'brazil', '6.8', '6.4', 'korea', 'bangladesh', 'country', 'rwanda', '18.0', 'orange', 'south', 'urban/total', '75.2', '1.0', 'blue', 'hong', '7.4', '25.2', 'germany', 'kilometers', 'egypt', '2.5', 'japan', '16.6', '21.5', 'square', '5.1', '26.0', 'indonesia', 'kong', 'maldives', 'urban', '17.1', '20.8', '25.4', '3.9', 'australia', 'france', '11.8', '0.2', 'singapore'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+        Country Urban/total  Persons per square kilometers   color
+0         Macau       Urban                           26.0  orange
+1         Macau       Total                           20.8    blue
+2         Japan       Urban                            3.9  orange
+3         Japan       Total                            0.5    blue
+4      Maldives       Urban                           21.5  orange
+5      Maldives       Total                            1.0    blue
+6        Rwanda       Urban                           18.0  orange
+7        Rwanda       Total                            0.5    blue
+8        Monaco       Urban                           17.1  orange
+9        Monaco       Total                           17.1    blue
+10    Australia       Urban                            1.8    blue
+11   Bangladesh       Urban                           75.2  orange
+12   Bangladesh       Total                            1.0    blue
+13    Indonesia       Urban                           16.6  orange
+14    Indonesia       Total                            0.1    blue
+15        Egypt       Urban                            5.1  orange
+16        Egypt       Total                            0.1    blue
+17        India       Urban                           25.2  orange
+18        India       Total                            0.4    blue
+19       France       Urban                            2.5  orange
+20       France       Total                            0.1    blue
+21      Germany       Urban                            6.8  orange
+22      Germany       Total                            0.2    blue
+23  South Korea       Urban                           11.8  orange
+24  South Korea       Total                            0.5    blue
+25    Hong Kong       Urban                           25.4  orange
+26    Hong Kong       Total                            6.4    blue
+27       Brazil       Urban                            9.7    blue
+28    Singapore       Urban                            7.5  orange
+29    Singapore       Total                            7.4    blue
+# query is: Of the countries and regions listed, which has the lowest number of persons per square kilometer of urban areas?
+# expected output type:[dtype('O')]
+# expected output is:
+      ANSWER
+0  Australia
+# inferred DSL terminals:
+  # ConstVal: ['Country@Str', 'Persons per square kilometers@Str', 'Urban/total@Str', 'Urban@Str', '<NULL>']
+     # cmap: [('urban', 'Urban/total'), ('per', 'Persons per square kilometers'), ('square', 'Persons per square kilometers'), ('countries', 'Country'), ('kilometer', 'Persons per square kilometers'), ('persons', 'Persons per square kilometers'), ('urban', 'Urban')]
+  # AggrFunc: ['min', 'count', '<NULL>']
+     # amap: [('lowest', 'min'), ('number', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('lowest', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Germany'}]
+  # found 0 program(s)
+# (t=8.31) i=1, candidate=[{'ANSWER': 'Australia'}, {'ANSWER': 'Germany'}]
+  # found 0 program(s)
+# (t=16.44) i=2, candidate=[{'ANSWER': 'Australia'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Urban@Str), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Urban'], 'eqmin', 'Persons per square kilometers'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Urban@Str), ==, 1, Urban@Str), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Urban'], '==', 'Urban/total', 'Urban'], 'eqmin', 'Persons per square kilometers'], ['Country']]
+# (t=24.97) i=3, candidate=[{'ANSWER': 'Germany'}, {'ANSWER': 'Maldives'}]
+  # found 0 program(s)
+# (t=33.33) i=4, candidate=[{'ANSWER': 'Germany'}, {'ANSWER': 'Monaco'}]
+  # found 0 program(s)
+# (t=41.75) i=5, candidate=[{'ANSWER': 'Germany'}, {'ANSWER': 'Rwanda'}]
+  # found 0 program(s)
+# (t=50.12) i=6, candidate=[{'ANSWER': 'Bangladesh'}, {'ANSWER': 'Germany'}]
+  # found 0 program(s)
+# (t=58.18) i=7, candidate=[{'ANSWER': 'Germany'}, {'ANSWER': 'Macau'}]
+  # found 0 program(s)
+# (t=66.70) i=8, candidate=[{'ANSWER': 'France'}, {'ANSWER': 'Germany'}]
+  # found 0 program(s)
+# (t=75.05) i=9, candidate=[{'ANSWER': 'Germany'}, {'ANSWER': 'Japan'}]
+  # found 0 program(s)
+# (t=83.46) i=10, candidate=[{'ANSWER': 'Germany'}, {'ANSWER': 'Indonesia'}]
+  # found 0 program(s)
+# (t=91.56) i=11, candidate=[{'ANSWER': 'Germany'}, {'ANSWER': 'India'}]
+  # found 0 program(s)
+# (t=100.08) i=12, candidate=[{'ANSWER': 'Australia'}, {'ANSWER': 'Maldives'}]
+  # found 0 program(s)
+# (t=108.46) i=13, candidate=[{'ANSWER': 'Australia'}, {'ANSWER': 'Monaco'}]
+  # found 0 program(s)
+# (t=116.86) i=14, candidate=[{'ANSWER': 'Australia'}, {'ANSWER': 'Rwanda'}]
+  # found 0 program(s)
+# (t=124.92) i=15, candidate=[{'ANSWER': 'Australia'}, {'ANSWER': 'Bangladesh'}]
+  # found 0 program(s)
+# (t=133.46) i=16, candidate=[{'ANSWER': 'Australia'}, {'ANSWER': 'Macau'}]
+  # found 0 program(s)
+# (t=141.84) i=17, candidate=[{'ANSWER': 'Australia'}, {'ANSWER': 'France'}]
+  # found 0 program(s)
+# (t=149.94) i=18, candidate=[{'ANSWER': 'Australia'}, {'ANSWER': 'Japan'}]
+  # found 0 program(s)
+# (t=158.45) i=19, candidate=[{'ANSWER': 'Australia'}, {'ANSWER': 'Indonesia'}]
+  # found 0 program(s)
+# (t=166.77) i=20, candidate=[{'ANSWER': 'Australia'}, {'ANSWER': 'India'}]
+  # found 0 program(s)
+# (t=175.15) i=21, candidate=[{'ANSWER': 'Maldives'}]
+  # found 0 program(s)
+# (t=183.54) i=22, candidate=[{'ANSWER': 'Maldives'}, {'ANSWER': 'Monaco'}]
+  # found 0 program(s)
+# (t=191.60) i=23, candidate=[{'ANSWER': 'Maldives'}, {'ANSWER': 'Rwanda'}]
+  # found 0 program(s)
+# (t=200.11) i=24, candidate=[{'ANSWER': 'Bangladesh'}, {'ANSWER': 'Maldives'}]
+  # found 0 program(s)
+# (t=208.50) i=25, candidate=[{'ANSWER': 'Macau'}, {'ANSWER': 'Maldives'}]
+  # found 0 program(s)
+# (t=216.88) i=26, candidate=[{'ANSWER': 'France'}, {'ANSWER': 'Maldives'}]
+  # found 0 program(s)
+# (t=224.98) i=27, candidate=[{'ANSWER': 'Japan'}, {'ANSWER': 'Maldives'}]
+  # found 0 program(s)
+# (t=233.45) i=28, candidate=[{'ANSWER': 'Indonesia'}, {'ANSWER': 'Maldives'}]
+  # found 0 program(s)
+# (t=241.81) i=29, candidate=[{'ANSWER': 'India'}, {'ANSWER': 'Maldives'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.47, answer: ['Australia']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Urban@Str), eqmin, 2), ['0'])
+# top-2, score: 2.44, answer: ['Australia']
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Urban@Str), ==, 1, Urban@Str), eqmin, 2), ['0'])

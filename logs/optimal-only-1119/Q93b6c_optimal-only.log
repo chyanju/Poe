@@ -1,0 +1,51 @@
+# parsed arguments: Namespace(benchmark='Q93b6c', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'x-houston', 'division', '41', 'detroit', 'hawks', 'cleveland', 'y-atlanta', 'color', 'antonio', '45', 'cavaliers', '66', 'pistons', 'pacers', 'rockets', 'l', 'indiana', '32', 'x-san', 'spurs', 'blue', 'central'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+      Central Division   L color
+0      y-Atlanta Hawks  32  blue
+1    x-Houston Rockets  41  blue
+2  x-San Antonio Spurs  41  blue
+3  Cleveland Cavaliers  45  blue
+4       Indiana Pacers  45  blue
+5      Detroit Pistons  66  blue
+# query is: How many points did the Cleveland Cavaliers score?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      45
+# inferred DSL terminals:
+  # ConstVal: ['Cleveland Cavaliers@Str', '<NULL>']
+     # cmap: [('cavaliers', 'Cleveland Cavaliers'), ('cleveland', 'Cleveland Cavaliers')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 45}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), ==, 0, Cleveland Cavaliers@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Central Division', 'Cleveland Cavaliers'], '==', 'Central Division', 'Cleveland Cavaliers'], ['L']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), ==, 0, Cleveland Cavaliers@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Central Division', 'Cleveland Cavaliers'], '==', 'Central Division', 'Cleveland Cavaliers'], ['L']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Central Division', 'Cleveland Cavaliers'], ['L']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Central Division', 'Cleveland Cavaliers'], ['L']]
+
+# ========== review report ========== #
+# top-1, score: 2.39, answer: [45]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), ['1'])
+# top-2, score: 2.39, answer: [45]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), ['-99', '-2'])
+# top-3, score: 2.34, answer: [45]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), ==, 0, Cleveland Cavaliers@Str), ['1'])
+# top-4, score: 2.34, answer: [45]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), ==, 0, Cleveland Cavaliers@Str), ['-99', '-2'])

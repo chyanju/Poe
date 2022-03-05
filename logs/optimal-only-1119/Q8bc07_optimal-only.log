@@ -1,0 +1,126 @@
+# parsed arguments: Namespace(benchmark='Q8bc07', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'blue', '1', '484.81', '220.0', '526.8', '495.85', 'sep', '417.94', '378.53', 'jun', '529.94', '338.53', '404.91', '2009', '337.99', '2008', '190.64', '526.42', '432.66', '515.25', '585.8', '316.46', '460.48', '574.29', '294.15', '348.06', '564.3', '362.62', '277.27', '195.62', '180.51', '400.52', '501.5', '2007', '473.75', '536.12', '476.39', '463.29', 'jan', '471.38', 'feb', 'oct', '510.0', 'aug', '443.05', '440.47', '287.76', 'color', '372.14', '401.9', '458.16', '359.36', 'nov', 'dec', '421.59', '691.48', '187.99', '693.0', '497.91', '449.45', '181.98', '417.23', 'date', 'mar', '395.97', 'jul', '192.79', '419.33', '707.0', '583.0', '292.96', '2004', '471.18', '2005', '2010', '522.7', '129.6', '286.0', '307.65', '2006', 'price', '102.37', '390.0', '619.98', '560.19', '386.6', '414.86', 'may', '371.82', 'apr', '567.27', '461.67'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+          date   price color
+0   Aug 1 2004  102.37  blue
+1   Sep 1 2004  129.60  blue
+2   Oct 1 2004  190.64  blue
+3   Nov 1 2004  181.98  blue
+4   Dec 1 2004  192.79  blue
+..         ...     ...   ...
+63  Nov 1 2009  583.00  blue
+64  Dec 1 2009  619.98  blue
+65  Jan 1 2010  529.94  blue
+66  Feb 1 2010  526.80  blue
+67  Mar 1 2010  560.19  blue
+
+[68 rows x 3 columns]
+# query is: The stock price was lowest at what date
+# expected output type:[dtype('O')]
+# expected output is:
+       ANSWER
+0  Aug 1 2004
+# inferred DSL terminals:
+  # ConstVal: ['price@Str', 'date@Str', '<NULL>']
+     # cmap: [('date', 'date'), ('price', 'price')]
+  # AggrFunc: ['min', '<NULL>']
+     # amap: [('lowest', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('lowest', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Aug 1 2004'}]
+  # found 10 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['date'], 'min', 'price'], 'eqmin', 'COL0'], ['date']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['date'], 'min', 'price'], 'eqmin', 'COL0'], ['date']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['date', 'price'], 'min', 'price'], 'eqmin', 'price'], ['date']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['date', 'price'], 'min', 'price'], 'eqmin', 'price'], ['date']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['date', 'price'], 'min', 'price'], 'eqmin', 'COL0'], ['date']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['date', 'price'], 'min', 'price'], 'eqmin', 'COL0'], ['date']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['date', 'color'], 'min', 'price'], 'eqmin', 'COL0'], ['date']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['date', 'color'], 'min', 'price'], 'eqmin', 'COL0'], ['date']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'price'], ['date']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'price'], ['date']]
+# (t=1.32) i=1, candidate=[{'ANSWER': 'Oct 1 2009'}]
+  # found 0 program(s)
+# (t=2.59) i=2, candidate=[{'ANSWER': 'Nov 1 2009'}]
+  # found 0 program(s)
+# (t=3.87) i=3, candidate=[{'ANSWER': 'Dec 1 2009'}]
+  # found 0 program(s)
+# (t=5.14) i=4, candidate=[{'ANSWER': 'Jan 1 2010'}]
+  # found 0 program(s)
+# (t=6.42) i=5, candidate=[{'ANSWER': 'Feb 1 2010'}]
+  # found 0 program(s)
+# (t=7.70) i=6, candidate=[{'ANSWER': 'Mar 1 2010'}]
+  # found 0 program(s)
+# (t=8.98) i=7, candidate=[{'ANSWER': 'Feb 1 2005'}]
+  # found 0 program(s)
+# (t=10.55) i=8, candidate=[{'ANSWER': 'Sep 1 2004'}]
+  # found 0 program(s)
+# (t=11.81) i=9, candidate=[{'ANSWER': 'Nov 1 2007'}]
+  # found 0 program(s)
+# (t=13.08) i=10, candidate=[{'ANSWER': 'Jul 1 2005'}]
+  # found 0 program(s)
+# (t=14.34) i=11, candidate=[{'ANSWER': 'Nov 1 2004'}]
+  # found 0 program(s)
+# (t=15.60) i=12, candidate=[{'ANSWER': 'Mar 1 2005'}]
+  # found 0 program(s)
+# (t=16.87) i=13, candidate=[{'ANSWER': 'Jan 1 2008'}]
+  # found 0 program(s)
+# (t=18.12) i=14, candidate=[{'ANSWER': 'Jun 1 2005'}]
+  # found 0 program(s)
+# (t=19.38) i=15, candidate=[{'ANSWER': 'Apr 1 2007'}]
+  # found 0 program(s)
+# (t=20.64) i=16, candidate=[{'ANSWER': 'May 1 2008'}]
+  # found 0 program(s)
+# (t=21.90) i=17, candidate=[{'ANSWER': 'Jan 1 2005'}]
+  # found 0 program(s)
+# (t=23.16) i=18, candidate=[{'ANSWER': 'Dec 1 2007'}]
+  # found 0 program(s)
+# (t=24.74) i=19, candidate=[{'ANSWER': 'May 1 2005'}]
+  # found 0 program(s)
+# (t=26.01) i=20, candidate=[{'ANSWER': 'Jan 1 2009'}]
+  # found 0 program(s)
+# (t=27.27) i=21, candidate=[{'ANSWER': 'Jun 1 2009'}]
+  # found 0 program(s)
+# (t=28.54) i=22, candidate=[{'ANSWER': 'Dec 1 2004'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.54, answer: ['Aug 1 2004']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+# top-2, score: 1.54, answer: ['Aug 1 2004']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+# top-3, score: 1.48, answer: ['Aug 1 2004']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+# top-4, score: 1.48, answer: ['Aug 1 2004']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+# top-5, score: 1.47, answer: ['Aug 1 2004']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+# top-6, score: 1.47, answer: ['Aug 1 2004']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+# top-7, score: 1.47, answer: ['Aug 1 2004']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+# top-8, score: 1.47, answer: ['Aug 1 2004']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-9, score: 1.47, answer: ['Aug 1 2004']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+# top-10, score: 1.47, answer: ['Aug 1 2004']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])

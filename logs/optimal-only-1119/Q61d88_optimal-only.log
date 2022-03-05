@@ -1,0 +1,103 @@
+# parsed arguments: Namespace(benchmark='Q61d88', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'27.6', '(aubach)', 'perf', '39.1', '55.0', '39.7', '19.1', '8.3', '49.7', 'mühlbach', 'name', '29.0', 'elbbach', 'kallenbach', 'ohm', 'lumda', '8.4', '13.6', 'color', '6.3', 'bieber', '22.9', '11.7', '20.0', 'emsbach', 'iserbach', 'feudinge', '26.9', 'wetschaft', '14.6', 'aar', 'wetzbach', '(rppersbach)', 'dörsbach', '32.0', '24.3', '(möttbach)', '24.6', 'ilse', 'weil', '8.8', '30.0', 'length', 'dill', '19.2', '20.7', 'wieseck', 'kerkerbach', 'dautphe', 'allna', '11.5', 'solmsbach', 'blue', 'zwester', 'kleebach', '32.1', 'laasphe', 'salzböde', 'banfe', '59.7', '46.6', 'ulmbach', 'gelbach', '40.7'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                     Name  Length color
+0   Feudinge (Rppersbach)     6.3  blue
+1                    Ilse     8.4  blue
+2                   Banfe    11.5  blue
+3                 Laasphe     8.3  blue
+4                    Perf    20.0  blue
+5                 Dautphe     8.8  blue
+6               Wetschaft    29.0  blue
+7                     Ohm    59.7  blue
+8                   Allna    19.1  blue
+9             Zwester Ohm    20.0  blue
+10               Salzböde    27.6  blue
+11                  Lumda    30.0  blue
+12                Wieseck    24.3  blue
+13                 Bieber    13.6  blue
+14               Kleebach    26.9  blue
+15               Wetzbach    11.7  blue
+16                   Dill    55.0  blue
+17              Solmsbach    24.6  blue
+18    Iserbach (Möttbach)    19.2  blue
+19                Ulmbach    22.9  blue
+20             Kallenbach    14.6  blue
+21                   Weil    46.6  blue
+22             Kerkerbach    20.7  blue
+23                Emsbach    39.1  blue
+24                Elbbach    40.7  blue
+25                    Aar    49.7  blue
+26               Dörsbach    32.0  blue
+27       Gelbach (Aubach)    39.7  blue
+28               Mühlbach    32.1  blue
+29                Emsbach    11.5  blue
+# query is: Which  bird is the longest in length?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0    Ohm
+# inferred DSL terminals:
+  # ConstVal: ['Length@Str', 'Iserbach (Möttbach)@Str', 'Gelbach (Aubach)@Str', 'Feudinge (Rppersbach)@Str', '<NULL>']
+     # cmap: [('', 'Gelbach (Aubach)'), ('', 'Iserbach (Möttbach)'), ('length', 'Length'), ('', 'Feudinge (Rppersbach)')]
+  # AggrFunc: ['max', '<NULL>']
+     # amap: [('longest', 'max')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('longest', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Ohm'}]
+  # found 10 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Name'], 'max', 'Length'], 'eqmax', 'COL0'], ['Name']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Name'], 'max', 'Length'], 'eqmax', 'COL0'], ['Name']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Name', 'Length'], 'max', 'Length'], 'eqmax', 'Length'], ['Name']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Name', 'Length'], 'max', 'Length'], 'eqmax', 'Length'], ['Name']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Name', 'Length'], 'max', 'Length'], 'eqmax', 'COL0'], ['Name']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Name', 'Length'], 'max', 'Length'], 'eqmax', 'COL0'], ['Name']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Name', 'color'], 'max', 'Length'], 'eqmax', 'COL0'], ['Name']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Name', 'color'], 'max', 'Length'], 'eqmax', 'COL0'], ['Name']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'Length'], ['Name']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'Length'], ['Name']]
+# (t=4.32) i=1, candidate=[{'ANSWER': 'Dill'}]
+  # found 0 program(s)
+# (t=8.56) i=2, candidate=[{'ANSWER': 'Mühlbach'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.42, answer: ['Ohm']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+# top-2, score: 1.42, answer: ['Ohm']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+# top-3, score: 1.35, answer: ['Ohm']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+# top-4, score: 1.35, answer: ['Ohm']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+# top-5, score: 1.34, answer: ['Ohm']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+# top-6, score: 1.34, answer: ['Ohm']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+# top-7, score: 1.34, answer: ['Ohm']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+# top-8, score: 1.34, answer: ['Ohm']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+# top-9, score: 1.34, answer: ['Ohm']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+# top-10, score: 1.34, answer: ['Ohm']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])

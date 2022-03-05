@@ -1,0 +1,145 @@
+# parsed arguments: Namespace(benchmark='Qa256d', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'39', '41', '40', 'brazil', 'italy', 'response', 'france', 'country', 'no', 'japan', 'poland', '30', '37', '27', 'most', '48', '35', 'tunisia', '57', '15', '24', '73', 'jordan', '56', 'czech', '53', 'work', 'egypt', 'percentage', 'u.s.', 'if', '45', '64', '67', '46', 'india', 'germany', '51', '42', '33', 'britain', '54', '20', 'china', '59', '69', '81', 'spain', 'blue', '65', 'mexico', 'pakistan', '32', '50', 'turkey', 'rep.', 'guarantee', 'lebanon', 'russia', '43', '77', 'hard', 'greece', 'color', 'orange', '31', 'succeed'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       country                   response  percentage   color
+0         U.S.     Hard work no guarantee          20    blue
+1         U.S.  Most succeed if work hard          77  orange
+2      Britain     Hard work no guarantee          41    blue
+3      Britain  Most succeed if work hard          57  orange
+4        Spain     Hard work no guarantee          43    blue
+5        Spain  Most succeed if work hard          56  orange
+6   Czech Rep.     Hard work no guarantee          43    blue
+7   Czech Rep.  Most succeed if work hard          54  orange
+8      Germany     Hard work no guarantee          48    blue
+9      Germany  Most succeed if work hard          51  orange
+10      Poland     Hard work no guarantee          43    blue
+11      Poland  Most succeed if work hard          48  orange
+12      France     Hard work no guarantee          54    blue
+13      France  Most succeed if work hard          46  orange
+14       Italy     Hard work no guarantee          46    blue
+15       Italy  Most succeed if work hard          43  orange
+16      Greece     Hard work no guarantee          51    blue
+17      Greece  Most succeed if work hard          43  orange
+18      Russia     Hard work no guarantee          53    blue
+19      Russia  Most succeed if work hard          35  orange
+20    Pakistan     Hard work no guarantee          15    blue
+21    Pakistan  Most succeed if work hard          81  orange
+22     Tunisia     Hard work no guarantee          24    blue
+23     Tunisia  Most succeed if work hard          73  orange
+24      Jordan     Hard work no guarantee          37    blue
+25      Jordan  Most succeed if work hard          57  orange
+26       Egypt     Hard work no guarantee          42    blue
+27       Egypt  Most succeed if work hard          53  orange
+28      Turkey     Hard work no guarantee          39    blue
+29      Turkey  Most succeed if work hard          50  orange
+30     Lebanon     Hard work no guarantee          64    blue
+31     Lebanon  Most succeed if work hard          32  orange
+32       India     Hard work no guarantee          27    blue
+33       India  Most succeed if work hard          67  orange
+34       China     Hard work no guarantee          33    blue
+35       China  Most succeed if work hard          45  orange
+36       Japan     Hard work no guarantee          59    blue
+37       Japan  Most succeed if work hard          40  orange
+38      Brazil     Hard work no guarantee          30    blue
+39      Brazil  Most succeed if work hard          69  orange
+40      Mexico     Hard work no guarantee          31    blue
+41      Mexico  Most succeed if work hard          65  orange
+# query is: What is value of orange bar in Brazil?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      69
+# inferred DSL terminals:
+  # ConstVal: ['Brazil@Str', 'orange@Str', '<NULL>']
+     # cmap: [('orange', 'orange'), ('brazil', 'Brazil')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 69}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Brazil@Str), ==, 3, orange@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'country', 'Brazil'], '==', 'color', 'orange'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, orange@Str), ==, 0, Brazil@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'orange'], '==', 'country', 'Brazil'], ['percentage']]
+# (t=1.89) i=1, candidate=[{'ANSWER': 69}, {'ANSWER': 77}]
+  # found 0 program(s)
+# (t=3.76) i=2, candidate=[{'ANSWER': 57}, {'ANSWER': 69}]
+  # found 0 program(s)
+# (t=5.63) i=3, candidate=[{'ANSWER': 65}, {'ANSWER': 69}]
+  # found 0 program(s)
+# (t=7.72) i=4, candidate=[{'ANSWER': 40}, {'ANSWER': 69}]
+  # found 0 program(s)
+# (t=9.57) i=5, candidate=[{'ANSWER': 67}, {'ANSWER': 69}]
+  # found 0 program(s)
+# (t=11.41) i=6, candidate=[{'ANSWER': 43}, {'ANSWER': 69}]
+  # found 0 program(s)
+# (t=13.27) i=7, candidate=[{'ANSWER': 50}, {'ANSWER': 69}]
+  # found 0 program(s)
+# (t=15.12) i=8, candidate=[{'ANSWER': 20}, {'ANSWER': 69}]
+  # found 0 program(s)
+# (t=17.29) i=9, candidate=[{'ANSWER': 46}, {'ANSWER': 69}]
+  # found 0 program(s)
+# (t=19.15) i=10, candidate=[{'ANSWER': 51}, {'ANSWER': 69}]
+  # found 0 program(s)
+# (t=21.01) i=11, candidate=[{'ANSWER': 30}, {'ANSWER': 69}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Brazil@Str), ==, 0, Brazil@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'country', 'Brazil'], '==', 'country', 'Brazil'], ['percentage']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Brazil@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'country', 'Brazil'], ['percentage']]
+# (t=22.87) i=12, candidate=[{'ANSWER': 35}, {'ANSWER': 69}]
+  # found 0 program(s)
+# (t=24.74) i=13, candidate=[{'ANSWER': 69}, {'ANSWER': 73}]
+  # found 0 program(s)
+# (t=26.61) i=14, candidate=[{'ANSWER': 32}, {'ANSWER': 69}]
+  # found 0 program(s)
+# (t=28.81) i=15, candidate=[{'ANSWER': 56}, {'ANSWER': 69}]
+  # found 0 program(s)
+# (t=30.66) i=16, candidate=[{'ANSWER': 53}, {'ANSWER': 69}]
+  # found 0 program(s)
+# (t=32.51) i=17, candidate=[{'ANSWER': 48}, {'ANSWER': 69}]
+  # found 0 program(s)
+# (t=34.35) i=18, candidate=[{'ANSWER': 45}, {'ANSWER': 69}]
+  # found 0 program(s)
+# (t=36.20) i=19, candidate=[{'ANSWER': 69}, {'ANSWER': 81}]
+  # found 0 program(s)
+# (t=38.32) i=20, candidate=[{'ANSWER': 54}, {'ANSWER': 69}]
+  # found 0 program(s)
+# (t=40.17) i=21, candidate=[{'ANSWER': 31}, {'ANSWER': 69}]
+  # found 0 program(s)
+# (t=42.02) i=22, candidate=[{'ANSWER': 77}]
+  # found 0 program(s)
+# (t=43.87) i=23, candidate=[{'ANSWER': 57}, {'ANSWER': 77}]
+  # found 0 program(s)
+# (t=45.73) i=24, candidate=[{'ANSWER': 65}, {'ANSWER': 77}]
+  # found 0 program(s)
+# (t=47.86) i=25, candidate=[{'ANSWER': 40}, {'ANSWER': 77}]
+  # found 0 program(s)
+# (t=49.73) i=26, candidate=[{'ANSWER': 67}, {'ANSWER': 77}]
+  # found 0 program(s)
+# (t=51.60) i=27, candidate=[{'ANSWER': 43}, {'ANSWER': 77}]
+  # found 0 program(s)
+# (t=53.47) i=28, candidate=[{'ANSWER': 50}, {'ANSWER': 77}]
+  # found 0 program(s)
+# (t=55.35) i=29, candidate=[{'ANSWER': 20}, {'ANSWER': 77}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.34, answer: [69]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Brazil@Str), ==, 3, orange@Str), ['2'])
+# top-2, score: 2.34, answer: [69]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, orange@Str), ==, 0, Brazil@Str), ['2'])
+# top-3, score: 2.27, answer: [30, 69]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Brazil@Str), ['2'])
+# top-4, score: 2.22, answer: [30, 69]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Brazil@Str), ==, 0, Brazil@Str), ['2'])

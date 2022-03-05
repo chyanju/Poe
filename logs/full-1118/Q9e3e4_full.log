@@ -1,0 +1,75 @@
+# parsed arguments: Namespace(benchmark='Q9e3e4', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'20.7', 'wetzbach', 'wetschaft', 'allna', 'zwester', 'dill', 'dautphe', '29.0', '8.4', 'laasphe', '19.2', '24.6', '40.7', '20.0', 'dörsbach', 'name', 'weil', 'emsbach', '24.3', 'gelbach', '49.7', '(rppersbach)', 'iserbach', '8.8', 'elbbach', '39.7', '32.1', '13.6', 'solmsbach', '27.6', '19.1', 'kallenbach', '59.7', 'blue', '46.6', '8.3', '6.3', '11.5', '14.6', 'ilse', '55.0', 'banfe', '30.0', 'lumda', 'perf', 'kerkerbach', '39.1', 'mühlbach', 'aar', '32.0', 'color', 'ohm', 'feudinge', 'bieber', 'kleebach', '26.9', 'ulmbach', '(aubach)', 'wieseck', '(möttbach)', 'length', 'salzböde', '11.7', '22.9'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                     Name  Length color
+0   Feudinge (Rppersbach)     6.3  blue
+1                    Ilse     8.4  blue
+2                   Banfe    11.5  blue
+3                 Laasphe     8.3  blue
+4                    Perf    20.0  blue
+5                 Dautphe     8.8  blue
+6               Wetschaft    29.0  blue
+7                     Ohm    59.7  blue
+8                   Allna    19.1  blue
+9             Zwester Ohm    20.0  blue
+10               Salzböde    27.6  blue
+11                  Lumda    30.0  blue
+12                Wieseck    24.3  blue
+13                 Bieber    13.6  blue
+14               Kleebach    26.9  blue
+15               Wetzbach    11.7  blue
+16                   Dill    55.0  blue
+17              Solmsbach    24.6  blue
+18    Iserbach (Möttbach)    19.2  blue
+19                Ulmbach    22.9  blue
+20             Kallenbach    14.6  blue
+21                   Weil    46.6  blue
+22             Kerkerbach    20.7  blue
+23                Emsbach    39.1  blue
+24                Elbbach    40.7  blue
+25                    Aar    49.7  blue
+26               Dörsbach    32.0  blue
+27       Gelbach (Aubach)    39.7  blue
+28               Mühlbach    32.1  blue
+29                Emsbach    11.5  blue
+# query is: How much shorter in length is the Dautphe than the Dill?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0    46.2
+# inferred DSL terminals:
+  # ConstVal: ['Dautphe@Str', 'Dill@Str', 'Length@Str', '<NULL>']
+     # cmap: [('dautphe', 'Dautphe'), ('dill', 'Dill'), ('length', 'Length')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('shorter', '-')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(46.2, 4), (-46.2, 4)]
+  # [debug] high_values (no dup.): [(50.900000000000006, 2), (48.7, 2), (46.7, 2), (46.6, 2), (43.5, 2), (43.5, 2), (43.3, 2), (41.4, 2), (40.900000000000006, 2), (40.4, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=1.47) i=1, candidate=[{'ANSWER': 46.2}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Dill@Str, Dautphe@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Name', 'Dill', 'Dautphe', 'Length']
+# (t=2.93) i=2, candidate=[{'ANSWER': -46.2}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Dautphe@Str, Dill@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Name', 'Dautphe', 'Dill', 'Length']
+
+# ========== review report ========== #
+# top-1, score: 2.51, answer: 46.2
+  # tprog: Contrast(@param0, -, 0, Dill@Str, Dautphe@Str, 1)
+# top-2, score: 2.51, answer: -46.2
+  # tprog: Contrast(@param0, -, 0, Dautphe@Str, Dill@Str, 1)

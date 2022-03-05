@@ -1,0 +1,83 @@
+# parsed arguments: Namespace(benchmark='Qc757c', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'gray', '9310714', '30', 'people', '9518507', '9735380', '6921268', '10205879', '0', '10069564', '336303', '15', '70', '6459082', '9659493', '970357', '1981156', '9731315', '45', '11488578', '55', '75', '35', '5668961', '1902638', '10', '20', '40', '1064581', 'color', '5184855', 'female', '4355644', '9925006', 'male', 'pink', '5123399', '3221898', '4804784', 'gender', '4453623', '10119296', '8507934', '8911133', '11475182', '9324244', '11635647', '25', '60', '10563233', '90', '65', '10237419', '10552146', '85', '10022524', '9692669', 'age', '2912655', '5', '3792145', '80', 'sum', '10261253', '11320252', '50'}
+# input type: [dtype('int64'), dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+    age  Sum of people  gender color
+0     0        9735380    Male  gray
+1     0        9310714  Female  pink
+2     5       10552146    Male  gray
+3     5       10069564  Female  pink
+4    10       10563233    Male  gray
+5    10       10022524  Female  pink
+6    15       10237419    Male  gray
+7    15        9692669  Female  pink
+8    20        9731315    Male  gray
+9    20        9324244  Female  pink
+10   25        9659493    Male  gray
+11   25        9518507  Female  pink
+12   30       10205879    Male  gray
+13   30       10119296  Female  pink
+14   35       11475182    Male  gray
+15   35       11635647  Female  pink
+16   40       11320252    Male  gray
+17   40       11488578  Female  pink
+18   45        9925006    Male  gray
+19   45       10261253  Female  pink
+20   50        8507934    Male  gray
+21   50        8911133  Female  pink
+22   55        6459082    Male  gray
+23   55        6921268  Female  pink
+24   60        5123399    Male  gray
+25   60        5668961  Female  pink
+26   65        4453623    Male  gray
+27   65        4804784  Female  pink
+28   70        3792145    Male  gray
+29   70        5184855  Female  pink
+30   75        2912655    Male  gray
+31   75        4355644  Female  pink
+32   80        1902638    Male  gray
+33   80        3221898  Female  pink
+34   85         970357    Male  gray
+35   85        1981156  Female  pink
+36   90         336303    Male  gray
+37   90        1064581  Female  pink
+# query is: What was the population of Females age 35?
+# expected output type:[dtype('int64')]
+# expected output is:
+     ANSWER
+0  11635647
+# inferred DSL terminals:
+  # ConstVal: ['age@Str', '35@Int', 'Female@Str', '<NULL>']
+     # cmap: [('age', 'age'), ('females', 'Female'), (35, 35)]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Male'}]
+  # found 0 program(s)
+# (t=2.83) i=1, candidate=[{'ANSWER': 'Female'}, {'ANSWER': 'Male'}]
+  # found 1 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, 35@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'age', 35], ['gender']]
+# (t=3.30) i=2, candidate=[{'ANSWER': 'Female'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 35@Int), ==, 2, Female@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'age', 35], '==', 'gender', 'Female'], ['gender']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, Female@Str), ==, 0, 35@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'gender', 'Female'], '==', 'age', 35], ['gender']]
+
+# ========== review report ========== #
+# top-1, score: 2.47, answer: Female
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 35@Int), ==, 2, Female@Str), ['2'])
+# top-2, score: 2.47, answer: Female
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, Female@Str), ==, 0, 35@Int), ['2'])
+# top-3, score: 1.39, answer: Female
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, 35@Int), ['2'])

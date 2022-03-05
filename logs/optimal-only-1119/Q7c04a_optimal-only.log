@@ -1,0 +1,83 @@
+# parsed arguments: Namespace(benchmark='Q7c04a', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'color', '52', 'social', 'phys', 'percent', 'chemistry', 'red', 'business', 'major', 'ls', 'design', 'green', 'sci', 'brown', 'humanities', '55', 'resources', 'bio', 'yellow', '84', 'sciences', 'math', '67', 'arts', 'gray', '62', 'purple', 'nat', '91', 'blue', 'programs', 'undergrad', '60', '42', '61', 'env', 'engineering', '53', 'orange'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+              major  percent   color
+0       LS Programs       42  yellow
+1      Bio Sciences       52    blue
+2      LS Undergrad       53  yellow
+3     Math Phys Sci       55  orange
+4     Nat Resources       60   brown
+5   Arts Humanities       61    gray
+6   Social Sciences       61   brown
+7         Chemistry       62     red
+8        Env Design       67   green
+9       Engineering       84  orange
+10         Business       91  purple
+# query is: What is the percentage difference between engineering and math phys sci majors?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      29
+# inferred DSL terminals:
+  # ConstVal: ['Engineering@Str', 'major@Str', 'Math Phys Sci@Str', 'percent@Str', '<NULL>']
+     # cmap: [('engineering', 'Engineering'), ('math', 'Math Phys Sci'), ('phys', 'Math Phys Sci'), ('sci', 'Math Phys Sci'), ('majors', 'major'), ('percentage', 'percent')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(29, 8), (-29, 8)]
+  # [debug] high_values (no dup.): [(29, 8), (-29, 8)]
+  # [debug] filtered low_values (no dup.): [(36, 4), (13, 4), (12, 4), (7, 4), (6, 4), (6, 4), (5, 4), (3, 4), (2, 4), (-2, 4)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=4.77) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=9.47) i=2, candidate=[{'ANSWER': 3}]
+  # found 0 program(s)
+# (t=14.16) i=3, candidate=[{'ANSWER': 4}]
+  # found 0 program(s)
+# (t=19.11) i=4, candidate=[{'ANSWER': 29}]
+  # found 2 program(s)
+    # Contrast(@param0, diff, 0, Engineering@Str, Math Phys Sci@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'major', 'Engineering', 'Math Phys Sci', 'percent']
+    # Contrast(@param0, diff, 0, Math Phys Sci@Str, Engineering@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'major', 'Math Phys Sci', 'Engineering', 'percent']
+# (t=23.79) i=5, candidate=[{'ANSWER': -29}]
+  # found 0 program(s)
+# (t=28.53) i=6, candidate=[{'ANSWER': 36}]
+  # found 0 program(s)
+# (t=33.53) i=7, candidate=[{'ANSWER': 13}]
+  # found 0 program(s)
+# (t=38.18) i=8, candidate=[{'ANSWER': 12}]
+  # found 0 program(s)
+# (t=42.82) i=9, candidate=[{'ANSWER': 7}]
+  # found 0 program(s)
+# (t=47.53) i=10, candidate=[{'ANSWER': 6}]
+  # found 0 program(s)
+# (t=52.56) i=11, candidate=[{'ANSWER': 6}]
+  # found 0 program(s)
+# (t=57.24) i=12, candidate=[{'ANSWER': 5}]
+  # found 0 program(s)
+# (t=61.87) i=13, candidate=[{'ANSWER': 3}]
+  # found 0 program(s)
+# (t=66.53) i=14, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=71.52) i=15, candidate=[{'ANSWER': -2}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.73, answer: [29]
+  # tprog: Contrast(@param0, diff, 0, Engineering@Str, Math Phys Sci@Str, 1)
+# top-2, score: 2.73, answer: [29]
+  # tprog: Contrast(@param0, diff, 0, Math Phys Sci@Str, Engineering@Str, 1)

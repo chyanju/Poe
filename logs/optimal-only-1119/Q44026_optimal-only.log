@@ -1,0 +1,126 @@
+# parsed arguments: Namespace(benchmark='Q44026', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'838', '434', 'rica', 'blue', 'salvador', 'belize', 'color', '904', '684', '632', 'nicaragua', 'honduras', '699', 'country', 'birds', 'costa', 'guatemala', 'panama', '544', 'el'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       Country  Birds color
+0       Belize    544  blue
+1   Costa Rica    838  blue
+2  El Salvador    434  blue
+3    Guatemala    684  blue
+4     Honduras    699  blue
+5    Nicaragua    632  blue
+6       Panama    904  blue
+# query is: Who has the most bird species, Guatemala or Honduras?
+# expected output type:[dtype('O')]
+# expected output is:
+     ANSWER
+0  Honduras
+# inferred DSL terminals:
+  # ConstVal: ['Birds@Str', 'Guatemala@Str', '<NULL>']
+     # cmap: [('guatemala', 'Guatemala'), ('bird', 'Birds')]
+  # AggrFunc: ['max', '<NULL>']
+     # amap: [('most', 'max')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('most', 'eqmax')]
+# ====> fallback strategy (selection) is triggered
+  # [debug] fallback (selection) answers: ['Birds', 'Guatemala']
+  # [debug] fallback (selection) answers (no dup.): ['Birds']
+  # [debug] 1 fallback (selection) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Guatemala'}]
+  # found 8 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Guatemala@Str), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Country', 'Guatemala'], 'eqmax', 'Birds'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Guatemala@Str), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Country', 'Guatemala'], 'eqmax', 'Birds'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Guatemala@Str), ==, 0, Guatemala@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Guatemala'], '==', 'Country', 'Guatemala'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Guatemala@Str), ==, 0, Guatemala@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Guatemala'], '==', 'Country', 'Guatemala'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Guatemala@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Guatemala'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Guatemala@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Guatemala'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, Guatemala@Str), ==, 0, Guatemala@Str), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Guatemala'], '==', 'Country', 'Guatemala'], 'eqmax', 'Birds'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, Guatemala@Str), ==, 0, Guatemala@Str), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Guatemala'], '==', 'Country', 'Guatemala'], 'eqmax', 'Birds'], ['Country']]
+# (t=1.31) i=1, candidate=[{'ANSWER': 'Honduras'}]
+  # found 0 program(s)
+# (t=2.61) i=2, candidate=[{'ANSWER': 'Panama'}]
+  # found 10 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'max', 'Birds'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'max', 'Birds'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Birds'], 'max', 'Birds'], 'eqmax', 'Birds'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Birds'], 'max', 'Birds'], 'eqmax', 'Birds'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Birds'], 'max', 'Birds'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Birds'], 'max', 'Birds'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'max', 'Birds'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'max', 'Birds'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'Birds'], ['Country']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'Birds'], ['Country']]
+# (t=3.93) i=3, candidate=[{'ANSWER': 'Belize'}]
+  # found 0 program(s)
+# (t=5.24) i=4, candidate=[{'ANSWER': 'El Salvador'}]
+  # found 0 program(s)
+# (t=6.54) i=5, candidate=[{'ANSWER': 'Costa Rica'}]
+  # found 0 program(s)
+# (t=7.82) i=6, candidate=[{'ANSWER': 'Nicaragua'}]
+  # found 0 program(s)
+# (t=9.12) i=7, candidate=[{'ANSWER': 'Birds'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.43, answer: ['Guatemala']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Guatemala@Str), eqmax, 1), ['0'])
+# top-2, score: 2.43, answer: ['Guatemala']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Guatemala@Str), eqmax, 1), ['-1', '-2'])
+# top-3, score: 2.40, answer: ['Guatemala']
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, Guatemala@Str), ==, 0, Guatemala@Str), eqmax, 1), ['0'])
+# top-4, score: 2.40, answer: ['Guatemala']
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, Guatemala@Str), ==, 0, Guatemala@Str), eqmax, 1), ['-1', '-2'])
+# top-5, score: 2.25, answer: ['Guatemala']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Guatemala@Str), ['0'])
+# top-6, score: 2.25, answer: ['Guatemala']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Guatemala@Str), ['-1', '-2'])
+# top-7, score: 2.20, answer: ['Guatemala']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Guatemala@Str), ==, 0, Guatemala@Str), ['0'])
+# top-8, score: 2.20, answer: ['Guatemala']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Guatemala@Str), ==, 0, Guatemala@Str), ['-1', '-2'])
+# top-9, score: 1.39, answer: ['Panama']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+# top-10, score: 1.39, answer: ['Panama']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+# top-11, score: 1.32, answer: ['Panama']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+# top-12, score: 1.32, answer: ['Panama']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+# top-13, score: 1.31, answer: ['Panama']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+# top-14, score: 1.31, answer: ['Panama']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+# top-15, score: 1.31, answer: ['Panama']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+# top-16, score: 1.31, answer: ['Panama']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+# top-17, score: 1.31, answer: ['Panama']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+# top-18, score: 1.31, answer: ['Panama']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])

@@ -1,0 +1,43 @@
+# parsed arguments: Namespace(benchmark='Q0fa44', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'cavaliers', 'hawks', 'pacers', 'l', '45', '66', 'antonio', 'pistons', 'indiana', 'blue', 'rockets', 'division', 'x-houston', 'x-san', 'color', 'cleveland', 'y-atlanta', 'detroit', 'central', 'spurs', '41', '32'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+      Central Division   L color
+0      y-Atlanta Hawks  32  blue
+1    x-Houston Rockets  41  blue
+2  x-San Antonio Spurs  41  blue
+3  Cleveland Cavaliers  45  blue
+4       Indiana Pacers  45  blue
+5      Detroit Pistons  66  blue
+# query is: What is the amount for Cleveland Cavaliers?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      45
+# inferred DSL terminals:
+  # ConstVal: ['Cleveland Cavaliers@Str', '<NULL>']
+     # cmap: [('cavaliers', 'Cleveland Cavaliers'), ('cleveland', 'Cleveland Cavaliers')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 45}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Central Division', 'Cleveland Cavaliers'], ['L']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Central Division', 'Cleveland Cavaliers'], ['L']]
+
+# ========== review report ========== #
+# top-1, score: 2.43, answer: [45]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), ['1'])
+# top-2, score: 2.43, answer: [45]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), ['-99', '-2'])

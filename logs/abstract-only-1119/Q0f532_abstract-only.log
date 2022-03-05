@@ -1,0 +1,435 @@
+# parsed arguments: Namespace(benchmark='Q0f532', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'35', 'improve', '25', '51', '45', 'britain', 'germany', 'tunisia', '52', '43', 'remain', 'blue', '33', 'japan', '5', 'worsen', '27', 'brazil', '10', '26', 'china', '24', '34', 'red', '44', '12', '15', '60', '84', 'mexico', '32', 'spain', '47', '28', 'italy', 'u.s.', '9', '83', '49', '20', '16', '18', '40', '13', 'rep.', 'greece', 'france', 'jordan', 'czech', 'pakistan', 'orange', 'turkey', 'percentage', '22', 'egypt', '2', 'poland', '37', 'lebanon', 'opinion', 'russia', '31', 'same', '75', 'india', '23', 'country', '81', '50', '29', 'color'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       Country          opinion  percentage   color
+0       Brazil          Improve          84    blue
+1       Brazil  Remain the same          12  orange
+2       Brazil           Worsen           5     red
+3        China          Improve          83    blue
+4        China  Remain the same           9  orange
+..         ...              ...         ...     ...
+58  Czech Rep.  Remain the same          27  orange
+59  Czech Rep.           Worsen          60     red
+60      Greece          Improve           9    blue
+61      Greece  Remain the same          10  orange
+62      Greece           Worsen          81     red
+
+[63 rows x 4 columns]
+# query is: which country's economy will get most worse over next 12 months?
+# expected output type:[dtype('O')]
+# expected output is:
+   ANSWER
+0  Greece
+# inferred DSL terminals:
+  # ConstVal: ['2@Int', 'U.S.@Str', '5@Int', '9@Int', 'Remain the same@Str', '10@Int', '12@Int', '13@Int', 'Pakistan@Str', 'Worsen@Str', '16@Int', '15@Int', 'Germany@Str', 'Jordan@Str', '20@Int', '18@Int', '22@Int', '23@Int', '24@Int', '25@Int', '26@Int', '27@Int', '28@Int', '29@Int', '31@Int', '32@Int', 'Turkey@Str', '34@Int', '35@Int', 'Spain@Str', '37@Int', '33@Int', 'Japan@Str', '40@Int', '43@Int', '44@Int', '45@Int', 'Czech Rep.@Str', '47@Int', 'blue@Str', 'Egypt@Str', '50@Int', '51@Int', '52@Int', '49@Int', 'India@Str', 'orange@Str', 'Improve@Str', 'Greece@Str', 'France@Str', '60@Int', 'percentage@Str', 'Italy@Str', 'Russia@Str', '75@Int', '81@Int', '83@Int', 'Brazil@Str', '84@Int', 'red@Str', 'opinion@Str', 'Mexico@Str', 'Tunisia@Str', 'Poland@Str', 'China@Str', 'Country@Str', 'Lebanon@Str', 'color@Str', 'Britain@Str']
+     # cmap: [(None, 2), (None, 'U.S.'), (None, 5), (None, 9), (None, 'Remain the same'), (None, 10), (None, 12), (None, 13), (None, 'Pakistan'), (None, 'Worsen'), (None, 16), (None, 15), (None, 'Germany'), (None, 'Jordan'), (None, 20), (None, 18), (None, 22), (None, 23), (None, 24), (None, 25), (None, 26), (None, 27), (None, 28), (None, 29), (None, 31), (None, 32), (None, 'Turkey'), (None, 34), (None, 35), (None, 'Spain'), (None, 37), (None, 33), (None, 'Japan'), (None, 40), (None, 43), (None, 44), (None, 45), (None, 'Czech Rep.'), (None, 47), (None, 'blue'), (None, 'Egypt'), (None, 50), (None, 51), (None, 52), (None, 49), (None, 'India'), (None, 'orange'), (None, 'Improve'), (None, 'Greece'), (None, 'France'), (None, 60), (None, 'percentage'), (None, 'Italy'), (None, 'Russia'), (None, 75), (None, 81), (None, 83), (None, 'Brazil'), (None, 84), (None, 'red'), (None, 'opinion'), (None, 'Mexico'), (None, 'Tunisia'), (None, 'Poland'), (None, 'China'), (None, 'Country'), (None, 'Lebanon'), (None, 'color'), (None, 'Britain')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'France'}]
+  # found 100 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 40@Int), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<', 'percentage', 40], 'eqmax', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 43@Int), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<', 'percentage', 43], 'eqmax', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 37@Int), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<=', 'percentage', 37], 'eqmax', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 40@Int), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<=', 'percentage', 40], 'eqmax', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, France@Str), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Country', 'France'], 'eqmin', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, France@Str), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Country', 'France'], 'eqmax', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 37@Int), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>=', 'percentage', 37], 'eqmin', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 40@Int), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>=', 'percentage', 40], 'eqmin', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 35@Int), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>', 'percentage', 35], 'eqmin', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 37@Int), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>', 'percentage', 37], 'eqmin', 'percentage'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 23@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 23], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 24], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 25@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 25], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 26@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 26], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 27@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 27], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 28@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 28], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 29@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 29], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 31@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 31], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 32@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 32], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 34@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 34], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 35@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 35], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 37@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 37], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 33@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 33], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 40@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 40], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 40@Int), >=, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 40], '>=', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 40@Int), >, 2, 35@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 40], '>', 'percentage', 35], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 43@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 43], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 43@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 43], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 43@Int), >=, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 43], '>=', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 43@Int), >, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 43], '>', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 44@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 44], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 44@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 44], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 45@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 45], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 45@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 45], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 47@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 47], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 47@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 47], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 50@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 50], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 50@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 50], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 51@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 51], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 51@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 51], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 52@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 52], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 52@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 52], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 49@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 49], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 49@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 49], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 60@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 60], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 60@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 60], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 75@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 75], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 75@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 75], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 81@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 81], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 81@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 81], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 83@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 83], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 83@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 83], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 84@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 84], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 84@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 84], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 22@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 22], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 23@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 23], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 24@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 24], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 25@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 25], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 26@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 26], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 27@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 27], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 28@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 28], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 29@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 29], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 31@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 31], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 32@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 32], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 34@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 34], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 35@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 35], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 37@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 37], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 37@Int), >=, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 37], '>=', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 37@Int), >, 2, 35@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 37], '>', 'percentage', 35], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 33@Int), ==, 0, France@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 33], '==', 'Country', 'France'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 40@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 40], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 40@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 40], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 40@Int), >=, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 40], '>=', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 40@Int), >, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 40], '>', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 43@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 43], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 43@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 43], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 44@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 44], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 44@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 44], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 45@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 45], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 45@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 45], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 47@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 47], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 47@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 47], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 50@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 50], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 50@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 50], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 51@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 51], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 51@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 51], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 52@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 52], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 52@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 52], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 49@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 49], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 49@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 49], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 60@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 60], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 60@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 60], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 75@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 75], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 75@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 75], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 81@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 81], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 81@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 81], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 83@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 83], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 83@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 83], '==', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 84@Int), ==, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 84], '==', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 84@Int), ==, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 84], '==', 'percentage', 40], ['Country']]
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 40@Int), eqmax, 2), ['0'])
+# top-2, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 43@Int), eqmax, 2), ['0'])
+# top-3, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 37@Int), eqmax, 2), ['0'])
+# top-4, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 40@Int), eqmax, 2), ['0'])
+# top-5, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, France@Str), eqmin, 2), ['0'])
+# top-6, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, France@Str), eqmax, 2), ['0'])
+# top-7, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 37@Int), eqmin, 2), ['0'])
+# top-8, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 40@Int), eqmin, 2), ['0'])
+# top-9, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 35@Int), eqmin, 2), ['0'])
+# top-10, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 37@Int), eqmin, 2), ['0'])
+# top-11, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 23@Int), ==, 0, France@Str), ['0'])
+# top-12, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 24@Int), ==, 0, France@Str), ['0'])
+# top-13, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 25@Int), ==, 0, France@Str), ['0'])
+# top-14, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 26@Int), ==, 0, France@Str), ['0'])
+# top-15, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 27@Int), ==, 0, France@Str), ['0'])
+# top-16, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 28@Int), ==, 0, France@Str), ['0'])
+# top-17, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 29@Int), ==, 0, France@Str), ['0'])
+# top-18, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 31@Int), ==, 0, France@Str), ['0'])
+# top-19, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 32@Int), ==, 0, France@Str), ['0'])
+# top-20, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 34@Int), ==, 0, France@Str), ['0'])
+# top-21, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 35@Int), ==, 0, France@Str), ['0'])
+# top-22, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 37@Int), ==, 0, France@Str), ['0'])
+# top-23, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 33@Int), ==, 0, France@Str), ['0'])
+# top-24, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 40@Int), ==, 2, 37@Int), ['0'])
+# top-25, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 40@Int), >=, 2, 37@Int), ['0'])
+# top-26, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 40@Int), >, 2, 35@Int), ['0'])
+# top-27, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 43@Int), ==, 2, 37@Int), ['0'])
+# top-28, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 43@Int), ==, 2, 40@Int), ['0'])
+# top-29, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 43@Int), >=, 2, 40@Int), ['0'])
+# top-30, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 43@Int), >, 2, 37@Int), ['0'])
+# top-31, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 44@Int), ==, 2, 37@Int), ['0'])
+# top-32, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 44@Int), ==, 2, 40@Int), ['0'])
+# top-33, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 45@Int), ==, 2, 37@Int), ['0'])
+# top-34, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 45@Int), ==, 2, 40@Int), ['0'])
+# top-35, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 47@Int), ==, 2, 37@Int), ['0'])
+# top-36, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 47@Int), ==, 2, 40@Int), ['0'])
+# top-37, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 50@Int), ==, 2, 37@Int), ['0'])
+# top-38, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 50@Int), ==, 2, 40@Int), ['0'])
+# top-39, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 51@Int), ==, 2, 37@Int), ['0'])
+# top-40, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 51@Int), ==, 2, 40@Int), ['0'])
+# top-41, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 52@Int), ==, 2, 37@Int), ['0'])
+# top-42, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 52@Int), ==, 2, 40@Int), ['0'])
+# top-43, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 49@Int), ==, 2, 37@Int), ['0'])
+# top-44, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 49@Int), ==, 2, 40@Int), ['0'])
+# top-45, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 60@Int), ==, 2, 37@Int), ['0'])
+# top-46, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 60@Int), ==, 2, 40@Int), ['0'])
+# top-47, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 75@Int), ==, 2, 37@Int), ['0'])
+# top-48, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 75@Int), ==, 2, 40@Int), ['0'])
+# top-49, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 81@Int), ==, 2, 37@Int), ['0'])
+# top-50, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 81@Int), ==, 2, 40@Int), ['0'])
+# top-51, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 83@Int), ==, 2, 37@Int), ['0'])
+# top-52, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 83@Int), ==, 2, 40@Int), ['0'])
+# top-53, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 84@Int), ==, 2, 37@Int), ['0'])
+# top-54, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 84@Int), ==, 2, 40@Int), ['0'])
+# top-55, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 22@Int), ==, 0, France@Str), ['0'])
+# top-56, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 23@Int), ==, 0, France@Str), ['0'])
+# top-57, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 24@Int), ==, 0, France@Str), ['0'])
+# top-58, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 25@Int), ==, 0, France@Str), ['0'])
+# top-59, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 26@Int), ==, 0, France@Str), ['0'])
+# top-60, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 27@Int), ==, 0, France@Str), ['0'])
+# top-61, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 28@Int), ==, 0, France@Str), ['0'])
+# top-62, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 29@Int), ==, 0, France@Str), ['0'])
+# top-63, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 31@Int), ==, 0, France@Str), ['0'])
+# top-64, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 32@Int), ==, 0, France@Str), ['0'])
+# top-65, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 34@Int), ==, 0, France@Str), ['0'])
+# top-66, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 35@Int), ==, 0, France@Str), ['0'])
+# top-67, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 37@Int), ==, 2, 37@Int), ['0'])
+# top-68, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 37@Int), >=, 2, 37@Int), ['0'])
+# top-69, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 37@Int), >, 2, 35@Int), ['0'])
+# top-70, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 33@Int), ==, 0, France@Str), ['0'])
+# top-71, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 40@Int), ==, 2, 37@Int), ['0'])
+# top-72, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 40@Int), ==, 2, 40@Int), ['0'])
+# top-73, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 40@Int), >=, 2, 40@Int), ['0'])
+# top-74, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 40@Int), >, 2, 37@Int), ['0'])
+# top-75, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 43@Int), ==, 2, 37@Int), ['0'])
+# top-76, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 43@Int), ==, 2, 40@Int), ['0'])
+# top-77, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 44@Int), ==, 2, 37@Int), ['0'])
+# top-78, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 44@Int), ==, 2, 40@Int), ['0'])
+# top-79, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 45@Int), ==, 2, 37@Int), ['0'])
+# top-80, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 45@Int), ==, 2, 40@Int), ['0'])
+# top-81, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 47@Int), ==, 2, 37@Int), ['0'])
+# top-82, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 47@Int), ==, 2, 40@Int), ['0'])
+# top-83, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 50@Int), ==, 2, 37@Int), ['0'])
+# top-84, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 50@Int), ==, 2, 40@Int), ['0'])
+# top-85, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 51@Int), ==, 2, 37@Int), ['0'])
+# top-86, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 51@Int), ==, 2, 40@Int), ['0'])
+# top-87, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 52@Int), ==, 2, 37@Int), ['0'])
+# top-88, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 52@Int), ==, 2, 40@Int), ['0'])
+# top-89, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 49@Int), ==, 2, 37@Int), ['0'])
+# top-90, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 49@Int), ==, 2, 40@Int), ['0'])
+# top-91, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 60@Int), ==, 2, 37@Int), ['0'])
+# top-92, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 60@Int), ==, 2, 40@Int), ['0'])
+# top-93, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 75@Int), ==, 2, 37@Int), ['0'])
+# top-94, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 75@Int), ==, 2, 40@Int), ['0'])
+# top-95, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 81@Int), ==, 2, 37@Int), ['0'])
+# top-96, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 81@Int), ==, 2, 40@Int), ['0'])
+# top-97, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 83@Int), ==, 2, 37@Int), ['0'])
+# top-98, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 83@Int), ==, 2, 40@Int), ['0'])
+# top-99, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 84@Int), ==, 2, 37@Int), ['0'])
+# top-100, score: 0.00, answer: ['France']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 84@Int), ==, 2, 40@Int), ['0'])

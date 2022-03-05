@@ -1,0 +1,180 @@
+# parsed arguments: Namespace(benchmark='Q343a9', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'100003', '173576', '158239', 'city', 'belfast', 'birmingham', 'southampton', 'handled', 'color', '331607', '607417', 'gatwick', '266987', '828531', 'blue', 'london', 'luton', '276488', 'stansted', 'airport', 'international', 'heathrow', 'bristol', '239666', '208123', 'passengers'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                 Airport  Passengers handled color
+0        London Heathrow              828531  blue
+1         London Gatwick              607417  blue
+2        London Stansted              331607  blue
+3           London Luton              276488  blue
+4  Belfast International              266987  blue
+5                Bristol              239666  blue
+6             Birmingham              208123  blue
+7            Southampton              173576  blue
+8            London City              158239  blue
+9           Belfast City              100003  blue
+# query is: Who handled more passengers Bristol or Belfast City?
+# expected output type:[dtype('O')]
+# expected output is:
+    ANSWER
+0  Bristol
+# inferred DSL terminals:
+  # ConstVal: ['Belfast City@Str', 'London City@Str', 'Bristol@Str', 'Belfast International@Str', 'Passengers handled@Str', '<NULL>']
+     # cmap: [('handled', 'Passengers handled'), ('city', 'London City'), ('passengers', 'Passengers handled'), ('city', 'Belfast City'), ('bristol', 'Bristol'), ('belfast', 'Belfast International'), ('belfast', 'Belfast City')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>', '>=', '==', '<NULL>']
+     # bmap: [('more', '>'), ('more', '>='), (None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(166984, 6), (139663, 6), (58236, 6), (-58236, 6), (-139663, 6), (-166984, 6), (108748, 4), (81427, 4), (27321, 4), (-27321, 4)]
+  # [debug] high_values (no dup.): [(166984, 6), (139663, 6), (58236, 6), (-58236, 6), (-139663, 6), (-166984, 6), (108748, 4), (81427, 4), (27321, 4), (-27321, 4)]
+  # [debug] filtered low_values (no dup.): [(728528, 3), (507414, 3), (231604, 3), (176485, 3), (108120, 3), (73573, 3), (-73573, 3), (-108120, 3), (-176485, 3), (-231604, 3)]
+  # [debug] fallback (comparison) answers are added
+# ====> fallback strategy (selection) is triggered
+  # [debug] fallback (selection) answers: ['Belfast City', 'London City', 'Bristol', 'Belfast International', 'Passengers handled']
+  # [debug] fallback (selection) answers (no dup.): ['Passengers handled']
+  # [debug] 1 fallback (selection) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Bristol'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Bristol@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Airport', 'Bristol'], ['Airport']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Bristol@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Airport', 'Bristol'], ['Airport']]
+# (t=5.42) i=1, candidate=[{'ANSWER': 'Belfast City'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Belfast City@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Airport', 'Belfast City'], ['Airport']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Belfast City@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Airport', 'Belfast City'], ['Airport']]
+# (t=10.73) i=2, candidate=[{'ANSWER': 'Belfast International'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Belfast International@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Airport', 'Belfast International'], ['Airport']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Belfast International@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Airport', 'Belfast International'], ['Airport']]
+# (t=16.06) i=3, candidate=[{'ANSWER': 'London Heathrow'}]
+  # found 0 program(s)
+# (t=21.40) i=4, candidate=[{'ANSWER': 'Birmingham'}]
+  # found 0 program(s)
+# (t=26.79) i=5, candidate=[{'ANSWER': 'London City'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, London City@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Airport', 'London City'], ['Airport']]
+    # SelectCol(SelectRow1(@param0, ==, 0, London City@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Airport', 'London City'], ['Airport']]
+# (t=32.15) i=6, candidate=[{'ANSWER': 'Southampton'}]
+  # found 0 program(s)
+# (t=37.53) i=7, candidate=[{'ANSWER': 'London Gatwick'}]
+  # found 0 program(s)
+# (t=42.86) i=8, candidate=[{'ANSWER': 'London Luton'}]
+  # found 0 program(s)
+# (t=48.15) i=9, candidate=[{'ANSWER': 'London Stansted'}]
+  # found 0 program(s)
+# (t=53.44) i=10, candidate=[{'ANSWER': 166984}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Belfast International@Str, Belfast City@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Airport', 'Belfast International', 'Belfast City', 'Passengers handled']
+# (t=58.48) i=11, candidate=[{'ANSWER': 139663}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Bristol@Str, Belfast City@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Airport', 'Bristol', 'Belfast City', 'Passengers handled']
+# (t=63.54) i=12, candidate=[{'ANSWER': 58236}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, London City@Str, Belfast City@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Airport', 'London City', 'Belfast City', 'Passengers handled']
+# (t=68.63) i=13, candidate=[{'ANSWER': -58236}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Belfast City@Str, London City@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Airport', 'Belfast City', 'London City', 'Passengers handled']
+# (t=73.71) i=14, candidate=[{'ANSWER': -139663}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Belfast City@Str, Bristol@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Airport', 'Belfast City', 'Bristol', 'Passengers handled']
+# (t=78.79) i=15, candidate=[{'ANSWER': -166984}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Belfast City@Str, Belfast International@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Airport', 'Belfast City', 'Belfast International', 'Passengers handled']
+# (t=83.88) i=16, candidate=[{'ANSWER': 108748}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Belfast International@Str, London City@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Airport', 'Belfast International', 'London City', 'Passengers handled']
+# (t=88.94) i=17, candidate=[{'ANSWER': 81427}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Bristol@Str, London City@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Airport', 'Bristol', 'London City', 'Passengers handled']
+# (t=94.00) i=18, candidate=[{'ANSWER': 27321}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Belfast International@Str, Bristol@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Airport', 'Belfast International', 'Bristol', 'Passengers handled']
+# (t=99.04) i=19, candidate=[{'ANSWER': -27321}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Bristol@Str, Belfast International@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Airport', 'Bristol', 'Belfast International', 'Passengers handled']
+# (t=104.09) i=20, candidate=[{'ANSWER': 728528}]
+  # found 0 program(s)
+# (t=109.21) i=21, candidate=[{'ANSWER': 507414}]
+  # found 0 program(s)
+# (t=114.32) i=22, candidate=[{'ANSWER': 231604}]
+  # found 0 program(s)
+# (t=119.47) i=23, candidate=[{'ANSWER': 176485}]
+  # found 0 program(s)
+# (t=124.62) i=24, candidate=[{'ANSWER': 108120}]
+  # found 0 program(s)
+# (t=129.70) i=25, candidate=[{'ANSWER': 73573}]
+  # found 0 program(s)
+# (t=134.76) i=26, candidate=[{'ANSWER': -73573}]
+  # found 0 program(s)
+# (t=139.85) i=27, candidate=[{'ANSWER': -108120}]
+  # found 0 program(s)
+# (t=144.96) i=28, candidate=[{'ANSWER': -176485}]
+  # found 0 program(s)
+# (t=150.01) i=29, candidate=[{'ANSWER': -231604}]
+  # found 0 program(s)
+# (t=155.35) i=30, candidate=[{'ANSWER': 'Passengers handled'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.89, answer: [139663]
+  # tprog: Contrast(@param0, -, 0, Bristol@Str, Belfast City@Str, 1)
+# top-2, score: 2.89, answer: [-139663]
+  # tprog: Contrast(@param0, -, 0, Belfast City@Str, Bristol@Str, 1)
+# top-3, score: 2.77, answer: [166984]
+  # tprog: Contrast(@param0, -, 0, Belfast International@Str, Belfast City@Str, 1)
+# top-4, score: 2.77, answer: [58236]
+  # tprog: Contrast(@param0, -, 0, London City@Str, Belfast City@Str, 1)
+# top-5, score: 2.77, answer: [-58236]
+  # tprog: Contrast(@param0, -, 0, Belfast City@Str, London City@Str, 1)
+# top-6, score: 2.77, answer: [-166984]
+  # tprog: Contrast(@param0, -, 0, Belfast City@Str, Belfast International@Str, 1)
+# top-7, score: 2.77, answer: [81427]
+  # tprog: Contrast(@param0, -, 0, Bristol@Str, London City@Str, 1)
+# top-8, score: 2.77, answer: [27321]
+  # tprog: Contrast(@param0, -, 0, Belfast International@Str, Bristol@Str, 1)
+# top-9, score: 2.77, answer: [-27321]
+  # tprog: Contrast(@param0, -, 0, Bristol@Str, Belfast International@Str, 1)
+# top-10, score: 2.39, answer: ['Belfast City']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Belfast City@Str), ['0'])
+# top-11, score: 2.39, answer: ['Belfast City']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Belfast City@Str), ['-1', '-2'])
+# top-12, score: 2.27, answer: ['Bristol']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Bristol@Str), ['0'])
+# top-13, score: 2.27, answer: ['Bristol']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Bristol@Str), ['-1', '-2'])
+# top-14, score: 1.77, answer: [108748]
+  # tprog: Contrast(@param0, -, 0, Belfast International@Str, London City@Str, 1)
+# top-15, score: 1.27, answer: ['Belfast International']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Belfast International@Str), ['0'])
+# top-16, score: 1.27, answer: ['Belfast International']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Belfast International@Str), ['-1', '-2'])
+# top-17, score: 1.27, answer: ['London City']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, London City@Str), ['0'])
+# top-18, score: 1.27, answer: ['London City']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, London City@Str), ['-1', '-2'])

@@ -1,0 +1,72 @@
+# parsed arguments: Namespace(benchmark='Q60b72', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'30033922', '67030000', 'netherlands', '5475452', 'norway', 'donations', 'european', 'germany', '2713704', 'us', '2000000', 'finland', 'belgium', '7033231', 'country', '1000000', 'china', 'commission', 'kuwait', 'color', 'blue', '26000000', 'japan', 'ireland', '1356852'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                Country  Donations color
+0                    US   67030000  blue
+1   European Commission   30033922  blue
+2                 Japan   26000000  blue
+3           Netherlands    7033231  blue
+4                Norway    5475452  blue
+5               Germany    2713704  blue
+6                Kuwait    2000000  blue
+7               Finland    1356852  blue
+8               Belgium    1356852  blue
+9               Ireland    1356852  blue
+10                China    1000000  blue
+# query is: How much has the US donated to Syrian refugees?
+# expected output type:[dtype('int64')]
+# expected output is:
+     ANSWER
+0  67030000
+# inferred DSL terminals:
+  # ConstVal: ['US@Str', '<NULL>']
+     # cmap: [('us', 'US')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 67030000}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, US@Str), ==, 0, US@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'US'], '==', 'Country', 'US'], ['Donations']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, US@Str), ==, 0, US@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'US'], '==', 'Country', 'US'], ['Donations']]
+    # SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'US'], ['Donations']]
+    # SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'US'], ['Donations']]
+# (t=0.36) i=1, candidate=[{'ANSWER': 134060000}]
+  # found 0 program(s)
+# (t=0.71) i=2, candidate=[{'ANSWER': 68030000}]
+  # found 0 program(s)
+# (t=1.05) i=3, candidate=[{'ANSWER': 97063922}]
+  # found 0 program(s)
+# (t=1.40) i=4, candidate=[{'ANSWER': 1000000}]
+  # found 0 program(s)
+# (t=1.74) i=5, candidate=[{'ANSWER': 2000000}]
+  # found 0 program(s)
+# (t=2.09) i=6, candidate=[{'ANSWER': 31033922}]
+  # found 0 program(s)
+# (t=2.44) i=7, candidate=[{'ANSWER': 30033922}]
+  # found 0 program(s)
+# (t=2.78) i=8, candidate=[{'ANSWER': 60067844}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.25, answer: [67030000]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['1'])
+# top-2, score: 2.25, answer: [67030000]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['-99', '-2'])
+# top-3, score: 2.20, answer: [67030000]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, US@Str), ==, 0, US@Str), ['1'])
+# top-4, score: 2.20, answer: [67030000]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, US@Str), ==, 0, US@Str), ['-99', '-2'])

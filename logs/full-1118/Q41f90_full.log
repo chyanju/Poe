@@ -1,0 +1,87 @@
+# parsed arguments: Namespace(benchmark='Q41f90', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'spread', '-1.5', '2.4', 'rasmussen', 'color', 'abc', 'orange', '2.9', 'post', 'fox', 'blue', '-1.7', '-2.5', 'democratic', 'pollster', 'effect', 'surveyusa', 'washington', 'cnn', '(robbins', 'house', 'polling', '(opinion', 'marist', 'reports', '0.8', '-1.4', '(ppp)', 'ipsos', 'research)', 'news', 'policy', 'quinnipiac', 'gallup', '1.9', 'shaw)', '3.1', '0.4', 'pew', '(nbc/marist)', 'yougov', '-1.3', '3.2', '/', 'public', 'republican', '&', 'research'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                       Pollster      spread  House Effect   color
+0                  Pew Research  Democratic           3.2    blue
+1   Public Policy Polling (PPP)  Democratic           3.1    blue
+2                         Ipsos  Democratic           2.9    blue
+3                     SurveyUSA  Democratic           2.4    blue
+4           Marist (NBC/Marist)  Democratic           1.9    blue
+5                        YouGov  Democratic           0.8    blue
+6        CNN (Opinion Research)  Democratic           0.4    blue
+7             Rasmussen Reports  Republican          -1.3  orange
+8    Washington Post / ABC News  Republican          -1.4  orange
+9     Fox News (Robbins & Shaw)  Republican          -1.5  orange
+10                   Quinnipiac  Republican          -1.7  orange
+11                       Gallup  Republican          -2.5  orange
+# query is: What organization has the least effect?
+# expected output type:[dtype('O')]
+# expected output is:
+                   ANSWER
+0  CNN (Opinion Research)
+# inferred DSL terminals:
+  # ConstVal: ['House Effect@Str', '<NULL>']
+     # cmap: [('effect', 'House Effect')]
+  # AggrFunc: ['min', '<NULL>']
+     # amap: [('least', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('least', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Gallup'}]
+  # found 11 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'spread'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'House Effect'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'color'], 'min', 'House Effect'], 'eqmin', 'COL0'], ['Pollster']]
+    # SelectCol(SelectRow0(@param0, eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'House Effect'], ['Pollster']]
+# (t=1.00) i=1, candidate=[{'ANSWER': 'Pew Research'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.50, answer: Gallup
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 2), ['0'])
+# top-2, score: 1.43, answer: Gallup
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['0'])
+# top-3, score: 1.43, answer: Gallup
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['-1'])
+# top-4, score: 1.42, answer: Gallup
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['0'])
+# top-5, score: 1.42, answer: Gallup
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-6, score: 1.42, answer: Gallup
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['0'])
+# top-7, score: 1.42, answer: Gallup
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['-1', '-2'])
+# top-8, score: 1.42, answer: Gallup
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['0'])
+# top-9, score: 1.42, answer: Gallup
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-10, score: 1.42, answer: Gallup
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['0'])
+# top-11, score: 1.42, answer: Gallup
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['-1', '-2'])

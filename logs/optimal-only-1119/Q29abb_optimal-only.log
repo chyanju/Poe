@@ -1,0 +1,124 @@
+# parsed arguments: Namespace(benchmark='Q29abb', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'35-49', '20.1', '24.98', 'age', '24.05', 'color', '2001', 'red', '35', '19.07', 'under', '23.2', '26.02', '65+', 'percent', '2007', '8.08', 'orange', 'blue', '30.06', '27.05', 'year', '9.11', '2012', '7.14', '50-64'}
+# input type: [dtype('O'), dtype('int64'), dtype('float64'), dtype('O')]
+# input is:
+         Age  year  percent   color
+0   Under 35  2001    30.06    blue
+1   Under 35  2012    26.02     red
+2   Under 35  2007    24.05  orange
+3      50-64  2001    23.20    blue
+4      50-64  2007    20.10  orange
+5      50-64  2012    19.07     red
+6        65+  2001     9.11    blue
+7        65+  2007     8.08  orange
+8        65+  2012     7.14     red
+9      35-49  2001    27.05    blue
+10     35-49  2007    26.02  orange
+11     35-49  2012    24.98     red
+# query is: What is the percentage of risk taken by people aged between 50 and 64 for the year 2012?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0   19.07
+# inferred DSL terminals:
+  # ConstVal: ['percent@Str', 'year@Str', 'Age@Str', '2012@Int', '50-64@Str', '<NULL>']
+     # cmap: [(2012, 2012), ('percentage', 'percent'), ('aged', 'Age'), (50, '50-64'), (64, '50-64'), ('year', 'year')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# ====> fallback strategy (retrieval) is triggered because no explanation is found so far
+# ====> retrieval_values: [19.07, 20.1, 2001, 2007, 2012, 23.2, 24.05, 24.98, 26.02, 27.05, 30.06, '35-49', '50-64', '65+', 7.14, 8.08, 9.11, 'Age', 'Under 35', 'blue', 'color', 'orange', 'percent', 'red', 'year']
+# (t=11.99) fallback i=0, candidate=[{'ANSWER': 19.07}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 1, 2012@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '==', 'year', 2012], ['percent']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2012@Int), ==, 0, 50-64@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'year', 2012], '==', 'Age', '50-64'], ['percent']]
+# (t=24.08) fallback i=1, candidate=[{'ANSWER': 20.1}]
+  # found 0 program(s)
+# (t=36.26) fallback i=2, candidate=[{'ANSWER': 2001}]
+  # found 0 program(s)
+# (t=48.40) fallback i=3, candidate=[{'ANSWER': 2007}]
+  # found 0 program(s)
+# (t=60.57) fallback i=4, candidate=[{'ANSWER': 2012}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 1, 2012@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '==', 'year', 2012], ['year']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2012@Int), ==, 0, 50-64@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'year', 2012], '==', 'Age', '50-64'], ['year']]
+# (t=72.70) fallback i=5, candidate=[{'ANSWER': 23.2}]
+  # found 0 program(s)
+# (t=84.87) fallback i=6, candidate=[{'ANSWER': 24.05}]
+  # found 0 program(s)
+# (t=96.99) fallback i=7, candidate=[{'ANSWER': 24.98}]
+  # found 0 program(s)
+# (t=108.78) fallback i=8, candidate=[{'ANSWER': 26.02}]
+  # found 0 program(s)
+# (t=121.24) fallback i=9, candidate=[{'ANSWER': 27.05}]
+  # found 0 program(s)
+# (t=133.03) fallback i=10, candidate=[{'ANSWER': 30.06}]
+  # found 0 program(s)
+# (t=145.53) fallback i=11, candidate=[{'ANSWER': '35-49'}]
+  # found 0 program(s)
+# (t=157.30) fallback i=12, candidate=[{'ANSWER': '50-64'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 1, 2012@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '==', 'year', 2012], ['Age']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2012@Int), ==, 0, 50-64@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'year', 2012], '==', 'Age', '50-64'], ['Age']]
+# (t=169.75) fallback i=13, candidate=[{'ANSWER': '65+'}]
+  # found 0 program(s)
+# (t=181.90) fallback i=14, candidate=[{'ANSWER': 7.14}]
+  # found 0 program(s)
+# (t=193.63) fallback i=15, candidate=[{'ANSWER': 8.08}]
+  # found 0 program(s)
+# (t=206.11) fallback i=16, candidate=[{'ANSWER': 9.11}]
+  # found 0 program(s)
+# (t=217.84) fallback i=17, candidate=[{'ANSWER': 'Age'}]
+  # found 0 program(s)
+# (t=230.29) fallback i=18, candidate=[{'ANSWER': 'Under 35'}]
+  # found 0 program(s)
+# (t=242.08) fallback i=19, candidate=[{'ANSWER': 'blue'}]
+  # found 0 program(s)
+# (t=254.77) fallback i=20, candidate=[{'ANSWER': 'color'}]
+  # found 0 program(s)
+# (t=266.62) fallback i=21, candidate=[{'ANSWER': 'orange'}]
+  # found 0 program(s)
+# (t=279.11) fallback i=22, candidate=[{'ANSWER': 'percent'}]
+  # found 0 program(s)
+# (t=291.34) fallback i=23, candidate=[{'ANSWER': 'red'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 1, 2012@Int), ['3'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age', '50-64'], '==', 'year', 2012], ['color']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2012@Int), ==, 0, 50-64@Str), ['3'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'year', 2012], '==', 'Age', '50-64'], ['color']]
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 1.42, answer: [19.07]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 1, 2012@Int), ['2'])
+# top-2, score: 1.42, answer: [19.07]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2012@Int), ==, 0, 50-64@Str), ['2'])
+# top-3, score: 1.37, answer: [2012]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 1, 2012@Int), ['1'])
+# top-4, score: 1.37, answer: [2012]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2012@Int), ==, 0, 50-64@Str), ['1'])
+# top-5, score: 1.37, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 1, 2012@Int), ['0'])
+# top-6, score: 1.37, answer: ['50-64']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2012@Int), ==, 0, 50-64@Str), ['0'])
+# top-7, score: 1.37, answer: ['red']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 50-64@Str), ==, 1, 2012@Int), ['3'])
+# top-8, score: 1.37, answer: ['red']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 2012@Int), ==, 0, 50-64@Str), ['3'])

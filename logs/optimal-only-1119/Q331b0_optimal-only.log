@@ -1,0 +1,55 @@
+# parsed arguments: Namespace(benchmark='Q331b0', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'adrian', 'percent', 'weiss', 'candidate', '13.9', 'color', 'margot', 'oliver', 'blue', 'george', 'james', 'majority', '18.9', '0.4', 'frank', '43.2', '29.3', 'fraser', '8.1', 'jill', 'dobson', 'rainbow'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+              Candidate  percent color
+0          Frank Dobson     43.2  blue
+1           Jill Fraser     29.3  blue
+2          Margot James     18.9  blue
+3         Adrian Oliver      8.1  blue
+4  Rainbow George Weiss      0.4  blue
+5              Majority     13.9  blue
+# query is: what is Jill Fraser's percentage?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0    29.3
+# inferred DSL terminals:
+  # ConstVal: ['Jill Fraser@Str', 'percent@Str', '<NULL>']
+     # cmap: [('percentage', 'percent'), ('fraser', 'Jill Fraser'), ('jill', 'Jill Fraser')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 29.3}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ==, 0, Jill Fraser@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Candidate', 'Jill Fraser'], '==', 'Candidate', 'Jill Fraser'], ['percent']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ==, 0, Jill Fraser@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Candidate', 'Jill Fraser'], '==', 'Candidate', 'Jill Fraser'], ['percent']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Jill Fraser'], ['percent']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Jill Fraser'], ['percent']]
+# (t=1.08) i=1, candidate=[{'ANSWER': 58.6}]
+  # found 0 program(s)
+# (t=2.15) i=2, candidate=[{'ANSWER': 87.9}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.64, answer: [29.3]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ['1'])
+# top-2, score: 2.64, answer: [29.3]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ['-99', '-2'])
+# top-3, score: 2.59, answer: [29.3]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ==, 0, Jill Fraser@Str), ['1'])
+# top-4, score: 2.59, answer: [29.3]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ==, 0, Jill Fraser@Str), ['-99', '-2'])

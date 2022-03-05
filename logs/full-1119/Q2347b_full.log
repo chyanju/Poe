@@ -1,0 +1,96 @@
+# parsed arguments: Namespace(benchmark='Q2347b', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'325.044', '516.031', '2001', '2004', '168.827', '2014', '2017', '262.799', '297.551', '2005', '533.909', '223.809', '2016', '456.216', '344.23', '2003', '129.505', '167.543', '2008', 'blue', '186.108', '1999', '2015', '125.734', '166.061', 'color', '2007', '2000', '2002', '408.037', '149.338', '1998', '2011', '2010', '2012', '2013', '123.061', 'year', '174.935', '169.598', 'cases', '2009', '2006', '184.211'}
+# input type: [dtype('float64'), dtype('int64'), dtype('O')]
+# input is:
+      cases  year color
+0   129.505  1998  blue
+1   123.061  1999  blue
+2   125.734  2000  blue
+3   149.338  2001  blue
+4   166.061  2002  blue
+5   169.598  2003  blue
+6   167.543  2004  blue
+7   184.211  2005  blue
+8   168.827  2006  blue
+9   174.935  2007  blue
+10  186.108  2008  blue
+11  223.809  2009  blue
+12  262.799  2010  blue
+13  297.551  2011  blue
+14  325.044  2012  blue
+15  344.230  2013  blue
+16  408.037  2014  blue
+17  456.216  2015  blue
+18  516.031  2016  blue
+19  533.909  2017  blue
+# query is: What is the difference in amount of pending cases between 2006 and 2007?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0   6.108
+# inferred DSL terminals:
+  # ConstVal: ['cases@Str', '2006@Int', '2007@Int', '<NULL>']
+     # cmap: [(2006, 2006), ('cases', 'cases'), (2007, 2007)]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(1838.173, 4), (1831.065, 4), (6.108000000000004, 4), (1.0, 4), (-1.0, 4), (-6.108000000000004, 4), (-1831.065, 4), (-1838.173, 4)]
+  # [debug] high_values (no dup.): [(1838.173, 4), (1831.065, 4), (6.108000000000004, 4), (-1.0, 4), (-6.108000000000004, 4), (-1831.065, 4), (-1838.173, 4)]
+  # [debug] filtered low_values (no dup.): [(1883.939, 2), (1882.939, 2), (1881.266, 2), (1880.266, 2), (1877.495, 2), (1876.495, 2), (1857.662, 2), (1856.662, 2), (1848.173, 2), (1847.173, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=2.49) i=1, candidate=[{'ANSWER': 1838.173}]
+  # found 0 program(s)
+# (t=5.01) i=2, candidate=[{'ANSWER': 1831.065}]
+  # found 0 program(s)
+# (t=7.54) i=3, candidate=[{'ANSWER': 6.108000000000004}]
+  # found 2 program(s)
+    # Contrast(@param0, diff, 1, 2006@Int, 2007@Int, 0)
+      --> ['Contrast', 'input@0', 'diff', 'year', 2006, 2007, 'cases']
+    # Contrast(@param0, diff, 1, 2007@Int, 2006@Int, 0)
+      --> ['Contrast', 'input@0', 'diff', 'year', 2007, 2006, 'cases']
+# (t=10.06) i=4, candidate=[{'ANSWER': -1.0}]
+  # found 0 program(s)
+# (t=12.56) i=5, candidate=[{'ANSWER': -6.108000000000004}]
+  # found 0 program(s)
+# (t=15.10) i=6, candidate=[{'ANSWER': -1831.065}]
+  # found 0 program(s)
+# (t=17.65) i=7, candidate=[{'ANSWER': -1838.173}]
+  # found 0 program(s)
+# (t=20.19) i=8, candidate=[{'ANSWER': 1883.939}]
+  # found 0 program(s)
+# (t=22.72) i=9, candidate=[{'ANSWER': 1882.939}]
+  # found 0 program(s)
+# (t=25.24) i=10, candidate=[{'ANSWER': 1881.266}]
+  # found 0 program(s)
+# (t=27.77) i=11, candidate=[{'ANSWER': 1880.266}]
+  # found 0 program(s)
+# (t=30.28) i=12, candidate=[{'ANSWER': 1877.495}]
+  # found 0 program(s)
+# (t=32.79) i=13, candidate=[{'ANSWER': 1876.495}]
+  # found 0 program(s)
+# (t=35.31) i=14, candidate=[{'ANSWER': 1857.662}]
+  # found 0 program(s)
+# (t=37.83) i=15, candidate=[{'ANSWER': 1856.662}]
+  # found 0 program(s)
+# (t=40.36) i=16, candidate=[{'ANSWER': 1848.173}]
+  # found 0 program(s)
+# (t=42.89) i=17, candidate=[{'ANSWER': 1847.173}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.45, answer: [6.108000000000004]
+  # tprog: Contrast(@param0, diff, 1, 2006@Int, 2007@Int, 0)
+# top-2, score: 1.45, answer: [6.108000000000004]
+  # tprog: Contrast(@param0, diff, 1, 2007@Int, 2006@Int, 0)

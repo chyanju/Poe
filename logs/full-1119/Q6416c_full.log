@@ -1,0 +1,53 @@
+# parsed arguments: Namespace(benchmark='Q6416c', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'color', '2010', '2004', '884', '2009', '1115', '2001', '1294', '1459', '2002', 'blue', '771', '2003', 'year', '1138', '1582', '1999', '794', '2008', '1103', '2011', '1230', '1413', '2006', '828', '2000', '2007', '2005', '4140', '2012', 'deaths', '971'}
+# input type: [dtype('int64'), dtype('int64'), dtype('O')]
+# input is:
+    year  deaths color
+0   2012     794  blue
+1   2011     828  blue
+2   2010    1115  blue
+3   2009    1103  blue
+4   2008     884  blue
+5   2007     971  blue
+6   2006    1294  blue
+7   2005    1459  blue
+8   2004     771  blue
+9   2003    1230  blue
+10  2002    1413  blue
+11  2001    4140  blue
+12  2000    1582  blue
+13  1999    1138  blue
+# query is: How many aviation deaths were there in 2001?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0    4140
+# inferred DSL terminals:
+  # ConstVal: ['2001@Int', 'deaths@Str', '<NULL>']
+     # cmap: [(2001, 2001), ('deaths', 'deaths')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 4140}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, 2001@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'year', 2001], ['deaths']]
+    # SelectCol(SelectRow1(@param0, ==, 0, 2001@Int), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'year', 2001], ['deaths']]
+# (t=0.87) i=1, candidate=[{'ANSWER': 8280}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.39, answer: [4140]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, 2001@Int), ['1'])
+# top-2, score: 1.39, answer: [4140]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, 2001@Int), ['-99', '-2'])

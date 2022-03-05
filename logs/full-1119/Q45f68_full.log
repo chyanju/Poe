@@ -1,0 +1,65 @@
+# parsed arguments: Namespace(benchmark='Q45f68', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'voters', '140', 'blue', 'minor', 'total', 'party', 'parties', 'unaffiliated', '27180', 'color', '28608', 'republican', '19258', 'democratic'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+           Party  Total voters color
+0     Republican         19258  blue
+1     Democratic         28608  blue
+2   Unaffiliated         27180  blue
+3  Minor parties           140  blue
+# query is: How many voters are affiliated with a party?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0   48006
+# inferred DSL terminals:
+  # ConstVal: ['Minor parties@Str', 'Party@Str', 'Total voters@Str', '<NULL>']
+     # cmap: [('party', 'Minor parties'), ('party', 'Party'), ('voters', 'Total voters')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 28608}]
+  # found 0 program(s)
+# (t=1.14) i=1, candidate=[{'ANSWER': 140}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Minor parties@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Party', 'Minor parties'], ['Total voters']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Minor parties@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Party', 'Minor parties'], ['Total voters']]
+# (t=2.29) i=2, candidate=[{'ANSWER': 57216}]
+  # found 0 program(s)
+# (t=3.28) i=3, candidate=[{'ANSWER': 28748}]
+  # found 0 program(s)
+# (t=4.27) i=4, candidate=[{'ANSWER': 55788}]
+  # found 0 program(s)
+# (t=5.26) i=5, candidate=[{'ANSWER': 27320}]
+  # found 0 program(s)
+# (t=6.25) i=6, candidate=[{'ANSWER': 47866}]
+  # found 0 program(s)
+# (t=7.23) i=7, candidate=[{'ANSWER': 19398}]
+  # found 0 program(s)
+# (t=8.21) i=8, candidate=[{'ANSWER': 27180}]
+  # found 0 program(s)
+# (t=9.33) i=9, candidate=[{'ANSWER': 54360}]
+  # found 0 program(s)
+# (t=10.31) i=10, candidate=[{'ANSWER': 46438}]
+  # found 0 program(s)
+# (t=11.30) i=11, candidate=[{'ANSWER': 19258}]
+  # found 0 program(s)
+# (t=12.43) i=12, candidate=[{'ANSWER': 38516}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.39, answer: [140]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Minor parties@Str), ['1'])
+# top-2, score: 1.39, answer: [140]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Minor parties@Str), ['-99', '-2'])

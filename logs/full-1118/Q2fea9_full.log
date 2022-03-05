@@ -1,0 +1,173 @@
+# parsed arguments: Namespace(benchmark='Q2fea9', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'donations', 'generous', '0.0011', '0.0001', 'us', 'belgium', '0.0003', '0.0006', '1e-05', 'color', 'netherlands', '0.0004', 'gdp', 'blue', 'china', '0.0005', 'finland', '0.0008', 'norway', 'ireland', 'by', 'country', 'estonia', 'germany', 'japan', 'kuwait'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+        Country  Generous donations by GDP color
+0        Norway                    0.00110  blue
+1        Kuwait                    0.00110  blue
+2   Netherlands                    0.00080  blue
+3       Ireland                    0.00060  blue
+4       Estonia                    0.00060  blue
+5       Finland                    0.00050  blue
+6         Japan                    0.00040  blue
+7            US                    0.00040  blue
+8       Belgium                    0.00030  blue
+9       Germany                    0.00010  blue
+10        China                    0.00001  blue
+# query is: Which country is most generous by GDP?
+# expected output type:[dtype('O')]
+# expected output is:
+   ANSWER
+0  Kuwait
+1  Norway
+# inferred DSL terminals:
+  # ConstVal: ['Country@Str', 'Generous donations by GDP@Str', '<NULL>']
+     # cmap: [('by', 'Generous donations by GDP'), ('gdp', 'Generous donations by GDP'), ('generous', 'Generous donations by GDP'), ('country', 'Country')]
+  # AggrFunc: ['max', '<NULL>']
+     # amap: [('most', 'max')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('most', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'China'}]
+  # found 0 program(s)
+# ====> fallback strategy (retrieval) is triggered because no explanation is found so far
+# ====> retrieval_values: [0.0001, 0.0003, 0.0004, 0.0005, 0.0006, 0.0008, 0.0011, 1e-05, 'Belgium', 'China', 'Country', 'Estonia', 'Finland', 'Generous donations by GDP', 'Germany', 'Ireland', 'Japan', 'Kuwait', 'Netherlands', 'Norway', 'US', 'blue', 'color']
+# (t=0.65) fallback i=0, candidate=[{'ANSWER': 0.0001}]
+  # found 0 program(s)
+# (t=1.30) fallback i=1, candidate=[{'ANSWER': 0.0003}]
+  # found 0 program(s)
+# (t=1.95) fallback i=2, candidate=[{'ANSWER': 0.0004}]
+  # found 0 program(s)
+# (t=2.60) fallback i=3, candidate=[{'ANSWER': 0.0005}]
+  # found 0 program(s)
+# (t=3.24) fallback i=4, candidate=[{'ANSWER': 0.0006}]
+  # found 0 program(s)
+# (t=3.88) fallback i=5, candidate=[{'ANSWER': 0.0008}]
+  # found 0 program(s)
+# (t=4.52) fallback i=6, candidate=[{'ANSWER': 0.0011}]
+  # found 17 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP'], 'max', 'Generous donations by GDP'], 'eqmax', 'Generous donations by GDP'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP'], 'max', 'Generous donations by GDP'], 'eqmax', 'Generous donations by GDP'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP'], 'max', 'Generous donations by GDP'], 'eqmax', 'Generous donations by GDP'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP'], 'max', 'Generous donations by GDP'], 'eqmax', 'Generous donations by GDP'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP'], 'max', 'Generous donations by GDP'], 'eqmax', 'COL0'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP'], 'max', 'Generous donations by GDP'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP'], 'max', 'Generous donations by GDP'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP'], 'max', 'Generous donations by GDP'], 'eqmax', 'COL0'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'max', 'Generous donations by GDP'], 'eqmax', 'Generous donations by GDP'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'max', 'Generous donations by GDP'], 'eqmax', 'Generous donations by GDP'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'max', 'Generous donations by GDP'], 'eqmax', 'Generous donations by GDP'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'max', 'Generous donations by GDP'], 'eqmax', 'Generous donations by GDP'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'max', 'Generous donations by GDP'], 'eqmax', 'COL0'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'max', 'Generous donations by GDP'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'max', 'Generous donations by GDP'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'max', 'Generous donations by GDP'], 'eqmax', 'COL0'], ['Generous donations by GDP']]
+    # Summarize(@param0, max, 1)
+      --> ['Summarize', 'input@0', 'max', 'Generous donations by GDP']
+# (t=5.20) fallback i=7, candidate=[{'ANSWER': 1e-05}]
+  # found 0 program(s)
+# (t=5.84) fallback i=8, candidate=[{'ANSWER': 'Belgium'}]
+  # found 0 program(s)
+# (t=6.48) fallback i=9, candidate=[{'ANSWER': 'China'}]
+  # found 0 program(s)
+# (t=7.12) fallback i=10, candidate=[{'ANSWER': 'Country'}]
+  # found 0 program(s)
+# (t=7.52) fallback i=11, candidate=[{'ANSWER': 'Estonia'}]
+  # found 0 program(s)
+# (t=8.16) fallback i=12, candidate=[{'ANSWER': 'Finland'}]
+  # found 0 program(s)
+# (t=8.80) fallback i=13, candidate=[{'ANSWER': 'Generous donations by GDP'}]
+  # found 0 program(s)
+# (t=9.19) fallback i=14, candidate=[{'ANSWER': 'Germany'}]
+  # found 0 program(s)
+# (t=9.83) fallback i=15, candidate=[{'ANSWER': 'Ireland'}]
+  # found 0 program(s)
+# (t=10.47) fallback i=16, candidate=[{'ANSWER': 'Japan'}]
+  # found 0 program(s)
+# (t=11.11) fallback i=17, candidate=[{'ANSWER': 'Kuwait'}]
+  # found 0 program(s)
+# (t=11.76) fallback i=18, candidate=[{'ANSWER': 'Netherlands'}]
+  # found 0 program(s)
+# (t=12.40) fallback i=19, candidate=[{'ANSWER': 'Norway'}]
+  # found 0 program(s)
+# (t=13.04) fallback i=20, candidate=[{'ANSWER': 'US'}]
+  # found 0 program(s)
+# (t=13.69) fallback i=21, candidate=[{'ANSWER': 'blue'}]
+  # found 4 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'max', 'Generous donations by GDP'], 'eqmax', 'Generous donations by GDP'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'max', 'Generous donations by GDP'], 'eqmax', 'Generous donations by GDP'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'max', 'Generous donations by GDP'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Generous donations by GDP', 'color'], 'max', 'Generous donations by GDP'], 'eqmax', 'COL0'], ['color']]
+# (t=14.34) fallback i=22, candidate=[{'ANSWER': 'color'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.82, answer: 0.0011
+  # tprog: Summarize(@param0, max, 1)
+# top-2, score: 1.67, answer: 0.0011
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['0'])
+# top-3, score: 1.67, answer: 0.0011
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['1'])
+# top-4, score: 1.67, answer: 0.0011
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-99'])
+# top-5, score: 1.67, answer: 0.0011
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-1'])
+# top-6, score: 1.67, answer: 0.0011
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['0'])
+# top-7, score: 1.67, answer: 0.0011
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['1'])
+# top-8, score: 1.67, answer: 0.0011
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-99'])
+# top-9, score: 1.67, answer: 0.0011
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-1'])
+# top-10, score: 1.66, answer: 0.0011
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['0'])
+# top-11, score: 1.66, answer: 0.0011
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['2'])
+# top-12, score: 1.66, answer: 0.0011
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-1'])
+# top-13, score: 1.66, answer: 0.0011
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-1', '-2'])
+# top-14, score: 1.66, answer: 0.0011
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['0'])
+# top-15, score: 1.66, answer: 0.0011
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['2'])
+# top-16, score: 1.66, answer: 0.0011
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-1'])
+# top-17, score: 1.66, answer: 0.0011
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+# top-18, score: 1.66, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['1'])
+# top-19, score: 1.66, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-2'])
+# top-20, score: 1.66, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['1'])
+# top-21, score: 1.66, answer: blue
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-2'])

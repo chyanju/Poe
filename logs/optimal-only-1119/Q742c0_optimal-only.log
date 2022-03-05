@@ -1,0 +1,75 @@
+# parsed arguments: Namespace(benchmark='Q742c0', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'456310000', '372190000', '799520000', '18014480000', '1363080000', '1349570000', '2289930000', '776670000', 'can', 'ita', '2301450000', 'swe', '458880000', 'gbr', 'blue', 'aus', 'bel', 'fra', '405800000', '4870750000', '4769530000', '672630000', 'fin', 'country', 'dnk', 'nor', 'prt', 'deu', '5404860000', '7020280000', 'donation', '1890450000', 'esp', 'aut', 'jpn', '1372000000', 'color', 'irl', 'kor', '2329560000', 'nld', 'usa', 'che', '1802720000'}
+# input type: [dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+       donation Country color
+0   18014480000     USA  blue
+1    7020280000     JPN  blue
+2    5404860000     FRA  blue
+3    4870750000     DEU  blue
+4    4769530000     GBR  blue
+5    2329560000     CAN  blue
+6    2301450000     AUS  blue
+7    2289930000     ESP  blue
+8    1890450000     NLD  blue
+9    1802720000     NOR  blue
+10   1372000000     BEL  blue
+11   1363080000     SWE  blue
+12   1349570000     DNK  blue
+13    799520000     KOR  blue
+14    776670000     CHE  blue
+15    672630000     ITA  blue
+16    458880000     IRL  blue
+17    456310000     FIN  blue
+18    405800000     AUT  blue
+19    372190000     PRT  blue
+# query is: What is the donation value of NLD?
+# expected output type:[dtype('int64')]
+# expected output is:
+       ANSWER
+0  1890450000
+# inferred DSL terminals:
+  # ConstVal: ['donation@Str', 'NLD@Str', '<NULL>']
+     # cmap: [('nld', 'NLD'), ('donation', 'donation')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1890450000}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, NLD@Str), ==, 1, NLD@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'NLD'], '==', 'Country', 'NLD'], ['donation']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, NLD@Str), ==, 1, NLD@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'NLD'], '==', 'Country', 'NLD'], ['donation']]
+    # SelectCol(SelectRow1(@param0, ==, 1, NLD@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'NLD'], ['donation']]
+    # SelectCol(SelectRow1(@param0, ==, 1, NLD@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'NLD'], ['donation']]
+# (t=1.10) i=1, candidate=[{'ANSWER': 18014480000}]
+  # found 0 program(s)
+# (t=2.17) i=2, candidate=[{'ANSWER': 458880000}]
+  # found 0 program(s)
+# (t=3.24) i=3, candidate=[{'ANSWER': 672630000}]
+  # found 0 program(s)
+# (t=4.31) i=4, candidate=[{'ANSWER': 7020280000}]
+  # found 0 program(s)
+# (t=5.39) i=5, candidate=[{'ANSWER': 1802720000}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.43, answer: [1890450000]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, NLD@Str), ['0'])
+# top-2, score: 2.43, answer: [1890450000]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, NLD@Str), ['-1', '-2'])
+# top-3, score: 2.38, answer: [1890450000]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, NLD@Str), ==, 1, NLD@Str), ['0'])
+# top-4, score: 2.38, answer: [1890450000]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, NLD@Str), ==, 1, NLD@Str), ['-1', '-2'])

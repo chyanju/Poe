@@ -1,0 +1,186 @@
+# parsed arguments: Namespace(benchmark='Qf4336', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'by', 'germany', 'ireland', 'country', '0.0011', '0.0006', 'blue', '0.0001', 'finland', 'kuwait', 'us', 'gdp', 'estonia', '0.0003', '1e-05', 'donations', '0.0005', 'generous', 'norway', 'china', '0.0004', 'japan', 'color', 'belgium', '0.0008', 'netherlands'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+        Country  Generous donations by GDP color
+0        Norway                    0.00110  blue
+1        Kuwait                    0.00110  blue
+2   Netherlands                    0.00080  blue
+3       Ireland                    0.00060  blue
+4       Estonia                    0.00060  blue
+5       Finland                    0.00050  blue
+6         Japan                    0.00040  blue
+7            US                    0.00040  blue
+8       Belgium                    0.00030  blue
+9       Germany                    0.00010  blue
+10        China                    0.00001  blue
+# query is: What is the generous donations for GDP (blue line total) for the Netherlands?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0  0.0008
+# inferred DSL terminals:
+  # ConstVal: ['blue@Str', 'Netherlands@Str', 'Generous donations by GDP@Str', '<NULL>']
+     # cmap: [('netherlands', 'Netherlands'), ('gdp', 'Generous donations by GDP'), ('blue', 'blue'), ('donations', 'Generous donations by GDP'), ('generous', 'Generous donations by GDP')]
+  # AggrFunc: ['sum', 'count', '<NULL>']
+     # amap: [('total', 'count'), ('total', 'sum')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 0.0008}]
+  # found 5 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, blue@Str), ==, 0, Netherlands@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'Country', 'Netherlands'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, blue@Str), ==, 0, Netherlands@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'Country', 'Netherlands'], ['Generous donations by GDP']]
+    # Summarize(SelectRow1(@param0, ==, 0, Netherlands@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Netherlands'], 'sum', 'Generous donations by GDP']
+    # SelectCol(SelectRow1(@param0, ==, 0, Netherlands@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Netherlands'], ['Generous donations by GDP']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Netherlands@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Netherlands'], ['Generous donations by GDP']]
+# (t=1.44) i=1, candidate=[{'ANSWER': 0.0011}]
+  # found 0 program(s)
+# (t=2.87) i=2, candidate=[{'ANSWER': 1e-05}]
+  # found 28 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, blue@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'blue'], 'sum', 'Generous donations by GDP']
+    # Summarize(SelectRow1(@param0, ==, 0, blue@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'blue'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, blue@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'blue'], 'count', 'Generous donations by GDP']
+    # Summarize(SelectRow1(@param0, ==, 0, blue@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'blue'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Generous donations by GDP@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Generous donations by GDP'], 'sum', 'Generous donations by GDP']
+    # Summarize(SelectRow1(@param0, ==, 0, Generous donations by GDP@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Generous donations by GDP'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, Generous donations by GDP@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Generous donations by GDP'], 'count', 'Generous donations by GDP']
+    # Summarize(SelectRow1(@param0, ==, 0, Generous donations by GDP@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Generous donations by GDP'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, blue@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 'blue'], 'sum', 'Generous donations by GDP']
+    # Summarize(SelectRow1(@param0, ==, 1, blue@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 'blue'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, blue@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 'blue'], 'count', 'Generous donations by GDP']
+    # Summarize(SelectRow1(@param0, ==, 1, blue@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 'blue'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, Netherlands@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 'Netherlands'], 'sum', 'Generous donations by GDP']
+    # Summarize(SelectRow1(@param0, ==, 1, Netherlands@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 'Netherlands'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, Netherlands@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 'Netherlands'], 'count', 'Generous donations by GDP']
+    # Summarize(SelectRow1(@param0, ==, 1, Netherlands@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 'Netherlands'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, Generous donations by GDP@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 'Generous donations by GDP'], 'sum', 'Generous donations by GDP']
+    # Summarize(SelectRow1(@param0, ==, 1, Generous donations by GDP@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 'Generous donations by GDP'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, Generous donations by GDP@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 'Generous donations by GDP'], 'count', 'Generous donations by GDP']
+    # Summarize(SelectRow1(@param0, ==, 1, Generous donations by GDP@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 'Generous donations by GDP'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, Netherlands@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Netherlands'], 'sum', 'Generous donations by GDP']
+    # Summarize(SelectRow1(@param0, ==, 2, Netherlands@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Netherlands'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, Netherlands@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Netherlands'], 'count', 'Generous donations by GDP']
+    # Summarize(SelectRow1(@param0, ==, 2, Netherlands@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Netherlands'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, Generous donations by GDP@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Generous donations by GDP'], 'sum', 'Generous donations by GDP']
+    # Summarize(SelectRow1(@param0, ==, 2, Generous donations by GDP@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Generous donations by GDP'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, Generous donations by GDP@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Generous donations by GDP'], 'count', 'Generous donations by GDP']
+    # Summarize(SelectRow1(@param0, ==, 2, Generous donations by GDP@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Generous donations by GDP'], 'count', 'color']
+# (t=4.35) i=3, candidate=[{'ANSWER': 0.0003}]
+  # found 0 program(s)
+# (t=5.79) i=4, candidate=[{'ANSWER': 0.0001}]
+  # found 0 program(s)
+# (t=7.21) i=5, candidate=[{'ANSWER': 0.0005}]
+  # found 0 program(s)
+# (t=8.64) i=6, candidate=[{'ANSWER': 0.0006}]
+  # found 0 program(s)
+# (t=10.04) i=7, candidate=[{'ANSWER': 0.0004}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.46, answer: [0.0008]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Netherlands@Str), sum, 1)
+# top-2, score: 2.46, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, blue@Str), sum, 1)
+# top-3, score: 2.46, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, blue@Str), count, 1)
+# top-4, score: 2.46, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, blue@Str), sum, 1)
+# top-5, score: 2.46, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, blue@Str), count, 0)
+# top-6, score: 2.46, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, blue@Str), count, 1)
+# top-7, score: 2.46, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, blue@Str), count, 2)
+# top-8, score: 2.46, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Netherlands@Str), sum, 1)
+# top-9, score: 2.46, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Netherlands@Str), count, 0)
+# top-10, score: 2.46, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Netherlands@Str), count, 1)
+# top-11, score: 2.46, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Netherlands@Str), count, 2)
+# top-12, score: 2.46, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Netherlands@Str), sum, 1)
+# top-13, score: 2.46, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Netherlands@Str), count, 1)
+# top-14, score: 2.42, answer: [0.0008]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, blue@Str), ==, 0, Netherlands@Str), ['1'])
+# top-15, score: 2.42, answer: [0.0008]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, blue@Str), ==, 0, Netherlands@Str), ['-99', '-2'])
+# top-16, score: 2.41, answer: [0.0008]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Netherlands@Str), ['1'])
+# top-17, score: 2.41, answer: [0.0008]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Netherlands@Str), ['-99', '-2'])
+# top-18, score: 2.26, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, blue@Str), count, 0)
+# top-19, score: 2.26, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, blue@Str), count, 2)
+# top-20, score: 2.26, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Netherlands@Str), count, 0)
+# top-21, score: 2.26, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Netherlands@Str), count, 2)
+# top-22, score: 1.39, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Generous donations by GDP@Str), sum, 1)
+# top-23, score: 1.39, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Generous donations by GDP@Str), count, 0)
+# top-24, score: 1.39, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Generous donations by GDP@Str), count, 1)
+# top-25, score: 1.39, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Generous donations by GDP@Str), count, 2)
+# top-26, score: 1.39, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Generous donations by GDP@Str), sum, 1)
+# top-27, score: 1.39, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Generous donations by GDP@Str), count, 0)
+# top-28, score: 1.39, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Generous donations by GDP@Str), count, 1)
+# top-29, score: 1.39, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Generous donations by GDP@Str), count, 2)
+# top-30, score: 1.39, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Generous donations by GDP@Str), sum, 1)
+# top-31, score: 1.39, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Generous donations by GDP@Str), count, 0)
+# top-32, score: 1.39, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Generous donations by GDP@Str), count, 1)
+# top-33, score: 1.39, answer: [1e-05]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Generous donations by GDP@Str), count, 2)

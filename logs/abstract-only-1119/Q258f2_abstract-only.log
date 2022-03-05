@@ -1,0 +1,979 @@
+# parsed arguments: Namespace(benchmark='Q258f2', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'14', 'too/not', 'spirituality', 'other', 'am.', '94', 'percentage', '93', 'common', '81', 'protestants', 'buddhists', '43', 'native', '92', 'very/somewhat', 'hindus', '61', 'non-christian', 'pagan/earth-based', 'orange', '21', 'color', 'jews', 'blue', 'response', '8', 'catholics', '7', 'not', 'religion', 'all', 'mormons', '79', '6', '19', '17', '83', 'orthodox', 'christian', '57', 'unaffiliated', '86', 'at', '24', 'muslims', '76', '39'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                   Religion                   response  percentage   color
+0                   Muslims       Very/somewhat common          57  orange
+1                   Muslims  Not too/not at all common          43    blue
+2         Pagan/earth-based       Very/somewhat common          39  orange
+3         Pagan/earth-based  Not too/not at all common          61    blue
+4               Protestants       Very/somewhat common          24  orange
+5               Protestants  Not too/not at all common          76    blue
+6       Other non-Christian       Very/somewhat common          21  orange
+7       Other non-Christian  Not too/not at all common          79    blue
+8   Native Am. spirituality       Very/somewhat common          19  orange
+9   Native Am. spirituality  Not too/not at all common          81    blue
+10                     Jews       Very/somewhat common          17  orange
+11                     Jews  Not too/not at all common          83    blue
+12             Unaffiliated       Very/somewhat common          14  orange
+13             Unaffiliated  Not too/not at all common          86    blue
+14                Catholics       Very/somewhat common           8  orange
+15                Catholics  Not too/not at all common          92    blue
+16                  Mormons       Very/somewhat common           8  orange
+17                  Mormons  Not too/not at all common          92    blue
+18       Orthodox Christian       Very/somewhat common           6  orange
+19       Orthodox Christian  Not too/not at all common          94    blue
+20                Buddhists       Very/somewhat common           7  orange
+21                Buddhists  Not too/not at all common          93    blue
+22                   Hindus       Very/somewhat common           6  orange
+23                   Hindus  Not too/not at all common          94    blue
+# query is: Which religion had the highest percentage of responses that say "Not too/not at all common"?
+# expected output type:[dtype('O')]
+# expected output is:
+               ANSWER
+0              Hindus
+1  Orthodox Christian
+# inferred DSL terminals:
+  # ConstVal: ['Catholics@Str', '6@Int', '7@Int', '8@Int', '14@Int', 'Religion@Str', '17@Int', 'Hindus@Str', '19@Int', '21@Int', 'Native Am. spirituality@Str', '24@Int', 'Other non-Christian@Str', 'percentage@Str', 'Not too/not at all common@Str', '39@Int', 'Very/somewhat common@Str', '43@Int', 'Jews@Str', 'Unaffiliated@Str', 'Orthodox Christian@Str', '57@Int', '61@Int', 'orange@Str', 'color@Str', 'blue@Str', 'response@Str', '76@Int', 'Pagan/earth-based@Str', '79@Int', '81@Int', '83@Int', '86@Int', '92@Int', '93@Int', '94@Int', 'Mormons@Str', 'Buddhists@Str', 'Muslims@Str', 'Protestants@Str']
+     # cmap: [(None, 'Catholics'), (None, 6), (None, 7), (None, 8), (None, 14), (None, 'Religion'), (None, 17), (None, 'Hindus'), (None, 19), (None, 21), (None, 'Native Am. spirituality'), (None, 24), (None, 'Other non-Christian'), (None, 'percentage'), (None, 'Not too/not at all common'), (None, 39), (None, 'Very/somewhat common'), (None, 43), (None, 'Jews'), (None, 'Unaffiliated'), (None, 'Orthodox Christian'), (None, 57), (None, 61), (None, 'orange'), (None, 'color'), (None, 'blue'), (None, 'response'), (None, 76), (None, 'Pagan/earth-based'), (None, 79), (None, 81), (None, 83), (None, 86), (None, 92), (None, 93), (None, 94), (None, 'Mormons'), (None, 'Buddhists'), (None, 'Muslims'), (None, 'Protestants')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Pagan/earth-based'}]
+  # found 233 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 43@Int), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<', 'percentage', 43], 'eqmax', 'percentage'], ['Religion']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 76@Int), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<', 'percentage', 76], 'eqmax', 'percentage'], ['Religion']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 39@Int), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<=', 'percentage', 39], 'eqmax', 'percentage'], ['Religion']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 61@Int), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<=', 'percentage', 61], 'eqmax', 'percentage'], ['Religion']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], 'eqmin', 'percentage'], ['Religion']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], 'eqmax', 'percentage'], ['Religion']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 39@Int), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>=', 'percentage', 39], 'eqmin', 'percentage'], ['Religion']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 61@Int), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>=', 'percentage', 61], 'eqmin', 'percentage'], ['Religion']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 24@Int), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>', 'percentage', 24], 'eqmin', 'percentage'], ['Religion']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 57@Int), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>', 'percentage', 57], 'eqmin', 'percentage'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 43@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 43], '==', 'Religion', 'Pagan/earth-based'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 43@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 43], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 43@Int), >=, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 43], '>=', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 43@Int), >, 2, 24@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 43], '>', 'percentage', 24], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 57@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 57], '==', 'Religion', 'Pagan/earth-based'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 57@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 57], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 61@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 61], '==', 'Religion', 'Pagan/earth-based'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 61@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 61], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 76@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 76], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 76@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 76], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 76@Int), >=, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 76], '>=', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 76@Int), >, 2, 57@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 76], '>', 'percentage', 57], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 79@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 79], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 79@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 79], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 81@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 81], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 81@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 81], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 83@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 83], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 83@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 83], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 86@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 86], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 86@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 86], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 92@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 92], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 92@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 92], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 93@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 93], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 93@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 93], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 94@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 94], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 94@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 94], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 39@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 39], '==', 'Religion', 'Pagan/earth-based'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 39@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 39], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 39@Int), >=, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 39], '>=', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 39@Int), >, 2, 24@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 39], '>', 'percentage', 24], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 43@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 43], '==', 'Religion', 'Pagan/earth-based'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 43@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 43], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 57@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 57], '==', 'Religion', 'Pagan/earth-based'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 57@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 57], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 61@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 61], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 61@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 61], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 61@Int), >=, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 61], '>=', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 61@Int), >, 2, 57@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 61], '>', 'percentage', 57], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 76@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 76], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 76@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 76], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 79@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 79], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 79@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 79], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 81@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 81], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 81@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 81], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 83@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 83], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 83@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 83], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 86@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 86], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 86@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 86], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 92@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 92], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 92@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 92], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 93@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 93], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 93@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 93], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 94@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 94], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 94@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 94], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), <, 2, 43@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '<', 'percentage', 43], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), <, 2, 57@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '<', 'percentage', 57], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), <, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '<', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), <=, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '<=', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), <=, 2, 43@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '<=', 'percentage', 43], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), <=, 2, 57@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '<=', 'percentage', 57], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), ==, 1, Not too/not at all common@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '==', 'response', 'Not too/not at all common'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), ==, 1, Very/somewhat common@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '==', 'response', 'Very/somewhat common'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), ==, 3, orange@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '==', 'color', 'orange'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), ==, 3, blue@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '==', 'color', 'blue'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), >=, 2, 43@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '>=', 'percentage', 43], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), >=, 2, 57@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '>=', 'percentage', 57], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), >=, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '>=', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), >, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '>', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), >, 2, 43@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '>', 'percentage', 43], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), >, 2, 57@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '>', 'percentage', 57], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), !=, 1, Not too/not at all common@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '!=', 'response', 'Not too/not at all common'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), !=, 1, Very/somewhat common@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '!=', 'response', 'Very/somewhat common'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), !=, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '!=', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), !=, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '!=', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), !=, 3, orange@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '!=', 'color', 'orange'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), !=, 3, blue@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Pagan/earth-based'], '!=', 'color', 'blue'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Not too/not at all common@Str), ==, 0, Pagan/earth-based@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Not too/not at all common'], '==', 'Religion', 'Pagan/earth-based'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Not too/not at all common@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Not too/not at all common'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Very/somewhat common@Str), ==, 0, Pagan/earth-based@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Very/somewhat common'], '==', 'Religion', 'Pagan/earth-based'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Very/somewhat common@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Very/somewhat common'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, orange@Str), ==, 0, Pagan/earth-based@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'orange'], '==', 'Religion', 'Pagan/earth-based'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, orange@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'orange'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Pagan/earth-based@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'Religion', 'Pagan/earth-based'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 6@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 6], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 6@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 6], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 7@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 7], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 7@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 7], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 8@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 8], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 8@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 8], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 14@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 14], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 14@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 14], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 17@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 17], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 17@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 17], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 19@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 19], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 19@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 19], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 21@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 21], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 21@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 21], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 24@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 24], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 24@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 24], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 39@Int), <, 2, 43@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 39], '<', 'percentage', 43], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 39@Int), <=, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 39], '<=', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 39@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 39], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 39@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 39], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 43@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 43], '==', 'Religion', 'Pagan/earth-based'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 43@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 43], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 57@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 57], '==', 'Religion', 'Pagan/earth-based'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 57@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 57], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 61@Int), <, 2, 76@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 61], '<', 'percentage', 76], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 61@Int), <=, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 61], '<=', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 61@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 61], '==', 'Religion', 'Pagan/earth-based'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 61@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>=', 'percentage', 61], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 6@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 6], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 6@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 6], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 7@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 7], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 7@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 7], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 8@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 8], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 8@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 8], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 14@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 14], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 14@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 14], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 17@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 17], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 17@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 17], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 19@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 19], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 19@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 19], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 21@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 21], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 21@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 21], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 24@Int), <, 2, 43@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 24], '<', 'percentage', 43], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 24@Int), <=, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 24], '<=', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 24@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 24], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 24@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 24], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 39@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 39], '==', 'Religion', 'Pagan/earth-based'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 39@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 39], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 43@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 43], '==', 'Religion', 'Pagan/earth-based'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 43@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 43], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 57@Int), <, 2, 76@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 57], '<', 'percentage', 76], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 57@Int), <=, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 57], '<=', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 57@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 57], '==', 'Religion', 'Pagan/earth-based'], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 57@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '>', 'percentage', 57], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Catholics@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Catholics'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Catholics@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Catholics'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 6@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 6], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 6@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 6], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 7@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 7], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 7@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 7], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 8@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 8], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 8@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 8], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 14@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 14], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 14@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 14], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Religion@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Religion'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Religion@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Religion'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 17@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 17], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 17@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 17], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Hindus@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Hindus'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Hindus@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Hindus'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 19@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 19], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 19@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 19], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 21@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 21], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 21@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 21], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Native Am. spirituality@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Native Am. spirituality'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Native Am. spirituality@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Native Am. spirituality'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 24@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 24], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 24@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 24], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Other non-Christian@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Other non-Christian'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Other non-Christian@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Other non-Christian'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, percentage@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'percentage'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, percentage@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'percentage'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Not too/not at all common@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Not too/not at all common'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Not too/not at all common@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Not too/not at all common'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 39@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 39], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 39@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 39], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Very/somewhat common@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Very/somewhat common'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Very/somewhat common@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Very/somewhat common'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 43@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 43], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 43@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 43], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Jews@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Jews'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Jews@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Jews'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Unaffiliated@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Unaffiliated'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Unaffiliated@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Unaffiliated'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Orthodox Christian@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Orthodox Christian'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Orthodox Christian@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Orthodox Christian'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 57@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 57], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 57@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 57], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 61@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 61], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 61@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 61], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, orange@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'orange'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, orange@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'orange'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, color@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'color'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, color@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'color'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, blue@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'blue'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, blue@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'blue'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, response@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'response'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, response@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'response'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 76@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 76], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 76@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 76], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 79@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 79], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 79@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 79], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 81@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 81], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 81@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 81], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 83@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 83], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 83@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 83], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 86@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 86], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 86@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 86], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 92@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 92], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 92@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 92], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 93@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 93], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 93@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 93], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 94@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 94], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 94@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 94], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Mormons@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Mormons'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Mormons@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Mormons'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Buddhists@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Buddhists'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Buddhists@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Buddhists'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Muslims@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Muslims'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Muslims@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Muslims'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Protestants@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Protestants'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Protestants@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Religion', 'Protestants'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Catholics@Str), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'response', 'Catholics'], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Catholics@Str), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'response', 'Catholics'], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 6@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'response', 6], '==', 'percentage', 39], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 6@Int), ==, 2, 61@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'response', 6], '==', 'percentage', 61], ['Religion']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 7@Int), ==, 2, 39@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'response', 7], '==', 'percentage', 39], ['Religion']]
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 43@Int), eqmax, 2), ['0'])
+# top-2, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 76@Int), eqmax, 2), ['0'])
+# top-3, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 39@Int), eqmax, 2), ['0'])
+# top-4, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 61@Int), eqmax, 2), ['0'])
+# top-5, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), eqmin, 2), ['0'])
+# top-6, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), eqmax, 2), ['0'])
+# top-7, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 39@Int), eqmin, 2), ['0'])
+# top-8, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 61@Int), eqmin, 2), ['0'])
+# top-9, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 24@Int), eqmin, 2), ['0'])
+# top-10, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 57@Int), eqmin, 2), ['0'])
+# top-11, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 43@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+# top-12, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 43@Int), ==, 2, 39@Int), ['0'])
+# top-13, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 43@Int), >=, 2, 39@Int), ['0'])
+# top-14, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 43@Int), >, 2, 24@Int), ['0'])
+# top-15, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 57@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+# top-16, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 57@Int), ==, 2, 39@Int), ['0'])
+# top-17, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 61@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+# top-18, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 61@Int), ==, 2, 39@Int), ['0'])
+# top-19, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 76@Int), ==, 2, 39@Int), ['0'])
+# top-20, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 76@Int), ==, 2, 61@Int), ['0'])
+# top-21, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 76@Int), >=, 2, 61@Int), ['0'])
+# top-22, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 76@Int), >, 2, 57@Int), ['0'])
+# top-23, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 79@Int), ==, 2, 39@Int), ['0'])
+# top-24, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 79@Int), ==, 2, 61@Int), ['0'])
+# top-25, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 81@Int), ==, 2, 39@Int), ['0'])
+# top-26, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 81@Int), ==, 2, 61@Int), ['0'])
+# top-27, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 83@Int), ==, 2, 39@Int), ['0'])
+# top-28, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 83@Int), ==, 2, 61@Int), ['0'])
+# top-29, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 86@Int), ==, 2, 39@Int), ['0'])
+# top-30, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 86@Int), ==, 2, 61@Int), ['0'])
+# top-31, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 92@Int), ==, 2, 39@Int), ['0'])
+# top-32, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 92@Int), ==, 2, 61@Int), ['0'])
+# top-33, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 93@Int), ==, 2, 39@Int), ['0'])
+# top-34, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 93@Int), ==, 2, 61@Int), ['0'])
+# top-35, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 94@Int), ==, 2, 39@Int), ['0'])
+# top-36, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 94@Int), ==, 2, 61@Int), ['0'])
+# top-37, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 39@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+# top-38, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 39@Int), ==, 2, 39@Int), ['0'])
+# top-39, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 39@Int), >=, 2, 39@Int), ['0'])
+# top-40, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 39@Int), >, 2, 24@Int), ['0'])
+# top-41, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 43@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+# top-42, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 43@Int), ==, 2, 39@Int), ['0'])
+# top-43, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 57@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+# top-44, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 57@Int), ==, 2, 39@Int), ['0'])
+# top-45, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 61@Int), ==, 2, 39@Int), ['0'])
+# top-46, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 61@Int), ==, 2, 61@Int), ['0'])
+# top-47, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 61@Int), >=, 2, 61@Int), ['0'])
+# top-48, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 61@Int), >, 2, 57@Int), ['0'])
+# top-49, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 76@Int), ==, 2, 39@Int), ['0'])
+# top-50, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 76@Int), ==, 2, 61@Int), ['0'])
+# top-51, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 79@Int), ==, 2, 39@Int), ['0'])
+# top-52, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 79@Int), ==, 2, 61@Int), ['0'])
+# top-53, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 81@Int), ==, 2, 39@Int), ['0'])
+# top-54, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 81@Int), ==, 2, 61@Int), ['0'])
+# top-55, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 83@Int), ==, 2, 39@Int), ['0'])
+# top-56, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 83@Int), ==, 2, 61@Int), ['0'])
+# top-57, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 86@Int), ==, 2, 39@Int), ['0'])
+# top-58, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 86@Int), ==, 2, 61@Int), ['0'])
+# top-59, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 92@Int), ==, 2, 39@Int), ['0'])
+# top-60, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 92@Int), ==, 2, 61@Int), ['0'])
+# top-61, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 93@Int), ==, 2, 39@Int), ['0'])
+# top-62, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 93@Int), ==, 2, 61@Int), ['0'])
+# top-63, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 94@Int), ==, 2, 39@Int), ['0'])
+# top-64, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 94@Int), ==, 2, 61@Int), ['0'])
+# top-65, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), <, 2, 43@Int), ['0'])
+# top-66, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), <, 2, 57@Int), ['0'])
+# top-67, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), <, 2, 61@Int), ['0'])
+# top-68, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), <=, 2, 39@Int), ['0'])
+# top-69, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), <=, 2, 43@Int), ['0'])
+# top-70, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), <=, 2, 57@Int), ['0'])
+# top-71, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), ==, 1, Not too/not at all common@Str), ['0'])
+# top-72, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), ==, 1, Very/somewhat common@Str), ['0'])
+# top-73, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), ==, 2, 39@Int), ['0'])
+# top-74, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), ==, 2, 61@Int), ['0'])
+# top-75, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), ==, 3, orange@Str), ['0'])
+# top-76, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), ==, 3, blue@Str), ['0'])
+# top-77, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), >=, 2, 43@Int), ['0'])
+# top-78, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), >=, 2, 57@Int), ['0'])
+# top-79, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), >=, 2, 61@Int), ['0'])
+# top-80, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), >, 2, 39@Int), ['0'])
+# top-81, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), >, 2, 43@Int), ['0'])
+# top-82, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), >, 2, 57@Int), ['0'])
+# top-83, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), !=, 1, Not too/not at all common@Str), ['0'])
+# top-84, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), !=, 1, Very/somewhat common@Str), ['0'])
+# top-85, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), !=, 2, 39@Int), ['0'])
+# top-86, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), !=, 2, 61@Int), ['0'])
+# top-87, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), !=, 3, orange@Str), ['0'])
+# top-88, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Pagan/earth-based@Str), !=, 3, blue@Str), ['0'])
+# top-89, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Not too/not at all common@Str), ==, 0, Pagan/earth-based@Str), ['0'])
+# top-90, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Not too/not at all common@Str), ==, 2, 61@Int), ['0'])
+# top-91, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Very/somewhat common@Str), ==, 0, Pagan/earth-based@Str), ['0'])
+# top-92, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Very/somewhat common@Str), ==, 2, 39@Int), ['0'])
+# top-93, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, orange@Str), ==, 0, Pagan/earth-based@Str), ['0'])
+# top-94, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, orange@Str), ==, 2, 39@Int), ['0'])
+# top-95, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Pagan/earth-based@Str), ['0'])
+# top-96, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 2, 61@Int), ['0'])
+# top-97, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 6@Int), ==, 2, 39@Int), ['0'])
+# top-98, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 6@Int), ==, 2, 61@Int), ['0'])
+# top-99, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 7@Int), ==, 2, 39@Int), ['0'])
+# top-100, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 7@Int), ==, 2, 61@Int), ['0'])
+# top-101, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 8@Int), ==, 2, 39@Int), ['0'])
+# top-102, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 8@Int), ==, 2, 61@Int), ['0'])
+# top-103, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 14@Int), ==, 2, 39@Int), ['0'])
+# top-104, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 14@Int), ==, 2, 61@Int), ['0'])
+# top-105, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 17@Int), ==, 2, 39@Int), ['0'])
+# top-106, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 17@Int), ==, 2, 61@Int), ['0'])
+# top-107, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 19@Int), ==, 2, 39@Int), ['0'])
+# top-108, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 19@Int), ==, 2, 61@Int), ['0'])
+# top-109, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 21@Int), ==, 2, 39@Int), ['0'])
+# top-110, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 21@Int), ==, 2, 61@Int), ['0'])
+# top-111, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 24@Int), ==, 2, 39@Int), ['0'])
+# top-112, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 24@Int), ==, 2, 61@Int), ['0'])
+# top-113, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 39@Int), <, 2, 43@Int), ['0'])
+# top-114, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 39@Int), <=, 2, 39@Int), ['0'])
+# top-115, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 39@Int), ==, 2, 39@Int), ['0'])
+# top-116, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 39@Int), ==, 2, 61@Int), ['0'])
+# top-117, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 43@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+# top-118, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 43@Int), ==, 2, 61@Int), ['0'])
+# top-119, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 57@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+# top-120, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 57@Int), ==, 2, 61@Int), ['0'])
+# top-121, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 61@Int), <, 2, 76@Int), ['0'])
+# top-122, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 61@Int), <=, 2, 61@Int), ['0'])
+# top-123, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 61@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+# top-124, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >=, 2, 61@Int), ==, 2, 61@Int), ['0'])
+# top-125, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 6@Int), ==, 2, 39@Int), ['0'])
+# top-126, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 6@Int), ==, 2, 61@Int), ['0'])
+# top-127, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 7@Int), ==, 2, 39@Int), ['0'])
+# top-128, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 7@Int), ==, 2, 61@Int), ['0'])
+# top-129, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 8@Int), ==, 2, 39@Int), ['0'])
+# top-130, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 8@Int), ==, 2, 61@Int), ['0'])
+# top-131, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 14@Int), ==, 2, 39@Int), ['0'])
+# top-132, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 14@Int), ==, 2, 61@Int), ['0'])
+# top-133, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 17@Int), ==, 2, 39@Int), ['0'])
+# top-134, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 17@Int), ==, 2, 61@Int), ['0'])
+# top-135, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 19@Int), ==, 2, 39@Int), ['0'])
+# top-136, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 19@Int), ==, 2, 61@Int), ['0'])
+# top-137, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 21@Int), ==, 2, 39@Int), ['0'])
+# top-138, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 21@Int), ==, 2, 61@Int), ['0'])
+# top-139, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 24@Int), <, 2, 43@Int), ['0'])
+# top-140, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 24@Int), <=, 2, 39@Int), ['0'])
+# top-141, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 24@Int), ==, 2, 39@Int), ['0'])
+# top-142, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 24@Int), ==, 2, 61@Int), ['0'])
+# top-143, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 39@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+# top-144, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 39@Int), ==, 2, 61@Int), ['0'])
+# top-145, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 43@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+# top-146, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 43@Int), ==, 2, 61@Int), ['0'])
+# top-147, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 57@Int), <, 2, 76@Int), ['0'])
+# top-148, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 57@Int), <=, 2, 61@Int), ['0'])
+# top-149, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 57@Int), ==, 0, Pagan/earth-based@Str), ['0'])
+# top-150, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, >, 2, 57@Int), ==, 2, 61@Int), ['0'])
+# top-151, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Catholics@Str), ==, 2, 39@Int), ['0'])
+# top-152, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Catholics@Str), ==, 2, 61@Int), ['0'])
+# top-153, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 6@Int), ==, 2, 39@Int), ['0'])
+# top-154, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 6@Int), ==, 2, 61@Int), ['0'])
+# top-155, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 7@Int), ==, 2, 39@Int), ['0'])
+# top-156, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 7@Int), ==, 2, 61@Int), ['0'])
+# top-157, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 8@Int), ==, 2, 39@Int), ['0'])
+# top-158, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 8@Int), ==, 2, 61@Int), ['0'])
+# top-159, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 14@Int), ==, 2, 39@Int), ['0'])
+# top-160, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 14@Int), ==, 2, 61@Int), ['0'])
+# top-161, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Religion@Str), ==, 2, 39@Int), ['0'])
+# top-162, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Religion@Str), ==, 2, 61@Int), ['0'])
+# top-163, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 17@Int), ==, 2, 39@Int), ['0'])
+# top-164, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 17@Int), ==, 2, 61@Int), ['0'])
+# top-165, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Hindus@Str), ==, 2, 39@Int), ['0'])
+# top-166, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Hindus@Str), ==, 2, 61@Int), ['0'])
+# top-167, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 19@Int), ==, 2, 39@Int), ['0'])
+# top-168, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 19@Int), ==, 2, 61@Int), ['0'])
+# top-169, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 21@Int), ==, 2, 39@Int), ['0'])
+# top-170, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 21@Int), ==, 2, 61@Int), ['0'])
+# top-171, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Native Am. spirituality@Str), ==, 2, 39@Int), ['0'])
+# top-172, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Native Am. spirituality@Str), ==, 2, 61@Int), ['0'])
+# top-173, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 24@Int), ==, 2, 39@Int), ['0'])
+# top-174, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 24@Int), ==, 2, 61@Int), ['0'])
+# top-175, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Other non-Christian@Str), ==, 2, 39@Int), ['0'])
+# top-176, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Other non-Christian@Str), ==, 2, 61@Int), ['0'])
+# top-177, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, percentage@Str), ==, 2, 39@Int), ['0'])
+# top-178, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, percentage@Str), ==, 2, 61@Int), ['0'])
+# top-179, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Not too/not at all common@Str), ==, 2, 39@Int), ['0'])
+# top-180, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Not too/not at all common@Str), ==, 2, 61@Int), ['0'])
+# top-181, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 39@Int), ==, 2, 39@Int), ['0'])
+# top-182, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 39@Int), ==, 2, 61@Int), ['0'])
+# top-183, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Very/somewhat common@Str), ==, 2, 39@Int), ['0'])
+# top-184, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Very/somewhat common@Str), ==, 2, 61@Int), ['0'])
+# top-185, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 43@Int), ==, 2, 39@Int), ['0'])
+# top-186, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 43@Int), ==, 2, 61@Int), ['0'])
+# top-187, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Jews@Str), ==, 2, 39@Int), ['0'])
+# top-188, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Jews@Str), ==, 2, 61@Int), ['0'])
+# top-189, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Unaffiliated@Str), ==, 2, 39@Int), ['0'])
+# top-190, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Unaffiliated@Str), ==, 2, 61@Int), ['0'])
+# top-191, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Orthodox Christian@Str), ==, 2, 39@Int), ['0'])
+# top-192, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Orthodox Christian@Str), ==, 2, 61@Int), ['0'])
+# top-193, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 57@Int), ==, 2, 39@Int), ['0'])
+# top-194, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 57@Int), ==, 2, 61@Int), ['0'])
+# top-195, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 61@Int), ==, 2, 39@Int), ['0'])
+# top-196, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 61@Int), ==, 2, 61@Int), ['0'])
+# top-197, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, orange@Str), ==, 2, 39@Int), ['0'])
+# top-198, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, orange@Str), ==, 2, 61@Int), ['0'])
+# top-199, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, color@Str), ==, 2, 39@Int), ['0'])
+# top-200, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, color@Str), ==, 2, 61@Int), ['0'])
+# top-201, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, blue@Str), ==, 2, 39@Int), ['0'])
+# top-202, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, blue@Str), ==, 2, 61@Int), ['0'])
+# top-203, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, response@Str), ==, 2, 39@Int), ['0'])
+# top-204, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, response@Str), ==, 2, 61@Int), ['0'])
+# top-205, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 76@Int), ==, 2, 39@Int), ['0'])
+# top-206, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 76@Int), ==, 2, 61@Int), ['0'])
+# top-207, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 79@Int), ==, 2, 39@Int), ['0'])
+# top-208, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 79@Int), ==, 2, 61@Int), ['0'])
+# top-209, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 81@Int), ==, 2, 39@Int), ['0'])
+# top-210, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 81@Int), ==, 2, 61@Int), ['0'])
+# top-211, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 83@Int), ==, 2, 39@Int), ['0'])
+# top-212, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 83@Int), ==, 2, 61@Int), ['0'])
+# top-213, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 86@Int), ==, 2, 39@Int), ['0'])
+# top-214, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 86@Int), ==, 2, 61@Int), ['0'])
+# top-215, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 92@Int), ==, 2, 39@Int), ['0'])
+# top-216, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 92@Int), ==, 2, 61@Int), ['0'])
+# top-217, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 93@Int), ==, 2, 39@Int), ['0'])
+# top-218, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 93@Int), ==, 2, 61@Int), ['0'])
+# top-219, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 94@Int), ==, 2, 39@Int), ['0'])
+# top-220, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, 94@Int), ==, 2, 61@Int), ['0'])
+# top-221, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Mormons@Str), ==, 2, 39@Int), ['0'])
+# top-222, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Mormons@Str), ==, 2, 61@Int), ['0'])
+# top-223, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Buddhists@Str), ==, 2, 39@Int), ['0'])
+# top-224, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Buddhists@Str), ==, 2, 61@Int), ['0'])
+# top-225, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Muslims@Str), ==, 2, 39@Int), ['0'])
+# top-226, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Muslims@Str), ==, 2, 61@Int), ['0'])
+# top-227, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Protestants@Str), ==, 2, 39@Int), ['0'])
+# top-228, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 0, Protestants@Str), ==, 2, 61@Int), ['0'])
+# top-229, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Catholics@Str), ==, 2, 39@Int), ['0'])
+# top-230, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Catholics@Str), ==, 2, 61@Int), ['0'])
+# top-231, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 6@Int), ==, 2, 39@Int), ['0'])
+# top-232, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 6@Int), ==, 2, 61@Int), ['0'])
+# top-233, score: 0.00, answer: ['Pagan/earth-based']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, 7@Int), ==, 2, 39@Int), ['0'])

@@ -1,0 +1,161 @@
+# parsed arguments: Namespace(benchmark='Q48f58', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'female', '12-17', '18-59', 'gender', 'blue', 'color', '5-11', '20', '24', '7', 'male', 'percentage', '9', 'orange', 'group', '60+', '0-4', '10', 'age', '1', '2'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+  Age group  Gender  Percentage   color
+0       0-4    Male           9  orange
+1       0-4  Female           9    blue
+2     12-17    Male           7  orange
+3     12-17  Female           7    blue
+4     18-59  Female          24    blue
+5     18-59    Male          20  orange
+6       60+  Female           2    blue
+7       60+    Male           1  orange
+8      5-11    Male          10  orange
+9      5-11  Female          10    blue
+# query is: Which age groups on the graph have an unequal gender split?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0  18-59
+1    60+
+# inferred DSL terminals:
+  # ConstVal: ['1@Int', '2@Int', '7@Int', '18-59@Str', '9@Int', '10@Int', 'Percentage@Str', '20@Int', '5-11@Str', '24@Int', 'Female@Str', 'Age group@Str', '12-17@Str', 'blue@Str', 'color@Str', 'Gender@Str', 'orange@Str', 'Male@Str', '60+@Str', '0-4@Str']
+     # cmap: [(None, 1), (None, 2), (None, 7), (None, '18-59'), (None, 9), (None, 10), (None, 'Percentage'), (None, 20), (None, '5-11'), (None, 24), (None, 'Female'), (None, 'Age group'), (None, '12-17'), (None, 'blue'), (None, 'color'), (None, 'Gender'), (None, 'orange'), (None, 'Male'), (None, '60+'), (None, '0-4')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': '0-4'}]
+  # found 32 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 0-4@Str), ==, 1, Female@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', '0-4'], '==', 'Gender', 'Female'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 0-4@Str), ==, 1, Male@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', '0-4'], '==', 'Gender', 'Male'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 0-4@Str), ==, 3, blue@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', '0-4'], '==', 'color', 'blue'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 0-4@Str), ==, 3, orange@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', '0-4'], '==', 'color', 'orange'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 0-4@Str), !=, 1, Female@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', '0-4'], '!=', 'Gender', 'Female'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 0-4@Str), !=, 1, Male@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', '0-4'], '!=', 'Gender', 'Male'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 0-4@Str), !=, 3, blue@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', '0-4'], '!=', 'color', 'blue'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 0-4@Str), !=, 3, orange@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', '0-4'], '!=', 'color', 'orange'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Female@Str), ==, 0, 0-4@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Gender', 'Female'], '==', 'Age group', '0-4'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Female@Str), ==, 2, 9@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Gender', 'Female'], '==', 'Percentage', 9], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Male@Str), ==, 0, 0-4@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Gender', 'Male'], '==', 'Age group', '0-4'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Male@Str), ==, 2, 9@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Gender', 'Male'], '==', 'Percentage', 9], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 9@Int), ==, 1, Female@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Percentage', 9], '==', 'Gender', 'Female'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 9@Int), ==, 1, Male@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Percentage', 9], '==', 'Gender', 'Male'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 9@Int), ==, 3, blue@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Percentage', 9], '==', 'color', 'blue'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 9@Int), ==, 3, orange@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Percentage', 9], '==', 'color', 'orange'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 9@Int), !=, 1, Female@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Percentage', 9], '!=', 'Gender', 'Female'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 9@Int), !=, 1, Male@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Percentage', 9], '!=', 'Gender', 'Male'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 9@Int), !=, 3, blue@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Percentage', 9], '!=', 'color', 'blue'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 9@Int), !=, 3, orange@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Percentage', 9], '!=', 'color', 'orange'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, 0-4@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'Age group', '0-4'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 2, 9@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'Percentage', 9], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, orange@Str), ==, 0, 0-4@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'orange'], '==', 'Age group', '0-4'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, orange@Str), ==, 2, 9@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'orange'], '==', 'Percentage', 9], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Female@Str), ==, 0, 0-4@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Gender', 'Female'], '==', 'Age group', '0-4'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Female@Str), ==, 2, 9@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Gender', 'Female'], '==', 'Percentage', 9], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Male@Str), ==, 0, 0-4@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Gender', 'Male'], '==', 'Age group', '0-4'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Male@Str), ==, 2, 9@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'Gender', 'Male'], '==', 'Percentage', 9], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, blue@Str), ==, 0, 0-4@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'blue'], '==', 'Age group', '0-4'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, blue@Str), ==, 2, 9@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'blue'], '==', 'Percentage', 9], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, orange@Str), ==, 0, 0-4@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'orange'], '==', 'Age group', '0-4'], ['Age group']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, orange@Str), ==, 2, 9@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '!=', 'color', 'orange'], '==', 'Percentage', 9], ['Age group']]
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 0-4@Str), ==, 1, Female@Str), ['0'])
+# top-2, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 0-4@Str), ==, 1, Male@Str), ['0'])
+# top-3, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 0-4@Str), ==, 3, blue@Str), ['0'])
+# top-4, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 0-4@Str), ==, 3, orange@Str), ['0'])
+# top-5, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 0-4@Str), !=, 1, Female@Str), ['0'])
+# top-6, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 0-4@Str), !=, 1, Male@Str), ['0'])
+# top-7, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 0-4@Str), !=, 3, blue@Str), ['0'])
+# top-8, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 0-4@Str), !=, 3, orange@Str), ['0'])
+# top-9, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Female@Str), ==, 0, 0-4@Str), ['0'])
+# top-10, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Female@Str), ==, 2, 9@Int), ['0'])
+# top-11, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Male@Str), ==, 0, 0-4@Str), ['0'])
+# top-12, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Male@Str), ==, 2, 9@Int), ['0'])
+# top-13, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 9@Int), ==, 1, Female@Str), ['0'])
+# top-14, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 9@Int), ==, 1, Male@Str), ['0'])
+# top-15, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 9@Int), ==, 3, blue@Str), ['0'])
+# top-16, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 9@Int), ==, 3, orange@Str), ['0'])
+# top-17, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 9@Int), !=, 1, Female@Str), ['0'])
+# top-18, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 9@Int), !=, 1, Male@Str), ['0'])
+# top-19, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 9@Int), !=, 3, blue@Str), ['0'])
+# top-20, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 9@Int), !=, 3, orange@Str), ['0'])
+# top-21, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, 0-4@Str), ['0'])
+# top-22, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 2, 9@Int), ['0'])
+# top-23, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, orange@Str), ==, 0, 0-4@Str), ['0'])
+# top-24, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, orange@Str), ==, 2, 9@Int), ['0'])
+# top-25, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Female@Str), ==, 0, 0-4@Str), ['0'])
+# top-26, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Female@Str), ==, 2, 9@Int), ['0'])
+# top-27, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Male@Str), ==, 0, 0-4@Str), ['0'])
+# top-28, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 1, Male@Str), ==, 2, 9@Int), ['0'])
+# top-29, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, blue@Str), ==, 0, 0-4@Str), ['0'])
+# top-30, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, blue@Str), ==, 2, 9@Int), ['0'])
+# top-31, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, orange@Str), ==, 0, 0-4@Str), ['0'])
+# top-32, score: 0.00, answer: ['0-4']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, !=, 3, orange@Str), ==, 2, 9@Int), ['0'])

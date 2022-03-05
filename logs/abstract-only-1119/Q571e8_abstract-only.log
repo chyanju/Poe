@@ -1,0 +1,1138 @@
+# parsed arguments: Namespace(benchmark='Q571e8', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'blue', 'washington', 'cnn', 'house', '(opinion', 'abc', 'policy', 'surveyusa', '-2.5', '3.1', 'rasmussen', '-1.3', '(nbc/marist)', '2.9', 'quinnipiac', '(ppp)', 'polling', 'research)', 'ipsos', '0.8', '1.9', 'news', 'reports', '&', 'gallup', '-1.4', 'color', 'public', 'yougov', 'marist', '-1.5', 'post', '/', '3.2', 'pew', 'research', '-1.7', 'shaw)', 'orange', '(robbins', 'fox', 'pollster', 'republican', 'spread', '0.4', 'effect', 'democratic', '2.4'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                       Pollster      spread  House Effect   color
+0                  Pew Research  Democratic           3.2    blue
+1   Public Policy Polling (PPP)  Democratic           3.1    blue
+2                         Ipsos  Democratic           2.9    blue
+3                     SurveyUSA  Democratic           2.4    blue
+4           Marist (NBC/Marist)  Democratic           1.9    blue
+5                        YouGov  Democratic           0.8    blue
+6        CNN (Opinion Research)  Democratic           0.4    blue
+7             Rasmussen Reports  Republican          -1.3  orange
+8    Washington Post / ABC News  Republican          -1.4  orange
+9     Fox News (Robbins & Shaw)  Republican          -1.5  orange
+10                   Quinnipiac  Republican          -1.7  orange
+11                       Gallup  Republican          -2.5  orange
+# query is: How much higher is the value of SurveyUSA than the value of YouGov?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0     1.6
+# inferred DSL terminals:
+  # ConstVal: ['0.8@Float', 'blue@Str', '2.9@Float', '3.2@Float', '3.1@Float', '2.4@Float', '1.9@Float', '0.4@Float', '-1.4@Float', 'Pollster@Str', 'House Effect@Str', 'Pew Research@Str', 'Gallup@Str', 'Republican@Str', 'Washington Post / ABC News@Str', 'color@Str', 'Democratic@Str', 'Quinnipiac@Str', '-1.7@Float', 'Ipsos@Str', 'Public Policy Polling (PPP)@Str', 'Rasmussen Reports@Str', 'Fox News (Robbins & Shaw)@Str', 'CNN (Opinion Research)@Str', 'orange@Str', 'Marist (NBC/Marist)@Str', 'SurveyUSA@Str', 'spread@Str', '-2.5@Float', '-1.5@Float', 'YouGov@Str', '-1.3@Float']
+     # cmap: [(None, 0.8), (None, 'blue'), (None, 2.9), (None, 3.2), (None, 3.1), (None, 2.4), (None, 1.9), (None, 0.4), (None, -1.4), (None, 'Pollster'), (None, 'House Effect'), (None, 'Pew Research'), (None, 'Gallup'), (None, 'Republican'), (None, 'Washington Post / ABC News'), (None, 'color'), (None, 'Democratic'), (None, 'Quinnipiac'), (None, -1.7), (None, 'Ipsos'), (None, 'Public Policy Polling (PPP)'), (None, 'Rasmussen Reports'), (None, 'Fox News (Robbins & Shaw)'), (None, 'CNN (Opinion Research)'), (None, 'orange'), (None, 'Marist (NBC/Marist)'), (None, 'SurveyUSA'), (None, 'spread'), (None, -2.5), (None, -1.5), (None, 'YouGov'), (None, -1.3)]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 276 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 0), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'count', 'Pollster'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 0), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'count', 'Pollster'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'count', 'Pollster'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 0), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'count', 'Pollster'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'count', 'spread'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 1), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'count', 'spread'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'count', 'spread'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 1), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'count', 'spread'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 2), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'count', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 2), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'count', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 2), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'count', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 2), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'count', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 3), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'count', 'color'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 3), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'count', 'color'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 3), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'count', 'color'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 3), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect'], 'count', 'color'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'count', 'Pollster'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'count', 'Pollster'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'count', 'Pollster'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'count', 'Pollster'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'count', 'spread'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'count', 'spread'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'count', 'spread'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'count', 'spread'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'count', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'count', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'count', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'count', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'count', 'color'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'count', 'color'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'count', 'color'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Pollster', 'House Effect'], 'count', 'color'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'count', 'Pollster'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'count', 'Pollster'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'count', 'Pollster'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'count', 'Pollster'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'count', 'spread'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'count', 'spread'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'count', 'spread'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'count', 'spread'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'count', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'count', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'count', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'count', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'count', 'color'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'count', 'color'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'count', 'color'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['spread', 'House Effect'], 'count', 'color'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 0), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'count', 'Pollster'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 0), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'count', 'Pollster'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 0), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'count', 'Pollster'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 0), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'count', 'Pollster'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'count', 'spread'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'count', 'spread'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'count', 'spread'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'count', 'spread'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 2), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'count', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 2), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'count', 'House Effect'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 2), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'count', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 2), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'count', 'House Effect'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 3), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'count', 'color'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 3), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'count', 'color'], 'eqmin', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 3), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'count', 'color'], 'eqmax', 'House Effect'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 3), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['House Effect', 'color'], 'count', 'color'], 'eqmax', 'House Effect'], ['COL0']]
+    # Summarize(SelectRow1(@param0, <, 2, -1.7@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'House Effect', -1.7], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, <, 2, -1.7@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'House Effect', -1.7], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, <, 2, -1.7@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'House Effect', -1.7], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, <, 2, -1.7@Float), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'House Effect', -1.7], 'count', 'color']
+    # Summarize(SelectRow1(@param0, <=, 2, -2.5@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'House Effect', -2.5], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, <=, 2, -2.5@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'House Effect', -2.5], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, <=, 2, -2.5@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'House Effect', -2.5], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, <=, 2, -2.5@Float), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'House Effect', -2.5], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Pew Research@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Pew Research'], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 0, Pew Research@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Pew Research'], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 0, Pew Research@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Pew Research'], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 0, Pew Research@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Pew Research'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Gallup@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Gallup'], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 0, Gallup@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Gallup'], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 0, Gallup@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Gallup'], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 0, Gallup@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Gallup'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Washington Post / ABC News'], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Washington Post / ABC News'], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Washington Post / ABC News'], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Washington Post / ABC News'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Quinnipiac@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Quinnipiac'], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 0, Quinnipiac@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Quinnipiac'], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 0, Quinnipiac@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Quinnipiac'], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 0, Quinnipiac@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Quinnipiac'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Ipsos@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Ipsos'], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 0, Ipsos@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Ipsos'], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 0, Ipsos@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Ipsos'], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 0, Ipsos@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Ipsos'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Public Policy Polling (PPP)'], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Public Policy Polling (PPP)'], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Public Policy Polling (PPP)'], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Public Policy Polling (PPP)'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Rasmussen Reports@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Rasmussen Reports'], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 0, Rasmussen Reports@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Rasmussen Reports'], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 0, Rasmussen Reports@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Rasmussen Reports'], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 0, Rasmussen Reports@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Rasmussen Reports'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Fox News (Robbins & Shaw)'], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Fox News (Robbins & Shaw)'], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Fox News (Robbins & Shaw)'], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Fox News (Robbins & Shaw)'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'CNN (Opinion Research)'], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'CNN (Opinion Research)'], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'CNN (Opinion Research)'], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'CNN (Opinion Research)'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Marist (NBC/Marist)'], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Marist (NBC/Marist)'], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Marist (NBC/Marist)'], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'Marist (NBC/Marist)'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, SurveyUSA@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'SurveyUSA'], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 0, SurveyUSA@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'SurveyUSA'], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 0, SurveyUSA@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'SurveyUSA'], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 0, SurveyUSA@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'SurveyUSA'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, YouGov@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'YouGov'], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 0, YouGov@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'YouGov'], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 0, YouGov@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'YouGov'], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 0, YouGov@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Pollster', 'YouGov'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 0.8@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 0.8], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 2, 0.8@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 0.8], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 2, 0.8@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 0.8], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 2, 0.8@Float), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 0.8], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 2.9@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 2.9], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 2, 2.9@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 2.9], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 2, 2.9@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 2.9], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 2, 2.9@Float), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 2.9], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 3.2@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 3.2], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 2, 3.2@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 3.2], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 2, 3.2@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 3.2], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 2, 3.2@Float), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 3.2], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 3.1@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 3.1], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 2, 3.1@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 3.1], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 2, 3.1@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 3.1], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 2, 3.1@Float), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 3.1], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 2.4@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 2.4], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 2, 2.4@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 2.4], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 2, 2.4@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 2.4], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 2, 2.4@Float), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 2.4], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 1.9@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 1.9], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 2, 1.9@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 1.9], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 2, 1.9@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 1.9], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 2, 1.9@Float), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 1.9], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, 0.4@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 0.4], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 2, 0.4@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 0.4], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 2, 0.4@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 0.4], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 2, 0.4@Float), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', 0.4], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, -1.4@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -1.4], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 2, -1.4@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -1.4], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 2, -1.4@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -1.4], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 2, -1.4@Float), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -1.4], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, -1.7@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -1.7], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 2, -1.7@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -1.7], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 2, -1.7@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -1.7], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 2, -1.7@Float), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -1.7], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, -2.5@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -2.5], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 2, -2.5@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -2.5], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 2, -2.5@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -2.5], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 2, -2.5@Float), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -2.5], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, -1.5@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -1.5], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 2, -1.5@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -1.5], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 2, -1.5@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -1.5], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 2, -1.5@Float), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -1.5], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, -1.3@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -1.3], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, ==, 2, -1.3@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -1.3], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, ==, 2, -1.3@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -1.3], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, ==, 2, -1.3@Float), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'House Effect', -1.3], 'count', 'color']
+    # Summarize(SelectRow1(@param0, >=, 2, 3.2@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'House Effect', 3.2], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, >=, 2, 3.2@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'House Effect', 3.2], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, >=, 2, 3.2@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'House Effect', 3.2], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, >=, 2, 3.2@Float), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'House Effect', 3.2], 'count', 'color']
+    # Summarize(SelectRow1(@param0, >, 2, 3.1@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'House Effect', 3.1], 'count', 'Pollster']
+    # Summarize(SelectRow1(@param0, >, 2, 3.1@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'House Effect', 3.1], 'count', 'spread']
+    # Summarize(SelectRow1(@param0, >, 2, 3.1@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'House Effect', 3.1], 'count', 'House Effect']
+    # Summarize(SelectRow1(@param0, >, 2, 3.1@Float), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'House Effect', 3.1], 'count', 'color']
+    # Contrast(SelectRow1(@param0, <, 2, 0.8@Float), -, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 0.8], '-', 'Pollster', 'Fox News (Robbins & Shaw)', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 0.8@Float), /, 0, Gallup@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 0.8], '/', 'Pollster', 'Gallup', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 0.8@Float), /, 0, Washington Post / ABC News@Str, Washington Post / ABC News@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 0.8], '/', 'Pollster', 'Washington Post / ABC News', 'Washington Post / ABC News', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 0.8@Float), /, 0, Quinnipiac@Str, Quinnipiac@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 0.8], '/', 'Pollster', 'Quinnipiac', 'Quinnipiac', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 0.8@Float), /, 0, Rasmussen Reports@Str, Rasmussen Reports@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 0.8], '/', 'Pollster', 'Rasmussen Reports', 'Rasmussen Reports', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 0.8@Float), /, 0, Fox News (Robbins & Shaw)@Str, Fox News (Robbins & Shaw)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 0.8], '/', 'Pollster', 'Fox News (Robbins & Shaw)', 'Fox News (Robbins & Shaw)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 0.8@Float), /, 0, CNN (Opinion Research)@Str, CNN (Opinion Research)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 0.8], '/', 'Pollster', 'CNN (Opinion Research)', 'CNN (Opinion Research)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 0.8@Float), /, 1, Democratic@Str, Democratic@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 0.8], '/', 'spread', 'Democratic', 'Democratic', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 0.8@Float), /, 3, blue@Str, blue@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 0.8], '/', 'color', 'blue', 'blue', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 0.8@Float), diff, 0, Gallup@Str, Fox News (Robbins & Shaw)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 0.8], 'diff', 'Pollster', 'Gallup', 'Fox News (Robbins & Shaw)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 0.8@Float), diff, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 0.8], 'diff', 'Pollster', 'Fox News (Robbins & Shaw)', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.9@Float), +, 0, Washington Post / ABC News@Str, SurveyUSA@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.9], '+', 'Pollster', 'Washington Post / ABC News', 'SurveyUSA', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.9@Float), +, 0, SurveyUSA@Str, Washington Post / ABC News@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.9], '+', 'Pollster', 'SurveyUSA', 'Washington Post / ABC News', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.9@Float), -, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.9], '-', 'Pollster', 'Fox News (Robbins & Shaw)', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.9@Float), /, 0, Gallup@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.9], '/', 'Pollster', 'Gallup', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.9@Float), /, 0, Washington Post / ABC News@Str, Washington Post / ABC News@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.9], '/', 'Pollster', 'Washington Post / ABC News', 'Washington Post / ABC News', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.9@Float), /, 0, Quinnipiac@Str, Quinnipiac@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.9], '/', 'Pollster', 'Quinnipiac', 'Quinnipiac', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.9@Float), /, 0, Rasmussen Reports@Str, Rasmussen Reports@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.9], '/', 'Pollster', 'Rasmussen Reports', 'Rasmussen Reports', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.9@Float), /, 0, Fox News (Robbins & Shaw)@Str, Fox News (Robbins & Shaw)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.9], '/', 'Pollster', 'Fox News (Robbins & Shaw)', 'Fox News (Robbins & Shaw)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.9@Float), /, 0, CNN (Opinion Research)@Str, CNN (Opinion Research)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.9], '/', 'Pollster', 'CNN (Opinion Research)', 'CNN (Opinion Research)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.9@Float), /, 0, Marist (NBC/Marist)@Str, Marist (NBC/Marist)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.9], '/', 'Pollster', 'Marist (NBC/Marist)', 'Marist (NBC/Marist)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.9@Float), /, 0, SurveyUSA@Str, SurveyUSA@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.9], '/', 'Pollster', 'SurveyUSA', 'SurveyUSA', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.9@Float), /, 0, YouGov@Str, YouGov@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.9], '/', 'Pollster', 'YouGov', 'YouGov', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.9@Float), diff, 0, Gallup@Str, Fox News (Robbins & Shaw)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.9], 'diff', 'Pollster', 'Gallup', 'Fox News (Robbins & Shaw)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.9@Float), diff, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.9], 'diff', 'Pollster', 'Fox News (Robbins & Shaw)', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.2@Float), +, 0, Washington Post / ABC News@Str, SurveyUSA@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.2], '+', 'Pollster', 'Washington Post / ABC News', 'SurveyUSA', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.2@Float), +, 0, SurveyUSA@Str, Washington Post / ABC News@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.2], '+', 'Pollster', 'SurveyUSA', 'Washington Post / ABC News', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.2@Float), -, 0, Ipsos@Str, Marist (NBC/Marist)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.2], '-', 'Pollster', 'Ipsos', 'Marist (NBC/Marist)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.2@Float), -, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.2], '-', 'Pollster', 'Fox News (Robbins & Shaw)', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, Gallup@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.2], '/', 'Pollster', 'Gallup', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, Washington Post / ABC News@Str, Washington Post / ABC News@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.2], '/', 'Pollster', 'Washington Post / ABC News', 'Washington Post / ABC News', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, Quinnipiac@Str, Quinnipiac@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.2], '/', 'Pollster', 'Quinnipiac', 'Quinnipiac', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, Ipsos@Str, Ipsos@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.2], '/', 'Pollster', 'Ipsos', 'Ipsos', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, Public Policy Polling (PPP)@Str, Public Policy Polling (PPP)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.2], '/', 'Pollster', 'Public Policy Polling (PPP)', 'Public Policy Polling (PPP)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, Rasmussen Reports@Str, Rasmussen Reports@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.2], '/', 'Pollster', 'Rasmussen Reports', 'Rasmussen Reports', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, Fox News (Robbins & Shaw)@Str, Fox News (Robbins & Shaw)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.2], '/', 'Pollster', 'Fox News (Robbins & Shaw)', 'Fox News (Robbins & Shaw)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, CNN (Opinion Research)@Str, CNN (Opinion Research)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.2], '/', 'Pollster', 'CNN (Opinion Research)', 'CNN (Opinion Research)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, Marist (NBC/Marist)@Str, Marist (NBC/Marist)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.2], '/', 'Pollster', 'Marist (NBC/Marist)', 'Marist (NBC/Marist)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, SurveyUSA@Str, SurveyUSA@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.2], '/', 'Pollster', 'SurveyUSA', 'SurveyUSA', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, YouGov@Str, YouGov@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.2], '/', 'Pollster', 'YouGov', 'YouGov', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.2@Float), diff, 0, Gallup@Str, Fox News (Robbins & Shaw)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.2], 'diff', 'Pollster', 'Gallup', 'Fox News (Robbins & Shaw)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.2@Float), diff, 0, Ipsos@Str, Marist (NBC/Marist)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.2], 'diff', 'Pollster', 'Ipsos', 'Marist (NBC/Marist)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.2@Float), diff, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.2], 'diff', 'Pollster', 'Fox News (Robbins & Shaw)', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.2@Float), diff, 0, Marist (NBC/Marist)@Str, Ipsos@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.2], 'diff', 'Pollster', 'Marist (NBC/Marist)', 'Ipsos', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.1@Float), +, 0, Washington Post / ABC News@Str, SurveyUSA@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.1], '+', 'Pollster', 'Washington Post / ABC News', 'SurveyUSA', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.1@Float), +, 0, SurveyUSA@Str, Washington Post / ABC News@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.1], '+', 'Pollster', 'SurveyUSA', 'Washington Post / ABC News', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.1@Float), -, 0, Ipsos@Str, Marist (NBC/Marist)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.1], '-', 'Pollster', 'Ipsos', 'Marist (NBC/Marist)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.1@Float), -, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.1], '-', 'Pollster', 'Fox News (Robbins & Shaw)', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, Gallup@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.1], '/', 'Pollster', 'Gallup', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, Washington Post / ABC News@Str, Washington Post / ABC News@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.1], '/', 'Pollster', 'Washington Post / ABC News', 'Washington Post / ABC News', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, Quinnipiac@Str, Quinnipiac@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.1], '/', 'Pollster', 'Quinnipiac', 'Quinnipiac', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, Ipsos@Str, Ipsos@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.1], '/', 'Pollster', 'Ipsos', 'Ipsos', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, Rasmussen Reports@Str, Rasmussen Reports@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.1], '/', 'Pollster', 'Rasmussen Reports', 'Rasmussen Reports', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, Fox News (Robbins & Shaw)@Str, Fox News (Robbins & Shaw)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.1], '/', 'Pollster', 'Fox News (Robbins & Shaw)', 'Fox News (Robbins & Shaw)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, CNN (Opinion Research)@Str, CNN (Opinion Research)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.1], '/', 'Pollster', 'CNN (Opinion Research)', 'CNN (Opinion Research)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, Marist (NBC/Marist)@Str, Marist (NBC/Marist)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.1], '/', 'Pollster', 'Marist (NBC/Marist)', 'Marist (NBC/Marist)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, SurveyUSA@Str, SurveyUSA@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.1], '/', 'Pollster', 'SurveyUSA', 'SurveyUSA', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, YouGov@Str, YouGov@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.1], '/', 'Pollster', 'YouGov', 'YouGov', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.1@Float), diff, 0, Gallup@Str, Fox News (Robbins & Shaw)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.1], 'diff', 'Pollster', 'Gallup', 'Fox News (Robbins & Shaw)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.1@Float), diff, 0, Ipsos@Str, Marist (NBC/Marist)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.1], 'diff', 'Pollster', 'Ipsos', 'Marist (NBC/Marist)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.1@Float), diff, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.1], 'diff', 'Pollster', 'Fox News (Robbins & Shaw)', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 3.1@Float), diff, 0, Marist (NBC/Marist)@Str, Ipsos@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 3.1], 'diff', 'Pollster', 'Marist (NBC/Marist)', 'Ipsos', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.4@Float), -, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.4], '-', 'Pollster', 'Fox News (Robbins & Shaw)', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.4@Float), /, 0, Gallup@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.4], '/', 'Pollster', 'Gallup', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.4@Float), /, 0, Washington Post / ABC News@Str, Washington Post / ABC News@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.4], '/', 'Pollster', 'Washington Post / ABC News', 'Washington Post / ABC News', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.4@Float), /, 0, Quinnipiac@Str, Quinnipiac@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.4], '/', 'Pollster', 'Quinnipiac', 'Quinnipiac', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.4@Float), /, 0, Rasmussen Reports@Str, Rasmussen Reports@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.4], '/', 'Pollster', 'Rasmussen Reports', 'Rasmussen Reports', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.4@Float), /, 0, Fox News (Robbins & Shaw)@Str, Fox News (Robbins & Shaw)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.4], '/', 'Pollster', 'Fox News (Robbins & Shaw)', 'Fox News (Robbins & Shaw)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.4@Float), /, 0, CNN (Opinion Research)@Str, CNN (Opinion Research)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.4], '/', 'Pollster', 'CNN (Opinion Research)', 'CNN (Opinion Research)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.4@Float), /, 0, Marist (NBC/Marist)@Str, Marist (NBC/Marist)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.4], '/', 'Pollster', 'Marist (NBC/Marist)', 'Marist (NBC/Marist)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.4@Float), /, 0, YouGov@Str, YouGov@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.4], '/', 'Pollster', 'YouGov', 'YouGov', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.4@Float), diff, 0, Gallup@Str, Fox News (Robbins & Shaw)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.4], 'diff', 'Pollster', 'Gallup', 'Fox News (Robbins & Shaw)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 2.4@Float), diff, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 2.4], 'diff', 'Pollster', 'Fox News (Robbins & Shaw)', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 1.9@Float), -, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 1.9], '-', 'Pollster', 'Fox News (Robbins & Shaw)', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 1.9@Float), /, 0, Gallup@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 1.9], '/', 'Pollster', 'Gallup', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 1.9@Float), /, 0, Washington Post / ABC News@Str, Washington Post / ABC News@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 1.9], '/', 'Pollster', 'Washington Post / ABC News', 'Washington Post / ABC News', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 1.9@Float), /, 0, Quinnipiac@Str, Quinnipiac@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 1.9], '/', 'Pollster', 'Quinnipiac', 'Quinnipiac', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 1.9@Float), /, 0, Rasmussen Reports@Str, Rasmussen Reports@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 1.9], '/', 'Pollster', 'Rasmussen Reports', 'Rasmussen Reports', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 1.9@Float), /, 0, Fox News (Robbins & Shaw)@Str, Fox News (Robbins & Shaw)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 1.9], '/', 'Pollster', 'Fox News (Robbins & Shaw)', 'Fox News (Robbins & Shaw)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 1.9@Float), /, 0, CNN (Opinion Research)@Str, CNN (Opinion Research)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 1.9], '/', 'Pollster', 'CNN (Opinion Research)', 'CNN (Opinion Research)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 1.9@Float), /, 0, YouGov@Str, YouGov@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 1.9], '/', 'Pollster', 'YouGov', 'YouGov', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 1.9@Float), diff, 0, Gallup@Str, Fox News (Robbins & Shaw)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 1.9], 'diff', 'Pollster', 'Gallup', 'Fox News (Robbins & Shaw)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 1.9@Float), diff, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 1.9], 'diff', 'Pollster', 'Fox News (Robbins & Shaw)', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 0.4@Float), -, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 0.4], '-', 'Pollster', 'Fox News (Robbins & Shaw)', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 0.4@Float), /, 0, Gallup@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 0.4], '/', 'Pollster', 'Gallup', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 0.4@Float), /, 0, Washington Post / ABC News@Str, Washington Post / ABC News@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 0.4], '/', 'Pollster', 'Washington Post / ABC News', 'Washington Post / ABC News', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 0.4@Float), /, 0, Quinnipiac@Str, Quinnipiac@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 0.4], '/', 'Pollster', 'Quinnipiac', 'Quinnipiac', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 0.4@Float), /, 0, Rasmussen Reports@Str, Rasmussen Reports@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 0.4], '/', 'Pollster', 'Rasmussen Reports', 'Rasmussen Reports', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 0.4@Float), /, 0, Fox News (Robbins & Shaw)@Str, Fox News (Robbins & Shaw)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 0.4], '/', 'Pollster', 'Fox News (Robbins & Shaw)', 'Fox News (Robbins & Shaw)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 0.4@Float), diff, 0, Gallup@Str, Fox News (Robbins & Shaw)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 0.4], 'diff', 'Pollster', 'Gallup', 'Fox News (Robbins & Shaw)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, 0.4@Float), diff, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', 0.4], 'diff', 'Pollster', 'Fox News (Robbins & Shaw)', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, -1.4@Float), -, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', -1.4], '-', 'Pollster', 'Fox News (Robbins & Shaw)', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, -1.4@Float), /, 0, Gallup@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', -1.4], '/', 'Pollster', 'Gallup', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, -1.4@Float), /, 0, Quinnipiac@Str, Quinnipiac@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', -1.4], '/', 'Pollster', 'Quinnipiac', 'Quinnipiac', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, -1.4@Float), /, 0, Fox News (Robbins & Shaw)@Str, Fox News (Robbins & Shaw)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', -1.4], '/', 'Pollster', 'Fox News (Robbins & Shaw)', 'Fox News (Robbins & Shaw)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, -1.4@Float), diff, 0, Gallup@Str, Fox News (Robbins & Shaw)@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', -1.4], 'diff', 'Pollster', 'Gallup', 'Fox News (Robbins & Shaw)', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, -1.4@Float), diff, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', -1.4], 'diff', 'Pollster', 'Fox News (Robbins & Shaw)', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, -1.7@Float), /, 0, Gallup@Str, Gallup@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', -1.7], '/', 'Pollster', 'Gallup', 'Gallup', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, -1.7@Float), /, 1, Republican@Str, Republican@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', -1.7], '/', 'spread', 'Republican', 'Republican', 'House Effect']
+    # Contrast(SelectRow1(@param0, <, 2, -1.7@Float), /, 3, orange@Str, orange@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'House Effect', -1.7], '/', 'color', 'orange', 'orange', 'House Effect']
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 0), eqmin, 0), ['1'])
+# top-2, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 0), eqmin, 0), ['-99'])
+# top-3, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 0), eqmax, 0), ['1'])
+# top-4, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 0), eqmax, 0), ['-99'])
+# top-5, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 1), eqmin, 0), ['1'])
+# top-6, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 1), eqmin, 0), ['-99'])
+# top-7, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 1), eqmax, 0), ['1'])
+# top-8, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 1), eqmax, 0), ['-99'])
+# top-9, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 2), eqmin, 0), ['1'])
+# top-10, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 2), eqmin, 0), ['-99'])
+# top-11, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 2), eqmax, 0), ['1'])
+# top-12, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 2), eqmax, 0), ['-99'])
+# top-13, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 3), eqmin, 0), ['1'])
+# top-14, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 3), eqmin, 0), ['-99'])
+# top-15, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 3), eqmax, 0), ['1'])
+# top-16, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], count, 3), eqmax, 0), ['-99'])
+# top-17, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmin, 1), ['2'])
+# top-18, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmin, 1), ['-99', '-1'])
+# top-19, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 1), ['2'])
+# top-20, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 1), ['-99', '-1'])
+# top-21, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmin, 1), ['2'])
+# top-22, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmin, 1), ['-99', '-1'])
+# top-23, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 1), ['2'])
+# top-24, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 1), ['-99', '-1'])
+# top-25, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmin, 1), ['2'])
+# top-26, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmin, 1), ['-99', '-1'])
+# top-27, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 1), ['2'])
+# top-28, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 1), ['-99', '-1'])
+# top-29, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmin, 1), ['2'])
+# top-30, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmin, 1), ['-99', '-1'])
+# top-31, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmax, 1), ['2'])
+# top-32, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmax, 1), ['-99', '-1'])
+# top-33, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 1), ['2'])
+# top-34, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 1), ['-99', '-1'])
+# top-35, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 1), ['2'])
+# top-36, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 1), ['-99', '-1'])
+# top-37, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 1), ['2'])
+# top-38, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 1), ['-99', '-1'])
+# top-39, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 1), ['2'])
+# top-40, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 1), ['-99', '-1'])
+# top-41, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 1), ['2'])
+# top-42, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 1), ['-99', '-1'])
+# top-43, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 1), ['2'])
+# top-44, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 1), ['-99', '-1'])
+# top-45, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmin, 1), ['2'])
+# top-46, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmin, 1), ['-99', '-1'])
+# top-47, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmax, 1), ['2'])
+# top-48, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 3), eqmax, 1), ['-99', '-1'])
+# top-49, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 0), eqmin, 0), ['2'])
+# top-50, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 0), eqmin, 0), ['-99', '-1'])
+# top-51, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 0), eqmax, 0), ['2'])
+# top-52, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 0), eqmax, 0), ['-99', '-1'])
+# top-53, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 1), eqmin, 0), ['2'])
+# top-54, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 1), eqmin, 0), ['-99', '-1'])
+# top-55, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 1), eqmax, 0), ['2'])
+# top-56, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 1), eqmax, 0), ['-99', '-1'])
+# top-57, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 2), eqmin, 0), ['2'])
+# top-58, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 2), eqmin, 0), ['-99', '-1'])
+# top-59, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 2), eqmax, 0), ['2'])
+# top-60, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 2), eqmax, 0), ['-99', '-1'])
+# top-61, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 3), eqmin, 0), ['2'])
+# top-62, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 3), eqmin, 0), ['-99', '-1'])
+# top-63, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 3), eqmax, 0), ['2'])
+# top-64, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], count, 3), eqmax, 0), ['-99', '-1'])
+# top-65, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 2, -1.7@Float), count, 0)
+# top-66, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 2, -1.7@Float), count, 1)
+# top-67, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 2, -1.7@Float), count, 2)
+# top-68, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 2, -1.7@Float), count, 3)
+# top-69, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 2, -2.5@Float), count, 0)
+# top-70, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 2, -2.5@Float), count, 1)
+# top-71, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 2, -2.5@Float), count, 2)
+# top-72, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 2, -2.5@Float), count, 3)
+# top-73, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Pew Research@Str), count, 0)
+# top-74, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Pew Research@Str), count, 1)
+# top-75, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Pew Research@Str), count, 2)
+# top-76, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Pew Research@Str), count, 3)
+# top-77, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Gallup@Str), count, 0)
+# top-78, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Gallup@Str), count, 1)
+# top-79, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Gallup@Str), count, 2)
+# top-80, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Gallup@Str), count, 3)
+# top-81, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), count, 0)
+# top-82, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), count, 1)
+# top-83, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), count, 2)
+# top-84, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), count, 3)
+# top-85, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Quinnipiac@Str), count, 0)
+# top-86, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Quinnipiac@Str), count, 1)
+# top-87, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Quinnipiac@Str), count, 2)
+# top-88, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Quinnipiac@Str), count, 3)
+# top-89, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Ipsos@Str), count, 0)
+# top-90, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Ipsos@Str), count, 1)
+# top-91, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Ipsos@Str), count, 2)
+# top-92, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Ipsos@Str), count, 3)
+# top-93, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), count, 0)
+# top-94, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), count, 1)
+# top-95, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), count, 2)
+# top-96, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), count, 3)
+# top-97, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Rasmussen Reports@Str), count, 0)
+# top-98, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Rasmussen Reports@Str), count, 1)
+# top-99, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Rasmussen Reports@Str), count, 2)
+# top-100, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Rasmussen Reports@Str), count, 3)
+# top-101, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), count, 0)
+# top-102, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), count, 1)
+# top-103, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), count, 2)
+# top-104, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), count, 3)
+# top-105, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), count, 0)
+# top-106, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), count, 1)
+# top-107, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), count, 2)
+# top-108, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), count, 3)
+# top-109, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), count, 0)
+# top-110, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), count, 1)
+# top-111, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), count, 2)
+# top-112, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), count, 3)
+# top-113, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, SurveyUSA@Str), count, 0)
+# top-114, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, SurveyUSA@Str), count, 1)
+# top-115, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, SurveyUSA@Str), count, 2)
+# top-116, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, SurveyUSA@Str), count, 3)
+# top-117, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, YouGov@Str), count, 0)
+# top-118, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, YouGov@Str), count, 1)
+# top-119, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, YouGov@Str), count, 2)
+# top-120, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, YouGov@Str), count, 3)
+# top-121, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 0.8@Float), count, 0)
+# top-122, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 0.8@Float), count, 1)
+# top-123, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 0.8@Float), count, 2)
+# top-124, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 0.8@Float), count, 3)
+# top-125, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 2.9@Float), count, 0)
+# top-126, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 2.9@Float), count, 1)
+# top-127, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 2.9@Float), count, 2)
+# top-128, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 2.9@Float), count, 3)
+# top-129, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 3.2@Float), count, 0)
+# top-130, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 3.2@Float), count, 1)
+# top-131, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 3.2@Float), count, 2)
+# top-132, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 3.2@Float), count, 3)
+# top-133, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 3.1@Float), count, 0)
+# top-134, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 3.1@Float), count, 1)
+# top-135, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 3.1@Float), count, 2)
+# top-136, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 3.1@Float), count, 3)
+# top-137, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 2.4@Float), count, 0)
+# top-138, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 2.4@Float), count, 1)
+# top-139, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 2.4@Float), count, 2)
+# top-140, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 2.4@Float), count, 3)
+# top-141, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 1.9@Float), count, 0)
+# top-142, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 1.9@Float), count, 1)
+# top-143, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 1.9@Float), count, 2)
+# top-144, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 1.9@Float), count, 3)
+# top-145, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 0.4@Float), count, 0)
+# top-146, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 0.4@Float), count, 1)
+# top-147, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 0.4@Float), count, 2)
+# top-148, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, 0.4@Float), count, 3)
+# top-149, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -1.4@Float), count, 0)
+# top-150, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -1.4@Float), count, 1)
+# top-151, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -1.4@Float), count, 2)
+# top-152, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -1.4@Float), count, 3)
+# top-153, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -1.7@Float), count, 0)
+# top-154, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -1.7@Float), count, 1)
+# top-155, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -1.7@Float), count, 2)
+# top-156, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -1.7@Float), count, 3)
+# top-157, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -2.5@Float), count, 0)
+# top-158, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -2.5@Float), count, 1)
+# top-159, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -2.5@Float), count, 2)
+# top-160, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -2.5@Float), count, 3)
+# top-161, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -1.5@Float), count, 0)
+# top-162, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -1.5@Float), count, 1)
+# top-163, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -1.5@Float), count, 2)
+# top-164, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -1.5@Float), count, 3)
+# top-165, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -1.3@Float), count, 0)
+# top-166, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -1.3@Float), count, 1)
+# top-167, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -1.3@Float), count, 2)
+# top-168, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, -1.3@Float), count, 3)
+# top-169, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 2, 3.2@Float), count, 0)
+# top-170, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 2, 3.2@Float), count, 1)
+# top-171, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 2, 3.2@Float), count, 2)
+# top-172, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 2, 3.2@Float), count, 3)
+# top-173, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 2, 3.1@Float), count, 0)
+# top-174, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 2, 3.1@Float), count, 1)
+# top-175, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 2, 3.1@Float), count, 2)
+# top-176, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 2, 3.1@Float), count, 3)
+# top-177, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 0.8@Float), -, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+# top-178, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 0.8@Float), /, 0, Gallup@Str, Gallup@Str, 2)
+# top-179, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 0.8@Float), /, 0, Washington Post / ABC News@Str, Washington Post / ABC News@Str, 2)
+# top-180, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 0.8@Float), /, 0, Quinnipiac@Str, Quinnipiac@Str, 2)
+# top-181, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 0.8@Float), /, 0, Rasmussen Reports@Str, Rasmussen Reports@Str, 2)
+# top-182, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 0.8@Float), /, 0, Fox News (Robbins & Shaw)@Str, Fox News (Robbins & Shaw)@Str, 2)
+# top-183, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 0.8@Float), /, 0, CNN (Opinion Research)@Str, CNN (Opinion Research)@Str, 2)
+# top-184, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 0.8@Float), /, 1, Democratic@Str, Democratic@Str, 2)
+# top-185, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 0.8@Float), /, 3, blue@Str, blue@Str, 2)
+# top-186, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 0.8@Float), diff, 0, Gallup@Str, Fox News (Robbins & Shaw)@Str, 2)
+# top-187, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 0.8@Float), diff, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+# top-188, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.9@Float), +, 0, Washington Post / ABC News@Str, SurveyUSA@Str, 2)
+# top-189, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.9@Float), +, 0, SurveyUSA@Str, Washington Post / ABC News@Str, 2)
+# top-190, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.9@Float), -, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+# top-191, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.9@Float), /, 0, Gallup@Str, Gallup@Str, 2)
+# top-192, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.9@Float), /, 0, Washington Post / ABC News@Str, Washington Post / ABC News@Str, 2)
+# top-193, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.9@Float), /, 0, Quinnipiac@Str, Quinnipiac@Str, 2)
+# top-194, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.9@Float), /, 0, Rasmussen Reports@Str, Rasmussen Reports@Str, 2)
+# top-195, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.9@Float), /, 0, Fox News (Robbins & Shaw)@Str, Fox News (Robbins & Shaw)@Str, 2)
+# top-196, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.9@Float), /, 0, CNN (Opinion Research)@Str, CNN (Opinion Research)@Str, 2)
+# top-197, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.9@Float), /, 0, Marist (NBC/Marist)@Str, Marist (NBC/Marist)@Str, 2)
+# top-198, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.9@Float), /, 0, SurveyUSA@Str, SurveyUSA@Str, 2)
+# top-199, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.9@Float), /, 0, YouGov@Str, YouGov@Str, 2)
+# top-200, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.9@Float), diff, 0, Gallup@Str, Fox News (Robbins & Shaw)@Str, 2)
+# top-201, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.9@Float), diff, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+# top-202, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.2@Float), +, 0, Washington Post / ABC News@Str, SurveyUSA@Str, 2)
+# top-203, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.2@Float), +, 0, SurveyUSA@Str, Washington Post / ABC News@Str, 2)
+# top-204, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.2@Float), -, 0, Ipsos@Str, Marist (NBC/Marist)@Str, 2)
+# top-205, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.2@Float), -, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+# top-206, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, Gallup@Str, Gallup@Str, 2)
+# top-207, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, Washington Post / ABC News@Str, Washington Post / ABC News@Str, 2)
+# top-208, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, Quinnipiac@Str, Quinnipiac@Str, 2)
+# top-209, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, Ipsos@Str, Ipsos@Str, 2)
+# top-210, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, Public Policy Polling (PPP)@Str, Public Policy Polling (PPP)@Str, 2)
+# top-211, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, Rasmussen Reports@Str, Rasmussen Reports@Str, 2)
+# top-212, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, Fox News (Robbins & Shaw)@Str, Fox News (Robbins & Shaw)@Str, 2)
+# top-213, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, CNN (Opinion Research)@Str, CNN (Opinion Research)@Str, 2)
+# top-214, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, Marist (NBC/Marist)@Str, Marist (NBC/Marist)@Str, 2)
+# top-215, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, SurveyUSA@Str, SurveyUSA@Str, 2)
+# top-216, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.2@Float), /, 0, YouGov@Str, YouGov@Str, 2)
+# top-217, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.2@Float), diff, 0, Gallup@Str, Fox News (Robbins & Shaw)@Str, 2)
+# top-218, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.2@Float), diff, 0, Ipsos@Str, Marist (NBC/Marist)@Str, 2)
+# top-219, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.2@Float), diff, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+# top-220, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.2@Float), diff, 0, Marist (NBC/Marist)@Str, Ipsos@Str, 2)
+# top-221, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.1@Float), +, 0, Washington Post / ABC News@Str, SurveyUSA@Str, 2)
+# top-222, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.1@Float), +, 0, SurveyUSA@Str, Washington Post / ABC News@Str, 2)
+# top-223, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.1@Float), -, 0, Ipsos@Str, Marist (NBC/Marist)@Str, 2)
+# top-224, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.1@Float), -, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+# top-225, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, Gallup@Str, Gallup@Str, 2)
+# top-226, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, Washington Post / ABC News@Str, Washington Post / ABC News@Str, 2)
+# top-227, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, Quinnipiac@Str, Quinnipiac@Str, 2)
+# top-228, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, Ipsos@Str, Ipsos@Str, 2)
+# top-229, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, Rasmussen Reports@Str, Rasmussen Reports@Str, 2)
+# top-230, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, Fox News (Robbins & Shaw)@Str, Fox News (Robbins & Shaw)@Str, 2)
+# top-231, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, CNN (Opinion Research)@Str, CNN (Opinion Research)@Str, 2)
+# top-232, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, Marist (NBC/Marist)@Str, Marist (NBC/Marist)@Str, 2)
+# top-233, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, SurveyUSA@Str, SurveyUSA@Str, 2)
+# top-234, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.1@Float), /, 0, YouGov@Str, YouGov@Str, 2)
+# top-235, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.1@Float), diff, 0, Gallup@Str, Fox News (Robbins & Shaw)@Str, 2)
+# top-236, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.1@Float), diff, 0, Ipsos@Str, Marist (NBC/Marist)@Str, 2)
+# top-237, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.1@Float), diff, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+# top-238, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 3.1@Float), diff, 0, Marist (NBC/Marist)@Str, Ipsos@Str, 2)
+# top-239, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.4@Float), -, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+# top-240, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.4@Float), /, 0, Gallup@Str, Gallup@Str, 2)
+# top-241, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.4@Float), /, 0, Washington Post / ABC News@Str, Washington Post / ABC News@Str, 2)
+# top-242, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.4@Float), /, 0, Quinnipiac@Str, Quinnipiac@Str, 2)
+# top-243, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.4@Float), /, 0, Rasmussen Reports@Str, Rasmussen Reports@Str, 2)
+# top-244, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.4@Float), /, 0, Fox News (Robbins & Shaw)@Str, Fox News (Robbins & Shaw)@Str, 2)
+# top-245, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.4@Float), /, 0, CNN (Opinion Research)@Str, CNN (Opinion Research)@Str, 2)
+# top-246, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.4@Float), /, 0, Marist (NBC/Marist)@Str, Marist (NBC/Marist)@Str, 2)
+# top-247, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.4@Float), /, 0, YouGov@Str, YouGov@Str, 2)
+# top-248, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.4@Float), diff, 0, Gallup@Str, Fox News (Robbins & Shaw)@Str, 2)
+# top-249, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 2.4@Float), diff, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+# top-250, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 1.9@Float), -, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+# top-251, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 1.9@Float), /, 0, Gallup@Str, Gallup@Str, 2)
+# top-252, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 1.9@Float), /, 0, Washington Post / ABC News@Str, Washington Post / ABC News@Str, 2)
+# top-253, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 1.9@Float), /, 0, Quinnipiac@Str, Quinnipiac@Str, 2)
+# top-254, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 1.9@Float), /, 0, Rasmussen Reports@Str, Rasmussen Reports@Str, 2)
+# top-255, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 1.9@Float), /, 0, Fox News (Robbins & Shaw)@Str, Fox News (Robbins & Shaw)@Str, 2)
+# top-256, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 1.9@Float), /, 0, CNN (Opinion Research)@Str, CNN (Opinion Research)@Str, 2)
+# top-257, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 1.9@Float), /, 0, YouGov@Str, YouGov@Str, 2)
+# top-258, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 1.9@Float), diff, 0, Gallup@Str, Fox News (Robbins & Shaw)@Str, 2)
+# top-259, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 1.9@Float), diff, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+# top-260, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 0.4@Float), -, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+# top-261, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 0.4@Float), /, 0, Gallup@Str, Gallup@Str, 2)
+# top-262, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 0.4@Float), /, 0, Washington Post / ABC News@Str, Washington Post / ABC News@Str, 2)
+# top-263, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 0.4@Float), /, 0, Quinnipiac@Str, Quinnipiac@Str, 2)
+# top-264, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 0.4@Float), /, 0, Rasmussen Reports@Str, Rasmussen Reports@Str, 2)
+# top-265, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 0.4@Float), /, 0, Fox News (Robbins & Shaw)@Str, Fox News (Robbins & Shaw)@Str, 2)
+# top-266, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 0.4@Float), diff, 0, Gallup@Str, Fox News (Robbins & Shaw)@Str, 2)
+# top-267, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, 0.4@Float), diff, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+# top-268, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, -1.4@Float), -, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+# top-269, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, -1.4@Float), /, 0, Gallup@Str, Gallup@Str, 2)
+# top-270, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, -1.4@Float), /, 0, Quinnipiac@Str, Quinnipiac@Str, 2)
+# top-271, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, -1.4@Float), /, 0, Fox News (Robbins & Shaw)@Str, Fox News (Robbins & Shaw)@Str, 2)
+# top-272, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, -1.4@Float), diff, 0, Gallup@Str, Fox News (Robbins & Shaw)@Str, 2)
+# top-273, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, -1.4@Float), diff, 0, Fox News (Robbins & Shaw)@Str, Gallup@Str, 2)
+# top-274, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, -1.7@Float), /, 0, Gallup@Str, Gallup@Str, 2)
+# top-275, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, -1.7@Float), /, 1, Republican@Str, Republican@Str, 2)
+# top-276, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 2, -1.7@Float), /, 3, orange@Str, orange@Str, 2)

@@ -1,0 +1,45 @@
+# parsed arguments: Namespace(benchmark='Q3f735', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'19258', 'democratic', '28608', 'unaffiliated', '140', 'total', 'republican', '27180', 'parties', 'minor', 'blue', 'color', 'voters', 'party'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+           Party  Total voters color
+0     Republican         19258  blue
+1     Democratic         28608  blue
+2   Unaffiliated         27180  blue
+3  Minor parties           140  blue
+# query is: How many Democratic voters are there?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0   28608
+# inferred DSL terminals:
+  # ConstVal: ['Total voters@Str', 'Democratic@Str', '<NULL>']
+     # cmap: [('voters', 'Total voters'), ('democratic', 'Democratic')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 28608}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Democratic@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Party', 'Democratic'], ['Total voters']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Democratic@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Party', 'Democratic'], ['Total voters']]
+# (t=0.68) i=1, candidate=[{'ANSWER': 57216}]
+  # found 0 program(s)
+# (t=1.24) i=2, candidate=[{'ANSWER': 85824}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.48, answer: 28608
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Democratic@Str), ['1'])
+# top-2, score: 2.48, answer: 28608
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Democratic@Str), ['-99', '-2'])

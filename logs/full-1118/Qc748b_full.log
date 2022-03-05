@@ -1,0 +1,46 @@
+# parsed arguments: Namespace(benchmark='Qc748b', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'color', 'costa', 'blue', 'honduras', '632', '544', 'rica', 'el', 'guatemala', '838', '699', 'nicaragua', 'salvador', 'country', '684', 'belize', '434', 'panama', '904', 'birds'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       Country  Birds color
+0       Belize    544  blue
+1   Costa Rica    838  blue
+2  El Salvador    434  blue
+3    Guatemala    684  blue
+4     Honduras    699  blue
+5    Nicaragua    632  blue
+6       Panama    904  blue
+# query is: About how many bird species are there in Panama?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0     904
+# inferred DSL terminals:
+  # ConstVal: ['Panama@Str', 'Birds@Str', '<NULL>']
+     # cmap: [('bird', 'Birds'), ('panama', 'Panama')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 904}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Panama'], ['Birds']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Panama'], ['Birds']]
+# (t=0.70) i=1, candidate=[{'ANSWER': 1808}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.37, answer: 904
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['1'])
+# top-2, score: 2.37, answer: 904
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['-99', '-2'])

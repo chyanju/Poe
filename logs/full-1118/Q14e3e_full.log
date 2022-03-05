@@ -1,0 +1,110 @@
+# parsed arguments: Namespace(benchmark='Q14e3e', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'or', '53', '82', 'neither', 'percentage', 'agree', 'color', 'strongly', '69', 'blue', 'disagree'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                       agree  percentage color
+0             Strongly agree          82  blue
+1  Neither agree or disagree          69  blue
+2          Strongly disagree          53  blue
+# query is: How many more agree than disagree
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      29
+# inferred DSL terminals:
+  # ConstVal: ['agree@Str', 'Neither agree or disagree@Str', 'Strongly agree@Str', 'Strongly disagree@Str', '<NULL>']
+     # cmap: [('disagree', 'Strongly disagree'), ('agree', 'Strongly agree'), ('agree', 'agree'), ('agree', 'Neither agree or disagree'), ('disagree', 'Neither agree or disagree')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['==', '>', '>=', '<NULL>']
+     # bmap: [(None, '=='), ('more', '>'), ('more', '>=')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(16, 6), (13, 6), (-13, 6), (-16, 6), (29, 4), (-29, 4)]
+  # [debug] high_values (no dup.): []
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 9 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, Neither agree or disagree@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'agree', 'Neither agree or disagree'], 'count', 'agree']
+    # Summarize(SelectRow1(@param0, ==, 0, Neither agree or disagree@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'agree', 'Neither agree or disagree'], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 0, Neither agree or disagree@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'agree', 'Neither agree or disagree'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Strongly agree@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'agree', 'Strongly agree'], 'count', 'agree']
+    # Summarize(SelectRow1(@param0, ==, 0, Strongly agree@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'agree', 'Strongly agree'], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 0, Strongly agree@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'agree', 'Strongly agree'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Strongly disagree@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'agree', 'Strongly disagree'], 'count', 'agree']
+    # Summarize(SelectRow1(@param0, ==, 0, Strongly disagree@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'agree', 'Strongly disagree'], 'count', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 0, Strongly disagree@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'agree', 'Strongly disagree'], 'count', 'color']
+# (t=3.05) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=6.09) i=2, candidate=[{'ANSWER': 16}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Neither agree or disagree@Str, Strongly disagree@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'agree', 'Neither agree or disagree', 'Strongly disagree', 'percentage']
+# (t=9.16) i=3, candidate=[{'ANSWER': 13}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Strongly agree@Str, Neither agree or disagree@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'agree', 'Strongly agree', 'Neither agree or disagree', 'percentage']
+# (t=12.27) i=4, candidate=[{'ANSWER': -13}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Neither agree or disagree@Str, Strongly agree@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'agree', 'Neither agree or disagree', 'Strongly agree', 'percentage']
+# (t=15.37) i=5, candidate=[{'ANSWER': -16}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Strongly disagree@Str, Neither agree or disagree@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'agree', 'Strongly disagree', 'Neither agree or disagree', 'percentage']
+# (t=18.49) i=6, candidate=[{'ANSWER': 29}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Strongly agree@Str, Strongly disagree@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'agree', 'Strongly agree', 'Strongly disagree', 'percentage']
+# (t=21.60) i=7, candidate=[{'ANSWER': -29}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Strongly disagree@Str, Strongly agree@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'agree', 'Strongly disagree', 'Strongly agree', 'percentage']
+
+# ========== review report ========== #
+# top-1, score: 1.64, answer: 16
+  # tprog: Contrast(@param0, -, 0, Neither agree or disagree@Str, Strongly disagree@Str, 1)
+# top-2, score: 1.64, answer: 13
+  # tprog: Contrast(@param0, -, 0, Strongly agree@Str, Neither agree or disagree@Str, 1)
+# top-3, score: 1.64, answer: -13
+  # tprog: Contrast(@param0, -, 0, Neither agree or disagree@Str, Strongly agree@Str, 1)
+# top-4, score: 1.64, answer: -16
+  # tprog: Contrast(@param0, -, 0, Strongly disagree@Str, Neither agree or disagree@Str, 1)
+# top-5, score: 1.64, answer: 29
+  # tprog: Contrast(@param0, -, 0, Strongly agree@Str, Strongly disagree@Str, 1)
+# top-6, score: 1.64, answer: -29
+  # tprog: Contrast(@param0, -, 0, Strongly disagree@Str, Strongly agree@Str, 1)
+# top-7, score: 1.62, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Neither agree or disagree@Str), count, 0)
+# top-8, score: 1.62, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Neither agree or disagree@Str), count, 1)
+# top-9, score: 1.62, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Neither agree or disagree@Str), count, 2)
+# top-10, score: 1.62, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Strongly disagree@Str), count, 0)
+# top-11, score: 1.62, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Strongly disagree@Str), count, 1)
+# top-12, score: 1.62, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Strongly disagree@Str), count, 2)
+# top-13, score: 1.46, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Strongly agree@Str), count, 0)
+# top-14, score: 1.46, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Strongly agree@Str), count, 1)
+# top-15, score: 1.46, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Strongly agree@Str), count, 2)

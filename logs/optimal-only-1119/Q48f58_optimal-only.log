@@ -1,0 +1,92 @@
+# parsed arguments: Namespace(benchmark='Q48f58', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'male', 'group', 'age', 'percentage', '9', 'orange', '10', '12-17', 'gender', 'female', '60+', '24', '18-59', '1', 'blue', '7', '0-4', 'color', '2', '20', '5-11'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+  Age group  Gender  Percentage   color
+0       0-4    Male           9  orange
+1       0-4  Female           9    blue
+2     12-17    Male           7  orange
+3     12-17  Female           7    blue
+4     18-59  Female          24    blue
+5     18-59    Male          20  orange
+6       60+  Female           2    blue
+7       60+    Male           1  orange
+8      5-11    Male          10  orange
+9      5-11  Female          10    blue
+# query is: Which age groups on the graph have an unequal gender split?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0  18-59
+1    60+
+# inferred DSL terminals:
+  # ConstVal: ['Gender@Str', 'Age group@Str', '<NULL>']
+     # cmap: [('age', 'Age group'), ('gender', 'Gender'), ('groups', 'Age group')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['!=', '==', '<NULL>']
+     # bmap: [(None, '=='), ('unequal', '!=')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': '0-4'}]
+  # found 0 program(s)
+# (t=7.88) i=1, candidate=[{'ANSWER': '12-17'}]
+  # found 0 program(s)
+# (t=16.11) i=2, candidate=[{'ANSWER': '18-59'}]
+  # found 0 program(s)
+# (t=24.40) i=3, candidate=[{'ANSWER': '5-11'}]
+  # found 0 program(s)
+# (t=32.37) i=4, candidate=[{'ANSWER': '60+'}]
+  # found 0 program(s)
+# ====> fallback strategy (retrieval) is triggered because no explanation is found so far
+# ====> retrieval_values: ['0-4', 1, 10, '12-17', '18-59', 2, 20, 24, '5-11', '60+', 7, 9, 'Age group', 'Female', 'Gender', 'Male', 'Percentage', 'blue', 'color', 'orange']
+# (t=40.72) fallback i=0, candidate=[{'ANSWER': '0-4'}]
+  # found 0 program(s)
+# (t=48.92) fallback i=1, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=56.86) fallback i=2, candidate=[{'ANSWER': 10}]
+  # found 0 program(s)
+# (t=65.19) fallback i=3, candidate=[{'ANSWER': '12-17'}]
+  # found 0 program(s)
+# (t=73.42) fallback i=4, candidate=[{'ANSWER': '18-59'}]
+  # found 0 program(s)
+# (t=81.35) fallback i=5, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=89.66) fallback i=6, candidate=[{'ANSWER': 20}]
+  # found 0 program(s)
+# (t=97.92) fallback i=7, candidate=[{'ANSWER': 24}]
+  # found 0 program(s)
+# (t=105.91) fallback i=8, candidate=[{'ANSWER': '5-11'}]
+  # found 0 program(s)
+# (t=114.29) fallback i=9, candidate=[{'ANSWER': '60+'}]
+  # found 0 program(s)
+# (t=122.62) fallback i=10, candidate=[{'ANSWER': 7}]
+  # found 0 program(s)
+# (t=130.58) fallback i=11, candidate=[{'ANSWER': 9}]
+  # found 0 program(s)
+# (t=139.01) fallback i=12, candidate=[{'ANSWER': 'Age group'}]
+  # found 0 program(s)
+# (t=147.02) fallback i=13, candidate=[{'ANSWER': 'Female'}]
+  # found 0 program(s)
+# (t=155.46) fallback i=14, candidate=[{'ANSWER': 'Gender'}]
+  # found 0 program(s)
+# (t=163.83) fallback i=15, candidate=[{'ANSWER': 'Male'}]
+  # found 0 program(s)
+# (t=171.85) fallback i=16, candidate=[{'ANSWER': 'Percentage'}]
+  # found 0 program(s)
+# (t=180.28) fallback i=17, candidate=[{'ANSWER': 'blue'}]
+  # found 0 program(s)
+# (t=188.60) fallback i=18, candidate=[{'ANSWER': 'color'}]
+  # found 0 program(s)
+# (t=196.64) fallback i=19, candidate=[{'ANSWER': 'orange'}]
+  # found 0 program(s)
+# ====> fallback strategy (original) is triggered
+# ====> use the original TaPas output as answer, which is: ['5-11']
+
+# ========== review report ========== #

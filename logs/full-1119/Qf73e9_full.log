@@ -1,0 +1,134 @@
+# parsed arguments: Namespace(benchmark='Qf73e9', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'84', '28', '12', '47', '18', 'red', 'greece', 'orange', 'italy', '37', '31', '5', '75', '16', '44', '26', '24', '13', 'brazil', 'lebanon', '52', 'spain', 'pakistan', '27', '2', 'tunisia', 'poland', 'jordan', 'worsen', 'india', 'britain', 'egypt', '29', '22', 'opinion', 'germany', '60', 'country', '40', '20', 'france', '35', 'japan', 'remain', '9', 'color', 'russia', 'u.s.', 'china', '50', 'turkey', '10', '15', '25', 'improve', 'same', 'blue', '34', '83', '23', '45', '32', '51', '43', '81', 'czech', '33', '49', 'percentage', 'rep.', 'mexico'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       Country          opinion  percentage   color
+0       Brazil          Improve          84    blue
+1       Brazil  Remain the same          12  orange
+2       Brazil           Worsen           5     red
+3        China          Improve          83    blue
+4        China  Remain the same           9  orange
+..         ...              ...         ...     ...
+58  Czech Rep.  Remain the same          27  orange
+59  Czech Rep.           Worsen          60     red
+60      Greece          Improve           9    blue
+61      Greece  Remain the same          10  orange
+62      Greece           Worsen          81     red
+
+[63 rows x 4 columns]
+# query is: Which country has the highest red bar?
+# expected output type:[dtype('O')]
+# expected output is:
+   ANSWER
+0  Greece
+# inferred DSL terminals:
+  # ConstVal: ['red@Str', 'Country@Str', '<NULL>']
+     # cmap: [('red', 'red'), ('country', 'Country')]
+  # AggrFunc: ['max', '<NULL>']
+     # amap: [('highest', 'max')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('highest', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Tunisia'}]
+  # found 0 program(s)
+# (t=1.84) i=1, candidate=[{'ANSWER': 'China'}]
+  # found 0 program(s)
+# (t=3.66) i=2, candidate=[{'ANSWER': 'France'}]
+  # found 0 program(s)
+# (t=5.51) i=3, candidate=[{'ANSWER': 'Egypt'}]
+  # found 0 program(s)
+# (t=7.30) i=4, candidate=[{'ANSWER': 'Russia'}]
+  # found 0 program(s)
+# (t=9.09) i=5, candidate=[{'ANSWER': 'Brazil'}]
+  # found 11 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'max', 'percentage'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'max', 'percentage'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'opinion'], 'max', 'percentage'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'opinion'], 'max', 'percentage'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(@param0, eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'percentage'], ['Country']]
+# (t=10.97) i=6, candidate=[{'ANSWER': 'Mexico'}]
+  # found 0 program(s)
+# (t=12.74) i=7, candidate=[{'ANSWER': 'Czech Rep.'}]
+  # found 0 program(s)
+# (t=14.50) i=8, candidate=[{'ANSWER': 'Italy'}]
+  # found 0 program(s)
+# (t=16.26) i=9, candidate=[{'ANSWER': 'Greece'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 3, red@Str), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'color', 'red'], 'eqmax', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 3, red@Str), ==, 3, red@Str), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'red'], '==', 'color', 'red'], 'eqmax', 'percentage'], ['Country']]
+# (t=18.03) i=10, candidate=[{'ANSWER': 'Spain'}]
+  # found 0 program(s)
+# (t=19.81) i=11, candidate=[{'ANSWER': 'India'}]
+  # found 0 program(s)
+# (t=21.61) i=12, candidate=[{'ANSWER': 'Germany'}]
+  # found 0 program(s)
+# (t=23.40) i=13, candidate=[{'ANSWER': 'U.S.'}]
+  # found 0 program(s)
+# (t=25.20) i=14, candidate=[{'ANSWER': 'Britain'}]
+  # found 0 program(s)
+# (t=27.06) i=15, candidate=[{'ANSWER': 'Lebanon'}]
+  # found 0 program(s)
+# (t=29.07) i=16, candidate=[{'ANSWER': 'Japan'}]
+  # found 0 program(s)
+# (t=30.92) i=17, candidate=[{'ANSWER': 'Poland'}]
+  # found 0 program(s)
+# (t=33.03) i=18, candidate=[{'ANSWER': 'Pakistan'}]
+  # found 0 program(s)
+# (t=34.85) i=19, candidate=[{'ANSWER': 'Jordan'}]
+  # found 0 program(s)
+# (t=36.73) i=20, candidate=[{'ANSWER': 'Turkey'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.53, answer: ['Greece']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 3, red@Str), eqmax, 2), ['0'])
+# top-2, score: 2.50, answer: ['Greece']
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 3, red@Str), ==, 3, red@Str), eqmax, 2), ['0'])
+# top-3, score: 1.45, answer: ['Brazil']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 2), ['0'])
+# top-4, score: 1.39, answer: ['Brazil']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['0'])
+# top-5, score: 1.39, answer: ['Brazil']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['-1'])
+# top-6, score: 1.38, answer: ['Brazil']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['0'])
+# top-7, score: 1.38, answer: ['Brazil']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-8, score: 1.38, answer: ['Brazil']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['0'])
+# top-9, score: 1.38, answer: ['Brazil']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+# top-10, score: 1.38, answer: ['Brazil']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['0'])
+# top-11, score: 1.38, answer: ['Brazil']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-12, score: 1.38, answer: ['Brazil']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['0'])
+# top-13, score: 1.38, answer: ['Brazil']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['-1', '-2'])

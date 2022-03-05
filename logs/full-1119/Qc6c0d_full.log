@@ -1,0 +1,53 @@
+# parsed arguments: Namespace(benchmark='Qc6c0d', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'asian', 'sports', '32.7', '1', 'bbc', '2', '5', '11.5', '3', 'total', '23.8', '18.8', 'wales', '7.2', 'scotland', '1xtra', '4', 'nan', '6', 'service', 'and', '122.1', '54.2', 'radio', '13.0', 'gàidheal', 'ulster', '6.3', 'foyle', 'local', '11.8', '152.5', 'cymru', '5.6', 'color', '17.6', 'blue', '54.3', 'cost(£million)', '76.0', 'extra', 'live', 'network', '62.1', '2012/13', 'music'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                                 Service  2012/13 Total Cost(£million) color
+0                            BBC Radio 1                          54.2  blue
+1                        BBC Radio 1Xtra                          11.8  blue
+2                            BBC Radio 2                          62.1  blue
+3                            BBC Radio 3                          54.3  blue
+4                            BBC Radio 4                         122.1  blue
+5                      BBC Radio 4 Extra                           7.2  blue
+6                       BBC Radio 5 Live                          76.0  blue
+7          BBC Radio 5 Live Sports Extra                           5.6  blue
+8                      BBC Radio 6 Music                          11.5  blue
+9                      BBC Asian Network                          13.0  blue
+10                       BBC Local Radio                         152.5  blue
+11                    BBC Radio Scotland                          32.7  blue
+12                BBC Radio nan Gàidheal                           6.3  blue
+13                       BBC Radio Wales                          18.8  blue
+14                       BBC Radio Cymru                          17.6  blue
+15  BBC Radio Ulster and BBC Radio Foyle                          23.8  blue
+# query is: Which service cost 122.1 million pounds?
+# expected output type:[dtype('O')]
+# expected output is:
+        ANSWER
+0  BBC Radio 4
+# inferred DSL terminals:
+  # ConstVal: ['Service@Str', '122.1@Float', '2012/13 Total Cost(£million)@Str', '<NULL>']
+     # cmap: [('service', 'Service'), ('cost', '2012/13 Total Cost(£million)'), (122.1, 122.1), ('million', '2012/13 Total Cost(£million)')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'BBC Radio 4'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 1, 122.1@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 122.1], ['Service']]
+    # SelectCol(SelectRow1(@param0, ==, 1, 122.1@Float), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 122.1], ['Service']]
+
+# ========== review report ========== #
+# top-1, score: 1.81, answer: ['BBC Radio 4']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, 122.1@Float), ['0'])
+# top-2, score: 1.81, answer: ['BBC Radio 4']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, 122.1@Float), ['-1', '-2'])

@@ -1,0 +1,54 @@
+# parsed arguments: Namespace(benchmark='Q82b67', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'opinion', 'percentage', 'russia', '43', 'orange', '84', '9', '52', '37', '31', '83', '47', 'pakistan', '34', 'spain', '24', '45', 'same', '75', 'czech', 'worsen', '29', 'greece', '33', '15', 'italy', 'brazil', 'blue', 'china', '35', '28', '25', '51', '81', 'remain', 'u.s.', '50', 'poland', 'france', 'mexico', 'india', '60', 'lebanon', '10', '27', '2', 'tunisia', 'egypt', 'britain', '18', 'improve', 'jordan', '12', '26', '32', '44', 'country', '49', '40', '16', '22', 'germany', 'color', 'turkey', 'japan', '20', 'red', 'rep.', '13', '23', '5'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       Country          opinion  percentage   color
+0       Brazil          Improve          84    blue
+1       Brazil  Remain the same          12  orange
+2       Brazil           Worsen           5     red
+3        China          Improve          83    blue
+4        China  Remain the same           9  orange
+..         ...              ...         ...     ...
+58  Czech Rep.  Remain the same          27  orange
+59  Czech Rep.           Worsen          60     red
+60      Greece          Improve           9    blue
+61      Greece  Remain the same          10  orange
+62      Greece           Worsen          81     red
+
+[63 rows x 4 columns]
+# query is: what is the blue value of China?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      83
+# inferred DSL terminals:
+  # ConstVal: ['blue@Str', 'China@Str', '<NULL>']
+     # cmap: [('china', 'China'), ('blue', 'blue')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'orange'}]
+  # found 0 program(s)
+# (t=1.21) i=1, candidate=[{'ANSWER': 'blue'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, China@Str), ==, 3, blue@Str), ['3'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'China'], '==', 'color', 'blue'], ['color']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, China@Str), ['3'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'Country', 'China'], ['color']]
+# (t=2.40) i=2, candidate=[{'ANSWER': 'red'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.38, answer: blue
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, China@Str), ==, 3, blue@Str), ['3'])
+# top-2, score: 2.38, answer: blue
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, China@Str), ['3'])

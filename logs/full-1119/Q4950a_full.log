@@ -1,0 +1,190 @@
+# parsed arguments: Namespace(benchmark='Q4950a', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'aut', '2289930000', 'esp', 'color', '1372000000', 'jpn', 'prt', 'aus', 'deu', '18014480000', '4870750000', '7020280000', '1802720000', 'fin', '1890450000', '456310000', '1363080000', 'kor', '4769530000', 'donation', '2301450000', 'blue', '776670000', '405800000', 'gbr', 'swe', 'che', 'country', '672630000', '5404860000', '372190000', '799520000', '458880000', 'nor', 'bel', 'dnk', '1349570000', 'fra', 'ita', 'usa', 'irl', '2329560000', 'can', 'nld'}
+# input type: [dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+       donation Country color
+0   18014480000     USA  blue
+1    7020280000     JPN  blue
+2    5404860000     FRA  blue
+3    4870750000     DEU  blue
+4    4769530000     GBR  blue
+5    2329560000     CAN  blue
+6    2301450000     AUS  blue
+7    2289930000     ESP  blue
+8    1890450000     NLD  blue
+9    1802720000     NOR  blue
+10   1372000000     BEL  blue
+11   1363080000     SWE  blue
+12   1349570000     DNK  blue
+13    799520000     KOR  blue
+14    776670000     CHE  blue
+15    672630000     ITA  blue
+16    458880000     IRL  blue
+17    456310000     FIN  blue
+18    405800000     AUT  blue
+19    372190000     PRT  blue
+# query is: How much more aid has the USA given than Japan?
+# expected output type:[dtype('int64')]
+# expected output is:
+        ANSWER
+0  10994200000
+# inferred DSL terminals:
+  # ConstVal: ['USA@Str', '<NULL>']
+     # cmap: [('usa', 'USA')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>', '==', '>=', '<NULL>']
+     # bmap: [('more', '>'), ('more', '>='), (None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: []
+  # [debug] high_values (no dup.): []
+  # [debug] filtered low_values (no dup.): [(17642290000, 2), (17608680000, 2), (17558170000, 2), (17555600000, 2), (17341850000, 2), (17237810000, 2), (17214960000, 2), (16664910000, 2), (16651400000, 2), (16642480000, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=0.21) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=0.42) i=2, candidate=[{'ANSWER': 17642290000}]
+  # found 0 program(s)
+# (t=0.62) i=3, candidate=[{'ANSWER': 17608680000}]
+  # found 0 program(s)
+# (t=0.83) i=4, candidate=[{'ANSWER': 17558170000}]
+  # found 0 program(s)
+# (t=1.04) i=5, candidate=[{'ANSWER': 17555600000}]
+  # found 0 program(s)
+# (t=1.24) i=6, candidate=[{'ANSWER': 17341850000}]
+  # found 0 program(s)
+# (t=1.45) i=7, candidate=[{'ANSWER': 17237810000}]
+  # found 0 program(s)
+# (t=1.65) i=8, candidate=[{'ANSWER': 17214960000}]
+  # found 0 program(s)
+# (t=1.86) i=9, candidate=[{'ANSWER': 16664910000}]
+  # found 0 program(s)
+# (t=2.07) i=10, candidate=[{'ANSWER': 16651400000}]
+  # found 0 program(s)
+# (t=2.27) i=11, candidate=[{'ANSWER': 16642480000}]
+  # found 0 program(s)
+# ====> fallback strategy (retrieval) is triggered because no explanation is found so far
+# ====> retrieval_values: [1349570000, 1363080000, 1372000000, 18014480000, 1802720000, 1890450000, 2289930000, 2301450000, 2329560000, 372190000, 405800000, 456310000, 458880000, 4769530000, 4870750000, 5404860000, 672630000, 7020280000, 776670000, 799520000, 'AUS', 'AUT', 'BEL', 'CAN', 'CHE', 'Country', 'DEU', 'DNK', 'ESP', 'FIN', 'FRA', 'GBR', 'IRL', 'ITA', 'JPN', 'KOR', 'NLD', 'NOR', 'PRT', 'SWE', 'USA', 'blue', 'color', 'donation']
+# (t=2.48) fallback i=0, candidate=[{'ANSWER': 1349570000}]
+  # found 0 program(s)
+# (t=2.78) fallback i=1, candidate=[{'ANSWER': 1363080000}]
+  # found 0 program(s)
+# (t=3.07) fallback i=2, candidate=[{'ANSWER': 1372000000}]
+  # found 0 program(s)
+# (t=3.36) fallback i=3, candidate=[{'ANSWER': 18014480000}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 1, USA@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'USA'], ['donation']]
+    # SelectCol(SelectRow1(@param0, ==, 1, USA@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'USA'], ['donation']]
+# (t=3.66) fallback i=4, candidate=[{'ANSWER': 1802720000}]
+  # found 0 program(s)
+# (t=3.96) fallback i=5, candidate=[{'ANSWER': 1890450000}]
+  # found 0 program(s)
+# (t=4.25) fallback i=6, candidate=[{'ANSWER': 2289930000}]
+  # found 0 program(s)
+# (t=4.55) fallback i=7, candidate=[{'ANSWER': 2301450000}]
+  # found 0 program(s)
+# (t=4.86) fallback i=8, candidate=[{'ANSWER': 2329560000}]
+  # found 0 program(s)
+# (t=5.16) fallback i=9, candidate=[{'ANSWER': 372190000}]
+  # found 0 program(s)
+# (t=5.46) fallback i=10, candidate=[{'ANSWER': 405800000}]
+  # found 0 program(s)
+# (t=5.76) fallback i=11, candidate=[{'ANSWER': 456310000}]
+  # found 0 program(s)
+# (t=6.05) fallback i=12, candidate=[{'ANSWER': 458880000}]
+  # found 0 program(s)
+# (t=6.35) fallback i=13, candidate=[{'ANSWER': 4769530000}]
+  # found 0 program(s)
+# (t=6.65) fallback i=14, candidate=[{'ANSWER': 4870750000}]
+  # found 0 program(s)
+# (t=6.95) fallback i=15, candidate=[{'ANSWER': 5404860000}]
+  # found 0 program(s)
+# (t=7.25) fallback i=16, candidate=[{'ANSWER': 672630000}]
+  # found 0 program(s)
+# (t=7.55) fallback i=17, candidate=[{'ANSWER': 7020280000}]
+  # found 0 program(s)
+# (t=7.84) fallback i=18, candidate=[{'ANSWER': 776670000}]
+  # found 0 program(s)
+# (t=8.13) fallback i=19, candidate=[{'ANSWER': 799520000}]
+  # found 0 program(s)
+# (t=8.43) fallback i=20, candidate=[{'ANSWER': 'AUS'}]
+  # found 0 program(s)
+# (t=8.72) fallback i=21, candidate=[{'ANSWER': 'AUT'}]
+  # found 0 program(s)
+# (t=9.02) fallback i=22, candidate=[{'ANSWER': 'BEL'}]
+  # found 0 program(s)
+# (t=9.31) fallback i=23, candidate=[{'ANSWER': 'CAN'}]
+  # found 0 program(s)
+# (t=9.60) fallback i=24, candidate=[{'ANSWER': 'CHE'}]
+  # found 0 program(s)
+# (t=9.89) fallback i=25, candidate=[{'ANSWER': 'Country'}]
+  # found 0 program(s)
+# (t=10.10) fallback i=26, candidate=[{'ANSWER': 'DEU'}]
+  # found 0 program(s)
+# (t=10.39) fallback i=27, candidate=[{'ANSWER': 'DNK'}]
+  # found 0 program(s)
+# (t=10.68) fallback i=28, candidate=[{'ANSWER': 'ESP'}]
+  # found 0 program(s)
+# (t=10.98) fallback i=29, candidate=[{'ANSWER': 'FIN'}]
+  # found 0 program(s)
+# (t=11.28) fallback i=30, candidate=[{'ANSWER': 'FRA'}]
+  # found 0 program(s)
+# (t=11.57) fallback i=31, candidate=[{'ANSWER': 'GBR'}]
+  # found 0 program(s)
+# (t=11.87) fallback i=32, candidate=[{'ANSWER': 'IRL'}]
+  # found 0 program(s)
+# (t=12.16) fallback i=33, candidate=[{'ANSWER': 'ITA'}]
+  # found 0 program(s)
+# (t=12.45) fallback i=34, candidate=[{'ANSWER': 'JPN'}]
+  # found 0 program(s)
+# (t=12.75) fallback i=35, candidate=[{'ANSWER': 'KOR'}]
+  # found 0 program(s)
+# (t=13.04) fallback i=36, candidate=[{'ANSWER': 'NLD'}]
+  # found 0 program(s)
+# (t=13.33) fallback i=37, candidate=[{'ANSWER': 'NOR'}]
+  # found 0 program(s)
+# (t=13.63) fallback i=38, candidate=[{'ANSWER': 'PRT'}]
+  # found 0 program(s)
+# (t=13.93) fallback i=39, candidate=[{'ANSWER': 'SWE'}]
+  # found 0 program(s)
+# (t=14.23) fallback i=40, candidate=[{'ANSWER': 'USA'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 1, USA@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'USA'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 1, USA@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'USA'], ['Country']]
+# (t=14.53) fallback i=41, candidate=[{'ANSWER': 'blue'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 1, USA@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'USA'], ['color']]
+    # SelectCol(SelectRow1(@param0, ==, 1, USA@Str), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'USA'], ['color']]
+# (t=14.83) fallback i=42, candidate=[{'ANSWER': 'color'}]
+  # found 0 program(s)
+# (t=15.04) fallback i=43, candidate=[{'ANSWER': 'donation'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.24, answer: [18014480000]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, USA@Str), ['0'])
+# top-2, score: 2.24, answer: [18014480000]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, USA@Str), ['-1', '-2'])
+# top-3, score: 2.24, answer: ['USA']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, USA@Str), ['1'])
+# top-4, score: 2.24, answer: ['USA']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, USA@Str), ['-99', '-2'])
+# top-5, score: 2.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, USA@Str), ['2'])
+# top-6, score: 2.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, USA@Str), ['-99', '-1'])

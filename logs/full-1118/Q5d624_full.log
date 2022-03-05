@@ -1,0 +1,167 @@
+# parsed arguments: Namespace(benchmark='Q5d624', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'international', 'handled', 'airport', '828531', '331607', 'gatwick', '100003', 'color', 'passengers', 'bristol', 'london', 'belfast', 'southampton', 'heathrow', '158239', 'luton', '276488', '266987', '208123', 'blue', '173576', 'stansted', 'city', '607417', '239666', 'birmingham'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                 Airport  Passengers handled color
+0        London Heathrow              828531  blue
+1         London Gatwick              607417  blue
+2        London Stansted              331607  blue
+3           London Luton              276488  blue
+4  Belfast International              266987  blue
+5                Bristol              239666  blue
+6             Birmingham              208123  blue
+7            Southampton              173576  blue
+8            London City              158239  blue
+9           Belfast City              100003  blue
+# query is: What is the lowest passengers handled for any given airport?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0  100003
+# inferred DSL terminals:
+  # ConstVal: ['Airport@Str', 'Passengers handled@Str', '<NULL>']
+     # cmap: [('passengers', 'Passengers handled'), ('airport', 'Airport'), ('handled', 'Passengers handled')]
+  # AggrFunc: ['min', '<NULL>']
+     # amap: [('lowest', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('lowest', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 100003}]
+  # found 31 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Airport'], 'min', 'Passengers handled'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Airport'], 'min', 'Passengers handled'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Passengers handled'], 'min', 'Passengers handled'], 'eqmin', 'Passengers handled'], ['Passengers handled']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Passengers handled'], 'min', 'Passengers handled'], 'eqmin', 'Passengers handled'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Passengers handled'], 'min', 'Passengers handled'], 'eqmin', 'Passengers handled'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Passengers handled'], 'min', 'Passengers handled'], 'eqmin', 'Passengers handled'], ['Passengers handled']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Passengers handled'], 'min', 'Passengers handled'], 'eqmin', 'COL0'], ['Passengers handled']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Passengers handled'], 'min', 'Passengers handled'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Passengers handled'], 'min', 'Passengers handled'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Passengers handled'], 'min', 'Passengers handled'], 'eqmin', 'COL0'], ['Passengers handled']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Airport', 'Passengers handled'], 'min', 'Passengers handled'], 'eqmin', 'Passengers handled'], ['Passengers handled']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Airport', 'Passengers handled'], 'min', 'Passengers handled'], 'eqmin', 'Passengers handled'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Airport', 'Passengers handled'], 'min', 'Passengers handled'], 'eqmin', 'Passengers handled'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Airport', 'Passengers handled'], 'min', 'Passengers handled'], 'eqmin', 'Passengers handled'], ['Passengers handled']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Airport', 'Passengers handled'], 'min', 'Passengers handled'], 'eqmin', 'COL0'], ['Passengers handled']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Airport', 'Passengers handled'], 'min', 'Passengers handled'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Airport', 'Passengers handled'], 'min', 'Passengers handled'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Airport', 'Passengers handled'], 'min', 'Passengers handled'], 'eqmin', 'COL0'], ['Passengers handled']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Airport', 'color'], 'min', 'Passengers handled'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Airport', 'color'], 'min', 'Passengers handled'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Passengers handled', 'color'], 'min', 'Passengers handled'], 'eqmin', 'Passengers handled'], ['Passengers handled']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Passengers handled', 'color'], 'min', 'Passengers handled'], 'eqmin', 'Passengers handled'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Passengers handled', 'color'], 'min', 'Passengers handled'], 'eqmin', 'Passengers handled'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Passengers handled', 'color'], 'min', 'Passengers handled'], 'eqmin', 'Passengers handled'], ['Passengers handled']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Passengers handled', 'color'], 'min', 'Passengers handled'], 'eqmin', 'COL0'], ['Passengers handled']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Passengers handled', 'color'], 'min', 'Passengers handled'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Passengers handled', 'color'], 'min', 'Passengers handled'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Passengers handled', 'color'], 'min', 'Passengers handled'], 'eqmin', 'COL0'], ['Passengers handled']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Passengers handled'], ['Passengers handled']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Passengers handled'], ['Passengers handled']]
+    # Summarize(@param0, min, 1)
+      --> ['Summarize', 'input@0', 'min', 'Passengers handled']
+# (t=0.90) i=1, candidate=[{'ANSWER': 828531}]
+  # found 0 program(s)
+# (t=1.70) i=2, candidate=[{'ANSWER': 607417}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.55, answer: 100003
+  # tprog: Summarize(@param0, min, 1)
+# top-2, score: 1.50, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['1'])
+# top-3, score: 1.50, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-99'])
+# top-4, score: 1.49, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['1'])
+# top-5, score: 1.49, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['2'])
+# top-6, score: 1.49, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-1'])
+# top-7, score: 1.49, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-2'])
+# top-8, score: 1.49, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['1'])
+# top-9, score: 1.49, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['2'])
+# top-10, score: 1.49, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-1'])
+# top-11, score: 1.49, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-2'])
+# top-12, score: 1.49, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['2'])
+# top-13, score: 1.49, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+# top-14, score: 1.47, answer: 100003
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['1'])
+# top-15, score: 1.47, answer: 100003
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-99', '-2'])
+# top-16, score: 1.40, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['0'])
+# top-17, score: 1.40, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['1'])
+# top-18, score: 1.40, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-99'])
+# top-19, score: 1.40, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-1'])
+# top-20, score: 1.40, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['0'])
+# top-21, score: 1.40, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['1'])
+# top-22, score: 1.40, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-99'])
+# top-23, score: 1.40, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-1'])
+# top-24, score: 1.39, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['0'])
+# top-25, score: 1.39, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['2'])
+# top-26, score: 1.39, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-99', '-1'])
+# top-27, score: 1.39, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-1', '-2'])
+# top-28, score: 1.39, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['0'])
+# top-29, score: 1.39, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['2'])
+# top-30, score: 1.39, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+# top-31, score: 1.39, answer: 100003
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-1', '-2'])

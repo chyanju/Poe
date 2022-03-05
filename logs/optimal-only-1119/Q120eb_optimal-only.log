@@ -1,0 +1,117 @@
+# parsed arguments: Namespace(benchmark='Q120eb', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'837.27', '(km²)', 'flat', 'plain', 'highland', 'area', 'gojō,', 'size', '506.89', 'color', 'blue', 'yoshino', 'district', 'yamato', '2346.84', 'inland'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                   District  Area Size (km²) color
+0  Yamato flat inland plain           837.27  blue
+1           Yamato highland           506.89  blue
+2             Gojō, Yoshino          2346.84  blue
+# query is: What is the difference between Gojo and the highland?
+# expected output type:[dtype('float64')]
+# expected output is:
+    ANSWER
+0  1839.95
+# inferred DSL terminals:
+  # ConstVal: ['Yamato highland@Str', '<NULL>']
+     # cmap: [('highland', 'Yamato highland')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: []
+  # [debug] high_values (no dup.): []
+  # [debug] filtered low_values (no dup.): [(1839.9500000000003, 2), (330.38, 2), (-330.38, 2), (-1839.9500000000003, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=0.39) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=0.77) i=2, candidate=[{'ANSWER': 1839.9500000000003}]
+  # found 0 program(s)
+# (t=1.15) i=3, candidate=[{'ANSWER': 330.38}]
+  # found 0 program(s)
+# (t=1.54) i=4, candidate=[{'ANSWER': -330.38}]
+  # found 0 program(s)
+# (t=1.92) i=5, candidate=[{'ANSWER': -1839.9500000000003}]
+  # found 0 program(s)
+# ====> fallback strategy (retrieval) is triggered because no explanation is found so far
+# ====> retrieval_values: [2346.84, 506.89, 837.27, 'Area Size (km²)', 'District', 'Gojō, Yoshino', 'Yamato flat inland plain', 'Yamato highland', 'blue', 'color']
+# (t=2.31) fallback i=0, candidate=[{'ANSWER': 2346.84}]
+  # found 0 program(s)
+# (t=2.70) fallback i=1, candidate=[{'ANSWER': 506.89}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato highland@Str), ==, 0, Yamato highland@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], '==', 'District', 'Yamato highland'], ['Area Size (km²)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato highland@Str), ==, 0, Yamato highland@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], '==', 'District', 'Yamato highland'], ['Area Size (km²)']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Yamato highland@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], ['Area Size (km²)']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Yamato highland@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], ['Area Size (km²)']]
+# (t=3.09) fallback i=2, candidate=[{'ANSWER': 837.27}]
+  # found 0 program(s)
+# (t=3.47) fallback i=3, candidate=[{'ANSWER': 'Area Size (km²)'}]
+  # found 0 program(s)
+# (t=3.85) fallback i=4, candidate=[{'ANSWER': 'District'}]
+  # found 0 program(s)
+# (t=4.24) fallback i=5, candidate=[{'ANSWER': 'Gojō, Yoshino'}]
+  # found 0 program(s)
+# (t=4.63) fallback i=6, candidate=[{'ANSWER': 'Yamato flat inland plain'}]
+  # found 0 program(s)
+# (t=5.02) fallback i=7, candidate=[{'ANSWER': 'Yamato highland'}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato highland@Str), ==, 0, Yamato highland@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], '==', 'District', 'Yamato highland'], ['District']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato highland@Str), ==, 0, Yamato highland@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], '==', 'District', 'Yamato highland'], ['District']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Yamato highland@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], ['District']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Yamato highland@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], ['District']]
+# (t=5.41) fallback i=8, candidate=[{'ANSWER': 'blue'}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato highland@Str), ==, 0, Yamato highland@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], '==', 'District', 'Yamato highland'], ['color']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato highland@Str), ==, 0, Yamato highland@Str), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], '==', 'District', 'Yamato highland'], ['color']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Yamato highland@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], ['color']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Yamato highland@Str), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], ['color']]
+# (t=5.80) fallback i=9, candidate=[{'ANSWER': 'color'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.25, answer: [506.89]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Yamato highland@Str), ['1'])
+# top-2, score: 1.25, answer: [506.89]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Yamato highland@Str), ['-99', '-2'])
+# top-3, score: 1.25, answer: ['Yamato highland']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Yamato highland@Str), ['0'])
+# top-4, score: 1.25, answer: ['Yamato highland']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Yamato highland@Str), ['-1', '-2'])
+# top-5, score: 1.25, answer: ['blue']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Yamato highland@Str), ['2'])
+# top-6, score: 1.25, answer: ['blue']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Yamato highland@Str), ['-99', '-1'])
+# top-7, score: 1.20, answer: [506.89]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato highland@Str), ==, 0, Yamato highland@Str), ['1'])
+# top-8, score: 1.20, answer: [506.89]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato highland@Str), ==, 0, Yamato highland@Str), ['-99', '-2'])
+# top-9, score: 1.20, answer: ['Yamato highland']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato highland@Str), ==, 0, Yamato highland@Str), ['0'])
+# top-10, score: 1.20, answer: ['Yamato highland']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato highland@Str), ==, 0, Yamato highland@Str), ['-1', '-2'])
+# top-11, score: 1.20, answer: ['blue']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato highland@Str), ==, 0, Yamato highland@Str), ['2'])
+# top-12, score: 1.20, answer: ['blue']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato highland@Str), ==, 0, Yamato highland@Str), ['-99', '-1'])

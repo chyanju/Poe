@@ -1,0 +1,55 @@
+# parsed arguments: Namespace(benchmark='Qa2cf0', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'4787', 'jill', 'adrian', '2798', 'rainbow', 'candidate', 'majority', 'dobson', 'james', 'frank', 'weiss', '10070', '6482', 'george', 'blue', 'fraser', '14857', 'margot', 'color', 'votes', '152', 'oliver'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+              Candidate  Votes color
+0          Frank Dobson  14857  blue
+1           Jill Fraser  10070  blue
+2          Margot James   6482  blue
+3         Adrian Oliver   2798  blue
+4  Rainbow George Weiss    152  blue
+5              Majority   4787  blue
+# query is: How many votes did Margot James receive?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0    6482
+# inferred DSL terminals:
+  # ConstVal: ['Votes@Str', 'Margot James@Str', '<NULL>']
+     # cmap: [('james', 'Margot James'), ('margot', 'Margot James'), ('votes', 'Votes')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 6482}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Margot James@Str), ==, 0, Margot James@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Candidate', 'Margot James'], '==', 'Candidate', 'Margot James'], ['Votes']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Margot James@Str), ==, 0, Margot James@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Candidate', 'Margot James'], '==', 'Candidate', 'Margot James'], ['Votes']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Margot James@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Margot James'], ['Votes']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Margot James@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Margot James'], ['Votes']]
+# (t=1.20) i=1, candidate=[{'ANSWER': 12964}]
+  # found 0 program(s)
+# (t=2.38) i=2, candidate=[{'ANSWER': 19446}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.57, answer: [6482]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Margot James@Str), ['1'])
+# top-2, score: 2.57, answer: [6482]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Margot James@Str), ['-99', '-2'])
+# top-3, score: 2.52, answer: [6482]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Margot James@Str), ==, 0, Margot James@Str), ['1'])
+# top-4, score: 2.52, answer: [6482]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Margot James@Str), ==, 0, Margot James@Str), ['-99', '-2'])

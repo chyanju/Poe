@@ -1,0 +1,120 @@
+# parsed arguments: Namespace(benchmark='Q65bf5', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'54', '70', 'fin', '60', 'jpn', '75', '57', 'kor', 'irl', 'ita', 'country', '52', 'deu', '66', 'can', '76', 'prt', '62', 'color', 'blue', 'aut', 'bel', 'esp', 'gbr', '42', '59', '61', 'nor', 'swe', '0', 'fra', '64', 'usa', '53', 'nld', '48', 'dnk', 'rating', '56', '49', 'aus', 'che'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+   country  rating color
+0      USA      53  blue
+1      JPN      42  blue
+2      FRA      56  blue
+3      DEU      61  blue
+4      GBR      75  blue
+5      CAN      54  blue
+6      AUS      66  blue
+7      ESP      57  blue
+8      NLD      76  blue
+9      NOR      64  blue
+10     BEL      59  blue
+11     SWE      66  blue
+12     DNK      62  blue
+13     KOR      52  blue
+14     CHE      59  blue
+15     ITA      49  blue
+16     IRL      70  blue
+17     FIN      60  blue
+18     AUT      48  blue
+19     PRT       0  blue
+# query is: How much more does USA have than JPN?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      11
+# inferred DSL terminals:
+  # ConstVal: ['JPN@Str', 'USA@Str', '<NULL>']
+     # cmap: [('jpn', 'JPN'), ('usa', 'USA')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>=', '>', '==', '<NULL>']
+     # bmap: [('more', '>'), (None, '=='), ('more', '>=')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(11, 4), (-11, 4)]
+  # [debug] high_values (no dup.): [(11, 4), (-11, 4)]
+  # [debug] filtered low_values (no dup.): [(53, 2), (42, 2), (34, 2), (33, 2), (28, 2), (24, 2), (24, 2), (23, 2), (22, 2), (22, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=1.28) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=2.55) i=2, candidate=[{'ANSWER': 11}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, USA@Str, JPN@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'country', 'USA', 'JPN', 'rating']
+# (t=3.82) i=3, candidate=[{'ANSWER': -11}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, JPN@Str, USA@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'country', 'JPN', 'USA', 'rating']
+# (t=5.11) i=4, candidate=[{'ANSWER': 53}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, USA@Str), ==, 0, USA@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'country', 'USA'], '==', 'country', 'USA'], ['rating']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, USA@Str), ==, 0, USA@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'country', 'USA'], '==', 'country', 'USA'], ['rating']]
+    # SelectCol(SelectRow1(@param0, ==, 0, USA@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'country', 'USA'], ['rating']]
+    # SelectCol(SelectRow1(@param0, ==, 0, USA@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'country', 'USA'], ['rating']]
+# (t=6.39) i=5, candidate=[{'ANSWER': 42}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, JPN@Str), ==, 0, JPN@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'country', 'JPN'], '==', 'country', 'JPN'], ['rating']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, JPN@Str), ==, 0, JPN@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'country', 'JPN'], '==', 'country', 'JPN'], ['rating']]
+    # SelectCol(SelectRow1(@param0, ==, 0, JPN@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'country', 'JPN'], ['rating']]
+    # SelectCol(SelectRow1(@param0, ==, 0, JPN@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'country', 'JPN'], ['rating']]
+# (t=7.66) i=6, candidate=[{'ANSWER': 34}]
+  # found 0 program(s)
+# (t=8.92) i=7, candidate=[{'ANSWER': 33}]
+  # found 0 program(s)
+# (t=10.18) i=8, candidate=[{'ANSWER': 28}]
+  # found 0 program(s)
+# (t=11.45) i=9, candidate=[{'ANSWER': 24}]
+  # found 0 program(s)
+# (t=12.73) i=10, candidate=[{'ANSWER': 24}]
+  # found 0 program(s)
+# (t=14.29) i=11, candidate=[{'ANSWER': 23}]
+  # found 0 program(s)
+# (t=15.57) i=12, candidate=[{'ANSWER': 22}]
+  # found 0 program(s)
+# (t=16.84) i=13, candidate=[{'ANSWER': 22}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.52, answer: [11]
+  # tprog: Contrast(@param0, -, 0, USA@Str, JPN@Str, 1)
+# top-2, score: 2.52, answer: [-11]
+  # tprog: Contrast(@param0, -, 0, JPN@Str, USA@Str, 1)
+# top-3, score: 2.27, answer: [53]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, USA@Str), ['1'])
+# top-4, score: 2.27, answer: [53]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, USA@Str), ['-99', '-2'])
+# top-5, score: 2.27, answer: [42]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, JPN@Str), ['1'])
+# top-6, score: 2.27, answer: [42]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, JPN@Str), ['-99', '-2'])
+# top-7, score: 2.22, answer: [53]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, USA@Str), ==, 0, USA@Str), ['1'])
+# top-8, score: 2.22, answer: [53]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, USA@Str), ==, 0, USA@Str), ['-99', '-2'])
+# top-9, score: 2.22, answer: [42]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, JPN@Str), ==, 0, JPN@Str), ['1'])
+# top-10, score: 2.22, answer: [42]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, JPN@Str), ==, 0, JPN@Str), ['-99', '-2'])

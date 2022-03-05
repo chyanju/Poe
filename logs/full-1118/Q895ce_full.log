@@ -1,0 +1,52 @@
+# parsed arguments: Namespace(benchmark='Q895ce', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'2010', '2009', '32.17', 'color', '156.34', '2015', '2008', '2004', '45.42', '94.52', '2002', '2013', '2011', '34.77', 'blue', '2014', '2007', '113.29', '74.1', '2003', '189.4', 'year', '32.83', 'revenue', '82.84', '2005', '2006', '2012', '37.89', '64.2', '167.05', '80.7', '2001', '30.64'}
+# input type: [dtype('int64'), dtype('float64'), dtype('O')]
+# input is:
+    year  revenue color
+0   2015   189.40  blue
+1   2014   167.05  blue
+2   2013   156.34  blue
+3   2012   113.29  blue
+4   2011    94.52  blue
+5   2010    82.84  blue
+6   2009    80.70  blue
+7   2008    74.10  blue
+8   2007    64.20  blue
+9   2006    45.42  blue
+10  2005    37.89  blue
+11  2004    34.77  blue
+12  2003    32.83  blue
+13  2002    32.17  blue
+14  2001    30.64  blue
+# query is: In what year did revenue amount to 113.29?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0    2012
+# inferred DSL terminals:
+  # ConstVal: ['revenue@Str', '113.29@Float', 'year@Str', '<NULL>']
+     # cmap: [(113.29, 113.29), ('year', 'year'), ('revenue', 'revenue')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 2012}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 1, 113.29@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'revenue', 113.29], ['year']]
+    # SelectCol(SelectRow1(@param0, ==, 1, 113.29@Float), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'revenue', 113.29], ['year']]
+
+# ========== review report ========== #
+# top-1, score: 1.52, answer: 2012
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, 113.29@Float), ['0'])
+# top-2, score: 1.52, answer: 2012
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, 113.29@Float), ['-1', '-2'])

@@ -1,0 +1,217 @@
+# parsed arguments: Namespace(benchmark='Q8a3ed', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'fox', 'reports', 'blue', 'post', 'public', '(opinion', '0.4', 'polling', '3.2', '-1.3', '(ppp)', '(nbc/marist)', 'research)', 'news', 'ipsos', 'pew', 'gallup', 'shaw)', 'policy', 'washington', 'orange', '-1.5', 'color', '(robbins', '-1.7', '2.9', 'abc', '2.4', 'quinnipiac', '&', 'marist', 'research', 'democratic', 'republican', '/', '0.8', 'yougov', 'house', 'spread', 'surveyusa', 'cnn', 'effect', '1.9', '-1.4', '3.1', 'pollster', '-2.5', 'rasmussen'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                       Pollster      spread  House Effect   color
+0                  Pew Research  Democratic           3.2    blue
+1   Public Policy Polling (PPP)  Democratic           3.1    blue
+2                         Ipsos  Democratic           2.9    blue
+3                     SurveyUSA  Democratic           2.4    blue
+4           Marist (NBC/Marist)  Democratic           1.9    blue
+5                        YouGov  Democratic           0.8    blue
+6        CNN (Opinion Research)  Democratic           0.4    blue
+7             Rasmussen Reports  Republican          -1.3  orange
+8    Washington Post / ABC News  Republican          -1.4  orange
+9     Fox News (Robbins & Shaw)  Republican          -1.5  orange
+10                   Quinnipiac  Republican          -1.7  orange
+11                       Gallup  Republican          -2.5  orange
+# query is: Is Washington Post / ABC News  Republican or Democratic?
+# expected output type:[dtype('O')]
+# expected output is:
+       ANSWER
+0  Republican
+# inferred DSL terminals:
+  # ConstVal: ['Marist (NBC/Marist)@Str', 'CNN (Opinion Research)@Str', 'Fox News (Robbins & Shaw)@Str', 'Washington Post / ABC News@Str', 'Democratic@Str', 'Public Policy Polling (PPP)@Str', 'Republican@Str', '<NULL>']
+     # cmap: [('', 'CNN (Opinion Research)'), ('', 'Marist (NBC/Marist)'), ('washington', 'Washington Post / ABC News'), ('abc', 'Washington Post / ABC News'), ('news', 'Fox News (Robbins & Shaw)'), ('', 'Fox News (Robbins & Shaw)'), ('post', 'Washington Post / ABC News'), ('republican', 'Republican'), ('news', 'Washington Post / ABC News'), ('democratic', 'Democratic'), ('', 'Public Policy Polling (PPP)')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (selection) is triggered
+  # [debug] fallback (selection) answers: ['Marist (NBC/Marist)', 'CNN (Opinion Research)', 'Fox News (Robbins & Shaw)', 'Washington Post / ABC News', 'Democratic', 'Public Policy Polling (PPP)', 'Republican']
+  # [debug] fallback (selection) answers (no dup.): ['Marist (NBC/Marist)', 'CNN (Opinion Research)', 'Fox News (Robbins & Shaw)', 'Washington Post / ABC News', 'Democratic', 'Public Policy Polling (PPP)']
+  # [debug] 6 fallback (selection) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Republican'}]
+  # found 8 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), ==, 0, Fox News (Robbins & Shaw)@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'Fox News (Robbins & Shaw)'], '==', 'Pollster', 'Fox News (Robbins & Shaw)'], ['spread']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), ==, 1, Republican@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'Fox News (Robbins & Shaw)'], '==', 'spread', 'Republican'], ['spread']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), ==, 0, Washington Post / ABC News@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'Washington Post / ABC News'], '==', 'Pollster', 'Washington Post / ABC News'], ['spread']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), ==, 1, Republican@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'Washington Post / ABC News'], '==', 'spread', 'Republican'], ['spread']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Republican@Str), ==, 0, Fox News (Robbins & Shaw)@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'spread', 'Republican'], '==', 'Pollster', 'Fox News (Robbins & Shaw)'], ['spread']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Republican@Str), ==, 0, Washington Post / ABC News@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'spread', 'Republican'], '==', 'Pollster', 'Washington Post / ABC News'], ['spread']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Pollster', 'Fox News (Robbins & Shaw)'], ['spread']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Pollster', 'Washington Post / ABC News'], ['spread']]
+# (t=22.10) i=1, candidate=[{'ANSWER': 'Marist (NBC/Marist)'}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), ==, 0, Marist (NBC/Marist)@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'Marist (NBC/Marist)'], '==', 'Pollster', 'Marist (NBC/Marist)'], ['Pollster']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), ==, 1, Democratic@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'Marist (NBC/Marist)'], '==', 'spread', 'Democratic'], ['Pollster']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Democratic@Str), ==, 0, Marist (NBC/Marist)@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'spread', 'Democratic'], '==', 'Pollster', 'Marist (NBC/Marist)'], ['Pollster']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Pollster', 'Marist (NBC/Marist)'], ['Pollster']]
+# (t=44.16) i=2, candidate=[{'ANSWER': 'CNN (Opinion Research)'}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), ==, 0, CNN (Opinion Research)@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'CNN (Opinion Research)'], '==', 'Pollster', 'CNN (Opinion Research)'], ['Pollster']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), ==, 1, Democratic@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'CNN (Opinion Research)'], '==', 'spread', 'Democratic'], ['Pollster']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Democratic@Str), ==, 0, CNN (Opinion Research)@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'spread', 'Democratic'], '==', 'Pollster', 'CNN (Opinion Research)'], ['Pollster']]
+    # SelectCol(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Pollster', 'CNN (Opinion Research)'], ['Pollster']]
+# (t=66.55) i=3, candidate=[{'ANSWER': 'Fox News (Robbins & Shaw)'}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), ==, 0, Fox News (Robbins & Shaw)@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'Fox News (Robbins & Shaw)'], '==', 'Pollster', 'Fox News (Robbins & Shaw)'], ['Pollster']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), ==, 1, Republican@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'Fox News (Robbins & Shaw)'], '==', 'spread', 'Republican'], ['Pollster']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Republican@Str), ==, 0, Fox News (Robbins & Shaw)@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'spread', 'Republican'], '==', 'Pollster', 'Fox News (Robbins & Shaw)'], ['Pollster']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Pollster', 'Fox News (Robbins & Shaw)'], ['Pollster']]
+# (t=88.69) i=4, candidate=[{'ANSWER': 'Washington Post / ABC News'}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), ==, 0, Washington Post / ABC News@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'Washington Post / ABC News'], '==', 'Pollster', 'Washington Post / ABC News'], ['Pollster']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), ==, 1, Republican@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'Washington Post / ABC News'], '==', 'spread', 'Republican'], ['Pollster']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Republican@Str), ==, 0, Washington Post / ABC News@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'spread', 'Republican'], '==', 'Pollster', 'Washington Post / ABC News'], ['Pollster']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Pollster', 'Washington Post / ABC News'], ['Pollster']]
+# (t=111.01) i=5, candidate=[{'ANSWER': 'Democratic'}]
+  # found 12 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), ==, 0, Marist (NBC/Marist)@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'Marist (NBC/Marist)'], '==', 'Pollster', 'Marist (NBC/Marist)'], ['spread']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), ==, 1, Democratic@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'Marist (NBC/Marist)'], '==', 'spread', 'Democratic'], ['spread']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), ==, 0, CNN (Opinion Research)@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'CNN (Opinion Research)'], '==', 'Pollster', 'CNN (Opinion Research)'], ['spread']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), ==, 1, Democratic@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'CNN (Opinion Research)'], '==', 'spread', 'Democratic'], ['spread']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), ==, 0, Public Policy Polling (PPP)@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'Public Policy Polling (PPP)'], '==', 'Pollster', 'Public Policy Polling (PPP)'], ['spread']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), ==, 1, Democratic@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'Public Policy Polling (PPP)'], '==', 'spread', 'Democratic'], ['spread']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Democratic@Str), ==, 0, Marist (NBC/Marist)@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'spread', 'Democratic'], '==', 'Pollster', 'Marist (NBC/Marist)'], ['spread']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Democratic@Str), ==, 0, CNN (Opinion Research)@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'spread', 'Democratic'], '==', 'Pollster', 'CNN (Opinion Research)'], ['spread']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Democratic@Str), ==, 0, Public Policy Polling (PPP)@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'spread', 'Democratic'], '==', 'Pollster', 'Public Policy Polling (PPP)'], ['spread']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Pollster', 'Marist (NBC/Marist)'], ['spread']]
+    # SelectCol(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Pollster', 'CNN (Opinion Research)'], ['spread']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Pollster', 'Public Policy Polling (PPP)'], ['spread']]
+# (t=133.40) i=6, candidate=[{'ANSWER': 'Public Policy Polling (PPP)'}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), ==, 0, Public Policy Polling (PPP)@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'Public Policy Polling (PPP)'], '==', 'Pollster', 'Public Policy Polling (PPP)'], ['Pollster']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), ==, 1, Democratic@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Pollster', 'Public Policy Polling (PPP)'], '==', 'spread', 'Democratic'], ['Pollster']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Democratic@Str), ==, 0, Public Policy Polling (PPP)@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'spread', 'Democratic'], '==', 'Pollster', 'Public Policy Polling (PPP)'], ['Pollster']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Pollster', 'Public Policy Polling (PPP)'], ['Pollster']]
+
+# ========== review report ========== #
+# top-1, score: 2.65, answer: ['Republican']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), ==, 1, Republican@Str), ['1'])
+# top-2, score: 2.65, answer: ['Republican']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Republican@Str), ==, 0, Washington Post / ABC News@Str), ['1'])
+# top-3, score: 2.65, answer: ['Washington Post / ABC News']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), ==, 1, Republican@Str), ['0'])
+# top-4, score: 2.65, answer: ['Washington Post / ABC News']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Republican@Str), ==, 0, Washington Post / ABC News@Str), ['0'])
+# top-5, score: 2.42, answer: ['Republican']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), ==, 1, Republican@Str), ['1'])
+# top-6, score: 2.42, answer: ['Republican']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Republican@Str), ==, 0, Fox News (Robbins & Shaw)@Str), ['1'])
+# top-7, score: 2.42, answer: ['Fox News (Robbins & Shaw)']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), ==, 1, Republican@Str), ['0'])
+# top-8, score: 2.42, answer: ['Fox News (Robbins & Shaw)']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Republican@Str), ==, 0, Fox News (Robbins & Shaw)@Str), ['0'])
+# top-9, score: 2.31, answer: ['Marist (NBC/Marist)']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), ==, 1, Democratic@Str), ['0'])
+# top-10, score: 2.31, answer: ['Marist (NBC/Marist)']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Democratic@Str), ==, 0, Marist (NBC/Marist)@Str), ['0'])
+# top-11, score: 2.31, answer: ['CNN (Opinion Research)']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), ==, 1, Democratic@Str), ['0'])
+# top-12, score: 2.31, answer: ['CNN (Opinion Research)']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Democratic@Str), ==, 0, CNN (Opinion Research)@Str), ['0'])
+# top-13, score: 2.31, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), ==, 1, Democratic@Str), ['1'])
+# top-14, score: 2.31, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), ==, 1, Democratic@Str), ['1'])
+# top-15, score: 2.31, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), ==, 1, Democratic@Str), ['1'])
+# top-16, score: 2.31, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Democratic@Str), ==, 0, Marist (NBC/Marist)@Str), ['1'])
+# top-17, score: 2.31, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Democratic@Str), ==, 0, CNN (Opinion Research)@Str), ['1'])
+# top-18, score: 2.31, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Democratic@Str), ==, 0, Public Policy Polling (PPP)@Str), ['1'])
+# top-19, score: 2.31, answer: ['Public Policy Polling (PPP)']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), ==, 1, Democratic@Str), ['0'])
+# top-20, score: 2.31, answer: ['Public Policy Polling (PPP)']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Democratic@Str), ==, 0, Public Policy Polling (PPP)@Str), ['0'])
+# top-21, score: 1.59, answer: ['Republican']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), ['1'])
+# top-22, score: 1.59, answer: ['Washington Post / ABC News']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), ['0'])
+# top-23, score: 1.54, answer: ['Republican']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), ==, 0, Washington Post / ABC News@Str), ['1'])
+# top-24, score: 1.54, answer: ['Washington Post / ABC News']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Washington Post / ABC News@Str), ==, 0, Washington Post / ABC News@Str), ['0'])
+# top-25, score: 1.37, answer: ['Republican']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), ['1'])
+# top-26, score: 1.37, answer: ['Fox News (Robbins & Shaw)']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), ['0'])
+# top-27, score: 1.31, answer: ['Republican']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), ==, 0, Fox News (Robbins & Shaw)@Str), ['1'])
+# top-28, score: 1.31, answer: ['Fox News (Robbins & Shaw)']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Fox News (Robbins & Shaw)@Str), ==, 0, Fox News (Robbins & Shaw)@Str), ['0'])
+# top-29, score: 1.25, answer: ['Marist (NBC/Marist)']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), ['0'])
+# top-30, score: 1.25, answer: ['CNN (Opinion Research)']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), ['0'])
+# top-31, score: 1.25, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), ['1'])
+# top-32, score: 1.25, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), ['1'])
+# top-33, score: 1.25, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), ['1'])
+# top-34, score: 1.25, answer: ['Public Policy Polling (PPP)']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), ['0'])
+# top-35, score: 1.20, answer: ['Marist (NBC/Marist)']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), ==, 0, Marist (NBC/Marist)@Str), ['0'])
+# top-36, score: 1.20, answer: ['CNN (Opinion Research)']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), ==, 0, CNN (Opinion Research)@Str), ['0'])
+# top-37, score: 1.20, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Marist (NBC/Marist)@Str), ==, 0, Marist (NBC/Marist)@Str), ['1'])
+# top-38, score: 1.20, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, CNN (Opinion Research)@Str), ==, 0, CNN (Opinion Research)@Str), ['1'])
+# top-39, score: 1.20, answer: ['Democratic']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), ==, 0, Public Policy Polling (PPP)@Str), ['1'])
+# top-40, score: 1.20, answer: ['Public Policy Polling (PPP)']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Public Policy Polling (PPP)@Str), ==, 0, Public Policy Polling (PPP)@Str), ['0'])

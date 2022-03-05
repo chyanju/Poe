@@ -1,0 +1,100 @@
+# parsed arguments: Namespace(benchmark='Q85789', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'699', '904', 'costa', 'nicaragua', 'salvador', '434', '544', 'birds', 'color', '684', 'country', '838', 'panama', 'blue', 'rica', '632', 'belize', 'guatemala', 'honduras', 'el'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       Country  Birds color
+0       Belize    544  blue
+1   Costa Rica    838  blue
+2  El Salvador    434  blue
+3    Guatemala    684  blue
+4     Honduras    699  blue
+5    Nicaragua    632  blue
+6       Panama    904  blue
+# query is: Which country has the least number of bird species?
+# expected output type:[dtype('O')]
+# expected output is:
+        ANSWER
+0  El Salvador
+# inferred DSL terminals:
+  # ConstVal: ['Birds@Str', 'Country@Str', '<NULL>']
+     # cmap: [('country', 'Country'), ('bird', 'Birds')]
+  # AggrFunc: ['min', 'count', '<NULL>']
+     # amap: [('number', 'count'), ('least', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('least', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'El Salvador'}]
+  # found 16 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'min', 'Birds'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'min', 'Birds'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Birds'], 'min', 'Birds'], 'eqmin', 'Birds'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Birds'], 'min', 'Birds'], 'eqmin', 'Birds'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Birds'], 'min', 'Birds'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Birds'], 'min', 'Birds'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Birds'], 'count', 'Country'], 'eqmin', 'Birds'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Birds'], 'count', 'Country'], 'eqmin', 'Birds'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Birds'], 'count', 'Birds'], 'eqmin', 'Birds'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Birds'], 'count', 'Birds'], 'eqmin', 'Birds'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Birds'], 'count', 'color'], 'eqmin', 'Birds'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Birds'], 'count', 'color'], 'eqmin', 'Birds'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'min', 'Birds'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'min', 'Birds'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Birds'], ['Country']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'Birds'], ['Country']]
+
+# ========== review report ========== #
+# top-1, score: 1.54, answer: El Salvador
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['0'])
+# top-2, score: 1.54, answer: El Salvador
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['-1', '-2'])
+# top-3, score: 1.54, answer: El Salvador
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['0'])
+# top-4, score: 1.54, answer: El Salvador
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['-1', '-2'])
+# top-5, score: 1.54, answer: El Salvador
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['0'])
+# top-6, score: 1.54, answer: El Salvador
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['-1', '-2'])
+# top-7, score: 1.50, answer: El Salvador
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+# top-8, score: 1.50, answer: El Salvador
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+# top-9, score: 1.43, answer: El Salvador
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+# top-10, score: 1.43, answer: El Salvador
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+# top-11, score: 1.42, answer: El Salvador
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+# top-12, score: 1.42, answer: El Salvador
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+# top-13, score: 1.42, answer: El Salvador
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+# top-14, score: 1.42, answer: El Salvador
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-15, score: 1.42, answer: El Salvador
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+# top-16, score: 1.42, answer: El Salvador
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])

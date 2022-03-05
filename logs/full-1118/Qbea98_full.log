@@ -1,0 +1,75 @@
+# parsed arguments: Namespace(benchmark='Qbea98', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'168.827', '533.909', '2000', '325.044', '2013', '2016', '344.23', '456.216', '125.734', '149.338', '2001', 'year', '2005', '262.799', '184.211', '174.935', '2008', '129.505', '2010', '2011', '2012', '2017', '2007', '223.809', '297.551', '1999', '1998', '2014', '167.543', '2003', '186.108', '2009', '2015', '516.031', '2006', '2002', '169.598', '123.061', 'blue', 'color', 'cases', '166.061', '2004', '408.037'}
+# input type: [dtype('float64'), dtype('int64'), dtype('O')]
+# input is:
+      cases  year color
+0   129.505  1998  blue
+1   123.061  1999  blue
+2   125.734  2000  blue
+3   149.338  2001  blue
+4   166.061  2002  blue
+5   169.598  2003  blue
+6   167.543  2004  blue
+7   184.211  2005  blue
+8   168.827  2006  blue
+9   174.935  2007  blue
+10  186.108  2008  blue
+11  223.809  2009  blue
+12  262.799  2010  blue
+13  297.551  2011  blue
+14  325.044  2012  blue
+15  344.230  2013  blue
+16  408.037  2014  blue
+17  456.216  2015  blue
+18  516.031  2016  blue
+19  533.909  2017  blue
+# query is: how many pending cases was there from 2010 to 2017?
+# expected output type:[dtype('float64')]
+# expected output is:
+     ANSWER
+0  3143.817
+# inferred DSL terminals:
+  # ConstVal: ['2017@Int', '2010@Int', 'cases@Str', '<NULL>']
+     # cmap: [(2017, 2017), (2010, 2010), ('cases', 'cases')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 6 program(s)
+    # Summarize(SelectRow1(@param0, ==, 1, 2017@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2017], 'count', 'cases']
+    # Summarize(SelectRow1(@param0, ==, 1, 2017@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2017], 'count', 'year']
+    # Summarize(SelectRow1(@param0, ==, 1, 2017@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2017], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 2010@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2010], 'count', 'cases']
+    # Summarize(SelectRow1(@param0, ==, 1, 2010@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2010], 'count', 'year']
+    # Summarize(SelectRow1(@param0, ==, 1, 2010@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'year', 2010], 'count', 'color']
+# (t=1.53) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.43, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 2017@Int), count, 0)
+# top-2, score: 1.43, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 2010@Int), count, 0)
+# top-3, score: 1.32, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 2017@Int), count, 1)
+# top-4, score: 1.32, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 2017@Int), count, 2)
+# top-5, score: 1.32, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 2010@Int), count, 1)
+# top-6, score: 1.32, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 2010@Int), count, 2)

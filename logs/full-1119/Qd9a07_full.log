@@ -1,0 +1,74 @@
+# parsed arguments: Namespace(benchmark='Qd9a07', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'0.4', 'oliver', '8.1', '13.9', 'color', 'weiss', 'margot', 'jill', 'james', 'blue', 'adrian', '18.9', 'majority', 'percent', '43.2', 'rainbow', 'frank', 'fraser', 'candidate', '29.3', 'george', 'dobson'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+              Candidate  percent color
+0          Frank Dobson     43.2  blue
+1           Jill Fraser     29.3  blue
+2          Margot James     18.9  blue
+3         Adrian Oliver      8.1  blue
+4  Rainbow George Weiss      0.4  blue
+5              Majority     13.9  blue
+# query is: what is the difference in percentage of Adrian Oliver and Frank Dobson
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0    35.1
+# inferred DSL terminals:
+  # ConstVal: ['Frank Dobson@Str', 'percent@Str', 'Adrian Oliver@Str', '<NULL>']
+     # cmap: [('oliver', 'Adrian Oliver'), ('dobson', 'Frank Dobson'), ('adrian', 'Adrian Oliver'), ('frank', 'Frank Dobson'), ('percentage', 'percent')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(35.1, 9), (-35.1, 9)]
+  # [debug] high_values (no dup.): [(35.1, 9), (-35.1, 9)]
+  # [debug] filtered low_values (no dup.): [(42.800000000000004, 3), (29.300000000000004, 3), (24.300000000000004, 3), (21.200000000000003, 3), (13.900000000000002, 3), (10.799999999999999, 3), (7.699999999999999, 3), (5.800000000000001, 3), (-5.800000000000001, 3), (-7.699999999999999, 3)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=1.48) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=2.93) i=2, candidate=[{'ANSWER': 35.1}]
+  # found 2 program(s)
+    # Contrast(@param0, diff, 0, Frank Dobson@Str, Adrian Oliver@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'Candidate', 'Frank Dobson', 'Adrian Oliver', 'percent']
+    # Contrast(@param0, diff, 0, Adrian Oliver@Str, Frank Dobson@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'Candidate', 'Adrian Oliver', 'Frank Dobson', 'percent']
+# (t=4.40) i=3, candidate=[{'ANSWER': -35.1}]
+  # found 0 program(s)
+# (t=5.85) i=4, candidate=[{'ANSWER': 42.800000000000004}]
+  # found 0 program(s)
+# (t=7.31) i=5, candidate=[{'ANSWER': 29.300000000000004}]
+  # found 0 program(s)
+# (t=8.75) i=6, candidate=[{'ANSWER': 24.300000000000004}]
+  # found 0 program(s)
+# (t=10.19) i=7, candidate=[{'ANSWER': 21.200000000000003}]
+  # found 0 program(s)
+# (t=11.63) i=8, candidate=[{'ANSWER': 13.900000000000002}]
+  # found 0 program(s)
+# (t=13.07) i=9, candidate=[{'ANSWER': 10.799999999999999}]
+  # found 0 program(s)
+# (t=14.51) i=10, candidate=[{'ANSWER': 7.699999999999999}]
+  # found 0 program(s)
+# (t=15.93) i=11, candidate=[{'ANSWER': 5.800000000000001}]
+  # found 0 program(s)
+# (t=17.37) i=12, candidate=[{'ANSWER': -5.800000000000001}]
+  # found 0 program(s)
+# (t=18.83) i=13, candidate=[{'ANSWER': -7.699999999999999}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.64, answer: [35.1]
+  # tprog: Contrast(@param0, diff, 0, Frank Dobson@Str, Adrian Oliver@Str, 1)
+# top-2, score: 2.64, answer: [35.1]
+  # tprog: Contrast(@param0, diff, 0, Adrian Oliver@Str, Frank Dobson@Str, 1)

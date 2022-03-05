@@ -1,0 +1,118 @@
+# parsed arguments: Namespace(benchmark='Qc93f0', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'56', 'children', '62', 'conditions', '20', '26', 'statement', 'red', 'response', '64', 'origin', 'society', 'strength', 'color', '23', '21', '38', 'ahead', '5', 'about', 'in', 'opportunity', '28', '18', 'same', 'religion', '34', 'treatment', 'to', 'country', 'freedom', 'political', '7', 'values', 'poor', 'for', 'ties', '14', 'moral', 'family', 'blue', '73', 'u.s.', 'get', '69', 'better', '3', '9', 'orange', 'views', '52', 'raising', 'percentage', 'express', 'practice', '13', '32'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                             statement  ...   color
+0             Opportunity to get ahead  ...    blue
+1   Freedom to express political views  ...    blue
+2                Treatment of the poor  ...    blue
+3      Conditions for raising children  ...    blue
+4         Freedom to practice religion  ...    blue
+5              Moral values of society  ...    blue
+6              Strength of family ties  ...    blue
+7             Opportunity to get ahead  ...  orange
+8   Freedom to express political views  ...  orange
+9                Treatment of the poor  ...  orange
+10     Conditions for raising children  ...  orange
+11        Freedom to practice religion  ...  orange
+12             Moral values of society  ...  orange
+13             Strength of family ties  ...  orange
+14            Opportunity to get ahead  ...     red
+15  Freedom to express political views  ...     red
+16               Treatment of the poor  ...     red
+17     Conditions for raising children  ...     red
+18        Freedom to practice religion  ...     red
+19             Moral values of society  ...     red
+20             Strength of family ties  ...     red
+
+[21 rows x 4 columns]
+# query is: Which reason that the US offers a better life has the least influence for Asians?
+# expected output type:[dtype('O')]
+# expected output is:
+                    ANSWER
+0  Strength of family ties
+# inferred DSL terminals:
+  # ConstVal: ['Better in U.S.@Str', 'Conditions for raising children@Str', 'Better in country of origin@Str', '<NULL>']
+     # cmap: [('better', 'Better in country of origin'), ('better', 'Better in U.S.'), ('for', 'Conditions for raising children')]
+  # AggrFunc: ['min', '<NULL>']
+     # amap: [('least', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('least', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Strength of family ties'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Better in U.S.@Str), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'response', 'Better in U.S.'], 'eqmin', 'percentage'], ['statement']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in U.S.@Str), ==, 1, Better in U.S.@Str), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Better in U.S.'], '==', 'response', 'Better in U.S.'], 'eqmin', 'percentage'], ['statement']]
+# (t=3.47) i=1, candidate=[{'ANSWER': 'Freedom to practice religion'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=4.35) i=2, candidate=[{'ANSWER': 'Opportunity to get ahead'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=5.21) i=3, candidate=[{'ANSWER': 'Strength of family ties'}, {'ANSWER': 'Treatment of the poor'}]
+  # found 0 program(s)
+# (t=6.08) i=4, candidate=[{'ANSWER': 'Conditions for raising children'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=6.94) i=5, candidate=[{'ANSWER': 'Moral values of society'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=7.81) i=6, candidate=[{'ANSWER': 'Freedom to express political views'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=8.68) i=7, candidate=[{'ANSWER': 'Freedom to practice religion'}, {'ANSWER': 'Opportunity to get ahead'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=9.47) i=8, candidate=[{'ANSWER': 'Freedom to practice religion'}, {'ANSWER': 'Strength of family ties'}, {'ANSWER': 'Treatment of the poor'}]
+  # found 0 program(s)
+# (t=10.27) i=9, candidate=[{'ANSWER': 'Conditions for raising children'}, {'ANSWER': 'Freedom to practice religion'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=11.06) i=10, candidate=[{'ANSWER': 'Freedom to practice religion'}, {'ANSWER': 'Moral values of society'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=11.84) i=11, candidate=[{'ANSWER': 'Freedom to express political views'}, {'ANSWER': 'Freedom to practice religion'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=12.64) i=12, candidate=[{'ANSWER': 'Opportunity to get ahead'}, {'ANSWER': 'Strength of family ties'}, {'ANSWER': 'Treatment of the poor'}]
+  # found 0 program(s)
+# (t=13.42) i=13, candidate=[{'ANSWER': 'Conditions for raising children'}, {'ANSWER': 'Opportunity to get ahead'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=14.20) i=14, candidate=[{'ANSWER': 'Moral values of society'}, {'ANSWER': 'Opportunity to get ahead'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=14.97) i=15, candidate=[{'ANSWER': 'Freedom to express political views'}, {'ANSWER': 'Opportunity to get ahead'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=15.76) i=16, candidate=[{'ANSWER': 'Conditions for raising children'}, {'ANSWER': 'Strength of family ties'}, {'ANSWER': 'Treatment of the poor'}]
+  # found 0 program(s)
+# (t=16.55) i=17, candidate=[{'ANSWER': 'Moral values of society'}, {'ANSWER': 'Strength of family ties'}, {'ANSWER': 'Treatment of the poor'}]
+  # found 0 program(s)
+# (t=17.34) i=18, candidate=[{'ANSWER': 'Freedom to express political views'}, {'ANSWER': 'Strength of family ties'}, {'ANSWER': 'Treatment of the poor'}]
+  # found 0 program(s)
+# (t=18.14) i=19, candidate=[{'ANSWER': 'Conditions for raising children'}, {'ANSWER': 'Moral values of society'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=18.92) i=20, candidate=[{'ANSWER': 'Conditions for raising children'}, {'ANSWER': 'Freedom to express political views'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=19.71) i=21, candidate=[{'ANSWER': 'Freedom to express political views'}, {'ANSWER': 'Moral values of society'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=20.52) i=22, candidate=[{'ANSWER': 'Freedom to practice religion'}]
+  # found 0 program(s)
+# (t=24.20) i=23, candidate=[{'ANSWER': 'Freedom to practice religion'}, {'ANSWER': 'Opportunity to get ahead'}]
+  # found 0 program(s)
+# (t=25.05) i=24, candidate=[{'ANSWER': 'Freedom to practice religion'}, {'ANSWER': 'Treatment of the poor'}]
+  # found 0 program(s)
+# (t=25.91) i=25, candidate=[{'ANSWER': 'Conditions for raising children'}, {'ANSWER': 'Freedom to practice religion'}]
+  # found 0 program(s)
+# (t=26.77) i=26, candidate=[{'ANSWER': 'Freedom to practice religion'}, {'ANSWER': 'Moral values of society'}]
+  # found 0 program(s)
+# (t=27.63) i=27, candidate=[{'ANSWER': 'Freedom to express political views'}, {'ANSWER': 'Freedom to practice religion'}]
+  # found 0 program(s)
+# (t=28.50) i=28, candidate=[{'ANSWER': 'Freedom to practice religion'}, {'ANSWER': 'Opportunity to get ahead'}, {'ANSWER': 'Treatment of the poor'}]
+  # found 0 program(s)
+# (t=29.28) i=29, candidate=[{'ANSWER': 'Conditions for raising children'}, {'ANSWER': 'Freedom to practice religion'}, {'ANSWER': 'Opportunity to get ahead'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.23, answer: ['Strength of family ties']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Better in U.S.@Str), eqmin, 2), ['0'])
+# top-2, score: 1.20, answer: ['Strength of family ties']
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in U.S.@Str), ==, 1, Better in U.S.@Str), eqmin, 2), ['0'])

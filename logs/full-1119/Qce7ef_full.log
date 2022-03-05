@@ -1,0 +1,75 @@
+# parsed arguments: Namespace(benchmark='Qce7ef', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'margot', 'majority', 'frank', 'dobson', 'james', 'fraser', 'rainbow', 'percent', 'candidate', 'adrian', 'george', '8.1', '18.9', 'jill', '13.9', '0.4', 'color', 'blue', 'oliver', '29.3', 'weiss', '43.2'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+              Candidate  percent color
+0          Frank Dobson     43.2  blue
+1           Jill Fraser     29.3  blue
+2          Margot James     18.9  blue
+3         Adrian Oliver      8.1  blue
+4  Rainbow George Weiss      0.4  blue
+5              Majority     13.9  blue
+# query is: Who has the highest percent?
+# expected output type:[dtype('O')]
+# expected output is:
+         ANSWER
+0  Frank Dobson
+# inferred DSL terminals:
+  # ConstVal: ['percent@Str', '<NULL>']
+     # cmap: [('percent', 'percent')]
+  # AggrFunc: ['max', '<NULL>']
+     # amap: [('highest', 'max')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('highest', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Frank Dobson'}]
+  # found 10 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Candidate'], 'max', 'percent'], 'eqmax', 'COL0'], ['Candidate']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Candidate'], 'max', 'percent'], 'eqmax', 'COL0'], ['Candidate']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Candidate', 'percent'], 'max', 'percent'], 'eqmax', 'percent'], ['Candidate']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Candidate', 'percent'], 'max', 'percent'], 'eqmax', 'percent'], ['Candidate']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Candidate', 'percent'], 'max', 'percent'], 'eqmax', 'COL0'], ['Candidate']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Candidate', 'percent'], 'max', 'percent'], 'eqmax', 'COL0'], ['Candidate']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Candidate', 'color'], 'max', 'percent'], 'eqmax', 'COL0'], ['Candidate']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Candidate', 'color'], 'max', 'percent'], 'eqmax', 'COL0'], ['Candidate']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'percent'], ['Candidate']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'percent'], ['Candidate']]
+
+# ========== review report ========== #
+# top-1, score: 1.57, answer: ['Frank Dobson']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+# top-2, score: 1.57, answer: ['Frank Dobson']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+# top-3, score: 1.50, answer: ['Frank Dobson']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+# top-4, score: 1.50, answer: ['Frank Dobson']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+# top-5, score: 1.49, answer: ['Frank Dobson']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+# top-6, score: 1.49, answer: ['Frank Dobson']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+# top-7, score: 1.49, answer: ['Frank Dobson']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+# top-8, score: 1.49, answer: ['Frank Dobson']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+# top-9, score: 1.49, answer: ['Frank Dobson']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+# top-10, score: 1.49, answer: ['Frank Dobson']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])

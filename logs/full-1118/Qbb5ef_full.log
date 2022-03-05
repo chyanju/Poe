@@ -1,0 +1,276 @@
+# parsed arguments: Namespace(benchmark='Qbb5ef', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'1', '9', '-2.1', 'in', 'income', '0.2', '5', '2', '-0.25', '-1.5', '-1.0', '0.1', '-0.4', '%', '-1.8', '6', '7', '4', 'blue', 'color', '3', 'rank', '8', 'change', '10', '-0.9'}
+# input type: [dtype('int64'), dtype('float64'), dtype('O')]
+# input is:
+   income rank  % change in income color
+0            1               -1.80  blue
+1            2               -1.50  blue
+2            3               -1.00  blue
+3            4               -0.90  blue
+4            5               -0.40  blue
+5            6                0.10  blue
+6            7                0.20  blue
+7            8                0.10  blue
+8            9               -0.25  blue
+9           10               -2.10  blue
+# query is: What is the value of the largest change in income?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0    -2.1
+# inferred DSL terminals:
+  # ConstVal: ['income rank@Str', '% change in income@Str', '<NULL>']
+     # cmap: [('income', 'income rank'), ('change', '% change in income'), ('in', '% change in income'), ('income', '% change in income')]
+  # AggrFunc: ['max', '<NULL>']
+     # amap: [('largest', 'max')]
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('change', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('largest', 'eqmax')]
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: []
+  # [debug] high_values (no dup.): [(11.8, 1), (11.5, 1), (11.1, 1), (11.0, 1), (10.9, 1), (10.8, 1), (10.5, 1), (10.4, 1), (10.25, 1), (10.1, 1)]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 0.2}]
+  # found 37 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank'], 'max', '% change in income'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank'], 'max', '% change in income'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income'], 'max', 'income rank'], 'eqmax', '% change in income'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income'], 'max', 'income rank'], 'eqmax', '% change in income'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income'], 'max', '% change in income'], 'eqmax', '% change in income'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income'], 'max', '% change in income'], 'eqmax', '% change in income'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income'], 'max', '% change in income'], 'eqmax', '% change in income'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income'], 'max', '% change in income'], 'eqmax', '% change in income'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income'], 'max', '% change in income'], 'eqmax', 'COL0'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income'], 'max', '% change in income'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income'], 'max', '% change in income'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income'], 'max', '% change in income'], 'eqmax', 'COL0'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', '% change in income'], 'max', 'income rank'], 'eqmax', '% change in income'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', '% change in income'], 'max', 'income rank'], 'eqmax', '% change in income'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', '% change in income'], 'max', '% change in income'], 'eqmax', '% change in income'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', '% change in income'], 'max', '% change in income'], 'eqmax', '% change in income'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', '% change in income'], 'max', '% change in income'], 'eqmax', '% change in income'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', '% change in income'], 'max', '% change in income'], 'eqmax', '% change in income'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', '% change in income'], 'max', '% change in income'], 'eqmax', 'COL0'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', '% change in income'], 'max', '% change in income'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', '% change in income'], 'max', '% change in income'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', '% change in income'], 'max', '% change in income'], 'eqmax', 'COL0'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', 'color'], 'max', '% change in income'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', 'color'], 'max', '% change in income'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income', 'color'], 'max', 'income rank'], 'eqmax', '% change in income'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income', 'color'], 'max', 'income rank'], 'eqmax', '% change in income'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income', 'color'], 'max', '% change in income'], 'eqmax', '% change in income'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income', 'color'], 'max', '% change in income'], 'eqmax', '% change in income'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income', 'color'], 'max', '% change in income'], 'eqmax', '% change in income'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income', 'color'], 'max', '% change in income'], 'eqmax', '% change in income'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income', 'color'], 'max', '% change in income'], 'eqmax', 'COL0'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income', 'color'], 'max', '% change in income'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income', 'color'], 'max', '% change in income'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income', 'color'], 'max', '% change in income'], 'eqmax', 'COL0'], ['% change in income']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', '% change in income'], ['% change in income']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', '% change in income'], ['% change in income']]
+    # Summarize(@param0, max, 1)
+      --> ['Summarize', 'input@0', 'max', '% change in income']
+# (t=2.14) i=1, candidate=[{'ANSWER': -0.9}]
+  # found 0 program(s)
+# (t=4.17) i=2, candidate=[{'ANSWER': 0.1}]
+  # found 0 program(s)
+# (t=6.21) i=3, candidate=[{'ANSWER': -1.8}]
+  # found 0 program(s)
+# (t=8.22) i=4, candidate=[{'ANSWER': -0.4}]
+  # found 0 program(s)
+# (t=10.25) i=5, candidate=[{'ANSWER': -0.25}]
+  # found 0 program(s)
+# (t=12.26) i=6, candidate=[{'ANSWER': -2.1}]
+  # found 18 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank'], 'max', '% change in income'], 'eqmax', 'income rank'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank'], 'max', '% change in income'], 'eqmax', 'income rank'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income'], 'max', 'income rank'], 'eqmax', 'COL0'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income'], 'max', 'income rank'], 'eqmax', 'COL0'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', '% change in income'], 'max', 'income rank'], 'eqmax', 'income rank'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', '% change in income'], 'max', 'income rank'], 'eqmax', 'income rank'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', '% change in income'], 'max', 'income rank'], 'eqmax', 'COL0'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', '% change in income'], 'max', 'income rank'], 'eqmax', 'COL0'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', '% change in income'], 'max', '% change in income'], 'eqmax', 'income rank'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', '% change in income'], 'max', '% change in income'], 'eqmax', 'income rank'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', '% change in income'], 'max', '% change in income'], 'eqmax', 'income rank'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', '% change in income'], 'max', '% change in income'], 'eqmax', 'income rank'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', 'color'], 'max', '% change in income'], 'eqmax', 'income rank'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['income rank', 'color'], 'max', '% change in income'], 'eqmax', 'income rank'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income', 'color'], 'max', 'income rank'], 'eqmax', 'COL0'], ['% change in income']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['% change in income', 'color'], 'max', 'income rank'], 'eqmax', 'COL0'], ['% change in income']]
+    # SelectCol(SelectRow0(@param0, eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'income rank'], ['% change in income']]
+    # SelectCol(SelectRow0(@param0, eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'income rank'], ['% change in income']]
+# (t=14.36) i=7, candidate=[{'ANSWER': -1.5}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.65, answer: 0.2
+  # tprog: Summarize(@param0, max, 1)
+# top-2, score: 1.57, answer: 0.2
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['1'])
+# top-3, score: 1.57, answer: 0.2
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['-99', '-2'])
+# top-4, score: 1.57, answer: -2.1
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 0), ['1'])
+# top-5, score: 1.57, answer: -2.1
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 0), ['-99', '-2'])
+# top-6, score: 1.50, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['1'])
+# top-7, score: 1.50, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-99'])
+# top-8, score: 1.50, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 0), ['0'])
+# top-9, score: 1.50, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 0), ['-1'])
+# top-10, score: 1.50, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['0'])
+# top-11, score: 1.50, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['1'])
+# top-12, score: 1.50, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-99'])
+# top-13, score: 1.50, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-1'])
+# top-14, score: 1.50, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['0'])
+# top-15, score: 1.50, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['1'])
+# top-16, score: 1.50, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-99'])
+# top-17, score: 1.50, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-1'])
+# top-18, score: 1.50, answer: -2.1
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 0), ['1'])
+# top-19, score: 1.50, answer: -2.1
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 0), ['-99'])
+# top-20, score: 1.50, answer: -2.1
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 1), ['0'])
+# top-21, score: 1.50, answer: -2.1
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 1), ['-1'])
+# top-22, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 1), ['1'])
+# top-23, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 1), ['-99', '-2'])
+# top-24, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['1'])
+# top-25, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['2'])
+# top-26, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-99', '-1'])
+# top-27, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-99', '-2'])
+# top-28, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['1'])
+# top-29, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['2'])
+# top-30, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-99', '-1'])
+# top-31, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-99', '-2'])
+# top-32, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['2'])
+# top-33, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-99', '-1'])
+# top-34, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['0'])
+# top-35, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['-1', '-2'])
+# top-36, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['0'])
+# top-37, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['2'])
+# top-38, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-1'])
+# top-39, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-1', '-2'])
+# top-40, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['0'])
+# top-41, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['2'])
+# top-42, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-1'])
+# top-43, score: 1.49, answer: 0.2
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+# top-44, score: 1.49, answer: -2.1
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['1'])
+# top-45, score: 1.49, answer: -2.1
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['-99', '-2'])
+# top-46, score: 1.49, answer: -2.1
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['1'])
+# top-47, score: 1.49, answer: -2.1
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['-99', '-2'])
+# top-48, score: 1.49, answer: -2.1
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['1'])
+# top-49, score: 1.49, answer: -2.1
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['2'])
+# top-50, score: 1.49, answer: -2.1
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['-99', '-1'])
+# top-51, score: 1.49, answer: -2.1
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['-99', '-2'])
+# top-52, score: 1.49, answer: -2.1
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 0), ['2'])
+# top-53, score: 1.49, answer: -2.1
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 0), ['-99', '-1'])
+# top-54, score: 1.49, answer: -2.1
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['0'])
+# top-55, score: 1.49, answer: -2.1
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['-1', '-2'])

@@ -1,0 +1,85 @@
+# parsed arguments: Namespace(benchmark='Qe9b39', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'orange', '20', '12', '1', '19', 'christian', 'same', 'protestants', '34', '17', '51', '67', 'hindus', 'other', '7', 'staying', 'muslims', '68', '24', 'non-christian', '11', '49', 'native', '14', 'jews', 'catholics', '8', '6', '3', 'blue', 'red', 'shrinking', 'growth?', '13', '10', 'religion', 'percentage', 'color', 'mormons', '63', '65', 'orthodox', '37', 'am.', 'buddhists', '73', 'unaffiliated', 'pagan/earth-based', '47', 'spirituality', '61', '42', 'growing'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                   Religion           Growth?  Percentage   color
+0                   Muslims           Growing          51    blue
+1                   Muslims  Staying the same          37     red
+2                   Muslims         Shrinking           7  orange
+3               Protestants           Growing          47    blue
+4               Protestants  Staying the same          42     red
+5               Protestants         Shrinking           6  orange
+6         Pagan/earth-based           Growing          34    blue
+7         Pagan/earth-based  Staying the same          49     red
+8         Pagan/earth-based         Shrinking           8  orange
+9   Native Am. Spirituality           Growing          24    blue
+10  Native Am. Spirituality  Staying the same          61     red
+11  Native Am. Spirituality         Shrinking           6  orange
+12                     Jews           Growing          19    blue
+13                     Jews  Staying the same          61     red
+14                     Jews         Shrinking           8  orange
+15                Catholics           Growing          14    blue
+16                Catholics  Staying the same          61     red
+17                Catholics         Shrinking          20  orange
+18             Unaffiliated           Growing          12    blue
+19             Unaffiliated  Staying the same          63     red
+20             Unaffiliated         Shrinking          17  orange
+21      Other non-Christian           Growing          13    blue
+22      Other non-Christian  Staying the same          65     red
+23      Other non-Christian         Shrinking           8  orange
+24                Buddhists           Growing          12    blue
+25                Buddhists  Staying the same          67     red
+26                Buddhists         Shrinking           8  orange
+27                  Mormons           Growing           3    blue
+28                  Mormons  Staying the same          68     red
+29                  Mormons         Shrinking          11  orange
+30       Orthodox Christian           Growing           3    blue
+31       Orthodox Christian  Staying the same          68     red
+32       Orthodox Christian         Shrinking          10  orange
+33                   Hindus           Growing           1    blue
+34                   Hindus  Staying the same          73     red
+35                   Hindus         Shrinking           8  orange
+# query is: What is the percentage of red Protestants?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      42
+# inferred DSL terminals:
+  # ConstVal: ['Percentage@Str', 'red@Str', 'Protestants@Str', '<NULL>']
+     # cmap: [('protestants', 'Protestants'), ('percentage', 'Percentage'), ('red', 'red')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 42}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Protestants@Str), ==, 3, red@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Protestants'], '==', 'color', 'red'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, red@Str), ==, 0, Protestants@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'red'], '==', 'Religion', 'Protestants'], ['Percentage']]
+# (t=2.05) i=1, candidate=[{'ANSWER': 61}]
+  # found 0 program(s)
+# (t=4.12) i=2, candidate=[{'ANSWER': 6}]
+  # found 0 program(s)
+# (t=6.17) i=3, candidate=[{'ANSWER': 68}]
+  # found 0 program(s)
+# (t=8.25) i=4, candidate=[{'ANSWER': 47}]
+  # found 0 program(s)
+# (t=10.37) i=5, candidate=[{'ANSWER': 37}]
+  # found 0 program(s)
+# (t=12.45) i=6, candidate=[{'ANSWER': 7}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.52, answer: 42
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Protestants@Str), ==, 3, red@Str), ['2'])
+# top-2, score: 2.52, answer: 42
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, red@Str), ==, 0, Protestants@Str), ['2'])

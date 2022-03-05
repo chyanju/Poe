@@ -1,0 +1,63 @@
+# parsed arguments: Namespace(benchmark='Qfa0c4', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'white', 'american', '57', 'color', 'race', 'african', 'latino', 'blue', 'percent', '48', '38'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+               Race  Percent color
+0             White       57  blue
+1            Latino       48  blue
+2  African American       38  blue
+# query is: What's the White rate of marriages minus the Latino?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0       9
+# inferred DSL terminals:
+  # ConstVal: ['Latino@Str', 'White@Str', '<NULL>']
+     # cmap: [('latino', 'Latino'), ('white', 'White')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('minus', '-')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(9, 4), (-9, 4)]
+  # [debug] high_values (no dup.): [(9, 4), (-9, 4)]
+  # [debug] filtered low_values (no dup.): [(19, 2), (10, 2), (-10, 2), (-19, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=0.96) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=1.91) i=2, candidate=[{'ANSWER': 3}]
+  # found 0 program(s)
+# (t=2.85) i=3, candidate=[{'ANSWER': 4}]
+  # found 0 program(s)
+# (t=3.80) i=4, candidate=[{'ANSWER': 9}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, White@Str, Latino@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Race', 'White', 'Latino', 'Percent']
+# (t=4.74) i=5, candidate=[{'ANSWER': -9}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Latino@Str, White@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Race', 'Latino', 'White', 'Percent']
+# (t=5.69) i=6, candidate=[{'ANSWER': 19}]
+  # found 0 program(s)
+# (t=6.65) i=7, candidate=[{'ANSWER': 10}]
+  # found 0 program(s)
+# (t=7.59) i=8, candidate=[{'ANSWER': -10}]
+  # found 0 program(s)
+# (t=8.53) i=9, candidate=[{'ANSWER': -19}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.44, answer: [9]
+  # tprog: Contrast(@param0, -, 0, White@Str, Latino@Str, 1)
+# top-2, score: 2.44, answer: [-9]
+  # tprog: Contrast(@param0, -, 0, Latino@Str, White@Str, 1)

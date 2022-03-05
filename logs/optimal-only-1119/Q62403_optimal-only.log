@@ -1,0 +1,112 @@
+# parsed arguments: Namespace(benchmark='Q62403', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'82', 'count', '34', 'date', '5', 'sun', '40', 'mar', '6', '10', 'snow', '71', '8', '38', '19', 'oct', 'jul', '14', 'sep', '54', '36', 'rain', 'apr', '25', 'drizzle', '45', '(month)', 'yellow', 'blue', 'aug', '33', 'dec', '1', '50', '85', '42', '94', 'color', '89', 'may', '16', '4', '20', 'fog', '13', '23', 'gray', '3', '37', 'records', '35', 'jun', 'jan', '30', 'feb', 'nov', '55', 'weather', 'pink', '2', '61'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+    weather date (month)  Count of Records   color
+0   drizzle          Jan                10    pink
+1      rain          Jan                35    blue
+2       sun          Jan                33  yellow
+3      snow          Jan                 8    gray
+4      rain          Feb                40    blue
+5       sun          Feb                30  yellow
+6   drizzle          Feb                 4    pink
+7      snow          Feb                 3    gray
+8       sun          Mar                42  yellow
+9      rain          Mar                37    blue
+10     snow          Mar                 6    gray
+11  drizzle          Mar                 3    pink
+12     rain          Apr                20    blue
+13      sun          Apr                61  yellow
+14     snow          Apr                 1    gray
+15  drizzle          Apr                 4    pink
+16     rain          May                16    blue
+17      sun          May                82  yellow
+18  drizzle          May                 1    pink
+19     rain          Jun                19    blue
+20      sun          Jun                85  yellow
+21  drizzle          Jun                 2    pink
+22     rain          Jul                14    blue
+23      sun          Jul                89  yellow
+24  drizzle          Jul                 8    pink
+25      fog          Jul                13    pink
+26  drizzle          Aug                 8    pink
+27      sun          Aug                94  yellow
+28     rain          Aug                 6    blue
+29      sun          Sep                71  yellow
+30     rain          Sep                 4    blue
+31      fog          Sep                40    pink
+32  drizzle          Sep                 5    pink
+33      sun          Oct                45  yellow
+34  drizzle          Oct                 4    pink
+35     rain          Oct                20    blue
+36     rain          Nov                25    blue
+37      sun          Nov                42  yellow
+38  drizzle          Nov                 3    pink
+39      fog          Nov                50    pink
+40     rain          Dec                23    blue
+41      sun          Dec                40  yellow
+42     snow          Dec                 5    gray
+43  drizzle          Dec                 2    pink
+44      fog          Mar                36    pink
+45      fog          Apr                34    pink
+46      fog          May                25    pink
+47      fog          Jun                14    pink
+48      fog          Aug                16    pink
+49      fog          Oct                55    pink
+50      fog          Dec                54    pink
+51      fog          Jan                38    pink
+52      fog          Feb                36    pink
+# query is: What month has the least fog?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0    Jul
+# inferred DSL terminals:
+  # ConstVal: ['date (month)@Str', 'fog@Str', '<NULL>']
+     # cmap: [('month', 'date (month)'), ('fog', 'fog')]
+  # AggrFunc: ['min', '<NULL>']
+     # amap: [('least', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('least', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Sep'}]
+  # found 0 program(s)
+# (t=2.75) i=1, candidate=[{'ANSWER': 'Jan'}]
+  # found 0 program(s)
+# (t=5.48) i=2, candidate=[{'ANSWER': 'Mar'}]
+  # found 0 program(s)
+# (t=8.22) i=3, candidate=[{'ANSWER': 'Oct'}]
+  # found 0 program(s)
+# (t=11.24) i=4, candidate=[{'ANSWER': 'Aug'}]
+  # found 0 program(s)
+# (t=13.99) i=5, candidate=[{'ANSWER': 'Nov'}]
+  # found 0 program(s)
+# (t=16.75) i=6, candidate=[{'ANSWER': 'Jun'}]
+  # found 0 program(s)
+# (t=19.52) i=7, candidate=[{'ANSWER': 'May'}]
+  # found 0 program(s)
+# (t=22.28) i=8, candidate=[{'ANSWER': 'Apr'}]
+  # found 0 program(s)
+# (t=25.40) i=9, candidate=[{'ANSWER': 'Dec'}]
+  # found 0 program(s)
+# (t=28.15) i=10, candidate=[{'ANSWER': 'Jul'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, fog@Str), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'weather', 'fog'], 'eqmin', 'Count of Records'], ['date (month)']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, fog@Str), ==, 0, fog@Str), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'weather', 'fog'], '==', 'weather', 'fog'], 'eqmin', 'Count of Records'], ['date (month)']]
+# (t=30.90) i=11, candidate=[{'ANSWER': 'Feb'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.60, answer: ['Jul']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, fog@Str), eqmin, 2), ['1'])
+# top-2, score: 2.57, answer: ['Jul']
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, fog@Str), ==, 0, fog@Str), eqmin, 2), ['1'])

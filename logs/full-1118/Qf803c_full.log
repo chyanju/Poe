@@ -1,0 +1,80 @@
+# parsed arguments: Namespace(benchmark='Qf803c', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'rica', 'color', '183', 'country', 'guatemala', 'amphibians', 'belize', 'panama', '101', 'costa', 'el', 'blue', '46', '61', 'salvador', 'honduras', 'nicaragua', '133', '30', '182'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       Country  Amphibians color
+0       Belize          46  blue
+1   Costa Rica         183  blue
+2  El Salvador          30  blue
+3    Guatemala         133  blue
+4     Honduras         101  blue
+5    Nicaragua          61  blue
+6       Panama         182  blue
+# query is: How many more Amphibians are located in Costa Rica versus El Salvador?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0     153
+# inferred DSL terminals:
+  # ConstVal: ['Amphibians@Str', 'Costa Rica@Str', 'El Salvador@Str', '<NULL>']
+     # cmap: [('el', 'El Salvador'), ('amphibians', 'Amphibians'), ('rica', 'Costa Rica'), ('costa', 'Costa Rica'), ('salvador', 'El Salvador')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>=', '==', '>', '<NULL>']
+     # bmap: [('more', '>'), (None, '=='), ('more', '>=')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(153, 9), (-153, 9)]
+  # [debug] high_values (no dup.): [(152, 3), (137, 3), (122, 3), (103, 3), (82, 3), (71, 3), (50, 3), (31, 3), (16, 3), (1, 3)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 183}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Costa Rica@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Costa Rica'], ['Amphibians']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Costa Rica@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Costa Rica'], ['Amphibians']]
+# (t=1.91) i=1, candidate=[{'ANSWER': 30}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, El Salvador@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'El Salvador'], ['Amphibians']]
+    # SelectCol(SelectRow1(@param0, ==, 0, El Salvador@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'El Salvador'], ['Amphibians']]
+# (t=3.78) i=2, candidate=[{'ANSWER': 213}]
+  # found 0 program(s)
+# (t=5.49) i=3, candidate=[{'ANSWER': 346}]
+  # found 0 program(s)
+# (t=7.20) i=4, candidate=[{'ANSWER': 316}]
+  # found 0 program(s)
+# (t=8.90) i=5, candidate=[{'ANSWER': 163}]
+  # found 0 program(s)
+# (t=10.59) i=6, candidate=[{'ANSWER': 133}]
+  # found 0 program(s)
+# (t=12.48) i=7, candidate=[{'ANSWER': 153}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Costa Rica@Str, El Salvador@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Country', 'Costa Rica', 'El Salvador', 'Amphibians']
+# (t=14.18) i=8, candidate=[{'ANSWER': -153}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, El Salvador@Str, Costa Rica@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Country', 'El Salvador', 'Costa Rica', 'Amphibians']
+
+# ========== review report ========== #
+# top-1, score: 2.64, answer: 153
+  # tprog: Contrast(@param0, -, 0, Costa Rica@Str, El Salvador@Str, 1)
+# top-2, score: 2.64, answer: -153
+  # tprog: Contrast(@param0, -, 0, El Salvador@Str, Costa Rica@Str, 1)
+# top-3, score: 2.39, answer: 183
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Costa Rica@Str), ['1'])
+# top-4, score: 2.39, answer: 183
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Costa Rica@Str), ['-99', '-2'])
+# top-5, score: 2.39, answer: 30
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, El Salvador@Str), ['1'])
+# top-6, score: 2.39, answer: 30
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, El Salvador@Str), ['-99', '-2'])

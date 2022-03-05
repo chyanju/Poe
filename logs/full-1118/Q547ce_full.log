@@ -1,0 +1,68 @@
+# parsed arguments: Namespace(benchmark='Q547ce', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'62', 'green', 'env', 'programs', '53', 'math', '52', 'humanities', 'color', 'yellow', 'sci', 'phys', 'bio', 'percent', 'design', 'brown', 'purple', '67', '42', 'sciences', '91', 'blue', 'business', 'red', '84', '61', 'social', 'resources', 'arts', 'gray', 'major', 'engineering', 'undergrad', 'chemistry', 'ls', 'nat', 'orange', '55', '60'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+              major  percent   color
+0       LS Programs       42  yellow
+1      Bio Sciences       52    blue
+2      LS Undergrad       53  yellow
+3     Math Phys Sci       55  orange
+4     Nat Resources       60   brown
+5   Arts Humanities       61    gray
+6   Social Sciences       61   brown
+7         Chemistry       62     red
+8        Env Design       67   green
+9       Engineering       84  orange
+10         Business       91  purple
+# query is: What percentage of students intend to major in engineering than bio sciences?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      32
+# inferred DSL terminals:
+  # ConstVal: ['Bio Sciences@Str', 'percent@Str', 'major@Str', 'Engineering@Str', '<NULL>']
+     # cmap: [('percentage', 'percent'), ('engineering', 'Engineering'), ('major', 'major'), ('bio', 'Bio Sciences')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 84}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Engineering@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'major', 'Engineering'], ['percent']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Engineering@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'major', 'Engineering'], ['percent']]
+# (t=1.66) i=1, candidate=[{'ANSWER': 42}]
+  # found 0 program(s)
+# (t=3.34) i=2, candidate=[{'ANSWER': 52}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Bio Sciences@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'major', 'Bio Sciences'], ['percent']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Bio Sciences@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'major', 'Bio Sciences'], ['percent']]
+# (t=5.03) i=3, candidate=[{'ANSWER': 53}]
+  # found 0 program(s)
+# (t=6.69) i=4, candidate=[{'ANSWER': 55}]
+  # found 0 program(s)
+# (t=8.36) i=5, candidate=[{'ANSWER': 61}]
+  # found 0 program(s)
+# (t=10.02) i=6, candidate=[{'ANSWER': 91}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.39, answer: 84
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Engineering@Str), ['1'])
+# top-2, score: 2.39, answer: 84
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Engineering@Str), ['-99', '-2'])
+# top-3, score: 2.39, answer: 52
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Bio Sciences@Str), ['1'])
+# top-4, score: 2.39, answer: 52
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Bio Sciences@Str), ['-99', '-2'])

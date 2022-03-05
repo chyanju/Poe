@@ -1,0 +1,141 @@
+# parsed arguments: Namespace(benchmark='Qca5fb', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'322.243454', '3041.677796', '1135.44795', '420.9653204', '4743.264112', '731.7417369', '5220.856542', '2651.442018', '1992', '1027.906574', '373.8000229', '2976.137049', '362.808414', '1995', '9146.41636', '406.8857207', '8391.668592', '2669.946123', 'gdp', '1490.380056', '450.4151061', '2005', '2007', '5109.348611', 'country', '949.1780621', '2526.596184', '1996', '1998', '3426.840162', '1126.945129', '1844.485782', '2929.303282', 'color', '2663.456988', '8628.952841', '2100.743786', '6946.880998', '1997', '3609.875507', '2812.334223', '2006', '1273.640743', '3413.259971', '4108.574488', '642.556503', 'red', '4751.065263', '2004', '8615.658757', '459.5766355', '820.8630768', '2651.260121', '7197.031306', '5793.400957', 'year', '864.7303144', '558.4416044', '306.1686498', '5337.065324', '2003', '2002', '448.0969889', '1731.125235', '3129.755456', '2008', '604.2280606', '2069.343631', '1775.141291', '1999', 'russia', '2001', '1055.136489', '2791.968684', '422.9243667', '480.2069446', '469.2131942', '774.467161', '2000', '380.0984013', '3748.934494', '3696.146772', '351.8848828', '4980.980645', '2375.162934', 'brazil', '1041.637704', '703.1207994', 'orange', 'china', '1338.986444', 'india', 'teal', '820.2983339', '1993', '11700.22112', '3413.588661', '3095.08716', '1994', 'blue', '2748.917437', '2009'}
+# input type: [dtype('int64'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+    year country          GDP   color
+0   1992  Brazil  2526.596184    blue
+1   1993  Brazil  2791.968684    blue
+2   1994  Brazil  3426.840162    blue
+3   1995  Brazil  4751.065263    blue
+4   1996  Brazil  5109.348611    blue
+..   ...     ...          ...     ...
+67  2005   China  1731.125235  orange
+68  2006   China  2069.343631  orange
+69  2007   China  2651.260121  orange
+70  2008   China  3413.588661  orange
+71  2009   China  3748.934494  orange
+
+[72 rows x 4 columns]
+# query is: Which countries have GPD per capita higher than 8000 in the year 2009?
+# expected output type:[dtype('O')]
+# expected output is:
+   ANSWER
+0  Brazil
+1  Russia
+# inferred DSL terminals:
+  # ConstVal: ['country@Str', '2009@Int', 'year@Str', '<NULL>']
+     # cmap: [(2009, 2009), ('countries', 'country'), ('year', 'year')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('higher', '-')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(7488.7136279999995, 4), (7264.723463, 4), (6606.658756999999, 4), (6606.658756999999, 4), (6606.658756999999, 4), (6382.668592, 4), (6382.668592, 4), (6382.668592, 4), (4866.724262999999, 4), (4642.734098, 4)]
+  # [debug] high_values (no dup.): [(7488.7136279999995, 4), (7264.723463, 4), (6606.658756999999, 4), (6606.658756999999, 4), (6606.658756999999, 4), (6382.668592, 4), (6382.668592, 4), (6382.668592, 4), (4866.724262999999, 4), (4642.734098, 4)]
+  # [debug] filtered low_values (no dup.): [(10573.275991, 2), (9691.22112, 2), (9691.22112, 2), (9691.22112, 2), (9691.22112, 2), (8309.4901072, 2), (8293.415303, 2), (8263.7738742, 2), (8252.850343, 2), (8241.858734099998, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Brazil'}]
+  # found 0 program(s)
+# (t=6.71) i=1, candidate=[{'ANSWER': 'Brazil'}, {'ANSWER': 'Russia'}]
+  # found 0 program(s)
+# (t=13.64) i=2, candidate=[{'ANSWER': 'Russia'}]
+  # found 0 program(s)
+# (t=20.27) i=3, candidate=[{'ANSWER': 7488.7136279999995}]
+  # found 0 program(s)
+# (t=26.91) i=4, candidate=[{'ANSWER': 7264.723463}]
+  # found 0 program(s)
+# (t=33.90) i=5, candidate=[{'ANSWER': 6606.658756999999}]
+  # found 0 program(s)
+# (t=40.53) i=6, candidate=[{'ANSWER': 6606.658756999999}]
+  # found 0 program(s)
+# (t=47.50) i=7, candidate=[{'ANSWER': 6606.658756999999}]
+  # found 0 program(s)
+# (t=54.11) i=8, candidate=[{'ANSWER': 6382.668592}]
+  # found 0 program(s)
+# (t=61.08) i=9, candidate=[{'ANSWER': 6382.668592}]
+  # found 0 program(s)
+# (t=67.71) i=10, candidate=[{'ANSWER': 6382.668592}]
+  # found 0 program(s)
+# (t=74.31) i=11, candidate=[{'ANSWER': 4866.724262999999}]
+  # found 0 program(s)
+# (t=81.31) i=12, candidate=[{'ANSWER': 4642.734098}]
+  # found 0 program(s)
+# (t=87.93) i=13, candidate=[{'ANSWER': 10573.275991}]
+  # found 0 program(s)
+# (t=94.86) i=14, candidate=[{'ANSWER': 9691.22112}]
+  # found 0 program(s)
+# (t=101.49) i=15, candidate=[{'ANSWER': 9691.22112}]
+  # found 0 program(s)
+# (t=108.45) i=16, candidate=[{'ANSWER': 9691.22112}]
+  # found 0 program(s)
+# (t=115.05) i=17, candidate=[{'ANSWER': 9691.22112}]
+  # found 0 program(s)
+# (t=121.66) i=18, candidate=[{'ANSWER': 8309.4901072}]
+  # found 0 program(s)
+# (t=128.69) i=19, candidate=[{'ANSWER': 8293.415303}]
+  # found 0 program(s)
+# (t=135.29) i=20, candidate=[{'ANSWER': 8263.7738742}]
+  # found 0 program(s)
+# (t=142.23) i=21, candidate=[{'ANSWER': 8252.850343}]
+  # found 0 program(s)
+# (t=148.84) i=22, candidate=[{'ANSWER': 8241.858734099998}]
+  # found 0 program(s)
+# ====> fallback strategy (retrieval) is triggered because no explanation is found so far
+# ====> retrieval_values: [1027.906574, 1041.637704, 1055.136489, 1126.945129, 1135.44795, 11700.22112, 1273.640743, 1338.986444, 1490.380056, 1731.125235, 1775.141291, 1844.485782, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2069.343631, 2100.743786, 2375.162934, 2526.596184, 2651.260121, 2651.442018, 2663.456988, 2669.946123, 2748.917437, 2791.968684, 2812.334223, 2929.303282, 2976.137049, 3041.677796, 306.1686498, 3095.08716, 3129.755456, 322.243454, 3413.259971, 3413.588661, 3426.840162, 351.8848828, 3609.875507, 362.808414, 3696.146772, 373.8000229, 3748.934494, 380.0984013, 406.8857207, 4108.574488, 420.9653204, 422.9243667, 448.0969889, 450.4151061, 459.5766355, 469.2131942, 4743.264112, 4751.065263, 480.2069446, 4980.980645, 5109.348611, 5220.856542, 5337.065324, 558.4416044, 5793.400957, 604.2280606, 642.556503, 6946.880998, 703.1207994, 7197.031306, 731.7417369, 774.467161, 820.2983339, 820.8630768, 8391.668592, 8615.658757, 8628.952841, 864.7303144, 9146.41636, 949.1780621, 'Brazil', 'China', 'GDP', 'India', 'Russia', 'blue', 'color', 'country', 'orange', 'red', 'teal', 'year']
+# (t=155.81) fallback i=0, candidate=[{'ANSWER': 1027.906574}]
+  # found 0 program(s)
+# (t=162.43) fallback i=1, candidate=[{'ANSWER': 1041.637704}]
+  # found 0 program(s)
+# (t=169.05) fallback i=2, candidate=[{'ANSWER': 1055.136489}]
+  # found 0 program(s)
+# (t=176.10) fallback i=3, candidate=[{'ANSWER': 1126.945129}]
+  # found 0 program(s)
+# (t=182.73) fallback i=4, candidate=[{'ANSWER': 1135.44795}]
+  # found 0 program(s)
+# (t=189.67) fallback i=5, candidate=[{'ANSWER': 11700.22112}]
+  # found 0 program(s)
+# (t=196.30) fallback i=6, candidate=[{'ANSWER': 1273.640743}]
+  # found 0 program(s)
+# (t=203.31) fallback i=7, candidate=[{'ANSWER': 1338.986444}]
+  # found 0 program(s)
+# (t=209.94) fallback i=8, candidate=[{'ANSWER': 1490.380056}]
+  # found 0 program(s)
+# (t=216.55) fallback i=9, candidate=[{'ANSWER': 1731.125235}]
+  # found 0 program(s)
+# (t=223.56) fallback i=10, candidate=[{'ANSWER': 1775.141291}]
+  # found 0 program(s)
+# (t=230.18) fallback i=11, candidate=[{'ANSWER': 1844.485782}]
+  # found 0 program(s)
+# (t=237.08) fallback i=12, candidate=[{'ANSWER': 1992}]
+  # found 0 program(s)
+# (t=243.69) fallback i=13, candidate=[{'ANSWER': 1993}]
+  # found 0 program(s)
+# (t=250.69) fallback i=14, candidate=[{'ANSWER': 1994}]
+  # found 0 program(s)
+# (t=257.33) fallback i=15, candidate=[{'ANSWER': 1995}]
+  # found 0 program(s)
+# (t=263.97) fallback i=16, candidate=[{'ANSWER': 1996}]
+  # found 0 program(s)
+# (t=271.02) fallback i=17, candidate=[{'ANSWER': 1997}]
+  # found 0 program(s)
+# (t=277.63) fallback i=18, candidate=[{'ANSWER': 1998}]
+  # found 0 program(s)
+# (t=284.59) fallback i=19, candidate=[{'ANSWER': 1999}]
+  # found 0 program(s)
+# (t=291.20) fallback i=20, candidate=[{'ANSWER': 2000}]
+  # found 0 program(s)
+# (t=298.16) fallback i=21, candidate=[{'ANSWER': 2001}]
+  # found 0 program(s)
+---------- timeout ----------
+# ====> fallback strategy (original) is triggered
+# ====> use the original TaPas output as answer, which is: ['Brazil', 'Russia']
+
+# ========== review report ========== #

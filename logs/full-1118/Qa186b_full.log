@@ -1,0 +1,263 @@
+# parsed arguments: Namespace(benchmark='Qa186b', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'monaco', '7.5', 'australia', '9.7', '75.2', '6.4', 'country', '25.2', 'kong', 'indonesia', 'hong', '18.0', 'germany', 'persons', '7.4', '25.4', 'kilometers', '0.5', '11.8', 'korea', '17.1', 'color', 'urban', 'blue', '1.8', '6.8', 'singapore', 'maldives', 'egypt', 'france', 'bangladesh', 'square', '20.8', '3.9', '0.4', '2.5', 'orange', '0.2', 'urban/total', '1.0', 'brazil', 'per', '16.6', 'south', 'rwanda', 'macau', 'india', '26.0', '5.1', 'total', 'japan', '0.1', '21.5'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+        Country Urban/total  Persons per square kilometers   color
+0         Egypt       Urban                            5.1  orange
+1         Egypt       Total                            0.1    blue
+2        Rwanda       Urban                           18.0  orange
+3        Rwanda       Total                            0.5    blue
+4        Brazil       Urban                            9.7    blue
+5     Singapore       Urban                            7.5  orange
+6     Singapore       Total                            7.4    blue
+7         Macau       Urban                           26.0  orange
+8         Macau       Total                           20.8    blue
+9     Australia       Urban                            1.8    blue
+10        India       Urban                           25.2  orange
+11        India       Total                            0.4    blue
+12       France       Urban                            2.5  orange
+13       France       Total                            0.1    blue
+14        Japan       Urban                            3.9  orange
+15        Japan       Total                            0.5    blue
+16   Bangladesh       Urban                           75.2  orange
+17   Bangladesh       Total                            1.0    blue
+18      Germany       Urban                            6.8  orange
+19      Germany       Total                            0.2    blue
+20     Maldives       Urban                           21.5  orange
+21     Maldives       Total                            1.0    blue
+22    Indonesia       Urban                           16.6  orange
+23    Indonesia       Total                            0.1    blue
+24       Monaco       Urban                           17.1  orange
+25       Monaco       Total                           17.1    blue
+26    Hong Kong       Urban                           25.4  orange
+27    Hong Kong       Total                            6.4    blue
+28  South Korea       Urban                           11.8  orange
+29  South Korea       Total                            0.5    blue
+# query is: Which country or principality has the highest total population density?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0  Macau
+# inferred DSL terminals:
+  # ConstVal: ['Urban/total@Str', 'Total@Str', 'Country@Str', '<NULL>']
+     # cmap: [('total', 'Total'), ('country', 'Country'), ('total', 'Urban/total')]
+  # AggrFunc: ['max', 'count', 'sum', '<NULL>']
+     # amap: [('total', 'count'), ('highest', 'max'), ('total', 'sum')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('highest', 'eqmax')]
+# ====> fallback strategy (selection) is triggered
+  # [debug] fallback (selection) answers: ['Urban/total', 'Total', 'Country']
+  # [debug] fallback (selection) answers (no dup.): ['Urban/total', 'Total', 'Country']
+  # [debug] 3 fallback (selection) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Maldives'}]
+  # found 0 program(s)
+# (t=4.69) i=1, candidate=[{'ANSWER': 'Egypt'}]
+  # found 0 program(s)
+# (t=9.38) i=2, candidate=[{'ANSWER': 'Singapore'}]
+  # found 0 program(s)
+# (t=14.04) i=3, candidate=[{'ANSWER': 'Bangladesh'}]
+  # found 29 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'max', 'Persons per square kilometers'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'max', 'Persons per square kilometers'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], sum, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'sum', 'Persons per square kilometers'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], sum, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'sum', 'Persons per square kilometers'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Urban/total'], 'max', 'Persons per square kilometers'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Urban/total'], 'max', 'Persons per square kilometers'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Urban/total'], 'sum', 'Persons per square kilometers'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Urban/total'], 'sum', 'Persons per square kilometers'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'max', 'Persons per square kilometers'], 'eqmax', 'Persons per square kilometers'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'max', 'Persons per square kilometers'], 'eqmax', 'Persons per square kilometers'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'max', 'Persons per square kilometers'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'max', 'Persons per square kilometers'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'count', 'Country'], 'eqmax', 'Persons per square kilometers'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'count', 'Country'], 'eqmax', 'Persons per square kilometers'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'count', 'Urban/total'], 'eqmax', 'Persons per square kilometers'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'count', 'Urban/total'], 'eqmax', 'Persons per square kilometers'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'count', 'Persons per square kilometers'], 'eqmax', 'Persons per square kilometers'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'count', 'Persons per square kilometers'], 'eqmax', 'Persons per square kilometers'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'count', 'color'], 'eqmax', 'Persons per square kilometers'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'count', 'color'], 'eqmax', 'Persons per square kilometers'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'sum', 'Persons per square kilometers'], 'eqmax', 'Persons per square kilometers'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'sum', 'Persons per square kilometers'], 'eqmax', 'Persons per square kilometers'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'sum', 'Persons per square kilometers'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'sum', 'Persons per square kilometers'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'max', 'Persons per square kilometers'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'max', 'Persons per square kilometers'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], sum, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'sum', 'Persons per square kilometers'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], sum, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'sum', 'Persons per square kilometers'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(@param0, eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'Persons per square kilometers'], ['Country']]
+# (t=18.80) i=4, candidate=[{'ANSWER': 'Japan'}]
+  # found 0 program(s)
+# (t=23.73) i=5, candidate=[{'ANSWER': 'South Korea'}]
+  # found 0 program(s)
+# (t=28.42) i=6, candidate=[{'ANSWER': 'France'}]
+  # found 0 program(s)
+# (t=33.09) i=7, candidate=[{'ANSWER': 'Indonesia'}]
+  # found 0 program(s)
+# (t=37.79) i=8, candidate=[{'ANSWER': 'Macau'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Total@Str), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Total'], 'eqmax', 'Persons per square kilometers'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Total@Str), ==, 1, Total@Str), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Total'], '==', 'Urban/total', 'Total'], 'eqmax', 'Persons per square kilometers'], ['Country']]
+# (t=42.50) i=9, candidate=[{'ANSWER': 'Hong Kong'}]
+  # found 0 program(s)
+# (t=47.19) i=10, candidate=[{'ANSWER': 'Monaco'}]
+  # found 8 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'count', 'Country'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'count', 'Country'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'count', 'Urban/total'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'count', 'Urban/total'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'count', 'Persons per square kilometers'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'count', 'Persons per square kilometers'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'count', 'color'], 'eqmax', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'Persons per square kilometers'], 'count', 'color'], 'eqmax', 'COL0'], ['Country']]
+# (t=51.89) i=11, candidate=[{'ANSWER': 'Rwanda'}]
+  # found 0 program(s)
+# (t=56.86) i=12, candidate=[{'ANSWER': 'India'}]
+  # found 0 program(s)
+# (t=61.59) i=13, candidate=[{'ANSWER': 'Germany'}]
+  # found 0 program(s)
+# (t=66.39) i=14, candidate=[{'ANSWER': 'Brazil'}]
+  # found 0 program(s)
+# (t=71.15) i=15, candidate=[{'ANSWER': 'Australia'}]
+  # found 0 program(s)
+# (t=75.90) i=16, candidate=[{'ANSWER': 'Urban/total'}]
+  # found 0 program(s)
+# (t=78.59) i=17, candidate=[{'ANSWER': 'Total'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Total@Str), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Total'], 'eqmax', 'Persons per square kilometers'], ['Urban/total']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Total@Str), ==, 1, Total@Str), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Total'], '==', 'Urban/total', 'Total'], 'eqmax', 'Persons per square kilometers'], ['Urban/total']]
+# (t=83.38) i=18, candidate=[{'ANSWER': 'Country'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.40, answer: Macau
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Total@Str), eqmax, 2), ['0'])
+# top-2, score: 2.37, answer: Macau
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Total@Str), ==, 1, Total@Str), eqmax, 2), ['0'])
+# top-3, score: 2.30, answer: Total
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Total@Str), eqmax, 2), ['1'])
+# top-4, score: 2.27, answer: Total
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Total@Str), ==, 1, Total@Str), eqmax, 2), ['1'])
+# top-5, score: 1.40, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], sum, 2), eqmax, 1), ['0'])
+# top-6, score: 1.40, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], sum, 2), eqmax, 1), ['-1'])
+# top-7, score: 1.39, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['0'])
+# top-8, score: 1.39, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-9, score: 1.39, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 2), eqmax, 2), ['0'])
+# top-10, score: 1.39, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 2), eqmax, 2), ['-1', '-2'])
+# top-11, score: 1.39, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 1), ['0'])
+# top-12, score: 1.39, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 1), ['-1', '-2'])
+# top-13, score: 1.39, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 1), ['0'])
+# top-14, score: 1.39, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 1), ['-1', '-2'])
+# top-15, score: 1.39, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 1), ['0'])
+# top-16, score: 1.39, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 1), ['-1', '-2'])
+# top-17, score: 1.39, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmax, 1), ['0'])
+# top-18, score: 1.39, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmax, 1), ['-1', '-2'])
+# top-19, score: 1.39, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmax, 1), ['0'])
+# top-20, score: 1.39, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmax, 1), ['-1', '-2'])
+# top-21, score: 1.39, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmax, 2), ['0'])
+# top-22, score: 1.39, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmax, 2), ['-1', '-2'])
+# top-23, score: 1.39, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], sum, 2), eqmax, 2), ['0'])
+# top-24, score: 1.39, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], sum, 2), eqmax, 2), ['-1', '-2'])
+# top-25, score: 1.39, answer: Monaco
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 2), ['0'])
+# top-26, score: 1.39, answer: Monaco
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmax, 2), ['-1', '-2'])
+# top-27, score: 1.39, answer: Monaco
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 2), ['0'])
+# top-28, score: 1.39, answer: Monaco
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmax, 2), ['-1', '-2'])
+# top-29, score: 1.39, answer: Monaco
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 2), ['0'])
+# top-30, score: 1.39, answer: Monaco
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmax, 2), ['-1', '-2'])
+# top-31, score: 1.39, answer: Monaco
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmax, 2), ['0'])
+# top-32, score: 1.39, answer: Monaco
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmax, 2), ['-1', '-2'])
+# top-33, score: 1.37, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 2), ['0'])
+# top-34, score: 1.30, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['0'])
+# top-35, score: 1.30, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['-1'])
+# top-36, score: 1.29, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['0'])
+# top-37, score: 1.29, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+# top-38, score: 1.29, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['0'])
+# top-39, score: 1.29, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-40, score: 1.29, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['0'])
+# top-41, score: 1.29, answer: Bangladesh
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['-1', '-2'])

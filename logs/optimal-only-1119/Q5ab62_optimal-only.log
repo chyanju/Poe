@@ -1,0 +1,116 @@
+# parsed arguments: Namespace(benchmark='Q5ab62', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'19258', '28608', 'total', '140', 'democratic', 'unaffiliated', 'parties', 'minor', 'republican', '27180', 'color', 'blue', 'voters', 'party'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+           Party  Total voters color
+0     Republican         19258  blue
+1     Democratic         28608  blue
+2   Unaffiliated         27180  blue
+3  Minor parties           140  blue
+# query is: How many more Democratic voters are there than Republican voters?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0    9350
+# inferred DSL terminals:
+  # ConstVal: ['Democratic@Str', 'Total voters@Str', 'Republican@Str', '<NULL>']
+     # cmap: [('democratic', 'Democratic'), ('voters', 'Total voters'), ('republican', 'Republican')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['==', '>', '>=', '<NULL>']
+     # bmap: [(None, '=='), ('more', '>='), ('more', '>')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(9350, 4), (-9350, 4)]
+  # [debug] high_values (no dup.): [(9350, 4), (-9350, 4)]
+  # [debug] filtered low_values (no dup.): [(28468, 2), (19118, 2), (7922, 2), (1428, 2), (-1428, 2), (-7922, 2), (-19118, 2), (-28468, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 28608}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Democratic@Str), ==, 0, Democratic@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Party', 'Democratic'], '==', 'Party', 'Democratic'], ['Total voters']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Democratic@Str), ==, 0, Democratic@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Party', 'Democratic'], '==', 'Party', 'Democratic'], ['Total voters']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Democratic@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Party', 'Democratic'], ['Total voters']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Democratic@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Party', 'Democratic'], ['Total voters']]
+# (t=2.80) i=1, candidate=[{'ANSWER': 57216}]
+  # found 0 program(s)
+# (t=5.58) i=2, candidate=[{'ANSWER': 85824}]
+  # found 0 program(s)
+# (t=8.42) i=3, candidate=[{'ANSWER': 105082}]
+  # found 0 program(s)
+# (t=11.22) i=4, candidate=[{'ANSWER': 76474}]
+  # found 0 program(s)
+# (t=14.29) i=5, candidate=[{'ANSWER': 47866}]
+  # found 0 program(s)
+# (t=17.06) i=6, candidate=[{'ANSWER': 95732}]
+  # found 0 program(s)
+# (t=19.85) i=7, candidate=[{'ANSWER': 67124}]
+  # found 0 program(s)
+# (t=22.65) i=8, candidate=[{'ANSWER': 19258}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Republican@Str), ==, 0, Republican@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Party', 'Republican'], '==', 'Party', 'Republican'], ['Total voters']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Republican@Str), ==, 0, Republican@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Party', 'Republican'], '==', 'Party', 'Republican'], ['Total voters']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Republican@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Party', 'Republican'], ['Total voters']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Republican@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Party', 'Republican'], ['Total voters']]
+# (t=25.45) i=9, candidate=[{'ANSWER': 38516}]
+  # found 0 program(s)
+# (t=28.26) i=10, candidate=[{'ANSWER': 9350}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Democratic@Str, Republican@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Party', 'Democratic', 'Republican', 'Total voters']
+# (t=31.41) i=11, candidate=[{'ANSWER': -9350}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Republican@Str, Democratic@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Party', 'Republican', 'Democratic', 'Total voters']
+# (t=34.19) i=12, candidate=[{'ANSWER': 28468}]
+  # found 0 program(s)
+# (t=36.95) i=13, candidate=[{'ANSWER': 19118}]
+  # found 0 program(s)
+# (t=39.69) i=14, candidate=[{'ANSWER': 7922}]
+  # found 0 program(s)
+# (t=42.45) i=15, candidate=[{'ANSWER': 1428}]
+  # found 0 program(s)
+# (t=45.24) i=16, candidate=[{'ANSWER': -1428}]
+  # found 0 program(s)
+# (t=48.34) i=17, candidate=[{'ANSWER': -7922}]
+  # found 0 program(s)
+# (t=51.13) i=18, candidate=[{'ANSWER': -19118}]
+  # found 0 program(s)
+# (t=53.95) i=19, candidate=[{'ANSWER': -28468}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.54, answer: [9350]
+  # tprog: Contrast(@param0, -, 0, Democratic@Str, Republican@Str, 1)
+# top-2, score: 2.54, answer: [-9350]
+  # tprog: Contrast(@param0, -, 0, Republican@Str, Democratic@Str, 1)
+# top-3, score: 2.34, answer: [28608]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Democratic@Str), ['1'])
+# top-4, score: 2.34, answer: [28608]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Democratic@Str), ['-99', '-2'])
+# top-5, score: 2.34, answer: [19258]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Republican@Str), ['1'])
+# top-6, score: 2.34, answer: [19258]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Republican@Str), ['-99', '-2'])
+# top-7, score: 2.29, answer: [28608]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Democratic@Str), ==, 0, Democratic@Str), ['1'])
+# top-8, score: 2.29, answer: [28608]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Democratic@Str), ==, 0, Democratic@Str), ['-99', '-2'])
+# top-9, score: 2.29, answer: [19258]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Republican@Str), ==, 0, Republican@Str), ['1'])
+# top-10, score: 2.29, answer: [19258]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Republican@Str), ==, 0, Republican@Str), ['-99', '-2'])

@@ -1,0 +1,67 @@
+# parsed arguments: Namespace(benchmark='Qdb531', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'0', 'color', 'gbr', 'aut', 'prt', '52', 'aus', 'che', 'rating', 'jpn', 'bel', 'swe', '42', '59', '60', 'esp', '54', '64', '62', '56', 'kor', 'irl', '49', 'nld', 'blue', '61', 'deu', 'usa', 'dnk', 'nor', '53', '76', '48', '75', 'country', 'ita', 'can', 'fin', '66', '70', 'fra', '57'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+   country  rating color
+0      USA      53  blue
+1      JPN      42  blue
+2      FRA      56  blue
+3      DEU      61  blue
+4      GBR      75  blue
+5      CAN      54  blue
+6      AUS      66  blue
+7      ESP      57  blue
+8      NLD      76  blue
+9      NOR      64  blue
+10     BEL      59  blue
+11     SWE      66  blue
+12     DNK      62  blue
+13     KOR      52  blue
+14     CHE      59  blue
+15     ITA      49  blue
+16     IRL      70  blue
+17     FIN      60  blue
+18     AUT      48  blue
+19     PRT       0  blue
+# query is: How much more does USA have than ITA?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0       4
+# inferred DSL terminals:
+  # ConstVal: ['ITA@Str', 'USA@Str', '<NULL>']
+     # cmap: [('usa', 'USA'), ('ita', 'ITA')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>', '>=', '==', '<NULL>']
+     # bmap: [('more', '>'), (None, '=='), ('more', '>=')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(4, 4), (-4, 4)]
+  # [debug] high_values (no dup.): [(53, 2), (49, 2), (27, 2), (26, 2), (23, 2), (22, 2), (21, 2), (17, 2), (17, 2), (17, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=0.63) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=1.25) i=2, candidate=[{'ANSWER': 4}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, USA@Str, ITA@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'country', 'USA', 'ITA', 'rating']
+# (t=1.87) i=3, candidate=[{'ANSWER': -4}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, ITA@Str, USA@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'country', 'ITA', 'USA', 'rating']
+
+# ========== review report ========== #
+# top-1, score: 2.52, answer: 4
+  # tprog: Contrast(@param0, -, 0, USA@Str, ITA@Str, 1)
+# top-2, score: 2.52, answer: -4
+  # tprog: Contrast(@param0, -, 0, ITA@Str, USA@Str, 1)

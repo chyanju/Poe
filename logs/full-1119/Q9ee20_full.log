@@ -1,0 +1,143 @@
+# parsed arguments: Namespace(benchmark='Q9ee20', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'scotland', 'wales', '62.1', 'gàidheal', '11.5', '7.2', '1', '6.3', 'blue', '54.3', 'service', '23.8', '5', 'music', '32.7', '17.6', 'live', '4', 'total', '18.8', 'color', '5.6', 'and', '2012/13', '6', '1xtra', '3', '13.0', 'sports', '76.0', 'foyle', 'asian', 'cost(£million)', 'bbc', 'network', 'local', 'ulster', 'extra', 'cymru', '54.2', 'radio', '122.1', 'nan', '11.8', '2', '152.5'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                                 Service  2012/13 Total Cost(£million) color
+0                            BBC Radio 1                          54.2  blue
+1                        BBC Radio 1Xtra                          11.8  blue
+2                            BBC Radio 2                          62.1  blue
+3                            BBC Radio 3                          54.3  blue
+4                            BBC Radio 4                         122.1  blue
+5                      BBC Radio 4 Extra                           7.2  blue
+6                       BBC Radio 5 Live                          76.0  blue
+7          BBC Radio 5 Live Sports Extra                           5.6  blue
+8                      BBC Radio 6 Music                          11.5  blue
+9                      BBC Asian Network                          13.0  blue
+10                       BBC Local Radio                         152.5  blue
+11                    BBC Radio Scotland                          32.7  blue
+12                BBC Radio nan Gàidheal                           6.3  blue
+13                       BBC Radio Wales                          18.8  blue
+14                       BBC Radio Cymru                          17.6  blue
+15  BBC Radio Ulster and BBC Radio Foyle                          23.8  blue
+# query is: Which service had the lowest total cost?
+# expected output type:[dtype('O')]
+# expected output is:
+                          ANSWER
+0  BBC Radio 5 Live Sports Extra
+# inferred DSL terminals:
+  # ConstVal: ['2012/13 Total Cost(£million)@Str', 'Service@Str', '<NULL>']
+     # cmap: [('total', '2012/13 Total Cost(£million)'), ('cost', '2012/13 Total Cost(£million)'), ('service', 'Service')]
+  # AggrFunc: ['count', 'min', 'sum', '<NULL>']
+     # amap: [('lowest', 'min'), ('total', 'count'), ('total', 'sum')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('lowest', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'BBC Radio 5 Live Sports Extra'}]
+  # found 24 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service'], 'min', '2012/13 Total Cost(£million)'], 'eqmin', 'COL0'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service'], 'min', '2012/13 Total Cost(£million)'], 'eqmin', 'COL0'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], sum, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service'], 'sum', '2012/13 Total Cost(£million)'], 'eqmin', 'COL0'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], sum, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service'], 'sum', '2012/13 Total Cost(£million)'], 'eqmin', 'COL0'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'count', 'Service'], 'eqmin', '2012/13 Total Cost(£million)'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'count', 'Service'], 'eqmin', '2012/13 Total Cost(£million)'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'count', '2012/13 Total Cost(£million)'], 'eqmin', '2012/13 Total Cost(£million)'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'count', '2012/13 Total Cost(£million)'], 'eqmin', '2012/13 Total Cost(£million)'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'count', 'color'], 'eqmin', '2012/13 Total Cost(£million)'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'count', 'color'], 'eqmin', '2012/13 Total Cost(£million)'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'min', '2012/13 Total Cost(£million)'], 'eqmin', '2012/13 Total Cost(£million)'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'min', '2012/13 Total Cost(£million)'], 'eqmin', '2012/13 Total Cost(£million)'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'min', '2012/13 Total Cost(£million)'], 'eqmin', 'COL0'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'min', '2012/13 Total Cost(£million)'], 'eqmin', 'COL0'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'sum', '2012/13 Total Cost(£million)'], 'eqmin', '2012/13 Total Cost(£million)'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'sum', '2012/13 Total Cost(£million)'], 'eqmin', '2012/13 Total Cost(£million)'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'sum', '2012/13 Total Cost(£million)'], 'eqmin', 'COL0'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'sum', '2012/13 Total Cost(£million)'], 'eqmin', 'COL0'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', 'color'], 'min', '2012/13 Total Cost(£million)'], 'eqmin', 'COL0'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', 'color'], 'min', '2012/13 Total Cost(£million)'], 'eqmin', 'COL0'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', 'color'], 'sum', '2012/13 Total Cost(£million)'], 'eqmin', 'COL0'], ['Service']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', 'color'], 'sum', '2012/13 Total Cost(£million)'], 'eqmin', 'COL0'], ['Service']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', '2012/13 Total Cost(£million)'], ['Service']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', '2012/13 Total Cost(£million)'], ['Service']]
+# (t=1.79) i=1, candidate=[{'ANSWER': 'BBC Radio 3'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.74, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+# top-2, score: 1.74, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+# top-3, score: 1.67, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+# top-4, score: 1.67, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+# top-5, score: 1.67, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], sum, 1), eqmin, 1), ['0'])
+# top-6, score: 1.67, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], sum, 1), eqmin, 1), ['-1'])
+# top-7, score: 1.66, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['0'])
+# top-8, score: 1.66, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['-1', '-2'])
+# top-9, score: 1.66, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['0'])
+# top-10, score: 1.66, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['-1', '-2'])
+# top-11, score: 1.66, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['0'])
+# top-12, score: 1.66, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['-1', '-2'])
+# top-13, score: 1.66, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+# top-14, score: 1.66, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+# top-15, score: 1.66, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+# top-16, score: 1.66, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-17, score: 1.66, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 1), eqmin, 1), ['0'])
+# top-18, score: 1.66, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 1), eqmin, 1), ['-1', '-2'])
+# top-19, score: 1.66, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 1), eqmin, 2), ['0'])
+# top-20, score: 1.66, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 1), eqmin, 2), ['-1', '-2'])
+# top-21, score: 1.66, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+# top-22, score: 1.66, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-23, score: 1.66, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 1), eqmin, 2), ['0'])
+# top-24, score: 1.66, answer: ['BBC Radio 5 Live Sports Extra']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 1), eqmin, 2), ['-1', '-2'])

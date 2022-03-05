@@ -1,0 +1,52 @@
+# parsed arguments: Namespace(benchmark='Qc2bca', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'167.05', '94.52', '2007', '2015', 'blue', '74.1', '2002', '189.4', '30.64', 'color', '34.77', '113.29', '45.42', '2005', '2008', '2010', '32.17', '2011', 'revenue', '156.34', '2009', '32.83', '80.7', '64.2', '2001', 'year', '2013', '2004', '2014', '2006', '82.84', '37.89', '2003', '2012'}
+# input type: [dtype('int64'), dtype('float64'), dtype('O')]
+# input is:
+    year  revenue color
+0   2015   189.40  blue
+1   2014   167.05  blue
+2   2013   156.34  blue
+3   2012   113.29  blue
+4   2011    94.52  blue
+5   2010    82.84  blue
+6   2009    80.70  blue
+7   2008    74.10  blue
+8   2007    64.20  blue
+9   2006    45.42  blue
+10  2005    37.89  blue
+11  2004    34.77  blue
+12  2003    32.83  blue
+13  2002    32.17  blue
+14  2001    30.64  blue
+# query is: What was the Infocomm industry revenue for the year of 2007?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0    64.2
+# inferred DSL terminals:
+  # ConstVal: ['revenue@Str', '2007@Int', 'year@Str', '<NULL>']
+     # cmap: [('revenue', 'revenue'), ('year', 'year'), (2007, 2007)]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 64.2}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, 2007@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'year', 2007], ['revenue']]
+    # SelectCol(SelectRow1(@param0, ==, 0, 2007@Int), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'year', 2007], ['revenue']]
+
+# ========== review report ========== #
+# top-1, score: 1.42, answer: 64.2
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, 2007@Int), ['1'])
+# top-2, score: 1.42, answer: 64.2
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, 2007@Int), ['-99', '-2'])

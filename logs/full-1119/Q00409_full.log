@@ -1,0 +1,97 @@
+# parsed arguments: Namespace(benchmark='Q00409', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'20', 'sum', '75', '10563233', '10069564', '65', '80', '11320252', '5668961', '15', '5123399', '10552146', '9731315', '45', 'pink', '30', '11488578', 'age', '4355644', '9659493', '11635647', '55', '9925006', '3221898', '6921268', '10261253', '50', '60', 'female', '8911133', 'gender', '11475182', '3792145', '970357', '9518507', '10', '9735380', '70', 'male', '4453623', '1064581', 'color', '6459082', '1902638', '8507934', '10205879', '2912655', '90', '9324244', '10022524', '5', '1981156', '9310714', 'people', '40', 'gray', '4804784', '10237419', '85', '336303', '10119296', '9692669', '35', '25', '5184855', '0'}
+# input type: [dtype('int64'), dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+    age  Sum of people  gender color
+0     0        9735380    Male  gray
+1     0        9310714  Female  pink
+2     5       10552146    Male  gray
+3     5       10069564  Female  pink
+4    10       10563233    Male  gray
+5    10       10022524  Female  pink
+6    15       10237419    Male  gray
+7    15        9692669  Female  pink
+8    20        9731315    Male  gray
+9    20        9324244  Female  pink
+10   25        9659493    Male  gray
+11   25        9518507  Female  pink
+12   30       10205879    Male  gray
+13   30       10119296  Female  pink
+14   35       11475182    Male  gray
+15   35       11635647  Female  pink
+16   40       11320252    Male  gray
+17   40       11488578  Female  pink
+18   45        9925006    Male  gray
+19   45       10261253  Female  pink
+20   50        8507934    Male  gray
+21   50        8911133  Female  pink
+22   55        6459082    Male  gray
+23   55        6921268  Female  pink
+24   60        5123399    Male  gray
+25   60        5668961  Female  pink
+26   65        4453623    Male  gray
+27   65        4804784  Female  pink
+28   70        3792145    Male  gray
+29   70        5184855  Female  pink
+30   75        2912655    Male  gray
+31   75        4355644  Female  pink
+32   80        1902638    Male  gray
+33   80        3221898  Female  pink
+34   85         970357    Male  gray
+35   85        1981156  Female  pink
+36   90         336303    Male  gray
+37   90        1064581  Female  pink
+# query is: what is  the overall population at the age 60?
+# expected output type:[dtype('int64')]
+# expected output is:
+     ANSWER
+0  10792360
+# inferred DSL terminals:
+  # ConstVal: ['60@Int', 'age@Str', '<NULL>']
+     # cmap: [('age', 'age'), (60, 60)]
+  # AggrFunc: ['sum', '<NULL>']
+     # amap: [('overall', 'sum')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 5123399}]
+  # found 0 program(s)
+# (t=1.38) i=1, candidate=[{'ANSWER': 5668961}]
+  # found 0 program(s)
+# (t=2.75) i=2, candidate=[{'ANSWER': 10246798}]
+  # found 0 program(s)
+# (t=3.85) i=3, candidate=[{'ANSWER': 10792360}]
+  # found 1 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, 60@Int), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'age', 60], 'sum', 'Sum of people']
+# (t=4.96) i=4, candidate=[{'ANSWER': 11337922}]
+  # found 0 program(s)
+# (t=6.07) i=5, candidate=[{'ANSWER': 14858779}]
+  # found 0 program(s)
+# (t=7.18) i=6, candidate=[{'ANSWER': 14434113}]
+  # found 0 program(s)
+# (t=8.30) i=7, candidate=[{'ANSWER': 15404341}]
+  # found 0 program(s)
+# (t=9.41) i=8, candidate=[{'ANSWER': 14979675}]
+  # found 0 program(s)
+# (t=10.52) i=9, candidate=[{'ANSWER': 9735380}]
+  # found 0 program(s)
+# (t=11.90) i=10, candidate=[{'ANSWER': 19470760}]
+  # found 0 program(s)
+# (t=13.01) i=11, candidate=[{'ANSWER': 19046094}]
+  # found 0 program(s)
+# (t=14.11) i=12, candidate=[{'ANSWER': 9310714}]
+  # found 0 program(s)
+# (t=15.48) i=13, candidate=[{'ANSWER': 18621428}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.43, answer: [10792360]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, 60@Int), sum, 1)

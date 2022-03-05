@@ -1,0 +1,147 @@
+# parsed arguments: Namespace(benchmark='Qfe843', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'33', '34', 'greece', '84', '75', '50', '29', '13', '35', 'china', '49', 'poland', '52', '43', 'spain', 'blue', 'tunisia', '23', '32', '47', '10', 'germany', 'brazil', 'india', '15', 'opinion', 'turkey', '51', '26', '25', '16', 'lebanon', 'rep.', '20', '5', '40', '9', '83', '28', 'jordan', 'britain', 'color', 'orange', '44', '37', 'same', '60', 'remain', '27', '45', 'percentage', 'u.s.', 'egypt', 'russia', 'improve', 'worsen', '12', '31', '81', 'country', 'mexico', '2', '24', 'italy', 'pakistan', 'france', 'czech', '18', '22', 'red', 'japan'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       Country          opinion  percentage   color
+0       Brazil          Improve          84    blue
+1       Brazil  Remain the same          12  orange
+2       Brazil           Worsen           5     red
+3        China          Improve          83    blue
+4        China  Remain the same           9  orange
+..         ...              ...         ...     ...
+58  Czech Rep.  Remain the same          27  orange
+59  Czech Rep.           Worsen          60     red
+60      Greece          Improve           9    blue
+61      Greece  Remain the same          10  orange
+62      Greece           Worsen          81     red
+
+[63 rows x 4 columns]
+# query is: What is the average percentage of responses for "remaining the same" for japan, China, and the U.S.?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      28
+# inferred DSL terminals:
+  # ConstVal: ['2@Int', 'Country@Str', '5@Int', 'Spain@Str', 'Improve@Str', '9@Int', '10@Int', '12@Int', 'India@Str', '13@Int', '15@Int', '16@Int', '18@Int', 'Greece@Str', '20@Int', '22@Int', '23@Int', '24@Int', '25@Int', '26@Int', '27@Int', '28@Int', 'Russia@Str', '29@Int', '31@Int', '32@Int', 'France@Str', '34@Int', '35@Int', 'orange@Str', 'Turkey@Str', '37@Int', '33@Int', '40@Int', 'color@Str', '43@Int', '44@Int', 'Worsen@Str', '45@Int', 'U.S.@Str', '47@Int', '49@Int', '50@Int', '51@Int', '52@Int', 'Egypt@Str', 'Britain@Str', 'Jordan@Str', 'percentage@Str', '60@Int', 'Tunisia@Str', 'Italy@Str', '75@Int', 'Japan@Str', '81@Int', '83@Int', '84@Int', 'China@Str', 'Lebanon@Str', 'blue@Str', 'Remain the same@Str', 'Czech Rep.@Str', 'Poland@Str', 'Brazil@Str', 'Mexico@Str', 'Germany@Str', 'Pakistan@Str', 'red@Str', 'opinion@Str']
+     # cmap: [(None, 2), (None, 'Country'), (None, 5), (None, 'Spain'), (None, 'Improve'), (None, 9), (None, 10), (None, 12), (None, 'India'), (None, 13), (None, 15), (None, 16), (None, 18), (None, 'Greece'), (None, 20), (None, 22), (None, 23), (None, 24), (None, 25), (None, 26), (None, 27), (None, 28), (None, 'Russia'), (None, 29), (None, 31), (None, 32), (None, 'France'), (None, 34), (None, 35), (None, 'orange'), (None, 'Turkey'), (None, 37), (None, 33), (None, 40), (None, 'color'), (None, 43), (None, 44), (None, 'Worsen'), (None, 45), (None, 'U.S.'), (None, 47), (None, 49), (None, 50), (None, 51), (None, 52), (None, 'Egypt'), (None, 'Britain'), (None, 'Jordan'), (None, 'percentage'), (None, 60), (None, 'Tunisia'), (None, 'Italy'), (None, 75), (None, 'Japan'), (None, 81), (None, 83), (None, 84), (None, 'China'), (None, 'Lebanon'), (None, 'blue'), (None, 'Remain the same'), (None, 'Czech Rep.'), (None, 'Poland'), (None, 'Brazil'), (None, 'Mexico'), (None, 'Germany'), (None, 'Pakistan'), (None, 'red'), (None, 'opinion')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 9.0}]
+  # found 28 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Greece@Str), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Country', 'Greece'], 'eqmin', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Improve@Str), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'opinion', 'Improve'], 'eqmin', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Remain the same@Str), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'opinion', 'Remain the same'], 'eqmin', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 3, orange@Str), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'color', 'orange'], 'eqmin', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 3, blue@Str), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'color', 'blue'], 'eqmin', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 10@Int), ==, 0, Greece@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 10], '==', 'Country', 'Greece'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 10@Int), ==, 1, Improve@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 10], '==', 'opinion', 'Improve'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 10@Int), ==, 1, Remain the same@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 10], '==', 'opinion', 'Remain the same'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 10@Int), ==, 3, orange@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 10], '==', 'color', 'orange'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 10@Int), ==, 3, blue@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 10], '==', 'color', 'blue'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 12@Int), ==, 1, Improve@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 12], '==', 'opinion', 'Improve'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 12@Int), ==, 3, blue@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 12], '==', 'color', 'blue'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 13@Int), ==, 1, Improve@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 13], '==', 'opinion', 'Improve'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 13@Int), ==, 3, blue@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 13], '==', 'color', 'blue'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 9@Int), ==, 0, Greece@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 9], '==', 'Country', 'Greece'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 9@Int), ==, 1, Improve@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 9], '==', 'opinion', 'Improve'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 9@Int), ==, 1, Remain the same@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 9], '==', 'opinion', 'Remain the same'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 9@Int), ==, 3, orange@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 9], '==', 'color', 'orange'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 9@Int), ==, 3, blue@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 9], '==', 'color', 'blue'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 10@Int), ==, 1, Improve@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 10], '==', 'opinion', 'Improve'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 10@Int), ==, 3, blue@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 10], '==', 'color', 'blue'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 12@Int), ==, 1, Improve@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 12], '==', 'opinion', 'Improve'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 12@Int), ==, 3, blue@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 12], '==', 'color', 'blue'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Greece@Str), <, 2, 10@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Greece'], '<', 'percentage', 10], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Greece@Str), <=, 2, 9@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Greece'], '<=', 'percentage', 9], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Greece@Str), ==, 1, Improve@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Greece'], '==', 'opinion', 'Improve'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Greece@Str), ==, 2, 9@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Greece'], '==', 'percentage', 9], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Greece@Str), ==, 3, blue@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Greece'], '==', 'color', 'blue'], ['percentage']]
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Greece@Str), eqmin, 2), ['2'])
+# top-2, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Improve@Str), eqmin, 2), ['2'])
+# top-3, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Remain the same@Str), eqmin, 2), ['2'])
+# top-4, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 3, orange@Str), eqmin, 2), ['2'])
+# top-5, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 3, blue@Str), eqmin, 2), ['2'])
+# top-6, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 10@Int), ==, 0, Greece@Str), ['2'])
+# top-7, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 10@Int), ==, 1, Improve@Str), ['2'])
+# top-8, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 10@Int), ==, 1, Remain the same@Str), ['2'])
+# top-9, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 10@Int), ==, 3, orange@Str), ['2'])
+# top-10, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 10@Int), ==, 3, blue@Str), ['2'])
+# top-11, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 12@Int), ==, 1, Improve@Str), ['2'])
+# top-12, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 12@Int), ==, 3, blue@Str), ['2'])
+# top-13, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 13@Int), ==, 1, Improve@Str), ['2'])
+# top-14, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 13@Int), ==, 3, blue@Str), ['2'])
+# top-15, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 9@Int), ==, 0, Greece@Str), ['2'])
+# top-16, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 9@Int), ==, 1, Improve@Str), ['2'])
+# top-17, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 9@Int), ==, 1, Remain the same@Str), ['2'])
+# top-18, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 9@Int), ==, 3, orange@Str), ['2'])
+# top-19, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 9@Int), ==, 3, blue@Str), ['2'])
+# top-20, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 10@Int), ==, 1, Improve@Str), ['2'])
+# top-21, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 10@Int), ==, 3, blue@Str), ['2'])
+# top-22, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 12@Int), ==, 1, Improve@Str), ['2'])
+# top-23, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 12@Int), ==, 3, blue@Str), ['2'])
+# top-24, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Greece@Str), <, 2, 10@Int), ['2'])
+# top-25, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Greece@Str), <=, 2, 9@Int), ['2'])
+# top-26, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Greece@Str), ==, 1, Improve@Str), ['2'])
+# top-27, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Greece@Str), ==, 2, 9@Int), ['2'])
+# top-28, score: 0.00, answer: [9.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Greece@Str), ==, 3, blue@Str), ['2'])

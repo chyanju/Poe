@@ -1,0 +1,104 @@
+# parsed arguments: Namespace(benchmark='Q528aa', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'central', '66', 'division', 'y-atlanta', 'spurs', 'l', '45', 'pacers', 'x-houston', 'cleveland', 'x-san', 'rockets', 'hawks', '41', 'pistons', 'blue', '32', 'antonio', 'cavaliers', 'color', 'detroit', 'indiana'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+      Central Division   L color
+0      y-Atlanta Hawks  32  blue
+1    x-Houston Rockets  41  blue
+2  x-San Antonio Spurs  41  blue
+3  Cleveland Cavaliers  45  blue
+4       Indiana Pacers  45  blue
+5      Detroit Pistons  66  blue
+# query is: How much more is the amount for the Detroit Pistons vs the Cleveland Cavaliers?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      21
+# inferred DSL terminals:
+  # ConstVal: ['Cleveland Cavaliers@Str', 'Detroit Pistons@Str', '<NULL>']
+     # cmap: [('cleveland', 'Cleveland Cavaliers'), ('cavaliers', 'Cleveland Cavaliers'), ('pistons', 'Detroit Pistons'), ('detroit', 'Detroit Pistons')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['==', '>', '>=', '<NULL>']
+     # bmap: [('more', '>'), ('more', '>='), (None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(21, 9), (-21, 9)]
+  # [debug] high_values (no dup.): [(21, 9), (-21, 9)]
+  # [debug] filtered low_values (no dup.): [(34, 3), (25, 3), (25, 3), (21, 3), (13, 3), (4, 3), (4, 3), (0, 3), (-4, 3), (-4, 3)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 45}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Central Division', 'Cleveland Cavaliers'], ['L']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Central Division', 'Cleveland Cavaliers'], ['L']]
+# (t=0.77) i=1, candidate=[{'ANSWER': 32}]
+  # found 0 program(s)
+# (t=1.53) i=2, candidate=[{'ANSWER': 41}]
+  # found 0 program(s)
+# (t=2.29) i=3, candidate=[{'ANSWER': 21}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Detroit Pistons@Str, Cleveland Cavaliers@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Central Division', 'Detroit Pistons', 'Cleveland Cavaliers', 'L']
+# (t=2.91) i=4, candidate=[{'ANSWER': -21}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Cleveland Cavaliers@Str, Detroit Pistons@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Central Division', 'Cleveland Cavaliers', 'Detroit Pistons', 'L']
+# (t=3.53) i=5, candidate=[{'ANSWER': 34}]
+  # found 0 program(s)
+# (t=4.15) i=6, candidate=[{'ANSWER': 25}]
+  # found 0 program(s)
+# (t=4.76) i=7, candidate=[{'ANSWER': 25}]
+  # found 0 program(s)
+# (t=5.37) i=8, candidate=[{'ANSWER': 21}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Detroit Pistons@Str, Cleveland Cavaliers@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Central Division', 'Detroit Pistons', 'Cleveland Cavaliers', 'L']
+# (t=6.00) i=9, candidate=[{'ANSWER': 13}]
+  # found 0 program(s)
+# (t=6.62) i=10, candidate=[{'ANSWER': 4}]
+  # found 0 program(s)
+# (t=7.24) i=11, candidate=[{'ANSWER': 4}]
+  # found 0 program(s)
+# (t=7.84) i=12, candidate=[{'ANSWER': 0}]
+  # found 4 program(s)
+    # Contrast(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), -, 0, Cleveland Cavaliers@Str, Cleveland Cavaliers@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Central Division', 'Cleveland Cavaliers'], '-', 'Central Division', 'Cleveland Cavaliers', 'Cleveland Cavaliers', 'L']
+    # Contrast(SelectRow1(@param0, ==, 0, Detroit Pistons@Str), -, 0, Detroit Pistons@Str, Detroit Pistons@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Central Division', 'Detroit Pistons'], '-', 'Central Division', 'Detroit Pistons', 'Detroit Pistons', 'L']
+    # Contrast(@param0, -, 0, Cleveland Cavaliers@Str, Cleveland Cavaliers@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Central Division', 'Cleveland Cavaliers', 'Cleveland Cavaliers', 'L']
+    # Contrast(@param0, -, 0, Detroit Pistons@Str, Detroit Pistons@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Central Division', 'Detroit Pistons', 'Detroit Pistons', 'L']
+# (t=8.46) i=13, candidate=[{'ANSWER': -4}]
+  # found 0 program(s)
+# (t=9.07) i=14, candidate=[{'ANSWER': -4}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.50, answer: [21]
+  # tprog: Contrast(@param0, -, 0, Detroit Pistons@Str, Cleveland Cavaliers@Str, 1)
+# top-2, score: 2.50, answer: [-21]
+  # tprog: Contrast(@param0, -, 0, Cleveland Cavaliers@Str, Detroit Pistons@Str, 1)
+# top-3, score: 2.50, answer: [21]
+  # tprog: Contrast(@param0, -, 0, Detroit Pistons@Str, Cleveland Cavaliers@Str, 1)
+# top-4, score: 2.36, answer: [0]
+  # tprog: Contrast(@param0, -, 0, Cleveland Cavaliers@Str, Cleveland Cavaliers@Str, 1)
+# top-5, score: 2.36, answer: [0]
+  # tprog: Contrast(@param0, -, 0, Detroit Pistons@Str, Detroit Pistons@Str, 1)
+# top-6, score: 2.31, answer: [0]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), -, 0, Cleveland Cavaliers@Str, Cleveland Cavaliers@Str, 1)
+# top-7, score: 2.31, answer: [0]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, Detroit Pistons@Str), -, 0, Detroit Pistons@Str, Detroit Pistons@Str, 1)
+# top-8, score: 2.29, answer: [45]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), ['1'])
+# top-9, score: 2.29, answer: [45]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Cleveland Cavaliers@Str), ['-99', '-2'])

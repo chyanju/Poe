@@ -1,0 +1,103 @@
+# parsed arguments: Namespace(benchmark='Q2a90c', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'9.11', '23.2', 'under', '20.1', '65+', '19.07', '24.98', '2012', 'age', '24.05', '7.14', '27.05', 'blue', '35-49', '50-64', '2007', '35', 'orange', 'color', '26.02', 'year', '8.08', 'red', '2001', 'percent', '30.06'}
+# input type: [dtype('O'), dtype('int64'), dtype('float64'), dtype('O')]
+# input is:
+         Age  year  percent   color
+0   Under 35  2001    30.06    blue
+1   Under 35  2012    26.02     red
+2   Under 35  2007    24.05  orange
+3      50-64  2001    23.20    blue
+4      50-64  2007    20.10  orange
+5      50-64  2012    19.07     red
+6        65+  2001     9.11    blue
+7        65+  2007     8.08  orange
+8        65+  2012     7.14     red
+9      35-49  2001    27.05    blue
+10     35-49  2007    26.02  orange
+11     35-49  2012    24.98     red
+# query is: In which year investors of all age groups took bigger risks?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0    2001
+# inferred DSL terminals:
+  # ConstVal: ['Age@Str', 'year@Str', '<NULL>']
+     # cmap: [('year', 'year'), ('age', 'Age')]
+  # AggrFunc: ['sum', '<NULL>']
+     # amap: [('all', 'sum')]
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('bigger', '-')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: []
+  # [debug] high_values (no dup.): []
+  # [debug] filtered low_values (no dup.): []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 2012}]
+  # found 0 program(s)
+# (t=2.27) i=1, candidate=[{'ANSWER': 2007}]
+  # found 0 program(s)
+# (t=4.50) i=2, candidate=[{'ANSWER': 2001}]
+  # found 0 program(s)
+# ====> fallback strategy (retrieval) is triggered because no explanation is found so far
+# ====> retrieval_values: [19.07, 20.1, 2001, 2007, 2012, 23.2, 24.05, 24.98, 26.02, 27.05, 30.06, '35-49', '50-64', '65+', 7.14, 8.08, 9.11, 'Age', 'Under 35', 'blue', 'color', 'orange', 'percent', 'red', 'year']
+# (t=6.70) fallback i=0, candidate=[{'ANSWER': 19.07}]
+  # found 0 program(s)
+# (t=8.94) fallback i=1, candidate=[{'ANSWER': 20.1}]
+  # found 0 program(s)
+# (t=11.19) fallback i=2, candidate=[{'ANSWER': 2001}]
+  # found 0 program(s)
+# (t=13.42) fallback i=3, candidate=[{'ANSWER': 2007}]
+  # found 0 program(s)
+# (t=15.65) fallback i=4, candidate=[{'ANSWER': 2012}]
+  # found 0 program(s)
+# (t=17.92) fallback i=5, candidate=[{'ANSWER': 23.2}]
+  # found 0 program(s)
+# (t=20.18) fallback i=6, candidate=[{'ANSWER': 24.05}]
+  # found 0 program(s)
+# (t=22.44) fallback i=7, candidate=[{'ANSWER': 24.98}]
+  # found 0 program(s)
+# (t=24.68) fallback i=8, candidate=[{'ANSWER': 26.02}]
+  # found 0 program(s)
+# (t=26.91) fallback i=9, candidate=[{'ANSWER': 27.05}]
+  # found 0 program(s)
+# (t=29.16) fallback i=10, candidate=[{'ANSWER': 30.06}]
+  # found 0 program(s)
+# (t=31.43) fallback i=11, candidate=[{'ANSWER': '35-49'}]
+  # found 0 program(s)
+# (t=33.71) fallback i=12, candidate=[{'ANSWER': '50-64'}]
+  # found 0 program(s)
+# (t=35.97) fallback i=13, candidate=[{'ANSWER': '65+'}]
+  # found 0 program(s)
+# (t=38.23) fallback i=14, candidate=[{'ANSWER': 7.14}]
+  # found 0 program(s)
+# (t=40.46) fallback i=15, candidate=[{'ANSWER': 8.08}]
+  # found 0 program(s)
+# (t=42.71) fallback i=16, candidate=[{'ANSWER': 9.11}]
+  # found 0 program(s)
+# (t=44.95) fallback i=17, candidate=[{'ANSWER': 'Age'}]
+  # found 0 program(s)
+# (t=47.00) fallback i=18, candidate=[{'ANSWER': 'Under 35'}]
+  # found 0 program(s)
+# (t=49.24) fallback i=19, candidate=[{'ANSWER': 'blue'}]
+  # found 0 program(s)
+# (t=51.49) fallback i=20, candidate=[{'ANSWER': 'color'}]
+  # found 0 program(s)
+# (t=53.52) fallback i=21, candidate=[{'ANSWER': 'orange'}]
+  # found 0 program(s)
+# (t=55.74) fallback i=22, candidate=[{'ANSWER': 'percent'}]
+  # found 0 program(s)
+# (t=57.76) fallback i=23, candidate=[{'ANSWER': 'red'}]
+  # found 0 program(s)
+# (t=59.99) fallback i=24, candidate=[{'ANSWER': 'year'}]
+  # found 0 program(s)
+# ====> fallback strategy (original) is triggered
+# ====> use the original TaPas output as answer, which is: [2012]
+
+# ========== review report ========== #

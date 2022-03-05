@@ -1,0 +1,43 @@
+# parsed arguments: Namespace(benchmark='Q40e35', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'55', '33', 'indian', 'blue', '57', '39', '15', 'color', 'percentage', 'japanese', 'public', '30', 'americans', 'population', 'chinese'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+           population  percentage color
+0    Indian Americans          55  blue
+1       Indian public          30  blue
+2   Chinese Americans          57  blue
+3      Chinese public          39  blue
+4  Japanese Americans          33  blue
+5     Japanese public          15  blue
+# query is: what is the percentage of the chinese public?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      39
+# inferred DSL terminals:
+  # ConstVal: ['Chinese public@Str', 'Chinese Americans@Str', 'percentage@Str', 'Japanese public@Str', 'Indian public@Str', '<NULL>']
+     # cmap: [('chinese', 'Chinese Americans'), ('percentage', 'percentage'), ('public', 'Chinese public'), ('public', 'Indian public'), ('chinese', 'Chinese public'), ('public', 'Japanese public')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 39}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Chinese public@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'population', 'Chinese public'], ['percentage']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Chinese public@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'population', 'Chinese public'], ['percentage']]
+
+# ========== review report ========== #
+# top-1, score: 2.52, answer: [39]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Chinese public@Str), ['1'])
+# top-2, score: 2.52, answer: [39]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Chinese public@Str), ['-99', '-2'])

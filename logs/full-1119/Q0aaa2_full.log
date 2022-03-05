@@ -1,0 +1,45 @@
+# parsed arguments: Namespace(benchmark='Q0aaa2', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'fraser', 'color', 'majority', 'james', '2798', '10070', 'candidate', 'votes', '6482', 'margot', '152', 'blue', 'dobson', 'jill', '4787', '14857', 'rainbow', 'george', 'weiss', 'oliver', 'adrian', 'frank'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+              Candidate  Votes color
+0          Frank Dobson  14857  blue
+1           Jill Fraser  10070  blue
+2          Margot James   6482  blue
+3         Adrian Oliver   2798  blue
+4  Rainbow George Weiss    152  blue
+5              Majority   4787  blue
+# query is: How many votes did Frank Dobson get?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0   14857
+# inferred DSL terminals:
+  # ConstVal: ['Votes@Str', 'Frank Dobson@Str', '<NULL>']
+     # cmap: [('votes', 'Votes'), ('frank', 'Frank Dobson'), ('dobson', 'Frank Dobson')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 14857}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Frank Dobson@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Frank Dobson'], ['Votes']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Frank Dobson@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Frank Dobson'], ['Votes']]
+# (t=0.69) i=1, candidate=[{'ANSWER': 29714}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.57, answer: [14857]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Frank Dobson@Str), ['1'])
+# top-2, score: 2.57, answer: [14857]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Frank Dobson@Str), ['-99', '-2'])

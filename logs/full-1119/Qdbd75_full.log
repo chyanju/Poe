@@ -1,0 +1,77 @@
+# parsed arguments: Namespace(benchmark='Qdbd75', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'46', 'color', '101', '133', 'country', 'el', 'guatemala', 'blue', '61', 'honduras', '182', 'salvador', 'costa', 'nicaragua', 'panama', 'belize', 'rica', '30', 'amphibians', '183'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       Country  Amphibians color
+0       Belize          46  blue
+1   Costa Rica         183  blue
+2  El Salvador          30  blue
+3    Guatemala         133  blue
+4     Honduras         101  blue
+5    Nicaragua          61  blue
+6       Panama         182  blue
+# query is: How many less amphibians species have Honduras than Guatemala?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      32
+# inferred DSL terminals:
+  # ConstVal: ['Amphibians@Str', 'Guatemala@Str', '<NULL>']
+     # cmap: [('guatemala', 'Guatemala'), ('amphibians', 'Amphibians')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('less', '-')]
+  # BoolFunc: ['==', '<', '<=', '<NULL>']
+     # bmap: [('less', '<='), ('less', '<'), (None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: []
+  # [debug] high_values (no dup.): []
+  # [debug] filtered low_values (no dup.): [(103, 2), (87, 2), (72, 2), (50, 2), (49, 2), (32, 2), (-32, 2), (-49, 2), (-50, 2), (-72, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 3 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, Guatemala@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Guatemala'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, Guatemala@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Guatemala'], 'count', 'Amphibians']
+    # Summarize(SelectRow1(@param0, ==, 0, Guatemala@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Guatemala'], 'count', 'color']
+# (t=0.84) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=1.67) i=2, candidate=[{'ANSWER': 3}]
+  # found 0 program(s)
+# (t=2.50) i=3, candidate=[{'ANSWER': 103}]
+  # found 0 program(s)
+# (t=3.32) i=4, candidate=[{'ANSWER': 87}]
+  # found 0 program(s)
+# (t=4.14) i=5, candidate=[{'ANSWER': 72}]
+  # found 0 program(s)
+# (t=4.96) i=6, candidate=[{'ANSWER': 50}]
+  # found 0 program(s)
+# (t=5.78) i=7, candidate=[{'ANSWER': 49}]
+  # found 0 program(s)
+# (t=6.61) i=8, candidate=[{'ANSWER': 32}]
+  # found 0 program(s)
+# (t=7.43) i=9, candidate=[{'ANSWER': -32}]
+  # found 0 program(s)
+# (t=8.26) i=10, candidate=[{'ANSWER': -49}]
+  # found 0 program(s)
+# (t=9.08) i=11, candidate=[{'ANSWER': -50}]
+  # found 0 program(s)
+# (t=9.89) i=12, candidate=[{'ANSWER': -72}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.46, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Guatemala@Str), count, 1)
+# top-2, score: 2.35, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Guatemala@Str), count, 0)
+# top-3, score: 2.35, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Guatemala@Str), count, 2)

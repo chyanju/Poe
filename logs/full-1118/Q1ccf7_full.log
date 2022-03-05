@@ -1,0 +1,52 @@
+# parsed arguments: Namespace(benchmark='Q1ccf7', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'color', 'latino', '27', 'white', 'percent', '57', 'american', 'race', 'african', '25', 'blue'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+               Race  Percent color
+0             White       57  blue
+1            Latino       27  blue
+2  African American       25  blue
+# query is: How much more percentage do White's average above Latino's?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      30
+# inferred DSL terminals:
+  # ConstVal: ['White@Str', 'Percent@Str', 'Latino@Str', '<NULL>']
+     # cmap: [('percentage', 'Percent'), ('white', 'White'), ('latino', 'Latino')]
+  # AggrFunc: ['mean', '<NULL>']
+     # amap: [('average', 'mean')]
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['==', '>', '>=', '<NULL>']
+     # bmap: [(None, '=='), ('more', '>='), ('more', '>')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(30, 4), (-30, 4)]
+  # [debug] high_values (no dup.): [(32, 2), (2, 2), (-2, 2), (-32, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=1.48) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=2.96) i=2, candidate=[{'ANSWER': 3}]
+  # found 0 program(s)
+# (t=4.44) i=3, candidate=[{'ANSWER': 30}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, White@Str, Latino@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Race', 'White', 'Latino', 'Percent']
+# (t=5.90) i=4, candidate=[{'ANSWER': -30}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Latino@Str, White@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Race', 'Latino', 'White', 'Percent']
+
+# ========== review report ========== #
+# top-1, score: 2.51, answer: 30
+  # tprog: Contrast(@param0, -, 0, White@Str, Latino@Str, 1)
+# top-2, score: 2.51, answer: -30
+  # tprog: Contrast(@param0, -, 0, Latino@Str, White@Str, 1)

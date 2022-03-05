@@ -1,0 +1,72 @@
+# parsed arguments: Namespace(benchmark='Q1a18c', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'highland', 'district', '56', 'yoshino', 'blue', 'gojō,', 'flat', 'population', 'yamato', 'inland', 'plain', '92', '1282', 'color'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                   District  Population color
+0  Yamato flat inland plain        1282  blue
+1           Yamato highland          56  blue
+2             Gojō, Yoshino          92  blue
+# query is: How much higher is the population of Gojo, Yoshino than Yamato highland?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      36
+# inferred DSL terminals:
+  # ConstVal: ['Yamato highland@Str', 'Yamato flat inland plain@Str', 'Population@Str', 'Gojō, Yoshino@Str', '<NULL>']
+     # cmap: [('highland', 'Yamato highland'), ('yamato', 'Yamato highland'), ('yoshino', 'Gojō, Yoshino'), ('population', 'Population'), ('yamato', 'Yamato flat inland plain')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('higher', '-')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(1226, 6), (36, 6), (-36, 6), (-1226, 6), (1190, 4), (-1190, 4)]
+  # [debug] high_values (no dup.): []
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=2.89) i=1, candidate=[{'ANSWER': 1226}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Yamato flat inland plain@Str, Yamato highland@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'District', 'Yamato flat inland plain', 'Yamato highland', 'Population']
+# (t=5.74) i=2, candidate=[{'ANSWER': 36}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Gojō, Yoshino@Str, Yamato highland@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'District', 'Gojō, Yoshino', 'Yamato highland', 'Population']
+# (t=8.57) i=3, candidate=[{'ANSWER': -36}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Yamato highland@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'District', 'Yamato highland', 'Gojō, Yoshino', 'Population']
+# (t=11.38) i=4, candidate=[{'ANSWER': -1226}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Yamato highland@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'District', 'Yamato highland', 'Yamato flat inland plain', 'Population']
+# (t=14.21) i=5, candidate=[{'ANSWER': 1190}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Yamato flat inland plain@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'District', 'Yamato flat inland plain', 'Gojō, Yoshino', 'Population']
+# (t=17.04) i=6, candidate=[{'ANSWER': -1190}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Gojō, Yoshino@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'District', 'Gojō, Yoshino', 'Yamato flat inland plain', 'Population']
+
+# ========== review report ========== #
+# top-1, score: 2.56, answer: 36
+  # tprog: Contrast(@param0, -, 0, Gojō, Yoshino@Str, Yamato highland@Str, 1)
+# top-2, score: 2.56, answer: -36
+  # tprog: Contrast(@param0, -, 0, Yamato highland@Str, Gojō, Yoshino@Str, 1)
+# top-3, score: 2.48, answer: 1226
+  # tprog: Contrast(@param0, -, 0, Yamato flat inland plain@Str, Yamato highland@Str, 1)
+# top-4, score: 2.48, answer: -1226
+  # tprog: Contrast(@param0, -, 0, Yamato highland@Str, Yamato flat inland plain@Str, 1)
+# top-5, score: 1.48, answer: 1190
+  # tprog: Contrast(@param0, -, 0, Yamato flat inland plain@Str, Gojō, Yoshino@Str, 1)
+# top-6, score: 1.48, answer: -1190
+  # tprog: Contrast(@param0, -, 0, Gojō, Yoshino@Str, Yamato flat inland plain@Str, 1)

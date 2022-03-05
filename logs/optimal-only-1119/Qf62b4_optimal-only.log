@@ -1,0 +1,70 @@
+# parsed arguments: Namespace(benchmark='Qf62b4', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'blue', '35', '10', '8977000', 'sum', '7268299', '17419067', 'people', '19055559', '5124536', '75', '19046094', '1400884', '22808830', '5', '80', '23110829', 'age', '0', '25', '85', '60', '20325175', '19930088', '65', '30', '45', '20', '55', '40', '13380350', '20186259', '20585757', '15', '20621710', '70', '19178000', '9258407', '90', 'color', '10792360', '2951513', '50'}
+# input type: [dtype('int64'), dtype('int64'), dtype('O')]
+# input is:
+    age  Sum of people color
+0     0       19046094  blue
+1     5       20621710  blue
+2    10       20585757  blue
+3    15       19930088  blue
+4    20       19055559  blue
+5    25       19178000  blue
+6    30       20325175  blue
+7    35       23110829  blue
+8    40       22808830  blue
+9    45       20186259  blue
+10   50       17419067  blue
+11   55       13380350  blue
+12   60       10792360  blue
+13   65        9258407  blue
+14   70        8977000  blue
+15   75        7268299  blue
+16   80        5124536  blue
+17   85        2951513  blue
+18   90        1400884  blue
+# query is: What is the population of 90 year olds?
+# expected output type:[dtype('int64')]
+# expected output is:
+    ANSWER
+0  1400884
+# inferred DSL terminals:
+  # ConstVal: ['90@Int', '<NULL>']
+     # cmap: [(90, 90)]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1400884}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 90@Int), ==, 0, 90@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'age', 90], '==', 'age', 90], ['Sum of people']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 90@Int), ==, 0, 90@Int), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'age', 90], '==', 'age', 90], ['Sum of people']]
+    # SelectCol(SelectRow1(@param0, ==, 0, 90@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'age', 90], ['Sum of people']]
+    # SelectCol(SelectRow1(@param0, ==, 0, 90@Int), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'age', 90], ['Sum of people']]
+# (t=0.37) i=1, candidate=[{'ANSWER': 2801768}]
+  # found 0 program(s)
+# (t=0.73) i=2, candidate=[{'ANSWER': 4202652}]
+  # found 0 program(s)
+# (t=1.10) i=3, candidate=[{'ANSWER': 5603536}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.27, answer: [1400884]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, 90@Int), ['1'])
+# top-2, score: 1.27, answer: [1400884]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, 90@Int), ['-99', '-2'])
+# top-3, score: 1.22, answer: [1400884]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 90@Int), ==, 0, 90@Int), ['1'])
+# top-4, score: 1.22, answer: [1400884]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, 90@Int), ==, 0, 90@Int), ['-99', '-2'])

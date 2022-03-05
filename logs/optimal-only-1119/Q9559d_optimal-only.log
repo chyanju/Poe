@@ -1,0 +1,48 @@
+# parsed arguments: Namespace(benchmark='Q9559d', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'percent', 'american', '31', 'race', 'white', 'african', 'blue', '44', 'latino', 'color', '23'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+               race  percent color
+0             White       44  blue
+1  African American       31  blue
+2            Latino       23  blue
+# query is: What percent of african americans have employer pensions?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      31
+# inferred DSL terminals:
+  # ConstVal: ['percent@Str', 'African American@Str', '<NULL>']
+     # cmap: [('african', 'African American'), ('percent', 'percent')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 31}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, African American@Str), ==, 0, African American@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'race', 'African American'], '==', 'race', 'African American'], ['percent']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, African American@Str), ==, 0, African American@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'race', 'African American'], '==', 'race', 'African American'], ['percent']]
+    # SelectCol(SelectRow1(@param0, ==, 0, African American@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'race', 'African American'], ['percent']]
+    # SelectCol(SelectRow1(@param0, ==, 0, African American@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'race', 'African American'], ['percent']]
+
+# ========== review report ========== #
+# top-1, score: 2.39, answer: [31]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, African American@Str), ['1'])
+# top-2, score: 2.39, answer: [31]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, African American@Str), ['-99', '-2'])
+# top-3, score: 2.34, answer: [31]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, African American@Str), ==, 0, African American@Str), ['1'])
+# top-4, score: 2.34, answer: [31]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, African American@Str), ==, 0, African American@Str), ['-99', '-2'])

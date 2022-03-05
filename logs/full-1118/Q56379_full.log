@@ -1,0 +1,138 @@
+# parsed arguments: Namespace(benchmark='Q56379', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'blue', 'gray', 'design', 'engineering', '55', 'resources', 'color', '84', '52', 'programs', 'env', '67', 'math', 'ls', '42', 'yellow', 'green', '61', 'phys', '53', '91', 'major', 'arts', 'sciences', 'nat', 'business', 'social', 'chemistry', 'sci', 'purple', 'bio', 'orange', 'humanities', '62', 'brown', 'percent', 'red', '60', 'undergrad'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+              major  percent   color
+0       LS Programs       42  yellow
+1      Bio Sciences       52    blue
+2      LS Undergrad       53  yellow
+3     Math Phys Sci       55  orange
+4     Nat Resources       60   brown
+5   Arts Humanities       61    gray
+6   Social Sciences       61   brown
+7         Chemistry       62     red
+8        Env Design       67   green
+9       Engineering       84  orange
+10         Business       91  purple
+# query is: Is a higher percentage represented by Chemistry or Bio Science majors?
+# expected output type:[dtype('O')]
+# expected output is:
+      ANSWER
+0  Chemistry
+# inferred DSL terminals:
+  # ConstVal: ['Chemistry@Str', 'major@Str', 'Bio Sciences@Str', 'percent@Str', '<NULL>']
+     # cmap: [('bio', 'Bio Sciences'), ('percentage', 'percent'), ('chemistry', 'Chemistry'), ('majors', 'major')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('higher', '-')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(10, 4), (-10, 4)]
+  # [debug] high_values (no dup.): [(39, 2), (32, 2), (29, 2), (22, 2), (20, 2), (15, 2), (10, 2), (9, 2), (9, 2), (9, 2)]
+  # [debug] fallback (comparison) answers are added
+# ====> fallback strategy (selection) is triggered
+  # [debug] fallback (selection) answers: ['Chemistry', 'major', 'Bio Sciences', 'percent']
+  # [debug] fallback (selection) answers (no dup.): ['major', 'percent']
+  # [debug] 2 fallback (selection) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Chemistry'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Chemistry@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'major', 'Chemistry'], ['major']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Chemistry@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'major', 'Chemistry'], ['major']]
+# (t=3.17) i=1, candidate=[{'ANSWER': 'Bio Sciences'}, {'ANSWER': 'Chemistry'}]
+  # found 0 program(s)
+# (t=3.38) i=2, candidate=[{'ANSWER': 'Bio Sciences'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Bio Sciences@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'major', 'Bio Sciences'], ['major']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Bio Sciences@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'major', 'Bio Sciences'], ['major']]
+# (t=6.51) i=3, candidate=[{'ANSWER': 'Business'}, {'ANSWER': 'Chemistry'}]
+  # found 0 program(s)
+# (t=6.72) i=4, candidate=[{'ANSWER': 'Chemistry'}, {'ANSWER': 'Social Sciences'}]
+  # found 0 program(s)
+# (t=6.94) i=5, candidate=[{'ANSWER': 'Chemistry'}, {'ANSWER': 'Engineering'}]
+  # found 0 program(s)
+# (t=7.15) i=6, candidate=[{'ANSWER': 'Chemistry'}, {'ANSWER': 'LS Programs'}]
+  # found 0 program(s)
+# (t=7.37) i=7, candidate=[{'ANSWER': 'Chemistry'}, {'ANSWER': 'Math Phys Sci'}]
+  # found 0 program(s)
+# (t=7.60) i=8, candidate=[{'ANSWER': 'Chemistry'}, {'ANSWER': 'LS Undergrad'}]
+  # found 0 program(s)
+# (t=7.82) i=9, candidate=[{'ANSWER': 'Chemistry'}, {'ANSWER': 'Env Design'}]
+  # found 0 program(s)
+# (t=8.04) i=10, candidate=[{'ANSWER': 'Arts Humanities'}, {'ANSWER': 'Chemistry'}]
+  # found 0 program(s)
+# (t=8.25) i=11, candidate=[{'ANSWER': 'Chemistry'}, {'ANSWER': 'Nat Resources'}]
+  # found 0 program(s)
+# (t=8.47) i=12, candidate=[{'ANSWER': 'Bio Sciences'}, {'ANSWER': 'Business'}]
+  # found 0 program(s)
+# (t=8.69) i=13, candidate=[{'ANSWER': 'Bio Sciences'}, {'ANSWER': 'Social Sciences'}]
+  # found 0 program(s)
+# (t=8.90) i=14, candidate=[{'ANSWER': 'Bio Sciences'}, {'ANSWER': 'Engineering'}]
+  # found 0 program(s)
+# (t=9.12) i=15, candidate=[{'ANSWER': 'Bio Sciences'}, {'ANSWER': 'LS Programs'}]
+  # found 0 program(s)
+# (t=9.34) i=16, candidate=[{'ANSWER': 'Bio Sciences'}, {'ANSWER': 'Math Phys Sci'}]
+  # found 0 program(s)
+# (t=9.55) i=17, candidate=[{'ANSWER': 'Bio Sciences'}, {'ANSWER': 'LS Undergrad'}]
+  # found 0 program(s)
+# (t=9.77) i=18, candidate=[{'ANSWER': 'Bio Sciences'}, {'ANSWER': 'Env Design'}]
+  # found 0 program(s)
+# (t=9.98) i=19, candidate=[{'ANSWER': 'Arts Humanities'}, {'ANSWER': 'Bio Sciences'}]
+  # found 0 program(s)
+# (t=10.20) i=20, candidate=[{'ANSWER': 'Bio Sciences'}, {'ANSWER': 'Nat Resources'}]
+  # found 0 program(s)
+# (t=10.41) i=21, candidate=[{'ANSWER': 'Business'}]
+  # found 0 program(s)
+# (t=13.55) i=22, candidate=[{'ANSWER': 'Business'}, {'ANSWER': 'Social Sciences'}]
+  # found 0 program(s)
+# (t=13.77) i=23, candidate=[{'ANSWER': 'Social Sciences'}]
+  # found 0 program(s)
+# (t=16.90) i=24, candidate=[{'ANSWER': 'Business'}, {'ANSWER': 'Engineering'}]
+  # found 0 program(s)
+# (t=17.11) i=25, candidate=[{'ANSWER': 'Business'}, {'ANSWER': 'LS Programs'}]
+  # found 0 program(s)
+# (t=17.32) i=26, candidate=[{'ANSWER': 'Business'}, {'ANSWER': 'Math Phys Sci'}]
+  # found 0 program(s)
+# (t=17.53) i=27, candidate=[{'ANSWER': 'Business'}, {'ANSWER': 'LS Undergrad'}]
+  # found 0 program(s)
+# (t=17.75) i=28, candidate=[{'ANSWER': 'Business'}, {'ANSWER': 'Env Design'}]
+  # found 0 program(s)
+# (t=17.96) i=29, candidate=[{'ANSWER': 'Arts Humanities'}, {'ANSWER': 'Business'}]
+  # found 0 program(s)
+# (t=18.17) i=30, candidate=[{'ANSWER': 10}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Chemistry@Str, Bio Sciences@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'major', 'Chemistry', 'Bio Sciences', 'percent']
+# (t=21.17) i=31, candidate=[{'ANSWER': -10}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Bio Sciences@Str, Chemistry@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'major', 'Bio Sciences', 'Chemistry', 'percent']
+# (t=24.10) i=32, candidate=[{'ANSWER': 'major'}]
+  # found 0 program(s)
+# (t=27.05) i=33, candidate=[{'ANSWER': 'percent'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.60, answer: 10
+  # tprog: Contrast(@param0, -, 0, Chemistry@Str, Bio Sciences@Str, 1)
+# top-2, score: 2.60, answer: -10
+  # tprog: Contrast(@param0, -, 0, Bio Sciences@Str, Chemistry@Str, 1)
+# top-3, score: 2.32, answer: Chemistry
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Chemistry@Str), ['0'])
+# top-4, score: 2.32, answer: Chemistry
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Chemistry@Str), ['-1', '-2'])
+# top-5, score: 1.32, answer: Bio Sciences
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Bio Sciences@Str), ['0'])
+# top-6, score: 1.32, answer: Bio Sciences
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Bio Sciences@Str), ['-1', '-2'])

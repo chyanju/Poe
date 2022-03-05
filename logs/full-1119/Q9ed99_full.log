@@ -1,0 +1,115 @@
+# parsed arguments: Namespace(benchmark='Q9ed99', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'hti', 'cog', 'irq', 'afg', 'uga', 'blue', 'cod', 'sdn', 'zaf', 'eth', '2327780000', '1158820000', '1033040000', '849210000', '2415910000', '1357330000', '1655460000', 'moz', 'country', '1927720000', '2219230000', '886580000', 'nga', '899670000', '5472120000', '821580000', 'donation', 'chn', 'tza', 'vnm', '2006940000', 'bgd', '1215280000', 'ken', 'gha', '2388330000', '925510000', '1031740000', 'color', 'pak', 'ind', 'idn', '1824530000', '1538320000'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+   country    donation color
+0      AFG  5472120000  blue
+1      PAK  2415910000  blue
+2      COD  2388330000  blue
+3      HTI  2327780000  blue
+4      IND  2219230000  blue
+5      IRQ  2006940000  blue
+6      ETH  1927720000  blue
+7      VNM  1824530000  blue
+8      TZA  1655460000  blue
+9      SDN  1538320000  blue
+10     MOZ  1357330000  blue
+11     COG  1215280000  blue
+12     KEN  1158820000  blue
+13     UGA  1033040000  blue
+14     IDN  1031740000  blue
+15     CHN   925510000  blue
+16     GHA   899670000  blue
+17     BGD   886580000  blue
+18     NGA   849210000  blue
+19     ZAF   821580000  blue
+# query is: Which country had the highest number in donations?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0    AFG
+# inferred DSL terminals:
+  # ConstVal: ['country@Str', 'donation@Str', '<NULL>']
+     # cmap: [('donations', 'donation'), ('country', 'country')]
+  # AggrFunc: ['max', 'count', '<NULL>']
+     # amap: [('highest', 'max'), ('number', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('highest', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'AFG'}]
+  # found 16 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'max', 'donation'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'max', 'donation'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmax', 'donation'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmax', 'donation'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'max', 'donation'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'count', 'country'], 'eqmax', 'donation'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'count', 'country'], 'eqmax', 'donation'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'count', 'donation'], 'eqmax', 'donation'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'count', 'donation'], 'eqmax', 'donation'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'count', 'color'], 'eqmax', 'donation'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'donation'], 'count', 'color'], 'eqmax', 'donation'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'donation'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'donation'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'donation'], ['country']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'donation'], ['country']]
+# (t=1.43) i=1, candidate=[{'ANSWER': 'PAK'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.59, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['0'])
+# top-2, score: 1.59, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['-1', '-2'])
+# top-3, score: 1.59, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['0'])
+# top-4, score: 1.59, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['-1', '-2'])
+# top-5, score: 1.59, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['0'])
+# top-6, score: 1.59, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['-1', '-2'])
+# top-7, score: 1.54, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+# top-8, score: 1.54, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+# top-9, score: 1.48, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+# top-10, score: 1.48, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+# top-11, score: 1.47, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+# top-12, score: 1.47, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+# top-13, score: 1.47, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+# top-14, score: 1.47, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+# top-15, score: 1.47, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+# top-16, score: 1.47, answer: ['AFG']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])

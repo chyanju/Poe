@@ -1,0 +1,98 @@
+# parsed arguments: Namespace(benchmark='Q38735', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'46.6', 'gelbach', 'emsbach', 'elbbach', 'blue', '20.0', 'ulmbach', '13.6', 'allna', '40.7', '8.8', 'ohm', '14.6', '(möttbach)', 'ilse', 'dautphe', 'dill', 'length', '24.6', 'feudinge', 'kerkerbach', '49.7', 'banfe', '26.9', '8.4', '11.5', '(rppersbach)', 'wetschaft', '20.7', 'iserbach', 'salzböde', 'kleebach', '30.0', '29.0', '24.3', 'zwester', 'bieber', 'mühlbach', '59.7', '39.1', '22.9', 'kallenbach', 'dörsbach', '6.3', 'wetzbach', 'solmsbach', 'perf', 'laasphe', '19.2', '11.7', 'lumda', '19.1', '32.1', '(aubach)', 'weil', '32.0', 'aar', '27.6', '39.7', '55.0', '8.3', 'wieseck', 'name', 'color'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                     Name  Length color
+0   Feudinge (Rppersbach)     6.3  blue
+1                    Ilse     8.4  blue
+2                   Banfe    11.5  blue
+3                 Laasphe     8.3  blue
+4                    Perf    20.0  blue
+5                 Dautphe     8.8  blue
+6               Wetschaft    29.0  blue
+7                     Ohm    59.7  blue
+8                   Allna    19.1  blue
+9             Zwester Ohm    20.0  blue
+10               Salzböde    27.6  blue
+11                  Lumda    30.0  blue
+12                Wieseck    24.3  blue
+13                 Bieber    13.6  blue
+14               Kleebach    26.9  blue
+15               Wetzbach    11.7  blue
+16                   Dill    55.0  blue
+17              Solmsbach    24.6  blue
+18    Iserbach (Möttbach)    19.2  blue
+19                Ulmbach    22.9  blue
+20             Kallenbach    14.6  blue
+21                   Weil    46.6  blue
+22             Kerkerbach    20.7  blue
+23                Emsbach    39.1  blue
+24                Elbbach    40.7  blue
+25                    Aar    49.7  blue
+26               Dörsbach    32.0  blue
+27       Gelbach (Aubach)    39.7  blue
+28               Mühlbach    32.1  blue
+29                Emsbach    11.5  blue
+# query is: By how much bigger is the AAR category compared to the Lumda category?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0    19.7
+# inferred DSL terminals:
+  # ConstVal: ['Lumda@Str', 'Aar@Str', '<NULL>']
+     # cmap: [('aar', 'Aar'), ('lumda', 'Lumda')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('bigger', '-')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(19.700000000000003, 4), (-19.700000000000003, 4)]
+  # [debug] high_values (no dup.): [(19.700000000000003, 4), (-19.700000000000003, 4)]
+  # [debug] filtered low_values (no dup.): [(43.400000000000006, 2), (41.400000000000006, 2), (41.300000000000004, 2), (40.900000000000006, 2), (38.2, 2), (38.2, 2), (38.0, 2), (36.1, 2), (35.1, 2), (30.6, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=0.63) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=1.26) i=2, candidate=[{'ANSWER': 19.700000000000003}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Aar@Str, Lumda@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Name', 'Aar', 'Lumda', 'Length']
+# (t=1.88) i=3, candidate=[{'ANSWER': -19.700000000000003}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Lumda@Str, Aar@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Name', 'Lumda', 'Aar', 'Length']
+# (t=2.50) i=4, candidate=[{'ANSWER': 43.400000000000006}]
+  # found 0 program(s)
+# (t=3.12) i=5, candidate=[{'ANSWER': 41.400000000000006}]
+  # found 0 program(s)
+# (t=3.74) i=6, candidate=[{'ANSWER': 41.300000000000004}]
+  # found 0 program(s)
+# (t=4.36) i=7, candidate=[{'ANSWER': 40.900000000000006}]
+  # found 0 program(s)
+# (t=4.99) i=8, candidate=[{'ANSWER': 38.2}]
+  # found 0 program(s)
+# (t=5.62) i=9, candidate=[{'ANSWER': 38.2}]
+  # found 0 program(s)
+# (t=6.24) i=10, candidate=[{'ANSWER': 38.0}]
+  # found 0 program(s)
+# (t=6.86) i=11, candidate=[{'ANSWER': 36.1}]
+  # found 0 program(s)
+# (t=7.48) i=12, candidate=[{'ANSWER': 35.1}]
+  # found 0 program(s)
+# (t=8.10) i=13, candidate=[{'ANSWER': 30.6}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.37, answer: [19.700000000000003]
+  # tprog: Contrast(@param0, -, 0, Aar@Str, Lumda@Str, 1)
+# top-2, score: 2.37, answer: [-19.700000000000003]
+  # tprog: Contrast(@param0, -, 0, Lumda@Str, Aar@Str, 1)

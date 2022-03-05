@@ -1,0 +1,67 @@
+# parsed arguments: Namespace(benchmark='Qaf580', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'60', '75', 'nor', '59', 'can', '70', 'fin', '66', 'nld', 'fra', 'irl', 'jpn', 'che', 'bel', '76', 'rating', 'aut', 'swe', 'blue', '57', '64', 'deu', 'ita', '48', 'prt', '54', '0', 'aus', 'country', 'kor', 'esp', '62', '53', '61', 'gbr', 'dnk', '49', 'usa', '52', '56', 'color', '42'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+   country  rating color
+0      USA      53  blue
+1      JPN      42  blue
+2      FRA      56  blue
+3      DEU      61  blue
+4      GBR      75  blue
+5      CAN      54  blue
+6      AUS      66  blue
+7      ESP      57  blue
+8      NLD      76  blue
+9      NOR      64  blue
+10     BEL      59  blue
+11     SWE      66  blue
+12     DNK      62  blue
+13     KOR      52  blue
+14     CHE      59  blue
+15     ITA      49  blue
+16     IRL      70  blue
+17     FIN      60  blue
+18     AUT      48  blue
+19     PRT       0  blue
+# query is: What rating does PRT have?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0       0
+# inferred DSL terminals:
+  # ConstVal: ['PRT@Str', 'rating@Str', '<NULL>']
+     # cmap: [('rating', 'rating'), ('prt', 'PRT')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 0}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, PRT@Str), ==, 0, PRT@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'country', 'PRT'], '==', 'country', 'PRT'], ['rating']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, PRT@Str), ==, 0, PRT@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'country', 'PRT'], '==', 'country', 'PRT'], ['rating']]
+    # SelectCol(SelectRow1(@param0, ==, 0, PRT@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'country', 'PRT'], ['rating']]
+    # SelectCol(SelectRow1(@param0, ==, 0, PRT@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'country', 'PRT'], ['rating']]
+# (t=1.06) i=1, candidate=[{'ANSWER': 48}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.54, answer: [0]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, PRT@Str), ['1'])
+# top-2, score: 2.54, answer: [0]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, PRT@Str), ['-99', '-2'])
+# top-3, score: 2.49, answer: [0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, PRT@Str), ==, 0, PRT@Str), ['1'])
+# top-4, score: 2.49, answer: [0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, PRT@Str), ==, 0, PRT@Str), ['-99', '-2'])

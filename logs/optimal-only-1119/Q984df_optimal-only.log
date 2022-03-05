@@ -1,0 +1,362 @@
+# parsed arguments: Namespace(benchmark='Q984df', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'blue', '3', 'society', 'color', 'origin', 'freedom', '32', 'about', 'conditions', '23', 'religion', '64', '21', '20', 'response', '38', 'treatment', '69', 'strength', '7', 'u.s.', 'to', 'ahead', '34', '14', '56', 'ties', '18', 'statement', '5', '62', 'values', 'percentage', '73', 'political', 'for', 'same', '26', 'poor', 'country', 'get', 'views', '28', 'in', '52', 'red', 'raising', 'opportunity', 'family', '9', 'moral', 'better', 'express', 'practice', 'children', 'orange', '13'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                             statement  ...   color
+0             Opportunity to get ahead  ...    blue
+1   Freedom to express political views  ...    blue
+2                Treatment of the poor  ...    blue
+3      Conditions for raising children  ...    blue
+4         Freedom to practice religion  ...    blue
+5              Moral values of society  ...    blue
+6              Strength of family ties  ...    blue
+7             Opportunity to get ahead  ...  orange
+8   Freedom to express political views  ...  orange
+9                Treatment of the poor  ...  orange
+10     Conditions for raising children  ...  orange
+11        Freedom to practice religion  ...  orange
+12             Moral values of society  ...  orange
+13             Strength of family ties  ...  orange
+14            Opportunity to get ahead  ...     red
+15  Freedom to express political views  ...     red
+16               Treatment of the poor  ...     red
+17     Conditions for raising children  ...     red
+18        Freedom to practice religion  ...     red
+19             Moral values of society  ...     red
+20             Strength of family ties  ...     red
+
+[21 rows x 4 columns]
+# query is: Which characteristic gets the most votes for being about the same as country of origin / U.S.?
+# expected output type:[dtype('O')]
+# expected output is:
+                         ANSWER
+0  Freedom to practice religion
+# inferred DSL terminals:
+  # ConstVal: ['Better in country of origin@Str', 'Better in U.S.@Str', 'Opportunity to get ahead@Str', 'Conditions for raising children@Str', 'About the same@Str', '<NULL>']
+     # cmap: [('country', 'Better in country of origin'), ('about', 'About the same'), ('gets', 'Opportunity to get ahead'), ('for', 'Conditions for raising children'), ('origin', 'Better in country of origin'), ('u.s.', 'Better in U.S.'), ('same', 'About the same')]
+  # AggrFunc: ['max', '<NULL>']
+     # amap: [('most', 'max')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('most', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 5}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Opportunity to get ahead@Str), ==, 1, Better in country of origin@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Opportunity to get ahead'], '==', 'response', 'Better in country of origin'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Better in country of origin@Str), ==, 0, Opportunity to get ahead@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Better in country of origin'], '==', 'statement', 'Opportunity to get ahead'], ['percentage']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, Opportunity to get ahead@Str), ==, 1, Better in country of origin@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Opportunity to get ahead'], '==', 'response', 'Better in country of origin'], 'eqmax', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in country of origin@Str), ==, 0, Opportunity to get ahead@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Better in country of origin'], '==', 'statement', 'Opportunity to get ahead'], 'eqmax', 'percentage'], ['percentage']]
+# (t=12.15) i=1, candidate=[{'ANSWER': 3}]
+  # found 0 program(s)
+# (t=24.39) i=2, candidate=[{'ANSWER': 9}]
+  # found 0 program(s)
+# (t=36.78) i=3, candidate=[{'ANSWER': 13}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 1, Better in country of origin@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Conditions for raising children'], '==', 'response', 'Better in country of origin'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Better in country of origin@Str), ==, 0, Conditions for raising children@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Better in country of origin'], '==', 'statement', 'Conditions for raising children'], ['percentage']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 1, Better in country of origin@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Conditions for raising children'], '==', 'response', 'Better in country of origin'], 'eqmax', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in country of origin@Str), ==, 0, Conditions for raising children@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Better in country of origin'], '==', 'statement', 'Conditions for raising children'], 'eqmax', 'percentage'], ['percentage']]
+# (t=49.05) i=4, candidate=[{'ANSWER': 7}]
+  # found 0 program(s)
+# (t=61.34) i=5, candidate=[{'ANSWER': 28}]
+  # found 0 program(s)
+# (t=73.68) i=6, candidate=[{'ANSWER': 20}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 1, About the same@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Conditions for raising children'], '==', 'response', 'About the same'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, About the same@Str), ==, 0, Conditions for raising children@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'About the same'], '==', 'statement', 'Conditions for raising children'], ['percentage']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 1, About the same@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Conditions for raising children'], '==', 'response', 'About the same'], 'eqmax', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, About the same@Str), ==, 0, Conditions for raising children@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'About the same'], '==', 'statement', 'Conditions for raising children'], 'eqmax', 'percentage'], ['percentage']]
+# (t=85.97) i=7, candidate=[{'ANSWER': 18}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Opportunity to get ahead@Str), ==, 1, About the same@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Opportunity to get ahead'], '==', 'response', 'About the same'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, About the same@Str), ==, 0, Opportunity to get ahead@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'About the same'], '==', 'statement', 'Opportunity to get ahead'], ['percentage']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, Opportunity to get ahead@Str), ==, 1, About the same@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Opportunity to get ahead'], '==', 'response', 'About the same'], 'eqmax', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, About the same@Str), ==, 0, Opportunity to get ahead@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'About the same'], '==', 'statement', 'Opportunity to get ahead'], 'eqmax', 'percentage'], ['percentage']]
+# (t=98.35) i=8, candidate=[{'ANSWER': 26}]
+  # found 0 program(s)
+# (t=110.58) i=9, candidate=[{'ANSWER': 32}]
+  # found 0 program(s)
+# (t=122.94) i=10, candidate=[{'ANSWER': 21}]
+  # found 0 program(s)
+# (t=135.17) i=11, candidate=[{'ANSWER': 73}]
+  # found 56 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Opportunity to get ahead@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'statement', 'Opportunity to get ahead'], 'eqmax', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Better in U.S.@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'response', 'Better in U.S.'], 'eqmax', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Opportunity to get ahead@Str), ==, 1, Better in U.S.@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Opportunity to get ahead'], '==', 'response', 'Better in U.S.'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Better in U.S.@Str), ==, 0, Opportunity to get ahead@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Better in U.S.'], '==', 'statement', 'Opportunity to get ahead'], ['percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'response'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'response'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'max', 'percentage'], 'eqmax', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'max', 'percentage'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'max', 'percentage'], 'eqmax', 'percentage'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'max', 'percentage'], 'eqmax', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['percentage', 'color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['percentage']]
+    # Summarize(SelectRow1(@param0, ==, 0, Opportunity to get ahead@Str), max, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'statement', 'Opportunity to get ahead'], 'max', 'percentage']
+    # Summarize(SelectRow1(@param0, ==, 1, Better in U.S.@Str), max, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'response', 'Better in U.S.'], 'max', 'percentage']
+    # SelectCol(SelectRow0(@param0, eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'percentage'], ['percentage']]
+    # Summarize(@param0, max, 2)
+      --> ['Summarize', 'input@0', 'max', 'percentage']
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, Opportunity to get ahead@Str), ==, 0, Opportunity to get ahead@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Opportunity to get ahead'], '==', 'statement', 'Opportunity to get ahead'], 'eqmax', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, Opportunity to get ahead@Str), ==, 1, Better in U.S.@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'statement', 'Opportunity to get ahead'], '==', 'response', 'Better in U.S.'], 'eqmax', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in U.S.@Str), ==, 0, Opportunity to get ahead@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Better in U.S.'], '==', 'statement', 'Opportunity to get ahead'], 'eqmax', 'percentage'], ['percentage']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in U.S.@Str), ==, 1, Better in U.S.@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Better in U.S.'], '==', 'response', 'Better in U.S.'], 'eqmax', 'percentage'], ['percentage']]
+
+# ========== review report ========== #
+# top-1, score: 2.32, answer: [20]
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 1, About the same@Str), eqmax, 2), ['2'])
+# top-2, score: 2.32, answer: [20]
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, About the same@Str), ==, 0, Conditions for raising children@Str), eqmax, 2), ['2'])
+# top-3, score: 2.32, answer: [18]
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, Opportunity to get ahead@Str), ==, 1, About the same@Str), eqmax, 2), ['2'])
+# top-4, score: 2.32, answer: [18]
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, About the same@Str), ==, 0, Opportunity to get ahead@Str), eqmax, 2), ['2'])
+# top-5, score: 2.28, answer: [20]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 1, About the same@Str), ['2'])
+# top-6, score: 2.28, answer: [20]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, About the same@Str), ==, 0, Conditions for raising children@Str), ['2'])
+# top-7, score: 2.28, answer: [18]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Opportunity to get ahead@Str), ==, 1, About the same@Str), ['2'])
+# top-8, score: 2.28, answer: [18]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, About the same@Str), ==, 0, Opportunity to get ahead@Str), ['2'])
+# top-9, score: 1.32, answer: [5]
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, Opportunity to get ahead@Str), ==, 1, Better in country of origin@Str), eqmax, 2), ['2'])
+# top-10, score: 1.32, answer: [5]
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in country of origin@Str), ==, 0, Opportunity to get ahead@Str), eqmax, 2), ['2'])
+# top-11, score: 1.32, answer: [13]
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 1, Better in country of origin@Str), eqmax, 2), ['2'])
+# top-12, score: 1.32, answer: [13]
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in country of origin@Str), ==, 0, Conditions for raising children@Str), eqmax, 2), ['2'])
+# top-13, score: 1.31, answer: [73]
+  # tprog: Summarize(@param0, max, 2)
+# top-14, score: 1.28, answer: [5]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Opportunity to get ahead@Str), ==, 1, Better in country of origin@Str), ['2'])
+# top-15, score: 1.28, answer: [5]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Better in country of origin@Str), ==, 0, Opportunity to get ahead@Str), ['2'])
+# top-16, score: 1.28, answer: [13]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Conditions for raising children@Str), ==, 1, Better in country of origin@Str), ['2'])
+# top-17, score: 1.28, answer: [13]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Better in country of origin@Str), ==, 0, Conditions for raising children@Str), ['2'])
+# top-18, score: 1.26, answer: [73]
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, Opportunity to get ahead@Str), ==, 1, Better in U.S.@Str), eqmax, 2), ['2'])
+# top-19, score: 1.26, answer: [73]
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in U.S.@Str), ==, 0, Opportunity to get ahead@Str), eqmax, 2), ['2'])
+# top-20, score: 1.25, answer: [73]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Opportunity to get ahead@Str), max, 2)
+# top-21, score: 1.25, answer: [73]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Better in U.S.@Str), max, 2)
+# top-22, score: 1.23, answer: [73]
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 2), ['2'])
+# top-23, score: 1.23, answer: [73]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Opportunity to get ahead@Str), eqmax, 2), ['2'])
+# top-24, score: 1.23, answer: [73]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Better in U.S.@Str), eqmax, 2), ['2'])
+# top-25, score: 1.22, answer: [73]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Opportunity to get ahead@Str), ==, 1, Better in U.S.@Str), ['2'])
+# top-26, score: 1.22, answer: [73]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Better in U.S.@Str), ==, 0, Opportunity to get ahead@Str), ['2'])
+# top-27, score: 1.20, answer: [73]
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, Opportunity to get ahead@Str), ==, 0, Opportunity to get ahead@Str), eqmax, 2), ['2'])
+# top-28, score: 1.20, answer: [73]
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in U.S.@Str), ==, 1, Better in U.S.@Str), eqmax, 2), ['2'])
+# top-29, score: 1.16, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['1'])
+# top-30, score: 1.16, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['-99'])
+# top-31, score: 1.16, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['1'])
+# top-32, score: 1.16, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['-99'])
+# top-33, score: 1.16, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 0), ['0'])
+# top-34, score: 1.16, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 0), ['1'])
+# top-35, score: 1.16, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 0), ['-99'])
+# top-36, score: 1.16, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 0), ['-1'])
+# top-37, score: 1.16, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 1), ['0'])
+# top-38, score: 1.16, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 1), ['1'])
+# top-39, score: 1.16, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 1), ['-99'])
+# top-40, score: 1.16, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 2), eqmax, 1), ['-1'])
+# top-41, score: 1.16, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmax, 1), ['1'])
+# top-42, score: 1.16, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['3'], max, 2), eqmax, 1), ['-99'])
+# top-43, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['2'])
+# top-44, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-99', '-1'])
+# top-45, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['1'])
+# top-46, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['2'])
+# top-47, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-99', '-1'])
+# top-48, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-99', '-2'])
+# top-49, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['1'])
+# top-50, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['2'])
+# top-51, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-99', '-1'])
+# top-52, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-99', '-2'])
+# top-53, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['2'])
+# top-54, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['-99', '-1'])
+# top-55, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['1'])
+# top-56, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['2'])
+# top-57, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['-99', '-1'])
+# top-58, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['-99', '-2'])
+# top-59, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['1'])
+# top-60, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['2'])
+# top-61, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['-99', '-1'])
+# top-62, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['-99', '-2'])
+# top-63, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['2'])
+# top-64, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['-99', '-1'])
+# top-65, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['0'])
+# top-66, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['2'])
+# top-67, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['-99', '-1'])
+# top-68, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 0), ['-1', '-2'])
+# top-69, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['0'])
+# top-70, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['2'])
+# top-71, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['-99', '-1'])
+# top-72, score: 1.15, answer: [73]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 2), eqmax, 2), ['-1', '-2'])

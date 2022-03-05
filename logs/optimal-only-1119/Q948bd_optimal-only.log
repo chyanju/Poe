@@ -1,0 +1,79 @@
+# parsed arguments: Namespace(benchmark='Q948bd', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'gelbach', '24.3', 'length', '29.0', 'salzböde', 'ulmbach', 'kleebach', '8.4', 'elbbach', 'blue', '39.1', 'ilse', 'dill', '20.0', '11.5', '14.6', 'color', 'iserbach', 'lumda', 'bieber', 'solmsbach', '49.7', 'allna', '24.6', 'name', 'aar', 'mühlbach', '(aubach)', 'zwester', 'laasphe', 'dautphe', '(rppersbach)', '26.9', 'wieseck', 'feudinge', '40.7', 'kerkerbach', '8.8', '22.9', '8.3', 'perf', '32.0', '6.3', '13.6', 'banfe', '46.6', '59.7', '55.0', '20.7', 'kallenbach', '(möttbach)', '19.2', '30.0', 'ohm', '27.6', 'wetzbach', '39.7', '11.7', 'emsbach', '32.1', 'wetschaft', 'dörsbach', 'weil', '19.1'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                     Name  Length color
+0   Feudinge (Rppersbach)     6.3  blue
+1                    Ilse     8.4  blue
+2                   Banfe    11.5  blue
+3                 Laasphe     8.3  blue
+4                    Perf    20.0  blue
+5                 Dautphe     8.8  blue
+6               Wetschaft    29.0  blue
+7                     Ohm    59.7  blue
+8                   Allna    19.1  blue
+9             Zwester Ohm    20.0  blue
+10               Salzböde    27.6  blue
+11                  Lumda    30.0  blue
+12                Wieseck    24.3  blue
+13                 Bieber    13.6  blue
+14               Kleebach    26.9  blue
+15               Wetzbach    11.7  blue
+16                   Dill    55.0  blue
+17              Solmsbach    24.6  blue
+18    Iserbach (Möttbach)    19.2  blue
+19                Ulmbach    22.9  blue
+20             Kallenbach    14.6  blue
+21                   Weil    46.6  blue
+22             Kerkerbach    20.7  blue
+23                Emsbach    39.1  blue
+24                Elbbach    40.7  blue
+25                    Aar    49.7  blue
+26               Dörsbach    32.0  blue
+27       Gelbach (Aubach)    39.7  blue
+28               Mühlbach    32.1  blue
+29                Emsbach    11.5  blue
+# query is: what is the length of the weil bird
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0    46.6
+# inferred DSL terminals:
+  # ConstVal: ['Weil@Str', 'Length@Str', '<NULL>']
+     # cmap: [('length', 'Length'), ('weil', 'Weil')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 46.6}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Weil@Str), ==, 0, Weil@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Name', 'Weil'], '==', 'Name', 'Weil'], ['Length']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Weil@Str), ==, 0, Weil@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Name', 'Weil'], '==', 'Name', 'Weil'], ['Length']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Weil@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Name', 'Weil'], ['Length']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Weil@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Name', 'Weil'], ['Length']]
+# (t=1.06) i=1, candidate=[{'ANSWER': 93.2}]
+  # found 0 program(s)
+# (t=2.13) i=2, candidate=[{'ANSWER': 139.8}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.39, answer: [46.6]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Weil@Str), ['1'])
+# top-2, score: 2.39, answer: [46.6]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Weil@Str), ['-99', '-2'])
+# top-3, score: 2.34, answer: [46.6]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Weil@Str), ==, 0, Weil@Str), ['1'])
+# top-4, score: 2.34, answer: [46.6]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Weil@Str), ==, 0, Weil@Str), ['-99', '-2'])

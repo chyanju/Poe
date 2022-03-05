@@ -1,0 +1,143 @@
+# parsed arguments: Namespace(benchmark='Qbae4c', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'57', '77', 'mexico', 'spain', 'poland', 'u.s.', 'china', '35', 'tunisia', 'pakistan', '31', 'jordan', 'india', '56', '15', '41', '45', 'no', '43', '42', 'most', '37', '48', 'orange', 'hard', 'japan', 'russia', '32', 'guarantee', '40', 'blue', 'percentage', '53', 'egypt', '20', 'work', 'succeed', '46', 'lebanon', '81', '27', '33', 'if', '39', 'turkey', 'italy', '51', 'color', '67', '69', '30', 'france', '54', 'response', 'rep.', '73', '59', 'germany', 'greece', '50', '65', 'brazil', 'country', 'britain', 'czech', '24', '64'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       country                   response  percentage   color
+0         U.S.     Hard work no guarantee          20    blue
+1         U.S.  Most succeed if work hard          77  orange
+2      Britain     Hard work no guarantee          41    blue
+3      Britain  Most succeed if work hard          57  orange
+4        Spain     Hard work no guarantee          43    blue
+5        Spain  Most succeed if work hard          56  orange
+6   Czech Rep.     Hard work no guarantee          43    blue
+7   Czech Rep.  Most succeed if work hard          54  orange
+8      Germany     Hard work no guarantee          48    blue
+9      Germany  Most succeed if work hard          51  orange
+10      Poland     Hard work no guarantee          43    blue
+11      Poland  Most succeed if work hard          48  orange
+12      France     Hard work no guarantee          54    blue
+13      France  Most succeed if work hard          46  orange
+14       Italy     Hard work no guarantee          46    blue
+15       Italy  Most succeed if work hard          43  orange
+16      Greece     Hard work no guarantee          51    blue
+17      Greece  Most succeed if work hard          43  orange
+18      Russia     Hard work no guarantee          53    blue
+19      Russia  Most succeed if work hard          35  orange
+20    Pakistan     Hard work no guarantee          15    blue
+21    Pakistan  Most succeed if work hard          81  orange
+22     Tunisia     Hard work no guarantee          24    blue
+23     Tunisia  Most succeed if work hard          73  orange
+24      Jordan     Hard work no guarantee          37    blue
+25      Jordan  Most succeed if work hard          57  orange
+26       Egypt     Hard work no guarantee          42    blue
+27       Egypt  Most succeed if work hard          53  orange
+28      Turkey     Hard work no guarantee          39    blue
+29      Turkey  Most succeed if work hard          50  orange
+30     Lebanon     Hard work no guarantee          64    blue
+31     Lebanon  Most succeed if work hard          32  orange
+32       India     Hard work no guarantee          27    blue
+33       India  Most succeed if work hard          67  orange
+34       China     Hard work no guarantee          33    blue
+35       China  Most succeed if work hard          45  orange
+36       Japan     Hard work no guarantee          59    blue
+37       Japan  Most succeed if work hard          40  orange
+38      Brazil     Hard work no guarantee          30    blue
+39      Brazil  Most succeed if work hard          69  orange
+40      Mexico     Hard work no guarantee          31    blue
+41      Mexico  Most succeed if work hard          65  orange
+# query is: What is the percentage of Poland for hard work no guarantee?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      43
+# inferred DSL terminals:
+  # ConstVal: ['Most succeed if work hard@Str', 'percentage@Str', 'Hard work no guarantee@Str', 'Poland@Str', '<NULL>']
+     # cmap: [('hard', 'Most succeed if work hard'), ('poland', 'Poland'), ('guarantee', 'Hard work no guarantee'), ('percentage', 'percentage'), ('hard', 'Hard work no guarantee'), ('no', 'Hard work no guarantee'), ('work', 'Hard work no guarantee'), ('work', 'Most succeed if work hard')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 20}]
+  # found 0 program(s)
+# (t=7.00) i=1, candidate=[{'ANSWER': 43}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Poland@Str), ==, 1, Hard work no guarantee@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'country', 'Poland'], '==', 'response', 'Hard work no guarantee'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Hard work no guarantee@Str), ==, 0, Poland@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Hard work no guarantee'], '==', 'country', 'Poland'], ['percentage']]
+# (t=14.27) i=2, candidate=[{'ANSWER': 41}]
+  # found 0 program(s)
+# (t=21.46) i=3, candidate=[{'ANSWER': 27}]
+  # found 0 program(s)
+# (t=28.44) i=4, candidate=[{'ANSWER': 15}]
+  # found 0 program(s)
+# (t=35.82) i=5, candidate=[{'ANSWER': 48}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Poland@Str), ==, 1, Most succeed if work hard@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'country', 'Poland'], '==', 'response', 'Most succeed if work hard'], ['percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Most succeed if work hard@Str), ==, 0, Poland@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Most succeed if work hard'], '==', 'country', 'Poland'], ['percentage']]
+# (t=43.10) i=6, candidate=[{'ANSWER': 46}]
+  # found 0 program(s)
+# (t=50.04) i=7, candidate=[{'ANSWER': 33}]
+  # found 0 program(s)
+# (t=57.38) i=8, candidate=[{'ANSWER': 59}]
+  # found 0 program(s)
+# (t=64.63) i=9, candidate=[{'ANSWER': 53}]
+  # found 0 program(s)
+# (t=71.63) i=10, candidate=[{'ANSWER': 54}]
+  # found 0 program(s)
+# (t=79.01) i=11, candidate=[{'ANSWER': 24}]
+  # found 0 program(s)
+# (t=86.22) i=12, candidate=[{'ANSWER': 31}]
+  # found 0 program(s)
+# (t=93.18) i=13, candidate=[{'ANSWER': 37}]
+  # found 0 program(s)
+# (t=100.53) i=14, candidate=[{'ANSWER': 64}]
+  # found 0 program(s)
+# (t=107.79) i=15, candidate=[{'ANSWER': 39}]
+  # found 0 program(s)
+# (t=114.73) i=16, candidate=[{'ANSWER': 57}]
+  # found 0 program(s)
+# (t=122.06) i=17, candidate=[{'ANSWER': 56}]
+  # found 0 program(s)
+# (t=129.34) i=18, candidate=[{'ANSWER': 30}]
+  # found 0 program(s)
+# (t=136.30) i=19, candidate=[{'ANSWER': 77}]
+  # found 0 program(s)
+# (t=143.59) i=20, candidate=[{'ANSWER': 40}]
+  # found 0 program(s)
+# (t=150.80) i=21, candidate=[{'ANSWER': 42}]
+  # found 0 program(s)
+# (t=157.83) i=22, candidate=[{'ANSWER': 65}]
+  # found 0 program(s)
+# (t=165.15) i=23, candidate=[{'ANSWER': 35}]
+  # found 0 program(s)
+# (t=172.32) i=24, candidate=[{'ANSWER': 69}]
+  # found 0 program(s)
+# (t=179.55) i=25, candidate=[{'ANSWER': 32}]
+  # found 0 program(s)
+# (t=186.54) i=26, candidate=[{'ANSWER': 51}]
+  # found 0 program(s)
+# (t=193.94) i=27, candidate=[{'ANSWER': 45}]
+  # found 0 program(s)
+# (t=200.87) i=28, candidate=[{'ANSWER': 81}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.64, answer: [43]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Poland@Str), ==, 1, Hard work no guarantee@Str), ['2'])
+# top-2, score: 2.64, answer: [43]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Hard work no guarantee@Str), ==, 0, Poland@Str), ['2'])
+# top-3, score: 2.45, answer: [48]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Poland@Str), ==, 1, Most succeed if work hard@Str), ['2'])
+# top-4, score: 2.45, answer: [48]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Most succeed if work hard@Str), ==, 0, Poland@Str), ['2'])

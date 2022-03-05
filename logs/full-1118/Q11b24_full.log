@@ -1,0 +1,99 @@
+# parsed arguments: Namespace(benchmark='Q11b24', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'pistons', 'indiana', 'x-houston', 'cavaliers', '66', 'rockets', 'hawks', 'x-san', 'central', 'division', 'cleveland', 'antonio', 'blue', 'spurs', 'l', '32', '45', 'pacers', 'color', '41', 'detroit', 'y-atlanta'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+      Central Division   L color
+0      y-Atlanta Hawks  32  blue
+1    x-Houston Rockets  41  blue
+2  x-San Antonio Spurs  41  blue
+3  Cleveland Cavaliers  45  blue
+4       Indiana Pacers  45  blue
+5      Detroit Pistons  66  blue
+# query is: What is the difference in points of the Indiana Pacers and x-Houston Rockets?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0       4
+# inferred DSL terminals:
+  # ConstVal: ['Indiana Pacers@Str', 'x-San Antonio Spurs@Str', 'x-Houston Rockets@Str', '<NULL>']
+     # cmap: [('pacers', 'Indiana Pacers'), ('indiana', 'Indiana Pacers'), ('rockets', 'x-Houston Rockets'), ('x', 'x-San Antonio Spurs'), ('houston', 'x-Houston Rockets'), ('x', 'x-Houston Rockets')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(4, 12), (-4, 12), (0, 8), (4, 6), (-4, 6)]
+  # [debug] high_values (no dup.): [(25, 4), (9, 4), (4, 4), (-4, 4), (-9, 4), (-25, 4), (21, 3), (13, 3), (0, 3), (-13, 3)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=1.45) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=2.89) i=2, candidate=[{'ANSWER': 3}]
+  # found 0 program(s)
+# (t=4.33) i=3, candidate=[{'ANSWER': 4}]
+  # found 4 program(s)
+    # Contrast(@param0, diff, 0, Indiana Pacers@Str, x-San Antonio Spurs@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'Central Division', 'Indiana Pacers', 'x-San Antonio Spurs', 'L']
+    # Contrast(@param0, diff, 0, Indiana Pacers@Str, x-Houston Rockets@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'Central Division', 'Indiana Pacers', 'x-Houston Rockets', 'L']
+    # Contrast(@param0, diff, 0, x-San Antonio Spurs@Str, Indiana Pacers@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'Central Division', 'x-San Antonio Spurs', 'Indiana Pacers', 'L']
+    # Contrast(@param0, diff, 0, x-Houston Rockets@Str, Indiana Pacers@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'Central Division', 'x-Houston Rockets', 'Indiana Pacers', 'L']
+# (t=5.76) i=4, candidate=[{'ANSWER': -4}]
+  # found 0 program(s)
+# (t=7.20) i=5, candidate=[{'ANSWER': 0}]
+  # found 8 program(s)
+    # Contrast(SelectRow1(@param0, ==, 0, Indiana Pacers@Str), diff, 0, Indiana Pacers@Str, Indiana Pacers@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Central Division', 'Indiana Pacers'], 'diff', 'Central Division', 'Indiana Pacers', 'Indiana Pacers', 'L']
+    # Contrast(SelectRow1(@param0, ==, 0, x-San Antonio Spurs@Str), diff, 0, x-San Antonio Spurs@Str, x-San Antonio Spurs@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Central Division', 'x-San Antonio Spurs'], 'diff', 'Central Division', 'x-San Antonio Spurs', 'x-San Antonio Spurs', 'L']
+    # Contrast(SelectRow1(@param0, ==, 0, x-Houston Rockets@Str), diff, 0, x-Houston Rockets@Str, x-Houston Rockets@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Central Division', 'x-Houston Rockets'], 'diff', 'Central Division', 'x-Houston Rockets', 'x-Houston Rockets', 'L']
+    # Contrast(@param0, diff, 0, Indiana Pacers@Str, Indiana Pacers@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'Central Division', 'Indiana Pacers', 'Indiana Pacers', 'L']
+    # Contrast(@param0, diff, 0, x-San Antonio Spurs@Str, x-San Antonio Spurs@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'Central Division', 'x-San Antonio Spurs', 'x-San Antonio Spurs', 'L']
+    # Contrast(@param0, diff, 0, x-San Antonio Spurs@Str, x-Houston Rockets@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'Central Division', 'x-San Antonio Spurs', 'x-Houston Rockets', 'L']
+    # Contrast(@param0, diff, 0, x-Houston Rockets@Str, x-San Antonio Spurs@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'Central Division', 'x-Houston Rockets', 'x-San Antonio Spurs', 'L']
+    # Contrast(@param0, diff, 0, x-Houston Rockets@Str, x-Houston Rockets@Str, 1)
+      --> ['Contrast', 'input@0', 'diff', 'Central Division', 'x-Houston Rockets', 'x-Houston Rockets', 'L']
+# (t=8.66) i=6, candidate=[{'ANSWER': -4}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.57, answer: 4
+  # tprog: Contrast(@param0, diff, 0, Indiana Pacers@Str, x-Houston Rockets@Str, 1)
+# top-2, score: 2.57, answer: 4
+  # tprog: Contrast(@param0, diff, 0, x-Houston Rockets@Str, Indiana Pacers@Str, 1)
+# top-3, score: 2.43, answer: 4
+  # tprog: Contrast(@param0, diff, 0, Indiana Pacers@Str, x-San Antonio Spurs@Str, 1)
+# top-4, score: 2.43, answer: 4
+  # tprog: Contrast(@param0, diff, 0, x-San Antonio Spurs@Str, Indiana Pacers@Str, 1)
+# top-5, score: 2.36, answer: 0
+  # tprog: Contrast(@param0, diff, 0, Indiana Pacers@Str, Indiana Pacers@Str, 1)
+# top-6, score: 2.31, answer: 0
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, Indiana Pacers@Str), diff, 0, Indiana Pacers@Str, Indiana Pacers@Str, 1)
+# top-7, score: 1.43, answer: 0
+  # tprog: Contrast(@param0, diff, 0, x-San Antonio Spurs@Str, x-Houston Rockets@Str, 1)
+# top-8, score: 1.43, answer: 0
+  # tprog: Contrast(@param0, diff, 0, x-Houston Rockets@Str, x-San Antonio Spurs@Str, 1)
+# top-9, score: 1.43, answer: 0
+  # tprog: Contrast(@param0, diff, 0, x-Houston Rockets@Str, x-Houston Rockets@Str, 1)
+# top-10, score: 1.38, answer: 0
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, x-Houston Rockets@Str), diff, 0, x-Houston Rockets@Str, x-Houston Rockets@Str, 1)
+# top-11, score: 1.29, answer: 0
+  # tprog: Contrast(@param0, diff, 0, x-San Antonio Spurs@Str, x-San Antonio Spurs@Str, 1)
+# top-12, score: 1.23, answer: 0
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, x-San Antonio Spurs@Str), diff, 0, x-San Antonio Spurs@Str, x-San Antonio Spurs@Str, 1)

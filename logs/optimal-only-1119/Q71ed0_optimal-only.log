@@ -1,0 +1,142 @@
+# parsed arguments: Namespace(benchmark='Q71ed0', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'country', 'kuwait', '0.0003', 'japan', 'china', '0.0008', 'norway', 'belgium', 'generous', 'us', '0.0004', 'blue', 'netherlands', 'by', 'ireland', 'finland', 'germany', '1e-05', '0.0011', 'gdp', '0.0001', 'estonia', '0.0006', 'color', 'donations', '0.0005'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+        Country  Generous donations by GDP color
+0        Norway                    0.00110  blue
+1        Kuwait                    0.00110  blue
+2   Netherlands                    0.00080  blue
+3       Ireland                    0.00060  blue
+4       Estonia                    0.00060  blue
+5       Finland                    0.00050  blue
+6         Japan                    0.00040  blue
+7            US                    0.00040  blue
+8       Belgium                    0.00030  blue
+9       Germany                    0.00010  blue
+10        China                    0.00001  blue
+# query is: If Ireland is 0.0006 and Finland is 0.0005, what is Belgium?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0  0.0003
+# inferred DSL terminals:
+  # ConstVal: ['Belgium@Str', 'Ireland@Str', 'Finland@Str', '0.0006@Float', '0.0005@Float', '<NULL>']
+     # cmap: [('ireland', 'Ireland'), ('belgium', 'Belgium'), (0.0006, 0.0006), (0.0005, 0.0005), ('finland', 'Finland')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Ireland'}]
+  # found 8 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Ireland@Str), ==, 0, Ireland@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Ireland'], '==', 'Country', 'Ireland'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Ireland@Str), ==, 0, Ireland@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Ireland'], '==', 'Country', 'Ireland'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Ireland@Str), ==, 1, 0.0006@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Ireland'], '==', 'Generous donations by GDP', 0.0006], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Ireland@Str), ==, 1, 0.0006@Float), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Ireland'], '==', 'Generous donations by GDP', 0.0006], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 0.0006@Float), ==, 0, Ireland@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 0.0006], '==', 'Country', 'Ireland'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 0.0006@Float), ==, 0, Ireland@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 0.0006], '==', 'Country', 'Ireland'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Ireland@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Ireland'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Ireland@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Ireland'], ['Country']]
+# (t=6.11) i=1, candidate=[{'ANSWER': 'Finland'}]
+  # found 12 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Finland@Str), ==, 0, Finland@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Finland'], '==', 'Country', 'Finland'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Finland@Str), ==, 0, Finland@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Finland'], '==', 'Country', 'Finland'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Finland@Str), ==, 1, 0.0005@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Finland'], '==', 'Generous donations by GDP', 0.0005], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Finland@Str), ==, 1, 0.0005@Float), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Finland'], '==', 'Generous donations by GDP', 0.0005], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 0.0005@Float), ==, 0, Finland@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 0.0005], '==', 'Country', 'Finland'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 0.0005@Float), ==, 0, Finland@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 0.0005], '==', 'Country', 'Finland'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 0.0005@Float), ==, 1, 0.0005@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 0.0005], '==', 'Generous donations by GDP', 0.0005], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 0.0005@Float), ==, 1, 0.0005@Float), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 0.0005], '==', 'Generous donations by GDP', 0.0005], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Finland@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Finland'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Finland@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Finland'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 1, 0.0005@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 0.0005], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 1, 0.0005@Float), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Generous donations by GDP', 0.0005], ['Country']]
+# (t=12.16) i=2, candidate=[{'ANSWER': 'Estonia'}]
+  # found 0 program(s)
+# (t=18.55) i=3, candidate=[{'ANSWER': 'Belgium'}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Belgium@Str), ==, 0, Belgium@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Belgium'], '==', 'Country', 'Belgium'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Belgium@Str), ==, 0, Belgium@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Belgium'], '==', 'Country', 'Belgium'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Belgium@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Belgium'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Belgium@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Belgium'], ['Country']]
+
+# ========== review report ========== #
+# top-1, score: 2.27, answer: ['Ireland']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Ireland@Str), ==, 1, 0.0006@Float), ['0'])
+# top-2, score: 2.27, answer: ['Ireland']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Ireland@Str), ==, 1, 0.0006@Float), ['-1', '-2'])
+# top-3, score: 2.27, answer: ['Ireland']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 0.0006@Float), ==, 0, Ireland@Str), ['0'])
+# top-4, score: 2.27, answer: ['Ireland']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 0.0006@Float), ==, 0, Ireland@Str), ['-1', '-2'])
+# top-5, score: 2.27, answer: ['Finland']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Finland@Str), ==, 1, 0.0005@Float), ['0'])
+# top-6, score: 2.27, answer: ['Finland']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Finland@Str), ==, 1, 0.0005@Float), ['-1', '-2'])
+# top-7, score: 2.27, answer: ['Finland']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 0.0005@Float), ==, 0, Finland@Str), ['0'])
+# top-8, score: 2.27, answer: ['Finland']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 0.0005@Float), ==, 0, Finland@Str), ['-1', '-2'])
+# top-9, score: 2.23, answer: ['Ireland']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Ireland@Str), ['0'])
+# top-10, score: 2.23, answer: ['Ireland']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Ireland@Str), ['-1', '-2'])
+# top-11, score: 2.23, answer: ['Finland']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Finland@Str), ['0'])
+# top-12, score: 2.23, answer: ['Finland']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Finland@Str), ['-1', '-2'])
+# top-13, score: 2.23, answer: ['Belgium']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Belgium@Str), ['0'])
+# top-14, score: 2.23, answer: ['Belgium']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Belgium@Str), ['-1', '-2'])
+# top-15, score: 2.18, answer: ['Ireland']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Ireland@Str), ==, 0, Ireland@Str), ['0'])
+# top-16, score: 2.18, answer: ['Ireland']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Ireland@Str), ==, 0, Ireland@Str), ['-1', '-2'])
+# top-17, score: 2.18, answer: ['Finland']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Finland@Str), ==, 0, Finland@Str), ['0'])
+# top-18, score: 2.18, answer: ['Finland']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Finland@Str), ==, 0, Finland@Str), ['-1', '-2'])
+# top-19, score: 2.18, answer: ['Belgium']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Belgium@Str), ==, 0, Belgium@Str), ['0'])
+# top-20, score: 2.18, answer: ['Belgium']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Belgium@Str), ==, 0, Belgium@Str), ['-1', '-2'])
+# top-21, score: 1.23, answer: ['Finland']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, 0.0005@Float), ['0'])
+# top-22, score: 1.23, answer: ['Finland']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, 0.0005@Float), ['-1', '-2'])
+# top-23, score: 1.18, answer: ['Finland']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 0.0005@Float), ==, 1, 0.0005@Float), ['0'])
+# top-24, score: 1.18, answer: ['Finland']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 0.0005@Float), ==, 1, 0.0005@Float), ['-1', '-2'])

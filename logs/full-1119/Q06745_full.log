@@ -1,0 +1,77 @@
+# parsed arguments: Namespace(benchmark='Q06745', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'1', '17', '63', '20', 'muslims', 'orthodox', 'other', 'staying', 'non-christian', '8', '11', 'growth?', 'pagan/earth-based', '10', 'shrinking', '67', '3', 'spirituality', '6', 'jews', 'growing', '37', 'mormons', 'same', '49', 'red', 'blue', '19', 'christian', '13', 'am.', '7', 'religion', '68', '34', 'hindus', 'catholics', '14', '12', 'percentage', '47', 'buddhists', 'protestants', 'unaffiliated', '51', '61', 'native', '24', '65', 'orange', '42', '73', 'color'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                   Religion           Growth?  Percentage   color
+0                   Muslims           Growing          51    blue
+1                   Muslims  Staying the same          37     red
+2                   Muslims         Shrinking           7  orange
+3               Protestants           Growing          47    blue
+4               Protestants  Staying the same          42     red
+5               Protestants         Shrinking           6  orange
+6         Pagan/earth-based           Growing          34    blue
+7         Pagan/earth-based  Staying the same          49     red
+8         Pagan/earth-based         Shrinking           8  orange
+9   Native Am. Spirituality           Growing          24    blue
+10  Native Am. Spirituality  Staying the same          61     red
+11  Native Am. Spirituality         Shrinking           6  orange
+12                     Jews           Growing          19    blue
+13                     Jews  Staying the same          61     red
+14                     Jews         Shrinking           8  orange
+15                Catholics           Growing          14    blue
+16                Catholics  Staying the same          61     red
+17                Catholics         Shrinking          20  orange
+18             Unaffiliated           Growing          12    blue
+19             Unaffiliated  Staying the same          63     red
+20             Unaffiliated         Shrinking          17  orange
+21      Other non-Christian           Growing          13    blue
+22      Other non-Christian  Staying the same          65     red
+23      Other non-Christian         Shrinking           8  orange
+24                Buddhists           Growing          12    blue
+25                Buddhists  Staying the same          67     red
+26                Buddhists         Shrinking           8  orange
+27                  Mormons           Growing           3    blue
+28                  Mormons  Staying the same          68     red
+29                  Mormons         Shrinking          11  orange
+30       Orthodox Christian           Growing           3    blue
+31       Orthodox Christian  Staying the same          68     red
+32       Orthodox Christian         Shrinking          10  orange
+33                   Hindus           Growing           1    blue
+34                   Hindus  Staying the same          73     red
+35                   Hindus         Shrinking           8  orange
+# query is: Which group saw the highest growth?
+# expected output type:[dtype('O')]
+# expected output is:
+    ANSWER
+0  Muslims
+# inferred DSL terminals:
+  # ConstVal: ['Growth?@Str', 'Growing@Str', 'Staying the same@Str', '<NULL>']
+     # cmap: [('growth', 'Growth?'), ('growth', 'Growing'), ('saw', 'Staying the same')]
+  # AggrFunc: ['max', '<NULL>']
+     # amap: [('highest', 'max')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('highest', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Muslims'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Growing@Str), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Growth?', 'Growing'], 'eqmax', 'Percentage'], ['Religion']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Growing@Str), ==, 1, Growing@Str), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Growth?', 'Growing'], '==', 'Growth?', 'Growing'], 'eqmax', 'Percentage'], ['Religion']]
+# (t=2.91) i=1, candidate=[{'ANSWER': 'Orthodox Christian'}]
+  # found 0 program(s)
+# (t=5.80) i=2, candidate=[{'ANSWER': 'Jews'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.43, answer: ['Muslims']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Growing@Str), eqmax, 2), ['0'])
+# top-2, score: 1.40, answer: ['Muslims']
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Growing@Str), ==, 1, Growing@Str), eqmax, 2), ['0'])

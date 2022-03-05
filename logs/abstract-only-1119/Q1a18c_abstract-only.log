@@ -1,0 +1,772 @@
+# parsed arguments: Namespace(benchmark='Q1a18c', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'flat', 'district', 'gojō,', 'color', '56', '1282', 'plain', 'population', 'yoshino', 'inland', 'highland', 'yamato', 'blue', '92'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                   District  Population color
+0  Yamato flat inland plain        1282  blue
+1           Yamato highland          56  blue
+2             Gojō, Yoshino          92  blue
+# query is: How much higher is the population of Gojo, Yoshino than Yamato highland?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      36
+# inferred DSL terminals:
+  # ConstVal: ['Yamato highland@Str', '1282@Int', 'Gojō, Yoshino@Str', 'color@Str', '92@Int', 'District@Str', '56@Int', 'Yamato flat inland plain@Str', 'blue@Str', 'Population@Str']
+     # cmap: [(None, 'Yamato highland'), (None, 1282), (None, 'Gojō, Yoshino'), (None, 'color'), (None, 92), (None, 'District'), (None, 56), (None, 'Yamato flat inland plain'), (None, 'blue'), (None, 'Population')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 187 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'District'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'District'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'District'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'District'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'color'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'color'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'color'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population'], 'count', 'color'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['District', 'Population'], 'count', 'District'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['District', 'Population'], 'count', 'District'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['District', 'Population'], 'count', 'District'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['District', 'Population'], 'count', 'District'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['District', 'Population'], 'count', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['District', 'Population'], 'count', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['District', 'Population'], 'count', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['District', 'Population'], 'count', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['District', 'Population'], 'count', 'color'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['District', 'Population'], 'count', 'color'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['District', 'Population'], 'count', 'color'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['District', 'Population'], 'count', 'color'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'District'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'District'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'District'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'District'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'Population'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'Population'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'color'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'color'], 'eqmin', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'color'], 'eqmax', 'Population'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Population', 'color'], 'count', 'color'], 'eqmax', 'Population'], ['COL0']]
+    # Summarize(SelectRow1(@param0, <, 1, 92@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'Population', 92], 'count', 'District']
+    # Summarize(SelectRow1(@param0, <, 1, 92@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'Population', 92], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, <, 1, 92@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', 'Population', 92], 'count', 'color']
+    # Summarize(SelectRow1(@param0, <=, 1, 56@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'Population', 56], 'count', 'District']
+    # Summarize(SelectRow1(@param0, <=, 1, 56@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'Population', 56], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, <=, 1, 56@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', 'Population', 56], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Yamato highland@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], 'count', 'District']
+    # Summarize(SelectRow1(@param0, ==, 0, Yamato highland@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, ==, 0, Yamato highland@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Gojō, Yoshino@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'District', 'Gojō, Yoshino'], 'count', 'District']
+    # Summarize(SelectRow1(@param0, ==, 0, Gojō, Yoshino@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'District', 'Gojō, Yoshino'], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, ==, 0, Gojō, Yoshino@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'District', 'Gojō, Yoshino'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'District', 'Yamato flat inland plain'], 'count', 'District']
+    # Summarize(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'District', 'Yamato flat inland plain'], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'District', 'Yamato flat inland plain'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 1282@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 1282], 'count', 'District']
+    # Summarize(SelectRow1(@param0, ==, 1, 1282@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 1282], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, ==, 1, 1282@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 1282], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 92@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 92], 'count', 'District']
+    # Summarize(SelectRow1(@param0, ==, 1, 92@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 92], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, ==, 1, 92@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 92], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 56@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 56], 'count', 'District']
+    # Summarize(SelectRow1(@param0, ==, 1, 56@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 56], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, ==, 1, 56@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Population', 56], 'count', 'color']
+    # Summarize(SelectRow1(@param0, >=, 1, 1282@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'Population', 1282], 'count', 'District']
+    # Summarize(SelectRow1(@param0, >=, 1, 1282@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'Population', 1282], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, >=, 1, 1282@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', 'Population', 1282], 'count', 'color']
+    # Summarize(SelectRow1(@param0, >, 1, 92@Int), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'Population', 92], 'count', 'District']
+    # Summarize(SelectRow1(@param0, >, 1, 92@Int), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'Population', 92], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, >, 1, 92@Int), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', 'Population', 92], 'count', 'color']
+    # Contrast(SelectRow1(@param0, <, 1, 1282@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'Population', 1282], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, <, 1, 1282@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'Population', 1282], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, <, 1, 92@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'Population', 92], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, <, 1, 92@Int), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', 'Population', 92], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 1282@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 1282], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 1282@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 1282], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 1282@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 1282], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 92@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 92], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 92@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 92], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 56@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 56], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, <=, 1, 56@Int), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<=', 'Population', 56], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 0, Yamato highland@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 0, Yamato highland@Str), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'District', 'Yamato highland'], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 0, Gojō, Yoshino@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'District', 'Gojō, Yoshino'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 0, Gojō, Yoshino@Str), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'District', 'Gojō, Yoshino'], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'District', 'Yamato flat inland plain'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'District', 'Yamato flat inland plain'], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 1, 1282@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Population', 1282], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 1, 1282@Int), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Population', 1282], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 1, 92@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Population', 92], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 1, 92@Int), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Population', 92], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 1, 56@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Population', 56], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 1, 56@Int), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Population', 56], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 2, blue@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 2, blue@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, ==, 2, blue@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 1282@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 1282], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 1282@Int), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 1282], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 92@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 92], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 92@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 92], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 56@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 56], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 56@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 56], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, >=, 1, 56@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>=', 'Population', 56], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, >, 1, 92@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>', 'Population', 92], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, >, 1, 92@Int), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>', 'Population', 92], '/', 'color', 'blue', 'blue', 'Population']
+    # Contrast(SelectRow1(@param0, >, 1, 56@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>', 'Population', 56], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, >, 1, 56@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '>', 'Population', 56], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Yamato highland@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 'Yamato highland'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Yamato highland@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 'Yamato highland'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 1282@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 1282], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 1282@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 1282], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 1282@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 1282], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Gojō, Yoshino@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 'Gojō, Yoshino'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Gojō, Yoshino@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 'Gojō, Yoshino'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, color@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 'color'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, color@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 'color'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, color@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 'color'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 92@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 92], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 92@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 92], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 92@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 92], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, District@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 'District'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, District@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 'District'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, District@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 'District'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 56@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 56], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 56@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 56], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, 56@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 56], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Yamato flat inland plain@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 'Yamato flat inland plain'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Yamato flat inland plain@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 'Yamato flat inland plain'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, blue@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 'blue'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, blue@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 'blue'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, blue@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 'blue'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Population@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 'Population'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Population@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 'Population'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 0, Population@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'District', 'Population'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, Yamato highland@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'Yamato highland'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, Yamato highland@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'Yamato highland'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, Yamato highland@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'Yamato highland'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, 1282@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 1282], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, 1282@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 1282], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, Gojō, Yoshino@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'Gojō, Yoshino'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, Gojō, Yoshino@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'Gojō, Yoshino'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, Gojō, Yoshino@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'Gojō, Yoshino'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, color@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'color'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, color@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'color'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, color@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'color'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, 92@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 92], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, 92@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 92], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, District@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'District'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, District@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'District'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, District@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'District'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, 56@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 56], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, 56@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 56], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, Yamato flat inland plain@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'Yamato flat inland plain'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, Yamato flat inland plain@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'Yamato flat inland plain'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, Yamato flat inland plain@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'Yamato flat inland plain'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, blue@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'blue'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, blue@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'blue'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, blue@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'blue'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, Population@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'Population'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, Population@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'Population'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 1, Population@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'Population', 'Population'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, Yamato highland@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 'Yamato highland'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, Yamato highland@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 'Yamato highland'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, Yamato highland@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 'Yamato highland'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, 1282@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 1282], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, 1282@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 1282], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, 1282@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 1282], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, Gojō, Yoshino@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 'Gojō, Yoshino'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, Gojō, Yoshino@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 'Gojō, Yoshino'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, Gojō, Yoshino@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 'Gojō, Yoshino'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, color@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 'color'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, color@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 'color'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, color@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 'color'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, 92@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 92], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, 92@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 92], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, 92@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 92], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, District@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 'District'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, District@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 'District'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, District@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 'District'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, 56@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 56], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, 56@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 56], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, 56@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 56], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, Yamato flat inland plain@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 'Yamato flat inland plain'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, Yamato flat inland plain@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 'Yamato flat inland plain'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, Yamato flat inland plain@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 'Yamato flat inland plain'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, Population@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 'Population'], '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, Population@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 'Population'], '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(SelectRow1(@param0, !=, 2, Population@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '!=', 'color', 'Population'], '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+    # Contrast(@param0, /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+      --> ['Contrast', 'input@0', '/', 'District', 'Yamato highland', 'Yamato highland', 'Population']
+    # Contrast(@param0, /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+      --> ['Contrast', 'input@0', '/', 'District', 'Gojō, Yoshino', 'Gojō, Yoshino', 'Population']
+    # Contrast(@param0, /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+      --> ['Contrast', 'input@0', '/', 'District', 'Yamato flat inland plain', 'Yamato flat inland plain', 'Population']
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmin, 0), ['1'])
+# top-2, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmin, 0), ['-99'])
+# top-3, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmax, 0), ['1'])
+# top-4, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmax, 0), ['-99'])
+# top-5, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmin, 0), ['1'])
+# top-6, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmin, 0), ['-99'])
+# top-7, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmax, 0), ['1'])
+# top-8, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmax, 0), ['-99'])
+# top-9, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmin, 0), ['1'])
+# top-10, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmin, 0), ['-99'])
+# top-11, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmax, 0), ['1'])
+# top-12, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmax, 0), ['-99'])
+# top-13, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['2'])
+# top-14, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['-99', '-1'])
+# top-15, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['2'])
+# top-16, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['-99', '-1'])
+# top-17, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['2'])
+# top-18, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['-99', '-1'])
+# top-19, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['2'])
+# top-20, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['-99', '-1'])
+# top-21, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['2'])
+# top-22, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['-99', '-1'])
+# top-23, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['2'])
+# top-24, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['-99', '-1'])
+# top-25, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 0), ['2'])
+# top-26, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 0), ['-99', '-1'])
+# top-27, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 0), ['2'])
+# top-28, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 0), ['-99', '-1'])
+# top-29, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 0), ['2'])
+# top-30, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 0), ['-99', '-1'])
+# top-31, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 0), ['2'])
+# top-32, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 0), ['-99', '-1'])
+# top-33, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 0), ['2'])
+# top-34, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 0), ['-99', '-1'])
+# top-35, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 0), ['2'])
+# top-36, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 0), ['-99', '-1'])
+# top-37, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 1, 92@Int), count, 0)
+# top-38, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 1, 92@Int), count, 1)
+# top-39, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 1, 92@Int), count, 2)
+# top-40, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 1, 56@Int), count, 0)
+# top-41, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 1, 56@Int), count, 1)
+# top-42, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 1, 56@Int), count, 2)
+# top-43, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Yamato highland@Str), count, 0)
+# top-44, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Yamato highland@Str), count, 1)
+# top-45, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Yamato highland@Str), count, 2)
+# top-46, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Gojō, Yoshino@Str), count, 0)
+# top-47, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Gojō, Yoshino@Str), count, 1)
+# top-48, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Gojō, Yoshino@Str), count, 2)
+# top-49, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), count, 0)
+# top-50, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), count, 1)
+# top-51, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), count, 2)
+# top-52, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 1282@Int), count, 0)
+# top-53, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 1282@Int), count, 1)
+# top-54, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 1282@Int), count, 2)
+# top-55, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 92@Int), count, 0)
+# top-56, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 92@Int), count, 1)
+# top-57, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 92@Int), count, 2)
+# top-58, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 56@Int), count, 0)
+# top-59, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 56@Int), count, 1)
+# top-60, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 56@Int), count, 2)
+# top-61, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 1282@Int), count, 0)
+# top-62, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 1282@Int), count, 1)
+# top-63, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 1282@Int), count, 2)
+# top-64, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 92@Int), count, 0)
+# top-65, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 92@Int), count, 1)
+# top-66, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 92@Int), count, 2)
+# top-67, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 1282@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-68, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 1282@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-69, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 92@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-70, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 92@Int), /, 2, blue@Str, blue@Str, 1)
+# top-71, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 1282@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-72, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 1282@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-73, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 1282@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-74, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 92@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-75, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 92@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-76, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 56@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-77, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <=, 1, 56@Int), /, 2, blue@Str, blue@Str, 1)
+# top-78, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, Yamato highland@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-79, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, Yamato highland@Str), /, 2, blue@Str, blue@Str, 1)
+# top-80, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, Gojō, Yoshino@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-81, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, Gojō, Yoshino@Str), /, 2, blue@Str, blue@Str, 1)
+# top-82, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-83, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), /, 2, blue@Str, blue@Str, 1)
+# top-84, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, 1282@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-85, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, 1282@Int), /, 2, blue@Str, blue@Str, 1)
+# top-86, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, 92@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-87, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, 92@Int), /, 2, blue@Str, blue@Str, 1)
+# top-88, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, 56@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-89, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, 56@Int), /, 2, blue@Str, blue@Str, 1)
+# top-90, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 2, blue@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-91, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 2, blue@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-92, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, ==, 2, blue@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-93, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 1282@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-94, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 1282@Int), /, 2, blue@Str, blue@Str, 1)
+# top-95, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 92@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-96, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 92@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-97, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 56@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-98, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 56@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-99, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >=, 1, 56@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-100, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >, 1, 92@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-101, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >, 1, 92@Int), /, 2, blue@Str, blue@Str, 1)
+# top-102, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >, 1, 56@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-103, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, >, 1, 56@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-104, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Yamato highland@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-105, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Yamato highland@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-106, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 1282@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-107, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 1282@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-108, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 1282@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-109, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Gojō, Yoshino@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-110, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Gojō, Yoshino@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-111, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, color@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-112, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, color@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-113, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, color@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-114, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 92@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-115, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 92@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-116, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 92@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-117, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, District@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-118, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, District@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-119, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, District@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-120, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 56@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-121, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 56@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-122, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, 56@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-123, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Yamato flat inland plain@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-124, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Yamato flat inland plain@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-125, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, blue@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-126, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, blue@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-127, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, blue@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-128, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Population@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-129, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Population@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-130, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 0, Population@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-131, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, Yamato highland@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-132, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, Yamato highland@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-133, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, Yamato highland@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-134, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, 1282@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-135, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, 1282@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-136, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, Gojō, Yoshino@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-137, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, Gojō, Yoshino@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-138, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, Gojō, Yoshino@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-139, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, color@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-140, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, color@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-141, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, color@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-142, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, 92@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-143, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, 92@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-144, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, District@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-145, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, District@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-146, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, District@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-147, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, 56@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-148, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, 56@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-149, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, Yamato flat inland plain@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-150, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, Yamato flat inland plain@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-151, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, Yamato flat inland plain@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-152, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, blue@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-153, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, blue@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-154, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, blue@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-155, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, Population@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-156, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, Population@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-157, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 1, Population@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-158, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, Yamato highland@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-159, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, Yamato highland@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-160, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, Yamato highland@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-161, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, 1282@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-162, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, 1282@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-163, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, 1282@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-164, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, Gojō, Yoshino@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-165, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, Gojō, Yoshino@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-166, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, Gojō, Yoshino@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-167, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, color@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-168, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, color@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-169, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, color@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-170, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, 92@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-171, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, 92@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-172, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, 92@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-173, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, District@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-174, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, District@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-175, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, District@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-176, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, 56@Int), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-177, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, 56@Int), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-178, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, 56@Int), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-179, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, Yamato flat inland plain@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-180, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, Yamato flat inland plain@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-181, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, Yamato flat inland plain@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-182, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, Population@Str), /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-183, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, Population@Str), /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-184, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, !=, 2, Population@Str), /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)
+# top-185, score: 0.00, answer: [1]
+  # tprog: Contrast(@param0, /, 0, Yamato highland@Str, Yamato highland@Str, 1)
+# top-186, score: 0.00, answer: [1]
+  # tprog: Contrast(@param0, /, 0, Gojō, Yoshino@Str, Gojō, Yoshino@Str, 1)
+# top-187, score: 0.00, answer: [1]
+  # tprog: Contrast(@param0, /, 0, Yamato flat inland plain@Str, Yamato flat inland plain@Str, 1)

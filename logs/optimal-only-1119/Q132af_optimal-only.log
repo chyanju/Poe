@@ -1,0 +1,103 @@
+# parsed arguments: Namespace(benchmark='Q132af', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'180000', '3095000', 'taxi', 'color', '3939000', 'lrt', 'bus', 'blue', 'mrt', '954000', 'transportation', 'ridership'}
+# input type: [dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+   ridership transportation color
+0    3939000            Bus  blue
+1    3095000            MRT  blue
+2     954000           Taxi  blue
+3     180000            LRT  blue
+# query is: Is the average daily ridership by bus greater than that by both MRT and taxi?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0    Yes
+# inferred DSL terminals:
+  # ConstVal: ['Taxi@Str', 'ridership@Str', 'Bus@Str', 'MRT@Str', '<NULL>']
+     # cmap: [('ridership', 'ridership'), ('mrt', 'MRT'), ('taxi', 'Taxi'), ('bus', 'Bus')]
+  # AggrFunc: ['mean', '<NULL>']
+     # amap: [('average', 'mean')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['>', '>=', '==', '<NULL>']
+     # bmap: [(None, '=='), ('greater', '>='), ('greater', '>')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 3939000.0}]
+  # found 5 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Bus@Str), ==, 1, Bus@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'transportation', 'Bus'], '==', 'transportation', 'Bus'], ['ridership']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Bus@Str), ==, 1, Bus@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'transportation', 'Bus'], '==', 'transportation', 'Bus'], ['ridership']]
+    # Summarize(SelectRow1(@param0, ==, 1, Bus@Str), mean, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'transportation', 'Bus'], 'mean', 'ridership']
+    # SelectCol(SelectRow1(@param0, ==, 1, Bus@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'transportation', 'Bus'], ['ridership']]
+    # SelectCol(SelectRow1(@param0, ==, 1, Bus@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'transportation', 'Bus'], ['ridership']]
+# (t=3.99) i=1, candidate=[{'ANSWER': 3095000.0}]
+  # found 5 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, MRT@Str), ==, 1, MRT@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'transportation', 'MRT'], '==', 'transportation', 'MRT'], ['ridership']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, MRT@Str), ==, 1, MRT@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'transportation', 'MRT'], '==', 'transportation', 'MRT'], ['ridership']]
+    # Summarize(SelectRow1(@param0, ==, 1, MRT@Str), mean, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'transportation', 'MRT'], 'mean', 'ridership']
+    # SelectCol(SelectRow1(@param0, ==, 1, MRT@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'transportation', 'MRT'], ['ridership']]
+    # SelectCol(SelectRow1(@param0, ==, 1, MRT@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'transportation', 'MRT'], ['ridership']]
+# (t=7.98) i=2, candidate=[{'ANSWER': 954000.0}]
+  # found 5 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Taxi@Str), ==, 1, Taxi@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'transportation', 'Taxi'], '==', 'transportation', 'Taxi'], ['ridership']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Taxi@Str), ==, 1, Taxi@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'transportation', 'Taxi'], '==', 'transportation', 'Taxi'], ['ridership']]
+    # Summarize(SelectRow1(@param0, ==, 1, Taxi@Str), mean, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'transportation', 'Taxi'], 'mean', 'ridership']
+    # SelectCol(SelectRow1(@param0, ==, 1, Taxi@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'transportation', 'Taxi'], ['ridership']]
+    # SelectCol(SelectRow1(@param0, ==, 1, Taxi@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'transportation', 'Taxi'], ['ridership']]
+# (t=12.29) i=3, candidate=[{'ANSWER': 3517000.0}]
+  # found 0 program(s)
+# (t=16.29) i=4, candidate=[{'ANSWER': 2446500.0}]
+  # found 0 program(s)
+# (t=20.26) i=5, candidate=[{'ANSWER': 2024500.0}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.33, answer: [3939000.0]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Bus@Str), mean, 0)
+# top-2, score: 2.33, answer: [3095000.0]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, MRT@Str), mean, 0)
+# top-3, score: 2.33, answer: [954000.0]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Taxi@Str), mean, 0)
+# top-4, score: 2.28, answer: [3939000.0]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, Bus@Str), ['0'])
+# top-5, score: 2.28, answer: [3939000.0]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, Bus@Str), ['-1', '-2'])
+# top-6, score: 2.28, answer: [3095000.0]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, MRT@Str), ['0'])
+# top-7, score: 2.28, answer: [3095000.0]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, MRT@Str), ['-1', '-2'])
+# top-8, score: 2.28, answer: [954000.0]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, Taxi@Str), ['0'])
+# top-9, score: 2.28, answer: [954000.0]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, Taxi@Str), ['-1', '-2'])
+# top-10, score: 2.22, answer: [3939000.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Bus@Str), ==, 1, Bus@Str), ['0'])
+# top-11, score: 2.22, answer: [3939000.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Bus@Str), ==, 1, Bus@Str), ['-1', '-2'])
+# top-12, score: 2.22, answer: [3095000.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, MRT@Str), ==, 1, MRT@Str), ['0'])
+# top-13, score: 2.22, answer: [3095000.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, MRT@Str), ==, 1, MRT@Str), ['-1', '-2'])
+# top-14, score: 2.22, answer: [954000.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Taxi@Str), ==, 1, Taxi@Str), ['0'])
+# top-15, score: 2.22, answer: [954000.0]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Taxi@Str), ==, 1, Taxi@Str), ['-1', '-2'])

@@ -1,0 +1,94 @@
+# parsed arguments: Namespace(benchmark='Qa977b', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'democratic', 'voters', 'color', 'parties', '28608', 'republican', '19258', 'unaffiliated', 'minor', 'blue', '27180', 'party', '140', 'total'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+           Party  Total voters color
+0     Republican         19258  blue
+1     Democratic         28608  blue
+2   Unaffiliated         27180  blue
+3  Minor parties           140  blue
+# query is: How many more Unaffiliated voters are there than Republican voters?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0    7922
+# inferred DSL terminals:
+  # ConstVal: ['Republican@Str', 'Unaffiliated@Str', 'Total voters@Str', '<NULL>']
+     # cmap: [('republican', 'Republican'), ('unaffiliated', 'Unaffiliated'), ('voters', 'Total voters')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['==', '>', '>=', '<NULL>']
+     # bmap: [('more', '>='), (None, '=='), ('more', '>')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(7922, 4), (-7922, 4)]
+  # [debug] high_values (no dup.): [(7922, 4), (-7922, 4)]
+  # [debug] filtered low_values (no dup.): [(27040, 2), (19118, 2), (9350, 2), (1428, 2), (-1428, 2), (-9350, 2), (-19118, 2), (-27040, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 6 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, Republican@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Party', 'Republican'], 'count', 'Party']
+    # Summarize(SelectRow1(@param0, ==, 0, Republican@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Party', 'Republican'], 'count', 'Total voters']
+    # Summarize(SelectRow1(@param0, ==, 0, Republican@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Party', 'Republican'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Unaffiliated@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Party', 'Unaffiliated'], 'count', 'Party']
+    # Summarize(SelectRow1(@param0, ==, 0, Unaffiliated@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Party', 'Unaffiliated'], 'count', 'Total voters']
+    # Summarize(SelectRow1(@param0, ==, 0, Unaffiliated@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Party', 'Unaffiliated'], 'count', 'color']
+# (t=2.89) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=5.68) i=2, candidate=[{'ANSWER': 3}]
+  # found 0 program(s)
+# (t=8.45) i=3, candidate=[{'ANSWER': 7922}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Unaffiliated@Str, Republican@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Party', 'Unaffiliated', 'Republican', 'Total voters']
+# (t=11.23) i=4, candidate=[{'ANSWER': -7922}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Republican@Str, Unaffiliated@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Party', 'Republican', 'Unaffiliated', 'Total voters']
+# (t=14.28) i=5, candidate=[{'ANSWER': 27040}]
+  # found 0 program(s)
+# (t=17.02) i=6, candidate=[{'ANSWER': 19118}]
+  # found 0 program(s)
+# (t=19.78) i=7, candidate=[{'ANSWER': 9350}]
+  # found 0 program(s)
+# (t=22.57) i=8, candidate=[{'ANSWER': 1428}]
+  # found 0 program(s)
+# (t=25.34) i=9, candidate=[{'ANSWER': -1428}]
+  # found 0 program(s)
+# (t=28.08) i=10, candidate=[{'ANSWER': -9350}]
+  # found 0 program(s)
+# (t=31.18) i=11, candidate=[{'ANSWER': -19118}]
+  # found 0 program(s)
+# (t=33.94) i=12, candidate=[{'ANSWER': -27040}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.54, answer: [7922]
+  # tprog: Contrast(@param0, -, 0, Unaffiliated@Str, Republican@Str, 1)
+# top-2, score: 2.54, answer: [-7922]
+  # tprog: Contrast(@param0, -, 0, Republican@Str, Unaffiliated@Str, 1)
+# top-3, score: 2.42, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Republican@Str), count, 1)
+# top-4, score: 2.42, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Unaffiliated@Str), count, 1)
+# top-5, score: 2.33, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Republican@Str), count, 0)
+# top-6, score: 2.33, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Republican@Str), count, 2)
+# top-7, score: 2.33, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Unaffiliated@Str), count, 0)
+# top-8, score: 2.33, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Unaffiliated@Str), count, 2)

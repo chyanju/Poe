@@ -1,0 +1,175 @@
+# parsed arguments: Namespace(benchmark='Qdb5ba', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'61', '49', '19', 'blue', '10', '17', 'spirituality', 'staying', '7', 'red', '3', '47', '20', 'buddhists', '6', '67', 'growing', '63', '65', 'mormons', '11', 'shrinking', '24', 'pagan/earth-based', 'am.', 'catholics', 'growth?', 'other', 'percentage', 'orange', 'native', 'jews', '34', '1', '73', 'color', 'orthodox', 'muslims', '13', '51', 'unaffiliated', '37', 'same', 'non-christian', 'religion', '42', '14', 'christian', 'hindus', '68', '12', 'protestants', '8'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                   Religion           Growth?  Percentage   color
+0                   Muslims           Growing          51    blue
+1                   Muslims  Staying the same          37     red
+2                   Muslims         Shrinking           7  orange
+3               Protestants           Growing          47    blue
+4               Protestants  Staying the same          42     red
+5               Protestants         Shrinking           6  orange
+6         Pagan/earth-based           Growing          34    blue
+7         Pagan/earth-based  Staying the same          49     red
+8         Pagan/earth-based         Shrinking           8  orange
+9   Native Am. Spirituality           Growing          24    blue
+10  Native Am. Spirituality  Staying the same          61     red
+11  Native Am. Spirituality         Shrinking           6  orange
+12                     Jews           Growing          19    blue
+13                     Jews  Staying the same          61     red
+14                     Jews         Shrinking           8  orange
+15                Catholics           Growing          14    blue
+16                Catholics  Staying the same          61     red
+17                Catholics         Shrinking          20  orange
+18             Unaffiliated           Growing          12    blue
+19             Unaffiliated  Staying the same          63     red
+20             Unaffiliated         Shrinking          17  orange
+21      Other non-Christian           Growing          13    blue
+22      Other non-Christian  Staying the same          65     red
+23      Other non-Christian         Shrinking           8  orange
+24                Buddhists           Growing          12    blue
+25                Buddhists  Staying the same          67     red
+26                Buddhists         Shrinking           8  orange
+27                  Mormons           Growing           3    blue
+28                  Mormons  Staying the same          68     red
+29                  Mormons         Shrinking          11  orange
+30       Orthodox Christian           Growing           3    blue
+31       Orthodox Christian  Staying the same          68     red
+32       Orthodox Christian         Shrinking          10  orange
+33                   Hindus           Growing           1    blue
+34                   Hindus  Staying the same          73     red
+35                   Hindus         Shrinking           8  orange
+# query is: Which group has the highest percentage of staying the same?
+# expected output type:[dtype('O')]
+# expected output is:
+   ANSWER
+0  Hindus
+# inferred DSL terminals:
+  # ConstVal: ['Percentage@Str', 'Staying the same@Str', '<NULL>']
+     # cmap: [('same', 'Staying the same'), ('percentage', 'Percentage'), ('staying', 'Staying the same')]
+  # AggrFunc: ['max', '<NULL>']
+     # amap: [('highest', 'max')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('highest', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Mormons'}]
+  # found 0 program(s)
+# (t=2.18) i=1, candidate=[{'ANSWER': 'Hindus'}, {'ANSWER': 'Mormons'}]
+  # found 0 program(s)
+# (t=4.33) i=2, candidate=[{'ANSWER': 'Mormons'}, {'ANSWER': 'Muslims'}]
+  # found 0 program(s)
+# (t=6.48) i=3, candidate=[{'ANSWER': 'Jews'}, {'ANSWER': 'Mormons'}]
+  # found 0 program(s)
+# (t=8.85) i=4, candidate=[{'ANSWER': 'Mormons'}, {'ANSWER': 'Orthodox Christian'}]
+  # found 0 program(s)
+# (t=10.99) i=5, candidate=[{'ANSWER': 'Mormons'}, {'ANSWER': 'Other non-Christian'}]
+  # found 0 program(s)
+# (t=13.14) i=6, candidate=[{'ANSWER': 'Buddhists'}, {'ANSWER': 'Mormons'}]
+  # found 0 program(s)
+# (t=15.28) i=7, candidate=[{'ANSWER': 'Mormons'}, {'ANSWER': 'Unaffiliated'}]
+  # found 0 program(s)
+# (t=17.72) i=8, candidate=[{'ANSWER': 'Catholics'}, {'ANSWER': 'Mormons'}]
+  # found 0 program(s)
+# (t=19.87) i=9, candidate=[{'ANSWER': 'Mormons'}, {'ANSWER': 'Pagan/earth-based'}]
+  # found 0 program(s)
+# (t=22.01) i=10, candidate=[{'ANSWER': 'Mormons'}, {'ANSWER': 'Protestants'}]
+  # found 0 program(s)
+# (t=24.17) i=11, candidate=[{'ANSWER': 'Mormons'}, {'ANSWER': 'Native Am. Spirituality'}]
+  # found 0 program(s)
+# (t=26.62) i=12, candidate=[{'ANSWER': 'Hindus'}]
+  # found 13 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Staying the same@Str), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Growth?', 'Staying the same'], 'eqmax', 'Percentage'], ['Religion']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Religion'], 'max', 'Percentage'], 'eqmax', 'COL0'], ['Religion']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Religion'], 'max', 'Percentage'], 'eqmax', 'COL0'], ['Religion']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Religion', 'Growth?'], 'max', 'Percentage'], 'eqmax', 'COL0'], ['Religion']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Religion', 'Growth?'], 'max', 'Percentage'], 'eqmax', 'COL0'], ['Religion']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Religion', 'Percentage'], 'max', 'Percentage'], 'eqmax', 'Percentage'], ['Religion']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Religion', 'Percentage'], 'max', 'Percentage'], 'eqmax', 'Percentage'], ['Religion']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Religion', 'Percentage'], 'max', 'Percentage'], 'eqmax', 'COL0'], ['Religion']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Religion', 'Percentage'], 'max', 'Percentage'], 'eqmax', 'COL0'], ['Religion']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Religion', 'color'], 'max', 'Percentage'], 'eqmax', 'COL0'], ['Religion']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Religion', 'color'], 'max', 'Percentage'], 'eqmax', 'COL0'], ['Religion']]
+    # SelectCol(SelectRow0(@param0, eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'Percentage'], ['Religion']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Staying the same@Str), ==, 1, Staying the same@Str), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Growth?', 'Staying the same'], '==', 'Growth?', 'Staying the same'], 'eqmax', 'Percentage'], ['Religion']]
+# (t=28.81) i=13, candidate=[{'ANSWER': 'Hindus'}, {'ANSWER': 'Muslims'}]
+  # found 0 program(s)
+# (t=30.95) i=14, candidate=[{'ANSWER': 'Hindus'}, {'ANSWER': 'Jews'}]
+  # found 0 program(s)
+# (t=33.11) i=15, candidate=[{'ANSWER': 'Hindus'}, {'ANSWER': 'Orthodox Christian'}]
+  # found 0 program(s)
+# (t=35.27) i=16, candidate=[{'ANSWER': 'Hindus'}, {'ANSWER': 'Other non-Christian'}]
+  # found 0 program(s)
+# (t=37.77) i=17, candidate=[{'ANSWER': 'Buddhists'}, {'ANSWER': 'Hindus'}]
+  # found 0 program(s)
+# (t=39.91) i=18, candidate=[{'ANSWER': 'Hindus'}, {'ANSWER': 'Unaffiliated'}]
+  # found 0 program(s)
+# (t=42.05) i=19, candidate=[{'ANSWER': 'Catholics'}, {'ANSWER': 'Hindus'}]
+  # found 0 program(s)
+# (t=44.20) i=20, candidate=[{'ANSWER': 'Hindus'}, {'ANSWER': 'Pagan/earth-based'}]
+  # found 0 program(s)
+# (t=46.63) i=21, candidate=[{'ANSWER': 'Hindus'}, {'ANSWER': 'Protestants'}]
+  # found 0 program(s)
+# (t=48.78) i=22, candidate=[{'ANSWER': 'Hindus'}, {'ANSWER': 'Native Am. Spirituality'}]
+  # found 0 program(s)
+# (t=50.93) i=23, candidate=[{'ANSWER': 'Muslims'}]
+  # found 0 program(s)
+# (t=53.08) i=24, candidate=[{'ANSWER': 'Jews'}, {'ANSWER': 'Muslims'}]
+  # found 0 program(s)
+# (t=55.23) i=25, candidate=[{'ANSWER': 'Muslims'}, {'ANSWER': 'Orthodox Christian'}]
+  # found 0 program(s)
+# (t=57.69) i=26, candidate=[{'ANSWER': 'Muslims'}, {'ANSWER': 'Other non-Christian'}]
+  # found 0 program(s)
+# (t=59.83) i=27, candidate=[{'ANSWER': 'Buddhists'}, {'ANSWER': 'Muslims'}]
+  # found 0 program(s)
+# (t=61.98) i=28, candidate=[{'ANSWER': 'Muslims'}, {'ANSWER': 'Unaffiliated'}]
+  # found 0 program(s)
+# (t=64.12) i=29, candidate=[{'ANSWER': 'Catholics'}, {'ANSWER': 'Muslims'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.50, answer: ['Hindus']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Staying the same@Str), eqmax, 2), ['0'])
+# top-2, score: 2.47, answer: ['Hindus']
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Staying the same@Str), ==, 1, Staying the same@Str), eqmax, 2), ['0'])
+# top-3, score: 1.37, answer: ['Hindus']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 2), ['0'])
+# top-4, score: 1.30, answer: ['Hindus']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['0'])
+# top-5, score: 1.30, answer: ['Hindus']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 2), eqmax, 1), ['-1'])
+# top-6, score: 1.29, answer: ['Hindus']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['0'])
+# top-7, score: 1.29, answer: ['Hindus']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-8, score: 1.29, answer: ['Hindus']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['0'])
+# top-9, score: 1.29, answer: ['Hindus']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+# top-10, score: 1.29, answer: ['Hindus']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['0'])
+# top-11, score: 1.29, answer: ['Hindus']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-12, score: 1.29, answer: ['Hindus']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['0'])
+# top-13, score: 1.29, answer: ['Hindus']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], max, 2), eqmax, 2), ['-1', '-2'])

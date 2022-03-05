@@ -1,0 +1,138 @@
+# parsed arguments: Namespace(benchmark='Qb50e8', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'category', '-0.21', '-1.29', '2.55', '1.77', 'rainfall', '-1.05', 'red', 'percentage', '7.5', '2.98', 'sunshine', 'color', 'thatcher', 'blue', '0.76', '-3.62', 'blair', '-1.71', 'brown', '8.8', '-3.95', 'orange', '11.53', 'temperature', '-4.18', 'administration', 'major', 'cameron', '3.14'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+   administration     category  percentage   color
+0           Major  Temperature        2.98     red
+1           Major     Sunshine        2.55  orange
+2           Major     Rainfall       -3.62    blue
+3           Brown  Temperature       -3.95     red
+4           Brown     Sunshine        1.77  orange
+5           Brown     Rainfall       -0.21    blue
+6         Cameron  Temperature       -4.18     red
+7         Cameron     Sunshine       -1.29  orange
+8         Cameron     Rainfall       -1.71    blue
+9           Blair  Temperature        7.50     red
+10          Blair     Sunshine        3.14  orange
+11          Blair     Rainfall        8.80    blue
+12       Thatcher  Temperature        0.76     red
+13       Thatcher     Sunshine       -1.05  orange
+14       Thatcher     Rainfall       11.53    blue
+# query is: Which administration has a -1.29% of sunshine?
+# expected output type:[dtype('O')]
+# expected output is:
+    ANSWER
+0  Cameron
+# inferred DSL terminals:
+  # ConstVal: ['administration@Str', 'Sunshine@Str', '-1.29@Float', '<NULL>']
+     # cmap: [('administration', 'administration'), ('sunshine', 'Sunshine'), (-1.29, -1.29)]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Blair'}]
+  # found 0 program(s)
+# ====> fallback strategy (retrieval) is triggered because no explanation is found so far
+# ====> retrieval_values: [-0.21, -1.05, -1.29, -1.71, -3.62, -3.95, -4.18, 0.76, 1.77, 11.53, 2.55, 2.98, 3.14, 7.5, 8.8, 'Blair', 'Brown', 'Cameron', 'Major', 'Rainfall', 'Sunshine', 'Temperature', 'Thatcher', 'administration', 'blue', 'category', 'color', 'orange', 'percentage', 'red']
+# (t=1.83) fallback i=0, candidate=[{'ANSWER': -0.21}]
+  # found 0 program(s)
+# (t=3.65) fallback i=1, candidate=[{'ANSWER': -1.05}]
+  # found 0 program(s)
+# (t=5.47) fallback i=2, candidate=[{'ANSWER': -1.29}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Sunshine@Str), ==, 2, -1.29@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'category', 'Sunshine'], '==', 'percentage', -1.29], ['percentage']]
+    # SelectCol(SelectRow1(@param0, ==, 2, -1.29@Float), ['2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'percentage', -1.29], ['percentage']]
+# (t=7.30) fallback i=3, candidate=[{'ANSWER': -1.71}]
+  # found 0 program(s)
+# (t=9.13) fallback i=4, candidate=[{'ANSWER': -3.62}]
+  # found 0 program(s)
+# (t=10.97) fallback i=5, candidate=[{'ANSWER': -3.95}]
+  # found 0 program(s)
+# (t=12.80) fallback i=6, candidate=[{'ANSWER': -4.18}]
+  # found 0 program(s)
+# (t=14.62) fallback i=7, candidate=[{'ANSWER': 0.76}]
+  # found 0 program(s)
+# (t=16.44) fallback i=8, candidate=[{'ANSWER': 1.77}]
+  # found 0 program(s)
+# (t=18.28) fallback i=9, candidate=[{'ANSWER': 11.53}]
+  # found 0 program(s)
+# (t=20.13) fallback i=10, candidate=[{'ANSWER': 2.55}]
+  # found 0 program(s)
+# (t=21.97) fallback i=11, candidate=[{'ANSWER': 2.98}]
+  # found 0 program(s)
+# (t=23.80) fallback i=12, candidate=[{'ANSWER': 3.14}]
+  # found 0 program(s)
+# (t=25.63) fallback i=13, candidate=[{'ANSWER': 7.5}]
+  # found 0 program(s)
+# (t=27.47) fallback i=14, candidate=[{'ANSWER': 8.8}]
+  # found 0 program(s)
+# (t=29.32) fallback i=15, candidate=[{'ANSWER': 'Blair'}]
+  # found 0 program(s)
+# (t=31.17) fallback i=16, candidate=[{'ANSWER': 'Brown'}]
+  # found 0 program(s)
+# (t=33.01) fallback i=17, candidate=[{'ANSWER': 'Cameron'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Sunshine@Str), ==, 2, -1.29@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'category', 'Sunshine'], '==', 'percentage', -1.29], ['administration']]
+    # SelectCol(SelectRow1(@param0, ==, 2, -1.29@Float), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'percentage', -1.29], ['administration']]
+# (t=34.86) fallback i=18, candidate=[{'ANSWER': 'Major'}]
+  # found 0 program(s)
+# (t=36.69) fallback i=19, candidate=[{'ANSWER': 'Rainfall'}]
+  # found 0 program(s)
+# (t=38.53) fallback i=20, candidate=[{'ANSWER': 'Sunshine'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Sunshine@Str), ==, 2, -1.29@Float), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'category', 'Sunshine'], '==', 'percentage', -1.29], ['category']]
+    # SelectCol(SelectRow1(@param0, ==, 2, -1.29@Float), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'percentage', -1.29], ['category']]
+# (t=40.37) fallback i=21, candidate=[{'ANSWER': 'Temperature'}]
+  # found 0 program(s)
+# (t=42.21) fallback i=22, candidate=[{'ANSWER': 'Thatcher'}]
+  # found 0 program(s)
+# (t=44.04) fallback i=23, candidate=[{'ANSWER': 'administration'}]
+  # found 0 program(s)
+# (t=45.41) fallback i=24, candidate=[{'ANSWER': 'blue'}]
+  # found 0 program(s)
+# (t=47.24) fallback i=25, candidate=[{'ANSWER': 'category'}]
+  # found 0 program(s)
+# (t=48.62) fallback i=26, candidate=[{'ANSWER': 'color'}]
+  # found 0 program(s)
+# (t=49.99) fallback i=27, candidate=[{'ANSWER': 'orange'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Sunshine@Str), ==, 2, -1.29@Float), ['3'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'category', 'Sunshine'], '==', 'percentage', -1.29], ['color']]
+    # SelectCol(SelectRow1(@param0, ==, 2, -1.29@Float), ['3'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'percentage', -1.29], ['color']]
+# (t=51.83) fallback i=28, candidate=[{'ANSWER': 'percentage'}]
+  # found 0 program(s)
+# (t=53.21) fallback i=29, candidate=[{'ANSWER': 'red'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.52, answer: ['Cameron']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Sunshine@Str), ==, 2, -1.29@Float), ['0'])
+# top-2, score: 2.38, answer: [-1.29]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Sunshine@Str), ==, 2, -1.29@Float), ['2'])
+# top-3, score: 2.38, answer: ['Sunshine']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Sunshine@Str), ==, 2, -1.29@Float), ['1'])
+# top-4, score: 2.38, answer: ['orange']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Sunshine@Str), ==, 2, -1.29@Float), ['3'])
+# top-5, score: 1.43, answer: ['Cameron']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 2, -1.29@Float), ['0'])
+# top-6, score: 1.29, answer: [-1.29]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 2, -1.29@Float), ['2'])
+# top-7, score: 1.29, answer: ['Sunshine']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 2, -1.29@Float), ['1'])
+# top-8, score: 1.29, answer: ['orange']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 2, -1.29@Float), ['3'])

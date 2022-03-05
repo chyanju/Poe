@@ -1,0 +1,68 @@
+# parsed arguments: Namespace(benchmark='Qaee6b', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'color', '69', 'blue', 'or', 'disagree', 'percentage', '82', 'agree', 'neither', 'strongly', '53'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                       agree  percentage color
+0             Strongly agree          82  blue
+1  Neither agree or disagree          69  blue
+2          Strongly disagree          53  blue
+# query is: What is the total value of the three bars (Strongly agree, Neither agree or disagree, Strongly disagree)?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0     204
+# inferred DSL terminals:
+  # ConstVal: ['Strongly agree@Str', 'Strongly disagree@Str', 'Neither agree or disagree@Str', 'agree@Str', '<NULL>']
+     # cmap: [('strongly', 'Strongly disagree'), ('neither', 'Neither agree or disagree'), ('strongly', 'Strongly agree'), ('or', 'Neither agree or disagree'), ('agree', 'agree'), ('agree', 'Strongly agree'), ('agree', 'Neither agree or disagree'), ('disagree', 'Strongly disagree'), ('disagree', 'Neither agree or disagree')]
+  # AggrFunc: ['count', 'sum', '<NULL>']
+     # amap: [('total', 'count'), ('total', 'sum')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (selection) is triggered
+  # [debug] fallback (selection) answers: ['Strongly agree', 'Strongly disagree', 'Neither agree or disagree', 'agree']
+  # [debug] fallback (selection) answers (no dup.): ['Strongly agree', 'Strongly disagree', 'Neither agree or disagree', 'agree']
+  # [debug] 4 fallback (selection) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': '<type error>'}]
+  # found 0 program(s)
+# (t=1.75) i=1, candidate=[{'ANSWER': 'Strongly agree'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Strongly agree@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'agree', 'Strongly agree'], ['agree']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Strongly agree@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'agree', 'Strongly agree'], ['agree']]
+# (t=3.71) i=2, candidate=[{'ANSWER': 'Strongly disagree'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Strongly disagree@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'agree', 'Strongly disagree'], ['agree']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Strongly disagree@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'agree', 'Strongly disagree'], ['agree']]
+# (t=5.67) i=3, candidate=[{'ANSWER': 'Neither agree or disagree'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Neither agree or disagree@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'agree', 'Neither agree or disagree'], ['agree']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Neither agree or disagree@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'agree', 'Neither agree or disagree'], ['agree']]
+# (t=7.60) i=4, candidate=[{'ANSWER': 'agree'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.38, answer: Neither agree or disagree
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Neither agree or disagree@Str), ['0'])
+# top-2, score: 2.38, answer: Neither agree or disagree
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Neither agree or disagree@Str), ['-1', '-2'])
+# top-3, score: 2.32, answer: Strongly disagree
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Strongly disagree@Str), ['0'])
+# top-4, score: 2.32, answer: Strongly disagree
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Strongly disagree@Str), ['-1', '-2'])
+# top-5, score: 2.26, answer: Strongly agree
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Strongly agree@Str), ['0'])
+# top-6, score: 2.26, answer: Strongly agree
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Strongly agree@Str), ['-1', '-2'])

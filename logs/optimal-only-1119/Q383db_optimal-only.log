@@ -1,0 +1,65 @@
+# parsed arguments: Namespace(benchmark='Q383db', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'usa', '456310000', 'che', '2289930000', 'deu', 'ita', '1802720000', 'fra', 'prt', '672630000', 'can', '2329560000', '1363080000', '18014480000', '4769530000', '1372000000', 'esp', 'donation', '1890450000', '776670000', '372190000', 'fin', 'gbr', 'nor', 'country', '4870750000', 'bel', '799520000', 'blue', 'irl', 'swe', '1349570000', '405800000', 'jpn', 'dnk', 'color', '5404860000', 'aut', 'kor', 'nld', '2301450000', 'aus', '458880000', '7020280000'}
+# input type: [dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+       donation Country color
+0   18014480000     USA  blue
+1    7020280000     JPN  blue
+2    5404860000     FRA  blue
+3    4870750000     DEU  blue
+4    4769530000     GBR  blue
+5    2329560000     CAN  blue
+6    2301450000     AUS  blue
+7    2289930000     ESP  blue
+8    1890450000     NLD  blue
+9    1802720000     NOR  blue
+10   1372000000     BEL  blue
+11   1363080000     SWE  blue
+12   1349570000     DNK  blue
+13    799520000     KOR  blue
+14    776670000     CHE  blue
+15    672630000     ITA  blue
+16    458880000     IRL  blue
+17    456310000     FIN  blue
+18    405800000     AUT  blue
+19    372190000     PRT  blue
+# query is: What is the donation value for DEU?
+# expected output type:[dtype('int64')]
+# expected output is:
+       ANSWER
+0  4870750000
+# inferred DSL terminals:
+  # ConstVal: ['donation@Str', 'DEU@Str', '<NULL>']
+     # cmap: [('deu', 'DEU'), ('donation', 'donation')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 4870750000}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, DEU@Str), ==, 1, DEU@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'DEU'], '==', 'Country', 'DEU'], ['donation']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, DEU@Str), ==, 1, DEU@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'DEU'], '==', 'Country', 'DEU'], ['donation']]
+    # SelectCol(SelectRow1(@param0, ==, 1, DEU@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'DEU'], ['donation']]
+    # SelectCol(SelectRow1(@param0, ==, 1, DEU@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'DEU'], ['donation']]
+
+# ========== review report ========== #
+# top-1, score: 2.43, answer: [4870750000]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, DEU@Str), ['0'])
+# top-2, score: 2.43, answer: [4870750000]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, DEU@Str), ['-1', '-2'])
+# top-3, score: 2.38, answer: [4870750000]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, DEU@Str), ==, 1, DEU@Str), ['0'])
+# top-4, score: 2.38, answer: [4870750000]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, DEU@Str), ==, 1, DEU@Str), ['-1', '-2'])

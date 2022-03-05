@@ -1,0 +1,134 @@
+# parsed arguments: Namespace(benchmark='Q8c15f', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'oliver', 'dobson', 'jill', '4787', 'majority', 'james', 'margot', 'fraser', '2798', 'candidate', '6482', 'blue', 'frank', 'adrian', '14857', '152', '10070', 'george', 'color', 'votes', 'rainbow', 'weiss'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+              Candidate  Votes color
+0          Frank Dobson  14857  blue
+1           Jill Fraser  10070  blue
+2          Margot James   6482  blue
+3         Adrian Oliver   2798  blue
+4  Rainbow George Weiss    152  blue
+5              Majority   4787  blue
+# query is: How much higher is Frank Dobson compared to Jill Fraser?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0    4787
+# inferred DSL terminals:
+  # ConstVal: ['Jill Fraser@Str', 'Frank Dobson@Str', '<NULL>']
+     # cmap: [('frank', 'Frank Dobson'), ('jill', 'Jill Fraser'), ('fraser', 'Jill Fraser'), ('dobson', 'Frank Dobson')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('higher', '-')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(4787, 9), (-4787, 9)]
+  # [debug] high_values (no dup.): [(4787, 9), (-4787, 9)]
+  # [debug] filtered low_values (no dup.): [(14705, 3), (12059, 3), (10070, 3), (9918, 3), (8375, 3), (7272, 3), (5283, 3), (3588, 3), (-3588, 3), (-5283, 3)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 14857}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Frank Dobson@Str), ==, 0, Frank Dobson@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Candidate', 'Frank Dobson'], '==', 'Candidate', 'Frank Dobson'], ['Votes']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Frank Dobson@Str), ==, 0, Frank Dobson@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Candidate', 'Frank Dobson'], '==', 'Candidate', 'Frank Dobson'], ['Votes']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Frank Dobson@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Frank Dobson'], ['Votes']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Frank Dobson@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Frank Dobson'], ['Votes']]
+# (t=1.24) i=1, candidate=[{'ANSWER': 10070}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ==, 0, Jill Fraser@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Candidate', 'Jill Fraser'], '==', 'Candidate', 'Jill Fraser'], ['Votes']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ==, 0, Jill Fraser@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Candidate', 'Jill Fraser'], '==', 'Candidate', 'Jill Fraser'], ['Votes']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Jill Fraser'], ['Votes']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Jill Fraser'], ['Votes']]
+# (t=2.48) i=2, candidate=[{'ANSWER': 29714}]
+  # found 0 program(s)
+# (t=3.72) i=3, candidate=[{'ANSWER': 24927}]
+  # found 0 program(s)
+# (t=4.97) i=4, candidate=[{'ANSWER': 20140}]
+  # found 0 program(s)
+# (t=6.20) i=5, candidate=[{'ANSWER': 39784}]
+  # found 0 program(s)
+# (t=7.43) i=6, candidate=[{'ANSWER': 34997}]
+  # found 0 program(s)
+# (t=8.64) i=7, candidate=[{'ANSWER': 49854}]
+  # found 0 program(s)
+# (t=9.86) i=8, candidate=[{'ANSWER': 4787}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Frank Dobson@Str, Jill Fraser@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Candidate', 'Frank Dobson', 'Jill Fraser', 'Votes']
+# (t=11.08) i=9, candidate=[{'ANSWER': -4787}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Jill Fraser@Str, Frank Dobson@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Candidate', 'Jill Fraser', 'Frank Dobson', 'Votes']
+# (t=12.30) i=10, candidate=[{'ANSWER': 14705}]
+  # found 0 program(s)
+# (t=13.80) i=11, candidate=[{'ANSWER': 12059}]
+  # found 0 program(s)
+# (t=15.02) i=12, candidate=[{'ANSWER': 10070}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ==, 0, Jill Fraser@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Candidate', 'Jill Fraser'], '==', 'Candidate', 'Jill Fraser'], ['Votes']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ==, 0, Jill Fraser@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Candidate', 'Jill Fraser'], '==', 'Candidate', 'Jill Fraser'], ['Votes']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Jill Fraser'], ['Votes']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Jill Fraser'], ['Votes']]
+# (t=16.23) i=13, candidate=[{'ANSWER': 9918}]
+  # found 0 program(s)
+# (t=17.44) i=14, candidate=[{'ANSWER': 8375}]
+  # found 0 program(s)
+# (t=18.65) i=15, candidate=[{'ANSWER': 7272}]
+  # found 0 program(s)
+# (t=19.87) i=16, candidate=[{'ANSWER': 5283}]
+  # found 0 program(s)
+# (t=21.10) i=17, candidate=[{'ANSWER': 3588}]
+  # found 0 program(s)
+# (t=22.34) i=18, candidate=[{'ANSWER': -3588}]
+  # found 0 program(s)
+# (t=23.56) i=19, candidate=[{'ANSWER': -5283}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.64, answer: [4787]
+  # tprog: Contrast(@param0, -, 0, Frank Dobson@Str, Jill Fraser@Str, 1)
+# top-2, score: 2.64, answer: [-4787]
+  # tprog: Contrast(@param0, -, 0, Jill Fraser@Str, Frank Dobson@Str, 1)
+# top-3, score: 2.34, answer: [14857]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Frank Dobson@Str), ['1'])
+# top-4, score: 2.34, answer: [14857]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Frank Dobson@Str), ['-99', '-2'])
+# top-5, score: 2.34, answer: [10070]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ['1'])
+# top-6, score: 2.34, answer: [10070]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ['-99', '-2'])
+# top-7, score: 2.34, answer: [10070]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ['1'])
+# top-8, score: 2.34, answer: [10070]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ['-99', '-2'])
+# top-9, score: 2.29, answer: [14857]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Frank Dobson@Str), ==, 0, Frank Dobson@Str), ['1'])
+# top-10, score: 2.29, answer: [14857]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Frank Dobson@Str), ==, 0, Frank Dobson@Str), ['-99', '-2'])
+# top-11, score: 2.29, answer: [10070]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ==, 0, Jill Fraser@Str), ['1'])
+# top-12, score: 2.29, answer: [10070]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ==, 0, Jill Fraser@Str), ['-99', '-2'])
+# top-13, score: 2.29, answer: [10070]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ==, 0, Jill Fraser@Str), ['1'])
+# top-14, score: 2.29, answer: [10070]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Jill Fraser@Str), ==, 0, Jill Fraser@Str), ['-99', '-2'])

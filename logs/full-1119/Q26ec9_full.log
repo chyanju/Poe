@@ -1,0 +1,192 @@
+# parsed arguments: Namespace(benchmark='Q26ec9', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'37', 'france', '52', '44', 'remain', 'poland', '23', 'tunisia', 'opinion', '22', '2', 'blue', 'czech', 'germany', '81', 'red', 'britain', '10', '5', '16', 'orange', '24', '35', '34', '12', '18', 'jordan', '40', '26', 'japan', 'pakistan', '83', 'russia', 'u.s.', 'italy', '25', '43', '45', 'india', '33', 'percentage', 'mexico', '32', 'same', '50', 'color', 'spain', '49', '60', '84', '51', 'improve', '20', '75', 'country', '15', '29', '9', '27', 'egypt', 'rep.', 'greece', '13', '47', 'china', '28', 'worsen', 'turkey', 'brazil', 'lebanon', '31'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       Country          opinion  percentage   color
+0       Brazil          Improve          84    blue
+1       Brazil  Remain the same          12  orange
+2       Brazil           Worsen           5     red
+3        China          Improve          83    blue
+4        China  Remain the same           9  orange
+..         ...              ...         ...     ...
+58  Czech Rep.  Remain the same          27  orange
+59  Czech Rep.           Worsen          60     red
+60      Greece          Improve           9    blue
+61      Greece  Remain the same          10  orange
+62      Greece           Worsen          81     red
+
+[63 rows x 4 columns]
+# query is: Which country has the least total percentage of responses?
+# expected output type:[dtype('O')]
+# expected output is:
+   ANSWER
+0  Russia
+# inferred DSL terminals:
+  # ConstVal: ['percentage@Str', 'Country@Str', '<NULL>']
+     # cmap: [('percentage', 'percentage'), ('country', 'Country')]
+  # AggrFunc: ['sum', 'count', 'min', '<NULL>']
+     # amap: [('least', 'min'), ('total', 'sum'), ('total', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('least', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'China'}]
+  # found 27 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'min', 'percentage'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'min', 'percentage'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'opinion'], 'sum', 'percentage'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'opinion'], 'sum', 'percentage'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'opinion'], 'min', 'percentage'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'opinion'], 'min', 'percentage'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'sum', 'percentage'], 'eqmin', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'sum', 'percentage'], 'eqmin', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'sum', 'percentage'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'sum', 'percentage'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'Country'], 'eqmin', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'Country'], 'eqmin', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'opinion'], 'eqmin', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'opinion'], 'eqmin', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'percentage'], 'eqmin', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'percentage'], 'eqmin', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'color'], 'eqmin', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'count', 'color'], 'eqmin', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'min', 'percentage'], 'eqmin', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'min', 'percentage'], 'eqmin', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'min', 'percentage'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'percentage'], 'min', 'percentage'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], sum, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'sum', 'percentage'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], sum, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'sum', 'percentage'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'min', 'percentage'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country', 'color'], 'min', 'percentage'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(@param0, eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'percentage'], ['Country']]
+# (t=3.42) i=1, candidate=[{'ANSWER': 'Tunisia'}]
+  # found 0 program(s)
+# (t=6.65) i=2, candidate=[{'ANSWER': 'Brazil'}]
+  # found 0 program(s)
+# (t=9.98) i=3, candidate=[{'ANSWER': 'Greece'}]
+  # found 0 program(s)
+# (t=13.29) i=4, candidate=[{'ANSWER': 'Japan'}]
+  # found 0 program(s)
+# (t=16.57) i=5, candidate=[{'ANSWER': 'Italy'}]
+  # found 0 program(s)
+# (t=19.93) i=6, candidate=[{'ANSWER': 'Poland'}]
+  # found 0 program(s)
+# (t=23.28) i=7, candidate=[{'ANSWER': 'Czech Rep.'}]
+  # found 0 program(s)
+# (t=26.78) i=8, candidate=[{'ANSWER': 'Russia'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], sum, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'sum', 'percentage'], 'eqmin', 'COL0'], ['Country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], sum, 2), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Country'], 'sum', 'percentage'], 'eqmin', 'COL0'], ['Country']]
+# (t=30.06) i=9, candidate=[{'ANSWER': 'Germany'}]
+  # found 0 program(s)
+# (t=33.32) i=10, candidate=[{'ANSWER': 'France'}]
+  # found 0 program(s)
+# (t=36.60) i=11, candidate=[{'ANSWER': 'Lebanon'}]
+  # found 0 program(s)
+# (t=39.88) i=12, candidate=[{'ANSWER': 'Spain'}]
+  # found 0 program(s)
+# (t=43.17) i=13, candidate=[{'ANSWER': 'India'}]
+  # found 0 program(s)
+# (t=46.46) i=14, candidate=[{'ANSWER': 'Mexico'}]
+  # found 0 program(s)
+# (t=49.79) i=15, candidate=[{'ANSWER': 'Jordan'}]
+  # found 0 program(s)
+# (t=53.15) i=16, candidate=[{'ANSWER': 'Turkey'}]
+  # found 0 program(s)
+# (t=56.54) i=17, candidate=[{'ANSWER': 'U.S.'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.54, answer: ['Russia']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], sum, 2), eqmin, 1), ['0'])
+# top-2, score: 1.54, answer: ['Russia']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], sum, 2), eqmin, 1), ['-1'])
+# top-3, score: 1.54, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 2), eqmin, 2), ['0'])
+# top-4, score: 1.54, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 2), eqmin, 2), ['-1', '-2'])
+# top-5, score: 1.54, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmin, 1), ['0'])
+# top-6, score: 1.54, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmin, 1), ['-1', '-2'])
+# top-7, score: 1.54, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmin, 2), ['0'])
+# top-8, score: 1.54, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmin, 2), ['-1', '-2'])
+# top-9, score: 1.54, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmin, 1), ['0'])
+# top-10, score: 1.54, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 0), eqmin, 1), ['-1', '-2'])
+# top-11, score: 1.54, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmin, 1), ['0'])
+# top-12, score: 1.54, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 1), eqmin, 1), ['-1', '-2'])
+# top-13, score: 1.54, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmin, 1), ['0'])
+# top-14, score: 1.54, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 2), eqmin, 1), ['-1', '-2'])
+# top-15, score: 1.54, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmin, 1), ['0'])
+# top-16, score: 1.54, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], count, 3), eqmin, 1), ['-1', '-2'])
+# top-17, score: 1.54, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], sum, 2), eqmin, 2), ['0'])
+# top-18, score: 1.54, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], sum, 2), eqmin, 2), ['-1', '-2'])
+# top-19, score: 1.50, answer: ['China']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 2), ['0'])
+# top-20, score: 1.43, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['0'])
+# top-21, score: 1.43, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['-1'])
+# top-22, score: 1.42, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['0'])
+# top-23, score: 1.42, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-24, score: 1.42, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['0'])
+# top-25, score: 1.42, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['-1', '-2'])
+# top-26, score: 1.42, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['0'])
+# top-27, score: 1.42, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-28, score: 1.42, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['0'])
+# top-29, score: 1.42, answer: ['China']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['-1', '-2'])

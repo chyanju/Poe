@@ -1,0 +1,122 @@
+# parsed arguments: Namespace(benchmark='Qd1c18', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'6921268', '15', '0', '70', '40', '4453623', '8507934', '10205879', 'male', '35', '11475182', '1064581', '2912655', '60', '9518507', '11488578', '4804784', '9735380', '9731315', 'people', 'age', '4355644', '75', '10022524', '30', '10119296', '10069564', '10563233', '5668961', 'color', '11635647', '80', '90', 'sum', '5', '20', '10', '5184855', '85', '10261253', '50', '6459082', '8911133', '3221898', '10552146', 'gray', '336303', '1902638', '9310714', 'pink', '10237419', 'gender', '25', '45', '1981156', '9925006', '9324244', '9692669', '3792145', 'female', '55', '65', '9659493', '11320252', '5123399', '970357'}
+# input type: [dtype('int64'), dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+    age  Sum of people  gender color
+0     0        9735380    Male  gray
+1     0        9310714  Female  pink
+2     5       10552146    Male  gray
+3     5       10069564  Female  pink
+4    10       10563233    Male  gray
+5    10       10022524  Female  pink
+6    15       10237419    Male  gray
+7    15        9692669  Female  pink
+8    20        9731315    Male  gray
+9    20        9324244  Female  pink
+10   25        9659493    Male  gray
+11   25        9518507  Female  pink
+12   30       10205879    Male  gray
+13   30       10119296  Female  pink
+14   35       11475182    Male  gray
+15   35       11635647  Female  pink
+16   40       11320252    Male  gray
+17   40       11488578  Female  pink
+18   45        9925006    Male  gray
+19   45       10261253  Female  pink
+20   50        8507934    Male  gray
+21   50        8911133  Female  pink
+22   55        6459082    Male  gray
+23   55        6921268  Female  pink
+24   60        5123399    Male  gray
+25   60        5668961  Female  pink
+26   65        4453623    Male  gray
+27   65        4804784  Female  pink
+28   70        3792145    Male  gray
+29   70        5184855  Female  pink
+30   75        2912655    Male  gray
+31   75        4355644  Female  pink
+32   80        1902638    Male  gray
+33   80        3221898  Female  pink
+34   85         970357    Male  gray
+35   85        1981156  Female  pink
+36   90         336303    Male  gray
+37   90        1064581  Female  pink
+# query is: What age and gender had the highest population?
+# expected output type:[dtype('O')]
+# expected output is:
+   ANSWER
+0      35
+1  Female
+# inferred DSL terminals:
+  # ConstVal: ['age@Str', 'gender@Str', '<NULL>']
+     # cmap: [('gender', 'gender'), ('age', 'age')]
+  # AggrFunc: ['max', '<NULL>']
+     # amap: [('highest', 'max')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('highest', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Male'}]
+  # found 0 program(s)
+# (t=3.23) i=1, candidate=[{'ANSWER': 'Female'}]
+  # found 13 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['gender'], 'max', 'Sum of people'], 'eqmax', 'COL0'], ['gender']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['gender'], 'max', 'Sum of people'], 'eqmax', 'COL0'], ['gender']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['age', 'gender'], 'max', 'Sum of people'], 'eqmax', 'COL0'], ['gender']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['age', 'gender'], 'max', 'Sum of people'], 'eqmax', 'COL0'], ['gender']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'max', 'age'], 'eqmax', 'Sum of people'], ['gender']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'max', 'age'], 'eqmax', 'Sum of people'], ['gender']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'max', 'Sum of people'], 'eqmax', 'Sum of people'], ['gender']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'max', 'Sum of people'], 'eqmax', 'Sum of people'], ['gender']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'max', 'Sum of people'], 'eqmax', 'COL0'], ['gender']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Sum of people', 'gender'], 'max', 'Sum of people'], 'eqmax', 'COL0'], ['gender']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['gender', 'color'], 'max', 'Sum of people'], 'eqmax', 'COL0'], ['gender']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['gender', 'color'], 'max', 'Sum of people'], 'eqmax', 'COL0'], ['gender']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'Sum of people'], ['gender']]
+
+# ========== review report ========== #
+# top-1, score: 1.47, answer: ['Female']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['1'])
+# top-2, score: 1.47, answer: ['Female']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-99', '-2'])
+# top-3, score: 1.47, answer: ['Female']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['1'])
+# top-4, score: 1.47, answer: ['Female']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['-99', '-2'])
+# top-5, score: 1.42, answer: ['Female']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['2'])
+# top-6, score: 1.35, answer: ['Female']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmax, 1), ['0'])
+# top-7, score: 1.35, answer: ['Female']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], max, 1), eqmax, 1), ['-1'])
+# top-8, score: 1.34, answer: ['Female']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['1'])
+# top-9, score: 1.34, answer: ['Female']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-2'])
+# top-10, score: 1.34, answer: ['Female']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['1'])
+# top-11, score: 1.34, answer: ['Female']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-2'])
+# top-12, score: 1.34, answer: ['Female']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 1), eqmax, 2), ['0'])
+# top-13, score: 1.34, answer: ['Female']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], max, 1), eqmax, 2), ['-1', '-2'])

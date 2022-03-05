@@ -1,0 +1,2111 @@
+# parsed arguments: Namespace(benchmark='Q6dd3c', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'2008', '325.044', '2017', '2010', '123.061', '168.827', '2003', '2000', '149.338', '167.543', '262.799', '1998', '2002', '223.809', '456.216', '2015', '2013', '533.909', '1999', '2007', '166.061', '2009', '2011', '2014', '2005', '516.031', '184.211', 'cases', '125.734', '2016', '186.108', '297.551', '408.037', '2001', '2006', '2012', '169.598', '344.23', '2004', 'color', 'blue', '174.935', 'year', '129.505'}
+# input type: [dtype('float64'), dtype('int64'), dtype('O')]
+# input is:
+      cases  year color
+0   129.505  1998  blue
+1   123.061  1999  blue
+2   125.734  2000  blue
+3   149.338  2001  blue
+4   166.061  2002  blue
+5   169.598  2003  blue
+6   167.543  2004  blue
+7   184.211  2005  blue
+8   168.827  2006  blue
+9   174.935  2007  blue
+10  186.108  2008  blue
+11  223.809  2009  blue
+12  262.799  2010  blue
+13  297.551  2011  blue
+14  325.044  2012  blue
+15  344.230  2013  blue
+16  408.037  2014  blue
+17  456.216  2015  blue
+18  516.031  2016  blue
+19  533.909  2017  blue
+# query is: What is the difference between the highest and lowest amount of pending cases?
+# expected output type:[dtype('float64')]
+# expected output is:
+    ANSWER
+0  410.848
+# inferred DSL terminals:
+  # ConstVal: ['cases@Str', '<NULL>']
+     # cmap: [('cases', 'cases')]
+  # AggrFunc: ['max', 'min', '<NULL>']
+     # amap: [('lowest', 'min'), ('highest', 'max')]
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', 'eqmax', '<NULL>']
+     # imap: [('highest', 'eqmax'), ('lowest', 'eqmin')]
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: []
+  # [debug] high_values (no dup.): []
+  # [debug] filtered low_values (no dup.): []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# ====> fallback strategy (retrieval) is triggered because no explanation is found so far
+# ====> retrieval_values: [123.061, 125.734, 129.505, 149.338, 166.061, 167.543, 168.827, 169.598, 174.935, 184.211, 186.108, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 223.809, 262.799, 297.551, 325.044, 344.23, 408.037, 456.216, 516.031, 533.909, 'blue', 'cases', 'color', 'year']
+# (t=0.46) fallback i=0, candidate=[{'ANSWER': 123.061}]
+  # found 71 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'cases'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'cases'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'cases'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmin, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'cases'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'cases'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'cases'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'year'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'year'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'cases'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'cases'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'cases'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmin, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'cases'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'cases'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'cases'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'year'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'year'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(@param0, eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(@param0, eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'cases'], ['cases']]
+    # Summarize(@param0, min, 0)
+      --> ['Summarize', 'input@0', 'min', 'cases']
+# (t=4.37) fallback i=1, candidate=[{'ANSWER': 125.734}]
+  # found 0 program(s)
+# (t=8.03) fallback i=2, candidate=[{'ANSWER': 129.505}]
+  # found 34 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'year'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'year'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'year'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'year'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'cases'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'cases'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'cases'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'cases'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmin', 'year'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmin', 'year'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmin', 'year'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmin', 'year'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmin', 'year'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmin', 'year'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmin', 'year'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmin', 'year'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmin', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'year'], ['cases']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'year'], ['cases']]
+# (t=11.78) fallback i=3, candidate=[{'ANSWER': 149.338}]
+  # found 0 program(s)
+# (t=15.53) fallback i=4, candidate=[{'ANSWER': 166.061}]
+  # found 0 program(s)
+# (t=19.26) fallback i=5, candidate=[{'ANSWER': 167.543}]
+  # found 0 program(s)
+# (t=23.26) fallback i=6, candidate=[{'ANSWER': 168.827}]
+  # found 0 program(s)
+# (t=26.99) fallback i=7, candidate=[{'ANSWER': 169.598}]
+  # found 0 program(s)
+# (t=30.69) fallback i=8, candidate=[{'ANSWER': 174.935}]
+  # found 0 program(s)
+# (t=34.36) fallback i=9, candidate=[{'ANSWER': 184.211}]
+  # found 0 program(s)
+# (t=38.07) fallback i=10, candidate=[{'ANSWER': 186.108}]
+  # found 0 program(s)
+# (t=41.75) fallback i=11, candidate=[{'ANSWER': 1998}]
+  # found 71 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'cases'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmin, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'cases'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'year'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'year'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'year'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'year'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'year'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'year'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'cases'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'cases'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'year'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'year'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'year'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'year'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'year'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'year'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmin', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmin', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'year'], ['year']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'year'], ['year']]
+    # Summarize(@param0, min, 1)
+      --> ['Summarize', 'input@0', 'min', 'year']
+# (t=45.62) fallback i=12, candidate=[{'ANSWER': 1999}]
+  # found 34 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'year'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'year'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'year'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'year'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'cases'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'cases'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'cases'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'cases'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmin', 'cases'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmin', 'cases'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmin', 'cases'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmin', 'cases'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmin', 'cases'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmin', 'cases'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmin', 'cases'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmin', 'cases'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmin', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmin', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(@param0, eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'cases'], ['year']]
+    # SelectCol(SelectRow0(@param0, eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'cases'], ['year']]
+# (t=49.37) fallback i=13, candidate=[{'ANSWER': 2000}]
+  # found 0 program(s)
+# (t=53.37) fallback i=14, candidate=[{'ANSWER': 2001}]
+  # found 0 program(s)
+# (t=57.05) fallback i=15, candidate=[{'ANSWER': 2002}]
+  # found 0 program(s)
+# (t=60.70) fallback i=16, candidate=[{'ANSWER': 2003}]
+  # found 0 program(s)
+# (t=64.34) fallback i=17, candidate=[{'ANSWER': 2004}]
+  # found 0 program(s)
+# (t=68.02) fallback i=18, candidate=[{'ANSWER': 2005}]
+  # found 0 program(s)
+# (t=71.70) fallback i=19, candidate=[{'ANSWER': 2006}]
+  # found 0 program(s)
+# (t=75.37) fallback i=20, candidate=[{'ANSWER': 2007}]
+  # found 0 program(s)
+# (t=79.44) fallback i=21, candidate=[{'ANSWER': 2008}]
+  # found 0 program(s)
+# (t=83.11) fallback i=22, candidate=[{'ANSWER': 2009}]
+  # found 0 program(s)
+# (t=86.80) fallback i=23, candidate=[{'ANSWER': 2010}]
+  # found 0 program(s)
+# (t=90.45) fallback i=24, candidate=[{'ANSWER': 2011}]
+  # found 0 program(s)
+# (t=94.15) fallback i=25, candidate=[{'ANSWER': 2012}]
+  # found 0 program(s)
+# (t=97.82) fallback i=26, candidate=[{'ANSWER': 2013}]
+  # found 0 program(s)
+# (t=101.46) fallback i=27, candidate=[{'ANSWER': 2014}]
+  # found 0 program(s)
+# (t=105.12) fallback i=28, candidate=[{'ANSWER': 2015}]
+  # found 0 program(s)
+# (t=109.17) fallback i=29, candidate=[{'ANSWER': 2016}]
+  # found 0 program(s)
+# (t=112.95) fallback i=30, candidate=[{'ANSWER': 2017}]
+  # found 105 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'year'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'year'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'year'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'year'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'cases'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'cases'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'cases'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'cases'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'year'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'year'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'year'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'year'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'year'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'year'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'cases'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmax, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'cases'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'cases'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'cases'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'year'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'year'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'year'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'year'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'year'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'year'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmax', 'cases'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmax', 'cases'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmax', 'cases'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmax', 'cases'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmax', 'cases'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmax', 'cases'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmax', 'cases'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmax', 'cases'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmax', 'COL0'], ['year']]
+    # SelectCol(SelectRow0(@param0, eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'cases'], ['year']]
+    # SelectCol(SelectRow0(@param0, eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'cases'], ['year']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'year'], ['year']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'year'], ['year']]
+    # Summarize(@param0, max, 1)
+      --> ['Summarize', 'input@0', 'max', 'year']
+# (t=117.06) fallback i=31, candidate=[{'ANSWER': 223.809}]
+  # found 0 program(s)
+# (t=120.71) fallback i=32, candidate=[{'ANSWER': 262.799}]
+  # found 0 program(s)
+# (t=124.38) fallback i=33, candidate=[{'ANSWER': 297.551}]
+  # found 0 program(s)
+# (t=128.07) fallback i=34, candidate=[{'ANSWER': 325.044}]
+  # found 0 program(s)
+# (t=131.74) fallback i=35, candidate=[{'ANSWER': 344.23}]
+  # found 0 program(s)
+# (t=135.38) fallback i=36, candidate=[{'ANSWER': 408.037}]
+  # found 0 program(s)
+# (t=139.41) fallback i=37, candidate=[{'ANSWER': 456.216}]
+  # found 0 program(s)
+# (t=143.03) fallback i=38, candidate=[{'ANSWER': 516.031}]
+  # found 0 program(s)
+# (t=146.72) fallback i=39, candidate=[{'ANSWER': 533.909}]
+  # found 105 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'cases'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'cases'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'cases'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmax, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'cases'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'cases'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'cases'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'year'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'year'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'year'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'max', 'year'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'cases'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'cases'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'cases'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmax, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'cases'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'cases'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'cases'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'year'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 0), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'year'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'year'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases'], 'min', 'year'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'cases'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'cases'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'max', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'cases'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'cases'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmax, 1), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmax, 1), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year'], 'min', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmax', 'year'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmax', 'year'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'cases'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmax', 'year'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmax', 'year'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'max', 'year'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmax', 'year'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmax', 'year'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'cases'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmax', 'year'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmax', 'year'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'year'], 'min', 'year'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmax', 'cases'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmax', 'COL0'], ['cases']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmax', 'year'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 2), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmax', 'COL0'], ['COL0']]
+    # SelectCol(SelectRow0(@param0, eqmax, 0), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(@param0, eqmax, 0), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'cases'], ['cases']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'year'], ['cases']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'year'], ['cases']]
+    # Summarize(@param0, max, 0)
+      --> ['Summarize', 'input@0', 'max', 'cases']
+# (t=150.70) fallback i=40, candidate=[{'ANSWER': 'blue'}]
+  # found 72 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmin', 'cases'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmin', 'cases'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmax', 'cases'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmax', 'cases'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'cases'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmin', 'cases'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmin', 'cases'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmax', 'cases'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmax', 'cases'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'max', 'year'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmin', 'cases'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmin', 'cases'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmax', 'cases'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmax', 'cases'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'cases'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmin', 'cases'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmin', 'cases'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmax', 'cases'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmax', 'cases'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['cases', 'color'], 'min', 'year'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmin', 'year'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmin', 'year'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmax', 'year'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmax', 'year'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'cases'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmin', 'year'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmin', 'year'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmax', 'year'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmax', 'year'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'max', 'year'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmin', 'year'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmin', 'year'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmax', 'year'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmax', 'year'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'cases'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmin', 'year'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmin', 'year'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmin', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmax', 'year'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmax', 'year'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'color'], 'min', 'year'], 'eqmax', 'COL0'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'cases'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'cases'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'year'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'year'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'cases'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'cases'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'year'], ['color']]
+    # SelectCol(SelectRow0(@param0, eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'year'], ['color']]
+# (t=154.61) fallback i=41, candidate=[{'ANSWER': 'cases'}]
+  # found 0 program(s)
+# (t=155.05) fallback i=42, candidate=[{'ANSWER': 'color'}]
+  # found 0 program(s)
+# (t=155.50) fallback i=43, candidate=[{'ANSWER': 'year'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.40, answer: [123.061]
+  # tprog: Summarize(@param0, min, 0)
+# top-2, score: 1.40, answer: [533.909]
+  # tprog: Summarize(@param0, max, 0)
+# top-3, score: 1.33, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmin, 0), ['0'])
+# top-4, score: 1.33, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmin, 0), ['1'])
+# top-5, score: 1.33, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmin, 0), ['-99'])
+# top-6, score: 1.33, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmin, 0), ['-1'])
+# top-7, score: 1.33, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmin, 1), ['0'])
+# top-8, score: 1.33, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmin, 1), ['1'])
+# top-9, score: 1.33, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmin, 1), ['-99'])
+# top-10, score: 1.33, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmin, 1), ['-1'])
+# top-11, score: 1.33, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 0), ['0'])
+# top-12, score: 1.33, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 0), ['-1'])
+# top-13, score: 1.33, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmin, 1), ['1'])
+# top-14, score: 1.33, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmin, 1), ['-99'])
+# top-15, score: 1.33, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['0'])
+# top-16, score: 1.33, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['-1'])
+# top-17, score: 1.33, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmin, 0), ['1'])
+# top-18, score: 1.33, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmin, 0), ['-99'])
+# top-19, score: 1.33, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['1'])
+# top-20, score: 1.33, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 1), ['-99'])
+# top-21, score: 1.33, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmin, 0), ['0'])
+# top-22, score: 1.33, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmin, 0), ['-1'])
+# top-23, score: 1.33, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 0), ['1'])
+# top-24, score: 1.33, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmin, 0), ['-99'])
+# top-25, score: 1.33, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmin, 1), ['0'])
+# top-26, score: 1.33, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmin, 1), ['-1'])
+# top-27, score: 1.33, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 0), ['1'])
+# top-28, score: 1.33, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 0), ['-99'])
+# top-29, score: 1.33, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['1'])
+# top-30, score: 1.33, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['-99'])
+# top-31, score: 1.33, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmax, 0), ['0'])
+# top-32, score: 1.33, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmax, 0), ['-1'])
+# top-33, score: 1.33, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmax, 1), ['0'])
+# top-34, score: 1.33, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmax, 1), ['-1'])
+# top-35, score: 1.33, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmax, 0), ['0'])
+# top-36, score: 1.33, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmax, 0), ['1'])
+# top-37, score: 1.33, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmax, 0), ['-99'])
+# top-38, score: 1.33, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmax, 0), ['-1'])
+# top-39, score: 1.33, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmax, 1), ['0'])
+# top-40, score: 1.33, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmax, 1), ['1'])
+# top-41, score: 1.33, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmax, 1), ['-99'])
+# top-42, score: 1.33, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmax, 1), ['-1'])
+# top-43, score: 1.33, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 0), ['0'])
+# top-44, score: 1.33, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 0), ['-1'])
+# top-45, score: 1.33, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['0'])
+# top-46, score: 1.33, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmax, 1), ['-1'])
+# top-47, score: 1.33, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmax, 0), ['1'])
+# top-48, score: 1.33, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmax, 0), ['-99'])
+# top-49, score: 1.33, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmax, 1), ['1'])
+# top-50, score: 1.33, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmax, 1), ['-99'])
+# top-51, score: 1.33, answer: [1998]
+  # tprog: Summarize(@param0, min, 1)
+# top-52, score: 1.33, answer: [2017]
+  # tprog: Summarize(@param0, max, 1)
+# top-53, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 0), ['0'])
+# top-54, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 0), ['2'])
+# top-55, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 0), ['-99', '-1'])
+# top-56, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 0), ['-1', '-2'])
+# top-57, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 2), ['0'])
+# top-58, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 2), ['2'])
+# top-59, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 2), ['-99', '-1'])
+# top-60, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 2), ['-1', '-2'])
+# top-61, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 0), ['0'])
+# top-62, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 0), ['-1', '-2'])
+# top-63, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 0), ['0'])
+# top-64, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 0), ['2'])
+# top-65, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 0), ['-99', '-1'])
+# top-66, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 0), ['-1', '-2'])
+# top-67, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 2), ['0'])
+# top-68, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 2), ['2'])
+# top-69, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 2), ['-99', '-1'])
+# top-70, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 2), ['-1', '-2'])
+# top-71, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 0), ['0'])
+# top-72, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 0), ['-1', '-2'])
+# top-73, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 2), ['2'])
+# top-74, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 2), ['-99', '-1'])
+# top-75, score: 1.32, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 1), ['0'])
+# top-76, score: 1.32, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 1), ['2'])
+# top-77, score: 1.32, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 1), ['-99', '-1'])
+# top-78, score: 1.32, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 1), ['-1', '-2'])
+# top-79, score: 1.32, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['0'])
+# top-80, score: 1.32, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-1', '-2'])
+# top-81, score: 1.32, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['0'])
+# top-82, score: 1.32, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-1', '-2'])
+# top-83, score: 1.32, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['0'])
+# top-84, score: 1.32, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-1', '-2'])
+# top-85, score: 1.32, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 0), ['2'])
+# top-86, score: 1.32, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 0), ['-99', '-1'])
+# top-87, score: 1.32, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 1), ['1'])
+# top-88, score: 1.32, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 1), ['-99', '-2'])
+# top-89, score: 1.32, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['1'])
+# top-90, score: 1.32, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['2'])
+# top-91, score: 1.32, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-99', '-1'])
+# top-92, score: 1.32, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 1), ['-99', '-2'])
+# top-93, score: 1.32, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['1'])
+# top-94, score: 1.32, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['2'])
+# top-95, score: 1.32, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-99', '-1'])
+# top-96, score: 1.32, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 2), ['-99', '-2'])
+# top-97, score: 1.32, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['2'])
+# top-98, score: 1.32, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-99', '-1'])
+# top-99, score: 1.32, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 0), ['0'])
+# top-100, score: 1.32, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 0), ['-1', '-2'])
+# top-101, score: 1.32, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 0), ['1'])
+# top-102, score: 1.32, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 0), ['-99', '-2'])
+# top-103, score: 1.32, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 2), ['1'])
+# top-104, score: 1.32, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmin, 2), ['-99', '-2'])
+# top-105, score: 1.32, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 0), ['1'])
+# top-106, score: 1.32, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 0), ['2'])
+# top-107, score: 1.32, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 0), ['-99', '-1'])
+# top-108, score: 1.32, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmin, 0), ['-99', '-2'])
+# top-109, score: 1.32, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 0), ['2'])
+# top-110, score: 1.32, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 0), ['-99', '-1'])
+# top-111, score: 1.32, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 2), ['0'])
+# top-112, score: 1.32, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 2), ['-1', '-2'])
+# top-113, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 0), ['1'])
+# top-114, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 0), ['-99', '-2'])
+# top-115, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 1), ['1'])
+# top-116, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 1), ['-99', '-2'])
+# top-117, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 2), ['1'])
+# top-118, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 2), ['-99', '-2'])
+# top-119, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 0), ['1'])
+# top-120, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 0), ['2'])
+# top-121, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 0), ['-99', '-1'])
+# top-122, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 0), ['-99', '-2'])
+# top-123, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['1'])
+# top-124, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['2'])
+# top-125, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-99', '-1'])
+# top-126, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-99', '-2'])
+# top-127, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['1'])
+# top-128, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['2'])
+# top-129, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-99', '-1'])
+# top-130, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-99', '-2'])
+# top-131, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 0), ['2'])
+# top-132, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 0), ['-99', '-1'])
+# top-133, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['2'])
+# top-134, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-99', '-1'])
+# top-135, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 0), ['0'])
+# top-136, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 0), ['-1', '-2'])
+# top-137, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 2), ['0'])
+# top-138, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 2), ['-1', '-2'])
+# top-139, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 0), ['0'])
+# top-140, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 0), ['2'])
+# top-141, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 0), ['-99', '-1'])
+# top-142, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 0), ['-1', '-2'])
+# top-143, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 1), ['0'])
+# top-144, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 1), ['2'])
+# top-145, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 1), ['-99', '-1'])
+# top-146, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 1), ['-1', '-2'])
+# top-147, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 2), ['0'])
+# top-148, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 2), ['2'])
+# top-149, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 2), ['-99', '-1'])
+# top-150, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmax, 2), ['-1', '-2'])
+# top-151, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 0), ['0'])
+# top-152, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 0), ['-1', '-2'])
+# top-153, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['0'])
+# top-154, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 1), ['-1', '-2'])
+# top-155, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['0'])
+# top-156, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmax, 2), ['-1', '-2'])
+# top-157, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 0), ['0'])
+# top-158, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 0), ['2'])
+# top-159, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 0), ['-99', '-1'])
+# top-160, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 0), ['-1', '-2'])
+# top-161, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 2), ['0'])
+# top-162, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 2), ['2'])
+# top-163, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 2), ['-99', '-1'])
+# top-164, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 2), ['-1', '-2'])
+# top-165, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 0), ['0'])
+# top-166, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 0), ['-1', '-2'])
+# top-167, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['0'])
+# top-168, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-1', '-2'])
+# top-169, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 0), ['2'])
+# top-170, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 0), ['-99', '-1'])
+# top-171, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 2), ['2'])
+# top-172, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 2), ['-99', '-1'])
+# top-173, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 0), ['1'])
+# top-174, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 0), ['-99', '-2'])
+# top-175, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 2), ['1'])
+# top-176, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmin, 2), ['-99', '-2'])
+# top-177, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 0), ['1'])
+# top-178, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 0), ['-99', '-2'])
+# top-179, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['1'])
+# top-180, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmin, 2), ['-99', '-2'])
+# top-181, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 0), ['1'])
+# top-182, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 0), ['-99', '-2'])
+# top-183, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 2), ['1'])
+# top-184, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmax, 2), ['-99', '-2'])
+# top-185, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 0), ['1'])
+# top-186, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 0), ['-99', '-2'])
+# top-187, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['1'])
+# top-188, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmax, 2), ['-99', '-2'])
+# top-189, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 0), ['1'])
+# top-190, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 0), ['-99', '-2'])
+# top-191, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 2), ['1'])
+# top-192, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmin, 2), ['-99', '-2'])
+# top-193, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 0), ['1'])
+# top-194, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 0), ['-99', '-2'])
+# top-195, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 2), ['1'])
+# top-196, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmax, 2), ['-99', '-2'])
+# top-197, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 0), ['0'])
+# top-198, score: 1.32, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 0), ['-1', '-2'])
+# top-199, score: 1.32, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+# top-200, score: 1.32, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+# top-201, score: 1.32, answer: [1999]
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 0), ['1'])
+# top-202, score: 1.32, answer: [1999]
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 0), ['-99', '-2'])
+# top-203, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 0), ['1'])
+# top-204, score: 1.32, answer: [2017]
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 0), ['-99', '-2'])
+# top-205, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 0), ['0'])
+# top-206, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 0), ['-1', '-2'])
+# top-207, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['0'])
+# top-208, score: 1.32, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['-1', '-2'])
+# top-209, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 0), ['2'])
+# top-210, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 0), ['-99', '-1'])
+# top-211, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 0), ['2'])
+# top-212, score: 1.32, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 0), ['-99', '-1'])
+# top-213, score: 1.25, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmin, 0), ['0'])
+# top-214, score: 1.25, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmin, 0), ['1'])
+# top-215, score: 1.25, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmin, 0), ['-99'])
+# top-216, score: 1.25, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmin, 0), ['-1'])
+# top-217, score: 1.25, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmin, 1), ['0'])
+# top-218, score: 1.25, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmin, 1), ['1'])
+# top-219, score: 1.25, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmin, 1), ['-99'])
+# top-220, score: 1.25, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 0), eqmin, 1), ['-1'])
+# top-221, score: 1.25, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 0), ['0'])
+# top-222, score: 1.25, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 0), ['-1'])
+# top-223, score: 1.25, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 1), ['1'])
+# top-224, score: 1.25, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 1), ['-99'])
+# top-225, score: 1.25, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+# top-226, score: 1.25, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+# top-227, score: 1.25, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 0), ['1'])
+# top-228, score: 1.25, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 0), ['-99'])
+# top-229, score: 1.25, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['1'])
+# top-230, score: 1.25, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-99'])
+# top-231, score: 1.25, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['0'])
+# top-232, score: 1.25, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['1'])
+# top-233, score: 1.25, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['-99'])
+# top-234, score: 1.25, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 0), ['-1'])
+# top-235, score: 1.25, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['0'])
+# top-236, score: 1.25, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['1'])
+# top-237, score: 1.25, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['-99'])
+# top-238, score: 1.25, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmin, 1), ['-1'])
+# top-239, score: 1.25, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 0), ['0'])
+# top-240, score: 1.25, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 0), ['-1'])
+# top-241, score: 1.25, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 0), ['1'])
+# top-242, score: 1.25, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 0), ['-99'])
+# top-243, score: 1.25, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 1), ['0'])
+# top-244, score: 1.25, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 0), eqmin, 1), ['-1'])
+# top-245, score: 1.25, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 0), ['1'])
+# top-246, score: 1.25, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 0), ['-99'])
+# top-247, score: 1.25, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['1'])
+# top-248, score: 1.25, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-99'])
+# top-249, score: 1.25, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 0), ['0'])
+# top-250, score: 1.25, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 0), ['-1'])
+# top-251, score: 1.25, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 1), ['0'])
+# top-252, score: 1.25, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 1), ['-1'])
+# top-253, score: 1.25, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['0'])
+# top-254, score: 1.25, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['1'])
+# top-255, score: 1.25, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['-99'])
+# top-256, score: 1.25, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 0), ['-1'])
+# top-257, score: 1.25, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['0'])
+# top-258, score: 1.25, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['1'])
+# top-259, score: 1.25, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['-99'])
+# top-260, score: 1.25, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmax, 1), ['-1'])
+# top-261, score: 1.25, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmax, 0), ['0'])
+# top-262, score: 1.25, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmax, 0), ['1'])
+# top-263, score: 1.25, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmax, 0), ['-99'])
+# top-264, score: 1.25, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmax, 0), ['-1'])
+# top-265, score: 1.25, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmax, 1), ['0'])
+# top-266, score: 1.25, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmax, 1), ['1'])
+# top-267, score: 1.25, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmax, 1), ['-99'])
+# top-268, score: 1.25, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 0), eqmax, 1), ['-1'])
+# top-269, score: 1.25, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 0), ['0'])
+# top-270, score: 1.25, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 0), ['-1'])
+# top-271, score: 1.25, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['0'])
+# top-272, score: 1.25, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], max, 1), eqmax, 1), ['-1'])
+# top-273, score: 1.25, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 0), ['1'])
+# top-274, score: 1.25, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 0), ['-99'])
+# top-275, score: 1.25, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 1), ['1'])
+# top-276, score: 1.25, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 0), eqmax, 1), ['-99'])
+# top-277, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['0'])
+# top-278, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['2'])
+# top-279, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['-99', '-1'])
+# top-280, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['-1', '-2'])
+# top-281, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['0'])
+# top-282, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['2'])
+# top-283, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['-99', '-1'])
+# top-284, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['-1', '-2'])
+# top-285, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 0), ['0'])
+# top-286, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 0), ['-1', '-2'])
+# top-287, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 0), ['0'])
+# top-288, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 0), ['2'])
+# top-289, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 0), ['-99', '-1'])
+# top-290, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 0), ['-1', '-2'])
+# top-291, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 2), ['0'])
+# top-292, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 2), ['2'])
+# top-293, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 2), ['-99', '-1'])
+# top-294, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 2), ['-1', '-2'])
+# top-295, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 0), ['0'])
+# top-296, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 0), ['-1', '-2'])
+# top-297, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['2'])
+# top-298, score: 1.24, answer: [123.061]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['-99', '-1'])
+# top-299, score: 1.24, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 1), ['0'])
+# top-300, score: 1.24, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 1), ['2'])
+# top-301, score: 1.24, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 1), ['-99', '-1'])
+# top-302, score: 1.24, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 1), ['-1', '-2'])
+# top-303, score: 1.24, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+# top-304, score: 1.24, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+# top-305, score: 1.24, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+# top-306, score: 1.24, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-307, score: 1.24, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+# top-308, score: 1.24, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-309, score: 1.24, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 0), ['2'])
+# top-310, score: 1.24, answer: [129.505]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 0), ['-99', '-1'])
+# top-311, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 1), ['1'])
+# top-312, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 1), ['-99', '-2'])
+# top-313, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['1'])
+# top-314, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['2'])
+# top-315, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-1'])
+# top-316, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-99', '-2'])
+# top-317, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['1'])
+# top-318, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['2'])
+# top-319, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-1'])
+# top-320, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-99', '-2'])
+# top-321, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['2'])
+# top-322, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+# top-323, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['0'])
+# top-324, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['2'])
+# top-325, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['-99', '-1'])
+# top-326, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['-1', '-2'])
+# top-327, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['0'])
+# top-328, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['2'])
+# top-329, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['-99', '-1'])
+# top-330, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['-1', '-2'])
+# top-331, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 0), ['0'])
+# top-332, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 0), ['-1', '-2'])
+# top-333, score: 1.24, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['1'])
+# top-334, score: 1.24, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 0), ['-99', '-2'])
+# top-335, score: 1.24, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['1'])
+# top-336, score: 1.24, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 0), eqmin, 2), ['-99', '-2'])
+# top-337, score: 1.24, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 0), ['1'])
+# top-338, score: 1.24, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 0), ['2'])
+# top-339, score: 1.24, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 0), ['-99', '-1'])
+# top-340, score: 1.24, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 0), ['-99', '-2'])
+# top-341, score: 1.24, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 0), ['2'])
+# top-342, score: 1.24, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 0), ['-99', '-1'])
+# top-343, score: 1.24, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['0'])
+# top-344, score: 1.24, answer: [1999]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['-1', '-2'])
+# top-345, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['1'])
+# top-346, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['-99', '-2'])
+# top-347, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 1), ['1'])
+# top-348, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 1), ['-99', '-2'])
+# top-349, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['1'])
+# top-350, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['-99', '-2'])
+# top-351, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['1'])
+# top-352, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['2'])
+# top-353, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['-99', '-1'])
+# top-354, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['-99', '-2'])
+# top-355, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['1'])
+# top-356, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['2'])
+# top-357, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-99', '-1'])
+# top-358, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-99', '-2'])
+# top-359, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['1'])
+# top-360, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['2'])
+# top-361, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-99', '-1'])
+# top-362, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-99', '-2'])
+# top-363, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 0), ['2'])
+# top-364, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 0), ['-99', '-1'])
+# top-365, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['2'])
+# top-366, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-99', '-1'])
+# top-367, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['0'])
+# top-368, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['-1', '-2'])
+# top-369, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['0'])
+# top-370, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['-1', '-2'])
+# top-371, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['0'])
+# top-372, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['2'])
+# top-373, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['-99', '-1'])
+# top-374, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['-1', '-2'])
+# top-375, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['0'])
+# top-376, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['2'])
+# top-377, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['-99', '-1'])
+# top-378, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['-1', '-2'])
+# top-379, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['0'])
+# top-380, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['2'])
+# top-381, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['-99', '-1'])
+# top-382, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 0), ['-1', '-2'])
+# top-383, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 1), ['0'])
+# top-384, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 1), ['2'])
+# top-385, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 1), ['-99', '-1'])
+# top-386, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 1), ['-1', '-2'])
+# top-387, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['0'])
+# top-388, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['2'])
+# top-389, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['-99', '-1'])
+# top-390, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 0), eqmax, 2), ['-1', '-2'])
+# top-391, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['0'])
+# top-392, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 0), ['-1', '-2'])
+# top-393, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['0'])
+# top-394, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 1), ['-1', '-2'])
+# top-395, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['0'])
+# top-396, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 1), eqmax, 2), ['-1', '-2'])
+# top-397, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 0), ['0'])
+# top-398, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 0), ['2'])
+# top-399, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 0), ['-99', '-1'])
+# top-400, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 0), ['-1', '-2'])
+# top-401, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 2), ['0'])
+# top-402, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 2), ['2'])
+# top-403, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 2), ['-99', '-1'])
+# top-404, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 2), ['-1', '-2'])
+# top-405, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 0), ['0'])
+# top-406, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 0), ['-1', '-2'])
+# top-407, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['0'])
+# top-408, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+# top-409, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['2'])
+# top-410, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['-99', '-1'])
+# top-411, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['2'])
+# top-412, score: 1.24, answer: [533.909]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['-99', '-1'])
+# top-413, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 0), ['1'])
+# top-414, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 0), ['-99', '-2'])
+# top-415, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 2), ['1'])
+# top-416, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 0), eqmax, 2), ['-99', '-2'])
+# top-417, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 0), ['1'])
+# top-418, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 0), ['-99', '-2'])
+# top-419, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['1'])
+# top-420, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], max, 1), eqmax, 2), ['-99', '-2'])
+# top-421, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 0), ['1'])
+# top-422, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 0), ['-99', '-2'])
+# top-423, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 2), ['1'])
+# top-424, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 0), eqmin, 2), ['-99', '-2'])
+# top-425, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 0), ['1'])
+# top-426, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 0), ['-99', '-2'])
+# top-427, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['1'])
+# top-428, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-99', '-2'])
+# top-429, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['1'])
+# top-430, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 0), ['-99', '-2'])
+# top-431, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['1'])
+# top-432, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 2), ['-99', '-2'])
+# top-433, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['1'])
+# top-434, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 0), ['-99', '-2'])
+# top-435, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['1'])
+# top-436, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmin, 2), ['-99', '-2'])
+# top-437, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 0), ['1'])
+# top-438, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 0), ['-99', '-2'])
+# top-439, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['1'])
+# top-440, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 0), eqmin, 2), ['-99', '-2'])
+# top-441, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['1'])
+# top-442, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 0), ['-99', '-2'])
+# top-443, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['1'])
+# top-444, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmax, 2), ['-99', '-2'])
+# top-445, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['1'])
+# top-446, score: 1.24, answer: [1998]
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-99', '-2'])
+# top-447, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['1'])
+# top-448, score: 1.24, answer: [2017]
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['-99', '-2'])
+# top-449, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['2'])
+# top-450, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-99', '-1'])
+# top-451, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['2'])
+# top-452, score: 1.24, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 1), ['-99', '-1'])
+# top-453, score: 1.18, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['0'])
+# top-454, score: 1.18, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['1'])
+# top-455, score: 1.18, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-99'])
+# top-456, score: 1.18, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 0), ['-1'])
+# top-457, score: 1.18, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['0'])
+# top-458, score: 1.18, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['1'])
+# top-459, score: 1.18, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-99'])
+# top-460, score: 1.18, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], min, 1), eqmin, 1), ['-1'])
+# top-461, score: 1.18, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['0'])
+# top-462, score: 1.18, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['1'])
+# top-463, score: 1.18, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-99'])
+# top-464, score: 1.18, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 0), ['-1'])
+# top-465, score: 1.18, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['0'])
+# top-466, score: 1.18, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['1'])
+# top-467, score: 1.18, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-99'])
+# top-468, score: 1.18, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 1), eqmax, 1), ['-1'])
+# top-469, score: 1.17, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['0'])
+# top-470, score: 1.17, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['2'])
+# top-471, score: 1.17, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-99', '-1'])
+# top-472, score: 1.17, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-1', '-2'])
+# top-473, score: 1.17, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['0'])
+# top-474, score: 1.17, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['2'])
+# top-475, score: 1.17, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-99', '-1'])
+# top-476, score: 1.17, answer: [1998]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-477, score: 1.17, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['0'])
+# top-478, score: 1.17, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['2'])
+# top-479, score: 1.17, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-1'])
+# top-480, score: 1.17, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-1', '-2'])
+# top-481, score: 1.17, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['0'])
+# top-482, score: 1.17, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['2'])
+# top-483, score: 1.17, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-1'])
+# top-484, score: 1.17, answer: [2017]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-1', '-2'])
+# top-485, score: 1.17, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['1'])
+# top-486, score: 1.17, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 0), ['-99', '-2'])
+# top-487, score: 1.17, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['1'])
+# top-488, score: 1.17, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 1), eqmax, 2), ['-99', '-2'])
+# top-489, score: 1.17, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['1'])
+# top-490, score: 1.17, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 0), ['-99', '-2'])
+# top-491, score: 1.17, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['1'])
+# top-492, score: 1.17, answer: ['blue']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], min, 1), eqmin, 2), ['-99', '-2'])

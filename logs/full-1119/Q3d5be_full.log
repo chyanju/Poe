@@ -1,0 +1,87 @@
+# parsed arguments: Namespace(benchmark='Q3d5be', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'ilse', '8.8', 'allna', 'laasphe', '8.3', '19.1', '19.2', 'gelbach', 'lumda', '(aubach)', '20.7', 'perf', 'bieber', 'wetzbach', 'iserbach', 'emsbach', '30.0', 'weil', 'wetschaft', 'ohm', 'color', 'feudinge', 'aar', '22.9', '46.6', 'mühlbach', 'kallenbach', '24.3', 'dörsbach', '11.5', '32.1', '55.0', '24.6', '29.0', 'kerkerbach', '59.7', '27.6', '20.0', '(möttbach)', 'dautphe', '32.0', 'banfe', '39.1', 'name', '8.4', 'salzböde', 'length', '40.7', '13.6', '39.7', '11.7', '6.3', 'zwester', '14.6', '(rppersbach)', 'wieseck', 'kleebach', 'blue', 'dill', '26.9', 'solmsbach', 'ulmbach', '49.7', 'elbbach'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                     Name  Length color
+0   Feudinge (Rppersbach)     6.3  blue
+1                    Ilse     8.4  blue
+2                   Banfe    11.5  blue
+3                 Laasphe     8.3  blue
+4                    Perf    20.0  blue
+5                 Dautphe     8.8  blue
+6               Wetschaft    29.0  blue
+7                     Ohm    59.7  blue
+8                   Allna    19.1  blue
+9             Zwester Ohm    20.0  blue
+10               Salzböde    27.6  blue
+11                  Lumda    30.0  blue
+12                Wieseck    24.3  blue
+13                 Bieber    13.6  blue
+14               Kleebach    26.9  blue
+15               Wetzbach    11.7  blue
+16                   Dill    55.0  blue
+17              Solmsbach    24.6  blue
+18    Iserbach (Möttbach)    19.2  blue
+19                Ulmbach    22.9  blue
+20             Kallenbach    14.6  blue
+21                   Weil    46.6  blue
+22             Kerkerbach    20.7  blue
+23                Emsbach    39.1  blue
+24                Elbbach    40.7  blue
+25                    Aar    49.7  blue
+26               Dörsbach    32.0  blue
+27       Gelbach (Aubach)    39.7  blue
+28               Mühlbach    32.1  blue
+29                Emsbach    11.5  blue
+# query is: How long in length is the Ohm?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0    59.7
+# inferred DSL terminals:
+  # ConstVal: ['Ohm@Str', 'Length@Str', 'Zwester Ohm@Str', '<NULL>']
+     # cmap: [('ohm', 'Ohm'), ('length', 'Length'), ('ohm', 'Zwester Ohm')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 59.7}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Ohm@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Name', 'Ohm'], ['Length']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Ohm@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Name', 'Ohm'], ['Length']]
+# (t=0.95) i=1, candidate=[{'ANSWER': 119.4}]
+  # found 0 program(s)
+# (t=1.73) i=2, candidate=[{'ANSWER': 179.10000000000002}]
+  # found 0 program(s)
+# (t=2.49) i=3, candidate=[{'ANSWER': 199.10000000000002}]
+  # found 0 program(s)
+# (t=3.26) i=4, candidate=[{'ANSWER': 139.4}]
+  # found 0 program(s)
+# (t=4.03) i=5, candidate=[{'ANSWER': 79.7}]
+  # found 0 program(s)
+# (t=4.81) i=6, candidate=[{'ANSWER': 20.0}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Zwester Ohm@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Name', 'Zwester Ohm'], ['Length']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Zwester Ohm@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Name', 'Zwester Ohm'], ['Length']]
+
+# ========== review report ========== #
+# top-1, score: 2.43, answer: [59.7]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Ohm@Str), ['1'])
+# top-2, score: 2.43, answer: [59.7]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Ohm@Str), ['-99', '-2'])
+# top-3, score: 1.43, answer: [20.0]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Zwester Ohm@Str), ['1'])
+# top-4, score: 1.43, answer: [20.0]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Zwester Ohm@Str), ['-99', '-2'])

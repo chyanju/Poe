@@ -1,0 +1,48 @@
+# parsed arguments: Namespace(benchmark='Qa36d4', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'color', 'region', 'skåne', 'blue', '608036', 'remainder', 'north-east', '683886', 'south', 'west', 'population', 'danish', 'capital', '305982', '1823109', '162829'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                  Region  Population color
+0  Danish Capital Region     1823109  blue
+1              Remainder      608036  blue
+2            South Skåne      683886  blue
+3             West Skåne      305982  blue
+4       North-East Skåne      162829  blue
+# query is: How many regions have a population lower than 500,000?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0       2
+# inferred DSL terminals:
+  # ConstVal: ['Population@Str', 'Danish Capital Region@Str', 'Region@Str', '<NULL>']
+     # cmap: [('regions', 'Danish Capital Region'), ('regions', 'Region'), ('population', 'Population')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 3 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'Danish Capital Region'], 'count', 'Region']
+    # Summarize(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'Danish Capital Region'], 'count', 'Population']
+    # Summarize(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Region', 'Danish Capital Region'], 'count', 'color']
+# (t=1.01) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.46, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), count, 1)
+# top-2, score: 1.35, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), count, 0)
+# top-3, score: 1.35, answer: 1
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), count, 2)

@@ -1,0 +1,143 @@
+# parsed arguments: Namespace(benchmark='Q59ba6', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'82.66', 'gender', '55-59', '50-54', '75-79', 'men', 'group', '75.43', '68.83', 'orange', 'blue', 'age', 'color', 'percentage', '63.8', '75.12', '60-64', '83.92', '85.49', 'over', '70.09', '65-69', 'and', '72.92', '65.69', '84.86', '84.23', '83.6', '80', '72.6', 'all', 'red', '70-74', 'aged', '75.75', 'women', '16', '80.77', '78.57', '73.55', '67.89', '79.52'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+               Age group gender  Percentage   color
+0                  60-64  Women       75.75     red
+1                  60-64    All       75.43    blue
+2                  60-64    Men       75.12  orange
+3   All aged 16 and over  Women       67.89     red
+4   All aged 16 and over    All       65.69    blue
+5   All aged 16 and over    Men       63.80  orange
+6                  70-74  Women       85.49     red
+7                  70-74    All       83.92    blue
+8                  70-74    Men       82.66  orange
+9                  75-79  Women       84.86     red
+10                 75-79    All       84.23    blue
+11                 75-79    Men       83.60  orange
+12                 55-59  Women       73.55     red
+13                 55-59    All       72.92    blue
+14                 55-59    Men       72.60  orange
+15           80 and over  Women       84.23     red
+16           80 and over    All       83.92    blue
+17           80 and over    Men       83.92  orange
+18                 50-54  Women       70.09     red
+19                 50-54    All       68.83    blue
+20                 50-54    Men       67.89  orange
+21                 65-69  Women       80.77     red
+22                 65-69    All       79.52    blue
+23                 65-69    Men       78.57  orange
+# query is: What is the highest value of the All bar?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0   84.23
+# inferred DSL terminals:
+  # ConstVal: ['All aged 16 and over@Str', 'All@Str', '<NULL>']
+     # cmap: [('all', 'All'), ('all', 'All aged 16 and over')]
+  # AggrFunc: ['max', 'sum', '<NULL>']
+     # amap: [('all', 'sum'), ('highest', 'max')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('highest', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 75.43}]
+  # found 0 program(s)
+# (t=2.45) i=1, candidate=[{'ANSWER': 75.75}]
+  # found 0 program(s)
+# (t=4.89) i=2, candidate=[{'ANSWER': 83.92}]
+  # found 8 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], sum, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Percentage'], 'sum', 'Percentage'], 'eqmax', 'COL0'], ['Percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2'], sum, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Percentage'], 'sum', 'Percentage'], 'eqmax', 'COL0'], ['Percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Age group', 'Percentage'], 'sum', 'Percentage'], 'eqmax', 'COL0'], ['Percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Age group', 'Percentage'], 'sum', 'Percentage'], 'eqmax', 'COL0'], ['Percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], sum, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['gender', 'Percentage'], 'sum', 'Percentage'], 'eqmax', 'COL0'], ['Percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], sum, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['gender', 'Percentage'], 'sum', 'Percentage'], 'eqmax', 'COL0'], ['Percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], sum, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Percentage', 'color'], 'sum', 'Percentage'], 'eqmax', 'COL0'], ['Percentage']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], sum, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Percentage', 'color'], 'sum', 'Percentage'], 'eqmax', 'COL0'], ['Percentage']]
+# (t=7.37) i=3, candidate=[{'ANSWER': 75.12}]
+  # found 0 program(s)
+# (t=10.05) i=4, candidate=[{'ANSWER': 79.52}]
+  # found 0 program(s)
+# (t=12.50) i=5, candidate=[{'ANSWER': 65.69}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, All aged 16 and over@Str), ==, 1, All@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', 'All aged 16 and over'], '==', 'gender', 'All'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, All@Str), ==, 0, All aged 16 and over@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'gender', 'All'], '==', 'Age group', 'All aged 16 and over'], ['Percentage']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, All aged 16 and over@Str), ==, 1, All@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', 'All aged 16 and over'], '==', 'gender', 'All'], 'eqmax', 'Percentage'], ['Percentage']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, All@Str), ==, 0, All aged 16 and over@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'gender', 'All'], '==', 'Age group', 'All aged 16 and over'], 'eqmax', 'Percentage'], ['Percentage']]
+# (t=14.95) i=6, candidate=[{'ANSWER': 84.23}]
+  # found 3 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, All@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'gender', 'All'], 'eqmax', 'Percentage'], ['Percentage']]
+    # Summarize(SelectRow1(@param0, ==, 1, All@Str), max, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'gender', 'All'], 'max', 'Percentage']
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, All@Str), ==, 1, All@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'gender', 'All'], '==', 'gender', 'All'], 'eqmax', 'Percentage'], ['Percentage']]
+# (t=17.65) i=7, candidate=[{'ANSWER': 68.83}]
+  # found 0 program(s)
+# (t=20.09) i=8, candidate=[{'ANSWER': 80.77}]
+  # found 0 program(s)
+# (t=22.52) i=9, candidate=[{'ANSWER': 67.89}]
+  # found 3 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, All aged 16 and over@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Age group', 'All aged 16 and over'], 'eqmax', 'Percentage'], ['Percentage']]
+    # Summarize(SelectRow1(@param0, ==, 0, All aged 16 and over@Str), max, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Age group', 'All aged 16 and over'], 'max', 'Percentage']
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, All aged 16 and over@Str), ==, 0, All aged 16 and over@Str), eqmax, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Age group', 'All aged 16 and over'], '==', 'Age group', 'All aged 16 and over'], 'eqmax', 'Percentage'], ['Percentage']]
+
+# ========== review report ========== #
+# top-1, score: 2.35, answer: [84.23]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, All@Str), max, 2)
+# top-2, score: 2.32, answer: [84.23]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, All@Str), eqmax, 2), ['2'])
+# top-3, score: 2.29, answer: [65.69]
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, All aged 16 and over@Str), ==, 1, All@Str), eqmax, 2), ['2'])
+# top-4, score: 2.29, answer: [65.69]
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, All@Str), ==, 0, All aged 16 and over@Str), eqmax, 2), ['2'])
+# top-5, score: 2.29, answer: [84.23]
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, All@Str), ==, 1, All@Str), eqmax, 2), ['2'])
+# top-6, score: 2.20, answer: [65.69]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, All aged 16 and over@Str), ==, 1, All@Str), ['2'])
+# top-7, score: 2.20, answer: [65.69]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, All@Str), ==, 0, All aged 16 and over@Str), ['2'])
+# top-8, score: 1.35, answer: [67.89]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, All aged 16 and over@Str), max, 2)
+# top-9, score: 1.32, answer: [83.92]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], sum, 2), eqmax, 1), ['0'])
+# top-10, score: 1.32, answer: [83.92]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2'], sum, 2), eqmax, 1), ['-1'])
+# top-11, score: 1.32, answer: [67.89]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, All aged 16 and over@Str), eqmax, 2), ['2'])
+# top-12, score: 1.31, answer: [83.92]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmax, 2), ['1'])
+# top-13, score: 1.31, answer: [83.92]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmax, 2), ['-99', '-2'])
+# top-14, score: 1.31, answer: [83.92]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], sum, 2), eqmax, 2), ['1'])
+# top-15, score: 1.31, answer: [83.92]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], sum, 2), eqmax, 2), ['-99', '-2'])
+# top-16, score: 1.31, answer: [83.92]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], sum, 2), eqmax, 2), ['0'])
+# top-17, score: 1.31, answer: [83.92]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['2', '3'], sum, 2), eqmax, 2), ['-1', '-2'])
+# top-18, score: 1.29, answer: [67.89]
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, All aged 16 and over@Str), ==, 0, All aged 16 and over@Str), eqmax, 2), ['2'])

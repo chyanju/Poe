@@ -1,0 +1,46 @@
+# parsed arguments: Namespace(benchmark='Qbfa03', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'blue', 'danish', '608036', 'west', 'remainder', 'population', '683886', 'region', '162829', 'color', '305982', 'north-east', 'skåne', '1823109', 'south', 'capital'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                  Region  Population color
+0  Danish Capital Region     1823109  blue
+1              Remainder      608036  blue
+2            South Skåne      683886  blue
+3             West Skåne      305982  blue
+4       North-East Skåne      162829  blue
+# query is: What is the population of the Danish Capital Region?
+# expected output type:[dtype('int64')]
+# expected output is:
+    ANSWER
+0  1823109
+# inferred DSL terminals:
+  # ConstVal: ['Region@Str', 'Population@Str', 'Danish Capital Region@Str', '<NULL>']
+     # cmap: [('region', 'Danish Capital Region'), ('capital', 'Danish Capital Region'), ('region', 'Region'), ('danish', 'Danish Capital Region'), ('population', 'Population')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1823109}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Region', 'Danish Capital Region'], ['Population']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Region', 'Danish Capital Region'], ['Population']]
+# (t=0.93) i=1, candidate=[{'ANSWER': 3646218}]
+  # found 0 program(s)
+# (t=1.69) i=2, candidate=[{'ANSWER': 5469327}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.59, answer: [1823109]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), ['1'])
+# top-2, score: 2.59, answer: [1823109]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Danish Capital Region@Str), ['-99', '-2'])

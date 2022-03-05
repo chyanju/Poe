@@ -1,0 +1,119 @@
+# parsed arguments: Namespace(benchmark='Q47c6b', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'orange', 'to', '24', '3157759', 'il', 'under', '18', 'fl', '7017731', '679201', '5656528', '1558919', '1420518', '925060', 'state', '2454721', '1208495', 'color', 'purple', '4746856', '13', 'and', '1345341', 'yellow', '1311479', '2141490', '1140516', '44', '14', '3596343', 'pa', '3239173', '2704659', '1999120', '5', '5120254', 'teal', '65', '3853788', 'green', '2159981', '894368', '1910571', '3277946', '2607672', 'age_range', '4114496', '17', '4499890', '1607297', '25', '725973', '2027307', '10604510', 'ny', '1203944', '3414001', 'years', '64', '4782119', 'over', '1058031', '8819342', '1575308', 'blue', '3187797', '2472223', '737462', 'tx', 'red', '45', 'ca', '5355235', 'population', '1938695'}
+# input type: [dtype('O'), dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+   State  population          age_range   color
+0     PA      737462      Under 5 Years  purple
+1     PA     1345341      5 to 13 Years   green
+2     PA      679201     14 to 17 Years    blue
+3     PA     1203944     18 to 24 Years  orange
+4     PA     3157759     25 to 44 Years     red
+5     PA     3414001     45 to 64 Years    teal
+6     PA     1910571  65 Years and Over  yellow
+7     IL      894368      Under 5 Years  purple
+8     IL     1558919      5 to 13 Years   green
+9     IL      725973     14 to 17 Years    blue
+10    IL     1311479     18 to 24 Years  orange
+11    IL     3596343     25 to 44 Years     red
+12    IL     3239173     45 to 64 Years    teal
+13    IL     1575308  65 Years and Over  yellow
+14    FL     1140516      Under 5 Years  purple
+15    FL     1938695      5 to 13 Years   green
+16    FL      925060     14 to 17 Years    blue
+17    FL     1607297     18 to 24 Years  orange
+18    FL     4782119     25 to 44 Years     red
+19    FL     4746856     45 to 64 Years    teal
+20    FL     3187797  65 Years and Over  yellow
+21    NY     1208495      Under 5 Years  purple
+22    NY     2141490      5 to 13 Years   green
+23    NY     1058031     14 to 17 Years    blue
+24    NY     1999120     18 to 24 Years  orange
+25    NY     5355235     25 to 44 Years     red
+26    NY     5120254     45 to 64 Years    teal
+27    NY     2607672  65 Years and Over  yellow
+28    CA     2704659      Under 5 Years  purple
+29    CA     4499890      5 to 13 Years   green
+30    CA     2159981     14 to 17 Years    blue
+31    CA     3853788     18 to 24 Years  orange
+32    CA    10604510     25 to 44 Years     red
+33    CA     8819342     45 to 64 Years    teal
+34    CA     4114496  65 Years and Over  yellow
+35    TX     2027307      Under 5 Years  purple
+36    TX     3277946      5 to 13 Years   green
+37    TX     1420518     14 to 17 Years    blue
+38    TX     2454721     18 to 24 Years  orange
+39    TX     7017731     25 to 44 Years     red
+40    TX     5656528     45 to 64 Years    teal
+41    TX     2472223  65 Years and Over  yellow
+# query is: Which categoty has the lowest population in FL?
+# expected output type:[dtype('O')]
+# expected output is:
+           ANSWER
+0  14 to 17 Years
+# inferred DSL terminals:
+  # ConstVal: ['FL@Str', 'population@Str', '<NULL>']
+     # cmap: [('population', 'population'), ('fl', 'FL')]
+  # AggrFunc: ['min', '<NULL>']
+     # amap: [('lowest', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('lowest', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'IL'}]
+  # found 0 program(s)
+# (t=1.73) i=1, candidate=[{'ANSWER': 'PA'}]
+  # found 11 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['State'], 'min', 'population'], 'eqmin', 'COL0'], ['State']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['State'], 'min', 'population'], 'eqmin', 'COL0'], ['State']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['State', 'population'], 'min', 'population'], 'eqmin', 'population'], ['State']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['State', 'population'], 'min', 'population'], 'eqmin', 'population'], ['State']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['State', 'population'], 'min', 'population'], 'eqmin', 'COL0'], ['State']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['State', 'population'], 'min', 'population'], 'eqmin', 'COL0'], ['State']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['State', 'age_range'], 'min', 'population'], 'eqmin', 'COL0'], ['State']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['State', 'age_range'], 'min', 'population'], 'eqmin', 'COL0'], ['State']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['State', 'color'], 'min', 'population'], 'eqmin', 'COL0'], ['State']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['State', 'color'], 'min', 'population'], 'eqmin', 'COL0'], ['State']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'population'], ['State']]
+# (t=3.51) i=2, candidate=[{'ANSWER': 'CA'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.42, answer: ['PA']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+# top-2, score: 1.35, answer: ['PA']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+# top-3, score: 1.35, answer: ['PA']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+# top-4, score: 1.34, answer: ['PA']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+# top-5, score: 1.34, answer: ['PA']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+# top-6, score: 1.34, answer: ['PA']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+# top-7, score: 1.34, answer: ['PA']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-8, score: 1.34, answer: ['PA']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+# top-9, score: 1.34, answer: ['PA']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-10, score: 1.34, answer: ['PA']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 1), eqmin, 2), ['0'])
+# top-11, score: 1.34, answer: ['PA']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 1), eqmin, 2), ['-1', '-2'])

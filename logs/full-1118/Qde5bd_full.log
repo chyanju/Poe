@@ -1,0 +1,53 @@
+# parsed arguments: Namespace(benchmark='Qde5bd', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'margot', 'majority', '18.9', 'adrian', 'james', 'jill', 'george', 'candidate', 'weiss', '43.2', '13.9', 'percent', 'fraser', '0.4', '8.1', 'frank', 'rainbow', 'blue', 'dobson', 'color', 'oliver', '29.3'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+              Candidate  percent color
+0          Frank Dobson     43.2  blue
+1           Jill Fraser     29.3  blue
+2          Margot James     18.9  blue
+3         Adrian Oliver      8.1  blue
+4  Rainbow George Weiss      0.4  blue
+5              Majority     13.9  blue
+# query is: How much more percentage does Frank Dobson have over Jill Fraser?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0    13.9
+# inferred DSL terminals:
+  # ConstVal: ['Frank Dobson@Str', 'Jill Fraser@Str', 'percent@Str', '<NULL>']
+     # cmap: [('percentage', 'percent'), ('fraser', 'Jill Fraser'), ('frank', 'Frank Dobson'), ('jill', 'Jill Fraser'), ('dobson', 'Frank Dobson')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>', '>=', '==', '<NULL>']
+     # bmap: [('more', '>'), (None, '=='), ('more', '>=')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(13.900000000000002, 9), (-13.900000000000002, 9)]
+  # [debug] high_values (no dup.): [(42.800000000000004, 3), (35.1, 3), (29.300000000000004, 3), (28.900000000000002, 3), (24.300000000000004, 3), (21.200000000000003, 3), (15.4, 3), (10.400000000000002, 3), (-10.400000000000002, 3), (-15.4, 3)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=1.47) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=2.93) i=2, candidate=[{'ANSWER': 13.900000000000002}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Frank Dobson@Str, Jill Fraser@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Candidate', 'Frank Dobson', 'Jill Fraser', 'percent']
+# (t=4.36) i=3, candidate=[{'ANSWER': -13.900000000000002}]
+  # found 1 program(s)
+    # Contrast(@param0, -, 0, Jill Fraser@Str, Frank Dobson@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Candidate', 'Jill Fraser', 'Frank Dobson', 'percent']
+
+# ========== review report ========== #
+# top-1, score: 2.69, answer: 13.900000000000002
+  # tprog: Contrast(@param0, -, 0, Frank Dobson@Str, Jill Fraser@Str, 1)
+# top-2, score: 2.69, answer: -13.900000000000002
+  # tprog: Contrast(@param0, -, 0, Jill Fraser@Str, Frank Dobson@Str, 1)

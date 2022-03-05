@@ -1,0 +1,51 @@
+# parsed arguments: Namespace(benchmark='Qc219b', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'19258', '28608', 'voters', '27180', 'blue', 'democratic', 'party', 'parties', 'republican', 'total', 'unaffiliated', 'minor', 'color', '140'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+           Party  Total voters color
+0     Republican         19258  blue
+1     Democratic         28608  blue
+2   Unaffiliated         27180  blue
+3  Minor parties           140  blue
+# query is: How many voters identify as Unaffiliated?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0   27180
+# inferred DSL terminals:
+  # ConstVal: ['Total voters@Str', 'Unaffiliated@Str', '<NULL>']
+     # cmap: [('voters', 'Total voters'), ('unaffiliated', 'Unaffiliated')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 27180}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), ==, 0, Unaffiliated@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Party', 'Unaffiliated'], '==', 'Party', 'Unaffiliated'], ['Total voters']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), ==, 0, Unaffiliated@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Party', 'Unaffiliated'], '==', 'Party', 'Unaffiliated'], ['Total voters']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Unaffiliated@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Party', 'Unaffiliated'], ['Total voters']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Unaffiliated@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Party', 'Unaffiliated'], ['Total voters']]
+# (t=1.19) i=1, candidate=[{'ANSWER': 54360}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.48, answer: [27180]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Unaffiliated@Str), ['1'])
+# top-2, score: 2.48, answer: [27180]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Unaffiliated@Str), ['-99', '-2'])
+# top-3, score: 2.42, answer: [27180]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), ==, 0, Unaffiliated@Str), ['1'])
+# top-4, score: 2.42, answer: [27180]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), ==, 0, Unaffiliated@Str), ['-99', '-2'])

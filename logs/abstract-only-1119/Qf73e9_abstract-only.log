@@ -1,0 +1,371 @@
+# parsed arguments: Namespace(benchmark='Qf73e9', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'same', '18', 'blue', 'lebanon', 'china', '22', '51', '27', 'france', 'egypt', 'opinion', '43', 'rep.', 'czech', '37', '26', 'britain', 'remain', '83', '10', '49', 'worsen', '2', 'brazil', 'percentage', '52', '9', 'red', 'germany', 'greece', '13', 'turkey', 'tunisia', 'improve', '28', '23', '32', 'mexico', 'u.s.', 'russia', 'pakistan', '44', '45', '15', '20', '16', '31', 'italy', '50', 'india', '84', '25', 'color', '29', '81', 'jordan', '35', '60', '12', '33', 'country', '75', '5', '24', '47', 'orange', 'japan', '34', 'spain', 'poland', '40'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       Country          opinion  percentage   color
+0       Brazil          Improve          84    blue
+1       Brazil  Remain the same          12  orange
+2       Brazil           Worsen           5     red
+3        China          Improve          83    blue
+4        China  Remain the same           9  orange
+..         ...              ...         ...     ...
+58  Czech Rep.  Remain the same          27  orange
+59  Czech Rep.           Worsen          60     red
+60      Greece          Improve           9    blue
+61      Greece  Remain the same          10  orange
+62      Greece           Worsen          81     red
+
+[63 rows x 4 columns]
+# query is: Which country has the highest red bar?
+# expected output type:[dtype('O')]
+# expected output is:
+   ANSWER
+0  Greece
+# inferred DSL terminals:
+  # ConstVal: ['2@Int', 'blue@Str', '5@Int', 'Brazil@Str', 'Tunisia@Str', '9@Int', 'Poland@Str', 'Greece@Str', '12@Int', 'Mexico@Str', '13@Int', '15@Int', '16@Int', '10@Int', 'Remain the same@Str', 'France@Str', '20@Int', '18@Int', '22@Int', '23@Int', '24@Int', '25@Int', '26@Int', '27@Int', '28@Int', '29@Int', 'opinion@Str', '31@Int', '32@Int', '33@Int', '34@Int', '35@Int', 'Worsen@Str', '37@Int', 'Italy@Str', '40@Int', 'Lebanon@Str', '43@Int', '44@Int', '45@Int', 'color@Str', '47@Int', '49@Int', '50@Int', '51@Int', '52@Int', 'Czech Rep.@Str', '60@Int', 'Russia@Str', 'percentage@Str', 'Country@Str', 'red@Str', '75@Int', 'Germany@Str', '81@Int', '83@Int', '84@Int', 'India@Str', 'Egypt@Str', 'Pakistan@Str', 'Japan@Str', 'Spain@Str', 'Britain@Str', 'orange@Str', 'Improve@Str', 'U.S.@Str', 'Turkey@Str', 'China@Str', 'Jordan@Str']
+     # cmap: [(None, 2), (None, 'blue'), (None, 5), (None, 'Brazil'), (None, 'Tunisia'), (None, 9), (None, 'Poland'), (None, 'Greece'), (None, 12), (None, 'Mexico'), (None, 13), (None, 15), (None, 16), (None, 10), (None, 'Remain the same'), (None, 'France'), (None, 20), (None, 18), (None, 22), (None, 23), (None, 24), (None, 25), (None, 26), (None, 27), (None, 28), (None, 29), (None, 'opinion'), (None, 31), (None, 32), (None, 33), (None, 34), (None, 35), (None, 'Worsen'), (None, 37), (None, 'Italy'), (None, 40), (None, 'Lebanon'), (None, 43), (None, 44), (None, 45), (None, 'color'), (None, 47), (None, 49), (None, 50), (None, 51), (None, 52), (None, 'Czech Rep.'), (None, 60), (None, 'Russia'), (None, 'percentage'), (None, 'Country'), (None, 'red'), (None, 75), (None, 'Germany'), (None, 81), (None, 83), (None, 84), (None, 'India'), (None, 'Egypt'), (None, 'Pakistan'), (None, 'Japan'), (None, 'Spain'), (None, 'Britain'), (None, 'orange'), (None, 'Improve'), (None, 'U.S.'), (None, 'Turkey'), (None, 'China'), (None, 'Jordan')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Tunisia'}]
+  # found 84 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 81@Int), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<', 'percentage', 81], 'eqmax', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 75@Int), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<=', 'percentage', 75], 'eqmax', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Tunisia@Str), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], 'eqmax', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 75@Int), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>=', 'percentage', 75], 'eqmin', 'percentage'], ['Country']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 60@Int), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>', 'percentage', 60], 'eqmin', 'percentage'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 81@Int), ==, 2, 75@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 81], '==', 'percentage', 75], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 81@Int), >=, 2, 75@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 81], '>=', 'percentage', 75], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 81@Int), >, 2, 60@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 81], '>', 'percentage', 60], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 83@Int), ==, 2, 75@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 83], '==', 'percentage', 75], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 84@Int), ==, 2, 75@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'percentage', 84], '==', 'percentage', 75], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 75@Int), ==, 2, 75@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 75], '==', 'percentage', 75], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 75@Int), >=, 2, 75@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 75], '>=', 'percentage', 75], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 75@Int), >, 2, 60@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 75], '>', 'percentage', 60], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 81@Int), ==, 2, 75@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 81], '==', 'percentage', 75], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 83@Int), ==, 2, 75@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 83], '==', 'percentage', 75], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 84@Int), ==, 2, 75@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'percentage', 84], '==', 'percentage', 75], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), ==, 1, Remain the same@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '==', 'opinion', 'Remain the same'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), ==, 1, Worsen@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '==', 'opinion', 'Worsen'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), ==, 1, Improve@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '==', 'opinion', 'Improve'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), ==, 2, 75@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '==', 'percentage', 75], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), ==, 3, blue@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '==', 'color', 'blue'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), ==, 3, red@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '==', 'color', 'red'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), ==, 3, orange@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '==', 'color', 'orange'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 13@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 13], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 15@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 15], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 16@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 16], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 20@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 20], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 18@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 18], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 22@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 22], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 23@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 23], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 24@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 24], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 25@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 25], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 26@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 26], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 27@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 27], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 28@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 28], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 29@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 29], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 31@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 31], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 32@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 32], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 33@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 33], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 34@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 34], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 35@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 35], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 43@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 43], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 44@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 44], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 45@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 45], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 47@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 47], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 49@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 49], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 50@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 50], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 51@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 51], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 52@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 52], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 60@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 60], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 75@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>=', 'percentage', 75], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 12@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 12], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 13@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 13], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 15@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 15], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 16@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 16], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 20@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 20], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 18@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 18], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 22@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 22], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 23@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 23], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 24@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 24], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 25@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 25], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 26@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 26], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 27@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 27], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 28@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 28], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 29@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 29], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 31@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 31], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 32@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 32], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 33@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 33], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 34@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 34], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 35@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 35], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 37@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 37], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 40@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 40], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 43@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 43], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 44@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 44], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 45@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 45], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 47@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 47], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 49@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 49], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 50@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 50], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 51@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 51], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 52@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 52], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 60@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '>', 'percentage', 60], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), !=, 2, 12@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Tunisia'], '!=', 'percentage', 12], ['Country']]
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 81@Int), eqmax, 2), ['0'])
+# top-2, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 75@Int), eqmax, 2), ['0'])
+# top-3, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Tunisia@Str), eqmax, 2), ['0'])
+# top-4, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 75@Int), eqmin, 2), ['0'])
+# top-5, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 60@Int), eqmin, 2), ['0'])
+# top-6, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 81@Int), ==, 2, 75@Int), ['0'])
+# top-7, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 81@Int), >=, 2, 75@Int), ['0'])
+# top-8, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 81@Int), >, 2, 60@Int), ['0'])
+# top-9, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 83@Int), ==, 2, 75@Int), ['0'])
+# top-10, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 84@Int), ==, 2, 75@Int), ['0'])
+# top-11, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 75@Int), ==, 2, 75@Int), ['0'])
+# top-12, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 75@Int), >=, 2, 75@Int), ['0'])
+# top-13, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 75@Int), >, 2, 60@Int), ['0'])
+# top-14, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 81@Int), ==, 2, 75@Int), ['0'])
+# top-15, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 83@Int), ==, 2, 75@Int), ['0'])
+# top-16, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 84@Int), ==, 2, 75@Int), ['0'])
+# top-17, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), ==, 1, Remain the same@Str), ['0'])
+# top-18, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), ==, 1, Worsen@Str), ['0'])
+# top-19, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), ==, 1, Improve@Str), ['0'])
+# top-20, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), ==, 2, 75@Int), ['0'])
+# top-21, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), ==, 3, blue@Str), ['0'])
+# top-22, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), ==, 3, red@Str), ['0'])
+# top-23, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), ==, 3, orange@Str), ['0'])
+# top-24, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 13@Int), ['0'])
+# top-25, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 15@Int), ['0'])
+# top-26, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 16@Int), ['0'])
+# top-27, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 20@Int), ['0'])
+# top-28, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 18@Int), ['0'])
+# top-29, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 22@Int), ['0'])
+# top-30, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 23@Int), ['0'])
+# top-31, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 24@Int), ['0'])
+# top-32, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 25@Int), ['0'])
+# top-33, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 26@Int), ['0'])
+# top-34, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 27@Int), ['0'])
+# top-35, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 28@Int), ['0'])
+# top-36, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 29@Int), ['0'])
+# top-37, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 31@Int), ['0'])
+# top-38, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 32@Int), ['0'])
+# top-39, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 33@Int), ['0'])
+# top-40, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 34@Int), ['0'])
+# top-41, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 35@Int), ['0'])
+# top-42, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 37@Int), ['0'])
+# top-43, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 40@Int), ['0'])
+# top-44, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 43@Int), ['0'])
+# top-45, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 44@Int), ['0'])
+# top-46, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 45@Int), ['0'])
+# top-47, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 47@Int), ['0'])
+# top-48, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 49@Int), ['0'])
+# top-49, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 50@Int), ['0'])
+# top-50, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 51@Int), ['0'])
+# top-51, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 52@Int), ['0'])
+# top-52, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 60@Int), ['0'])
+# top-53, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >=, 2, 75@Int), ['0'])
+# top-54, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 12@Int), ['0'])
+# top-55, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 13@Int), ['0'])
+# top-56, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 15@Int), ['0'])
+# top-57, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 16@Int), ['0'])
+# top-58, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 20@Int), ['0'])
+# top-59, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 18@Int), ['0'])
+# top-60, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 22@Int), ['0'])
+# top-61, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 23@Int), ['0'])
+# top-62, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 24@Int), ['0'])
+# top-63, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 25@Int), ['0'])
+# top-64, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 26@Int), ['0'])
+# top-65, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 27@Int), ['0'])
+# top-66, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 28@Int), ['0'])
+# top-67, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 29@Int), ['0'])
+# top-68, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 31@Int), ['0'])
+# top-69, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 32@Int), ['0'])
+# top-70, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 33@Int), ['0'])
+# top-71, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 34@Int), ['0'])
+# top-72, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 35@Int), ['0'])
+# top-73, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 37@Int), ['0'])
+# top-74, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 40@Int), ['0'])
+# top-75, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 43@Int), ['0'])
+# top-76, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 44@Int), ['0'])
+# top-77, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 45@Int), ['0'])
+# top-78, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 47@Int), ['0'])
+# top-79, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 49@Int), ['0'])
+# top-80, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 50@Int), ['0'])
+# top-81, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 51@Int), ['0'])
+# top-82, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 52@Int), ['0'])
+# top-83, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), >, 2, 60@Int), ['0'])
+# top-84, score: 0.00, answer: ['Tunisia']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Tunisia@Str), !=, 2, 12@Int), ['0'])

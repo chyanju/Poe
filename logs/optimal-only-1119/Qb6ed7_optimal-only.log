@@ -1,0 +1,48 @@
+# parsed arguments: Namespace(benchmark='Qb6ed7', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'plain', 'flat', 'highland', 'gojō,', 'inland', 'yoshino', 'district', 'color', 'size', 'area', '(km²)', 'blue', '2346.84', '837.27', '506.89', 'yamato'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                   District  Area Size (km²) color
+0  Yamato flat inland plain           837.27  blue
+1           Yamato highland           506.89  blue
+2             Gojō, Yoshino          2346.84  blue
+# query is: What is the value of the bar for Yamato flat inland plain?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0  837.27
+# inferred DSL terminals:
+  # ConstVal: ['Yamato flat inland plain@Str', 'Yamato highland@Str', '<NULL>']
+     # cmap: [('yamato', 'Yamato highland'), ('yamato', 'Yamato flat inland plain'), ('flat', 'Yamato flat inland plain'), ('plain', 'Yamato flat inland plain'), ('inland', 'Yamato flat inland plain')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 837.27}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), ==, 0, Yamato flat inland plain@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'District', 'Yamato flat inland plain'], '==', 'District', 'Yamato flat inland plain'], ['Area Size (km²)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), ==, 0, Yamato flat inland plain@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'District', 'Yamato flat inland plain'], '==', 'District', 'Yamato flat inland plain'], ['Area Size (km²)']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'District', 'Yamato flat inland plain'], ['Area Size (km²)']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'District', 'Yamato flat inland plain'], ['Area Size (km²)']]
+
+# ========== review report ========== #
+# top-1, score: 2.48, answer: [837.27]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), ['1'])
+# top-2, score: 2.48, answer: [837.27]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), ['-99', '-2'])
+# top-3, score: 2.42, answer: [837.27]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), ==, 0, Yamato flat inland plain@Str), ['1'])
+# top-4, score: 2.42, answer: [837.27]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), ==, 0, Yamato flat inland plain@Str), ['-99', '-2'])

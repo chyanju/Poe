@@ -1,0 +1,143 @@
+# parsed arguments: Namespace(benchmark='Q82657', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'blue', 'european', 'netherlands', '30033922', 'norway', 'commission', 'us', 'finland', '67030000', 'color', '5475452', '1000000', 'donations', 'kuwait', 'ireland', '26000000', '7033231', '1356852', 'belgium', '2000000', 'country', '2713704', 'germany', 'japan', 'china'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                Country  Donations color
+0                    US   67030000  blue
+1   European Commission   30033922  blue
+2                 Japan   26000000  blue
+3           Netherlands    7033231  blue
+4                Norway    5475452  blue
+5               Germany    2713704  blue
+6                Kuwait    2000000  blue
+7               Finland    1356852  blue
+8               Belgium    1356852  blue
+9               Ireland    1356852  blue
+10                China    1000000  blue
+# query is: Who made more donations: Belgium or Ireland?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0   same
+# inferred DSL terminals:
+  # ConstVal: ['Donations@Str', 'Ireland@Str', 'Belgium@Str', '<NULL>']
+     # cmap: [('ireland', 'Ireland'), ('belgium', 'Belgium'), ('donations', 'Donations')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['==', '>', '>=', '<NULL>']
+     # bmap: [('more', '>'), (None, '=='), ('more', '>=')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(0, 4)]
+  # [debug] high_values (no dup.): [(0, 4)]
+  # [debug] filtered low_values (no dup.): [(65673148, 2), (65673148, 2), (28677070, 2), (28677070, 2), (24643148, 2), (24643148, 2), (5676379, 2), (5676379, 2), (4118600, 2), (4118600, 2)]
+  # [debug] fallback (comparison) answers are added
+# ====> fallback strategy (selection) is triggered
+  # [debug] fallback (selection) answers: ['Donations', 'Ireland', 'Belgium']
+  # [debug] fallback (selection) answers (no dup.): ['Donations']
+  # [debug] 1 fallback (selection) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Belgium'}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Belgium@Str), ==, 0, Belgium@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Belgium'], '==', 'Country', 'Belgium'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Belgium@Str), ==, 0, Belgium@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Belgium'], '==', 'Country', 'Belgium'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Belgium@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Belgium'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Belgium@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Belgium'], ['Country']]
+# (t=2.67) i=1, candidate=[{'ANSWER': 'Ireland'}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Ireland@Str), ==, 0, Ireland@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Ireland'], '==', 'Country', 'Ireland'], ['Country']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Ireland@Str), ==, 0, Ireland@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Ireland'], '==', 'Country', 'Ireland'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Ireland@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Ireland'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Ireland@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Ireland'], ['Country']]
+# (t=5.32) i=2, candidate=[{'ANSWER': 'Norway'}]
+  # found 0 program(s)
+# (t=7.97) i=3, candidate=[{'ANSWER': 'Germany'}]
+  # found 0 program(s)
+# (t=10.62) i=4, candidate=[{'ANSWER': 'US'}]
+  # found 0 program(s)
+# (t=13.27) i=5, candidate=[{'ANSWER': 'Kuwait'}]
+  # found 0 program(s)
+# (t=16.23) i=6, candidate=[{'ANSWER': 'Finland'}]
+  # found 0 program(s)
+# (t=18.89) i=7, candidate=[{'ANSWER': 'Netherlands'}]
+  # found 0 program(s)
+# (t=21.54) i=8, candidate=[{'ANSWER': 0}]
+  # found 6 program(s)
+    # Contrast(SelectRow1(@param0, ==, 0, Ireland@Str), -, 0, Ireland@Str, Ireland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Country', 'Ireland'], '-', 'Country', 'Ireland', 'Ireland', 'Donations']
+    # Contrast(SelectRow1(@param0, ==, 0, Belgium@Str), -, 0, Belgium@Str, Belgium@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Country', 'Belgium'], '-', 'Country', 'Belgium', 'Belgium', 'Donations']
+    # Contrast(@param0, -, 0, Ireland@Str, Ireland@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Country', 'Ireland', 'Ireland', 'Donations']
+    # Contrast(@param0, -, 0, Ireland@Str, Belgium@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Country', 'Ireland', 'Belgium', 'Donations']
+    # Contrast(@param0, -, 0, Belgium@Str, Ireland@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Country', 'Belgium', 'Ireland', 'Donations']
+    # Contrast(@param0, -, 0, Belgium@Str, Belgium@Str, 1)
+      --> ['Contrast', 'input@0', '-', 'Country', 'Belgium', 'Belgium', 'Donations']
+# (t=24.18) i=9, candidate=[{'ANSWER': 65673148}]
+  # found 0 program(s)
+# (t=26.83) i=10, candidate=[{'ANSWER': 65673148}]
+  # found 0 program(s)
+# (t=29.48) i=11, candidate=[{'ANSWER': 28677070}]
+  # found 0 program(s)
+# (t=32.47) i=12, candidate=[{'ANSWER': 28677070}]
+  # found 0 program(s)
+# (t=35.12) i=13, candidate=[{'ANSWER': 24643148}]
+  # found 0 program(s)
+# (t=37.77) i=14, candidate=[{'ANSWER': 24643148}]
+  # found 0 program(s)
+# (t=40.42) i=15, candidate=[{'ANSWER': 5676379}]
+  # found 0 program(s)
+# (t=43.07) i=16, candidate=[{'ANSWER': 5676379}]
+  # found 0 program(s)
+# (t=45.72) i=17, candidate=[{'ANSWER': 4118600}]
+  # found 0 program(s)
+# (t=48.70) i=18, candidate=[{'ANSWER': 4118600}]
+  # found 0 program(s)
+# (t=51.35) i=19, candidate=[{'ANSWER': 'Donations'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.71, answer: [0]
+  # tprog: Contrast(@param0, -, 0, Ireland@Str, Belgium@Str, 1)
+# top-2, score: 2.71, answer: [0]
+  # tprog: Contrast(@param0, -, 0, Belgium@Str, Ireland@Str, 1)
+# top-3, score: 2.57, answer: [0]
+  # tprog: Contrast(@param0, -, 0, Ireland@Str, Ireland@Str, 1)
+# top-4, score: 2.57, answer: [0]
+  # tprog: Contrast(@param0, -, 0, Belgium@Str, Belgium@Str, 1)
+# top-5, score: 2.52, answer: [0]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, Ireland@Str), -, 0, Ireland@Str, Ireland@Str, 1)
+# top-6, score: 2.52, answer: [0]
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, Belgium@Str), -, 0, Belgium@Str, Belgium@Str, 1)
+# top-7, score: 2.29, answer: ['Belgium']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Belgium@Str), ['0'])
+# top-8, score: 2.29, answer: ['Belgium']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Belgium@Str), ['-1', '-2'])
+# top-9, score: 2.29, answer: ['Ireland']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Ireland@Str), ['0'])
+# top-10, score: 2.29, answer: ['Ireland']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Ireland@Str), ['-1', '-2'])
+# top-11, score: 2.23, answer: ['Belgium']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Belgium@Str), ==, 0, Belgium@Str), ['0'])
+# top-12, score: 2.23, answer: ['Belgium']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Belgium@Str), ==, 0, Belgium@Str), ['-1', '-2'])
+# top-13, score: 2.23, answer: ['Ireland']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Ireland@Str), ==, 0, Ireland@Str), ['0'])
+# top-14, score: 2.23, answer: ['Ireland']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Ireland@Str), ==, 0, Ireland@Str), ['-1', '-2'])

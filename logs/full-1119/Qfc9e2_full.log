@@ -1,0 +1,151 @@
+# parsed arguments: Namespace(benchmark='Qfc9e2', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'54', '32', '30', '35', 'jordan', 'poland', '69', 'russia', 'turkey', '73', 'czech', '53', 'france', '33', '48', 'tunisia', 'pakistan', 'no', '67', '57', 'brazil', '46', 'spain', '50', '81', 'lebanon', '31', 'color', 'if', 'germany', 'egypt', 'response', '65', 'rep.', 'country', '51', 'britain', 'mexico', 'u.s.', 'orange', 'hard', '39', '40', 'succeed', '59', '20', 'italy', '27', 'percentage', '56', '41', '77', 'guarantee', 'japan', '64', 'work', 'blue', 'greece', 'india', 'most', 'china', '37', '43', '15', '45', '24', '42'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       country                   response  percentage   color
+0         U.S.     Hard work no guarantee          20    blue
+1         U.S.  Most succeed if work hard          77  orange
+2      Britain     Hard work no guarantee          41    blue
+3      Britain  Most succeed if work hard          57  orange
+4        Spain     Hard work no guarantee          43    blue
+5        Spain  Most succeed if work hard          56  orange
+6   Czech Rep.     Hard work no guarantee          43    blue
+7   Czech Rep.  Most succeed if work hard          54  orange
+8      Germany     Hard work no guarantee          48    blue
+9      Germany  Most succeed if work hard          51  orange
+10      Poland     Hard work no guarantee          43    blue
+11      Poland  Most succeed if work hard          48  orange
+12      France     Hard work no guarantee          54    blue
+13      France  Most succeed if work hard          46  orange
+14       Italy     Hard work no guarantee          46    blue
+15       Italy  Most succeed if work hard          43  orange
+16      Greece     Hard work no guarantee          51    blue
+17      Greece  Most succeed if work hard          43  orange
+18      Russia     Hard work no guarantee          53    blue
+19      Russia  Most succeed if work hard          35  orange
+20    Pakistan     Hard work no guarantee          15    blue
+21    Pakistan  Most succeed if work hard          81  orange
+22     Tunisia     Hard work no guarantee          24    blue
+23     Tunisia  Most succeed if work hard          73  orange
+24      Jordan     Hard work no guarantee          37    blue
+25      Jordan  Most succeed if work hard          57  orange
+26       Egypt     Hard work no guarantee          42    blue
+27       Egypt  Most succeed if work hard          53  orange
+28      Turkey     Hard work no guarantee          39    blue
+29      Turkey  Most succeed if work hard          50  orange
+30     Lebanon     Hard work no guarantee          64    blue
+31     Lebanon  Most succeed if work hard          32  orange
+32       India     Hard work no guarantee          27    blue
+33       India  Most succeed if work hard          67  orange
+34       China     Hard work no guarantee          33    blue
+35       China  Most succeed if work hard          45  orange
+36       Japan     Hard work no guarantee          59    blue
+37       Japan  Most succeed if work hard          40  orange
+38      Brazil     Hard work no guarantee          30    blue
+39      Brazil  Most succeed if work hard          69  orange
+40      Mexico     Hard work no guarantee          31    blue
+41      Mexico  Most succeed if work hard          65  orange
+# query is: Which country's has the lowest summed value from the two responses?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0  China
+# inferred DSL terminals:
+  # ConstVal: ['response@Str', 'country@Str', '<NULL>']
+     # cmap: [('country', 'country'), ('responses', 'response')]
+  # AggrFunc: ['min', 'sum', '<NULL>']
+     # amap: [('lowest', 'min'), ('summed', 'sum')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('lowest', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'U.S.'}]
+  # found 0 program(s)
+# (t=2.05) i=1, candidate=[{'ANSWER': 'Pakistan'}]
+  # found 19 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'min', 'percentage'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'min', 'percentage'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'response'], 'min', 'percentage'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'response'], 'min', 'percentage'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'response'], 'sum', 'percentage'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'response'], 'sum', 'percentage'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'percentage'], 'min', 'percentage'], 'eqmin', 'percentage'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'percentage'], 'min', 'percentage'], 'eqmin', 'percentage'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'percentage'], 'min', 'percentage'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'percentage'], 'min', 'percentage'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'percentage'], 'sum', 'percentage'], 'eqmin', 'percentage'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'percentage'], 'sum', 'percentage'], 'eqmin', 'percentage'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'percentage'], 'sum', 'percentage'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'percentage'], 'sum', 'percentage'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'min', 'percentage'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'min', 'percentage'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], sum, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'sum', 'percentage'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], sum, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'sum', 'percentage'], 'eqmin', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(@param0, eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'percentage'], ['country']]
+# (t=4.14) i=2, candidate=[{'ANSWER': 'Russia'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.42, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 2), eqmin, 2), ['0'])
+# top-2, score: 1.42, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], sum, 2), eqmin, 2), ['-1', '-2'])
+# top-3, score: 1.34, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['0'])
+# top-4, score: 1.34, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-5, score: 1.34, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmin, 1), ['0'])
+# top-6, score: 1.34, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmin, 1), ['-1', '-2'])
+# top-7, score: 1.34, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmin, 2), ['0'])
+# top-8, score: 1.34, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], sum, 2), eqmin, 2), ['-1', '-2'])
+# top-9, score: 1.34, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], sum, 2), eqmin, 2), ['0'])
+# top-10, score: 1.34, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], sum, 2), eqmin, 2), ['-1', '-2'])
+# top-11, score: 1.33, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 2), ['0'])
+# top-12, score: 1.27, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['0'])
+# top-13, score: 1.27, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['-1'])
+# top-14, score: 1.26, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['0'])
+# top-15, score: 1.26, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['-1', '-2'])
+# top-16, score: 1.26, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['0'])
+# top-17, score: 1.26, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-18, score: 1.26, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['0'])
+# top-19, score: 1.26, answer: ['Pakistan']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['-1', '-2'])

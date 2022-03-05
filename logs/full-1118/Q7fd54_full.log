@@ -1,0 +1,69 @@
+# parsed arguments: Namespace(benchmark='Q7fd54', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'26.0', 'singapore', '3.9', '11.8', '25.4', 'total', 'blue', '75.2', '6.4', '16.6', '0.5', 'maldives', 'color', 'france', 'monaco', 'square', 'australia', '7.4', '25.2', '0.4', '17.1', '6.8', '2.5', 'brazil', 'country', 'orange', 'egypt', 'indonesia', '1.0', 'japan', 'kong', 'per', 'kilometers', '5.1', 'germany', '20.8', '18.0', '0.1', 'india', 'persons', '9.7', 'bangladesh', '21.5', 'urban/total', '7.5', '0.2', '1.8', 'south', 'korea', 'rwanda', 'hong', 'macau', 'urban'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+        Country Urban/total  Persons per square kilometers   color
+0         Egypt       Urban                            5.1  orange
+1         Egypt       Total                            0.1    blue
+2        Rwanda       Urban                           18.0  orange
+3        Rwanda       Total                            0.5    blue
+4        Brazil       Urban                            9.7    blue
+5     Singapore       Urban                            7.5  orange
+6     Singapore       Total                            7.4    blue
+7         Macau       Urban                           26.0  orange
+8         Macau       Total                           20.8    blue
+9     Australia       Urban                            1.8    blue
+10        India       Urban                           25.2  orange
+11        India       Total                            0.4    blue
+12       France       Urban                            2.5  orange
+13       France       Total                            0.1    blue
+14        Japan       Urban                            3.9  orange
+15        Japan       Total                            0.5    blue
+16   Bangladesh       Urban                           75.2  orange
+17   Bangladesh       Total                            1.0    blue
+18      Germany       Urban                            6.8  orange
+19      Germany       Total                            0.2    blue
+20     Maldives       Urban                           21.5  orange
+21     Maldives       Total                            1.0    blue
+22    Indonesia       Urban                           16.6  orange
+23    Indonesia       Total                            0.1    blue
+24       Monaco       Urban                           17.1  orange
+25       Monaco       Total                           17.1    blue
+26    Hong Kong       Urban                           25.4  orange
+27    Hong Kong       Total                            6.4    blue
+28  South Korea       Urban                           11.8  orange
+29  South Korea       Total                            0.5    blue
+# query is: What is the urban populaton density in Macau?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      26
+# inferred DSL terminals:
+  # ConstVal: ['Macau@Str', 'Urban@Str', 'Urban/total@Str', '<NULL>']
+     # cmap: [('urban', 'Urban'), ('macau', 'Macau'), ('urban', 'Urban/total')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Urban'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Macau@Str), ==, 1, Urban@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'Macau'], '==', 'Urban/total', 'Urban'], ['Urban/total']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Urban@Str), ==, 0, Macau@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Urban'], '==', 'Country', 'Macau'], ['Urban/total']]
+# (t=1.96) i=1, candidate=[{'ANSWER': 'Total'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.34, answer: Urban
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Macau@Str), ==, 1, Urban@Str), ['1'])
+# top-2, score: 2.34, answer: Urban
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Urban@Str), ==, 0, Macau@Str), ['1'])

@@ -1,0 +1,77 @@
+# parsed arguments: Namespace(benchmark='Qb65c4', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'pagan/earth-based', '94', 'other', 'catholics', '81', '61', 'hindus', '17', '14', 'blue', 'unaffiliated', '86', 'very/somewhat', 'native', 'too/not', 'buddhists', 'all', 'protestants', 'mormons', '6', '83', 'percentage', 'non-christian', 'orange', '19', '57', '79', '93', '7', '24', 'not', '21', 'orthodox', 'color', 'common', '39', 'am.', 'christian', 'response', '43', 'muslims', 'at', 'jews', 'religion', '76', '92', '8', 'spirituality'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                   Religion                   response  percentage   color
+0                   Muslims       Very/somewhat common          57  orange
+1                   Muslims  Not too/not at all common          43    blue
+2         Pagan/earth-based       Very/somewhat common          39  orange
+3         Pagan/earth-based  Not too/not at all common          61    blue
+4               Protestants       Very/somewhat common          24  orange
+5               Protestants  Not too/not at all common          76    blue
+6       Other non-Christian       Very/somewhat common          21  orange
+7       Other non-Christian  Not too/not at all common          79    blue
+8   Native Am. spirituality       Very/somewhat common          19  orange
+9   Native Am. spirituality  Not too/not at all common          81    blue
+10                     Jews       Very/somewhat common          17  orange
+11                     Jews  Not too/not at all common          83    blue
+12             Unaffiliated       Very/somewhat common          14  orange
+13             Unaffiliated  Not too/not at all common          86    blue
+14                Catholics       Very/somewhat common           8  orange
+15                Catholics  Not too/not at all common          92    blue
+16                  Mormons       Very/somewhat common           8  orange
+17                  Mormons  Not too/not at all common          92    blue
+18       Orthodox Christian       Very/somewhat common           6  orange
+19       Orthodox Christian  Not too/not at all common          94    blue
+20                Buddhists       Very/somewhat common           7  orange
+21                Buddhists  Not too/not at all common          93    blue
+22                   Hindus       Very/somewhat common           6  orange
+23                   Hindus  Not too/not at all common          94    blue
+# query is: How common is religious extremism for Catholics shown in the chart?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0       8
+# inferred DSL terminals:
+  # ConstVal: ['Not too/not at all common@Str', 'Catholics@Str', 'Very/somewhat common@Str', '<NULL>']
+     # cmap: [('catholics', 'Catholics'), ('common', 'Not too/not at all common'), ('common', 'Very/somewhat common')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Not too/not at all common'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Catholics@Str), ==, 1, Not too/not at all common@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Catholics'], '==', 'response', 'Not too/not at all common'], ['response']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Not too/not at all common@Str), ==, 0, Catholics@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Not too/not at all common'], '==', 'Religion', 'Catholics'], ['response']]
+# (t=2.24) i=1, candidate=[{'ANSWER': 'Not too/not at all common'}, {'ANSWER': 'Very/somewhat common'}]
+  # found 1 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Catholics@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Religion', 'Catholics'], ['response']]
+# (t=2.89) i=2, candidate=[{'ANSWER': 'Very/somewhat common'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Catholics@Str), ==, 1, Very/somewhat common@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Catholics'], '==', 'response', 'Very/somewhat common'], ['response']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Very/somewhat common@Str), ==, 0, Catholics@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Very/somewhat common'], '==', 'Religion', 'Catholics'], ['response']]
+
+# ========== review report ========== #
+# top-1, score: 2.27, answer: Not too/not at all common
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Catholics@Str), ==, 1, Not too/not at all common@Str), ['1'])
+# top-2, score: 2.27, answer: Not too/not at all common
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Not too/not at all common@Str), ==, 0, Catholics@Str), ['1'])
+# top-3, score: 2.27, answer: Very/somewhat common
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Catholics@Str), ==, 1, Very/somewhat common@Str), ['1'])
+# top-4, score: 2.27, answer: Very/somewhat common
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Very/somewhat common@Str), ==, 0, Catholics@Str), ['1'])
+# top-5, score: 2.23, answer: Not too/not at all common
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Catholics@Str), ['1'])

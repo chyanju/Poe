@@ -1,0 +1,62 @@
+# parsed arguments: Namespace(benchmark='Qe7939', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'color', 'unix', '100', '230', '1426', 'osx', 'jsp', '15233', 'platform', 'lin_x86', '636', 'cgi', 'bsd', '80', '193', 'windows', '1664', 'blue', '190', 'multiple', '7240', 'ios', '300', 'solaris', '863', 'asp', 'aix', 'php', '2139', 'linux', 'hardware', '162', '81', 'count'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+    Platform  count color
+0        bsd     80  blue
+1        aix     81  blue
+2        ios    100  blue
+3        jsp    162  blue
+4    solaris    190  blue
+5    lin_x86    193  blue
+6        osx    230  blue
+7       unix    300  blue
+8        cgi    636  blue
+9   hardware    863  blue
+10       asp   1426  blue
+11  multiple   1664  blue
+12     linux   2139  blue
+13   windows   7240  blue
+14       php  15233  blue
+# query is: Approximately how many security vulnerabilities have been found in php?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0   15233
+# inferred DSL terminals:
+  # ConstVal: ['php@Str', '<NULL>']
+     # cmap: [('php', 'php')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 3 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, php@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Platform', 'php'], 'count', 'Platform']
+    # Summarize(SelectRow1(@param0, ==, 0, php@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Platform', 'php'], 'count', 'count']
+    # Summarize(SelectRow1(@param0, ==, 0, php@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Platform', 'php'], 'count', 'color']
+# (t=0.46) i=1, candidate=[{'ANSWER': 2}]
+  # found 0 program(s)
+# (t=0.91) i=2, candidate=[{'ANSWER': 3}]
+  # found 0 program(s)
+# (t=1.36) i=3, candidate=[{'ANSWER': 4}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.33, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, php@Str), count, 0)
+# top-2, score: 2.33, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, php@Str), count, 1)
+# top-3, score: 2.33, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, php@Str), count, 2)

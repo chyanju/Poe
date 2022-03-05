@@ -1,0 +1,112 @@
+# parsed arguments: Namespace(benchmark='Qd35df', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'26.0', '6.8', 'country', 'australia', '11.8', '75.2', 'color', '7.5', 'macau', 'germany', 'square', 'urban/total', '5.1', '21.5', '6.4', 'persons', 'per', '2.5', '1.0', '0.1', '0.4', '3.9', 'egypt', '1.8', 'maldives', 'rwanda', 'total', 'monaco', '16.6', 'singapore', '9.7', 'bangladesh', 'indonesia', 'india', 'orange', 'france', '20.8', 'blue', '18.0', 'south', '7.4', 'japan', '17.1', 'kong', 'hong', '25.4', 'brazil', 'kilometers', '0.2', '0.5', '25.2', 'korea', 'urban'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+        Country Urban/total  Persons per square kilometers   color
+0         Macau       Urban                           26.0  orange
+1         Macau       Total                           20.8    blue
+2         Japan       Urban                            3.9  orange
+3         Japan       Total                            0.5    blue
+4      Maldives       Urban                           21.5  orange
+5      Maldives       Total                            1.0    blue
+6        Rwanda       Urban                           18.0  orange
+7        Rwanda       Total                            0.5    blue
+8        Monaco       Urban                           17.1  orange
+9        Monaco       Total                           17.1    blue
+10    Australia       Urban                            1.8    blue
+11   Bangladesh       Urban                           75.2  orange
+12   Bangladesh       Total                            1.0    blue
+13    Indonesia       Urban                           16.6  orange
+14    Indonesia       Total                            0.1    blue
+15        Egypt       Urban                            5.1  orange
+16        Egypt       Total                            0.1    blue
+17        India       Urban                           25.2  orange
+18        India       Total                            0.4    blue
+19       France       Urban                            2.5  orange
+20       France       Total                            0.1    blue
+21      Germany       Urban                            6.8  orange
+22      Germany       Total                            0.2    blue
+23  South Korea       Urban                           11.8  orange
+24  South Korea       Total                            0.5    blue
+25    Hong Kong       Urban                           25.4  orange
+26    Hong Kong       Total                            6.4    blue
+27       Brazil       Urban                            9.7    blue
+28    Singapore       Urban                            7.5  orange
+29    Singapore       Total                            7.4    blue
+# query is: How much more urban population density is India vs. Indonesia?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0     8.6
+# inferred DSL terminals:
+  # ConstVal: ['Urban/total@Str', 'India@Str', 'Urban@Str', 'Indonesia@Str', '<NULL>']
+     # cmap: [('urban', 'Urban/total'), ('urban', 'Urban'), ('india', 'India'), ('indonesia', 'Indonesia')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('more', '-')]
+  # BoolFunc: ['>', '>=', '==', '<NULL>']
+     # bmap: [('more', '>='), (None, '=='), ('more', '>')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(8.599999999999998, 9), (-8.599999999999998, 9), (58.6, 6), (50.0, 6), (25.099999999999998, 6), (24.8, 6), (23.4, 6), (22.7, 6), (21.3, 6), (20.1, 6)]
+  # [debug] high_values (no dup.): [(8.599999999999998, 9), (-8.599999999999998, 9), (58.6, 6), (50.0, 6), (25.099999999999998, 6), (24.8, 6), (23.4, 6), (22.7, 6), (21.3, 6), (20.1, 6)]
+  # [debug] filtered low_values (no dup.): [(25.099999999999998, 3), (25.099999999999998, 3), (25.0, 3), (24.7, 3), (24.7, 3), (24.7, 3), (24.2, 3), (24.2, 3), (18.799999999999997, 3), (17.799999999999997, 3)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=6.28) i=1, candidate=[{'ANSWER': 8.599999999999998}]
+  # found 1 program(s)
+    # Contrast(SelectRow1(@param0, ==, 1, Urban@Str), -, 0, India@Str, Indonesia@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Urban'], '-', 'Country', 'India', 'Indonesia', 'Persons per square kilometers']
+# (t=11.65) i=2, candidate=[{'ANSWER': -8.599999999999998}]
+  # found 1 program(s)
+    # Contrast(SelectRow1(@param0, ==, 1, Urban@Str), -, 0, Indonesia@Str, India@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Urban'], '-', 'Country', 'Indonesia', 'India', 'Persons per square kilometers']
+# (t=16.99) i=3, candidate=[{'ANSWER': 58.6}]
+  # found 0 program(s)
+# (t=22.31) i=4, candidate=[{'ANSWER': 50.0}]
+  # found 0 program(s)
+# (t=27.62) i=5, candidate=[{'ANSWER': 25.099999999999998}]
+  # found 0 program(s)
+# (t=32.99) i=6, candidate=[{'ANSWER': 24.8}]
+  # found 0 program(s)
+# (t=38.36) i=7, candidate=[{'ANSWER': 23.4}]
+  # found 0 program(s)
+# (t=43.71) i=8, candidate=[{'ANSWER': 22.7}]
+  # found 0 program(s)
+# (t=49.12) i=9, candidate=[{'ANSWER': 21.3}]
+  # found 0 program(s)
+# (t=54.51) i=10, candidate=[{'ANSWER': 20.1}]
+  # found 0 program(s)
+# (t=59.96) i=11, candidate=[{'ANSWER': 25.099999999999998}]
+  # found 0 program(s)
+# (t=65.41) i=12, candidate=[{'ANSWER': 25.099999999999998}]
+  # found 0 program(s)
+# (t=70.86) i=13, candidate=[{'ANSWER': 25.0}]
+  # found 0 program(s)
+# (t=76.24) i=14, candidate=[{'ANSWER': 24.7}]
+  # found 0 program(s)
+# (t=81.65) i=15, candidate=[{'ANSWER': 24.7}]
+  # found 0 program(s)
+# (t=87.03) i=16, candidate=[{'ANSWER': 24.7}]
+  # found 0 program(s)
+# (t=92.42) i=17, candidate=[{'ANSWER': 24.2}]
+  # found 0 program(s)
+# (t=97.79) i=18, candidate=[{'ANSWER': 24.2}]
+  # found 0 program(s)
+# (t=103.14) i=19, candidate=[{'ANSWER': 18.799999999999997}]
+  # found 0 program(s)
+# (t=108.55) i=20, candidate=[{'ANSWER': 17.799999999999997}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.49, answer: [8.599999999999998]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Urban@Str), -, 0, India@Str, Indonesia@Str, 2)
+# top-2, score: 2.49, answer: [-8.599999999999998]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Urban@Str), -, 0, Indonesia@Str, India@Str, 2)

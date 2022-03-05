@@ -1,0 +1,105 @@
+# parsed arguments: Namespace(benchmark='Q1567a', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'20.1', '7.14', '23.2', 'age', '8.08', '2007', 'year', 'red', 'under', '2001', '24.05', 'orange', '30.06', '35', '50-64', '9.11', '26.02', 'percent', '19.07', '27.05', '24.98', '35-49', '65+', 'blue', '2012', 'color'}
+# input type: [dtype('O'), dtype('int64'), dtype('float64'), dtype('O')]
+# input is:
+         Age  year  percent   color
+0      50-64  2001    23.20    blue
+1      50-64  2007    20.10  orange
+2      50-64  2012    19.07     red
+3   Under 35  2001    30.06    blue
+4   Under 35  2012    26.02     red
+5   Under 35  2007    24.05  orange
+6        65+  2001     9.11    blue
+7        65+  2007     8.08  orange
+8        65+  2012     7.14     red
+9      35-49  2001    27.05    blue
+10     35-49  2007    26.02  orange
+11     35-49  2012    24.98     red
+# query is: Which is the least risk averse group?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0    65+
+# inferred DSL terminals:
+  # ConstVal: ['<NULL>']
+     # cmap: []
+  # AggrFunc: ['min', '<NULL>']
+     # amap: [('least', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('least', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Under 35'}]
+  # found 0 program(s)
+# (t=1.26) i=1, candidate=[{'ANSWER': '65+'}, {'ANSWER': 'Under 35'}]
+  # found 0 program(s)
+# (t=1.69) i=2, candidate=[{'ANSWER': '65+'}]
+  # found 13 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Age'], 'min', 'percent'], 'eqmin', 'COL0'], ['Age']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Age'], 'min', 'percent'], 'eqmin', 'COL0'], ['Age']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Age', 'year'], 'min', 'percent'], 'eqmin', 'COL0'], ['Age']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Age', 'year'], 'min', 'percent'], 'eqmin', 'COL0'], ['Age']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Age', 'percent'], 'min', 'year'], 'eqmin', 'percent'], ['Age']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Age', 'percent'], 'min', 'year'], 'eqmin', 'percent'], ['Age']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Age', 'percent'], 'min', 'percent'], 'eqmin', 'percent'], ['Age']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Age', 'percent'], 'min', 'percent'], 'eqmin', 'percent'], ['Age']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Age', 'percent'], 'min', 'percent'], 'eqmin', 'COL0'], ['Age']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Age', 'percent'], 'min', 'percent'], 'eqmin', 'COL0'], ['Age']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Age', 'color'], 'min', 'percent'], 'eqmin', 'COL0'], ['Age']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Age', 'color'], 'min', 'percent'], 'eqmin', 'COL0'], ['Age']]
+    # SelectCol(SelectRow0(@param0, eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'percent'], ['Age']]
+# (t=2.98) i=3, candidate=[{'ANSWER': '50-64'}, {'ANSWER': '65+'}, {'ANSWER': 'Under 35'}]
+  # found 0 program(s)
+# (t=3.35) i=4, candidate=[{'ANSWER': '50-64'}, {'ANSWER': 'Under 35'}]
+  # found 0 program(s)
+# (t=3.78) i=5, candidate=[{'ANSWER': '50-64'}, {'ANSWER': '65+'}]
+  # found 0 program(s)
+# (t=4.21) i=6, candidate=[{'ANSWER': '50-64'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.31, answer: 65+
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 2), ['0'])
+# top-2, score: 1.24, answer: 65+
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['0'])
+# top-3, score: 1.24, answer: 65+
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['-1'])
+# top-4, score: 1.23, answer: 65+
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['0'])
+# top-5, score: 1.23, answer: 65+
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-6, score: 1.23, answer: 65+
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 1), ['0'])
+# top-7, score: 1.23, answer: 65+
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 1), ['-1', '-2'])
+# top-8, score: 1.23, answer: 65+
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['0'])
+# top-9, score: 1.23, answer: 65+
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['-1', '-2'])
+# top-10, score: 1.23, answer: 65+
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['0'])
+# top-11, score: 1.23, answer: 65+
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-12, score: 1.23, answer: 65+
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['0'])
+# top-13, score: 1.23, answer: 65+
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['-1', '-2'])

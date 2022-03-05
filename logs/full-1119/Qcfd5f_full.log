@@ -1,0 +1,108 @@
+# parsed arguments: Namespace(benchmark='Qcfd5f', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'2002', '2651.260121', '4108.574488', '1055.136489', 'year', '4743.264112', '1273.640743', '459.5766355', '1338.986444', '1992', '2651.442018', '1999', '480.2069446', '2069.343631', '949.1780621', '774.467161', '3129.755456', '2375.162934', 'russia', '9146.41636', 'india', '2008', '3095.08716', '4980.980645', '1490.380056', '2526.596184', '3413.588661', '1994', '558.4416044', '362.808414', '1135.44795', '3426.840162', '8391.668592', '642.556503', 'orange', '2669.946123', 'red', '406.8857207', '1995', '1997', '2007', '6946.880998', '820.2983339', '3413.259971', '1993', '731.7417369', '5109.348611', '1998', '306.1686498', '1844.485782', '1126.945129', '2001', '2748.917437', '3748.934494', '422.9243667', '2791.968684', '1996', '373.8000229', '2009', 'blue', '2929.303282', '4751.065263', '469.2131942', 'gdp', '2812.334223', '5337.065324', '2663.456988', '8615.658757', 'brazil', '420.9653204', '703.1207994', '2006', '3696.146772', '2004', '2005', 'country', '5220.856542', '11700.22112', '2000', '2100.743786', 'china', 'color', '1731.125235', '7197.031306', '2976.137049', '8628.952841', '322.243454', '3041.677796', '1041.637704', 'teal', '450.4151061', '2003', '3609.875507', '351.8848828', '1027.906574', '448.0969889', '864.7303144', '380.0984013', '604.2280606', '820.8630768', '1775.141291', '5793.400957'}
+# input type: [dtype('int64'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+    year country          GDP   color
+0   1992  Brazil  2526.596184    blue
+1   1993  Brazil  2791.968684    blue
+2   1994  Brazil  3426.840162    blue
+3   1995  Brazil  4751.065263    blue
+4   1996  Brazil  5109.348611    blue
+..   ...     ...          ...     ...
+67  2005   China  1731.125235  orange
+68  2006   China  2069.343631  orange
+69  2007   China  2651.260121  orange
+70  2008   China  3413.588661  orange
+71  2009   China  3748.934494  orange
+
+[72 rows x 4 columns]
+# query is: Which country has the highest GDP per capita in year 2005
+# expected output type:[dtype('O')]
+# expected output is:
+   ANSWER
+0  Russia
+# inferred DSL terminals:
+  # ConstVal: ['GDP@Str', '2005@Int', 'country@Str', 'year@Str', '<NULL>']
+     # cmap: [('year', 'year'), ('gdp', 'GDP'), ('country', 'country'), (2005, 2005)]
+  # AggrFunc: ['max', '<NULL>']
+     # amap: [('highest', 'max')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('highest', 'eqmax')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Brazil'}]
+  # found 0 program(s)
+# (t=6.98) i=1, candidate=[{'ANSWER': 'India'}]
+  # found 0 program(s)
+# (t=14.03) i=2, candidate=[{'ANSWER': 'Russia'}]
+  # found 15 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, 2005@Int), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'year', 2005], 'eqmax', 'GDP'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'max', 'GDP'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country'], 'max', 'GDP'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'country'], 'max', 'GDP'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['year', 'country'], 'max', 'GDP'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'GDP'], 'max', 'year'], 'eqmax', 'GDP'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'GDP'], 'max', 'year'], 'eqmax', 'GDP'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'GDP'], 'max', 'GDP'], 'eqmax', 'GDP'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'GDP'], 'max', 'GDP'], 'eqmax', 'GDP'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'GDP'], 'max', 'GDP'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'GDP'], 'max', 'GDP'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'GDP'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['country', 'color'], 'max', 'GDP'], 'eqmax', 'COL0'], ['country']]
+    # SelectCol(SelectRow0(@param0, eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'GDP'], ['country']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, 2005@Int), ==, 0, 2005@Int), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'year', 2005], '==', 'year', 2005], 'eqmax', 'GDP'], ['country']]
+# (t=21.07) i=3, candidate=[{'ANSWER': 'China'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.55, answer: ['Russia']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, 2005@Int), eqmax, 2), ['1'])
+# top-2, score: 1.53, answer: ['Russia']
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, 2005@Int), ==, 0, 2005@Int), eqmax, 2), ['1'])
+# top-3, score: 1.45, answer: ['Russia']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['1'])
+# top-4, score: 1.45, answer: ['Russia']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-99', '-2'])
+# top-5, score: 1.45, answer: ['Russia']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 1), ['0'])
+# top-6, score: 1.45, answer: ['Russia']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 0), eqmax, 1), ['-1', '-2'])
+# top-7, score: 1.44, answer: ['Russia']
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 2), ['1'])
+# top-8, score: 1.37, answer: ['Russia']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['0'])
+# top-9, score: 1.37, answer: ['Russia']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['-1'])
+# top-10, score: 1.36, answer: ['Russia']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['0'])
+# top-11, score: 1.36, answer: ['Russia']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+# top-12, score: 1.36, answer: ['Russia']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['0'])
+# top-13, score: 1.36, answer: ['Russia']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-14, score: 1.36, answer: ['Russia']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['0'])
+# top-15, score: 1.36, answer: ['Russia']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['-1', '-2'])

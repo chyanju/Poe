@@ -1,0 +1,898 @@
+# parsed arguments: Namespace(benchmark='Q7e98d', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'122.1', 'blue', '13.0', 'scotland', '54.2', 'gàidheal', '6', '5', 'total', 'asian', '11.8', '54.3', '4', 'local', '1', '11.5', 'ulster', '23.8', '3', '18.8', '76.0', 'service', '152.5', 'wales', 'music', '1xtra', '62.1', 'extra', '5.6', 'network', '2', 'and', 'cost(£million)', 'color', 'sports', '32.7', 'radio', '6.3', 'live', 'foyle', 'nan', '7.2', 'bbc', 'cymru', '2012/13', '17.6'}
+# input type: [dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+                                 Service  2012/13 Total Cost(£million) color
+0                            BBC Radio 1                          54.2  blue
+1                        BBC Radio 1Xtra                          11.8  blue
+2                            BBC Radio 2                          62.1  blue
+3                            BBC Radio 3                          54.3  blue
+4                            BBC Radio 4                         122.1  blue
+5                      BBC Radio 4 Extra                           7.2  blue
+6                       BBC Radio 5 Live                          76.0  blue
+7          BBC Radio 5 Live Sports Extra                           5.6  blue
+8                      BBC Radio 6 Music                          11.5  blue
+9                      BBC Asian Network                          13.0  blue
+10                       BBC Local Radio                         152.5  blue
+11                    BBC Radio Scotland                          32.7  blue
+12                BBC Radio nan Gàidheal                           6.3  blue
+13                       BBC Radio Wales                          18.8  blue
+14                       BBC Radio Cymru                          17.6  blue
+15  BBC Radio Ulster and BBC Radio Foyle                          23.8  blue
+# query is: what is the value for BBC Asian network?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      13
+# inferred DSL terminals:
+  # ConstVal: ['blue@Str', '5.6@Float', '6.3@Float', '7.2@Float', 'BBC Local Radio@Str', '11.8@Float', '11.5@Float', '13.0@Float', 'BBC Radio Scotland@Str', '17.6@Float', '18.8@Float', 'BBC Radio 1@Str', '152.5@Float', 'BBC Radio Wales@Str', '23.8@Float', '2012/13 Total Cost(£million)@Str', 'BBC Radio Ulster and BBC Radio Foyle@Str', 'BBC Radio 5 Live Sports Extra@Str', '32.7@Float', 'BBC Radio 4 Extra@Str', '54.2@Float', '54.3@Float', 'BBC Radio 2@Str', '62.1@Float', '76.0@Float', 'BBC Radio 4@Str', 'BBC Radio 5 Live@Str', 'BBC Radio nan Gàidheal@Str', 'BBC Radio Cymru@Str', 'Service@Str', 'BBC Radio 1Xtra@Str', 'BBC Radio 3@Str', 'color@Str', 'BBC Radio 6 Music@Str', 'BBC Asian Network@Str', '122.1@Float']
+     # cmap: [(None, 'blue'), (None, 5.6), (None, 6.3), (None, 7.2), (None, 'BBC Local Radio'), (None, 11.8), (None, 11.5), (None, 13.0), (None, 'BBC Radio Scotland'), (None, 17.6), (None, 18.8), (None, 'BBC Radio 1'), (None, 152.5), (None, 'BBC Radio Wales'), (None, 23.8), (None, '2012/13 Total Cost(£million)'), (None, 'BBC Radio Ulster and BBC Radio Foyle'), (None, 'BBC Radio 5 Live Sports Extra'), (None, 32.7), (None, 'BBC Radio 4 Extra'), (None, 54.2), (None, 54.3), (None, 'BBC Radio 2'), (None, 62.1), (None, 76.0), (None, 'BBC Radio 4'), (None, 'BBC Radio 5 Live'), (None, 'BBC Radio nan Gàidheal'), (None, 'BBC Radio Cymru'), (None, 'Service'), (None, 'BBC Radio 1Xtra'), (None, 'BBC Radio 3'), (None, 'color'), (None, 'BBC Radio 6 Music'), (None, 'BBC Asian Network'), (None, 122.1)]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 215 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)'], 'count', 'Service'], 'eqmin', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)'], 'count', 'Service'], 'eqmin', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)'], 'count', 'Service'], 'eqmax', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)'], 'count', 'Service'], 'eqmax', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)'], 'count', '2012/13 Total Cost(£million)'], 'eqmin', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)'], 'count', '2012/13 Total Cost(£million)'], 'eqmin', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)'], 'count', '2012/13 Total Cost(£million)'], 'eqmax', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)'], 'count', '2012/13 Total Cost(£million)'], 'eqmax', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmin, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)'], 'count', 'color'], 'eqmin', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmin, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)'], 'count', 'color'], 'eqmin', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmax, 0), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)'], 'count', 'color'], 'eqmax', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmax, 0), ['-99'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)'], 'count', 'color'], 'eqmax', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'count', 'Service'], 'eqmin', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'count', 'Service'], 'eqmin', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'count', 'Service'], 'eqmax', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'count', 'Service'], 'eqmax', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'count', '2012/13 Total Cost(£million)'], 'eqmin', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'count', '2012/13 Total Cost(£million)'], 'eqmin', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'count', '2012/13 Total Cost(£million)'], 'eqmax', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'count', '2012/13 Total Cost(£million)'], 'eqmax', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'count', 'color'], 'eqmin', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'count', 'color'], 'eqmin', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'count', 'color'], 'eqmax', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Service', '2012/13 Total Cost(£million)'], 'count', 'color'], 'eqmax', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)', 'color'], 'count', 'Service'], 'eqmin', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)', 'color'], 'count', 'Service'], 'eqmin', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)', 'color'], 'count', 'Service'], 'eqmax', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)', 'color'], 'count', 'Service'], 'eqmax', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)', 'color'], 'count', '2012/13 Total Cost(£million)'], 'eqmin', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)', 'color'], 'count', '2012/13 Total Cost(£million)'], 'eqmin', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)', 'color'], 'count', '2012/13 Total Cost(£million)'], 'eqmax', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)', 'color'], 'count', '2012/13 Total Cost(£million)'], 'eqmax', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)', 'color'], 'count', 'color'], 'eqmin', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)', 'color'], 'count', 'color'], 'eqmin', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 0), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)', 'color'], 'count', 'color'], 'eqmax', '2012/13 Total Cost(£million)'], ['COL0']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 0), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['2012/13 Total Cost(£million)', 'color'], 'count', 'color'], 'eqmax', '2012/13 Total Cost(£million)'], ['COL0']]
+    # Summarize(SelectRow1(@param0, <, 1, 6.3@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 6.3], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, <, 1, 6.3@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 6.3], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, <, 1, 6.3@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 6.3], 'count', 'color']
+    # Summarize(SelectRow1(@param0, <=, 1, 5.6@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', '2012/13 Total Cost(£million)', 5.6], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, <=, 1, 5.6@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', '2012/13 Total Cost(£million)', 5.6], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, <=, 1, 5.6@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '<=', '2012/13 Total Cost(£million)', 5.6], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Local Radio@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Local Radio'], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Local Radio@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Local Radio'], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Local Radio@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Local Radio'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio Scotland@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio Scotland'], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio Scotland@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio Scotland'], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio Scotland@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio Scotland'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 1@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 1'], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 1@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 1'], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 1@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 1'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio Wales@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio Wales'], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio Wales@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio Wales'], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio Wales@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio Wales'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio Ulster and BBC Radio Foyle@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio Ulster and BBC Radio Foyle'], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio Ulster and BBC Radio Foyle@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio Ulster and BBC Radio Foyle'], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio Ulster and BBC Radio Foyle@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio Ulster and BBC Radio Foyle'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 5 Live Sports Extra@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 5 Live Sports Extra'], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 5 Live Sports Extra@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 5 Live Sports Extra'], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 5 Live Sports Extra@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 5 Live Sports Extra'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 4 Extra@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 4 Extra'], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 4 Extra@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 4 Extra'], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 4 Extra@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 4 Extra'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 2@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 2'], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 2@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 2'], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 2@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 2'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 4@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 4'], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 4@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 4'], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 4@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 4'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 5 Live@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 5 Live'], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 5 Live@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 5 Live'], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 5 Live@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 5 Live'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio nan Gàidheal@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio nan Gàidheal'], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio nan Gàidheal@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio nan Gàidheal'], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio nan Gàidheal@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio nan Gàidheal'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio Cymru@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio Cymru'], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio Cymru@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio Cymru'], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio Cymru@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio Cymru'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 1Xtra@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 1Xtra'], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 1Xtra@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 1Xtra'], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 1Xtra@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 1Xtra'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 3@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 3'], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 3@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 3'], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 3@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 3'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 6 Music@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 6 Music'], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 6 Music@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 6 Music'], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Radio 6 Music@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Radio 6 Music'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Asian Network@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Asian Network'], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Asian Network@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Asian Network'], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 0, BBC Asian Network@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Service', 'BBC Asian Network'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 5.6@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 5.6], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 1, 5.6@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 5.6], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 1, 5.6@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 5.6], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 6.3@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 6.3], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 1, 6.3@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 6.3], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 1, 6.3@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 6.3], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 7.2@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 7.2], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 1, 7.2@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 7.2], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 1, 7.2@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 7.2], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 11.8@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 11.8], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 1, 11.8@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 11.8], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 1, 11.8@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 11.8], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 11.5@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 11.5], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 1, 11.5@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 11.5], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 1, 11.5@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 11.5], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 13.0@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 13.0], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 1, 13.0@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 13.0], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 1, 13.0@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 13.0], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 17.6@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 17.6], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 1, 17.6@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 17.6], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 1, 17.6@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 17.6], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 18.8@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 18.8], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 1, 18.8@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 18.8], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 1, 18.8@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 18.8], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 152.5@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 152.5], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 1, 152.5@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 152.5], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 1, 152.5@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 152.5], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 23.8@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 23.8], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 1, 23.8@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 23.8], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 1, 23.8@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 23.8], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 32.7@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 32.7], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 1, 32.7@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 32.7], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 1, 32.7@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 32.7], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 54.2@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 54.2], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 1, 54.2@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 54.2], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 1, 54.2@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 54.2], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 54.3@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 54.3], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 1, 54.3@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 54.3], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 1, 54.3@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 54.3], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 62.1@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 62.1], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 1, 62.1@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 62.1], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 1, 62.1@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 62.1], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 76.0@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 76.0], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 1, 76.0@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 76.0], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 1, 76.0@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 76.0], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, 122.1@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 122.1], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, ==, 1, 122.1@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 122.1], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, ==, 1, 122.1@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', '2012/13 Total Cost(£million)', 122.1], 'count', 'color']
+    # Summarize(SelectRow1(@param0, >=, 1, 152.5@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', '2012/13 Total Cost(£million)', 152.5], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, >=, 1, 152.5@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', '2012/13 Total Cost(£million)', 152.5], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, >=, 1, 152.5@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>=', '2012/13 Total Cost(£million)', 152.5], 'count', 'color']
+    # Summarize(SelectRow1(@param0, >, 1, 122.1@Float), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', '2012/13 Total Cost(£million)', 122.1], 'count', 'Service']
+    # Summarize(SelectRow1(@param0, >, 1, 122.1@Float), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', '2012/13 Total Cost(£million)', 122.1], 'count', '2012/13 Total Cost(£million)']
+    # Summarize(SelectRow1(@param0, >, 1, 122.1@Float), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '>', '2012/13 Total Cost(£million)', 122.1], 'count', 'color']
+    # Contrast(SelectRow1(@param0, <, 1, 6.3@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 6.3], '/', 'Service', 'BBC Radio 5 Live Sports Extra', 'BBC Radio 5 Live Sports Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 6.3@Float), /, 2, blue@Str, blue@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 6.3], '/', 'color', 'blue', 'blue', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 7.2@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 7.2], '/', 'Service', 'BBC Radio 5 Live Sports Extra', 'BBC Radio 5 Live Sports Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 7.2@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 7.2], '/', 'Service', 'BBC Radio nan Gàidheal', 'BBC Radio nan Gàidheal', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 11.8@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 11.8], '/', 'Service', 'BBC Radio 5 Live Sports Extra', 'BBC Radio 5 Live Sports Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 11.8@Float), /, 0, BBC Radio 4 Extra@Str, BBC Radio 4 Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 11.8], '/', 'Service', 'BBC Radio 4 Extra', 'BBC Radio 4 Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 11.8@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 11.8], '/', 'Service', 'BBC Radio nan Gàidheal', 'BBC Radio nan Gàidheal', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 11.8@Float), /, 0, BBC Radio 6 Music@Str, BBC Radio 6 Music@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 11.8], '/', 'Service', 'BBC Radio 6 Music', 'BBC Radio 6 Music', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 11.5@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 11.5], '/', 'Service', 'BBC Radio 5 Live Sports Extra', 'BBC Radio 5 Live Sports Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 11.5@Float), /, 0, BBC Radio 4 Extra@Str, BBC Radio 4 Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 11.5], '/', 'Service', 'BBC Radio 4 Extra', 'BBC Radio 4 Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 11.5@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 11.5], '/', 'Service', 'BBC Radio nan Gàidheal', 'BBC Radio nan Gàidheal', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 13.0@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 13.0], '/', 'Service', 'BBC Radio 5 Live Sports Extra', 'BBC Radio 5 Live Sports Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 13.0@Float), /, 0, BBC Radio 4 Extra@Str, BBC Radio 4 Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 13.0], '/', 'Service', 'BBC Radio 4 Extra', 'BBC Radio 4 Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 13.0@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 13.0], '/', 'Service', 'BBC Radio nan Gàidheal', 'BBC Radio nan Gàidheal', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 13.0@Float), /, 0, BBC Radio 1Xtra@Str, BBC Radio 1Xtra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 13.0], '/', 'Service', 'BBC Radio 1Xtra', 'BBC Radio 1Xtra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 13.0@Float), /, 0, BBC Radio 6 Music@Str, BBC Radio 6 Music@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 13.0], '/', 'Service', 'BBC Radio 6 Music', 'BBC Radio 6 Music', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 17.6@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 17.6], '/', 'Service', 'BBC Radio 5 Live Sports Extra', 'BBC Radio 5 Live Sports Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 17.6@Float), /, 0, BBC Radio 4 Extra@Str, BBC Radio 4 Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 17.6], '/', 'Service', 'BBC Radio 4 Extra', 'BBC Radio 4 Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 17.6@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 17.6], '/', 'Service', 'BBC Radio nan Gàidheal', 'BBC Radio nan Gàidheal', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 17.6@Float), /, 0, BBC Radio 1Xtra@Str, BBC Radio 1Xtra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 17.6], '/', 'Service', 'BBC Radio 1Xtra', 'BBC Radio 1Xtra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 17.6@Float), /, 0, BBC Radio 6 Music@Str, BBC Radio 6 Music@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 17.6], '/', 'Service', 'BBC Radio 6 Music', 'BBC Radio 6 Music', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 17.6@Float), /, 0, BBC Asian Network@Str, BBC Asian Network@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 17.6], '/', 'Service', 'BBC Asian Network', 'BBC Asian Network', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 18.8@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 18.8], '/', 'Service', 'BBC Radio 5 Live Sports Extra', 'BBC Radio 5 Live Sports Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 18.8@Float), /, 0, BBC Radio 4 Extra@Str, BBC Radio 4 Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 18.8], '/', 'Service', 'BBC Radio 4 Extra', 'BBC Radio 4 Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 18.8@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 18.8], '/', 'Service', 'BBC Radio nan Gàidheal', 'BBC Radio nan Gàidheal', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 18.8@Float), /, 0, BBC Radio Cymru@Str, BBC Radio Cymru@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 18.8], '/', 'Service', 'BBC Radio Cymru', 'BBC Radio Cymru', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 18.8@Float), /, 0, BBC Radio 1Xtra@Str, BBC Radio 1Xtra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 18.8], '/', 'Service', 'BBC Radio 1Xtra', 'BBC Radio 1Xtra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 18.8@Float), /, 0, BBC Radio 6 Music@Str, BBC Radio 6 Music@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 18.8], '/', 'Service', 'BBC Radio 6 Music', 'BBC Radio 6 Music', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 18.8@Float), /, 0, BBC Asian Network@Str, BBC Asian Network@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 18.8], '/', 'Service', 'BBC Asian Network', 'BBC Asian Network', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio Scotland@Str, BBC Radio Scotland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 152.5], '/', 'Service', 'BBC Radio Scotland', 'BBC Radio Scotland', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio 1@Str, BBC Radio 1@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 152.5], '/', 'Service', 'BBC Radio 1', 'BBC Radio 1', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio Wales@Str, BBC Radio Wales@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 152.5], '/', 'Service', 'BBC Radio Wales', 'BBC Radio Wales', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio Ulster and BBC Radio Foyle@Str, BBC Radio Ulster and BBC Radio Foyle@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 152.5], '/', 'Service', 'BBC Radio Ulster and BBC Radio Foyle', 'BBC Radio Ulster and BBC Radio Foyle', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 152.5], '/', 'Service', 'BBC Radio 5 Live Sports Extra', 'BBC Radio 5 Live Sports Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio 4 Extra@Str, BBC Radio 4 Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 152.5], '/', 'Service', 'BBC Radio 4 Extra', 'BBC Radio 4 Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio 2@Str, BBC Radio 2@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 152.5], '/', 'Service', 'BBC Radio 2', 'BBC Radio 2', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio 4@Str, BBC Radio 4@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 152.5], '/', 'Service', 'BBC Radio 4', 'BBC Radio 4', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio 5 Live@Str, BBC Radio 5 Live@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 152.5], '/', 'Service', 'BBC Radio 5 Live', 'BBC Radio 5 Live', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 152.5], '/', 'Service', 'BBC Radio nan Gàidheal', 'BBC Radio nan Gàidheal', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio Cymru@Str, BBC Radio Cymru@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 152.5], '/', 'Service', 'BBC Radio Cymru', 'BBC Radio Cymru', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio 1Xtra@Str, BBC Radio 1Xtra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 152.5], '/', 'Service', 'BBC Radio 1Xtra', 'BBC Radio 1Xtra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio 3@Str, BBC Radio 3@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 152.5], '/', 'Service', 'BBC Radio 3', 'BBC Radio 3', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio 6 Music@Str, BBC Radio 6 Music@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 152.5], '/', 'Service', 'BBC Radio 6 Music', 'BBC Radio 6 Music', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Asian Network@Str, BBC Asian Network@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 152.5], '/', 'Service', 'BBC Asian Network', 'BBC Asian Network', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 23.8@Float), /, 0, BBC Radio Wales@Str, BBC Radio Wales@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 23.8], '/', 'Service', 'BBC Radio Wales', 'BBC Radio Wales', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 23.8@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 23.8], '/', 'Service', 'BBC Radio 5 Live Sports Extra', 'BBC Radio 5 Live Sports Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 23.8@Float), /, 0, BBC Radio 4 Extra@Str, BBC Radio 4 Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 23.8], '/', 'Service', 'BBC Radio 4 Extra', 'BBC Radio 4 Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 23.8@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 23.8], '/', 'Service', 'BBC Radio nan Gàidheal', 'BBC Radio nan Gàidheal', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 23.8@Float), /, 0, BBC Radio Cymru@Str, BBC Radio Cymru@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 23.8], '/', 'Service', 'BBC Radio Cymru', 'BBC Radio Cymru', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 23.8@Float), /, 0, BBC Radio 1Xtra@Str, BBC Radio 1Xtra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 23.8], '/', 'Service', 'BBC Radio 1Xtra', 'BBC Radio 1Xtra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 23.8@Float), /, 0, BBC Radio 6 Music@Str, BBC Radio 6 Music@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 23.8], '/', 'Service', 'BBC Radio 6 Music', 'BBC Radio 6 Music', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 23.8@Float), /, 0, BBC Asian Network@Str, BBC Asian Network@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 23.8], '/', 'Service', 'BBC Asian Network', 'BBC Asian Network', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 32.7@Float), /, 0, BBC Radio Wales@Str, BBC Radio Wales@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 32.7], '/', 'Service', 'BBC Radio Wales', 'BBC Radio Wales', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 32.7@Float), /, 0, BBC Radio Ulster and BBC Radio Foyle@Str, BBC Radio Ulster and BBC Radio Foyle@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 32.7], '/', 'Service', 'BBC Radio Ulster and BBC Radio Foyle', 'BBC Radio Ulster and BBC Radio Foyle', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 32.7@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 32.7], '/', 'Service', 'BBC Radio 5 Live Sports Extra', 'BBC Radio 5 Live Sports Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 32.7@Float), /, 0, BBC Radio 4 Extra@Str, BBC Radio 4 Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 32.7], '/', 'Service', 'BBC Radio 4 Extra', 'BBC Radio 4 Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 32.7@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 32.7], '/', 'Service', 'BBC Radio nan Gàidheal', 'BBC Radio nan Gàidheal', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 32.7@Float), /, 0, BBC Radio Cymru@Str, BBC Radio Cymru@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 32.7], '/', 'Service', 'BBC Radio Cymru', 'BBC Radio Cymru', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 32.7@Float), /, 0, BBC Radio 1Xtra@Str, BBC Radio 1Xtra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 32.7], '/', 'Service', 'BBC Radio 1Xtra', 'BBC Radio 1Xtra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 32.7@Float), /, 0, BBC Radio 6 Music@Str, BBC Radio 6 Music@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 32.7], '/', 'Service', 'BBC Radio 6 Music', 'BBC Radio 6 Music', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 32.7@Float), /, 0, BBC Asian Network@Str, BBC Asian Network@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 32.7], '/', 'Service', 'BBC Asian Network', 'BBC Asian Network', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Radio Scotland@Str, BBC Radio Scotland@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 54.2], '/', 'Service', 'BBC Radio Scotland', 'BBC Radio Scotland', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Radio Wales@Str, BBC Radio Wales@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 54.2], '/', 'Service', 'BBC Radio Wales', 'BBC Radio Wales', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Radio Ulster and BBC Radio Foyle@Str, BBC Radio Ulster and BBC Radio Foyle@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 54.2], '/', 'Service', 'BBC Radio Ulster and BBC Radio Foyle', 'BBC Radio Ulster and BBC Radio Foyle', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 54.2], '/', 'Service', 'BBC Radio 5 Live Sports Extra', 'BBC Radio 5 Live Sports Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Radio 4 Extra@Str, BBC Radio 4 Extra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 54.2], '/', 'Service', 'BBC Radio 4 Extra', 'BBC Radio 4 Extra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 54.2], '/', 'Service', 'BBC Radio nan Gàidheal', 'BBC Radio nan Gàidheal', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Radio Cymru@Str, BBC Radio Cymru@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 54.2], '/', 'Service', 'BBC Radio Cymru', 'BBC Radio Cymru', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Radio 1Xtra@Str, BBC Radio 1Xtra@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 54.2], '/', 'Service', 'BBC Radio 1Xtra', 'BBC Radio 1Xtra', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Radio 6 Music@Str, BBC Radio 6 Music@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 54.2], '/', 'Service', 'BBC Radio 6 Music', 'BBC Radio 6 Music', '2012/13 Total Cost(£million)']
+    # Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Asian Network@Str, BBC Asian Network@Str, 1)
+      --> ['Contrast', ['SelectRow1', 'input@0', '<', '2012/13 Total Cost(£million)', 54.2], '/', 'Service', 'BBC Asian Network', 'BBC Asian Network', '2012/13 Total Cost(£million)']
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmin, 0), ['1'])
+# top-2, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmin, 0), ['-99'])
+# top-3, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmax, 0), ['1'])
+# top-4, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 0), eqmax, 0), ['-99'])
+# top-5, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmin, 0), ['1'])
+# top-6, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmin, 0), ['-99'])
+# top-7, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmax, 0), ['1'])
+# top-8, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 1), eqmax, 0), ['-99'])
+# top-9, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmin, 0), ['1'])
+# top-10, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmin, 0), ['-99'])
+# top-11, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmax, 0), ['1'])
+# top-12, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], count, 2), eqmax, 0), ['-99'])
+# top-13, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['2'])
+# top-14, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmin, 1), ['-99', '-1'])
+# top-15, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['2'])
+# top-16, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 0), eqmax, 1), ['-99', '-1'])
+# top-17, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['2'])
+# top-18, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmin, 1), ['-99', '-1'])
+# top-19, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['2'])
+# top-20, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 1), eqmax, 1), ['-99', '-1'])
+# top-21, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['2'])
+# top-22, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmin, 1), ['-99', '-1'])
+# top-23, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['2'])
+# top-24, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], count, 2), eqmax, 1), ['-99', '-1'])
+# top-25, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 0), ['2'])
+# top-26, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmin, 0), ['-99', '-1'])
+# top-27, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 0), ['2'])
+# top-28, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 0), eqmax, 0), ['-99', '-1'])
+# top-29, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 0), ['2'])
+# top-30, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmin, 0), ['-99', '-1'])
+# top-31, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 0), ['2'])
+# top-32, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 1), eqmax, 0), ['-99', '-1'])
+# top-33, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 0), ['2'])
+# top-34, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmin, 0), ['-99', '-1'])
+# top-35, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 0), ['2'])
+# top-36, score: 0.00, answer: [1]
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], count, 2), eqmax, 0), ['-99', '-1'])
+# top-37, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 1, 6.3@Float), count, 0)
+# top-38, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 1, 6.3@Float), count, 1)
+# top-39, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <, 1, 6.3@Float), count, 2)
+# top-40, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 1, 5.6@Float), count, 0)
+# top-41, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 1, 5.6@Float), count, 1)
+# top-42, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, <=, 1, 5.6@Float), count, 2)
+# top-43, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Local Radio@Str), count, 0)
+# top-44, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Local Radio@Str), count, 1)
+# top-45, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Local Radio@Str), count, 2)
+# top-46, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio Scotland@Str), count, 0)
+# top-47, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio Scotland@Str), count, 1)
+# top-48, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio Scotland@Str), count, 2)
+# top-49, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 1@Str), count, 0)
+# top-50, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 1@Str), count, 1)
+# top-51, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 1@Str), count, 2)
+# top-52, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio Wales@Str), count, 0)
+# top-53, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio Wales@Str), count, 1)
+# top-54, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio Wales@Str), count, 2)
+# top-55, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio Ulster and BBC Radio Foyle@Str), count, 0)
+# top-56, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio Ulster and BBC Radio Foyle@Str), count, 1)
+# top-57, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio Ulster and BBC Radio Foyle@Str), count, 2)
+# top-58, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 5 Live Sports Extra@Str), count, 0)
+# top-59, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 5 Live Sports Extra@Str), count, 1)
+# top-60, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 5 Live Sports Extra@Str), count, 2)
+# top-61, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 4 Extra@Str), count, 0)
+# top-62, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 4 Extra@Str), count, 1)
+# top-63, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 4 Extra@Str), count, 2)
+# top-64, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 2@Str), count, 0)
+# top-65, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 2@Str), count, 1)
+# top-66, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 2@Str), count, 2)
+# top-67, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 4@Str), count, 0)
+# top-68, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 4@Str), count, 1)
+# top-69, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 4@Str), count, 2)
+# top-70, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 5 Live@Str), count, 0)
+# top-71, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 5 Live@Str), count, 1)
+# top-72, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 5 Live@Str), count, 2)
+# top-73, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio nan Gàidheal@Str), count, 0)
+# top-74, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio nan Gàidheal@Str), count, 1)
+# top-75, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio nan Gàidheal@Str), count, 2)
+# top-76, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio Cymru@Str), count, 0)
+# top-77, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio Cymru@Str), count, 1)
+# top-78, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio Cymru@Str), count, 2)
+# top-79, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 1Xtra@Str), count, 0)
+# top-80, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 1Xtra@Str), count, 1)
+# top-81, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 1Xtra@Str), count, 2)
+# top-82, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 3@Str), count, 0)
+# top-83, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 3@Str), count, 1)
+# top-84, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 3@Str), count, 2)
+# top-85, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 6 Music@Str), count, 0)
+# top-86, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 6 Music@Str), count, 1)
+# top-87, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Radio 6 Music@Str), count, 2)
+# top-88, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Asian Network@Str), count, 0)
+# top-89, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Asian Network@Str), count, 1)
+# top-90, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, BBC Asian Network@Str), count, 2)
+# top-91, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 5.6@Float), count, 0)
+# top-92, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 5.6@Float), count, 1)
+# top-93, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 5.6@Float), count, 2)
+# top-94, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 6.3@Float), count, 0)
+# top-95, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 6.3@Float), count, 1)
+# top-96, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 6.3@Float), count, 2)
+# top-97, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 7.2@Float), count, 0)
+# top-98, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 7.2@Float), count, 1)
+# top-99, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 7.2@Float), count, 2)
+# top-100, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11.8@Float), count, 0)
+# top-101, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11.8@Float), count, 1)
+# top-102, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11.8@Float), count, 2)
+# top-103, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11.5@Float), count, 0)
+# top-104, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11.5@Float), count, 1)
+# top-105, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 11.5@Float), count, 2)
+# top-106, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 13.0@Float), count, 0)
+# top-107, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 13.0@Float), count, 1)
+# top-108, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 13.0@Float), count, 2)
+# top-109, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 17.6@Float), count, 0)
+# top-110, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 17.6@Float), count, 1)
+# top-111, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 17.6@Float), count, 2)
+# top-112, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 18.8@Float), count, 0)
+# top-113, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 18.8@Float), count, 1)
+# top-114, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 18.8@Float), count, 2)
+# top-115, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 152.5@Float), count, 0)
+# top-116, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 152.5@Float), count, 1)
+# top-117, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 152.5@Float), count, 2)
+# top-118, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 23.8@Float), count, 0)
+# top-119, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 23.8@Float), count, 1)
+# top-120, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 23.8@Float), count, 2)
+# top-121, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 32.7@Float), count, 0)
+# top-122, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 32.7@Float), count, 1)
+# top-123, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 32.7@Float), count, 2)
+# top-124, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 54.2@Float), count, 0)
+# top-125, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 54.2@Float), count, 1)
+# top-126, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 54.2@Float), count, 2)
+# top-127, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 54.3@Float), count, 0)
+# top-128, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 54.3@Float), count, 1)
+# top-129, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 54.3@Float), count, 2)
+# top-130, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 62.1@Float), count, 0)
+# top-131, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 62.1@Float), count, 1)
+# top-132, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 62.1@Float), count, 2)
+# top-133, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 76.0@Float), count, 0)
+# top-134, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 76.0@Float), count, 1)
+# top-135, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 76.0@Float), count, 2)
+# top-136, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 122.1@Float), count, 0)
+# top-137, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 122.1@Float), count, 1)
+# top-138, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, 122.1@Float), count, 2)
+# top-139, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 152.5@Float), count, 0)
+# top-140, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 152.5@Float), count, 1)
+# top-141, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >=, 1, 152.5@Float), count, 2)
+# top-142, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 122.1@Float), count, 0)
+# top-143, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 122.1@Float), count, 1)
+# top-144, score: 0.00, answer: [1]
+  # tprog: Summarize(SelectRow1(@param0, >, 1, 122.1@Float), count, 2)
+# top-145, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 6.3@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+# top-146, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 6.3@Float), /, 2, blue@Str, blue@Str, 1)
+# top-147, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 7.2@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+# top-148, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 7.2@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+# top-149, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 11.8@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+# top-150, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 11.8@Float), /, 0, BBC Radio 4 Extra@Str, BBC Radio 4 Extra@Str, 1)
+# top-151, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 11.8@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+# top-152, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 11.8@Float), /, 0, BBC Radio 6 Music@Str, BBC Radio 6 Music@Str, 1)
+# top-153, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 11.5@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+# top-154, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 11.5@Float), /, 0, BBC Radio 4 Extra@Str, BBC Radio 4 Extra@Str, 1)
+# top-155, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 11.5@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+# top-156, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 13.0@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+# top-157, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 13.0@Float), /, 0, BBC Radio 4 Extra@Str, BBC Radio 4 Extra@Str, 1)
+# top-158, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 13.0@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+# top-159, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 13.0@Float), /, 0, BBC Radio 1Xtra@Str, BBC Radio 1Xtra@Str, 1)
+# top-160, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 13.0@Float), /, 0, BBC Radio 6 Music@Str, BBC Radio 6 Music@Str, 1)
+# top-161, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 17.6@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+# top-162, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 17.6@Float), /, 0, BBC Radio 4 Extra@Str, BBC Radio 4 Extra@Str, 1)
+# top-163, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 17.6@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+# top-164, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 17.6@Float), /, 0, BBC Radio 1Xtra@Str, BBC Radio 1Xtra@Str, 1)
+# top-165, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 17.6@Float), /, 0, BBC Radio 6 Music@Str, BBC Radio 6 Music@Str, 1)
+# top-166, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 17.6@Float), /, 0, BBC Asian Network@Str, BBC Asian Network@Str, 1)
+# top-167, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 18.8@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+# top-168, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 18.8@Float), /, 0, BBC Radio 4 Extra@Str, BBC Radio 4 Extra@Str, 1)
+# top-169, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 18.8@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+# top-170, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 18.8@Float), /, 0, BBC Radio Cymru@Str, BBC Radio Cymru@Str, 1)
+# top-171, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 18.8@Float), /, 0, BBC Radio 1Xtra@Str, BBC Radio 1Xtra@Str, 1)
+# top-172, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 18.8@Float), /, 0, BBC Radio 6 Music@Str, BBC Radio 6 Music@Str, 1)
+# top-173, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 18.8@Float), /, 0, BBC Asian Network@Str, BBC Asian Network@Str, 1)
+# top-174, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio Scotland@Str, BBC Radio Scotland@Str, 1)
+# top-175, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio 1@Str, BBC Radio 1@Str, 1)
+# top-176, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio Wales@Str, BBC Radio Wales@Str, 1)
+# top-177, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio Ulster and BBC Radio Foyle@Str, BBC Radio Ulster and BBC Radio Foyle@Str, 1)
+# top-178, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+# top-179, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio 4 Extra@Str, BBC Radio 4 Extra@Str, 1)
+# top-180, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio 2@Str, BBC Radio 2@Str, 1)
+# top-181, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio 4@Str, BBC Radio 4@Str, 1)
+# top-182, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio 5 Live@Str, BBC Radio 5 Live@Str, 1)
+# top-183, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+# top-184, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio Cymru@Str, BBC Radio Cymru@Str, 1)
+# top-185, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio 1Xtra@Str, BBC Radio 1Xtra@Str, 1)
+# top-186, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio 3@Str, BBC Radio 3@Str, 1)
+# top-187, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Radio 6 Music@Str, BBC Radio 6 Music@Str, 1)
+# top-188, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 152.5@Float), /, 0, BBC Asian Network@Str, BBC Asian Network@Str, 1)
+# top-189, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 23.8@Float), /, 0, BBC Radio Wales@Str, BBC Radio Wales@Str, 1)
+# top-190, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 23.8@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+# top-191, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 23.8@Float), /, 0, BBC Radio 4 Extra@Str, BBC Radio 4 Extra@Str, 1)
+# top-192, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 23.8@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+# top-193, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 23.8@Float), /, 0, BBC Radio Cymru@Str, BBC Radio Cymru@Str, 1)
+# top-194, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 23.8@Float), /, 0, BBC Radio 1Xtra@Str, BBC Radio 1Xtra@Str, 1)
+# top-195, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 23.8@Float), /, 0, BBC Radio 6 Music@Str, BBC Radio 6 Music@Str, 1)
+# top-196, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 23.8@Float), /, 0, BBC Asian Network@Str, BBC Asian Network@Str, 1)
+# top-197, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 32.7@Float), /, 0, BBC Radio Wales@Str, BBC Radio Wales@Str, 1)
+# top-198, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 32.7@Float), /, 0, BBC Radio Ulster and BBC Radio Foyle@Str, BBC Radio Ulster and BBC Radio Foyle@Str, 1)
+# top-199, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 32.7@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+# top-200, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 32.7@Float), /, 0, BBC Radio 4 Extra@Str, BBC Radio 4 Extra@Str, 1)
+# top-201, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 32.7@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+# top-202, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 32.7@Float), /, 0, BBC Radio Cymru@Str, BBC Radio Cymru@Str, 1)
+# top-203, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 32.7@Float), /, 0, BBC Radio 1Xtra@Str, BBC Radio 1Xtra@Str, 1)
+# top-204, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 32.7@Float), /, 0, BBC Radio 6 Music@Str, BBC Radio 6 Music@Str, 1)
+# top-205, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 32.7@Float), /, 0, BBC Asian Network@Str, BBC Asian Network@Str, 1)
+# top-206, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Radio Scotland@Str, BBC Radio Scotland@Str, 1)
+# top-207, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Radio Wales@Str, BBC Radio Wales@Str, 1)
+# top-208, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Radio Ulster and BBC Radio Foyle@Str, BBC Radio Ulster and BBC Radio Foyle@Str, 1)
+# top-209, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Radio 5 Live Sports Extra@Str, BBC Radio 5 Live Sports Extra@Str, 1)
+# top-210, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Radio 4 Extra@Str, BBC Radio 4 Extra@Str, 1)
+# top-211, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Radio nan Gàidheal@Str, BBC Radio nan Gàidheal@Str, 1)
+# top-212, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Radio Cymru@Str, BBC Radio Cymru@Str, 1)
+# top-213, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Radio 1Xtra@Str, BBC Radio 1Xtra@Str, 1)
+# top-214, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Radio 6 Music@Str, BBC Radio 6 Music@Str, 1)
+# top-215, score: 0.00, answer: [1]
+  # tprog: Contrast(SelectRow1(@param0, <, 1, 54.2@Float), /, 0, BBC Asian Network@Str, BBC Asian Network@Str, 1)

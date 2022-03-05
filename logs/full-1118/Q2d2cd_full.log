@@ -1,0 +1,88 @@
+# parsed arguments: Namespace(benchmark='Q2d2cd', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'53', 'design', '52', 'yellow', 'blue', 'sci', 'business', 'orange', '91', 'social', 'sciences', 'resources', '42', 'undergrad', 'major', 'green', '67', 'color', 'math', 'arts', 'engineering', '60', 'phys', 'gray', 'red', 'percent', 'nat', 'programs', '55', '62', 'chemistry', 'env', '61', 'ls', 'purple', 'humanities', 'brown', '84', 'bio'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+              major  percent   color
+0       LS Programs       42  yellow
+1      Bio Sciences       52    blue
+2      LS Undergrad       53  yellow
+3     Math Phys Sci       55  orange
+4     Nat Resources       60   brown
+5   Arts Humanities       61    gray
+6   Social Sciences       61   brown
+7         Chemistry       62     red
+8        Env Design       67   green
+9       Engineering       84  orange
+10         Business       91  purple
+# query is: Is a smaller percentage represented by Social Science or LS Undergrad majors?
+# expected output type:[dtype('O')]
+# expected output is:
+         ANSWER
+0  LS Undergrad
+# inferred DSL terminals:
+  # ConstVal: ['LS Undergrad@Str', 'LS Programs@Str', 'major@Str', 'percent@Str', 'Social Sciences@Str', '<NULL>']
+     # cmap: [('majors', 'major'), ('ls', 'LS Programs'), ('percentage', 'percent'), ('ls', 'LS Undergrad'), ('undergrad', 'LS Undergrad'), ('social', 'Social Sciences')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['<=', '<', '==', '<NULL>']
+     # bmap: [(None, '=='), ('smaller', '<'), ('smaller', '<=')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (selection) is triggered
+  # [debug] fallback (selection) answers: ['LS Undergrad', 'LS Programs', 'major', 'percent', 'Social Sciences']
+  # [debug] fallback (selection) answers (no dup.): ['major', 'percent']
+  # [debug] 2 fallback (selection) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'LS Programs'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, LS Programs@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'major', 'LS Programs'], ['major']]
+    # SelectCol(SelectRow1(@param0, ==, 0, LS Programs@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'major', 'LS Programs'], ['major']]
+# (t=2.81) i=1, candidate=[{'ANSWER': 'LS Undergrad'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, LS Undergrad@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'major', 'LS Undergrad'], ['major']]
+    # SelectCol(SelectRow1(@param0, ==, 0, LS Undergrad@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'major', 'LS Undergrad'], ['major']]
+# (t=5.61) i=2, candidate=[{'ANSWER': 'Social Sciences'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Social Sciences@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'major', 'Social Sciences'], ['major']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Social Sciences@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'major', 'Social Sciences'], ['major']]
+# (t=8.43) i=3, candidate=[{'ANSWER': 'Bio Sciences'}]
+  # found 0 program(s)
+# (t=11.32) i=4, candidate=[{'ANSWER': 'Math Phys Sci'}]
+  # found 0 program(s)
+# (t=14.14) i=5, candidate=[{'ANSWER': 'Arts Humanities'}]
+  # found 0 program(s)
+# (t=16.99) i=6, candidate=[{'ANSWER': 'Chemistry'}]
+  # found 0 program(s)
+# (t=19.79) i=7, candidate=[{'ANSWER': 'Nat Resources'}]
+  # found 0 program(s)
+# (t=22.67) i=8, candidate=[{'ANSWER': 'Engineering'}]
+  # found 0 program(s)
+# (t=25.50) i=9, candidate=[{'ANSWER': 'major'}]
+  # found 0 program(s)
+# (t=28.03) i=10, candidate=[{'ANSWER': 'percent'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.39, answer: LS Undergrad
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, LS Undergrad@Str), ['0'])
+# top-2, score: 2.39, answer: LS Undergrad
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, LS Undergrad@Str), ['-1', '-2'])
+# top-3, score: 1.31, answer: LS Programs
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, LS Programs@Str), ['0'])
+# top-4, score: 1.31, answer: LS Programs
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, LS Programs@Str), ['-1', '-2'])
+# top-5, score: 1.31, answer: Social Sciences
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Social Sciences@Str), ['0'])
+# top-6, score: 1.31, answer: Social Sciences
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Social Sciences@Str), ['-1', '-2'])

@@ -1,0 +1,166 @@
+# parsed arguments: Namespace(benchmark='Q4b6d5', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'orange', 'am.', 'red', 'blue', '8', '1', 'pagan/earth-based', 'protestants', 'color', 'percentage', '65', '34', '47', '6', 'hindus', '42', 'same', 'native', '13', 'non-christian', '10', '63', '68', 'christian', 'religion', '37', '12', '51', 'shrinking', '20', 'growing', '67', '73', '24', 'muslims', 'mormons', 'spirituality', 'jews', '7', '19', '49', 'other', 'orthodox', 'catholics', '61', 'growth?', '17', '14', 'unaffiliated', '11', 'buddhists', 'staying', '3'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                   Religion           Growth?  Percentage   color
+0                   Muslims           Growing          51    blue
+1                   Muslims  Staying the same          37     red
+2                   Muslims         Shrinking           7  orange
+3               Protestants           Growing          47    blue
+4               Protestants  Staying the same          42     red
+5               Protestants         Shrinking           6  orange
+6         Pagan/earth-based           Growing          34    blue
+7         Pagan/earth-based  Staying the same          49     red
+8         Pagan/earth-based         Shrinking           8  orange
+9   Native Am. Spirituality           Growing          24    blue
+10  Native Am. Spirituality  Staying the same          61     red
+11  Native Am. Spirituality         Shrinking           6  orange
+12                     Jews           Growing          19    blue
+13                     Jews  Staying the same          61     red
+14                     Jews         Shrinking           8  orange
+15                Catholics           Growing          14    blue
+16                Catholics  Staying the same          61     red
+17                Catholics         Shrinking          20  orange
+18             Unaffiliated           Growing          12    blue
+19             Unaffiliated  Staying the same          63     red
+20             Unaffiliated         Shrinking          17  orange
+21      Other non-Christian           Growing          13    blue
+22      Other non-Christian  Staying the same          65     red
+23      Other non-Christian         Shrinking           8  orange
+24                Buddhists           Growing          12    blue
+25                Buddhists  Staying the same          67     red
+26                Buddhists         Shrinking           8  orange
+27                  Mormons           Growing           3    blue
+28                  Mormons  Staying the same          68     red
+29                  Mormons         Shrinking          11  orange
+30       Orthodox Christian           Growing           3    blue
+31       Orthodox Christian  Staying the same          68     red
+32       Orthodox Christian         Shrinking          10  orange
+33                   Hindus           Growing           1    blue
+34                   Hindus  Staying the same          73     red
+35                   Hindus         Shrinking           8  orange
+# query is: What is the percentage of blue Buddhists?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      12
+# inferred DSL terminals:
+  # ConstVal: ['orange@Str', 'Growing@Str', 'Staying the same@Str', 'red@Str', 'Catholics@Str', '3@Int', 'blue@Str', '7@Int', '6@Int', '8@Int', 'Native Am. Spirituality@Str', '11@Int', 'Muslims@Str', '12@Int', '14@Int', '13@Int', '10@Int', '17@Int', '19@Int', '20@Int', '24@Int', 'color@Str', '1@Int', '34@Int', '37@Int', '42@Int', 'Growth?@Str', 'Other non-Christian@Str', '47@Int', '49@Int', 'Orthodox Christian@Str', '51@Int', 'Protestants@Str', 'Jews@Str', '61@Int', '63@Int', '65@Int', 'Religion@Str', '67@Int', '68@Int', '73@Int', 'Unaffiliated@Str', 'Percentage@Str', 'Buddhists@Str', 'Mormons@Str', 'Shrinking@Str', 'Pagan/earth-based@Str', 'Hindus@Str']
+     # cmap: [(None, 'orange'), (None, 'Growing'), (None, 'Staying the same'), (None, 'red'), (None, 'Catholics'), (None, 3), (None, 'blue'), (None, 7), (None, 6), (None, 8), (None, 'Native Am. Spirituality'), (None, 11), (None, 'Muslims'), (None, 12), (None, 14), (None, 13), (None, 10), (None, 17), (None, 19), (None, 20), (None, 24), (None, 'color'), (None, 1), (None, 34), (None, 37), (None, 42), (None, 'Growth?'), (None, 'Other non-Christian'), (None, 47), (None, 49), (None, 'Orthodox Christian'), (None, 51), (None, 'Protestants'), (None, 'Jews'), (None, 61), (None, 63), (None, 65), (None, 'Religion'), (None, 67), (None, 68), (None, 73), (None, 'Unaffiliated'), (None, 'Percentage'), (None, 'Buddhists'), (None, 'Mormons'), (None, 'Shrinking'), (None, 'Pagan/earth-based'), (None, 'Hindus')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 12}]
+  # found 27 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Unaffiliated@Str), eqmin, 2), ['2'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'Religion', 'Unaffiliated'], 'eqmin', 'Percentage'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 14@Int), ==, 0, Unaffiliated@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 14], '==', 'Religion', 'Unaffiliated'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 13@Int), ==, 0, Unaffiliated@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 13], '==', 'Religion', 'Unaffiliated'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 17@Int), ==, 0, Unaffiliated@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Percentage', 17], '==', 'Religion', 'Unaffiliated'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 12@Int), ==, 0, Unaffiliated@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 12], '==', 'Religion', 'Unaffiliated'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 14@Int), ==, 0, Unaffiliated@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 14], '==', 'Religion', 'Unaffiliated'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 13@Int), ==, 0, Unaffiliated@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Percentage', 13], '==', 'Religion', 'Unaffiliated'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), <, 2, 14@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Unaffiliated'], '<', 'Percentage', 14], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), <, 2, 13@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Unaffiliated'], '<', 'Percentage', 13], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), <, 2, 17@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Unaffiliated'], '<', 'Percentage', 17], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), <=, 2, 12@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Unaffiliated'], '<=', 'Percentage', 12], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), <=, 2, 14@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Unaffiliated'], '<=', 'Percentage', 14], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), <=, 2, 13@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Unaffiliated'], '<=', 'Percentage', 13], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), ==, 1, Growing@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Unaffiliated'], '==', 'Growth?', 'Growing'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), ==, 2, 12@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Unaffiliated'], '==', 'Percentage', 12], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), ==, 3, blue@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Unaffiliated'], '==', 'color', 'blue'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Buddhists@Str), ==, 1, Growing@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Buddhists'], '==', 'Growth?', 'Growing'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Buddhists@Str), ==, 2, 12@Int), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Buddhists'], '==', 'Percentage', 12], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Buddhists@Str), ==, 3, blue@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Religion', 'Buddhists'], '==', 'color', 'blue'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Growing@Str), ==, 0, Unaffiliated@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Growth?', 'Growing'], '==', 'Religion', 'Unaffiliated'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Growing@Str), ==, 0, Buddhists@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Growth?', 'Growing'], '==', 'Religion', 'Buddhists'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 12@Int), ==, 0, Unaffiliated@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Percentage', 12], '==', 'Religion', 'Unaffiliated'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 12@Int), ==, 0, Buddhists@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Percentage', 12], '==', 'Religion', 'Buddhists'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 12@Int), !=, 0, Unaffiliated@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Percentage', 12], '!=', 'Religion', 'Unaffiliated'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 12@Int), !=, 0, Buddhists@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Percentage', 12], '!=', 'Religion', 'Buddhists'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Unaffiliated@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'Religion', 'Unaffiliated'], ['Percentage']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Buddhists@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'Religion', 'Buddhists'], ['Percentage']]
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, Unaffiliated@Str), eqmin, 2), ['2'])
+# top-2, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 14@Int), ==, 0, Unaffiliated@Str), ['2'])
+# top-3, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 13@Int), ==, 0, Unaffiliated@Str), ['2'])
+# top-4, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 17@Int), ==, 0, Unaffiliated@Str), ['2'])
+# top-5, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 12@Int), ==, 0, Unaffiliated@Str), ['2'])
+# top-6, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 14@Int), ==, 0, Unaffiliated@Str), ['2'])
+# top-7, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 13@Int), ==, 0, Unaffiliated@Str), ['2'])
+# top-8, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), <, 2, 14@Int), ['2'])
+# top-9, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), <, 2, 13@Int), ['2'])
+# top-10, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), <, 2, 17@Int), ['2'])
+# top-11, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), <=, 2, 12@Int), ['2'])
+# top-12, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), <=, 2, 14@Int), ['2'])
+# top-13, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), <=, 2, 13@Int), ['2'])
+# top-14, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), ==, 1, Growing@Str), ['2'])
+# top-15, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), ==, 2, 12@Int), ['2'])
+# top-16, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Unaffiliated@Str), ==, 3, blue@Str), ['2'])
+# top-17, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Buddhists@Str), ==, 1, Growing@Str), ['2'])
+# top-18, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Buddhists@Str), ==, 2, 12@Int), ['2'])
+# top-19, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Buddhists@Str), ==, 3, blue@Str), ['2'])
+# top-20, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Growing@Str), ==, 0, Unaffiliated@Str), ['2'])
+# top-21, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Growing@Str), ==, 0, Buddhists@Str), ['2'])
+# top-22, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 12@Int), ==, 0, Unaffiliated@Str), ['2'])
+# top-23, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 12@Int), ==, 0, Buddhists@Str), ['2'])
+# top-24, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 12@Int), !=, 0, Unaffiliated@Str), ['2'])
+# top-25, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 2, 12@Int), !=, 0, Buddhists@Str), ['2'])
+# top-26, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Unaffiliated@Str), ['2'])
+# top-27, score: 0.00, answer: [12]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 0, Buddhists@Str), ['2'])

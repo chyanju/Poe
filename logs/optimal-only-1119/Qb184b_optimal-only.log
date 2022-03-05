@@ -1,0 +1,85 @@
+# parsed arguments: Namespace(benchmark='Qb184b', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'spurs', 'pacers', 'indiana', 'color', 'division', '45', 'central', '41', 'x-san', 'rockets', '32', 'x-houston', 'pistons', 'y-atlanta', 'cavaliers', 'detroit', 'hawks', 'antonio', '66', 'cleveland', 'l', 'blue'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+      Central Division   L color
+0      y-Atlanta Hawks  32  blue
+1    x-Houston Rockets  41  blue
+2  x-San Antonio Spurs  41  blue
+3  Cleveland Cavaliers  45  blue
+4       Indiana Pacers  45  blue
+5      Detroit Pistons  66  blue
+# query is: Which basketball team has the least value on the graph?
+# expected output type:[dtype('O')]
+# expected output is:
+            ANSWER
+0  y-Atlanta Hawks
+# inferred DSL terminals:
+  # ConstVal: ['<NULL>']
+     # cmap: []
+  # AggrFunc: ['min', '<NULL>']
+     # amap: [('least', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('least', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'y-Atlanta Hawks'}]
+  # found 10 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Central Division'], 'min', 'L'], 'eqmin', 'COL0'], ['Central Division']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Central Division'], 'min', 'L'], 'eqmin', 'COL0'], ['Central Division']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Central Division', 'L'], 'min', 'L'], 'eqmin', 'L'], ['Central Division']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Central Division', 'L'], 'min', 'L'], 'eqmin', 'L'], ['Central Division']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Central Division', 'L'], 'min', 'L'], 'eqmin', 'COL0'], ['Central Division']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Central Division', 'L'], 'min', 'L'], 'eqmin', 'COL0'], ['Central Division']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Central Division', 'color'], 'min', 'L'], 'eqmin', 'COL0'], ['Central Division']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['Central Division', 'color'], 'min', 'L'], 'eqmin', 'COL0'], ['Central Division']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'L'], ['Central Division']]
+    # SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'L'], ['Central Division']]
+# (t=0.26) i=1, candidate=[{'ANSWER': 'Indiana Pacers'}]
+  # found 0 program(s)
+# (t=0.49) i=2, candidate=[{'ANSWER': 'Cleveland Cavaliers'}]
+  # found 0 program(s)
+# (t=0.72) i=3, candidate=[{'ANSWER': 'Detroit Pistons'}]
+  # found 0 program(s)
+# (t=0.94) i=4, candidate=[{'ANSWER': 'x-San Antonio Spurs'}]
+  # found 0 program(s)
+# (t=1.18) i=5, candidate=[{'ANSWER': 'x-Houston Rockets'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.27, answer: ['y-Atlanta Hawks']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['0'])
+# top-2, score: 1.27, answer: ['y-Atlanta Hawks']
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 1), ['-1', '-2'])
+# top-3, score: 1.20, answer: ['y-Atlanta Hawks']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['0'])
+# top-4, score: 1.20, answer: ['y-Atlanta Hawks']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 1), eqmin, 1), ['-1'])
+# top-5, score: 1.19, answer: ['y-Atlanta Hawks']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['0'])
+# top-6, score: 1.19, answer: ['y-Atlanta Hawks']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 1), ['-1', '-2'])
+# top-7, score: 1.19, answer: ['y-Atlanta Hawks']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['0'])
+# top-8, score: 1.19, answer: ['y-Atlanta Hawks']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 1), eqmin, 2), ['-1', '-2'])
+# top-9, score: 1.19, answer: ['y-Atlanta Hawks']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['0'])
+# top-10, score: 1.19, answer: ['y-Atlanta Hawks']
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 1), eqmin, 2), ['-1', '-2'])

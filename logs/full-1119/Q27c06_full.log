@@ -1,0 +1,127 @@
+# parsed arguments: Namespace(benchmark='Q27c06', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'panama', '699', 'belize', 'nicaragua', '904', 'salvador', 'color', '684', '838', 'birds', 'guatemala', '434', 'blue', '632', 'costa', 'el', '544', 'country', 'rica', 'honduras'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+       Country  Birds color
+0       Belize    544  blue
+1   Costa Rica    838  blue
+2  El Salvador    434  blue
+3    Guatemala    684  blue
+4     Honduras    699  blue
+5    Nicaragua    632  blue
+6       Panama    904  blue
+# query is: Which country has less than half as many bird species as Panama?
+# expected output type:[dtype('O')]
+# expected output is:
+        ANSWER
+0  El Salvador
+# inferred DSL terminals:
+  # ConstVal: ['Country@Str', 'Panama@Str', 'Birds@Str', '<NULL>']
+     # cmap: [('panama', 'Panama'), ('country', 'Country'), ('bird', 'Birds')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['-', '<NULL>']
+     # nmap: [('less', '-')]
+  # BoolFunc: ['<', '==', '<=', '<NULL>']
+     # bmap: [(None, '=='), ('less', '<='), ('less', '<')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: []
+  # [debug] high_values (no dup.): []
+  # [debug] filtered low_values (no dup.): [(470, 2), (360, 2), (272, 2), (220, 2), (205, 2), (66, 2), (-66, 2), (-205, 2), (-220, 2), (-272, 2)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'El Salvador'}]
+  # found 0 program(s)
+# (t=1.60) i=1, candidate=[{'ANSWER': 'Belize'}]
+  # found 0 program(s)
+# (t=3.19) i=2, candidate=[{'ANSWER': 'Nicaragua'}]
+  # found 0 program(s)
+# (t=4.77) i=3, candidate=[{'ANSWER': 470}]
+  # found 0 program(s)
+# (t=6.20) i=4, candidate=[{'ANSWER': 360}]
+  # found 0 program(s)
+# (t=7.63) i=5, candidate=[{'ANSWER': 272}]
+  # found 0 program(s)
+# (t=9.06) i=6, candidate=[{'ANSWER': 220}]
+  # found 0 program(s)
+# (t=10.50) i=7, candidate=[{'ANSWER': 205}]
+  # found 0 program(s)
+# (t=11.95) i=8, candidate=[{'ANSWER': 66}]
+  # found 0 program(s)
+# (t=13.39) i=9, candidate=[{'ANSWER': -66}]
+  # found 0 program(s)
+# (t=14.84) i=10, candidate=[{'ANSWER': -205}]
+  # found 0 program(s)
+# (t=16.28) i=11, candidate=[{'ANSWER': -220}]
+  # found 0 program(s)
+# (t=17.73) i=12, candidate=[{'ANSWER': -272}]
+  # found 0 program(s)
+# ====> fallback strategy (retrieval) is triggered because no explanation is found so far
+# ====> retrieval_values: [434, 544, 632, 684, 699, 838, 904, 'Belize', 'Birds', 'Costa Rica', 'Country', 'El Salvador', 'Guatemala', 'Honduras', 'Nicaragua', 'Panama', 'blue', 'color']
+# (t=19.16) fallback i=0, candidate=[{'ANSWER': 434}]
+  # found 0 program(s)
+# (t=20.74) fallback i=1, candidate=[{'ANSWER': 544}]
+  # found 0 program(s)
+# (t=22.34) fallback i=2, candidate=[{'ANSWER': 632}]
+  # found 0 program(s)
+# (t=23.94) fallback i=3, candidate=[{'ANSWER': 684}]
+  # found 0 program(s)
+# (t=25.53) fallback i=4, candidate=[{'ANSWER': 699}]
+  # found 0 program(s)
+# (t=27.10) fallback i=5, candidate=[{'ANSWER': 838}]
+  # found 0 program(s)
+# (t=28.69) fallback i=6, candidate=[{'ANSWER': 904}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Panama'], ['Birds']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Panama'], ['Birds']]
+# (t=30.26) fallback i=7, candidate=[{'ANSWER': 'Belize'}]
+  # found 0 program(s)
+# (t=31.84) fallback i=8, candidate=[{'ANSWER': 'Birds'}]
+  # found 0 program(s)
+# (t=33.29) fallback i=9, candidate=[{'ANSWER': 'Costa Rica'}]
+  # found 0 program(s)
+# (t=34.87) fallback i=10, candidate=[{'ANSWER': 'Country'}]
+  # found 0 program(s)
+# (t=36.31) fallback i=11, candidate=[{'ANSWER': 'El Salvador'}]
+  # found 0 program(s)
+# (t=37.90) fallback i=12, candidate=[{'ANSWER': 'Guatemala'}]
+  # found 0 program(s)
+# (t=39.48) fallback i=13, candidate=[{'ANSWER': 'Honduras'}]
+  # found 0 program(s)
+# (t=41.07) fallback i=14, candidate=[{'ANSWER': 'Nicaragua'}]
+  # found 0 program(s)
+# (t=42.67) fallback i=15, candidate=[{'ANSWER': 'Panama'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Panama'], ['Country']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Panama'], ['Country']]
+# (t=44.27) fallback i=16, candidate=[{'ANSWER': 'blue'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Panama'], ['color']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['-99', '-1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'Panama'], ['color']]
+# (t=45.86) fallback i=17, candidate=[{'ANSWER': 'color'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.39, answer: [904]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['1'])
+# top-2, score: 2.39, answer: [904]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['-99', '-2'])
+# top-3, score: 2.31, answer: ['Panama']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['0'])
+# top-4, score: 2.31, answer: ['Panama']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['-1', '-2'])
+# top-5, score: 2.31, answer: ['blue']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['2'])
+# top-6, score: 2.31, answer: ['blue']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Panama@Str), ['-99', '-1'])

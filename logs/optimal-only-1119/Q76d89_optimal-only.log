@@ -1,0 +1,96 @@
+# parsed arguments: Namespace(benchmark='Q76d89', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'1356852', 'blue', 'color', '26000000', 'japan', '67030000', 'kuwait', 'china', 'finland', 'belgium', 'norway', 'germany', '30033922', '2713704', 'ireland', 'us', 'netherlands', 'european', 'country', 'commission', '2000000', '7033231', 'donations', '5475452', '1000000'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                Country  Donations color
+0                    US   67030000  blue
+1   European Commission   30033922  blue
+2                 Japan   26000000  blue
+3           Netherlands    7033231  blue
+4                Norway    5475452  blue
+5               Germany    2713704  blue
+6                Kuwait    2000000  blue
+7               Finland    1356852  blue
+8               Belgium    1356852  blue
+9               Ireland    1356852  blue
+10                China    1000000  blue
+# query is: How much  is the total of the donations of US and China together?
+# expected output type:[dtype('int64')]
+# expected output is:
+     ANSWER
+0  68030000
+# inferred DSL terminals:
+  # ConstVal: ['Donations@Str', 'China@Str', 'US@Str', '<NULL>']
+     # cmap: [('donations', 'Donations'), ('us', 'US'), ('china', 'China')]
+  # AggrFunc: ['count', 'sum', '<NULL>']
+     # amap: [('total', 'sum'), ('total', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1000000}]
+  # found 5 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, China@Str), ==, 0, China@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'China'], '==', 'Country', 'China'], ['Donations']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, China@Str), ==, 0, China@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'China'], '==', 'Country', 'China'], ['Donations']]
+    # Summarize(SelectRow1(@param0, ==, 0, China@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'China'], 'sum', 'Donations']
+    # SelectCol(SelectRow1(@param0, ==, 0, China@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'China'], ['Donations']]
+    # SelectCol(SelectRow1(@param0, ==, 0, China@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'China'], ['Donations']]
+# (t=2.45) i=1, candidate=[{'ANSWER': 2000000}]
+  # found 0 program(s)
+# (t=4.87) i=2, candidate=[{'ANSWER': 3000000}]
+  # found 0 program(s)
+# (t=7.32) i=3, candidate=[{'ANSWER': 69030000}]
+  # found 0 program(s)
+# (t=9.80) i=4, candidate=[{'ANSWER': 68030000}]
+  # found 0 program(s)
+# (t=12.56) i=5, candidate=[{'ANSWER': 135060000}]
+  # found 0 program(s)
+# (t=14.98) i=6, candidate=[{'ANSWER': 67030000}]
+  # found 5 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, US@Str), ==, 0, US@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'US'], '==', 'Country', 'US'], ['Donations']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, US@Str), ==, 0, US@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Country', 'US'], '==', 'Country', 'US'], ['Donations']]
+    # Summarize(SelectRow1(@param0, ==, 0, US@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'US'], 'sum', 'Donations']
+    # SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'US'], ['Donations']]
+    # SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Country', 'US'], ['Donations']]
+# (t=17.41) i=7, candidate=[{'ANSWER': 134060000}]
+  # found 0 program(s)
+# (t=19.86) i=8, candidate=[{'ANSWER': 201090000}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.34, answer: [1000000]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, China@Str), sum, 1)
+# top-2, score: 2.34, answer: [67030000]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, US@Str), sum, 1)
+# top-3, score: 2.29, answer: [1000000]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, China@Str), ['1'])
+# top-4, score: 2.29, answer: [1000000]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, China@Str), ['-99', '-2'])
+# top-5, score: 2.29, answer: [67030000]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['1'])
+# top-6, score: 2.29, answer: [67030000]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, US@Str), ['-99', '-2'])
+# top-7, score: 2.23, answer: [1000000]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, China@Str), ==, 0, China@Str), ['1'])
+# top-8, score: 2.23, answer: [1000000]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, China@Str), ==, 0, China@Str), ['-99', '-2'])
+# top-9, score: 2.23, answer: [67030000]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, US@Str), ==, 0, US@Str), ['1'])
+# top-10, score: 2.23, answer: [67030000]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, US@Str), ==, 0, US@Str), ['-99', '-2'])

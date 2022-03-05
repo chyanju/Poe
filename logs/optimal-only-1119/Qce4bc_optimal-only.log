@@ -1,0 +1,60 @@
+# parsed arguments: Namespace(benchmark='Qce4bc', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'91', '61', 'env', 'design', '62', 'purple', 'phys', '84', 'major', 'sciences', 'color', '53', '55', '60', '67', 'engineering', 'math', 'gray', 'blue', 'business', 'sci', 'yellow', 'orange', 'social', 'arts', 'brown', 'percent', 'resources', '52', 'ls', 'undergrad', 'bio', 'nat', 'chemistry', 'programs', '42', 'red', 'green', 'humanities'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+              major  percent   color
+0       LS Programs       42  yellow
+1      Bio Sciences       52    blue
+2      LS Undergrad       53  yellow
+3     Math Phys Sci       55  orange
+4     Nat Resources       60   brown
+5   Arts Humanities       61    gray
+6   Social Sciences       61   brown
+7         Chemistry       62     red
+8        Env Design       67   green
+9       Engineering       84  orange
+10         Business       91  purple
+# query is: Which major did 62% of students receive a degree?
+# expected output type:[dtype('O')]
+# expected output is:
+      ANSWER
+0  Chemistry
+# inferred DSL terminals:
+  # ConstVal: ['major@Str', '62@Int', '<NULL>']
+     # cmap: [('major', 'major'), (62, 62)]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Chemistry'}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 62@Int), ==, 1, 62@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'percent', 62], '==', 'percent', 62], ['major']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 62@Int), ==, 1, 62@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'percent', 62], '==', 'percent', 62], ['major']]
+    # SelectCol(SelectRow1(@param0, ==, 1, 62@Int), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'percent', 62], ['major']]
+    # SelectCol(SelectRow1(@param0, ==, 1, 62@Int), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'percent', 62], ['major']]
+# (t=1.05) i=1, candidate=[{'ANSWER': 'Env Design'}]
+  # found 0 program(s)
+# (t=2.10) i=2, candidate=[{'ANSWER': 'Social Sciences'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.37, answer: ['Chemistry']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, 62@Int), ['0'])
+# top-2, score: 1.37, answer: ['Chemistry']
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, 62@Int), ['-1', '-2'])
+# top-3, score: 1.31, answer: ['Chemistry']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 62@Int), ==, 1, 62@Int), ['0'])
+# top-4, score: 1.31, answer: ['Chemistry']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, 62@Int), ==, 1, 62@Int), ['-1', '-2'])

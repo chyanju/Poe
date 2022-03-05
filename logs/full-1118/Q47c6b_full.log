@@ -1,0 +1,83 @@
+# parsed arguments: Namespace(benchmark='Q47c6b', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'17', '7017731', '2607672', '2454721', '5355235', '45', '925060', '14', '2704659', '1999120', '5656528', '4499890', 'red', '3277946', 'color', '44', '3187797', 'to', 'and', '2027307', '3157759', '1910571', 'green', 'ca', '2159981', '1208495', '894368', 'yellow', 'state', 'purple', '5120254', '737462', '1311479', 'blue', '13', '10604510', '3414001', '1938695', '1345341', 'age_range', '4782119', '3239173', 'population', 'years', '5', '3596343', '1575308', '25', '24', 'fl', 'pa', '679201', 'ny', '4746856', '1558919', '2472223', '725973', '1140516', 'teal', 'over', '4114496', '1420518', 'il', '1607297', 'orange', '18', '8819342', '2141490', '64', '3853788', 'under', '65', 'tx', '1058031', '1203944'}
+# input type: [dtype('O'), dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+   State  population          age_range   color
+0     CA     2704659      Under 5 Years  purple
+1     CA     4499890      5 to 13 Years   green
+2     CA     2159981     14 to 17 Years    blue
+3     CA     3853788     18 to 24 Years  orange
+4     CA    10604510     25 to 44 Years     red
+5     CA     8819342     45 to 64 Years    teal
+6     CA     4114496  65 Years and Over  yellow
+7     FL     1140516      Under 5 Years  purple
+8     FL     1938695      5 to 13 Years   green
+9     FL      925060     14 to 17 Years    blue
+10    FL     1607297     18 to 24 Years  orange
+11    FL     4782119     25 to 44 Years     red
+12    FL     4746856     45 to 64 Years    teal
+13    FL     3187797  65 Years and Over  yellow
+14    PA      737462      Under 5 Years  purple
+15    PA     1345341      5 to 13 Years   green
+16    PA      679201     14 to 17 Years    blue
+17    PA     1203944     18 to 24 Years  orange
+18    PA     3157759     25 to 44 Years     red
+19    PA     3414001     45 to 64 Years    teal
+20    PA     1910571  65 Years and Over  yellow
+21    NY     1208495      Under 5 Years  purple
+22    NY     2141490      5 to 13 Years   green
+23    NY     1058031     14 to 17 Years    blue
+24    NY     1999120     18 to 24 Years  orange
+25    NY     5355235     25 to 44 Years     red
+26    NY     5120254     45 to 64 Years    teal
+27    NY     2607672  65 Years and Over  yellow
+28    TX     2027307      Under 5 Years  purple
+29    TX     3277946      5 to 13 Years   green
+30    TX     1420518     14 to 17 Years    blue
+31    TX     2454721     18 to 24 Years  orange
+32    TX     7017731     25 to 44 Years     red
+33    TX     5656528     45 to 64 Years    teal
+34    TX     2472223  65 Years and Over  yellow
+35    IL      894368      Under 5 Years  purple
+36    IL     1558919      5 to 13 Years   green
+37    IL      725973     14 to 17 Years    blue
+38    IL     1311479     18 to 24 Years  orange
+39    IL     3596343     25 to 44 Years     red
+40    IL     3239173     45 to 64 Years    teal
+41    IL     1575308  65 Years and Over  yellow
+# query is: Which categoty has the lowest population in FL?
+# expected output type:[dtype('O')]
+# expected output is:
+           ANSWER
+0  14 to 17 Years
+# inferred DSL terminals:
+  # ConstVal: ['population@Str', 'FL@Str', '<NULL>']
+     # cmap: [('fl', 'FL'), ('population', 'population')]
+  # AggrFunc: ['min', '<NULL>']
+     # amap: [('lowest', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('lowest', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'FL'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, FL@Str), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'State', 'FL'], 'eqmin', 'population'], ['State']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, FL@Str), ==, 0, FL@Str), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'State', 'FL'], '==', 'State', 'FL'], 'eqmin', 'population'], ['State']]
+# (t=1.71) i=1, candidate=[{'ANSWER': 'CA'}]
+  # found 0 program(s)
+# (t=3.39) i=2, candidate=[{'ANSWER': 'TX'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.48, answer: FL
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 0, FL@Str), eqmin, 1), ['0'])
+# top-2, score: 2.45, answer: FL
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 0, FL@Str), ==, 0, FL@Str), eqmin, 1), ['0'])

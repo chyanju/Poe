@@ -1,0 +1,41 @@
+# parsed arguments: Namespace(benchmark='Q312c6', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'total', '19258', 'parties', 'unaffiliated', 'minor', '27180', '140', 'color', 'party', '28608', 'voters', 'blue', 'republican', 'democratic'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+           Party  Total voters color
+0     Republican         19258  blue
+1     Democratic         28608  blue
+2   Unaffiliated         27180  blue
+3  Minor parties           140  blue
+# query is: How many Minor Party Voters are there?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0     140
+# inferred DSL terminals:
+  # ConstVal: ['Total voters@Str', 'Party@Str', 'Minor parties@Str', '<NULL>']
+     # cmap: [('party', 'Party'), ('party', 'Minor parties'), ('minor', 'Minor parties'), ('voters', 'Total voters')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('how many', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 140}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Minor parties@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Party', 'Minor parties'], ['Total voters']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Minor parties@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Party', 'Minor parties'], ['Total voters']]
+
+# ========== review report ========== #
+# top-1, score: 1.57, answer: 140
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Minor parties@Str), ['1'])
+# top-2, score: 1.57, answer: 140
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Minor parties@Str), ['-99', '-2'])

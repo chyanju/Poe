@@ -1,0 +1,93 @@
+# parsed arguments: Namespace(benchmark='Q60816', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'rainbow', '6482', 'votes', 'candidate', '2798', 'majority', 'jill', 'margot', 'frank', 'adrian', 'james', '14857', 'weiss', 'color', '10070', 'blue', '152', 'george', '4787', 'dobson', 'oliver', 'fraser'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+              Candidate  Votes color
+0          Frank Dobson  14857  blue
+1           Jill Fraser  10070  blue
+2          Margot James   6482  blue
+3         Adrian Oliver   2798  blue
+4  Rainbow George Weiss    152  blue
+5              Majority   4787  blue
+# query is: What is the sum of both Adrian Oliver and Margot James' votes?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0    9280
+# inferred DSL terminals:
+  # ConstVal: ['Votes@Str', 'Adrian Oliver@Str', 'Margot James@Str', '<NULL>']
+     # cmap: [('margot', 'Margot James'), ('adrian', 'Adrian Oliver'), ('james', 'Margot James'), ('votes', 'Votes'), ('oliver', 'Adrian Oliver')]
+  # AggrFunc: ['sum', '<NULL>']
+     # amap: [('sum', 'sum')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 6482}]
+  # found 5 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Margot James@Str), ==, 0, Margot James@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Candidate', 'Margot James'], '==', 'Candidate', 'Margot James'], ['Votes']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Margot James@Str), ==, 0, Margot James@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Candidate', 'Margot James'], '==', 'Candidate', 'Margot James'], ['Votes']]
+    # Summarize(SelectRow1(@param0, ==, 0, Margot James@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Candidate', 'Margot James'], 'sum', 'Votes']
+    # SelectCol(SelectRow1(@param0, ==, 0, Margot James@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Margot James'], ['Votes']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Margot James@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Margot James'], ['Votes']]
+# (t=2.29) i=1, candidate=[{'ANSWER': 2798}]
+  # found 5 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Adrian Oliver@Str), ==, 0, Adrian Oliver@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Candidate', 'Adrian Oliver'], '==', 'Candidate', 'Adrian Oliver'], ['Votes']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Adrian Oliver@Str), ==, 0, Adrian Oliver@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'Candidate', 'Adrian Oliver'], '==', 'Candidate', 'Adrian Oliver'], ['Votes']]
+    # Summarize(SelectRow1(@param0, ==, 0, Adrian Oliver@Str), sum, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Candidate', 'Adrian Oliver'], 'sum', 'Votes']
+    # SelectCol(SelectRow1(@param0, ==, 0, Adrian Oliver@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Adrian Oliver'], ['Votes']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Adrian Oliver@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Candidate', 'Adrian Oliver'], ['Votes']]
+# (t=4.60) i=2, candidate=[{'ANSWER': 12964}]
+  # found 0 program(s)
+# (t=6.89) i=3, candidate=[{'ANSWER': 9280}]
+  # found 0 program(s)
+# (t=9.18) i=4, candidate=[{'ANSWER': 5596}]
+  # found 0 program(s)
+# (t=11.76) i=5, candidate=[{'ANSWER': 19446}]
+  # found 0 program(s)
+# (t=14.07) i=6, candidate=[{'ANSWER': 15762}]
+  # found 0 program(s)
+# (t=16.37) i=7, candidate=[{'ANSWER': 12078}]
+  # found 0 program(s)
+# (t=18.63) i=8, candidate=[{'ANSWER': 22244}]
+  # found 0 program(s)
+# (t=20.89) i=9, candidate=[{'ANSWER': 18560}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.46, answer: [6482]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Margot James@Str), sum, 1)
+# top-2, score: 2.46, answer: [2798]
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Adrian Oliver@Str), sum, 1)
+# top-3, score: 2.39, answer: [6482]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Margot James@Str), ['1'])
+# top-4, score: 2.39, answer: [6482]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Margot James@Str), ['-99', '-2'])
+# top-5, score: 2.39, answer: [2798]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Adrian Oliver@Str), ['1'])
+# top-6, score: 2.39, answer: [2798]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Adrian Oliver@Str), ['-99', '-2'])
+# top-7, score: 2.34, answer: [6482]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Margot James@Str), ==, 0, Margot James@Str), ['1'])
+# top-8, score: 2.34, answer: [6482]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Margot James@Str), ==, 0, Margot James@Str), ['-99', '-2'])
+# top-9, score: 2.34, answer: [2798]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Adrian Oliver@Str), ==, 0, Adrian Oliver@Str), ['1'])
+# top-10, score: 2.34, answer: [2798]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Adrian Oliver@Str), ==, 0, Adrian Oliver@Str), ['-99', '-2'])

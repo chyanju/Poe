@@ -1,0 +1,97 @@
+# parsed arguments: Namespace(benchmark='Q1eebe', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'blue', '3.14', '-1.05', 'brown', 'cameron', '8.8', '7.5', '-3.62', 'red', '1.77', 'temperature', '2.55', '-3.95', 'orange', 'sunshine', '2.98', '11.53', 'color', 'rainfall', '-4.18', '-0.21', '-1.29', 'administration', 'major', 'thatcher', 'blair', '-1.71', '0.76', 'percentage', 'category'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+   administration     category  percentage   color
+0           Major  Temperature        2.98     red
+1           Major     Sunshine        2.55  orange
+2           Major     Rainfall       -3.62    blue
+3           Brown  Temperature       -3.95     red
+4           Brown     Sunshine        1.77  orange
+5           Brown     Rainfall       -0.21    blue
+6         Cameron  Temperature       -4.18     red
+7         Cameron     Sunshine       -1.29  orange
+8         Cameron     Rainfall       -1.71    blue
+9           Blair  Temperature        7.50     red
+10          Blair     Sunshine        3.14  orange
+11          Blair     Rainfall        8.80    blue
+12       Thatcher  Temperature        0.76     red
+13       Thatcher     Sunshine       -1.05  orange
+14       Thatcher     Rainfall       11.53    blue
+# query is: What's the difference in sunshine percentage between Blair and Brown?
+# expected output type:[dtype('float64')]
+# expected output is:
+   ANSWER
+0    1.37
+# inferred DSL terminals:
+  # ConstVal: ['Blair@Str', 'Brown@Str', 'percentage@Str', 'Sunshine@Str', '<NULL>']
+     # cmap: [('sunshine', 'Sunshine'), ('blair', 'Blair'), ('percentage', 'percentage'), ('brown', 'Brown')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(1.37, 9), (-1.37, 9), (7.09, 6), (7.030000000000001, 6), (5.73, 6), (5.720000000000001, 6), (5.66, 6), (4.43, 6), (4.359999999999999, 6), (4.19, 6)]
+  # [debug] high_values (no dup.): [(1.37, 9), (-1.37, 9), (7.09, 6), (7.030000000000001, 6), (5.73, 6), (5.720000000000001, 6), (5.66, 6), (4.43, 6), (4.359999999999999, 6), (4.19, 6)]
+  # [debug] filtered low_values (no dup.): [(9.76, 3), (8.389999999999999, 3), (7.32, 3), (6.76, 3), (5.949999999999999, 3), (5.390000000000001, 3), (4.85, 3), (3.48, 3), (2.38, 3), (1.21, 3)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=8.10) i=1, candidate=[{'ANSWER': 1.37}]
+  # found 2 program(s)
+    # Contrast(SelectRow1(@param0, ==, 1, Sunshine@Str), diff, 0, Blair@Str, Brown@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'category', 'Sunshine'], 'diff', 'administration', 'Blair', 'Brown', 'percentage']
+    # Contrast(SelectRow1(@param0, ==, 1, Sunshine@Str), diff, 0, Brown@Str, Blair@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'category', 'Sunshine'], 'diff', 'administration', 'Brown', 'Blair', 'percentage']
+# (t=16.51) i=2, candidate=[{'ANSWER': -1.37}]
+  # found 0 program(s)
+# (t=24.96) i=3, candidate=[{'ANSWER': 7.09}]
+  # found 0 program(s)
+# (t=33.05) i=4, candidate=[{'ANSWER': 7.030000000000001}]
+  # found 0 program(s)
+# (t=41.52) i=5, candidate=[{'ANSWER': 5.73}]
+  # found 0 program(s)
+# (t=49.82) i=6, candidate=[{'ANSWER': 5.720000000000001}]
+  # found 0 program(s)
+# (t=57.91) i=7, candidate=[{'ANSWER': 5.66}]
+  # found 0 program(s)
+# (t=66.39) i=8, candidate=[{'ANSWER': 4.43}]
+  # found 0 program(s)
+# (t=74.76) i=9, candidate=[{'ANSWER': 4.359999999999999}]
+  # found 0 program(s)
+# (t=83.09) i=10, candidate=[{'ANSWER': 4.19}]
+  # found 0 program(s)
+# (t=91.17) i=11, candidate=[{'ANSWER': 9.76}]
+  # found 0 program(s)
+# (t=99.76) i=12, candidate=[{'ANSWER': 8.389999999999999}]
+  # found 0 program(s)
+# (t=108.16) i=13, candidate=[{'ANSWER': 7.32}]
+  # found 0 program(s)
+# (t=116.21) i=14, candidate=[{'ANSWER': 6.76}]
+  # found 0 program(s)
+# (t=124.75) i=15, candidate=[{'ANSWER': 5.949999999999999}]
+  # found 0 program(s)
+# (t=132.79) i=16, candidate=[{'ANSWER': 5.390000000000001}]
+  # found 0 program(s)
+# (t=141.19) i=17, candidate=[{'ANSWER': 4.85}]
+  # found 0 program(s)
+# (t=149.60) i=18, candidate=[{'ANSWER': 3.48}]
+  # found 0 program(s)
+# (t=157.68) i=19, candidate=[{'ANSWER': 2.38}]
+  # found 0 program(s)
+# (t=166.16) i=20, candidate=[{'ANSWER': 1.21}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.55, answer: [1.37]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Sunshine@Str), diff, 0, Blair@Str, Brown@Str, 2)
+# top-2, score: 2.55, answer: [1.37]
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Sunshine@Str), diff, 0, Brown@Str, Blair@Str, 2)

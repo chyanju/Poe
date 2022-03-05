@@ -1,0 +1,50 @@
+# parsed arguments: Namespace(benchmark='Q27dac', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'blue', 'gojō,', '1282', 'flat', '92', 'district', 'yamato', 'inland', '56', 'population', 'yoshino', 'highland', 'plain', 'color'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                   District  Population color
+0  Yamato flat inland plain        1282  blue
+1           Yamato highland          56  blue
+2             Gojō, Yoshino          92  blue
+# query is: What is the population of Yamato flat inland plain?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0    1282
+# inferred DSL terminals:
+  # ConstVal: ['Yamato highland@Str', 'Yamato flat inland plain@Str', 'Population@Str', '<NULL>']
+     # cmap: [('yamato', 'Yamato highland'), ('population', 'Population'), ('inland', 'Yamato flat inland plain'), ('yamato', 'Yamato flat inland plain'), ('plain', 'Yamato flat inland plain'), ('flat', 'Yamato flat inland plain')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1282}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), ==, 0, Yamato flat inland plain@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'District', 'Yamato flat inland plain'], '==', 'District', 'Yamato flat inland plain'], ['Population']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), ==, 0, Yamato flat inland plain@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'District', 'Yamato flat inland plain'], '==', 'District', 'Yamato flat inland plain'], ['Population']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'District', 'Yamato flat inland plain'], ['Population']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'District', 'Yamato flat inland plain'], ['Population']]
+# (t=2.22) i=1, candidate=[{'ANSWER': 2564}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.70, answer: [1282]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), ['1'])
+# top-2, score: 2.70, answer: [1282]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), ['-99', '-2'])
+# top-3, score: 2.65, answer: [1282]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), ==, 0, Yamato flat inland plain@Str), ['1'])
+# top-4, score: 2.65, answer: [1282]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, Yamato flat inland plain@Str), ==, 0, Yamato flat inland plain@Str), ['-99', '-2'])

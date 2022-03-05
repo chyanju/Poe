@@ -1,0 +1,703 @@
+# parsed arguments: Namespace(benchmark='Qa3e84', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='abstract-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'4', 'feb', '8', 'dec', '(month)', 'mar', 'aug', 'jun', '23', 'records', '82', 'may', '35', 'nov', 'apr', 'weather', '2', '5', 'color', 'sun', 'gray', '40', 'blue', '13', '36', '1', '38', '71', '37', '61', '10', '45', 'count', '19', 'yellow', '6', '33', '54', 'jul', '20', 'drizzle', '85', '30', 'pink', 'date', 'jan', '50', '34', 'snow', '55', '25', 'sep', '42', '16', 'rain', '3', '94', 'oct', '89', '14', 'fog'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+    weather date (month)  Count of Records   color
+0   drizzle          Jan                10    pink
+1      rain          Jan                35    blue
+2       sun          Jan                33  yellow
+3      snow          Jan                 8    gray
+4      rain          Feb                40    blue
+5       sun          Feb                30  yellow
+6   drizzle          Feb                 4    pink
+7      snow          Feb                 3    gray
+8       sun          Mar                42  yellow
+9      rain          Mar                37    blue
+10     snow          Mar                 6    gray
+11  drizzle          Mar                 3    pink
+12     rain          Apr                20    blue
+13      sun          Apr                61  yellow
+14     snow          Apr                 1    gray
+15  drizzle          Apr                 4    pink
+16     rain          May                16    blue
+17      sun          May                82  yellow
+18  drizzle          May                 1    pink
+19     rain          Jun                19    blue
+20      sun          Jun                85  yellow
+21  drizzle          Jun                 2    pink
+22     rain          Jul                14    blue
+23      sun          Jul                89  yellow
+24  drizzle          Jul                 8    pink
+25      fog          Jul                13    pink
+26  drizzle          Aug                 8    pink
+27      sun          Aug                94  yellow
+28     rain          Aug                 6    blue
+29      sun          Sep                71  yellow
+30     rain          Sep                 4    blue
+31      fog          Sep                40    pink
+32  drizzle          Sep                 5    pink
+33      sun          Oct                45  yellow
+34  drizzle          Oct                 4    pink
+35     rain          Oct                20    blue
+36     rain          Nov                25    blue
+37      sun          Nov                42  yellow
+38  drizzle          Nov                 3    pink
+39      fog          Nov                50    pink
+40     rain          Dec                23    blue
+41      sun          Dec                40  yellow
+42     snow          Dec                 5    gray
+43  drizzle          Dec                 2    pink
+44      fog          Mar                36    pink
+45      fog          Apr                34    pink
+46      fog          May                25    pink
+47      fog          Jun                14    pink
+48      fog          Aug                16    pink
+49      fog          Oct                55    pink
+50      fog          Dec                54    pink
+51      fog          Jan                38    pink
+52      fog          Feb                36    pink
+# query is: What month has the highest sun weather type?
+# expected output type:[dtype('O')]
+# expected output is:
+  ANSWER
+0    Aug
+# inferred DSL terminals:
+  # ConstVal: ['1@Int', '2@Int', '3@Int', '4@Int', '5@Int', 'Jan@Str', '6@Int', '8@Int', 'Apr@Str', '10@Int', 'Jul@Str', '13@Int', '14@Int', '16@Int', '19@Int', '20@Int', 'May@Str', '23@Int', '25@Int', 'Oct@Str', 'Count of Records@Str', '30@Int', 'Mar@Str', '33@Int', '34@Int', '35@Int', '36@Int', '37@Int', '38@Int', 'weather@Str', '40@Int', '42@Int', 'Feb@Str', 'date (month)@Str', 'Jun@Str', 'sun@Str', 'gray@Str', '45@Int', 'blue@Str', 'Nov@Str', '50@Int', 'color@Str', '54@Int', '55@Int', '61@Int', 'Aug@Str', '71@Int', 'yellow@Str', '82@Int', 'drizzle@Str', '85@Int', 'pink@Str', '89@Int', 'snow@Str', '94@Int', 'Sep@Str', 'rain@Str', 'Dec@Str', 'fog@Str']
+     # cmap: [(None, 1), (None, 2), (None, 3), (None, 4), (None, 5), (None, 'Jan'), (None, 6), (None, 8), (None, 'Apr'), (None, 10), (None, 'Jul'), (None, 13), (None, 14), (None, 16), (None, 19), (None, 20), (None, 'May'), (None, 23), (None, 25), (None, 'Oct'), (None, 'Count of Records'), (None, 30), (None, 'Mar'), (None, 33), (None, 34), (None, 35), (None, 36), (None, 37), (None, 38), (None, 'weather'), (None, 40), (None, 42), (None, 'Feb'), (None, 'date (month)'), (None, 'Jun'), (None, 'sun'), (None, 'gray'), (None, 45), (None, 'blue'), (None, 'Nov'), (None, 50), (None, 'color'), (None, 54), (None, 55), (None, 61), (None, 'Aug'), (None, 71), (None, 'yellow'), (None, 82), (None, 'drizzle'), (None, 85), (None, 'pink'), (None, 89), (None, 'snow'), (None, 94), (None, 'Sep'), (None, 'rain'), (None, 'Dec'), (None, 'fog')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Jun'}]
+  # found 157 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 20@Int), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<', 'Count of Records', 20], 'eqmax', 'Count of Records'], ['date (month)']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 89@Int), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<', 'Count of Records', 89], 'eqmax', 'Count of Records'], ['date (month)']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 19@Int), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<=', 'Count of Records', 19], 'eqmax', 'Count of Records'], ['date (month)']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 85@Int), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '<=', 'Count of Records', 85], 'eqmax', 'Count of Records'], ['date (month)']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Jun@Str), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], 'eqmin', 'Count of Records'], ['date (month)']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Jun@Str), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], 'eqmax', 'Count of Records'], ['date (month)']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 19@Int), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>=', 'Count of Records', 19], 'eqmin', 'Count of Records'], ['date (month)']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 85@Int), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>=', 'Count of Records', 85], 'eqmin', 'Count of Records'], ['date (month)']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 16@Int), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>', 'Count of Records', 16], 'eqmin', 'Count of Records'], ['date (month)']]
+    # SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 82@Int), eqmin, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '>', 'Count of Records', 82], 'eqmin', 'Count of Records'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 3@Int), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 3], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 4@Int), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 4], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 5@Int), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 5], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 6@Int), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 6], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 8@Int), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 8], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 10@Int), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 10], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 13@Int), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 13], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 14@Int), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 14], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 20], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20@Int), >=, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 20], '>=', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20@Int), >, 2, 16@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 20], '>', 'Count of Records', 16], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 23@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 23], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 25@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 25], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 30@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 30], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 33@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 33], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 34@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 34], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 35@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 35], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 36@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 36], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 37@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 37], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 38@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 38], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 40@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 40], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 42@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 42], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 45@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 45], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 50@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 50], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 54@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 54], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 55@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 55], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 61@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 61], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 71@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 71], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 82@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 82], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 85@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 85], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 89@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 89], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 89@Int), ==, 2, 85@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 89], '==', 'Count of Records', 85], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 89@Int), >=, 2, 85@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 89], '>=', 'Count of Records', 85], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 89@Int), >, 2, 82@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 89], '>', 'Count of Records', 82], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 94@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 94], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 94@Int), ==, 2, 85@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<', 'Count of Records', 94], '==', 'Count of Records', 85], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2@Int), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 2], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 3@Int), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 3], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 4@Int), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 4], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 5@Int), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 5], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 6@Int), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 6], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 8@Int), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 8], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 10@Int), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 10], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 13@Int), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 13], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 19], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19@Int), >=, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 19], '>=', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19@Int), >, 2, 16@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 19], '>', 'Count of Records', 16], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 20@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 20], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 23@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 23], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 25@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 25], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 30@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 30], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 33@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 33], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 34@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 34], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 35@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 35], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 36@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 36], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 37@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 37], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 38@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 38], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 40@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 40], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 42@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 42], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 45@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 45], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 50@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 50], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 54@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 54], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 55@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 55], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 61@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 61], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 71@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 71], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 82@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 82], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 85@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 85], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 85@Int), ==, 2, 85@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 85], '==', 'Count of Records', 85], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 85@Int), >=, 2, 85@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 85], '>=', 'Count of Records', 85], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 85@Int), >, 2, 82@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 85], '>', 'Count of Records', 82], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 89@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 89], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 89@Int), ==, 2, 85@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 89], '==', 'Count of Records', 85], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 94@Int), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 94], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 94@Int), ==, 2, 85@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '<=', 'Count of Records', 94], '==', 'Count of Records', 85], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, sun@Str), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'weather', 'sun'], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, sun@Str), ==, 2, 85@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'weather', 'sun'], '==', 'Count of Records', 85], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, drizzle@Str), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'weather', 'drizzle'], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, rain@Str), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'weather', 'rain'], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, rain@Str), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'weather', 'rain'], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, fog@Str), ==, 1, Jun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'weather', 'fog'], '==', 'date (month)', 'Jun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, fog@Str), ==, 2, 14@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'weather', 'fog'], '==', 'Count of Records', 14], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <, 2, 3@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '<', 'Count of Records', 3], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <, 2, 4@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '<', 'Count of Records', 4], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <, 2, 5@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '<', 'Count of Records', 5], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <, 2, 6@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '<', 'Count of Records', 6], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <, 2, 8@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '<', 'Count of Records', 8], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <, 2, 10@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '<', 'Count of Records', 10], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <, 2, 13@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '<', 'Count of Records', 13], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <, 2, 14@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '<', 'Count of Records', 14], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <=, 2, 2@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '<=', 'Count of Records', 2], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <=, 2, 3@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '<=', 'Count of Records', 3], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <=, 2, 4@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '<=', 'Count of Records', 4], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <=, 2, 5@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '<=', 'Count of Records', 5], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <=, 2, 6@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '<=', 'Count of Records', 6], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <=, 2, 8@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '<=', 'Count of Records', 8], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <=, 2, 10@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '<=', 'Count of Records', 10], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <=, 2, 13@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '<=', 'Count of Records', 13], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 0, sun@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '==', 'weather', 'sun'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 0, drizzle@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '==', 'weather', 'drizzle'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 0, rain@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '==', 'weather', 'rain'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 0, fog@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '==', 'weather', 'fog'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 2, 2@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '==', 'Count of Records', 2], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 2, 14@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '==', 'Count of Records', 14], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '==', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 2, 85@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '==', 'Count of Records', 85], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 3, blue@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '==', 'color', 'blue'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 3, yellow@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '==', 'color', 'yellow'], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 20@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 20], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 23@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 23], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 25@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 25], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 30@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 30], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 33@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 33], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 34@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 34], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 35@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 35], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 36@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 36], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 37@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 37], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 38@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 38], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 40@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 40], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 42@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 42], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 45@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 45], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 50@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 50], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 54@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 54], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 55@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 55], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 61@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 61], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 71@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 71], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 82@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 82], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 85@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>=', 'Count of Records', 85], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 19@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 19], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 20@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 20], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 23@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 23], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 25@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 25], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 30@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 30], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 33@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 33], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 34@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 34], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 35@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 35], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 36@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 36], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 37@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 37], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 38@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 38], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 40@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 40], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 42@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 42], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 45@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 45], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 50@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 50], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 54@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 54], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 55@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 55], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 61@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 61], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 71@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 71], ['date (month)']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 82@Int), ['1'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'date (month)', 'Jun'], '>', 'Count of Records', 82], ['date (month)']]
+---------- timeout ----------
+
+# ========== review report ========== #
+# top-1, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 20@Int), eqmax, 2), ['1'])
+# top-2, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <, 2, 89@Int), eqmax, 2), ['1'])
+# top-3, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 19@Int), eqmax, 2), ['1'])
+# top-4, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, <=, 2, 85@Int), eqmax, 2), ['1'])
+# top-5, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Jun@Str), eqmin, 2), ['1'])
+# top-6, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Jun@Str), eqmax, 2), ['1'])
+# top-7, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 19@Int), eqmin, 2), ['1'])
+# top-8, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >=, 2, 85@Int), eqmin, 2), ['1'])
+# top-9, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 16@Int), eqmin, 2), ['1'])
+# top-10, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, >, 2, 82@Int), eqmin, 2), ['1'])
+# top-11, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 3@Int), ==, 1, Jun@Str), ['1'])
+# top-12, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 4@Int), ==, 1, Jun@Str), ['1'])
+# top-13, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 5@Int), ==, 1, Jun@Str), ['1'])
+# top-14, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 6@Int), ==, 1, Jun@Str), ['1'])
+# top-15, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 8@Int), ==, 1, Jun@Str), ['1'])
+# top-16, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 10@Int), ==, 1, Jun@Str), ['1'])
+# top-17, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 13@Int), ==, 1, Jun@Str), ['1'])
+# top-18, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 14@Int), ==, 1, Jun@Str), ['1'])
+# top-19, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20@Int), ==, 2, 19@Int), ['1'])
+# top-20, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20@Int), >=, 2, 19@Int), ['1'])
+# top-21, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 20@Int), >, 2, 16@Int), ['1'])
+# top-22, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 23@Int), ==, 2, 19@Int), ['1'])
+# top-23, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 25@Int), ==, 2, 19@Int), ['1'])
+# top-24, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 30@Int), ==, 2, 19@Int), ['1'])
+# top-25, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 33@Int), ==, 2, 19@Int), ['1'])
+# top-26, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 34@Int), ==, 2, 19@Int), ['1'])
+# top-27, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 35@Int), ==, 2, 19@Int), ['1'])
+# top-28, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 36@Int), ==, 2, 19@Int), ['1'])
+# top-29, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 37@Int), ==, 2, 19@Int), ['1'])
+# top-30, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 38@Int), ==, 2, 19@Int), ['1'])
+# top-31, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 40@Int), ==, 2, 19@Int), ['1'])
+# top-32, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 42@Int), ==, 2, 19@Int), ['1'])
+# top-33, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 45@Int), ==, 2, 19@Int), ['1'])
+# top-34, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 50@Int), ==, 2, 19@Int), ['1'])
+# top-35, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 54@Int), ==, 2, 19@Int), ['1'])
+# top-36, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 55@Int), ==, 2, 19@Int), ['1'])
+# top-37, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 61@Int), ==, 2, 19@Int), ['1'])
+# top-38, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 71@Int), ==, 2, 19@Int), ['1'])
+# top-39, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 82@Int), ==, 2, 19@Int), ['1'])
+# top-40, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 85@Int), ==, 2, 19@Int), ['1'])
+# top-41, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 89@Int), ==, 2, 19@Int), ['1'])
+# top-42, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 89@Int), ==, 2, 85@Int), ['1'])
+# top-43, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 89@Int), >=, 2, 85@Int), ['1'])
+# top-44, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 89@Int), >, 2, 82@Int), ['1'])
+# top-45, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 94@Int), ==, 2, 19@Int), ['1'])
+# top-46, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <, 2, 94@Int), ==, 2, 85@Int), ['1'])
+# top-47, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 2@Int), ==, 1, Jun@Str), ['1'])
+# top-48, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 3@Int), ==, 1, Jun@Str), ['1'])
+# top-49, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 4@Int), ==, 1, Jun@Str), ['1'])
+# top-50, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 5@Int), ==, 1, Jun@Str), ['1'])
+# top-51, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 6@Int), ==, 1, Jun@Str), ['1'])
+# top-52, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 8@Int), ==, 1, Jun@Str), ['1'])
+# top-53, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 10@Int), ==, 1, Jun@Str), ['1'])
+# top-54, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 13@Int), ==, 1, Jun@Str), ['1'])
+# top-55, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19@Int), ==, 2, 19@Int), ['1'])
+# top-56, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19@Int), >=, 2, 19@Int), ['1'])
+# top-57, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 19@Int), >, 2, 16@Int), ['1'])
+# top-58, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 20@Int), ==, 2, 19@Int), ['1'])
+# top-59, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 23@Int), ==, 2, 19@Int), ['1'])
+# top-60, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 25@Int), ==, 2, 19@Int), ['1'])
+# top-61, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 30@Int), ==, 2, 19@Int), ['1'])
+# top-62, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 33@Int), ==, 2, 19@Int), ['1'])
+# top-63, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 34@Int), ==, 2, 19@Int), ['1'])
+# top-64, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 35@Int), ==, 2, 19@Int), ['1'])
+# top-65, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 36@Int), ==, 2, 19@Int), ['1'])
+# top-66, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 37@Int), ==, 2, 19@Int), ['1'])
+# top-67, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 38@Int), ==, 2, 19@Int), ['1'])
+# top-68, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 40@Int), ==, 2, 19@Int), ['1'])
+# top-69, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 42@Int), ==, 2, 19@Int), ['1'])
+# top-70, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 45@Int), ==, 2, 19@Int), ['1'])
+# top-71, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 50@Int), ==, 2, 19@Int), ['1'])
+# top-72, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 54@Int), ==, 2, 19@Int), ['1'])
+# top-73, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 55@Int), ==, 2, 19@Int), ['1'])
+# top-74, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 61@Int), ==, 2, 19@Int), ['1'])
+# top-75, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 71@Int), ==, 2, 19@Int), ['1'])
+# top-76, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 82@Int), ==, 2, 19@Int), ['1'])
+# top-77, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 85@Int), ==, 2, 19@Int), ['1'])
+# top-78, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 85@Int), ==, 2, 85@Int), ['1'])
+# top-79, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 85@Int), >=, 2, 85@Int), ['1'])
+# top-80, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 85@Int), >, 2, 82@Int), ['1'])
+# top-81, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 89@Int), ==, 2, 19@Int), ['1'])
+# top-82, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 89@Int), ==, 2, 85@Int), ['1'])
+# top-83, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 94@Int), ==, 2, 19@Int), ['1'])
+# top-84, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, <=, 2, 94@Int), ==, 2, 85@Int), ['1'])
+# top-85, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, sun@Str), ==, 1, Jun@Str), ['1'])
+# top-86, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, sun@Str), ==, 2, 85@Int), ['1'])
+# top-87, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, drizzle@Str), ==, 1, Jun@Str), ['1'])
+# top-88, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, rain@Str), ==, 1, Jun@Str), ['1'])
+# top-89, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, rain@Str), ==, 2, 19@Int), ['1'])
+# top-90, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, fog@Str), ==, 1, Jun@Str), ['1'])
+# top-91, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 0, fog@Str), ==, 2, 14@Int), ['1'])
+# top-92, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <, 2, 3@Int), ['1'])
+# top-93, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <, 2, 4@Int), ['1'])
+# top-94, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <, 2, 5@Int), ['1'])
+# top-95, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <, 2, 6@Int), ['1'])
+# top-96, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <, 2, 8@Int), ['1'])
+# top-97, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <, 2, 10@Int), ['1'])
+# top-98, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <, 2, 13@Int), ['1'])
+# top-99, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <, 2, 14@Int), ['1'])
+# top-100, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <=, 2, 2@Int), ['1'])
+# top-101, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <=, 2, 3@Int), ['1'])
+# top-102, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <=, 2, 4@Int), ['1'])
+# top-103, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <=, 2, 5@Int), ['1'])
+# top-104, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <=, 2, 6@Int), ['1'])
+# top-105, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <=, 2, 8@Int), ['1'])
+# top-106, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <=, 2, 10@Int), ['1'])
+# top-107, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), <=, 2, 13@Int), ['1'])
+# top-108, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 0, sun@Str), ['1'])
+# top-109, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 0, drizzle@Str), ['1'])
+# top-110, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 0, rain@Str), ['1'])
+# top-111, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 0, fog@Str), ['1'])
+# top-112, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 2, 2@Int), ['1'])
+# top-113, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 2, 14@Int), ['1'])
+# top-114, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 2, 19@Int), ['1'])
+# top-115, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 2, 85@Int), ['1'])
+# top-116, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 3, blue@Str), ['1'])
+# top-117, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), ==, 3, yellow@Str), ['1'])
+# top-118, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 20@Int), ['1'])
+# top-119, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 23@Int), ['1'])
+# top-120, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 25@Int), ['1'])
+# top-121, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 30@Int), ['1'])
+# top-122, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 33@Int), ['1'])
+# top-123, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 34@Int), ['1'])
+# top-124, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 35@Int), ['1'])
+# top-125, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 36@Int), ['1'])
+# top-126, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 37@Int), ['1'])
+# top-127, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 38@Int), ['1'])
+# top-128, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 40@Int), ['1'])
+# top-129, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 42@Int), ['1'])
+# top-130, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 45@Int), ['1'])
+# top-131, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 50@Int), ['1'])
+# top-132, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 54@Int), ['1'])
+# top-133, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 55@Int), ['1'])
+# top-134, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 61@Int), ['1'])
+# top-135, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 71@Int), ['1'])
+# top-136, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 82@Int), ['1'])
+# top-137, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >=, 2, 85@Int), ['1'])
+# top-138, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 19@Int), ['1'])
+# top-139, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 20@Int), ['1'])
+# top-140, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 23@Int), ['1'])
+# top-141, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 25@Int), ['1'])
+# top-142, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 30@Int), ['1'])
+# top-143, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 33@Int), ['1'])
+# top-144, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 34@Int), ['1'])
+# top-145, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 35@Int), ['1'])
+# top-146, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 36@Int), ['1'])
+# top-147, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 37@Int), ['1'])
+# top-148, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 38@Int), ['1'])
+# top-149, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 40@Int), ['1'])
+# top-150, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 42@Int), ['1'])
+# top-151, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 45@Int), ['1'])
+# top-152, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 50@Int), ['1'])
+# top-153, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 54@Int), ['1'])
+# top-154, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 55@Int), ['1'])
+# top-155, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 61@Int), ['1'])
+# top-156, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 71@Int), ['1'])
+# top-157, score: 0.00, answer: ['Jun']
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, Jun@Str), >, 2, 82@Int), ['1'])

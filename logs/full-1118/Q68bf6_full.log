@@ -1,0 +1,47 @@
+# parsed arguments: Namespace(benchmark='Q68bf6', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'cleveland', 'y-atlanta', 'pacers', 'spurs', 'l', 'central', 'blue', 'indiana', 'cavaliers', 'x-san', 'pistons', '66', '41', 'rockets', '32', 'x-houston', 'hawks', 'detroit', '45', 'division', 'antonio', 'color'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+      Central Division   L color
+0      y-Atlanta Hawks  32  blue
+1    x-Houston Rockets  41  blue
+2  x-San Antonio Spurs  41  blue
+3  Cleveland Cavaliers  45  blue
+4       Indiana Pacers  45  blue
+5      Detroit Pistons  66  blue
+# query is: What is the amount for Detroit Pistons?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      66
+# inferred DSL terminals:
+  # ConstVal: ['Detroit Pistons@Str', '<NULL>']
+     # cmap: [('pistons', 'Detroit Pistons'), ('detroit', 'Detroit Pistons')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 66}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Detroit Pistons@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Central Division', 'Detroit Pistons'], ['L']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Detroit Pistons@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'Central Division', 'Detroit Pistons'], ['L']]
+# (t=0.23) i=1, candidate=[{'ANSWER': 32}]
+  # found 0 program(s)
+# (t=0.46) i=2, candidate=[{'ANSWER': 41}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.43, answer: 66
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Detroit Pistons@Str), ['1'])
+# top-2, score: 2.43, answer: 66
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Detroit Pistons@Str), ['-99', '-2'])

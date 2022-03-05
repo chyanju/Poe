@@ -1,0 +1,162 @@
+# parsed arguments: Namespace(benchmark='Qc4673', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'same', 'orange', 'conditions', 'ahead', '3', 'religion', 'treatment', '23', '73', '14', 'moral', '5', '26', 'opportunity', 'raising', 'views', '21', 'children', 'values', 'express', '9', '69', 'about', 'color', 'statement', 'response', '28', '62', '20', 'practice', 'country', 'to', 'strength', 'freedom', 'origin', 'better', '18', 'u.s.', '38', 'for', 'society', '34', 'percentage', 'get', '52', '32', 'political', '7', '13', 'family', 'in', 'ties', '56', '64', 'blue', 'poor', 'red'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                             statement  ...   color
+0             Opportunity to get ahead  ...    blue
+1   Freedom to express political views  ...    blue
+2                Treatment of the poor  ...    blue
+3      Conditions for raising children  ...    blue
+4         Freedom to practice religion  ...    blue
+5              Moral values of society  ...    blue
+6              Strength of family ties  ...    blue
+7             Opportunity to get ahead  ...  orange
+8   Freedom to express political views  ...  orange
+9                Treatment of the poor  ...  orange
+10     Conditions for raising children  ...  orange
+11        Freedom to practice religion  ...  orange
+12             Moral values of society  ...  orange
+13             Strength of family ties  ...  orange
+14            Opportunity to get ahead  ...     red
+15  Freedom to express political views  ...     red
+16               Treatment of the poor  ...     red
+17     Conditions for raising children  ...     red
+18        Freedom to practice religion  ...     red
+19             Moral values of society  ...     red
+20             Strength of family ties  ...     red
+
+[21 rows x 4 columns]
+# query is: which of the statements have the shortest on the blue scale
+# expected output type:[dtype('O')]
+# expected output is:
+                               ANSWER
+0  Freedom to express political views
+# inferred DSL terminals:
+  # ConstVal: ['statement@Str', 'blue@Str', '<NULL>']
+     # cmap: [('statements', 'statement'), ('blue', 'blue')]
+  # AggrFunc: ['min', '<NULL>']
+     # amap: [('shortest', 'min')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmin', '<NULL>']
+     # imap: [('shortest', 'eqmin')]
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Opportunity to get ahead'}]
+  # found 0 program(s)
+# (t=1.71) i=1, candidate=[{'ANSWER': 'Freedom to express political views'}, {'ANSWER': 'Opportunity to get ahead'}]
+  # found 0 program(s)
+# (t=2.22) i=2, candidate=[{'ANSWER': 'Freedom to express political views'}]
+  # found 13 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 3, blue@Str), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'color', 'blue'], 'eqmin', 'percentage'], ['statement']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement'], 'min', 'percentage'], 'eqmin', 'COL0'], ['statement']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement'], 'min', 'percentage'], 'eqmin', 'COL0'], ['statement']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'response'], 'min', 'percentage'], 'eqmin', 'COL0'], ['statement']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'response'], 'min', 'percentage'], 'eqmin', 'COL0'], ['statement']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'percentage'], 'min', 'percentage'], 'eqmin', 'percentage'], ['statement']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'percentage'], 'min', 'percentage'], 'eqmin', 'percentage'], ['statement']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'percentage'], 'min', 'percentage'], 'eqmin', 'COL0'], ['statement']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'percentage'], 'min', 'percentage'], 'eqmin', 'COL0'], ['statement']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'color'], 'min', 'percentage'], 'eqmin', 'COL0'], ['statement']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'color'], 'min', 'percentage'], 'eqmin', 'COL0'], ['statement']]
+    # SelectCol(SelectRow0(@param0, eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmin', 'percentage'], ['statement']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 3, blue@Str), eqmin, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'color', 'blue'], '==', 'color', 'blue'], 'eqmin', 'percentage'], ['statement']]
+# (t=3.94) i=3, candidate=[{'ANSWER': 'Freedom to express political views'}, {'ANSWER': 'Opportunity to get ahead'}, {'ANSWER': 'Treatment of the poor'}]
+  # found 0 program(s)
+# (t=4.43) i=4, candidate=[{'ANSWER': 'Freedom to express political views'}, {'ANSWER': 'Moral values of society'}, {'ANSWER': 'Opportunity to get ahead'}]
+  # found 0 program(s)
+# (t=4.90) i=5, candidate=[{'ANSWER': 'Freedom to express political views'}, {'ANSWER': 'Opportunity to get ahead'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=5.38) i=6, candidate=[{'ANSWER': 'Conditions for raising children'}, {'ANSWER': 'Freedom to express political views'}, {'ANSWER': 'Opportunity to get ahead'}]
+  # found 0 program(s)
+# (t=5.85) i=7, candidate=[{'ANSWER': 'Freedom to express political views'}, {'ANSWER': 'Freedom to practice religion'}, {'ANSWER': 'Opportunity to get ahead'}]
+  # found 0 program(s)
+# (t=6.33) i=8, candidate=[{'ANSWER': 'Opportunity to get ahead'}, {'ANSWER': 'Treatment of the poor'}]
+  # found 0 program(s)
+# (t=6.83) i=9, candidate=[{'ANSWER': 'Moral values of society'}, {'ANSWER': 'Opportunity to get ahead'}]
+  # found 0 program(s)
+# (t=7.34) i=10, candidate=[{'ANSWER': 'Opportunity to get ahead'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=7.84) i=11, candidate=[{'ANSWER': 'Conditions for raising children'}, {'ANSWER': 'Opportunity to get ahead'}]
+  # found 0 program(s)
+# (t=8.35) i=12, candidate=[{'ANSWER': 'Freedom to practice religion'}, {'ANSWER': 'Opportunity to get ahead'}]
+  # found 0 program(s)
+# (t=8.84) i=13, candidate=[{'ANSWER': 'Freedom to express political views'}, {'ANSWER': 'Treatment of the poor'}]
+  # found 0 program(s)
+# (t=9.35) i=14, candidate=[{'ANSWER': 'Freedom to express political views'}, {'ANSWER': 'Moral values of society'}]
+  # found 0 program(s)
+# (t=9.85) i=15, candidate=[{'ANSWER': 'Freedom to express political views'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=10.36) i=16, candidate=[{'ANSWER': 'Conditions for raising children'}, {'ANSWER': 'Freedom to express political views'}]
+  # found 0 program(s)
+# (t=10.86) i=17, candidate=[{'ANSWER': 'Freedom to express political views'}, {'ANSWER': 'Freedom to practice religion'}]
+  # found 0 program(s)
+# (t=11.36) i=18, candidate=[{'ANSWER': 'Moral values of society'}, {'ANSWER': 'Opportunity to get ahead'}, {'ANSWER': 'Treatment of the poor'}]
+  # found 0 program(s)
+# (t=11.84) i=19, candidate=[{'ANSWER': 'Opportunity to get ahead'}, {'ANSWER': 'Strength of family ties'}, {'ANSWER': 'Treatment of the poor'}]
+  # found 0 program(s)
+# (t=12.31) i=20, candidate=[{'ANSWER': 'Conditions for raising children'}, {'ANSWER': 'Opportunity to get ahead'}, {'ANSWER': 'Treatment of the poor'}]
+  # found 0 program(s)
+# (t=12.78) i=21, candidate=[{'ANSWER': 'Freedom to practice religion'}, {'ANSWER': 'Opportunity to get ahead'}, {'ANSWER': 'Treatment of the poor'}]
+  # found 0 program(s)
+# (t=13.24) i=22, candidate=[{'ANSWER': 'Moral values of society'}, {'ANSWER': 'Opportunity to get ahead'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=13.71) i=23, candidate=[{'ANSWER': 'Conditions for raising children'}, {'ANSWER': 'Moral values of society'}, {'ANSWER': 'Opportunity to get ahead'}]
+  # found 0 program(s)
+# (t=14.18) i=24, candidate=[{'ANSWER': 'Freedom to practice religion'}, {'ANSWER': 'Moral values of society'}, {'ANSWER': 'Opportunity to get ahead'}]
+  # found 0 program(s)
+# (t=14.65) i=25, candidate=[{'ANSWER': 'Conditions for raising children'}, {'ANSWER': 'Opportunity to get ahead'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=15.12) i=26, candidate=[{'ANSWER': 'Freedom to practice religion'}, {'ANSWER': 'Opportunity to get ahead'}, {'ANSWER': 'Strength of family ties'}]
+  # found 0 program(s)
+# (t=15.59) i=27, candidate=[{'ANSWER': 'Conditions for raising children'}, {'ANSWER': 'Freedom to practice religion'}, {'ANSWER': 'Opportunity to get ahead'}]
+  # found 0 program(s)
+# (t=16.07) i=28, candidate=[{'ANSWER': 'Freedom to express political views'}, {'ANSWER': 'Moral values of society'}, {'ANSWER': 'Treatment of the poor'}]
+  # found 0 program(s)
+# (t=16.78) i=29, candidate=[{'ANSWER': 'Freedom to express political views'}, {'ANSWER': 'Strength of family ties'}, {'ANSWER': 'Treatment of the poor'}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.37, answer: Freedom to express political views
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 3, blue@Str), eqmin, 2), ['0'])
+# top-2, score: 2.34, answer: Freedom to express political views
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 3, blue@Str), ==, 3, blue@Str), eqmin, 2), ['0'])
+# top-3, score: 1.35, answer: Freedom to express political views
+  # tprog: SelectCol(SelectRow0(@param0, eqmin, 2), ['0'])
+# top-4, score: 1.28, answer: Freedom to express political views
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['0'])
+# top-5, score: 1.28, answer: Freedom to express political views
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0'], min, 2), eqmin, 1), ['-1'])
+# top-6, score: 1.27, answer: Freedom to express political views
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['0'])
+# top-7, score: 1.27, answer: Freedom to express political views
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-8, score: 1.27, answer: Freedom to express political views
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['0'])
+# top-9, score: 1.27, answer: Freedom to express political views
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 1), ['-1', '-2'])
+# top-10, score: 1.27, answer: Freedom to express political views
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['0'])
+# top-11, score: 1.27, answer: Freedom to express political views
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '2'], min, 2), eqmin, 2), ['-1', '-2'])
+# top-12, score: 1.27, answer: Freedom to express political views
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['0'])
+# top-13, score: 1.27, answer: Freedom to express political views
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '3'], min, 2), eqmin, 2), ['-1', '-2'])

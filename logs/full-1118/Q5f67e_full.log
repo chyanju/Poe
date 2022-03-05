@@ -1,0 +1,367 @@
+# parsed arguments: Namespace(benchmark='Q5f67e', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'australia', 'urban/total', 'hong', 'total', 'orange', '7.4', '17.1', 'per', 'indonesia', '0.1', '6.4', '25.4', '9.7', 'egypt', '1.0', '2.5', 'persons', '26.0', '0.4', 'korea', 'kilometers', '7.5', 'south', 'germany', '20.8', '1.8', 'macau', 'blue', 'brazil', 'france', 'singapore', 'urban', '11.8', 'country', 'color', 'india', 'kong', 'square', 'monaco', 'japan', 'bangladesh', '16.6', '5.1', '18.0', '75.2', '0.2', '21.5', '6.8', '3.9', '25.2', 'rwanda', '0.5', 'maldives'}
+# input type: [dtype('O'), dtype('O'), dtype('float64'), dtype('O')]
+# input is:
+        Country Urban/total  Persons per square kilometers   color
+0         Egypt       Urban                            5.1  orange
+1         Egypt       Total                            0.1    blue
+2        Rwanda       Urban                           18.0  orange
+3        Rwanda       Total                            0.5    blue
+4        Brazil       Urban                            9.7    blue
+5     Singapore       Urban                            7.5  orange
+6     Singapore       Total                            7.4    blue
+7         Macau       Urban                           26.0  orange
+8         Macau       Total                           20.8    blue
+9     Australia       Urban                            1.8    blue
+10        India       Urban                           25.2  orange
+11        India       Total                            0.4    blue
+12       France       Urban                            2.5  orange
+13       France       Total                            0.1    blue
+14        Japan       Urban                            3.9  orange
+15        Japan       Total                            0.5    blue
+16   Bangladesh       Urban                           75.2  orange
+17   Bangladesh       Total                            1.0    blue
+18      Germany       Urban                            6.8  orange
+19      Germany       Total                            0.2    blue
+20     Maldives       Urban                           21.5  orange
+21     Maldives       Total                            1.0    blue
+22    Indonesia       Urban                           16.6  orange
+23    Indonesia       Total                            0.1    blue
+24       Monaco       Urban                           17.1  orange
+25       Monaco       Total                           17.1    blue
+26    Hong Kong       Urban                           25.4  orange
+27    Hong Kong       Total                            6.4    blue
+28  South Korea       Urban                           11.8  orange
+29  South Korea       Total                            0.5    blue
+# query is: What is the total population density difference between South Korea and Japan?
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0       0
+# inferred DSL terminals:
+  # ConstVal: ['Japan@Str', 'Urban/total@Str', 'Total@Str', 'South Korea@Str', '<NULL>']
+     # cmap: [('total', 'Total'), ('japan', 'Japan'), ('total', 'Urban/total'), ('korea', 'South Korea'), ('south', 'South Korea')]
+  # AggrFunc: ['count', 'sum', '<NULL>']
+     # amap: [('total', 'sum'), ('total', 'count')]
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(11.3, 12), (0.0, 12), (-11.3, 12), (11.3, 9), (-11.3, 9), (20.3, 8), (16.6, 8), (6.9, 8), (5.9, 8), (3.4, 8)]
+  # [debug] high_values (no dup.): [(74.7, 4), (25.5, 4), (24.9, 4), (24.7, 4), (21.0, 4), (17.5, 4), (16.6, 4), (16.1, 4), (9.2, 4), (7.0, 4)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 1}]
+  # found 0 program(s)
+# (t=7.09) i=1, candidate=[{'ANSWER': 11.3}]
+  # found 0 program(s)
+# (t=13.24) i=2, candidate=[{'ANSWER': 0.0}]
+  # found 71 program(s)
+    # Summarize(SelectRow1(@param0, ==, 0, Urban/total@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Urban/total'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, Urban/total@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Urban/total'], 'count', 'Urban/total']
+    # Summarize(SelectRow1(@param0, ==, 0, Urban/total@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Urban/total'], 'count', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 0, Urban/total@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Urban/total'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Urban/total@Str), sum, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Urban/total'], 'sum', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 0, Total@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Total'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 0, Total@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Total'], 'count', 'Urban/total']
+    # Summarize(SelectRow1(@param0, ==, 0, Total@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Total'], 'count', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 0, Total@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Total'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 0, Total@Str), sum, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Country', 'Total'], 'sum', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 1, Japan@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Japan'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, Japan@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Japan'], 'count', 'Urban/total']
+    # Summarize(SelectRow1(@param0, ==, 1, Japan@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Japan'], 'count', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 1, Japan@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Japan'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, Japan@Str), sum, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Japan'], 'sum', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 1, Urban/total@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Urban/total'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, Urban/total@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Urban/total'], 'count', 'Urban/total']
+    # Summarize(SelectRow1(@param0, ==, 1, Urban/total@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Urban/total'], 'count', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 1, Urban/total@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Urban/total'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, Urban/total@Str), sum, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Urban/total'], 'sum', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 1, South Korea@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Urban/total', 'South Korea'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 1, South Korea@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Urban/total', 'South Korea'], 'count', 'Urban/total']
+    # Summarize(SelectRow1(@param0, ==, 1, South Korea@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Urban/total', 'South Korea'], 'count', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 1, South Korea@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Urban/total', 'South Korea'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 1, South Korea@Str), sum, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Urban/total', 'South Korea'], 'sum', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 2, Japan@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'Japan'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, Japan@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'Japan'], 'count', 'Urban/total']
+    # Summarize(SelectRow1(@param0, ==, 2, Japan@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'Japan'], 'count', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 2, Japan@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'Japan'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, Japan@Str), sum, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'Japan'], 'sum', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 2, Urban/total@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'Urban/total'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, Urban/total@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'Urban/total'], 'count', 'Urban/total']
+    # Summarize(SelectRow1(@param0, ==, 2, Urban/total@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'Urban/total'], 'count', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 2, Urban/total@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'Urban/total'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, Urban/total@Str), sum, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'Urban/total'], 'sum', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 2, Total@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'Total'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, Total@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'Total'], 'count', 'Urban/total']
+    # Summarize(SelectRow1(@param0, ==, 2, Total@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'Total'], 'count', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 2, Total@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'Total'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, Total@Str), sum, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'Total'], 'sum', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 2, South Korea@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'South Korea'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 2, South Korea@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'South Korea'], 'count', 'Urban/total']
+    # Summarize(SelectRow1(@param0, ==, 2, South Korea@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'South Korea'], 'count', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 2, South Korea@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'South Korea'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 2, South Korea@Str), sum, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'Persons per square kilometers', 'South Korea'], 'sum', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 3, Japan@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Japan'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 3, Japan@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Japan'], 'count', 'Urban/total']
+    # Summarize(SelectRow1(@param0, ==, 3, Japan@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Japan'], 'count', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 3, Japan@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Japan'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 3, Japan@Str), sum, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Japan'], 'sum', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 3, Urban/total@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Urban/total'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 3, Urban/total@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Urban/total'], 'count', 'Urban/total']
+    # Summarize(SelectRow1(@param0, ==, 3, Urban/total@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Urban/total'], 'count', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 3, Urban/total@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Urban/total'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 3, Urban/total@Str), sum, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Urban/total'], 'sum', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 3, Total@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Total'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 3, Total@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Total'], 'count', 'Urban/total']
+    # Summarize(SelectRow1(@param0, ==, 3, Total@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Total'], 'count', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 3, Total@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Total'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 3, Total@Str), sum, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'Total'], 'sum', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 3, South Korea@Str), count, 0)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'South Korea'], 'count', 'Country']
+    # Summarize(SelectRow1(@param0, ==, 3, South Korea@Str), count, 1)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'South Korea'], 'count', 'Urban/total']
+    # Summarize(SelectRow1(@param0, ==, 3, South Korea@Str), count, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'South Korea'], 'count', 'Persons per square kilometers']
+    # Summarize(SelectRow1(@param0, ==, 3, South Korea@Str), count, 3)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'South Korea'], 'count', 'color']
+    # Summarize(SelectRow1(@param0, ==, 3, South Korea@Str), sum, 2)
+      --> ['Summarize', ['SelectRow1', 'input@0', '==', 'color', 'South Korea'], 'sum', 'Persons per square kilometers']
+    # Contrast(SelectRow1(@param0, ==, 0, Japan@Str), diff, 1, Total@Str, Total@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Country', 'Japan'], 'diff', 'Urban/total', 'Total', 'Total', 'Persons per square kilometers']
+    # Contrast(SelectRow1(@param0, ==, 0, South Korea@Str), diff, 1, Total@Str, Total@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Country', 'South Korea'], 'diff', 'Urban/total', 'Total', 'Total', 'Persons per square kilometers']
+    # Contrast(SelectRow1(@param0, ==, 1, Total@Str), diff, 0, Japan@Str, Japan@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Total'], 'diff', 'Country', 'Japan', 'Japan', 'Persons per square kilometers']
+    # Contrast(SelectRow1(@param0, ==, 1, Total@Str), diff, 0, Japan@Str, South Korea@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Total'], 'diff', 'Country', 'Japan', 'South Korea', 'Persons per square kilometers']
+    # Contrast(SelectRow1(@param0, ==, 1, Total@Str), diff, 0, South Korea@Str, Japan@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Total'], 'diff', 'Country', 'South Korea', 'Japan', 'Persons per square kilometers']
+    # Contrast(SelectRow1(@param0, ==, 1, Total@Str), diff, 0, South Korea@Str, South Korea@Str, 2)
+      --> ['Contrast', ['SelectRow1', 'input@0', '==', 'Urban/total', 'Total'], 'diff', 'Country', 'South Korea', 'South Korea', 'Persons per square kilometers']
+# (t=19.44) i=3, candidate=[{'ANSWER': -11.3}]
+  # found 0 program(s)
+# (t=25.49) i=4, candidate=[{'ANSWER': 11.3}]
+  # found 0 program(s)
+# (t=31.49) i=5, candidate=[{'ANSWER': -11.3}]
+  # found 0 program(s)
+# (t=37.49) i=6, candidate=[{'ANSWER': 20.3}]
+  # found 0 program(s)
+# (t=43.50) i=7, candidate=[{'ANSWER': 16.6}]
+  # found 0 program(s)
+# (t=50.46) i=8, candidate=[{'ANSWER': 6.9}]
+  # found 0 program(s)
+# (t=56.55) i=9, candidate=[{'ANSWER': 5.9}]
+  # found 0 program(s)
+# (t=62.75) i=10, candidate=[{'ANSWER': 3.4}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.51, answer: 0.0
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Total@Str), diff, 0, Japan@Str, South Korea@Str, 2)
+# top-2, score: 2.51, answer: 0.0
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Total@Str), diff, 0, South Korea@Str, Japan@Str, 2)
+# top-3, score: 2.42, answer: 0.0
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, South Korea@Str), diff, 1, Total@Str, Total@Str, 2)
+# top-4, score: 2.42, answer: 0.0
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Total@Str), diff, 0, South Korea@Str, South Korea@Str, 2)
+# top-5, score: 2.38, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, South Korea@Str), count, 0)
+# top-6, score: 2.38, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, South Korea@Str), count, 1)
+# top-7, score: 2.38, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, South Korea@Str), count, 2)
+# top-8, score: 2.38, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, South Korea@Str), count, 3)
+# top-9, score: 2.38, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, South Korea@Str), sum, 2)
+# top-10, score: 2.38, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, South Korea@Str), count, 0)
+# top-11, score: 2.38, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, South Korea@Str), count, 1)
+# top-12, score: 2.38, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, South Korea@Str), count, 2)
+# top-13, score: 2.38, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, South Korea@Str), count, 3)
+# top-14, score: 2.38, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, South Korea@Str), sum, 2)
+# top-15, score: 2.38, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, South Korea@Str), count, 0)
+# top-16, score: 2.38, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, South Korea@Str), count, 1)
+# top-17, score: 2.38, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, South Korea@Str), count, 2)
+# top-18, score: 2.38, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, South Korea@Str), count, 3)
+# top-19, score: 2.38, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, South Korea@Str), sum, 2)
+# top-20, score: 2.34, answer: 0.0
+  # tprog: Contrast(SelectRow1(@param0, ==, 0, Japan@Str), diff, 1, Total@Str, Total@Str, 2)
+# top-21, score: 2.34, answer: 0.0
+  # tprog: Contrast(SelectRow1(@param0, ==, 1, Total@Str), diff, 0, Japan@Str, Japan@Str, 2)
+# top-22, score: 2.29, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Japan@Str), count, 0)
+# top-23, score: 2.29, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Japan@Str), count, 1)
+# top-24, score: 2.29, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Japan@Str), count, 2)
+# top-25, score: 2.29, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Japan@Str), count, 3)
+# top-26, score: 2.29, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Japan@Str), sum, 2)
+# top-27, score: 2.29, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Japan@Str), count, 0)
+# top-28, score: 2.29, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Japan@Str), count, 1)
+# top-29, score: 2.29, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Japan@Str), count, 2)
+# top-30, score: 2.29, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Japan@Str), count, 3)
+# top-31, score: 2.29, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Japan@Str), sum, 2)
+# top-32, score: 2.29, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, Japan@Str), count, 0)
+# top-33, score: 2.29, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, Japan@Str), count, 1)
+# top-34, score: 2.29, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, Japan@Str), count, 2)
+# top-35, score: 2.29, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, Japan@Str), count, 3)
+# top-36, score: 2.29, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, Japan@Str), sum, 2)
+# top-37, score: 2.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Total@Str), count, 0)
+# top-38, score: 2.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Total@Str), count, 1)
+# top-39, score: 2.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Total@Str), count, 2)
+# top-40, score: 2.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Total@Str), count, 3)
+# top-41, score: 2.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Total@Str), sum, 2)
+# top-42, score: 2.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Total@Str), count, 0)
+# top-43, score: 2.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Total@Str), count, 1)
+# top-44, score: 2.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Total@Str), count, 2)
+# top-45, score: 2.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Total@Str), count, 3)
+# top-46, score: 2.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Total@Str), sum, 2)
+# top-47, score: 2.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, Total@Str), count, 0)
+# top-48, score: 2.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, Total@Str), count, 1)
+# top-49, score: 2.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, Total@Str), count, 2)
+# top-50, score: 2.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, Total@Str), count, 3)
+# top-51, score: 2.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, Total@Str), sum, 2)
+# top-52, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Urban/total@Str), count, 0)
+# top-53, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Urban/total@Str), count, 1)
+# top-54, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Urban/total@Str), count, 2)
+# top-55, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Urban/total@Str), count, 3)
+# top-56, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 0, Urban/total@Str), sum, 2)
+# top-57, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Urban/total@Str), count, 0)
+# top-58, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Urban/total@Str), count, 1)
+# top-59, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Urban/total@Str), count, 2)
+# top-60, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Urban/total@Str), count, 3)
+# top-61, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 1, Urban/total@Str), sum, 2)
+# top-62, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Urban/total@Str), count, 0)
+# top-63, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Urban/total@Str), count, 1)
+# top-64, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Urban/total@Str), count, 2)
+# top-65, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Urban/total@Str), count, 3)
+# top-66, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 2, Urban/total@Str), sum, 2)
+# top-67, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, Urban/total@Str), count, 0)
+# top-68, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, Urban/total@Str), count, 1)
+# top-69, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, Urban/total@Str), count, 2)
+# top-70, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, Urban/total@Str), count, 3)
+# top-71, score: 1.21, answer: 0.0
+  # tprog: Summarize(SelectRow1(@param0, ==, 3, Urban/total@Str), sum, 2)

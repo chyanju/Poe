@@ -1,0 +1,132 @@
+# parsed arguments: Namespace(benchmark='Q1417b', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'64', 'for', 'ties', 'response', 'statement', 'express', 'get', '56', 'to', '20', 'family', '3', 'raising', 'poor', 'values', 'blue', 'treatment', 'religion', '34', '23', 'same', '9', '26', 'orange', 'in', 'origin', 'better', 'society', '5', 'opportunity', '52', 'red', 'country', 'u.s.', 'about', 'strength', '14', '21', 'percentage', '62', 'ahead', '7', 'children', '32', 'practice', '69', '38', 'views', '13', 'political', 'moral', 'freedom', 'conditions', '18', '73', '28', 'color'}
+# input type: [dtype('O'), dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+                             statement  ...   color
+0             Opportunity to get ahead  ...    blue
+1   Freedom to express political views  ...    blue
+2                Treatment of the poor  ...    blue
+3      Conditions for raising children  ...    blue
+4         Freedom to practice religion  ...    blue
+5              Moral values of society  ...    blue
+6              Strength of family ties  ...    blue
+7             Opportunity to get ahead  ...  orange
+8   Freedom to express political views  ...  orange
+9                Treatment of the poor  ...  orange
+10     Conditions for raising children  ...  orange
+11        Freedom to practice religion  ...  orange
+12             Moral values of society  ...  orange
+13             Strength of family ties  ...  orange
+14            Opportunity to get ahead  ...     red
+15  Freedom to express political views  ...     red
+16               Treatment of the poor  ...     red
+17     Conditions for raising children  ...     red
+18        Freedom to practice religion  ...     red
+19             Moral values of society  ...     red
+20             Strength of family ties  ...     red
+
+[21 rows x 4 columns]
+# query is: Which reason has the greatest difference the US and the country of origin?
+# expected output type:[dtype('O')]
+# expected output is:
+                     ANSWER
+0  Opportunity to get ahead
+# inferred DSL terminals:
+  # ConstVal: ['Better in country of origin@Str', '<NULL>']
+     # cmap: [('origin', 'Better in country of origin'), ('country', 'Better in country of origin')]
+  # AggrFunc: ['max', '<NULL>']
+     # amap: [('greatest', 'max')]
+  # NumFunc: ['diff', '<NULL>']
+     # nmap: [('difference', 'diff')]
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['eqmax', '<NULL>']
+     # imap: [('greatest', 'eqmax')]
+# ====> fallback strategy (comparison) is triggered
+  # [debug] high_values: [(53, 9), (51, 9), (49, 9), (47, 9), (43, 9), (28, 9), (25, 9), (23, 9), (21, 9), (19, 9)]
+  # [debug] high_values (no dup.): [(70, 3), (68, 3), (66, 3), (66, 3), (64, 3), (64, 3), (62, 3), (61, 3), (60, 3), (60, 3)]
+  # [debug] fallback (comparison) answers are added
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 'Better in country of origin'}]
+  # found 2 program(s)
+    # SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Better in country of origin@Str), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', 'input@0', '==', 'response', 'Better in country of origin'], 'eqmax', 'percentage'], ['response']]
+    # SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in country of origin@Str), ==, 1, Better in country of origin@Str), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'response', 'Better in country of origin'], '==', 'response', 'Better in country of origin'], 'eqmax', 'percentage'], ['response']]
+# (t=1.30) i=1, candidate=[{'ANSWER': 'Better in U.S.'}]
+  # found 11 program(s)
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response'], 'max', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['-1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response'], 'max', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'response'], 'max', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['statement', 'response'], 'max', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmax', 'percentage'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'percentage'], 'max', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['0'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow0', ['GroupSum', 'input@0', ['response', 'color'], 'max', 'percentage'], 'eqmax', 'COL0'], ['response']]
+    # SelectCol(SelectRow0(@param0, eqmax, 2), ['1'])
+      --> ['SelectCol', ['SelectRow0', 'input@0', 'eqmax', 'percentage'], ['response']]
+# (t=2.62) i=2, candidate=[{'ANSWER': 'About the same'}]
+  # found 0 program(s)
+# (t=3.92) i=3, candidate=[{'ANSWER': 53}]
+  # found 0 program(s)
+# (t=4.33) i=4, candidate=[{'ANSWER': 51}]
+  # found 0 program(s)
+# (t=4.73) i=5, candidate=[{'ANSWER': 49}]
+  # found 0 program(s)
+# (t=5.13) i=6, candidate=[{'ANSWER': 47}]
+  # found 0 program(s)
+# (t=5.54) i=7, candidate=[{'ANSWER': 43}]
+  # found 0 program(s)
+# (t=5.94) i=8, candidate=[{'ANSWER': 28}]
+  # found 0 program(s)
+# (t=7.24) i=9, candidate=[{'ANSWER': 25}]
+  # found 0 program(s)
+# (t=7.66) i=10, candidate=[{'ANSWER': 23}]
+  # found 0 program(s)
+# (t=8.97) i=11, candidate=[{'ANSWER': 21}]
+  # found 0 program(s)
+# (t=10.27) i=12, candidate=[{'ANSWER': 19}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 1.33, answer: Better in country of origin
+  # tprog: SelectCol(SelectRow0(SelectRow1(@param0, ==, 1, Better in country of origin@Str), eqmax, 2), ['1'])
+# top-2, score: 1.30, answer: Better in country of origin
+  # tprog: SelectCol(SelectRow0(SelectRow1(SelectRow1(@param0, ==, 1, Better in country of origin@Str), ==, 1, Better in country of origin@Str), eqmax, 2), ['1'])
+# top-3, score: 1.24, answer: Better in U.S.
+  # tprog: SelectCol(SelectRow0(@param0, eqmax, 2), ['1'])
+# top-4, score: 1.18, answer: Better in U.S.
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['0'])
+# top-5, score: 1.18, answer: Better in U.S.
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1'], max, 2), eqmax, 1), ['-1'])
+# top-6, score: 1.17, answer: Better in U.S.
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['1'])
+# top-7, score: 1.17, answer: Better in U.S.
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['0', '1'], max, 2), eqmax, 2), ['-99', '-2'])
+# top-8, score: 1.17, answer: Better in U.S.
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['0'])
+# top-9, score: 1.17, answer: Better in U.S.
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 1), ['-1', '-2'])
+# top-10, score: 1.17, answer: Better in U.S.
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['0'])
+# top-11, score: 1.17, answer: Better in U.S.
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '2'], max, 2), eqmax, 2), ['-1', '-2'])
+# top-12, score: 1.17, answer: Better in U.S.
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['0'])
+# top-13, score: 1.17, answer: Better in U.S.
+  # tprog: SelectCol(SelectRow0(GroupSum(@param0, ['1', '3'], max, 2), eqmax, 2), ['-1', '-2'])

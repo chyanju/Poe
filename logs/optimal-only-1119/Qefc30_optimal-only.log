@@ -1,0 +1,53 @@
+# parsed arguments: Namespace(benchmark='Qefc30', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='optimal-only', expected_only=False)
+# loading benchmark...
+# table keywords: {'ridership', 'lrt', '3939000', 'taxi', 'blue', '3095000', 'bus', 'mrt', '180000', 'transportation', 'color', '954000'}
+# input type: [dtype('int64'), dtype('O'), dtype('O')]
+# input is:
+   ridership transportation color
+0    3939000            Bus  blue
+1    3095000            MRT  blue
+2     954000           Taxi  blue
+3     180000            LRT  blue
+# query is: What is the number of ridership for MRT?
+# expected output type:[dtype('int64')]
+# expected output is:
+    ANSWER
+0  3095000
+# inferred DSL terminals:
+  # ConstVal: ['MRT@Str', 'ridership@Str', '<NULL>']
+     # cmap: [('ridership', 'ridership'), ('mrt', 'MRT')]
+  # AggrFunc: ['count', '<NULL>']
+     # amap: [('number', 'count')]
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 3095000}]
+  # found 4 program(s)
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, MRT@Str), ==, 1, MRT@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'transportation', 'MRT'], '==', 'transportation', 'MRT'], ['ridership']]
+    # SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, MRT@Str), ==, 1, MRT@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', ['SelectRow1', 'input@0', '==', 'transportation', 'MRT'], '==', 'transportation', 'MRT'], ['ridership']]
+    # SelectCol(SelectRow1(@param0, ==, 1, MRT@Str), ['0'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'transportation', 'MRT'], ['ridership']]
+    # SelectCol(SelectRow1(@param0, ==, 1, MRT@Str), ['-1', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'transportation', 'MRT'], ['ridership']]
+# (t=1.17) i=1, candidate=[{'ANSWER': 6190000}]
+  # found 0 program(s)
+# (t=2.34) i=2, candidate=[{'ANSWER': 9285000}]
+  # found 0 program(s)
+
+# ========== review report ========== #
+# top-1, score: 2.39, answer: [3095000]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, MRT@Str), ['0'])
+# top-2, score: 2.39, answer: [3095000]
+  # tprog: SelectCol(SelectRow1(@param0, ==, 1, MRT@Str), ['-1', '-2'])
+# top-3, score: 2.34, answer: [3095000]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, MRT@Str), ==, 1, MRT@Str), ['0'])
+# top-4, score: 2.34, answer: [3095000]
+  # tprog: SelectCol(SelectRow1(SelectRow1(@param0, ==, 1, MRT@Str), ==, 1, MRT@Str), ['-1', '-2'])

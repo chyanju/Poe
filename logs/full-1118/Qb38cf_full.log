@@ -1,0 +1,53 @@
+# parsed arguments: Namespace(benchmark='Qb38cf', dsl='meta_visqa', skeletons='visqa_normal', strategy='TaPas_C', fallback='auto', timeout=300, mode='full', expected_only=False)
+# loading benchmark...
+# table keywords: {'blue', '15', 'population', 'color', 'public', '57', '30', '55', 'americans', '39', 'japanese', 'chinese', 'indian', '33', 'percentage'}
+# input type: [dtype('O'), dtype('int64'), dtype('O')]
+# input is:
+           population  percentage color
+0    Indian Americans          55  blue
+1       Indian public          30  blue
+2   Chinese Americans          57  blue
+3      Chinese public          39  blue
+4  Japanese Americans          33  blue
+5     Japanese public          15  blue
+# query is: What is percentage for Indian public.
+# expected output type:[dtype('int64')]
+# expected output is:
+   ANSWER
+0      30
+# inferred DSL terminals:
+  # ConstVal: ['Indian Americans@Str', 'Indian public@Str', 'Japanese public@Str', 'Chinese public@Str', 'percentage@Str', '<NULL>']
+     # cmap: [('indian', 'Indian public'), ('public', 'Indian public'), ('public', 'Chinese public'), ('percentage', 'percentage'), ('public', 'Japanese public'), ('indian', 'Indian Americans')]
+  # AggrFunc: ['<NULL>']
+     # amap: []
+  # NumFunc: ['<NULL>']
+     # nmap: []
+  # BoolFunc: ['==', '<NULL>']
+     # bmap: [(None, '==')]
+  # IndFunc: ['<NULL>']
+     # imap: []
+# loading skeleton list...
+
+# ========== candidate program report ========== #
+# (t=0.00) i=0, candidate=[{'ANSWER': 30}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Indian public@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'population', 'Indian public'], ['percentage']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Indian public@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'population', 'Indian public'], ['percentage']]
+# (t=2.70) i=1, candidate=[{'ANSWER': 55}]
+  # found 2 program(s)
+    # SelectCol(SelectRow1(@param0, ==, 0, Indian Americans@Str), ['1'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'population', 'Indian Americans'], ['percentage']]
+    # SelectCol(SelectRow1(@param0, ==, 0, Indian Americans@Str), ['-99', '-2'])
+      --> ['SelectCol', ['SelectRow1', 'input@0', '==', 'population', 'Indian Americans'], ['percentage']]
+
+# ========== review report ========== #
+# top-1, score: 2.64, answer: 30
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Indian public@Str), ['1'])
+# top-2, score: 2.64, answer: 30
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Indian public@Str), ['-99', '-2'])
+# top-3, score: 1.48, answer: 55
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Indian Americans@Str), ['1'])
+# top-4, score: 1.48, answer: 55
+  # tprog: SelectCol(SelectRow1(@param0, ==, 0, Indian Americans@Str), ['-99', '-2'])
