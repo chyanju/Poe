@@ -139,14 +139,17 @@ The following notes show procedures for dataset construction/adaptation from the
 The main entrance of the tool is `test_TaPas_on_VisQA_benchmark.py`.
 
 ```bash
-usage: test_TaPas_on_VisQA_benchmark.py [-h] [-b BENCHMARK] [-d {test_min,meta_visqa}] 
-                                        [-s {test_min,visqa_simple,visqa_normal}]
-                                        [-g {TaPas_C}] [-f {none,auto}] [-t TIMEOUT] 
-                                        [-m {full,optimal-only,abstract-only}]
+usage: test_TaPas_on_VisQA_benchmark.py [-h] [-i DATASET] [-b BENCHMARK] 
+                                        [-d {test_min,meta_visqa}] 
+                                        [-s {test_min,visqa_simple,visqa_normal}] 
+                                        [-g {TaPas_C}] [-f {none,auto}] [-t TIMEOUT]
+                                        [-m {full,optimal-only,abstract-only}] 
                                         [--expected-only]
 
 optional arguments:
   -h, --help            show this help message and exit
+  -i DATASET, --dataset DATASET
+                        the input dataset, default: benchmarks/VisQA/shared/tapas_on_visqa_dataset.pkl
   -b BENCHMARK, --benchmark BENCHMARK
                         6-charactered benchmark id, default: Q0f532
   -d {test_min,meta_visqa}, --dsl {test_min,meta_visqa}

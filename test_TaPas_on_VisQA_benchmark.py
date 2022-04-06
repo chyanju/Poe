@@ -100,6 +100,7 @@ if __name__ == "__main__":
     logger.setLevel('CRITICAL')
 
     ap = argparse.ArgumentParser()
+    ap.add_argument("-i", "--dataset", default="./benchmarks/VisQA/shared/tapas_on_visqa_dataset.pkl", type=str, help="the input dataset, default: benchmarks/VisQA/shared/tapas_on_visqa_dataset.pkl")
     ap.add_argument("-b", "--benchmark", default="Q0f532", type=str, help="6-charactered benchmark id, default: Q0f532")
     ap.add_argument("-d", "--dsl", default="test_min", type=str, choices=["test_min", "meta_visqa"], help="DSL definition to use, default: test_min")
     ap.add_argument("-s", "--skeletons", default="test_min", choices=["test_min", "visqa_simple", "visqa_normal"], help="skeleton list to use, default: test_min")
@@ -114,7 +115,7 @@ if __name__ == "__main__":
         args.timeout = None
 
     # load dataset
-    with open("./benchmarks/VisQA/shared/tapas_on_visqa_dataset.pkl", "rb") as f:
+    with open("{}".format(args.dataset), "rb") as f:
         dt = pickle.load(f)
     # build reverse index
     short_id_to_id = {dt[i]["short_id"]:i for i in range(len(dt))}
