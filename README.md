@@ -3,6 +3,10 @@
 <div align="left">
   This project is powered by <img src="./resources/trinity_edge_matrix.png" width=30> Trinity-Edge (<a href="https://github.com/chyanju/Trinity-Edge">https://github.com/chyanju/Trinity-Edge</a>).
 </div>
+## [Artifact Evaluation] Poe in Colab
+
+1. To set up the machine learning model used in the artifact, we provide a colab notebook that covers every step and reproduces the procedure. Please check it out here: [link](./public_PLDI22AE_Poe_TaPas_on_VisQA.ipynb).
+2. To reuse the tool and make modifications to existing benchmarks, or even create your own benchmarks, we provide a colab notebook for you to easily do that. Please check it out here: [link](public_PLDI22AE_Poe_make_benchmark.ipynb).
 
 ## [Artifact Evaluation] Getting Started Guide
 
@@ -73,6 +77,8 @@ A Linux (or Unix-like) machine is recommended since this is where the tool is te
 
 ## Dependencies
 
+Please refer to [this](public_PLDI22AE_Poe_make_benchmark.ipynb) colab notebook for step-by-step environment configuration. You can also consider directly using the colab version.
+
 The major functionalities of the tool depend on the following packages:
 
 - Trinity-Edge ([https://github.com/chyanju/Trinity-Edge](https://github.com/chyanju/Trinity-Edge))
@@ -85,8 +91,6 @@ The major functionalities of the tool depend on the following packages:
 - NLTK ([https://www.nltk.org/](https://www.nltk.org/))
 - simplejson ([https://github.com/simplejson/simplejson](https://github.com/simplejson/simplejson))
 - python-tabulate ([https://github.com/astanin/python-tabulate](https://github.com/astanin/python-tabulate))
-
-The following packages are needed ***only*** when you want to redo the dataset pre-processing from scratch. The processed version of dataset is already included in this repo.
 
 - Node.js ([https://nodejs.org/](https://nodejs.org/))
 - Vega-Lite >= 5.1.1 ([https://vega.github.io/vega-lite/](https://vega.github.io/vega-lite/))
@@ -265,3 +269,7 @@ We manually categorize every benchmark with different question types. There's no
 ### Reusability
 
 Poe provides an easy-to-use entrance. The internal framework structure follows that of Trinity ([https://github.com/fredfeng/Trinity](https://github.com/fredfeng/Trinity)) and Trinity-Edge ([https://github.com/chyanju/Trinity-Edge](https://github.com/chyanju/Trinity-Edge)), which are designed for better extensibility and well documented. One can easily build upon Poe following similar procedure of Trinity and Trinity-Edge, and will also find it easy to change evaluation settings according to the "Usage" section.
+
+## Citation
+
+Please check back later for bibtex.
