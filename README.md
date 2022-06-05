@@ -272,4 +272,21 @@ Poe provides an easy-to-use entrance. The internal framework structure follows t
 
 ## Citation
 
-Please check back later for bibtex.
+```
+@inproceedings{pldi22_poe,
+author = {Chen, Yanju and Yan, Xifeng and Feng, Yu},
+title = {Visualization Question Answering Using Introspective Program Synthesis},
+year = {2022},
+isbn = {9781450392655},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3519939.3523709},
+doi = {10.1145/3519939.3523709},
+booktitle = {Proceedings of the 43rd ACM SIGPLAN International Conference on Programming Language Design and Implementation},
+pages = {137–151},
+numpages = {15},
+keywords = {Program Synthesis, Visualization, Machine Learning, Natural Language Processing},
+location = {San Diego, CA, USA},
+series = {PLDI 2022}
+}
+```
